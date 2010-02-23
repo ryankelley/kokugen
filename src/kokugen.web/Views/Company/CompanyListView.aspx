@@ -33,7 +33,8 @@ body
         <h2>Companies</h2>
 
         <div>
-        <%= this.InputFor(x => x.CompanyName).Id("companyName") %>
+        
+        <%= this.InputFor(x => x.CompanyName) %>
         
             <input type="button" value="Add" id="addCompanyButton" />
         </div>
@@ -57,8 +58,8 @@ body
         };
         
         var saveNewCompany = function(){
-            var name = $("#companyName").val();
-            $.post(addCompanyUrl, {Name: name}, saveCompanyResponse, "json");
+            var name = $("#company-name").val();
+            $.post(addCompanyUrl, {CompanyName: name}, saveCompanyResponse, "json");
         };
         
         var saveCompanyResponse = function(data){
@@ -67,7 +68,7 @@ body
                 return;
             }
             
-            $("#companyName").val("");
+            $("#company-name").val("");
             addCompanyToList(data.Item);
         };
         

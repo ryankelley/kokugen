@@ -23,6 +23,7 @@ namespace Kokugen.WebBackend.Handlers
             var routeDefinition = call.ToRouteDefinition();
             routeDefinition.Append(call.HandlerType.Namespace.Replace(GetType().Namespace + ".", string.Empty).ToLower());
             routeDefinition.Append(call.HandlerType.Name.Replace("Handler", string.Empty).ToLower());
+
             return routeDefinition;
         }
     }

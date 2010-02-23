@@ -1,4 +1,6 @@
 using System;
+using System.Linq;
+using System.Text;
 using FubuMVC.Core;
 using FubuMVC.UI;
 using FubuMVC.UI.Configuration;
@@ -96,13 +98,62 @@ namespace Kokugen.WebBackend.Conventions
         {
             string title = request.Accessor.InnerProperty.Name;
 
-            var divTag = new HtmlTag("div").AddClass("form-item")
-                .Child(new HtmlTag("label").Text(request.Accessor.InnerProperty.Name).Attr("for", request.ElementId));
+            var parts = BreakUpperCase(request.ElementId);
 
-            var inputTag = new TextboxTag(request.Accessor.InnerProperty.Name, "").Id(request.ElementId);
-            divTag.Child(inputTag);
+            string id = string.Empty;
+            string label = string.Empty;
+            bool isFirst = true;
+
+            foreach (var s in parts)
+            {
+                if(!isFirst)
+                {
+                    label += " ";
+                    id += "-";
+                    
+                }
+                label += s;
+                id += s.ToLower();
+
+                isFirst = false;
+            }
+            
+
+
+            var divTag = new HtmlTag("div").AddClass("form-item")
+                .Child(new HtmlTag("label", x => x.Id(id + "-label").Text(label).Attr("for", id)));
+
+            var inputTag = new TextboxTag(request.ElementId, "").Id(id);
+            divTag.Child(new HtmlTag("br")).Child(inputTag);
 
             return divTag;
+        }
+
+        public string[] BreakUpperCase(string sInput)
+        {
+            StringBuilder[] sReturn = new StringBuilder[1];
+            sReturn[0] = new StringBuilder(sInput.Length);
+            const string CUPPER = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            int iArrayCount = 0;
+            for (int iIndex = 0; iIndex < sInput.Length; iIndex++)
+            {
+                string sChar = sInput.Substring(iIndex, 1); // get a char
+                if ((CUPPER.Contains(sChar)) && (iIndex > 0))
+                {
+                    iArrayCount++;
+                    System.Text.StringBuilder[] sTemp = new System.Text.StringBuilder[iArrayCount + 1];
+                    Array.Copy(sReturn, 0, sTemp, 0, iArrayCount);
+                    sTemp[iArrayCount] = new StringBuilder(sInput.Length);
+                    sReturn = sTemp;
+                }
+                sReturn[iArrayCount].Append(sChar);
+            }
+            string[] sReturnString = new string[iArrayCount + 1];
+            for (int iIndex = 0; iIndex < sReturn.Length; iIndex++)
+            {
+                sReturnString[iIndex] = sReturn[iIndex].ToString();
+            }
+            return sReturnString;
         }
     }
 }

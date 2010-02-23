@@ -17,9 +17,9 @@ namespace Kokugen.WebBackend.Handlers.Company
 
         public AjaxResponse Execute(AddCompanyInput model)
         {
-            if(model.Name.IsEmpty()) return new AjaxResponse{ Success = false};
+            if(model.CompanyName.IsEmpty()) return new AjaxResponse{ Success = false};
 
-            var company = _companyService.AddCompany(model.Name);
+            var company = _companyService.AddCompany(model.CompanyName);
 
             return new AjaxResponse
                        {
@@ -31,6 +31,6 @@ namespace Kokugen.WebBackend.Handlers.Company
 
     public class AddCompanyInput
     {
-        public string Name { get; set; }
+        public string CompanyName { get; set; }
     }
 }

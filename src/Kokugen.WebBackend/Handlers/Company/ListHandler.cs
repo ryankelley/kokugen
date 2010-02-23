@@ -13,7 +13,7 @@ namespace Kokugen.WebBackend.Handlers.Company
             _companyService = companyService;
         }
 
-        public CompanyListModel Execute()
+        public CompanyListModel Execute(CompanyListModel model)
         {
             var outModel = new CompanyListModel {Companies = _companyService.ListAllCompanies()};
 

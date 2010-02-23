@@ -4,6 +4,7 @@ using System.Linq;
 using FubuMVC.Core;
 using FubuMVC.Core.Registration;
 using FubuMVC.Core.Registration.Nodes;
+using FubuMVC.Core.Urls;
 using FubuMVC.Core.View;
 using Kokugen.Core;
 using Kokugen.Web.Behaviors;
@@ -35,6 +36,8 @@ namespace Kokugen.Web
             HomeIs<IndexHandler>(x => x.Execute());
 
             Routes.UrlPolicy<HandlerUrlPolicy>();
+
+            
             
             //Policies.WrapBehaviorChainsWith<TransactionalContainerBehavior>();
             
