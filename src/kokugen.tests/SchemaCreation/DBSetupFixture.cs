@@ -37,11 +37,12 @@ namespace Kokugen.Tests.SchemaCreation
             _sessionSource = ObjectFactory.GetInstance<ISessionSource>();
         }
 
-        [Test, System.ComponentModel.Category("DBSchema"), Explicit]
+        [Test, Category("DBSchema"), Explicit]
         public void CreateSchemaWithAllData()
         {
             Create_Database_Schema();
         }
+
         [Test, Explicit]
         public void Create_Database_Schema()
         {
