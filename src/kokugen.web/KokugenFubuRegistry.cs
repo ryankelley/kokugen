@@ -37,7 +37,13 @@ namespace Kokugen.Web
 
             Routes.UrlPolicy<HandlerUrlPolicy>();
 
-            
+            this.StringConversions(x =>
+            {
+                x.IfIsType<DateTime>(d => d.ToString("g"));
+                x.IfIsType<decimal>(d => d.ToString("N2"));
+                x.IfIsType<float>(f => f.ToString("N2"));
+                x.IfIsType<double>(d => d.ToString("N2"));
+            });
             
             //Policies.WrapBehaviorChainsWith<TransactionalContainerBehavior>();
             

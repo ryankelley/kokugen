@@ -18,8 +18,9 @@ namespace Kokugen.WebBackend.Conventions
     {
         public KokugenHtmlConventions()
         {
-            validationAttributes();
             numbers();
+            validationAttributes();
+            
  
             //Profile("edit", x => x.Editors.Builder<EditInPlaceBuilder>());
  
@@ -34,26 +35,35 @@ namespace Kokugen.WebBackend.Conventions
 
         private void editors()
         {
-            Editors.Builder<RyansTestBuilder>();
+            //Editors.Builder<RyansTestBuilder>();
             //Editors.Builder<ValueObjectDropdownBuilder>();
             Editors.IfPropertyIs<bool>().BuildBy(request => new CheckboxTag(request.Value<bool>()).Style("width", "auto !important").Attr("value", request.ElementId));
             
-            Editors.Always.Modify((request, tag) =>
-            {
-                //tag.Attr("label", request.Header());
-                tag.Attr("label", request.ElementId);
-                tag.Attr("name", request.ElementId);
-            });
+
+            Editors.Always.Modify(tag =>
+                                      {
+                                          var wrapperTag = new HtmlTag("div", x => x.AddClass("form-item"));
+                                          wrapperTag.Child(tag);
+
+                                          tag = wrapperTag;
+                                      });
+
+            //Editors.Always.Modify((request, tag) =>
+            //{
+            //    //tag.Attr("label", request.Header());
+            //    tag.Attr("label", request.ElementId);
+            //    tag.Attr("name", request.ElementId);
+            //});
  
             // Ugly hack because of the hacky Edit in Place jQuery plugin we use, but
             // I'm gonna kill it some day
-            Editors.IfPropertyTypeIs(t => t.IsDateTime()).Modify(x =>
-            {
-                //if (!x.HasMetaData(EditInPlaceBuilder.EDITABLE_ATTRIBUTE_NAME))
-                //{
-                //    x.AddClass("DatePicker");
-                //}
-            });
+            //Editors.IfPropertyTypeIs(t => t.IsDateTime()).Modify(x =>
+            //{
+            //    //if (!x.HasMetaData(EditInPlaceBuilder.EDITABLE_ATTRIBUTE_NAME))
+            //    //{
+            //    //    x.AddClass("DatePicker");
+            //    //}
+            //});
         }
  
         // Setting up rules for tagging elements with jQuery validation
@@ -65,8 +75,8 @@ namespace Kokugen.WebBackend.Conventions
             Editors.IfPropertyIs<Int32>().Attr("max", Int32.MaxValue);
             Editors.IfPropertyIs<Int16>().Attr("max", Int16.MaxValue);
             Editors.IfPropertyIs<Int64>().Attr("max", Int64.MaxValue);
-            Editors.IfPropertyTypeIs(t => t.IsIntegerBased()).AddClass("integer");
-            Editors.IfPropertyTypeIs(t => t.IsFloatingPoint()).AddClass("number");
+            Editors.IfPropertyTypeIs(IsIntegerBased).AddClass("integer");
+            Editors.IfPropertyTypeIs(IsFloatingPoint).AddClass("number");
         }
  
         // Declare policies for using validation attributes
@@ -85,75 +95,81 @@ namespace Kokugen.WebBackend.Conventions
             Editors.ModifyForAttribute<GreaterOrEqualToZeroAttribute>(tag => tag.Attr("min", 0));
             Editors.ModifyForAttribute<GreaterThanZeroAttribute>(tag => tag.Attr("min", 1));
         }
-    }
 
-    public class RyansTestBuilder : ElementBuilder
-    {
-        protected override bool matches(AccessorDef def)
+        public static bool IsIntegerBased(Type type)
         {
-            return def.Accessor.PropertyType == typeof (string);
+            return type == typeof(int) || type == typeof(long) || type == typeof(short);
         }
 
-        public override HtmlTag Build(ElementRequest request)
+        public static bool IsFloatingPoint(Type type)
         {
-            string title = request.Accessor.InnerProperty.Name;
-
-            var parts = BreakUpperCase(request.ElementId);
-
-            string id = string.Empty;
-            string label = string.Empty;
-            bool isFirst = true;
-
-            foreach (var s in parts)
-            {
-                if(!isFirst)
-                {
-                    label += " ";
-                    id += "-";
-                    
-                }
-                label += s;
-                id += s.ToLower();
-
-                isFirst = false;
-            }
-            
-
-
-            var divTag = new HtmlTag("div").AddClass("form-item")
-                .Child(new HtmlTag("label", x => x.Id(id + "-label").Text(label).Attr("for", id)));
-
-            var inputTag = new TextboxTag(request.ElementId, "").Id(id);
-            divTag.Child(new HtmlTag("br")).Child(inputTag);
-
-            return divTag;
-        }
-
-        public string[] BreakUpperCase(string sInput)
-        {
-            StringBuilder[] sReturn = new StringBuilder[1];
-            sReturn[0] = new StringBuilder(sInput.Length);
-            const string CUPPER = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-            int iArrayCount = 0;
-            for (int iIndex = 0; iIndex < sInput.Length; iIndex++)
-            {
-                string sChar = sInput.Substring(iIndex, 1); // get a char
-                if ((CUPPER.Contains(sChar)) && (iIndex > 0))
-                {
-                    iArrayCount++;
-                    System.Text.StringBuilder[] sTemp = new System.Text.StringBuilder[iArrayCount + 1];
-                    Array.Copy(sReturn, 0, sTemp, 0, iArrayCount);
-                    sTemp[iArrayCount] = new StringBuilder(sInput.Length);
-                    sReturn = sTemp;
-                }
-                sReturn[iArrayCount].Append(sChar);
-            }
-            string[] sReturnString = new string[iArrayCount + 1];
-            for (int iIndex = 0; iIndex < sReturn.Length; iIndex++)
-            {
-                sReturnString[iIndex] = sReturn[iIndex].ToString();
-            }
-            return sReturnString;
+            return type == typeof(decimal) || type == typeof(float) || type == typeof(double);
         }
     }
+
+    //public class RyansTestBuilder : ElementBuilder
+    //{
+    //    protected override bool matches(AccessorDef def)
+    //    {
+    //        return def.Accessor.PropertyType == typeof (string);
+    //    }
+
+    //    public override HtmlTag Build(ElementRequest request)
+    //    {
+    //        string title = request.Accessor.InnerProperty.Name;
+
+    //        var parts = BreakUpperCase(request.ElementId);
+
+    //        //string id = string.Empty;
+    //        string label = string.Empty;
+    //        bool isFirst = true;
+
+    //        foreach (var s in parts)
+    //        {
+    //            if(!isFirst)
+    //            {
+    //                label += " ";
+    //                //id += "-";
+    //            }
+    //            label += s;
+    //            //id += s.ToLower();
+    //            isFirst = false;
+    //        }
+
+    //        //var divTag = new HtmlTag("div").AddClass("form-item")
+    //        //    .Child(new HtmlTag("label").Text(label).Attr("for", ));
+
+    //        var inputTag = new TextboxTag(request.ElementId, "").Id(id);
+    //        divTag.Child(new HtmlTag("br")).Child(inputTag);
+
+    //        return divTag;
+    //    }
+
+    //    public string[] BreakUpperCase(string sInput)
+    //    {
+    //        StringBuilder[] sReturn = new StringBuilder[1];
+    //        sReturn[0] = new StringBuilder(sInput.Length);
+    //        const string CUPPER = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    //        int iArrayCount = 0;
+    //        for (int iIndex = 0; iIndex < sInput.Length; iIndex++)
+    //        {
+    //            string sChar = sInput.Substring(iIndex, 1); // get a char
+    //            if ((CUPPER.Contains(sChar)) && (iIndex > 0))
+    //            {
+    //                iArrayCount++;
+    //                System.Text.StringBuilder[] sTemp = new System.Text.StringBuilder[iArrayCount + 1];
+    //                Array.Copy(sReturn, 0, sTemp, 0, iArrayCount);
+    //                sTemp[iArrayCount] = new StringBuilder(sInput.Length);
+    //                sReturn = sTemp;
+    //            }
+    //            sReturn[iArrayCount].Append(sChar);
+    //        }
+    //        string[] sReturnString = new string[iArrayCount + 1];
+    //        for (int iIndex = 0; iIndex < sReturn.Length; iIndex++)
+    //        {
+    //            sReturnString[iIndex] = sReturn[iIndex].ToString();
+    //        }
+    //        return sReturnString;
+    //    }
+    //}
 }

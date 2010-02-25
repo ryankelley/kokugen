@@ -2,6 +2,6 @@ namespace Kokugen.Core
 {
     public class Entity
     {
-        public static int UnboundedStringLength = 10000;
+        public static int UnboundedStringLength = 2000;
     }
 }

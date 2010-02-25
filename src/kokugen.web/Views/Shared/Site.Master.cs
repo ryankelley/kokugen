@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Web.UI;
+using FubuMVC.Core.View;
 
 namespace Kokugen.Web.Views.Shared
 {
-    public class Site : MasterPage
+    public class Site : FubuMasterPage
     {
-        protected void Page_Load(object sender, EventArgs e)
-        {
-
-        }
+        
     }
 }
