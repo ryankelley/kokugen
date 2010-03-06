@@ -1,4 +1,5 @@
 using System;
+using FluentNHibernate;
 using NHibernate;
 
 namespace Kokugen.Core.Persistence

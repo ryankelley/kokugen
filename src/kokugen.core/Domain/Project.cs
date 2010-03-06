@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Kokugen.Core.Domain
 {
-    public class Project : DomainEntity
+    public class Project : Entity
     {
         private IList<TimeRecord> _timeRecords = new List<TimeRecord>();
         public virtual string Name { get; set; }

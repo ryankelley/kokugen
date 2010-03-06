@@ -27,8 +27,8 @@ namespace Kokugen.Core
         {
             return type == typeof (decimal) || type == typeof (double) || type == typeof (Decimal) || type == typeof (Double) || type == typeof (float);
         }
-        public static bool ContainsEntity<T>(this IList<T> list, DomainEntity value)
-            where T : DomainEntity
+        public static bool ContainsEntity<T>(this IList<T> list, Domain.Entity value)
+            where T : Domain.Entity
         {
             foreach (var entity in list)
             {
@@ -121,7 +121,7 @@ namespace Kokugen.Core
             return dateTime.ToShortDateString() + " " + dateTime.ToShortTimeString();
         }
 
-        public static bool CheckEquality<ENTITYTYPE>(this DomainEntity source, object obj) where ENTITYTYPE : DomainEntity
+        public static bool CheckEquality<ENTITYTYPE>(this Domain.Entity source, object obj) where ENTITYTYPE : Domain.Entity
         {
             var other = obj as ENTITYTYPE;
 

@@ -1,3 +1,4 @@
+using FluentNHibernate;
 using FubuMVC.Core.Behaviors;
 using Kokugen.Core.Persistence;
 using Kokugen.Core.Services;

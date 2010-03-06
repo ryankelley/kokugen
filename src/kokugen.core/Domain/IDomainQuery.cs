@@ -8,7 +8,7 @@ using System.Linq.Expressions;
 namespace Kokugen.Core.Domain
 {
     public interface IDomainQuery<ENTITY>
-        where ENTITY : DomainEntity
+        where ENTITY : Entity
     {
         Expression<Func<ENTITY, bool>> Expression { get; }
     }

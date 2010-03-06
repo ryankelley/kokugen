@@ -7,6 +7,7 @@ using FubuMVC.UI.Configuration;
 using FubuMVC.UI.Tags;
 using HtmlTags;
 using Kokugen.Core;
+using Kokugen.Core.Domain;
 using Kokugen.Core.Validation;
 
 namespace Kokugen.WebBackend.Conventions
@@ -85,7 +86,7 @@ namespace Kokugen.WebBackend.Conventions
             Editors.AddClassForAttribute<RequiredAttribute>("required");
             Editors.ModifyForAttribute<MaximumStringLengthAttribute>((tag, att) =>
             {
-                if (att.Length < Entity.UnboundedStringLength)
+                if (att.Length <Entity.UnboundedStringLength)
                 {
                     tag.Attr("maxlength", att.Length);
                 }

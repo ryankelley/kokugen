@@ -2,7 +2,7 @@ using System;
 
 namespace Kokugen.Core.Domain
 {
-    public class TimeRecord : DomainEntity
+    public class TimeRecord : Entity
     {
         public virtual double Duration { get; set; }
         public virtual DateTime StartTime { get; set; }
