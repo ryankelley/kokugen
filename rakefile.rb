@@ -97,7 +97,7 @@ task :unit_test => :compile do
 end
 
 desc "Target used for the CI server"
-task :ci => [:unit_test,:zip]
+task :ci => [:dbCreate,:dbUpdate,:unit_test,:zip]
 
 desc "ZIPs up the build results"
 zip do |zip|
