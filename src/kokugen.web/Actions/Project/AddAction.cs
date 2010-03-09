@@ -18,6 +18,8 @@ namespace Kokugen.Web.Actions.Project
         {
             var project = new Core.Domain.Project();
 
+            project = model.Project;
+
             return new ProjectFormModel {Project = project};
         }
     }

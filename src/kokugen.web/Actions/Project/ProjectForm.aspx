@@ -6,6 +6,13 @@
 <%= this.InputFor(x => x.Project.Name) %>
 
 <%= this.InputFor(x => x.Project.Description) %>
+
+<%= this.InputFor(x => x.Project.Company.Name) %>
+
+<p>
+    <input type = "submit" value = "Add" />
+</p>
+
 </form>
 </div>
 </asp:Content>
