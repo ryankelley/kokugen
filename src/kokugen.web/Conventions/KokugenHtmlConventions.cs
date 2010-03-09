@@ -11,16 +11,17 @@ namespace Kokugen.Web.Conventions
     {
         public KokugenHtmlConventions()
         {
+            Labels.Builder(new LabelBuilder());
             numbers();
             validationAttributes();
             editors();
-            Editors.Builder<FormItemBuilder>();
+            
         }
 
         private void editors()
         {
             Editors.IfPropertyIs<bool>().BuildBy(request => new CheckboxTag(request.Value<bool>()).Style("width", "auto !important").Attr("value", request.ElementId));
-            Editors.Builder(new FormItemBuilder());
+            //Editors.Builder(new FormItemBuilder());
         }
  
         // Setting up rules for tagging elements with jQuery validation
@@ -64,40 +65,23 @@ namespace Kokugen.Web.Conventions
         }
     }
 
-    public class FormItemBuilder : ElementBuilder
+    public class LabelBuilder : ElementBuilder
     {
         protected override bool matches(AccessorDef def)
         {
-            return def.Accessor.PropertyType == typeof(string);
+            return true;
         }
 
         public override HtmlTag Build(ElementRequest request)
         {
-            var elementId = buildId(request.Accessor.Name);
+            
+            var elementId = request.Accessor.Name.BuildHtmlID();
 
             var label = new HtmlTag("label").Attr("for", elementId).Id(elementId+"-label").Text(request.Accessor.Name.SplitCamelCase());
 
-            var tag = new TextboxTag(request.Accessor.FieldName, request.RawValue == null ? "" : request.RawValue.ToString()).Id(elementId);
-            var divWrapper = new DivTag(request.Accessor.Name).AddClass("form-item");
-            divWrapper.Child(label);
-            divWrapper.Child(tag);
-            return divWrapper;
+            return label;
         }
 
-        private static string buildId(string name)
-        {
-            var splitName = name.SplitCamelCase();
-            var parts = splitName.Split(' ');
-            var output = string.Empty;
-            var isFirst = true;
-            foreach (var s in parts)
-            {
-                if (!isFirst)
-                    output += "-";
-                output += s.ToLower();
-                isFirst = false;
-            }
-            return output;
-        }
+        
     }
 }
