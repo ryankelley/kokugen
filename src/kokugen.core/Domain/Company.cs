@@ -1,6 +1,6 @@
 namespace Kokugen.Core.Domain
 {
-    public class Company : DomainEntity
+    public class Company : Entity
     {
         public virtual string Name { get; set; }
         

@@ -10,6 +10,17 @@ class NUnitRunner
 		@compileTarget = paths.fetch(:compilemode, 'debug')
 		@options = paths.fetch(:options, '')
 	
+		if ENV["teamcity.dotnet.nunitlauncher"] # check if we are running in TeamCity
+			# We are not using the TeamCity nunit launcher. We use NUnit with the TeamCity NUnit Addin which needs tO be copied to our NUnit addins folder
+			# http://blogs.jetbrains.com/teamcity/2008/07/28/unfolding-teamcity-addin-for-nunit-secrets/
+			# The teamcity.dotnet.nunitaddin environment variable is not available until TeamCity 4.0, so we hardcode it for now
+			puts "Add In Path is "
+			puts ENV["teamcity.dotnet.nunitaddin"] ? ENV["teamcity.dotnet.nunitaddin"] : 'NOT FOUND'
+			#@teamCityAddinPath = ENV["teamcity.dotnet.nunitaddin"] ? ENV["teamcity.dotnet.nunitaddin"] : 'c:/buildAgent/plugins/dotnetPlugin/bin/JetBrains.TeamCity.NUnitAddin-NUnit'
+			@teamCityAddinPath = 'c:/buildAgent/plugins/dotnetPlugin/bin/JetBrains.TeamCity.NUnitAddin-NUnit'
+			cp @teamCityAddinPath + '-2.4.8.dll', 'lib/nunit/addins/'
+		end
+		
 		@nunitExe = File.join('lib', 'nunit', "nunit-console#{(@compilePlatform.empty? ? '' : "-#{@compilePlatform}")}.exe").gsub('/','\\') + ' /nothread'
 	end
 	

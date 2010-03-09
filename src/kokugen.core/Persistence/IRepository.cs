@@ -19,7 +19,7 @@ using NHibernate.Type;
 namespace Kokugen.Core.Persistence
 {
 
-    public interface IRepository<ENTITY> where ENTITY : DomainEntity
+    public interface IRepository<ENTITY> where ENTITY : Domain.Entity
     {
         void Save(ENTITY entity);
 
@@ -37,7 +37,7 @@ namespace Kokugen.Core.Persistence
 
         IEnumerable<ENTITY> FindAll(params ICriterion[] criteria);
 
-        //PagedList<ENTITY> PagedQuery<ENTITY>(int start, int numItems) where ENTITY : DomainEntity;
+        //PagedList<ENTITY> PagedQuery<ENTITY>(int start, int numItems) where ENTITY : Entity;
 
         /// <summary>
         /// Execute the specified stored procedure with the given parameters and then converts
@@ -88,7 +88,7 @@ namespace Kokugen.Core.Persistence
     }
 
     public class NHibernateRepository<ENTITY>
-        where ENTITY : DomainEntity
+        where ENTITY : Domain.Entity
     {
         private readonly ISession _session;
 

@@ -8,7 +8,7 @@ using System.Reflection;
 namespace Kokugen.Core.Validation
 {
     [AttributeUsage(AttributeTargets.Property)]
-    public sealed class RequiredAttribute : ValidationAttribute
+    public class RequiredAttribute : ValidationAttribute
     {
         public static Func<RequiredAttribute, PropertyInfo, string> GetMessage = (att, prop) =>
                                                                                      {
@@ -24,21 +24,8 @@ namespace Kokugen.Core.Validation
 
         protected override void validate(object target, object rawValue, INotification notification)
         {
-            if (rawValue is DateTime)
-            {
-                if ((DateTime) rawValue == new DateTime())
-                    logMessage(notification, GetMessage(this, Property));
-                return;
-            }
 
-            if(rawValue is decimal)
-            {
-                if((decimal) rawValue == 0)
-                    logMessage(notification, GetMessage(this,Property));
-                return;
-            }
-
-            if (rawValue == null || (string) rawValue == string.Empty)
+            if (rawValue == null || rawValue.ToString() == string.Empty)
             {
                 logMessage(notification, GetMessage(this, Property));
             }

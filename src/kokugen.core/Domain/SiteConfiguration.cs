@@ -7,14 +7,14 @@ using System.Linq;
 
 namespace Kokugen.Core.Domain
 {
-    public class Alias : DomainEntity
+    public class Alias : Entity
     {
         public string Host { get; set; }
 
         public bool Redirect { get; set; }
     }
 
-    public class SiteConfiguration : DomainEntity
+    public class SiteConfiguration : Entity
     {
         private readonly IList<Alias> _aliases = new List<Alias>();
 

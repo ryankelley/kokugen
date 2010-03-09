@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using FluentNHibernate;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using NHibernate;
@@ -9,12 +10,11 @@ namespace Kokugen.Core.Persistence
 {
     public class NHibernatesessionSource : ISessionSource
     {
-        private readonly DatabaseSettings _databaseSettings;
         private readonly object _factorySyncRoot = new object();
         private Configuration _configuration;
         private ISessionFactory _sessionFactory;
 
-        public NHibernatesessionSource(DatabaseSettings databaseSettings)
+        public NHibernatesessionSource()
         {
             if(_sessionFactory != null) return;
 
@@ -22,13 +22,23 @@ namespace Kokugen.Core.Persistence
             {
                 if(_sessionFactory != null) return;
 
-                _databaseSettings = databaseSettings;
                 _configuration = AssembleConfiguration(null);
                 _sessionFactory = _configuration.BuildSessionFactory();
             }
         }
 
+        public ISessionSource CreateSessionSource()
+        {
+            var source = new SessionSource(BuildFluentConfig());
+            return source;
+        }
+
         public Configuration AssembleConfiguration(string mappingExportPath)
+        {
+            return BuildFluentConfig().BuildConfiguration();
+        }
+
+        private FluentConfiguration BuildFluentConfig()
         {
             return Fluently.Configure()
                 .Database(MsSqlConfiguration.MsSql2005
@@ -39,11 +49,11 @@ namespace Kokugen.Core.Persistence
                               .Raw("generate_statistics", "true")
 #endif
                               .UseOuterJoin()
-                              //.Cache(cache =>
-                              //           {
-                              //               cache.UseQueryCache();
-                              //               cache.ProviderClass("NHibernate.Caches.SysCache.SysCacheProvider, NHibernate.Caches.SysCache");
-                              //           })
+                //.Cache(cache =>
+                //           {
+                //               cache.UseQueryCache();
+                //               cache.ProviderClass("NHibernate.Caches.SysCache.SysCacheProvider, NHibernate.Caches.SysCache");
+                //           })
                 )
                 .Mappings(x =>
                               {
@@ -51,9 +61,10 @@ namespace Kokugen.Core.Persistence
                                   //x.FluentMappings.AddFromAssemblyOf<RegionMap>();
                                   //x.AutoMappings.ExportTo("d:\\code\\coachesaid3\\MappingFiles");
                               })
-                .ExposeConfiguration(config => config.Properties.Add("prepare_sql", "true"))
-                .BuildConfiguration();
+                .ExposeConfiguration(config => config.Properties.Add("prepare_sql", "true"));
         }
+        
+        
 
         public ISession CreateSession()
         {
@@ -65,7 +76,7 @@ namespace Kokugen.Core.Persistence
             ISession session = CreateSession();
             IDbConnection connection = session.Connection;
 
-            Dialect dialect = Dialect.GetDialect(_databaseSettings.GetProperties());
+            Dialect dialect = Dialect.GetDialect(AssembleConfiguration(null).Properties);
             string[] drops = _configuration.GenerateDropSchemaScript(dialect);
             executeScripts(drops, connection);
 

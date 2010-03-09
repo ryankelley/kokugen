@@ -15,7 +15,7 @@ namespace Kokugen.Core.Persistence
             setupComponentTypes();
             var mappings = new AutoPersistenceModel();
 
-            mappings = AutoMap.AssemblyOf<DomainEntity>();
+            mappings = AutoMap.AssemblyOf<Domain.Entity>();
             mappings.Where(GetAutoMappingFilter);
             mappings.Conventions.Setup(GetConventions());
             mappings.UseOverridesFromAssemblyOf<AutoPersistenceModelGenerator>();
@@ -23,7 +23,7 @@ namespace Kokugen.Core.Persistence
             mappings.OverrideAll(x => x.IgnoreProperties(z => z.PropertyType.IsSubclassOf(typeof(Enumeration))));
             
             
-            mappings.IgnoreBase<DomainEntity>();
+            mappings.IgnoreBase<Domain.Entity>();
             //mappings.WriteMappingsTo("d:/code/CoachesAid3/MappingFiles");
             
 
@@ -88,7 +88,7 @@ namespace Kokugen.Core.Persistence
 
         private static bool GetAutoMappingFilter(Type arg)
         {
-            if(arg.IsSubclassOf(typeof(DomainEntity)))
+            if(arg.IsSubclassOf(typeof(Domain.Entity)))
             {
                 if(arg == typeof (SiteConfiguration) || arg == typeof (Alias))
                     return false;

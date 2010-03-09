@@ -70,7 +70,7 @@ task :compileAsp => [:clean, :version] do
    
   
   copyOutputFiles "src/Kokugen.Web/bin/", "*.*", props[:archive]
-  #copyOutputFiles "src/FubuMVC.View.Spark/bin/#{COMPILE_TARGET}", "*Spark.{dll.pdb}", props[:archive]
+  copyOutputFiles "src/Kokugen.Web/Views/", "*.*", props[:archive]
   #copyOutputFiles "src/FubuMVC.UI/bin/#{COMPILE_TARGET}", "FubuMVC.UI.{dll,pdb}", props[:archive]
   #copyOutputFiles "src/Spark.Web.FubuMVC/bin/#{COMPILE_TARGET}", "*Spark*.{dll,pdb}", props[:archive]
 end
@@ -97,7 +97,7 @@ task :unit_test => :compile do
 end
 
 desc "Target used for the CI server"
-task :ci => [:unit_test,:zip]
+task :ci => [:dbCreate,:dbUpdate,:unit_test,:zip]
 
 desc "ZIPs up the build results"
 zip do |zip|

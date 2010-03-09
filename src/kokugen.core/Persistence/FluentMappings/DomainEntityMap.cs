@@ -8,7 +8,7 @@ using Kokugen.Core.Domain;
 namespace Kokugen.Core.Persistence.FluentMappings
 {
     public class DomainEntityMap<ENTITY> : ClassMap<ENTITY>
-        where ENTITY : DomainEntity
+        where ENTITY : Domain.Entity
     {
         public DomainEntityMap()
         {
@@ -21,7 +21,7 @@ namespace Kokugen.Core.Persistence.FluentMappings
         }
     }
 
-    public class DomainEntitySublcassMap<Entity> : SubclassMap<Entity> where Entity : DomainEntity
+    public class DomainEntitySublcassMap<Entity> : SubclassMap<Entity> where Entity : Domain.Entity
     {
         public DomainEntitySublcassMap()
         {
