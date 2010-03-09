@@ -1,5 +1,5 @@
-<%@ Page Language="C#" Inherits="Kokugen.Web.Views.Company.CompanyListView" AutoEventWireup="true" MasterPageFile="~/Views/Shared/Site.Master" %>
-<%@ Import Namespace="Kokugen.WebBackend.Handlers.Company"%>
+<%@ Page Language="C#" Inherits="Kokugen.Web.Actions.Company.List" AutoEventWireup="true" MasterPageFile="~/Shared/Site.Master" %>
+<%@ Import Namespace="Kokugen.Web.Actions.Company"%>
 <%@ Import Namespace="Kokugen.Core"%>
 <%@ Import Namespace="FubuMVC.Core.Urls"%>
 <%@ Import Namespace="HtmlTags"%>

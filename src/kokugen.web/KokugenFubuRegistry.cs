@@ -7,12 +7,11 @@ using FubuMVC.Core.Registration.Nodes;
 using FubuMVC.Core.Urls;
 using FubuMVC.Core.View;
 using Kokugen.Core;
+using Kokugen.Web.Actions;
+using Kokugen.Web.Actions.Home;
 using Kokugen.Web.Behaviors;
 using FubuMVC.UI;
-using Kokugen.WebBackend.Conventions;
-using Kokugen.WebBackend.Handlers;
-using Kokugen.WebBackend.Handlers.Home;
-using Kokugen.WebBackend.ViewModels;
+using Kokugen.Web.Conventions;
 
 namespace Kokugen.Web
 {
@@ -24,18 +23,24 @@ namespace Kokugen.Web
             IncludeDiagnostics(enableDiagnostics);
 
             Applies.ToThisAssembly();
-            Applies.ToAssemblyContainingType<HandlerUrlPolicy>();
+
 
             Actions
-                .IncludeTypes(t => t.Namespace.StartsWith(typeof(HandlerUrlPolicy).Namespace) && t.Name.EndsWith("Handler"))
-                .IncludeMethods(action => action.Method.Name == "Execute");
+                 .IncludeTypesNamed(x => x.EndsWith("Action"));
 
-            
+            Routes
+                .IgnoreNamespaceText(typeof(AjaxResponse).Namespace)
+                .IgnoreClassSuffix("Action")
+                .IgnoreMethodsNamed("Execute")
+                .IgnoreMethodSuffix("Command")
+                .IgnoreMethodSuffix("Query")
+                .ConstrainToHttpMethod(action => action.Method.Name.EndsWith("Command"), "POST")
+                .ConstrainToHttpMethod(action => action.Method.Name.StartsWith("Query"), "GET");
+
+
             this.HtmlConvention(new KokugenHtmlConventions());
 
-            HomeIs<IndexHandler>(x => x.Execute());
-
-            Routes.UrlPolicy<HandlerUrlPolicy>();
+            HomeIs<IndexAction>(x => x.Query());
 
             this.StringConversions(x =>
             {
@@ -51,7 +56,6 @@ namespace Kokugen.Web
 
             Views.TryToAttach(x =>
                                   {
-                                      x.by(new KokugenViewAttachmentStrategy());
                                       x.by_ViewModel_and_Namespace_and_MethodName();
                                       x.by_ViewModel_and_Namespace();
                                       x.by_ViewModel();
@@ -59,16 +63,16 @@ namespace Kokugen.Web
         }
     }
 
-    public class KokugenViewAttachmentStrategy : IViewsForActionFilter
-    {
-        public IEnumerable<IViewToken> Apply(ActionCall call, ViewBag views)
-        {
-            return
-                views
-                    .ViewsFor(call.OutputType())
-                    .Where(view => view.ViewType.Name == call.Method.Name
-                                   && view.ViewType.Namespace == call.HandlerType.Namespace)
-                    .Select(view => view);
-        }
-    }
+    //public class KokugenViewAttachmentStrategy : IViewsForActionFilter
+    //{
+    //    public IEnumerable<IViewToken> Apply(ActionCall call, ViewBag views)
+    //    {
+    //        return
+    //            views
+    //                .ViewsFor(call.OutputType())
+    //                .Where(view => view.ViewType.Name == call.Method.Name
+    //                               && view.ViewType.Namespace == call.HandlerType.Namespace)
+    //                .Select(view => view);
+    //    }
+    //}
 }

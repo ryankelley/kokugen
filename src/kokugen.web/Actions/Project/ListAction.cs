@@ -2,18 +2,18 @@ using System;
 using System.Collections.Generic;
 using Kokugen.Core.Services;
 
-namespace Kokugen.WebBackend.Handlers.Project
+namespace Kokugen.Web.Actions.Project
 {
-    public class ListHandler
+    public class ListAction
     {
         private readonly IProjectService _projectService;
 
-        public ListHandler(IProjectService projectService)
+        public ListAction(IProjectService projectService)
         {
             _projectService = projectService;
         }
 
-        public ProjectListModel Execute()
+        public ProjectListModel Query()
         {
             return new ProjectListModel
                        {

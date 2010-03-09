@@ -1,7 +1,6 @@
 ﻿using FubuMVC.Core.View;
-using Kokugen.WebBackend.ViewModels;
 
-namespace Kokugen.Web.Views.Home
+namespace Kokugen.Web.Actions.Home
 {
     public class Home : FubuPage<HomeViewModel>
     {

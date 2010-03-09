@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
+using Kokugen.Core.Validation;
 
 namespace Kokugen.Core.Domain
 {
     public class Project : Entity
     {
         private IList<TimeRecord> _timeRecords = new List<TimeRecord>();
+        [Required]
         public virtual string Name { get; set; }
         public virtual DateTime? StartDate { get; set; }
         public virtual DateTime? EndDate { get; set; }

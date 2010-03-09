@@ -1,21 +1,18 @@
-using System;
 using FubuMVC.Core;
-using Kokugen.Core.Persistence.Repositories;
 using Kokugen.Core.Services;
-using Kokugen.WebBackend.ViewModels;
 
-namespace Kokugen.WebBackend.Handlers.Company
+namespace Kokugen.Web.Actions.Company
 {
-    public class AddHandler
+    public class AddAction
     {
-        private readonly ICompanyService _companyService;
+      private readonly ICompanyService _companyService;
 
-        public AddHandler(ICompanyService companyService)
+        public AddAction(ICompanyService companyService)
         {
             _companyService = companyService;
         }
 
-        public AjaxResponse Execute(AddCompanyInput model)
+        public AjaxResponse Command(AddCompanyInput model)
         {
             if(model.CompanyName.IsEmpty()) return new AjaxResponse{ Success = false};
 

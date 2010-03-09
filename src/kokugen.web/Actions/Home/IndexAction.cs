@@ -1,10 +1,8 @@
-using Kokugen.WebBackend.ViewModels;
-
-namespace Kokugen.WebBackend.Handlers.Home
+namespace Kokugen.Web.Actions.Home
 {
-    public class IndexHandler
+    public class IndexAction
     {
-        public HomeViewModel Execute()
+        public HomeViewModel Query()
         {
             return new HomeViewModel
                        {

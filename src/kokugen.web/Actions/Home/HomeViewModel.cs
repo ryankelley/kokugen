@@ -1,4 +1,4 @@
-namespace Kokugen.WebBackend.ViewModels
+namespace Kokugen.Web.Actions.Home
 {
     public class HomeViewModel
     {

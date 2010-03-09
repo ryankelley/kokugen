@@ -1,19 +1,18 @@
-using System;
 using System.Collections.Generic;
 using Kokugen.Core.Services;
 
-namespace Kokugen.WebBackend.Handlers.Company
+namespace Kokugen.Web.Actions.Company
 {
-    public class ListHandler
+    public class ListAction
     {
         private readonly ICompanyService _companyService;
 
-        public ListHandler(ICompanyService companyService)
+        public ListAction(ICompanyService companyService)
         {
             _companyService = companyService;
         }
 
-        public CompanyListModel Execute(CompanyListModel model)
+        public CompanyListModel Query(CompanyListModel model)
         {
             var outModel = new CompanyListModel {Companies = _companyService.ListAllCompanies()};
 
