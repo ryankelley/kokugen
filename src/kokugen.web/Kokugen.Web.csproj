@@ -112,6 +112,7 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Behaviors\TransactionalContainerBehavior.cs" />
+    <Compile Include="Conventions\HtmlExtensions.cs" />
     <Compile Include="Conventions\KokugenHtmlConventions.cs" />
     <Compile Include="Conventions\SplitCamelCaseExtension.cs" />
     <Compile Include="Global.asax.cs">
