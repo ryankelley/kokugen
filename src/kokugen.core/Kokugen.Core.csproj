@@ -82,6 +82,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\ValueOfAttribute.cs" />
     <Compile Include="Config\AliasDTO.cs" />
     <Compile Include="Config\ConfigExtensions.cs" />
     <Compile Include="Config\CookieHandler.cs" />
