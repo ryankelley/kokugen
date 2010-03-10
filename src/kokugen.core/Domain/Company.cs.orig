@@ -1,13 +1,21 @@
+<<<<<<< HEAD
 using Kokugen.Core.Attributes;
+=======
+>>>>>>> 45b95fd686ffa9dca5659ed3bbe8d0634ee8c826
 using Kokugen.Core.Validation;
-
 
 namespace Kokugen.Core.Domain
 {
     public class Company : Entity
     {
+<<<<<<< HEAD
         [Required, ValueOf()]
+        public string Name { get; set; }
+        
+=======
+        [Required]
         public virtual string Name { get; set; }
         public virtual Address Address { get; set; }
+>>>>>>> 45b95fd686ffa9dca5659ed3bbe8d0634ee8c826
     }
 }
