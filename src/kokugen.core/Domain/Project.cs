@@ -7,6 +7,8 @@ namespace Kokugen.Core.Domain
     public class Project : Entity
     {
         private IList<TimeRecord> _timeRecords = new List<TimeRecord>();
+        private IList<BoardColumn> _boardColumns = new List<BoardColumn>();
+
         [Required]
         public virtual string Name { get; set; }
         public virtual DateTime? StartDate { get; set; }
@@ -37,6 +39,26 @@ namespace Kokugen.Core.Domain
             if(!_timeRecords.Contains(timeRecord)) return;
 
             _timeRecords.Remove(timeRecord);
+        }
+
+        public virtual IEnumerable<BoardColumn> GetBoardColumn()
+        {
+            return _boardColumns;
+        }
+
+        public virtual void AddBoard(BoardColumn boardColumn)
+        {
+            if(_boardColumns.Contains(boardColumn)) return;
+
+            boardColumn.Project = this;
+            _boardColumns.Add(boardColumn);
+        }
+
+        public virtual void RemoveBoard(BoardColumn boardColumn)
+        {
+            if(!_boardColumns.Contains(boardColumn)) return;
+
+            _boardColumns.Remove(boardColumn);
         }
 
         public virtual void ComputeTotalTimeAndSessions()

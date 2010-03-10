@@ -1,15 +1,7 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using FubuMVC.Core;
-using FubuMVC.Core.Registration;
-using FubuMVC.Core.Registration.Nodes;
-using FubuMVC.Core.Urls;
-using FubuMVC.Core.View;
-using Kokugen.Core;
 using Kokugen.Web.Actions;
 using Kokugen.Web.Actions.Home;
-using Kokugen.Web.Behaviors;
 using FubuMVC.UI;
 using Kokugen.Web.Conventions;
 
