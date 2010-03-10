@@ -1,5 +1,6 @@
 using FubuMVC.Core;
 using Kokugen.Core.Attributes;
+using Kokugen.Core.Validation;
 using Kokugen.Web.Conventions;
 
 namespace Kokugen.Web.Actions.Project
@@ -30,7 +31,7 @@ namespace Kokugen.Web.Actions.Project
     {
         public Core.Domain.Project Project { get; set; }
 
-        [ValueOf("Company")]
+        [ValueOf("Company"), Required]
         public ValueObject CompanyId { get; set; }
     }
 }

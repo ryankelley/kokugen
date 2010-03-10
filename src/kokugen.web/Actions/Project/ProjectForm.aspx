@@ -1,9 +1,10 @@
-<%@ Page Language="C#" AutoEventWireup="true" Inherits="Kokugen.Web.Actions.Project.ProjectForm" MasterPageFile="~/Shared/Site.Master"%>
+<%@ Page Language="C#" AutoEventWireup="true" Inherits="Kokugen.Web.Actions.Project.ProjectForm"%>
+<%@ Import Namespace="FubuMVC.Core.Urls"%>
 <%@ Import Namespace="Kokugen.Web.Conventions"%>
 <%@ Import Namespace="Kokugen.Web.Actions.Project"%>
-<asp:Content ID="AddProject" ContentPlaceHolderID="mainContent" runat="server">
-<div id="project-form">
-<%= this.FormFor(new AddProjectModel()) %>
+
+<div id="project-form-container" class="hide">
+<%= this.FormFor(new AddProjectModel()).Id("project-form") %>
 
 <%= this.Edit(x => x.Project.Name) %>
 
@@ -12,9 +13,14 @@
 <%= this.Edit(x => x.CompanyId) %>
 
 <p>
-    <input type = "submit" value = "Add" />
+    <input type = "submit" value = "Add" id = "add-project-button"/>
 </p>
 
 </form>
+   
 </div>
-</asp:Content>
+<script type="text/javascript">
+    $(document).ready(function() {
+    $("#project-form").validate();
+    });
+</script>

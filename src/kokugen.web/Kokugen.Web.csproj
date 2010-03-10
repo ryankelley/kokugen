@@ -149,6 +149,14 @@
     <Content Include="Actions\Project\List.aspx" />
     <Content Include="Actions\Project\ProjectForm.aspx" />
     <Content Include="Actions\Project\ProjectItem_Control.ascx" />
+    <Content Include="Content\css\global.css" />
+    <Content Include="Content\images\add_button.png" />
+    <Content Include="Content\images\bg.jpg" />
+    <Content Include="Content\images\head.jpg" />
+    <Content Include="Content\images\head.png" />
+    <Content Include="Content\images\icon.png" />
+    <Content Include="Content\images\logo.png" />
+    <Content Include="Content\images\sel.png" />
     <Content Include="Content\main-styles.css" />
     <Content Include="Content\css\ui-darkness\images\ui-bg_flat_30_cccccc_40x100.png" />
     <Content Include="Content\css\ui-darkness\images\ui-bg_flat_50_5c5c5c_40x100.png" />
