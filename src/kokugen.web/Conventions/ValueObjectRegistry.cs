@@ -15,4 +15,14 @@ namespace Kokugen.Web.Conventions
             throw new NotImplementedException();
         }
     }
+
+    public static class ListNames
+    {
+        private static List<string> _origins;
+
+        public static List<string> Origins()
+        {
+            return _origins;
+        }
+    }
 }

@@ -5,8 +5,8 @@ namespace Kokugen.Core.Domain
 {
     public class Company : Entity
     {
-        [Required]
-        public virtual string Name { get; set; }
+        [Required, ValueOf()]
+        public string Name { get; set; }
         
     }
 }

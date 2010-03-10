@@ -8,12 +8,13 @@ namespace Kokugen.Web.Conventions
         
         public static void ForListName(this ElementRequest request, Action<string> action)
         {
-            throw new NotImplementedException();
+            request.ForValue(action);
         }
 
         public static void EachValueObject(this ElementRequest request, Action<ValueObject> tag )
         {
-            throw new NotImplementedException();
+            request.ForValue(tag);
         }
     }
+
 }

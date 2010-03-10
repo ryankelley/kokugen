@@ -117,6 +117,7 @@
     <Compile Include="Conventions\SplitCamelCaseExtension.cs" />
     <Compile Include="Conventions\ValueObject.cs" />
     <Compile Include="Conventions\ValueObjectDropdownBuilder.cs" />
+    <Compile Include="Conventions\ValueObjectDropdownExtensions.cs" />
     <Compile Include="Conventions\ValueObjectRegistry.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
