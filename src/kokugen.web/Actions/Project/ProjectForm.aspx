@@ -12,15 +12,31 @@
 
 <%= this.Edit(x => x.CompanyId) %>
 
-<p>
-    <input type = "submit" value = "Add" id = "add-project-button"/>
-</p>
+
 
 </form>
    
 </div>
 <script type="text/javascript">
+
+    function closeDialog() {
+        $("#project-form-container").dialog('close');
+        // would want to update list here too
+    }
+
     $(document).ready(function() {
-    $("#project-form").validate();
+        $("#project-form").validate();
+        var options = {
+            success: closeDialog,  // post-submit callback 
+            type: 'post',        // 'get' or 'post', override for form's 'method' attribute 
+            dataType: 'json',        // 'xml', 'script', or 'json' (expected server response type) 
+            clearForm: true        // clear all form fields after successful submit 
+        };
+
+        $("#project-form-container").dialog({ title: "Add Project", autoOpen: false, buttons: { "Save": function() { $("#project-form").ajaxSubmit(options); } } });
+
+
+        // bind form using 'ajaxForm'
+        //$('#project-form').ajaxForm(options);
     });
 </script>

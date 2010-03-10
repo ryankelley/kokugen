@@ -107,3 +107,21 @@ h1{
 }
 
 /*end subnav*/
+
+/* Form Items */
+
+.form-item 
+{
+    padding: 2px;
+}
+
+.form-item label 
+{
+    padding: 5px;
+    display:block;
+}
+
+.form-item input 
+{
+    padding: 5px;
+}

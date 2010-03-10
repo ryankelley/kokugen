@@ -28,9 +28,7 @@ label.error
             $("#project-form-container").dialog('open');
             return false;
         }
-        $(document).ready(function() {
-        $("#project-form-container").dialog({ autoOpen: false });
-        });
+       
     
     </script>
 </body>

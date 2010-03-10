@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using Kokugen.Core.Domain;
 using Kokugen.Core.Persistence.Repositories;
+using Kokugen.Core.Validation;
 
 namespace Kokugen.Core.Services
 {
     public interface IProjectService
     {
         IEnumerable<Project> ListProjects();
-        void SaveProject(Project project);
+        INotification SaveProject(Project project);
         Project Load(Guid Id);
         Project GetProjectFromName(string name);
     }
@@ -17,10 +18,12 @@ namespace Kokugen.Core.Services
     public class ProjectService : IProjectService
     {
         private readonly IProjectRepository _projectRepository;
+        private readonly IValidator _validator;
 
-        public ProjectService(IProjectRepository projectRepository)
+        public ProjectService(IProjectRepository projectRepository, IValidator validator)
         {
             _projectRepository = projectRepository;
+            _validator = validator;
         }
 
         public IEnumerable<Project> ListProjects()
@@ -29,9 +32,17 @@ namespace Kokugen.Core.Services
 
         }
 
-        public void SaveProject(Project project)
+        public INotification SaveProject(Project project)
         {
-            _projectRepository.Save(project);
+            var notification = _validator.Validate(project);
+
+            if(notification.IsValid())
+            {
+                _projectRepository.Save(project);
+            }
+
+            return notification;
+
         }
 
         public Project Load(Guid Id)
