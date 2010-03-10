@@ -88,6 +88,7 @@
     <Compile Include="Config\ICookieHandler.cs" />
     <Compile Include="Config\PayPalConfiguration.cs" />
     <Compile Include="Config\SiteConfigDTO.cs" />
+    <Compile Include="Domain\Address.cs" />
     <Compile Include="Domain\Company.cs" />
     <Compile Include="Domain\Entity.cs" />
     <Compile Include="Domain\Enumeration.cs" />
