@@ -82,6 +82,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\ValueOfAttribute.cs" />
     <Compile Include="Config\AliasDTO.cs" />
     <Compile Include="Config\ConfigExtensions.cs" />
     <Compile Include="Config\CookieHandler.cs" />
@@ -89,6 +90,7 @@
     <Compile Include="Config\PayPalConfiguration.cs" />
     <Compile Include="Config\SiteConfigDTO.cs" />
     <Compile Include="Domain\BoardColumn.cs" />
+    <Compile Include="Domain\Address.cs" />
     <Compile Include="Domain\Company.cs" />
     <Compile Include="Domain\Entity.cs" />
     <Compile Include="Domain\Enumeration.cs" />

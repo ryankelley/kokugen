@@ -1,4 +1,6 @@
 using FubuMVC.Core;
+using Kokugen.Core.Attributes;
+using Kokugen.Web.Conventions;
 
 namespace Kokugen.Web.Actions.Project
 {
@@ -18,6 +20,8 @@ namespace Kokugen.Web.Actions.Project
         {
             var project = new Core.Domain.Project();
 
+            project = model.Project;
+
             return new ProjectFormModel {Project = project};
         }
     }
@@ -25,5 +29,8 @@ namespace Kokugen.Web.Actions.Project
     public class ProjectFormModel
     {
         public Core.Domain.Project Project { get; set; }
+
+        [ValueOf("Company")]
+        public ValueObject CompanyId { get; set; }
     }
 }
