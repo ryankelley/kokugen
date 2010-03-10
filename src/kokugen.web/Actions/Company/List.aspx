@@ -31,12 +31,9 @@ body
 
     <div class="content">
         <h2>Companies</h2>
-
-        
         
         <%= this.InputFor(x => x.CompanyName).Id("company-name") %>
-        
-            <input type="button" value="Add" id="addCompanyButton" />
+        <input type="button" value="Add" id="addCompanyButton" />
         
         <ul id="companyList"></ul>
     </div>
