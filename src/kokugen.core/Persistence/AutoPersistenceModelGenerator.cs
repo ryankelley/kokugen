@@ -23,7 +23,7 @@ namespace Kokugen.Core.Persistence
             mappings.OverrideAll(x => x.IgnoreProperties(z => z.PropertyType.IsSubclassOf(typeof(Enumeration))));
             
             
-            mappings.IgnoreBase<Domain.Entity>();
+            mappings.IgnoreBase<Entity>();
             //mappings.WriteMappingsTo("d:/code/CoachesAid3/MappingFiles");
             
 
