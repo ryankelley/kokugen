@@ -6,12 +6,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head runat="server">
     <title>Kokugen - Time Tracking</title>
-    <%= this.Script("jquery-1.3.2.min.js")%>
-    <script src="/Content/Scripts/jquery-1.3.2-vsdoc2.js"></script>
-    <%= this.Script("jquery-ui-1.7.2.min.js")%>
+    <%= this.Script("jquery-1..4.2.min.js")%>
+    <script src="/Content/Scripts/jquery-1.4.1-vsdoc.js"></script>
+    <%= this.Script("jquery-ui-1.8rc3.custom.min.js")%>
     <%= this.Script("jquery.validate.min.js")%>
     <%= this.Script("jquery.form.js")%>
-    <%= this.CSS("ui-darkness/jquery-ui-1.7.2.css")%>
+    <%= this.CSS("custom-theme/jquery-ui-1.8rc3.custom.css")%>
     <%= this.CSS("global.css")%>
     <link rel="shortcut icon" href="images/icon.png" />
     <asp:ContentPlaceHolder ID="head" runat="server">

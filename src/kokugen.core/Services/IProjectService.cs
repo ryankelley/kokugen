@@ -47,7 +47,7 @@ namespace Kokugen.Core.Services
 
         public Project Load(Guid Id)
         {
-           return  _projectRepository.Load(Id);
+           return  _projectRepository.Get(Id);
         }
 
         public Project GetProjectFromName(string name)

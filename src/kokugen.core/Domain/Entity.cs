@@ -13,7 +13,7 @@ namespace Kokugen.Core.Domain
         #region IEquatable<Entity> Members
 
         /// <summary>
-        /// Indicates whether the current <see cref="T:CoachesAid.Core.Domain.Entity" /> is equal to another <see cref="T:CoachesAid.Core.Domain.Entity" />.
+        /// Indicates whether the current <see cref="T:Kokugen.Core.Domain.Entity" /> is equal to another <see cref="T:Kokugen.Core.Domain.Entity" />.
         /// </summary>
         /// <returns>
         /// true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
@@ -36,10 +36,10 @@ namespace Kokugen.Core.Domain
         #endregion
 
         /// <summary>
-        /// Determines whether the specified <see cref="T:CoachesAid.Core.Domain.Entity" /> is equal to the current <see cref="T:System.Object" />.
+        /// Determines whether the specified <see cref="T:Kokugen.Core.Domain.Entity" /> is equal to the current <see cref="T:System.Object" />.
         /// </summary>
         /// <returns>
-        /// true if the specified <see cref="T:CoachesAid.Core.Domain.Entity" /> is equal to the current <see cref="T:System.Object" />; otherwise, false.
+        /// true if the specified <see cref="T:Kokugen.Core.Domain.Entity" /> is equal to the current <see cref="T:System.Object" />; otherwise, false.
         /// </returns>
         /// <param name="obj">The <see cref="T:System.Object" /> to compare with the current <see cref="T:System.Object" />. </param>
         /// <exception cref="T:System.NullReferenceException">The <paramref name="obj" /> parameter is null.</exception><filterpriority>2</filterpriority>
