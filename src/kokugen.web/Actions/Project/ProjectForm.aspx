@@ -9,7 +9,7 @@
 
 <%= this.Edit(x => x.Project.Description) %>
 
-<%= this.Edit(x => x.Project.Company.Name) %>
+<%= this.Edit(x => x.CompanyId) %>
 
 <p>
     <input type = "submit" value = "Add" />

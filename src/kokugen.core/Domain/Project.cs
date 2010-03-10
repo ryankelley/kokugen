@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Kokugen.Core.Attributes;
 using Kokugen.Core.Validation;
 
 namespace Kokugen.Core.Domain
@@ -16,7 +17,7 @@ namespace Kokugen.Core.Domain
         public virtual double TotalTime { get; set; }
 
         public virtual string Description { get; set; }
-
+        [ValueOf("Project Company Name")]
         public virtual Company Company { get; set; }
 
         public virtual IEnumerable<TimeRecord> GetTimeRecords()
