@@ -41,12 +41,12 @@ namespace Kokugen.Core.Domain
             _timeRecords.Remove(timeRecord);
         }
 
-        public virtual IEnumerable<BoardColumn> GetBoardColumn()
+        public virtual IEnumerable<BoardColumn> GetBoardColumns()
         {
             return _boardColumns;
         }
 
-        public virtual void AddBoard(BoardColumn boardColumn)
+        public virtual void AddBoardColumn(BoardColumn boardColumn)
         {
             if(_boardColumns.Contains(boardColumn)) return;
 
@@ -54,7 +54,7 @@ namespace Kokugen.Core.Domain
             _boardColumns.Add(boardColumn);
         }
 
-        public virtual void RemoveBoard(BoardColumn boardColumn)
+        public virtual void RemoveBoardColumn(BoardColumn boardColumn)
         {
             if(!_boardColumns.Contains(boardColumn)) return;
 

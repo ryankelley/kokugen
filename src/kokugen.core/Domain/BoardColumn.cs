@@ -4,10 +4,10 @@ namespace Kokugen.Core.Domain
 {
     public class BoardColumn : Entity
     {
-        public string Name { get; set; }
-        public int Order { get; set; }
-        public int Limit { get; set; }
+        public virtual string Name { get; set; }
+        public virtual int Order { get; set; }
+        public virtual int Limit { get; set; }
 
-        public Project Project { get; set; }
+        public virtual Project Project { get; set; }
     }
 }
