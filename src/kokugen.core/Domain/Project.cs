@@ -5,12 +5,9 @@ using Kokugen.Core.Validation;
 
 namespace Kokugen.Core.Domain
 {
-    [Serializable]
     public class Project : Entity
     {
         private IList<TimeRecord> _timeRecords = new List<TimeRecord>();
-        private IList<BoardColumn> _boardColumns = new List<BoardColumn>();
-
         [Required]
         public virtual string Name { get; set; }
         public virtual DateTime? StartDate { get; set; }
@@ -20,7 +17,7 @@ namespace Kokugen.Core.Domain
         public virtual double TotalTime { get; set; }
 
         public virtual string Description { get; set; }
-        
+        [ValueOf("Project Company Name")]
         public virtual Company Company { get; set; }
 
         public virtual BoardColumn Backlog { get; set; }

@@ -12,37 +12,28 @@
 
 <%= this.Edit(x => x.CompanyId) %>
 
+
+
 </form>
    
 </div>
 <script type="text/javascript">
 
-    function closeDialog(response) {
-        
-        alert(response.Item);
+    function closeDialog() {
         $("#project-form-container").dialog('close');
         // would want to update list here too
     }
-    function validateAndSave() {
+
+    $(document).ready(function() {
+        $("#project-form").validate();
         var options = {
             success: closeDialog,  // post-submit callback 
             type: 'post',        // 'get' or 'post', override for form's 'method' attribute 
             dataType: 'json',        // 'xml', 'script', or 'json' (expected server response type) 
             clearForm: true        // clear all form fields after successful submit 
         };
-        var isValid = $("#project-form").valid();
 
-        if (isValid) {
-            $("#project-form").ajaxSubmit(options);
-        }
-        
-    }
-
-    $(document).ready(function() {
-        $("#project-form").validate({ errorClass: "ui-state-error" });
-        
-
-        $("#project-form-container").dialog({ title: "Add Project", autoOpen: false, buttons: { "Save": function() { validateAndSave(); } } });
+        $("#project-form-container").dialog({ title: "Add Project", autoOpen: false, buttons: { "Save": function() { $("#project-form").ajaxSubmit(options); } } });
 
 
         // bind form using 'ajaxForm'

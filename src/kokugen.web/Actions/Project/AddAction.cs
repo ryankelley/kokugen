@@ -1,4 +1,4 @@
-using Kokugen.Core;
+using FubuMVC.Core;
 using Kokugen.Core.Attributes;
 using Kokugen.Core.Services;
 using Kokugen.Core.Validation;
@@ -9,40 +9,32 @@ namespace Kokugen.Web.Actions.Project
     public class AddAction
     {
         private readonly IProjectService _projectService;
-        private readonly ICompanyService _companyService;
 
-        public AddAction(IProjectService projectService, ICompanyService companyService)
+        public AddAction(IProjectService projectService)
         {
             _projectService = projectService;
-            _companyService = companyService;
         }
 
         public AjaxResponse Command(AddProjectModel inModel)
         {
-            var company = _companyService.Get(inModel.CompanyId);
-
-            var project = inModel.Project;
-
-            project.Company = company;
-            var notification = _projectService.SaveProject(project);
-
-
+            var notification = _projectService.SaveProject(inModel.Project);
 
             if (notification.IsValid())
-                return new AjaxResponse()
-                           {
-                               Success = true,
-                               Item = new
-                                          {
-                                              Name = project.Name,
-                                              Description = project.Description,
-                                              Id = project.Id,
-                                              CompanyId = project.Company.Id,
-                                              CompanyName = project.Company.Name
-                                          }
-                           }
-                    ;
+                return new AjaxResponse() {Success = true, Item = inModel.Project};
             return new AjaxResponse() {Success = false};
+        }
+    }
+
+    public class ProjectFormAction
+    {
+        [FubuPartial]
+        public ProjectFormModel Execute(ProjectFormModel model)
+        {
+            var project = new Core.Domain.Project();
+
+            project = model.Project;
+
+            return new ProjectFormModel {Project = project};
         }
     }
 

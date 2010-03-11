@@ -11,7 +11,6 @@ namespace Kokugen.Core.Services
         Company AddCompany(string name);
         IEnumerable<Company> ListAllCompanies();
         void DeleteCompany(Guid guid);
-        Company Get(Guid id);
     }
 
     public class CompanyService : ICompanyService
@@ -39,13 +38,8 @@ namespace Kokugen.Core.Services
 
         public void DeleteCompany(Guid guid)
         {
-            var company = _companyRepository.Get(guid);
+            var company = _companyRepository.Load(guid);
             _companyRepository.Delete(company);
-        }
-
-        public Company Get(Guid id)
-        {
-            return _companyRepository.Get(id);
         }
     }
 }
