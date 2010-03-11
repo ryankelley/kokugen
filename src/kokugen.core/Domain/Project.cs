@@ -35,7 +35,7 @@ namespace Kokugen.Core.Domain
         {
             if(_timeRecords.Contains(timeRecord)) return;
 
-            //timeRecord.Project = this;
+            timeRecord.Project = this;
             _timeRecords.Add(timeRecord);
         }
 
