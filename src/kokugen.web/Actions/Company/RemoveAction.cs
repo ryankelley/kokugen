@@ -12,7 +12,7 @@ namespace Kokugen.Web.Actions.Company
             _companyService = companyService;
         }
 
-        public AjaxResponse Command(RemoveCompanyInput model)
+        public AjaxResponse Remove(RemoveCompanyInput model)
         {
             _companyService.DeleteCompany(model.Id);
             return new AjaxResponse

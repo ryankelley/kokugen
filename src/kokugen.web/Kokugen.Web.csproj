@@ -30,6 +30,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Castle.Core, Version=1.1.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL" />
+    <Reference Include="FluentNHibernate, Version=1.0.0.0, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\Fluent NHibernate\FluentNHibernate.dll</HintPath>
+    </Reference>
     <Reference Include="FubuMVC.Core, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\FubuMVC\FubuMVC.Core.dll</HintPath>
@@ -109,6 +114,7 @@
     <Compile Include="Actions\Project\AddAction.cs" />
     <Compile Include="Actions\Project\AddProjectModel.cs" />
     <Compile Include="Actions\Project\ListAction.cs" />
+    <Compile Include="Actions\Project\ProjectFormAction.cs" />
     <Compile Include="Actions\Project\View_Page_Type_Declarations.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -116,6 +122,10 @@
     <Compile Include="Conventions\HtmlExtensions.cs" />
     <Compile Include="Conventions\KokugenHtmlConventions.cs" />
     <Compile Include="Conventions\SplitCamelCaseExtension.cs" />
+    <Compile Include="Conventions\ValueObject.cs" />
+    <Compile Include="Conventions\ValueObjectDropdownBuilder.cs" />
+    <Compile Include="Conventions\ValueObjectDropdownExtensions.cs" />
+    <Compile Include="Conventions\ValueObjectRegistry.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -141,6 +151,28 @@
     <Content Include="Actions\Project\List.aspx" />
     <Content Include="Actions\Project\ProjectForm.aspx" />
     <Content Include="Actions\Project\ProjectItem_Control.ascx" />
+    <Content Include="Content\css\custom-theme\images\ui-bg_fine-grain_10_ffffff_60x60.png" />
+    <Content Include="Content\css\custom-theme\images\ui-bg_fine-grain_42_333333_60x60.png" />
+    <Content Include="Content\css\custom-theme\images\ui-bg_glass_15_222222_1x400.png" />
+    <Content Include="Content\css\custom-theme\images\ui-bg_glass_20_333333_1x400.png" />
+    <Content Include="Content\css\custom-theme\images\ui-bg_glass_20_a83c00_1x400.png" />
+    <Content Include="Content\css\custom-theme\images\ui-bg_glass_30_999999_1x400.png" />
+    <Content Include="Content\css\custom-theme\images\ui-bg_glass_40_dadada_1x400.png" />
+    <Content Include="Content\css\custom-theme\images\ui-bg_highlight-hard_50_333333_1x100.png" />
+    <Content Include="Content\css\custom-theme\images\ui-icons_111111_256x240.png" />
+    <Content Include="Content\css\custom-theme\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\css\custom-theme\images\ui-icons_333333_256x240.png" />
+    <Content Include="Content\css\custom-theme\images\ui-icons_cccccc_256x240.png" />
+    <Content Include="Content\css\custom-theme\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\css\custom-theme\jquery-ui-1.8rc3.custom.css" />
+    <Content Include="Content\css\global.css" />
+    <Content Include="Content\images\add_button.png" />
+    <Content Include="Content\images\bg.jpg" />
+    <Content Include="Content\images\head.jpg" />
+    <Content Include="Content\images\head.png" />
+    <Content Include="Content\images\icon.png" />
+    <Content Include="Content\images\logo.png" />
+    <Content Include="Content\images\sel.png" />
     <Content Include="Content\main-styles.css" />
     <Content Include="Content\css\ui-darkness\images\ui-bg_flat_30_cccccc_40x100.png" />
     <Content Include="Content\css\ui-darkness\images\ui-bg_flat_50_5c5c5c_40x100.png" />
@@ -157,9 +189,10 @@
     <Content Include="Content\css\ui-darkness\images\ui-icons_cccccc_256x240.png" />
     <Content Include="Content\css\ui-darkness\images\ui-icons_ffffff_256x240.png" />
     <Content Include="Content\css\ui-darkness\jquery-ui-1.7.2.css" />
-    <Content Include="Content\Scripts\jquery-1.3.2-vsdoc2.js" />
-    <Content Include="Content\Scripts\jquery-1.3.2.min.js" />
-    <Content Include="Content\Scripts\jquery-ui-1.7.2.min.js" />
+    <Content Include="Content\Scripts\jquery-1.4.1-vsdoc.js" />
+    <Content Include="Content\Scripts\jquery-1.4.2.min.js" />
+    <Content Include="Content\Scripts\jquery-ui-1.8rc3.custom.min.js" />
+    <Content Include="Content\Scripts\jquery.form.js" />
     <Content Include="Content\Scripts\jquery.validate.min.js" />
     <Content Include="Shared\Site.Master" />
   </ItemGroup>

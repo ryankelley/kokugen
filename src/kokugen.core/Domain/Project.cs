@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
+using Kokugen.Core.Attributes;
 using Kokugen.Core.Validation;
 
 namespace Kokugen.Core.Domain
 {
+    [Serializable]
     public class Project : Entity
     {
         private IList<TimeRecord> _timeRecords = new List<TimeRecord>();
@@ -18,7 +20,7 @@ namespace Kokugen.Core.Domain
         public virtual double TotalTime { get; set; }
 
         public virtual string Description { get; set; }
-
+        
         public virtual Company Company { get; set; }
 
         public virtual BoardColumn Backlog { get; set; }
@@ -33,7 +35,7 @@ namespace Kokugen.Core.Domain
         {
             if(_timeRecords.Contains(timeRecord)) return;
 
-            timeRecord.Project = this;
+            //timeRecord.Project = this;
             _timeRecords.Add(timeRecord);
         }
 

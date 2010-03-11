@@ -22,12 +22,15 @@ namespace Kokugen.Web
 
             Routes
                 .IgnoreNamespaceText(typeof(AjaxResponse).Namespace)
+                .IgnoreControllerNamesEntirely()
                 .IgnoreClassSuffix("Action")
                 .IgnoreMethodsNamed("Execute")
                 .IgnoreMethodSuffix("Command")
                 .IgnoreMethodSuffix("Query")
+                .IgnoreMethodSuffix("Remove")
                 .ConstrainToHttpMethod(action => action.Method.Name.EndsWith("Command"), "POST")
-                .ConstrainToHttpMethod(action => action.Method.Name.StartsWith("Query"), "GET");
+                .ConstrainToHttpMethod(action => action.Method.Name.StartsWith("Query"), "GET")
+                .ConstrainToHttpMethod(action => action.Method.Name.StartsWith("Remove"), "DELETE");
 
 
             this.HtmlConvention(new KokugenHtmlConventions());
