@@ -1,4 +1,6 @@
-﻿<%@ Import Namespace="Kokugen.Web"%>
+﻿<%@ Import Namespace="Kokugen.Web.Actions.Project"%>
+<%@ Import Namespace="Kokugen.Web.Actions.Company"%>
+<%@ Import Namespace="Kokugen.Web"%>
 <%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="FubuMVC.Core.View.FubuMasterPage" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -13,7 +15,7 @@
     <%= this.Script("jquery.form.js")%>
     <%= this.CSS("custom-theme/jquery-ui-1.8rc3.custom.css")%>
     <%= this.CSS("global.css")%>
-    <link rel="shortcut icon" href="images/icon.png" />
+    <link rel="shortcut icon" href="/content/images/icon.png" />
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -22,10 +24,10 @@
 		<div id="wrapper">
 			<h1 id="logo"><a href="index.html">Kokugen - Time Managment</a></h1>
 			<ul id="subnav">
-				<li class="active"><a href="contact.html">BOARD</a></li>
-				<li class="bar"><a href="contact.html">WORK ITEMS</a></li>
-				<li class="lbar"><a href="index.html">TIME RECORDS</a></li>
-				<li class="last"><a href="create.html">USERS</a></li>
+				<li class="active"><%= this.LinkTo(new CompanyListModel()).Text("Companies") %></li>
+				<li class="bar"><%= this.LinkTo(new ProjectListModel()).Text("Projects") %></li>
+				<li class="lbar"><a href="index.html">Time Records</a></li>
+				<li class="last"><a href="create.html">Users</a></li>
 			</ul>
 		</div>
 	</div>
