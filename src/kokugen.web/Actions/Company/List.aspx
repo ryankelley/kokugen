@@ -39,11 +39,7 @@ body
         <%= this.Edit(x => x.Company.Address.City)%>
         <%= this.Edit(x => x.Company.Address.State)%>
         <%= this.Edit(x => x.Company.Address.ZipCode)%>
-        <input type="button" value="Add" id="addCompanyButton" />
-        
-        
-        
-            <input type="button" value="Add" id="addCompanyButton" />
+        <input type="button" value="Add" id="addCompanyButton" />  
         
         <ul id="companyList"></ul>
     </div>
