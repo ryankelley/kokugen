@@ -20,9 +20,6 @@ namespace Kokugen.Core.Domain
         [ValueOf("Project Company Name")]
         public virtual Company Company { get; set; }
 
-        public virtual BoardColumn Backlog { get; set; }
-        public virtual BoardColumn Archive { get; set; }
-
         public virtual IEnumerable<TimeRecord> GetTimeRecords()
         {
             return _timeRecords;

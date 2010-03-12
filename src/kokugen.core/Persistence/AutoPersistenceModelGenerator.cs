@@ -73,9 +73,7 @@ namespace Kokugen.Core.Persistence
                 c.Add<CustomReferencesConvention>();
                 //c.Add<CustomHasManyConvention>();
                 c.Add<CustomJoinedSubclassConvention>();
-
                 c.Add<CustomFieldLengthAttributeConvention>();
-                c.Add<RequiredFieldAttributeConvention>();
 
                 // Keep these last
                 c.Add<DefaultStringLengthConvention>();
