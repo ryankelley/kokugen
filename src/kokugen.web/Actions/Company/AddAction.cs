@@ -1,5 +1,4 @@
 using FubuMVC.Core;
-using Kokugen.Core.Domain;
 using Kokugen.Core.Services;
 
 namespace Kokugen.Web.Actions.Company
@@ -30,6 +29,5 @@ namespace Kokugen.Web.Actions.Company
     public class AddCompanyInput
     {
         public string CompanyName { get; set; }
-        public Address Address { get; set; }
     }
 }

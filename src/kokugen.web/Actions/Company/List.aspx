@@ -1,5 +1,4 @@
 <%@ Page Language="C#" Inherits="Kokugen.Web.Actions.Company.List" AutoEventWireup="true" MasterPageFile="~/Shared/Site.Master" %>
-<%@ Import Namespace="Kokugen.Web.Conventions"%>
 <%@ Import Namespace="Kokugen.Web.Actions.Company"%>
 <%@ Import Namespace="Kokugen.Core"%>
 <%@ Import Namespace="FubuMVC.Core.Urls"%>
@@ -35,14 +34,7 @@ body
 
         
         
-        <%= this.Edit(x => x.Company.Name) %>
-        <%= this.Edit(x => x.Company.Address.StreetLine1)%>
-        <%= this.Edit(x => x.Company.Address.StreetLine2)%>
-        <%= this.Edit(x => x.Company.Address.City)%>
-        <%= this.Edit(x => x.Company.Address.State)%>
-        <%= this.Edit(x => x.Company.Address.ZipCode)%>
-        
-        
+        <%= this.InputFor(x => x.CompanyName).Id("company-name") %>
         
             <input type="button" value="Add" id="addCompanyButton" />
         
@@ -98,13 +90,7 @@ body
                 listItem.remove();
             }
             
-            $.ajax({
-                url: removeCompanyUrl,
-                data: {Id: companyId},
-                success: onSuccess,
-                dataType: "json",
-                type: "DELETE"
-            });
+            $.post(removeCompanyUrl, {Id: companyId}, onSuccess, "json");
         });
         
         $("#addCompanyButton").click(saveNewCompany);

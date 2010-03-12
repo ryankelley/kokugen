@@ -1,25 +1,20 @@
 using System;
 using System.Collections.Generic;
 using Kokugen.Core.Services;
-using Kokugen.Web.Conventions;
 
 namespace Kokugen.Web.Actions.Project
 {
     public class ListAction
     {
         private readonly IProjectService _projectService;
-        private readonly IValueObjectInitializer _initLists;
 
-        public ListAction(IProjectService projectService, IValueObjectInitializer initLists)
+        public ListAction(IProjectService projectService)
         {
             _projectService = projectService;
-            _initLists = initLists;
         }
 
         public ProjectListModel Query()
         {
-            _initLists.Start();
-
             return new ProjectListModel
                        {
                            Projects = _projectService.ListProjects()
