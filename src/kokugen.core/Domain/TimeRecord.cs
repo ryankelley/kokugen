@@ -9,7 +9,7 @@ namespace Kokugen.Core.Domain
         public virtual DateTime EndTime { get; set; }
 
         public virtual string Description { get; set; }
-        public virtual Project Project { get; set; }
+        //public virtual Project Project { get; set; }
 
         public virtual User User { get; set; }
 

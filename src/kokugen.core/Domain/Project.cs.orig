@@ -1,13 +1,18 @@
 using System;
 using System.Collections.Generic;
+using Kokugen.Core.Attributes;
 using Kokugen.Core.Validation;
 
 namespace Kokugen.Core.Domain
 {
+    [Serializable]
     public class Project : Entity
     {
         private IList<TimeRecord> _timeRecords = new List<TimeRecord>();
+<<<<<<< HEAD
         private IList<BoardColumn> _boardColumns = new List<BoardColumn>();
+=======
+>>>>>>> 34954fa3c25098bf6638e01427eec2504dab9b4f
 
         [Required]
         public virtual string Name { get; set; }
@@ -18,8 +23,11 @@ namespace Kokugen.Core.Domain
         public virtual double TotalTime { get; set; }
 
         public virtual string Description { get; set; }
-
+        
         public virtual Company Company { get; set; }
+
+        public virtual BoardColumn Backlog { get; set; }
+        public virtual BoardColumn Archive { get; set; }
 
         public virtual IEnumerable<TimeRecord> GetTimeRecords()
         {
