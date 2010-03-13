@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<license id="48f330f0-70e6-43a8-a102-9c080116206c" expiration="9999-12-31T23:59:59.9999999" type="Standard">
+  <name>Ryan</name>
+  <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+    <SignedInfo>
+      <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+      <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+      <Reference URI="">
+        <Transforms>
+          <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
+        </Transforms>
+        <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <DigestValue>TIzD3/cr2Y9pt/kH24V8iQoplZE=</DigestValue>
+      </Reference>
+    </SignedInfo>
+    <SignatureValue>Wko7NjrA58b+oaKDfB5/l5xpuAbYtgC4OWTuaNmeQEXkmw7N+VsfKSz4pkLPeJaX9ZbdRVKRqlGBMwH6uZkNgcrdtbzG1OdyU5gxmY2Kqb1R+ajuxKqesz6aVcY/BwFywYU09bQGIykt6Ck8r9k+uhIlUWmoKGUPJCwnpefr78A=</SignatureValue>
+  </Signature>
+</license>
