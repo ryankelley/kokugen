@@ -2,18 +2,7 @@
 <%@ Import Namespace="FubuMVC.Core.Urls"%>
 <%@ Import Namespace="Kokugen.Web.Actions.Project"%>
 <asp:Content ID="ProjectListHead" ContentPlaceHolderID="head" runat="server">
-<style type="text/css">
-.hidden { display:none;}
-input.error 
-{
-    border: solid thin red;
-}
-label.error
-{
-    display:block;
-    color:Red;
-}
-</style>
+
 </asp:Content>
 <asp:Content ID="ProjectListContent" ContentPlaceHolderID="mainContent" runat="server">
 <body>

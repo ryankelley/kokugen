@@ -8,6 +8,8 @@ namespace Kokugen.Core.Domain
     {
         [Required]
         public virtual string Name { get; set; }
+
+        [ValidatedChild]
         public virtual Address Address { get; set; }
     }
 }

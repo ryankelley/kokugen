@@ -99,6 +99,7 @@
   <ItemGroup>
     <Compile Include="Actions\AjaxResponse.cs" />
     <Compile Include="Actions\Company\AddAction.cs" />
+    <Compile Include="Actions\Company\CompanyFormAction.cs" />
     <Compile Include="Actions\Company\ListAction.cs" />
     <Compile Include="Actions\Company\RemoveAction.cs" />
     <Compile Include="Actions\Company\View_Page_Type_Declarations.cs">
@@ -145,6 +146,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Actions\Company\CompanyForm.aspx" />
     <Content Include="Actions\Company\List.aspx" />
     <Content Include="Actions\Home\Home.aspx" />
     <Content Include="Actions\Project\List.aspx" />

@@ -36,6 +36,16 @@ h1{
 	width: 283px;
 	xposition: absolute;
 }
+.hidden { display:none;}
+input.error 
+{
+    border: solid thin red;
+}
+label.error
+{
+    display:block;
+    color:Red;
+}
 
 #logo a {
 	text-indent: -7777px;
@@ -123,4 +133,5 @@ h1{
 .form-item input 
 {
     padding: 5px;
+    width: 100%;
 }

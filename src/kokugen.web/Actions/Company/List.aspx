@@ -5,6 +5,10 @@
 <%@ Import Namespace="FubuMVC.Core.Urls"%>
 <%@ Import Namespace="HtmlTags"%>
 <asp:Content ID="CompanyListHead" ContentPlaceHolderID="head" runat="server">
+<script type="text/javascript">
+
+
+</script>
 <style type="text/css">
 body
 {
@@ -31,23 +35,20 @@ body
 <asp:Content ID="THISCONTENTAREAID" ContentPlaceHolderID="mainContent" runat="server">
 
     <div class="content">
+    <div><a href="#" onclick="showCompanyForm();"><img src="/content/images/add_button.png" alt="add company" /></a></div>
         <h2>Companies</h2>
-
-        
-        
-        <%= this.Edit(x => x.Company.Name) %>
-        <%= this.Edit(x => x.Company.Address.StreetLine1)%>
-        <%= this.Edit(x => x.Company.Address.StreetLine2)%>
-        <%= this.Edit(x => x.Company.Address.City)%>
-        <%= this.Edit(x => x.Company.Address.State)%>
-        <%= this.Edit(x => x.Company.Address.ZipCode)%>
-        
-        
-        
-            <input type="button" value="Add" id="addCompanyButton" />
-        
+       <% this.Partial(new CompanyFormModel()); %>
         <ul id="companyList"></ul>
     </div>
+    <script type="text/javascript">
+
+        function showCompanyForm() {
+            $("#company-form-container").dialog('open');
+            return false;
+        }
+       
+    
+    </script>
     <script type="text/javascript">
     var addCompanyUrl = "<%= Get<IUrlRegistry>().UrlFor(new AddCompanyInput()) %>";
     var removeCompanyUrl = "<%= Get<IUrlRegistry>().UrlFor(new RemoveCompanyInput()) %>";
@@ -65,12 +66,7 @@ body
             companyList.append( listItem );
         };
         
-        var saveNewCompany = function(){
-            var name = $("#company-name").val();
-            $.post(addCompanyUrl, {CompanyName: name}, saveCompanyResponse, "json");
-        };
-        
-        var saveCompanyResponse = function(data){
+          var saveCompanyResponse = function(data){
             if (data.Success !== true) {
                 alert("failed to add your company");
                 return;
@@ -107,7 +103,7 @@ body
             });
         });
         
-        $("#addCompanyButton").click(saveNewCompany);
+        
     });
 
 

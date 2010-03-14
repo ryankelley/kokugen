@@ -17,7 +17,13 @@ namespace Kokugen.Web.Actions.Company
         {
             if(model.CompanyName.IsEmpty()) return new AjaxResponse{ Success = false};
 
-            var company = _companyService.AddCompany(model.CompanyName);
+            var company = _companyService.AddCompany
+                (model.CompanyName, 
+                model.CompanyAddressStreetLine1, 
+                model.CompanyAddressStreetLine2, 
+                model.CompanyAddressCity, 
+                model.CompanyAddressState, 
+                model.CompanyAddressZipCode);
 
             return new AjaxResponse
                        {
@@ -29,7 +35,12 @@ namespace Kokugen.Web.Actions.Company
 
     public class AddCompanyInput
     {
+        public Core.Domain.Company Company { get; set; } 
         public string CompanyName { get; set; }
-        public Address Address { get; set; }
+        public string CompanyAddressStreetLine1 { get; set; }
+        public string CompanyAddressStreetLine2 { get; set; }
+        public string CompanyAddressCity { get; set; }
+        public string CompanyAddressState { get; set; }
+        public string CompanyAddressZipCode { get; set; }
     }
 }

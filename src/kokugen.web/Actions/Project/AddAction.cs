@@ -21,7 +21,7 @@ namespace Kokugen.Web.Actions.Project
         {
             var company = _companyService.Get(inModel.CompanyId);
 
-            var project = _projectService.CreateProject(inModel.Project, company);
+            var project = _projectService.CreateProject(inModel.ProjectName, inModel.ProjectDescription, company);
             var notification = _projectService.SaveProject(project);
 
             if (notification.IsValid())
