@@ -22,29 +22,15 @@ namespace Kokugen.Core.Persistence
             mappings.Setup(GetSetup());
             mappings.OverrideAll(x => x.IgnoreProperties(z => z.PropertyType.IsSubclassOf(typeof(Enumeration))));
             
-            
             mappings.IgnoreBase<Domain.Entity>();
-            //mappings.WriteMappingsTo("d:/code/CoachesAid3/MappingFiles");
-            
-
             mappings.UseOverridesFromAssemblyOf<AutoPersistenceModelGenerator>();
-
-            
 
             return mappings;
         }
 
         private void setupComponentTypes()
         {
-            //componentTypes.Add<DateRange>();
-            //componentTypes.Add<TeamRecord>();
-            //componentTypes.Add<Address>();
-            //componentTypes.Add<ImageAttributes>();
-            //componentTypes.Add<ImageResolution>();
-            //componentTypes.Add<ImageCoordinates>();
-            //componentTypes.Add<Domain.Advertising.DateRange>();
-
-            
+            componentTypes.Add<Address>();
         }
 
         private Action<AutoMappingExpressions> GetSetup()
@@ -67,23 +53,26 @@ namespace Kokugen.Core.Persistence
             return c =>
             {
                 c.Add<PrimaryKeyConvention>();
-                c.Add<HasManyConvention>();
-                c.Add<CustomManyToManyConvention>();
                 c.Add<CustomManyToManyTableNameConvention>();
                 c.Add<CustomReferencesConvention>();
-                //c.Add<CustomHasManyConvention>();
                 c.Add<CustomJoinedSubclassConvention>();
-                c.Add<CustomFieldLengthAttributeConvention>();
+
+                AddValidation(c);
 
                 // Keep these last
                 c.Add<DefaultStringLengthConvention>();
                 c.Add<CustomForeignKeyConvention>();
                 c.Add<TableNameConvention>();
-
                 
                 //c.Add(ConventionBuilder.Property.Always(s => s.Column("[" + s.Property.Name + "]")));
                 //c.Add(ConventionBuilder.Class.Always(s => s.Table("[" + s.EntityType.Name + "]"))); 
             };
+        }
+
+        private void AddValidation(IConventionFinder finder)
+        {
+            finder.Add<RequiredAttributeConvention>();
+            finder.Add<MaximumStingLengthConvention>();
         }
 
         private static bool GetAutoMappingFilter(Type arg)
@@ -99,8 +88,6 @@ namespace Kokugen.Core.Persistence
             return false;
         }
     }
-
-   
 
     public interface IAutoPersistenceModelGenerator
     {

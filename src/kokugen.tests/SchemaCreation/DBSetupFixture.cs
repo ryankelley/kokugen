@@ -26,9 +26,6 @@ namespace Kokugen.Tests.SchemaCreation
             ObjectFactory.Initialize(x =>
             {
                 x.AddRegistry(new KokugenCoreRegistry());
-
-                //x.ForRequestedType<ISessionSourceConfiguration>().Singleton()
-                //.TheDefault.Is.OfConcreteType<TestSQLServerSessionSourceConfiguration>();
             });
         }
 
@@ -55,15 +52,12 @@ namespace Kokugen.Tests.SchemaCreation
 
                 //var exporter = new SchemaUpdate(conf);
                 //exporter.SetOutputFile("ExecuteOutput.sql");
-
                 //exporter.Create(false, true);
 
-                //sessSource.BuildSchema(true);
+                //sessSource.BuildSchema();
 
                 CreateOrUpdateSchema(conf);
             }
-
-            //_sessionSource.BuildSchema();
         }
 
         private static void CreateOrUpdateSchema(Configuration config)

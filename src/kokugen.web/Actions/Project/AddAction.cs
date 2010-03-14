@@ -21,25 +21,22 @@ namespace Kokugen.Web.Actions.Project
         {
             var company = _companyService.Get(inModel.CompanyId);
 
-            var project = inModel.Project;
-
-            project.Company = company;
+            var project = _projectService.CreateProject(inModel.Project, company);
             var notification = _projectService.SaveProject(project);
-
-
 
             if (notification.IsValid())
                 return new AjaxResponse()
                            {
                                Success = true,
-                               Item = new
-                                          {
-                                              Name = project.Name,
-                                              Description = project.Description,
-                                              Id = project.Id,
-                                              CompanyId = project.Company.Id,
-                                              CompanyName = project.Company.Name
-                                          }
+                               Item = project
+                               //Item = new
+                               //           {
+                               //               Name = project.Name,
+                               //               Description = project.Description,
+                               //               Id = project.Id,
+                               //               CompanyId = project.Company.Id,
+                               //               CompanyName = project.Company.Name
+                               //           }
                            }
                     ;
             return new AjaxResponse() {Success = false};

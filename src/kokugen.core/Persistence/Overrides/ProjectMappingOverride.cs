@@ -15,6 +15,10 @@ namespace Kokugen.Core.Persistence.Overrides
                 .Cascade.SaveUpdate()
                 .ForeignKeyConstraintName("FK_Project_To_Time_Record");
 
+            mapping.HasMany(x => x.GetBoardColumns())
+                .Access.CamelCaseField(Prefix.Underscore)
+                .Cascade.SaveUpdate()
+                .ForeignKeyConstraintName("FK_Project_To_Board_Columns");
         }
     }
 }
