@@ -19,7 +19,7 @@
         }
 
         function appendProjectToList(project) {
-            var output = "<li class=\"project first\"><a title=\"Click to view this project\" href=\"/project/4588/board\">";
+            var output = "<li class=\"project first\"><a title=\"Click to view this project\" href=\"/project/ "+ project.Id + "\">";
             output = output +  "<span class=\"project-name\">" + project.Name + "</span>";
             output = output +  "<span class=\"project-stats\">Some Status Here</span><div class=\"project-owner\">" + project.Company.Name + "</div></a></li>";
 

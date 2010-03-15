@@ -1,6 +1,6 @@
 <%@ Control Language="C#" AutoEventWireup="true" Inherits="Kokugen.Web.Actions.Project.ProjectItem_Control"  %>
 <li class="project first">
-<a title="Click to view this project" href="/project/4588/board">
+<a title="Click to view this project" href="/project/<%= Model.Id %>">
     <span class="project-name">
 		<%= this.DisplayFor(x => x.Name) %>
 	</span>

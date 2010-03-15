@@ -14,6 +14,7 @@ namespace Kokugen.Core.Services
         Project Load(Guid Id);
         Project GetProjectFromName(string name);
         Project CreateProject(string projectName, string projectDescription, Company company);
+        Project GetProjectFromId(Guid id);
     }
 
     public class ProjectService : IProjectService
@@ -67,6 +68,11 @@ namespace Kokugen.Core.Services
             project.Company = company;
 
             return project;
+        }
+
+        public Project GetProjectFromId(Guid id)
+        {
+            return _projectRepository.Get(id);
         }
     }
 }

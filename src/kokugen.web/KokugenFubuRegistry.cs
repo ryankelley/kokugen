@@ -38,8 +38,11 @@ namespace Kokugen.Web
                 .IgnoreMethodSuffix("Remove")
                 .ConstrainToHttpMethod(action => action.Method.Name.EndsWith("Command"), "POST")
                 .ConstrainToHttpMethod(action => action.Method.Name.StartsWith("Query"), "GET")
-                .ConstrainToHttpMethod(action => action.Method.Name.StartsWith("Remove"), "DELETE");
+                .ConstrainToHttpMethod(action => action.Method.Name.StartsWith("Remove"), "DELETE")
+                .ForInputTypesOf<IRequestById>(x => x.RouteInputFor(request => request.Id));
 
+
+            
 
             this.HtmlConvention(new KokugenHtmlConventions());
 

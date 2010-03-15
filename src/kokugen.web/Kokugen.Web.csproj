@@ -113,6 +113,7 @@
     <Compile Include="Actions\Home\IndexAction.cs" />
     <Compile Include="Actions\Project\AddAction.cs" />
     <Compile Include="Actions\Project\AddProjectModel.cs" />
+    <Compile Include="Actions\Project\GetProjectAction.cs" />
     <Compile Include="Actions\Project\ListAction.cs" />
     <Compile Include="Actions\Project\ProjectFormAction.cs" />
     <Compile Include="Actions\Project\View_Page_Type_Declarations.cs">
@@ -120,6 +121,7 @@
     </Compile>
     <Compile Include="Behaviors\TransactionalContainerBehavior.cs" />
     <Compile Include="Conventions\HtmlExtensions.cs" />
+    <Compile Include="Conventions\IRequestById.cs" />
     <Compile Include="Conventions\KokugenHtmlConventions.cs" />
     <Compile Include="Conventions\SplitCamelCaseExtension.cs" />
     <Compile Include="Conventions\ValueObject.cs" />
@@ -149,6 +151,7 @@
     <Content Include="Actions\Company\CompanyForm.aspx" />
     <Content Include="Actions\Company\List.aspx" />
     <Content Include="Actions\Home\Home.aspx" />
+    <Content Include="Actions\Project\GetProject.aspx" />
     <Content Include="Actions\Project\List.aspx" />
     <Content Include="Actions\Project\ProjectForm.aspx" />
     <Content Include="Actions\Project\ProjectItem_Control.ascx" />
