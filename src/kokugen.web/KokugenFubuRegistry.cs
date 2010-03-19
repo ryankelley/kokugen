@@ -1,7 +1,15 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using FubuMVC.Core;
+using FubuMVC.Core.Registration;
+using FubuMVC.Core.Registration.Nodes;
+using FubuMVC.Core.Urls;
+using FubuMVC.Core.View;
+using Kokugen.Core;
 using Kokugen.Web.Actions;
 using Kokugen.Web.Actions.Home;
+using Kokugen.Web.Behaviors;
 using FubuMVC.UI;
 using Kokugen.Web.Conventions;
 
@@ -30,8 +38,11 @@ namespace Kokugen.Web
                 .IgnoreMethodSuffix("Remove")
                 .ConstrainToHttpMethod(action => action.Method.Name.EndsWith("Command"), "POST")
                 .ConstrainToHttpMethod(action => action.Method.Name.StartsWith("Query"), "GET")
-                .ConstrainToHttpMethod(action => action.Method.Name.StartsWith("Remove"), "DELETE");
+                .ConstrainToHttpMethod(action => action.Method.Name.StartsWith("Remove"), "DELETE")
+                .ForInputTypesOf<IRequestById>(x => x.RouteInputFor(request => request.Id));
 
+
+            
 
             this.HtmlConvention(new KokugenHtmlConventions());
 

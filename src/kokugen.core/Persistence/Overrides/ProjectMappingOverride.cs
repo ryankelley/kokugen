@@ -18,15 +18,7 @@ namespace Kokugen.Core.Persistence.Overrides
             mapping.HasMany(x => x.GetBoardColumns())
                 .Access.CamelCaseField(Prefix.Underscore)
                 .Cascade.SaveUpdate()
-                .ForeignKeyConstraintName("FK_Project_To_BoardColumn");
-        }
-    }
-
-    public class BoardColumnOverride : IAutoMappingOverride<BoardColumn>
-    {
-        public void Override(AutoMapping<BoardColumn> mapping)
-        {
-            mapping.References(x => x.Project).Cascade.SaveUpdate();
+                .ForeignKeyConstraintName("FK_Project_To_Board_Columns");
         }
     }
 }

@@ -98,8 +98,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Actions\AjaxResponse.cs" />
-    <Compile Include="Actions\Board\ManageColumnsAction.cs" />
     <Compile Include="Actions\Company\AddAction.cs" />
+    <Compile Include="Actions\Company\CompanyFormAction.cs" />
     <Compile Include="Actions\Company\ListAction.cs" />
     <Compile Include="Actions\Company\RemoveAction.cs" />
     <Compile Include="Actions\Company\View_Page_Type_Declarations.cs">
@@ -113,6 +113,7 @@
     <Compile Include="Actions\Home\IndexAction.cs" />
     <Compile Include="Actions\Project\AddAction.cs" />
     <Compile Include="Actions\Project\AddProjectModel.cs" />
+    <Compile Include="Actions\Project\GetProjectAction.cs" />
     <Compile Include="Actions\Project\ListAction.cs" />
     <Compile Include="Actions\Project\ProjectFormAction.cs" />
     <Compile Include="Actions\Project\View_Page_Type_Declarations.cs">
@@ -120,6 +121,7 @@
     </Compile>
     <Compile Include="Behaviors\TransactionalContainerBehavior.cs" />
     <Compile Include="Conventions\HtmlExtensions.cs" />
+    <Compile Include="Conventions\IRequestById.cs" />
     <Compile Include="Conventions\KokugenHtmlConventions.cs" />
     <Compile Include="Conventions\SplitCamelCaseExtension.cs" />
     <Compile Include="Conventions\ValueObject.cs" />
@@ -146,8 +148,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Actions\Company\CompanyForm.aspx" />
     <Content Include="Actions\Company\List.aspx" />
     <Content Include="Actions\Home\Home.aspx" />
+    <Content Include="Actions\Project\GetProject.aspx" />
     <Content Include="Actions\Project\List.aspx" />
     <Content Include="Actions\Project\ProjectForm.aspx" />
     <Content Include="Actions\Project\ProjectItem_Control.ascx" />
@@ -168,6 +172,7 @@
     <Content Include="Content\css\global.css" />
     <Content Include="Content\images\add_button.png" />
     <Content Include="Content\images\bg.jpg" />
+    <Content Include="Content\images\clipboard.png" />
     <Content Include="Content\images\head.jpg" />
     <Content Include="Content\images\head.png" />
     <Content Include="Content\images\icon.png" />

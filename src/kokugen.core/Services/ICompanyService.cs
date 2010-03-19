@@ -8,10 +8,10 @@ namespace Kokugen.Core.Services
 {
     public interface ICompanyService
     {
-        Company AddCompany(string name);
         IEnumerable<Company> ListAllCompanies();
         void DeleteCompany(Guid guid);
         Company Get(Guid id);
+        Company AddCompany(string companyName, string addressStreetLine1, string addressStreetLine2, string addressCity, string addressState, string addressZipCode);
     }
 
     public class CompanyService : ICompanyService
@@ -23,9 +23,19 @@ namespace Kokugen.Core.Services
             _companyRepository = companyRepository;
         }
 
-        public Company AddCompany(string name)
+        public Company AddCompany(string companyName, string addressStreetLine1, string addressStreetLine2, string addressCity, string addressState, string addressZipCode)
         {
-            var company = new Company() {Name = name};
+            var company = new Company() {Name = companyName};
+
+            company.Address = new Address
+                                  {
+                                      StreetLine1 = addressStreetLine1,
+                                      StreetLine2 = addressStreetLine2,
+                                      City = addressCity,
+                                      State = addressState,
+                                      ZipCode = addressZipCode
+                                  };
+            
 
             _companyRepository.Save(company);
 

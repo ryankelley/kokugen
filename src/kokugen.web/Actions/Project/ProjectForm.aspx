@@ -5,21 +5,17 @@
 
 <div id="project-form-container" class="hide">
 <%= this.FormFor(new AddProjectModel()).Id("project-form") %>
-
-<%= this.Edit(x => x.Project.Name) %>
-
-<%= this.Edit(x => x.Project.Description) %>
-
-<%= this.Edit(x => x.CompanyId) %>
-
+    <%= this.Edit(x => x.Project.Name) %>
+    <%= this.Edit(x => x.Project.Description) %>
+    <%= this.Edit(x => x.CompanyId) %>
 </form>
    
 </div>
 <script type="text/javascript">
 
     function closeDialog(response) {
-        
-        alert(response.Item);
+        appendProjectToList(response.Item);
+
         $("#project-form-container").dialog('close');
         // would want to update list here too
     }
@@ -35,17 +31,10 @@
         if (isValid) {
             $("#project-form").ajaxSubmit(options);
         }
-        
     }
 
     $(document).ready(function() {
         $("#project-form").validate({ errorClass: "ui-state-error" });
-        
-
         $("#project-form-container").dialog({ title: "Add Project", autoOpen: false, buttons: { "Save": function() { validateAndSave(); } } });
-
-
-        // bind form using 'ajaxForm'
-        //$('#project-form').ajaxForm(options);
     });
 </script>

@@ -13,6 +13,8 @@ namespace Kokugen.Core.Services
         INotification SaveProject(Project project);
         Project Load(Guid Id);
         Project GetProjectFromName(string name);
+        Project CreateProject(string projectName, string projectDescription, Company company);
+        Project GetProjectFromId(Guid id);
     }
 
     public class ProjectService : IProjectService
@@ -53,6 +55,24 @@ namespace Kokugen.Core.Services
         public Project GetProjectFromName(string name)
         {
             return _projectRepository.Query().Where(c => c.Name == name).FirstOrDefault();
+        }
+
+        public Project CreateProject(string projectName, string projectDescription, Company company)
+        {
+            var project = new Project();
+            project.Name = projectName;
+            project.Description = projectDescription;
+            project.Backlog = new BoardColumn {Name = "Backlog", Description = "This is the project Backlog"};
+            project.Archive = new BoardColumn {Name = "Archive", Description = "This queue contains all finished tasks"};
+
+            project.Company = company;
+
+            return project;
+        }
+
+        public Project GetProjectFromId(Guid id)
+        {
+            return _projectRepository.Get(id);
         }
     }
 }

@@ -16,7 +16,7 @@ namespace Kokugen.Web.Actions.Project
             _initLists = initLists;
         }
 
-        public ProjectListModel Query()
+        public ProjectListModel Query( ProjectListModel projectListModel)
         {
             _initLists.Start();
 

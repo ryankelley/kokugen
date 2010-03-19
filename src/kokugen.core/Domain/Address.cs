@@ -2,7 +2,7 @@ using Kokugen.Core.Validation;
 
 namespace Kokugen.Core.Domain
 {
-    public class Address : Entity
+    public class Address
     {
         [Required]
         public virtual string StreetLine1 { get; set; }

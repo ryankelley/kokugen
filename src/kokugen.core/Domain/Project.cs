@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using FubuMVC.Core;
 using Kokugen.Core.Attributes;
 using Kokugen.Core.Validation;
 
@@ -9,7 +11,7 @@ namespace Kokugen.Core.Domain
     public class Project : Entity
     {
         private IList<TimeRecord> _timeRecords = new List<TimeRecord>();
-        private IList<BoardColumn> _boardColumns = new List<BoardColumn>();
+        private IList<CustomBoardColumn> _boardColumns = new List<CustomBoardColumn>();
 
         [Required]
         public virtual string Name { get; set; }
@@ -25,6 +27,8 @@ namespace Kokugen.Core.Domain
 
         public virtual BoardColumn Backlog { get; set; }
         public virtual BoardColumn Archive { get; set; }
+
+        #region Time Records
 
         public virtual IEnumerable<TimeRecord> GetTimeRecords()
         {
@@ -46,25 +50,29 @@ namespace Kokugen.Core.Domain
             _timeRecords.Remove(timeRecord);
         }
 
-        public virtual IEnumerable<BoardColumn> GetBoardColumns()
+        #endregion
+
+        #region Board Columns
+
+        public virtual IEnumerable<CustomBoardColumn> GetBoardColumns()
         {
-            return _boardColumns;
+            return _boardColumns.AsEnumerable();
         }
 
-        public virtual void AddBoardColumn(BoardColumn boardColumn)
+        public virtual void AddBoardColumn(CustomBoardColumn column)
         {
-            if(_boardColumns.Contains(boardColumn)) return;
+            if(_boardColumns.Contains(column)) return;
 
-            boardColumn.Project = this;
-            _boardColumns.Add(boardColumn);
+            _boardColumns.Add(column);
         }
 
-        public virtual void RemoveBoardColumn(BoardColumn boardColumn)
+        public virtual void RemoveBoardColumn(CustomBoardColumn column)
         {
-            if(!_boardColumns.Contains(boardColumn)) return;
-
-            _boardColumns.Remove(boardColumn);
+            if (_boardColumns.Contains(column))
+                _boardColumns.Remove(column);
         }
+
+        #endregion
 
         public virtual void ComputeTotalTimeAndSessions()
         {
