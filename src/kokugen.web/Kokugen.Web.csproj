@@ -98,6 +98,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Actions\AjaxResponse.cs" />
+    <Compile Include="Actions\Board\BoardListModel.cs" />
+    <Compile Include="Actions\Board\BoardAction.cs" />
+    <Compile Include="Actions\Board\View_Page_Type_Declarations.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Actions\Company\AddAction.cs" />
     <Compile Include="Actions\Company\CompanyFormAction.cs" />
     <Compile Include="Actions\Company\ListAction.cs" />
@@ -148,6 +153,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Actions\Board\List.aspx" />
+    <Content Include="Actions\Board\BoardItem_Control.ascx" />
     <Content Include="Actions\Company\CompanyForm.aspx" />
     <Content Include="Actions\Company\List.aspx" />
     <Content Include="Actions\Home\Home.aspx" />
