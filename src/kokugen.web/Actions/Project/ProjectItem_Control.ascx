@@ -9,14 +9,9 @@
 	</span>
 	<div class="project-owner">
 		<%= this.DisplayFor(x => x.Company.Name) %>
-<<<<<<< HEAD
+
 	</div>
 </a>
 <span class="project-meta"><img src="/Content/images/edit.png" alt="Edit Project" /> <img src="/Content/images/card.png" alt="Project Board" /></span>
 </li>
 <div class="clear"></div>
-=======
-	</div>
-</a>
-</li>
->>>>>>> 155bd84fde467e52baae346fad32c8d737cf5415
