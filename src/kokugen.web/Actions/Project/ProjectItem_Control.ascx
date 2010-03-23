@@ -11,4 +11,6 @@
 		<%= this.DisplayFor(x => x.Company.Name) %>
 	</div>
 </a>
+<span class="project-meta"><img src="/Content/images/edit.png" alt="Edit Project" /> <img src="/Content/images/card.png" alt="Project Board" /></span>
 </li>
+<div class="clear"></div>

@@ -4,6 +4,7 @@ using FubuMVC.UI.Configuration;
 using HtmlTags;
 using Kokugen.Core.Domain;
 using Kokugen.Core.Validation;
+using Kokugen.Web.Actions.Project;
 
 namespace Kokugen.Web.Conventions
 {
@@ -15,6 +16,9 @@ namespace Kokugen.Web.Conventions
             numbers();
             validationAttributes();
             editors();
+
+            BeforePartial.Builder(new BeforePartialBuilder());
+            AfterPartial.Builder(new AfterPartialBuilder());
             
         }
 
@@ -63,6 +67,32 @@ namespace Kokugen.Web.Conventions
         private static bool IsFloatingPoint(Type type)
         {
             return type == typeof(decimal) || type == typeof(float) || type == typeof(double);
+        }
+    }
+
+    public class BeforePartialBuilder : ElementBuilder
+    {
+        protected override bool matches(AccessorDef def)
+        {
+            return def.ModelType == typeof (ProjectListModel);
+        }
+
+        public override HtmlTag Build(ElementRequest request)
+        {
+            return new HtmlTag("div").NoClosingTag().AddClass("EasyToFind");
+        }
+    }
+
+    public class AfterPartialBuilder : ElementBuilder
+    {
+        protected override bool matches(AccessorDef def)
+        {
+            return def.ModelType == typeof(ProjectListModel);
+        }
+
+        public override HtmlTag Build(ElementRequest request)
+        {
+            return new HtmlTag("/div").NoClosingTag();
         }
     }
 
