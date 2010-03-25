@@ -1,4 +1,5 @@
 using System.Web.Routing;
+using FubuCore;
 using FubuMVC.Core;
 using FubuMVC.Core.Runtime;
 using FubuMVC.StructureMap;

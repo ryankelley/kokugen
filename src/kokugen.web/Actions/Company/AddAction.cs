@@ -1,3 +1,4 @@
+using FubuCore;
 using FubuMVC.Core;
 using Kokugen.Core.Domain;
 using Kokugen.Core.Services;

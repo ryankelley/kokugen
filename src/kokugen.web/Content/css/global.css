@@ -1,7 +1,6 @@
-<<<<<<< HEAD
 /* Global */
 
-img { border:none;}
+img { border: none;}
 
 * {margin: 0; padding: 0;}
 
@@ -25,7 +24,6 @@ body{
 	margin: auto;
 	position: relative;
 	width: 960px;
-	
 }
 
 h1{
@@ -75,7 +73,6 @@ label.error
 	font-size: 13px;
 	position:relative;
 	text-decoration: none;
-	
 }
 
 #subnav li a {
@@ -99,7 +96,6 @@ label.error
 	color: #fff;
 	font-weight: bold;
 	text-shadow: #000 1px 2px 0;
-	
 }
 
 #subnav li.last a {
@@ -165,6 +161,16 @@ text-indent:24px;
 z-index:10;
 }
 
+li.project.odd a 
+{
+    background:#CCC url(../images/clipboard.png) no-repeat scroll 6px 6px;
+}
+
+li.project.even a 
+{
+    background:#FFF url(../images/clipboard.png) no-repeat scroll 6px 6px;
+}
+
 li.project a:hover {
 -moz-background-clip:border;
 -moz-background-inline-policy:continuous;
@@ -217,7 +223,7 @@ line-height:normal;
    margin: 5px;
 }
 
-.add-caption img { vertical-align: middle; margin: 2px;}
+.add-caption img { vertical-align: middle; margin: 2px; }
 .add-caption a, .add-caption a:visited
 {
     color: #666;
@@ -236,199 +242,4 @@ input.error
 label.error
 {
     color: Red;
-=======
-/* Global */
-
-img { border:none;}
-
-* {margin: 0; padding: 0;}
-
-a:focus
-{
-  -moz-outline: none;
-}
-
-body{
-	background: url(../images/bg.jpg) repeat top left;
-	font-family: Helvetica;
-}
-
-#head {
-	background: url(../images/head.png) repeat-x top left;
-	height: 192px;
-}
-
-#wrapper{
-	height: 170px;
-	margin: auto;
-	position: relative;
-	width: 960px;
-	
-}
-
-h1{
-	background: url(../images/logo.png) no-repeat top left;
-	height: 77px;
-	left: -50px;
-	position: absolute;
-	xtop: 20px;
-	width: 283px;
-	xposition: absolute;
-}
-.hidden { display:none;}
-input.error 
-{
-    border: solid thin red;
-}
-label.error
-{
-    display:block;
-    color:Red;
-}
-
-#logo a {
-	text-indent: -7777px;
-	display: block;
-	height: 53px;
-	overflow: hidden;
-}
-
-/*subnav*/
-
-#subnav {
-	left: 289px;
-	list-style:none;
-	margin:auto;
-	position:absolute;
-	xpadding-left: 320px;
-	text-decoration: none;
-	top: 80px;
-}
-
-#subnav li {
-	color: #333;
-	display:inline-block;
-	padding: 13px 0 27px 0;
-	float:left;
-	font-size: 13px;
-	position:relative;
-	text-decoration: none;
-	
-}
-
-#subnav li a {
-	text-align:center;
-	text-decoration:none;
-	font-weight:normal;
-	font-size:12px;
-	color:#333;
-	padding:5px 15px;
-	display:inline-block;
-	xtext-shadow: #f1f1f1 1px 2px 0;
-	letter-spacing: 1px;
-}
-
-#subnav li a:hover {
-	color:#fff;
-	font-weight:normal;
-}
-
-#subnav li a:active{
-	color: #fff;
-	font-weight: bold;
-	text-shadow: #000 1px 2px 0;
-	
-}
-
-#subnav li.last a {
-	padding-left: 20px;
-	padding-right: 0px;
-}
-
-#subnav li.bar a {
-	border-right:1px solid #333;
-	border-left:1px solid #333;
-}
-
-#subnav li.lbar a {
-	border-right:1px solid #333;
-}
-
-/*end subnav*/
-
-/* Form Items */
-
-.form-item 
-{
-    padding: 2px;
-}
-
-.form-item label 
-{
-    padding: 5px;
-    display:block;
-}
-
-.form-item input 
-{
-    padding: 5px;
-    width: 100%;
-}
-
-ol, ul {
-list-style-image:none;
-list-style-position:outside;
-list-style-type:none;
-}
-
-li.project 
-{
-    margin-bottom: 5px;
-}
-
-li.project a {
--moz-background-clip:border;
--moz-background-inline-policy:continuous;
--moz-background-origin:padding;
-background:#D3F3D3 url(../images/clipboard.png) no-repeat scroll 6px 6px;
-border:1px solid #A3D3A3;
-font-family:"Georgia","Times New Roman",serif;
-color:#000000;
-display:block;
-padding:6px;
-text-decoration:none;
-text-indent:24px;
-}
-
-
-li.project span.project-name 
-{
-    font-weight: bold;
-}
-
-li.project span.project-stats {
--x-system-font:none;
-color:#66A366;
-
-font-size: 12px;
-font-size-adjust:none;
-font-stretch:normal;
-font-style:italic;
-font-variant:normal;
-font-weight:normal;
-line-height:normal;
-}
-
-li.project div.project-owner {
--x-system-font:none;
-color:#66A366;
-
-font-size:10px;
-font-size-adjust:none;
-font-stretch:normal;
-font-style:italic;
-font-variant:normal;
-font-weight:normal;
-line-height:normal;
->>>>>>> 155bd84fde467e52baae346fad32c8d737cf5415
 }

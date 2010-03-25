@@ -1,7 +1,9 @@
 using System;
 using FubuMVC.UI;
 using FubuMVC.UI.Configuration;
+using FubuMVC.UI.Tags;
 using HtmlTags;
+using Kokugen.Core;
 using Kokugen.Core.Domain;
 using Kokugen.Core.Validation;
 using Kokugen.Web.Actions.Project;
@@ -10,17 +12,22 @@ namespace Kokugen.Web.Conventions
 {
     public class KokugenHtmlConventions : HtmlConventionRegistry
     {
-        public KokugenHtmlConventions()
-        {
-            Labels.Builder(new LabelBuilder());
-            numbers();
-            validationAttributes();
-            editors();
+public KokugenHtmlConventions()
+{
+    Labels.Builder(new LabelBuilder());
+    numbers();
+    validationAttributes();
+    editors();
 
-            BeforePartial.Builder(new BeforePartialBuilder());
-            AfterPartial.Builder(new AfterPartialBuilder());
-            
-        }
+    BeforePartial.Builder(new BeforePartialBuilder());
+    AfterPartial.Builder(new AfterPartialBuilder());
+
+    BeforeEachOfPartial.Builder<BeforeEachOfPartialBuilder>();
+    BeforeEachOfPartial.Modifier<OddEvenLiModifier>();
+    //BeforeEachOfPartial.If(x => x.Is<ProjectListModel>()).Modify();
+    AfterEachOfPartial.Builder<AfterEachOfPartialBuilder>();
+    
+}
 
         private void editors()
         {
@@ -70,31 +77,90 @@ namespace Kokugen.Web.Conventions
         }
     }
 
-    public class BeforePartialBuilder : ElementBuilder
-    {
-        protected override bool matches(AccessorDef def)
-        {
-            return def.ModelType == typeof (ProjectListModel);
-        }
+public class OddEvenLiModifier : IPartialElementModifier
+{
+    private readonly Func<AccessorDef, bool> _matches;
+    private readonly Func<AccessorDef, EachPartialTagModifier> _modifierBuilder;
 
-        public override HtmlTag Build(ElementRequest request)
-        {
-            return new HtmlTag("div").NoClosingTag().AddClass("EasyToFind");
-        }
+    private bool matches(AccessorDef accessorDef)
+    {
+        return accessorDef.ModelType.IsType<ProjectListModel>();
     }
 
-    public class AfterPartialBuilder : ElementBuilder
-    {
-        protected override bool matches(AccessorDef def)
-        {
-            return def.ModelType == typeof(ProjectListModel);
-        }
+    private EachPartialTagModifier modifier = (request, tag, index, count) =>
+                                                  {
+                                                      if ((index%2) == 0)
+                                                          tag.AddClass("odd");
+                                                      else
+                                                          tag.AddClass("even");
 
-        public override HtmlTag Build(ElementRequest request)
-        {
-            return new HtmlTag("/div").NoClosingTag();
-        }
+                                                      if (index == 0)
+                                                          tag.AddClass("first");
+
+                                                      if (index == count - 1)
+                                                          tag.AddClass("last");
+                                                  };
+
+    public EachPartialTagModifier CreateModifier(AccessorDef accessorDef)
+    {
+        var something =  matches(accessorDef) ? modifier : null;
+        return something;
+
     }
+}
+
+    public class AfterEachOfPartialBuilder : EachOfPartialBuilder
+{
+    protected override bool matches(AccessorDef def)
+    {
+        return def.ModelType == typeof(ProjectListModel);
+    }
+
+    public override HtmlTag Build(ElementRequest request, int index, int total)
+    {
+        return new HtmlTag("/li").NoClosingTag();
+    }
+}
+
+public class BeforeEachOfPartialBuilder : EachOfPartialBuilder
+{
+    protected override bool matches(AccessorDef def)
+    {
+        return def.ModelType == typeof (ProjectListModel);
+    }
+
+    public override HtmlTag Build(ElementRequest request, int index, int total)
+    {
+        var tag = new HtmlTag("li").NoClosingTag().AddClass("project");
+        return tag;
+    }
+}
+
+public class BeforePartialBuilder : ElementBuilder
+{
+    protected override bool matches(AccessorDef def)
+    {
+        return def.ModelType == typeof (ProjectListModel);
+    }
+
+    public override HtmlTag Build(ElementRequest request)
+    {
+        return new HtmlTag("div").NoClosingTag().AddClass("EasyToFind");
+    }
+}
+
+public class AfterPartialBuilder : ElementBuilder
+{
+    protected override bool matches(AccessorDef def)
+    {
+        return def.ModelType == typeof(ProjectListModel);
+    }
+
+    public override HtmlTag Build(ElementRequest request)
+    {
+        return new HtmlTag("/div").NoClosingTag();
+    }
+}
 
     public class LabelBuilder : ElementBuilder
     {

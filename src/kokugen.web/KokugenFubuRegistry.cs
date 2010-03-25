@@ -32,6 +32,7 @@ namespace Kokugen.Web
                 .ConstrainToHttpMethod(action => action.Method.Name.StartsWith("Remove"), "DELETE")
                 .ForInputTypesOf<IRequestById>(x => x.RouteInputFor(request => request.Id));
 
+            this.UseDefaultHtmlConventions();
             this.HtmlConvention(new KokugenHtmlConventions());
 
             HomeIs<IndexAction>(x => x.Query());

@@ -1,8 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using FubuCore.Binding;
 using FubuMVC.Core.Runtime;
-using FubuMVC.Core.Util;
 using Kokugen.Core.Persistence;
 using StructureMap;
 using StructureMap.Pipeline;
