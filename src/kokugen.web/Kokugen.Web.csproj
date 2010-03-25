@@ -129,9 +129,15 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Behaviors\TransactionalContainerBehavior.cs" />
+    <Compile Include="Conventions\Builders\AfterEachOfPartialBuilder.cs" />
+    <Compile Include="Conventions\Builders\BeforeEachOfPartialBuilder.cs" />
+    <Compile Include="Conventions\Builders\BeforePartialBuilder.cs" />
+    <Compile Include="Conventions\Builders\AfterPartialBuilder.cs" />
+    <Compile Include="Conventions\Builders\OddEvenLiModifier.cs" />
     <Compile Include="Conventions\HtmlExtensions.cs" />
     <Compile Include="Conventions\IRequestById.cs" />
     <Compile Include="Conventions\KokugenHtmlConventions.cs" />
+    <Compile Include="Conventions\Builders\LabelBuilder.cs" />
     <Compile Include="Conventions\SplitCamelCaseExtension.cs" />
     <Compile Include="Conventions\ValueObject.cs" />
     <Compile Include="Conventions\ValueObjectDropdownBuilder.cs" />
