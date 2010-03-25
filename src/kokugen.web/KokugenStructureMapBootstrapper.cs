@@ -36,28 +36,14 @@ namespace Kokugen.Web
                                              x.AddRegistry(new KokugenWebRegistry());
                                          });
 
-            //var transProcessor = new TransactionProcessor(ObjectFactory.Container);
-
-            //ObjectFactory.Container.ExecuteInTransaction(x =>
-            //     {
-            //         var startables =ObjectFactory.Container.Model.GetAllPossible<IStartable>();
-            //         foreach (var startable in startables)
-            //         {
-
-            //             startable.Start();
-            //         }
-            //     });
-
-
-            
-
-
             var fubuBootstrapper = new StructureMapBootstrapper(ObjectFactory.Container, fubuRegistry);
             fubuBootstrapper.Builder = (c, args, id) =>
                                            {
                                                return new TransactionalContainerBehavior(c, args, id);
                                            };
             fubuBootstrapper.Bootstrap(_routes);
+
+            ObjectFactory.Container.StartStartables();
         }
     }
 

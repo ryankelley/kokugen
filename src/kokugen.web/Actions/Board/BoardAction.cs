@@ -1,30 +1,28 @@
 using System;
+using System.Linq;
 using Kokugen.Core.Services;
-using Kokugen.Web.Conventions;
 
 namespace Kokugen.Web.Actions.Board
 {
     public class ListAction
     {
         private readonly IProjectService _projectService;
-        private readonly IValueObjectInitializer _initLists;
 
-        public ListAction(IProjectService projectService, IValueObjectInitializer initLists)
+        public ListAction(IProjectService projectService)
         {
             _projectService = projectService;
-            _initLists = initLists;
         }
 
-        public BoardListModel Query(BoardListModel boardListModel)
+        public BoardListModel Query(BoardSelectModel model)
         {
-            _initLists.Start();
 
-            if(boardListModel.ProjectId != Guid.Empty)
+            if(model.Id != Guid.Empty)
             {
-                return new BoardListModel(boardListModel.ProjectId)
-                       {
-                           BoardColumns = _projectService.GetProjectFromId(boardListModel.ProjectId).GetBoardColumns()
-                       };
+                return new BoardListModel
+                           {
+                               Id = model.Id,
+                               BoardColumns = _projectService.GetProjectFromId(model.Id).GetBoardColumns().ToList()
+                           };
             }
             return new BoardListModel();
         }

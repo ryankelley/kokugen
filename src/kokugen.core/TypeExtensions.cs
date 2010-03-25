@@ -17,6 +17,16 @@ namespace Kokugen.Core
             transactionProcessor.WithinTransaction(action);
             
         }
+
+        public static void StartStartables(this IContainer container)
+        {
+            container.ExecuteInTransaction(c => c.Model.GetAllPossible<IStartable>()
+#if !DEBUG
+                        .Where(x => !x.GetType().HasCustomAttribute<DebugOnlyAttribute>())
+#endif
+                        .Each(x => x.Start()));
+            
+        }
     }
 
     public static class ServiceArgumentsExtensions

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using FubuCore.Util;
+using Kokugen.Core;
 using Kokugen.Core.Domain;
 using Kokugen.Core.Services;
 
@@ -97,8 +98,5 @@ namespace Kokugen.Web.Conventions
     {
     }
 
-    public interface IStartable
-    {
-        void Start();
-    }
+    
 }
