@@ -102,7 +102,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Actions\AjaxResponse.cs" />
-    <Compile Include="Actions\Board\BoardAction.cs" />
+    <Compile Include="Actions\Board\ListAction.cs" />
     <Compile Include="Actions\Board\BoardListModel.cs" />
     <Compile Include="Actions\Board\View_Page_Type_Declarations.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -139,10 +139,8 @@
     <Compile Include="Conventions\KokugenHtmlConventions.cs" />
     <Compile Include="Conventions\Builders\LabelBuilder.cs" />
     <Compile Include="Conventions\SplitCamelCaseExtension.cs" />
-    <Compile Include="Conventions\ValueObject.cs" />
     <Compile Include="Conventions\ValueObjectDropdownBuilder.cs" />
     <Compile Include="Conventions\ValueObjectDropdownExtensions.cs" />
-    <Compile Include="Conventions\ValueObjectRegistry.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -164,6 +162,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Actions\Board\BoardItem_Control.ascx" />
+    <Content Include="Actions\Board\Configure.aspx" />
     <Content Include="Actions\Board\List.aspx" />
     <Content Include="Actions\Company\CompanyForm.aspx" />
     <Content Include="Actions\Company\List.aspx" />
@@ -187,6 +186,20 @@
     <Content Include="Content\css\custom-theme\images\ui-icons_ffffff_256x240.png" />
     <Content Include="Content\css\custom-theme\jquery-ui-1.8rc3.custom.css" />
     <Content Include="Content\css\global.css" />
+    <Content Include="Content\css\smoothness\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\css\smoothness\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\css\smoothness\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\css\smoothness\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\css\smoothness\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\css\smoothness\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\css\smoothness\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\css\smoothness\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\css\smoothness\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\css\smoothness\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\css\smoothness\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\css\smoothness\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\css\smoothness\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\css\smoothness\jquery-ui-1.8.custom.css" />
     <Content Include="Content\images\add_button.png" />
     <Content Include="Content\images\bg.jpg" />
     <Content Include="Content\images\card.png" />

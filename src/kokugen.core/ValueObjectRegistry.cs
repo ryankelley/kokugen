@@ -2,11 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using FubuCore.Util;
-using Kokugen.Core;
 using Kokugen.Core.Domain;
 using Kokugen.Core.Services;
 
-namespace Kokugen.Web.Conventions
+namespace Kokugen.Core
 {
     public static class ValueObjectRegistry
     {
@@ -31,6 +30,13 @@ namespace Kokugen.Web.Conventions
         //{
         //    _valueObjectCache.Store(key, objects);
         //}
+
+        public static void AddValueObject<T>(ValueObject valueObject)
+        {
+            var holder = _valueObjectCache.Find(x => x.GetKey() == typeof (T).Name);
+
+            holder.AddValue(valueObject);
+        }
 
         public static void AddValueObjects<T>(IEnumerable<ValueObject> objects)
         {
@@ -59,11 +65,13 @@ namespace Kokugen.Web.Conventions
             _key = key;
         }
 
+        private readonly IList<ValueObject> _values = new List<ValueObject>();
 
 
         public IEnumerable<ValueObject> Values
         {
-            get; set;
+            get { return _values; }
+            set { _values.AddRange(value);}
         }
 
         public string GetKey()
@@ -74,6 +82,11 @@ namespace Kokugen.Web.Conventions
         public ValueObject Default()
         {
             return Values.Where(x => x.IsDefault).FirstOrDefault() ?? Values.FirstOrDefault();
+        }
+
+        public void AddValue(ValueObject valueObject)
+        {
+            _values.Add(valueObject);
         }
     }
 
@@ -97,6 +110,4 @@ namespace Kokugen.Web.Conventions
     public interface IValueObjectInitializer : IStartable
     {
     }
-
-    
 }

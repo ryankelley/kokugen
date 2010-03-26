@@ -161,6 +161,8 @@
     <Compile Include="Validation\Validator.cs" />
     <Compile Include="Validation\ValidEmailAttribute.cs" />
     <Compile Include="Validation\ValidYear.cs" />
+    <Compile Include="ValueObject.cs" />
+    <Compile Include="ValueObjectRegistry.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Domain\Domain Diagram.cd" />

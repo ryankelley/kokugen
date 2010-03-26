@@ -1,5 +1,6 @@
 using FubuMVC.UI.Configuration;
 using HtmlTags;
+using Kokugen.Web.Actions.Board;
 using Kokugen.Web.Actions.Project;
 
 namespace Kokugen.Web.Conventions.Builders
@@ -8,7 +9,7 @@ namespace Kokugen.Web.Conventions.Builders
     {
         protected override bool matches(AccessorDef def)
         {
-            return def.ModelType == typeof(ProjectListModel);
+            return def.ModelType == typeof(ProjectListModel) || def.ModelType == typeof(BoardConfigurationModel); ;
         }
 
         public override HtmlTag Build(ElementRequest request, int index, int total)

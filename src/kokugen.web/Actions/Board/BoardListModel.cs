@@ -5,15 +5,10 @@ using Kokugen.Web.Conventions;
 
 namespace Kokugen.Web.Actions.Board
 {
-    public class BoardListModel
+    public class BoardListModel : IRequestById
     {
         public Guid Id { get; set; }
-        public IEnumerable<CustomBoardColumn> BoardColumns { get; set; }
+        public IEnumerable<BoardColumn> BoardColumns { get; set; }
         
-    }
-
-    public class BoardSelectModel : IRequestById
-    {
-        public Guid Id { get; set; }
     }
 }

@@ -1,7 +1,6 @@
 using System;
 
-namespace Kokugen.Web.Conventions
-{
+namespace Kokugen.Core{
     public class ValueObject
     {
         public string Key { get; private set; }
@@ -19,5 +18,4 @@ namespace Kokugen.Web.Conventions
         {
             return Value;
         }
-    }
-}
+    }}
