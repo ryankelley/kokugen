@@ -35,6 +35,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\Fluent NHibernate\FluentNHibernate.dll</HintPath>
     </Reference>
+    <Reference Include="FubuCore, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\FubuMVC\FubuCore.dll</HintPath>
+    </Reference>
     <Reference Include="FubuMVC.Core, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\FubuMVC\FubuMVC.Core.dll</HintPath>
@@ -98,6 +102,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Actions\AjaxResponse.cs" />
+    <Compile Include="Actions\Board\BoardAction.cs" />
+    <Compile Include="Actions\Board\BoardListModel.cs" />
+    <Compile Include="Actions\Board\View_Page_Type_Declarations.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Actions\Company\AddAction.cs" />
     <Compile Include="Actions\Company\CompanyFormAction.cs" />
     <Compile Include="Actions\Company\ListAction.cs" />
@@ -120,9 +129,15 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Behaviors\TransactionalContainerBehavior.cs" />
+    <Compile Include="Conventions\Builders\AfterEachOfPartialBuilder.cs" />
+    <Compile Include="Conventions\Builders\BeforeEachOfPartialBuilder.cs" />
+    <Compile Include="Conventions\Builders\BeforePartialBuilder.cs" />
+    <Compile Include="Conventions\Builders\AfterPartialBuilder.cs" />
+    <Compile Include="Conventions\Builders\OddEvenLiModifier.cs" />
     <Compile Include="Conventions\HtmlExtensions.cs" />
     <Compile Include="Conventions\IRequestById.cs" />
     <Compile Include="Conventions\KokugenHtmlConventions.cs" />
+    <Compile Include="Conventions\Builders\LabelBuilder.cs" />
     <Compile Include="Conventions\SplitCamelCaseExtension.cs" />
     <Compile Include="Conventions\ValueObject.cs" />
     <Compile Include="Conventions\ValueObjectDropdownBuilder.cs" />
@@ -148,6 +163,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Actions\Board\BoardItem_Control.ascx" />
+    <Content Include="Actions\Board\List.aspx" />
     <Content Include="Actions\Company\CompanyForm.aspx" />
     <Content Include="Actions\Company\List.aspx" />
     <Content Include="Actions\Home\Home.aspx" />
@@ -172,7 +189,9 @@
     <Content Include="Content\css\global.css" />
     <Content Include="Content\images\add_button.png" />
     <Content Include="Content\images\bg.jpg" />
+    <Content Include="Content\images\card.png" />
     <Content Include="Content\images\clipboard.png" />
+    <Content Include="Content\images\edit.png" />
     <Content Include="Content\images\head.jpg" />
     <Content Include="Content\images\head.png" />
     <Content Include="Content\images\icon.png" />
@@ -214,7 +233,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>50002</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

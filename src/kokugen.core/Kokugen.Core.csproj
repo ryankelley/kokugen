@@ -35,6 +35,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\Fluent NHibernate\FluentNHibernate.dll</HintPath>
     </Reference>
+    <Reference Include="FubuCore, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\FubuMVC\FubuCore.dll</HintPath>
+    </Reference>
     <Reference Include="FubuMVC.Core, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\FubuMVC\FubuMVC.Core.dll</HintPath>
@@ -101,6 +105,7 @@
     <Compile Include="Domain\User.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Inflector.cs" />
+    <Compile Include="IStartable.cs" />
     <Compile Include="ModelExtensions.cs" />
     <Compile Include="Persistence\Conventions\MaximumStingLengthConvention.cs" />
     <Compile Include="Persistence\ITransactionBoundary.cs" />

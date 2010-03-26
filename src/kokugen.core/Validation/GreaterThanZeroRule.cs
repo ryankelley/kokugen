@@ -1,6 +1,6 @@
 #region Using Directives
 
-using FubuMVC.Core.Util;
+using FubuCore.Reflection;
 
 #endregion
 
