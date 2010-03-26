@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using FubuMVC.Core.Util;
+using FubuCore.Util;
+using Kokugen.Core;
 using Kokugen.Core.Domain;
 using Kokugen.Core.Services;
 
@@ -35,7 +36,7 @@ namespace Kokugen.Web.Conventions
         {
             var holder = new ValueObjectHolder(typeof (T).Name);
             holder.Values = objects;
-            _valueObjectCache.Store(holder.GetKey(), holder);
+            _valueObjectCache.Fill(holder.GetKey(), holder);
         }
 
         public static void RemoveObject(string key)
@@ -97,8 +98,5 @@ namespace Kokugen.Web.Conventions
     {
     }
 
-    public interface IStartable
-    {
-        void Start();
-    }
+    
 }
