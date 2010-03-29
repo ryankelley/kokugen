@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using FubuMVC.UI.Configuration;
 using Kokugen.Core;
 using Kokugen.Core.Domain;
@@ -48,6 +50,34 @@ namespace Kokugen.Web.Conventions.Builders
                            };
         }
     }
+
+    public class BoardColumnIDAdder : PartialElementModifier
+    {
+        protected override bool matches(AccessorDef accessorDef)
+        {
+            var truefalse = accessorDef.Accessor.Name == "BoardColumns";
+            return truefalse;
+        }
+
+        public BoardColumnIDAdder()
+        {
+            modifier = (request, tag, index, count) =>
+                           {
+                               if (index != 0 && index != count - 1)
+                               {
+                                   if(request.RawValue is IEnumerable<BoardColumn>)
+                                   {
+                                       var cols = (request.RawValue as IEnumerable<BoardColumn>).ToList();
+                                       var col = cols[index] as CustomBoardColumn;
+                                       tag.Id(col.Id.ToString());
+                                   }
+                               }
+                                   //tag.Id(request.RawValue.ToString());
+
+                           };
+        }
+    }
+
 
     public abstract class PartialElementModifier : IPartialElementModifier
     {
