@@ -12,7 +12,7 @@
 <asp:Content ID="THISCONTENTAREAID" ContentPlaceHolderID="mainContent" runat="server">
 
     <div class="content">
-    <% this.Partial(new BoardListModel()); %>
+    <%= this.PartialForEach(m => m.BoardColumns).Using<BoardItem_Control>() %>
     </div>
    
    

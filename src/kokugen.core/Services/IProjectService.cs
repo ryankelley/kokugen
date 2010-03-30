@@ -65,6 +65,10 @@ namespace Kokugen.Core.Services
             project.Backlog = new BoardColumn {Name = "Backlog", Description = "This is the project Backlog"};
             project.Archive = new BoardColumn {Name = "Archive", Description = "This queue contains all finished tasks"};
 
+            project.AddBoardColumn(new CustomBoardColumn { ColumnOrder = 1, Name = "Ready", Description = "Items in this column are ready"});
+            project.AddBoardColumn(new CustomBoardColumn { ColumnOrder = 2, Name = "Working", Description = "Items in this column are being worked on"});
+            project.AddBoardColumn(new CustomBoardColumn { ColumnOrder = 3, Name = "Done", Description = "Items in this column are Done"});
+
             project.Company = company;
 
             return project;

@@ -14,4 +14,6 @@ namespace Kokugen.Core.Persistence.Repositories
         {
         }
     }
+
+    
 }

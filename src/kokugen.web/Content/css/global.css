@@ -243,3 +243,41 @@ label.error
 {
     color: Red;
 }
+
+.board-column-configure li.phase.draggable div.col-title{
+cursor:move;
+}
+
+.board-column-configure div.col-title {
+font-size:1.8em;
+height:60px;
+padding:24px 12px 12px;
+}
+.board-column-configure div.col-desc {
+border-top:1px dotted #CCCCCC;
+height:40px;
+padding:8px;
+}
+
+.board-column-configure li.phase.fixed {
+background-color:#E3E3E3;
+}
+.board-column-configure li.phase {
+-moz-border-radius:8px 8px 8px 8px;
+background-color:#EFEFEF;
+border:1px solid #CCCCCC;
+display:inline-block;
+margin:0 0 12px 12px;
+text-align:center;
+vertical-align:top;
+}
+
+.board-column-configure .phase-placeholder {
+-moz-border-radius:8px 8px 8px 8px;
+background-color:#CCFFCC;
+border:1px solid #BBEEBB !important;
+display:inline-block;
+margin:0 0 12px 12px;
+vertical-align:top;
+
+}

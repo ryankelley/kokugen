@@ -43,6 +43,14 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\FubuMVC\FubuMVC.Core.dll</HintPath>
     </Reference>
+    <Reference Include="FubuMVC.StructureMap, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\FubuMVC\FubuMVC.StructureMap.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\Common Service Locator\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
     <Reference Include="NHibernate, Version=2.1.2.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\NHibernate\NHibernate.dll</HintPath>
@@ -72,6 +80,11 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Data.SQLite, Version=1.0.65.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\sqlite\System.Data.SQLite.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -83,12 +96,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContextSpecification.cs" />
+    <Compile Include="Persistence\InMemoryRepository.cs" />
     <Compile Include="Persistence\IntegrationAssemblySetup.cs" />
     <Compile Include="Persistence\PersistenceTesterContext.cs" />
     <Compile Include="Persistence\Tests\CompanyPersistenceTester.cs" />
     <Compile Include="Persistence\Tests\ProjectPersistenceTester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SchemaCreation\DBSetupFixture.cs" />
+    <Compile Include="SchemaCreation\SchemaRegistry.cs" />
     <Compile Include="SpecificationExtensions.cs" />
     <Compile Include="PersistenceTestRegistry.cs" />
     <Compile Include="Validation\EmailValidationTester.cs" />

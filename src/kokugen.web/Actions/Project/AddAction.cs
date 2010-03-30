@@ -2,7 +2,6 @@ using Kokugen.Core;
 using Kokugen.Core.Attributes;
 using Kokugen.Core.Services;
 using Kokugen.Core.Validation;
-using Kokugen.Web.Conventions;
 
 namespace Kokugen.Web.Actions.Project
 {

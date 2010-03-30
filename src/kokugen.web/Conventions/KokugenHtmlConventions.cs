@@ -6,6 +6,7 @@ using HtmlTags;
 using Kokugen.Core;
 using Kokugen.Core.Domain;
 using Kokugen.Core.Validation;
+using Kokugen.Web.Actions.Board;
 using Kokugen.Web.Actions.Project;
 using Kokugen.Web.Conventions.Builders;
 
@@ -25,6 +26,13 @@ namespace Kokugen.Web.Conventions
 
             BeforeEachOfPartial.Builder<BeforeEachOfPartialBuilder>();
             BeforeEachOfPartial.Modifier<OddEvenLiModifier>();
+            BeforeEachOfPartial.Modifier<FixedItemBoardModifier>();
+            BeforeEachOfPartial.Modifier<BoardColumnIDAdder>();
+            BeforeEachOfPartial.If(x => x.ModelType == typeof(ProjectListModel)).Modify(x => x.AddClass("project"));
+            BeforeEachOfPartial.If(x => x.ModelType == typeof(BoardConfigurationModel)).Modify(x => x.AddClass("phase"));
+            
+            //BeforeEachOfPartial.If(x => x.Accessor.)
+
             //BeforeEachOfPartial.If(x => x.Is<ProjectListModel>()).Modify();
             AfterEachOfPartial.Builder<AfterEachOfPartialBuilder>();
 
@@ -34,6 +42,7 @@ namespace Kokugen.Web.Conventions
         {
             Editors.Builder<ValueObjectDropdownBuilder>();
             Editors.IfPropertyIs<bool>().BuildBy(request => new CheckboxTag(request.Value<bool>()).Style("width", "auto !important").Attr("value", request.ElementId));
+            Editors.IfPropertyIs<Guid>().BuildBy(request => new HiddenTag().Attr("value", request.StringValue()));
             //Editors.Builder(new FormItemBuilder());
         }
 

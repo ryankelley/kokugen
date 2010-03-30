@@ -35,10 +35,9 @@ namespace Kokugen.Core.Services
                                       State = addressState,
                                       ZipCode = addressZipCode
                                   };
-            
 
             _companyRepository.Save(company);
-
+            ValueObjectRegistry.AddValueObject<Company>(new ValueObject(company.Id.ToString(), company.Name));
             return company;
         }
 
@@ -57,5 +56,9 @@ namespace Kokugen.Core.Services
         {
             return _companyRepository.Get(id);
         }
+    }
+
+    public class CompanyAddedEventArgs
+    {
     }
 }

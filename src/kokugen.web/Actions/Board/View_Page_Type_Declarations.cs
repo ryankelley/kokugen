@@ -1,9 +1,11 @@
 using FubuMVC.Core.View;
-using Kokugen.Web.Actions.Project;
 
 namespace Kokugen.Web.Actions.Board
 {
     public class List : FubuPage<BoardListModel> { }
+    public class Configure : FubuPage<BoardConfigurationModel> { }
 
-    public class BoardItem_Control : FubuControl<Kokugen.Core.Domain.CustomBoardColumn> { }
+    public class EditBoardColumnForm : FubuPage<BoardColumnEditModel> {}
+
+    public class BoardItem_Control : FubuControl<Core.Domain.BoardColumn> { }
 }

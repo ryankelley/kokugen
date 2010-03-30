@@ -5,6 +5,7 @@ namespace Kokugen.Core.Domain
 {
     
 
+    [Serializable]
     public class BoardColumn : Entity
     {
         [Required]
@@ -13,8 +14,10 @@ namespace Kokugen.Core.Domain
 
     }
 
+    [Serializable]
     public class CustomBoardColumn : BoardColumn
     {
+        public virtual int Limit { get; set; }
         public virtual int ColumnOrder { get; set; }
         public virtual Project Project { get; set; }
     }

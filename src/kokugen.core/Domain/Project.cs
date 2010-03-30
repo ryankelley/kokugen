@@ -54,6 +54,16 @@ namespace Kokugen.Core.Domain
 
         #region Board Columns
 
+        public virtual IEnumerable<BoardColumn> GetAllBoardColumns()
+        {
+            var output = new List<BoardColumn>();
+            output.Add(Backlog);
+            output.AddRange(GetBoardColumns().OrderBy(x => x.ColumnOrder).Select(x => x as BoardColumn));
+            output.Add(Archive);
+
+            return output;
+        }
+
         public virtual IEnumerable<CustomBoardColumn> GetBoardColumns()
         {
             return _boardColumns.AsEnumerable();
@@ -62,7 +72,7 @@ namespace Kokugen.Core.Domain
         public virtual void AddBoardColumn(CustomBoardColumn column)
         {
             if(_boardColumns.Contains(column)) return;
-
+            column.Project = this;
             _boardColumns.Add(column);
         }
 

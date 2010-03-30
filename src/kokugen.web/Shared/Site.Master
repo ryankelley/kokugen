@@ -10,10 +10,13 @@
     <title>Kokugen - Time Tracking</title>
     <%= this.Script("jquery-1.4.2.min.js")%>
     <script src="/Content/Scripts/jquery-1.4.1-vsdoc.js"></script>
-    <%= this.Script("jquery-ui-1.8rc3.custom.min.js")%>
+<%--    <%= this.Script("jquery-ui-1.8rc3.custom.min.js")%>--%>
+    <%= this.Script("jquery-ui-1.8.smoothness.min.js")%>
     <%= this.Script("jquery.validate.min.js")%>
     <%= this.Script("jquery.form.js")%>
-    <%= this.CSS("custom-theme/jquery-ui-1.8rc3.custom.css")%>
+    <%= this.Script("jquery.json-2.2.min.js")%>
+<%--    <%= this.CSS("custom-theme/jquery-ui-1.8rc3.custom.css")%>--%>
+    <%= this.CSS("smoothness/jquery-ui-1.8.custom.css")%>
     <%= this.CSS("global.css")%>
     <link rel="shortcut icon" href="/content/images/icon.png" />
     <asp:ContentPlaceHolder ID="head" runat="server">
