@@ -206,6 +206,8 @@
     <Content Include="Content\images\add_button.png" />
     <Content Include="Content\images\bg.jpg" />
     <Content Include="Content\images\card.png" />
+    <Content Include="Content\images\card_delete.png" />
+    <Content Include="Content\images\card_edit.png" />
     <Content Include="Content\images\clipboard.png" />
     <Content Include="Content\images\edit.png" />
     <Content Include="Content\images\head.jpg" />

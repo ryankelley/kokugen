@@ -23,7 +23,7 @@
         $("#new-column-container").slideToggle('slow');
 
         var item = "<li id=\"" + response.Item.Id + "\" class=\"draggable phase\"><div class=\"col-title\"><span>" + response.Item.Name + "</span></div>";
-        item = item + "<div class=\"col-desc\"><span>" + response.Item.Id + "</span></div></li>";
+        item = item + "<div class=\"col-desc\"><span>" + response.Item.Description + "</span></div></li>";
 
         $(item).insertBefore($("#board-columns li:last"));
     }

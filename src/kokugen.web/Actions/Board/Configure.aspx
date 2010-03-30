@@ -38,14 +38,22 @@
     function showColumnForm() {
         $("#new-column-container").slideToggle('slow');
     }
-    
+
     $(document).ready(function() {
         $('#board-columns').sortable({
-        items: '> *:not(".fixed")', placeholder: 'phase-placeholder', forcePlaceholderSize: true,
+            items: '> *:not(".fixed")', placeholder: 'phase-placeholder', forcePlaceholderSize: true,
             update: updateColumns
         });
-        $('#board-columns').disableSelection(); 
+        $('#board-columns').disableSelection();
+
+        $("li.draggable .col-desc").hover(function() {
+            $(this).children('.col-links').fadeIn(500);
+        }, function() {
+            $(this).children('.col-links').fadeOut(300);
+        });
     });
+    
+    
 </script>
 
 </asp:Content>
