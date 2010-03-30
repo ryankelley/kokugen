@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using FluentNHibernate;
+using FubuMVC.StructureMap;
 using Kokugen.Core;
 using Kokugen.Core.Persistence;
 using NHibernate;
@@ -18,21 +19,23 @@ namespace Kokugen.Tests.SchemaCreation
     public class DBSetupFixture
     {
         private ISessionSource _sessionSource;
+        private IContainer container;
 
         [TestFixtureSetUp]
         public void FixtureSetup()
         {
 
-            ObjectFactory.Initialize(x =>
-            {
-                x.AddRegistry(new KokugenCoreRegistry());
-            });
+            container = StructureMapContainerFacility.GetBasicFubuContainer();
+
+            container.Configure(x => x.AddRegistry(new PersistenceTestRegistry()));
+
+            //ObjectFactory.AssertConfigurationIsValid();
         }
 
         [SetUp]
         public void SetMeUp()
         {
-            _sessionSource = ObjectFactory.GetInstance<ISessionSource>();
+            _sessionSource = container.GetInstance<ISessionSource>();
         }
 
         [Test, Category("DBSchema"), Explicit]

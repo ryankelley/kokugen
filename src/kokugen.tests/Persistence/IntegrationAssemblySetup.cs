@@ -1,4 +1,5 @@
 using FluentNHibernate;
+using FubuMVC.StructureMap;
 using Kokugen.Core;
 using Kokugen.Core.Persistence;
 using NUnit.Framework;
@@ -19,16 +20,13 @@ namespace Kokugen.Tests.Persistence
         [SetUp]
         public void Run_Before_Any_Tests()
         {
-            ObjectFactory.Initialize(x =>
-                                         {
-                                             //x.AddRegistry(new KokugenCoreRegistry());
-                                             x.AddRegistry(new PersistenceTestRegistry());
+            var container = StructureMapContainerFacility.GetBasicFubuContainer();
 
-                                         });
+            container.Configure(x => x.AddRegistry(new PersistenceTestRegistry()));
 
-            ObjectFactory.AssertConfigurationIsValid();
+            //ObjectFactory.AssertConfigurationIsValid();
 
-            _sessionSource = ObjectFactory.GetInstance<ISessionSource>();
+            _sessionSource = container.GetInstance<ISessionSource>();
             _sessionSource.BuildSchema();
         }
 

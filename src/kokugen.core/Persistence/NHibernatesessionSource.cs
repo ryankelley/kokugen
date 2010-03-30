@@ -10,12 +10,14 @@ namespace Kokugen.Core.Persistence
 {
     public class NHibernatesessionSource : ISessionSource
     {
+        private readonly DatabaseSettings _databaseSettings;
         private readonly object _factorySyncRoot = new object();
         private Configuration _configuration;
         private ISessionFactory _sessionFactory;
 
-        public NHibernatesessionSource()
+        public NHibernatesessionSource(DatabaseSettings databaseSettings)
         {
+            _databaseSettings = databaseSettings;
             if(_sessionFactory != null) return;
 
             lock(_factorySyncRoot)
@@ -41,20 +43,7 @@ namespace Kokugen.Core.Persistence
         private FluentConfiguration BuildFluentConfig()
         {
             return Fluently.Configure()
-                .Database(MsSqlConfiguration.MsSql2005
-                              .ConnectionString(c => c.FromConnectionStringWithKey("KokugenData"))
-                              .AdoNetBatchSize(1)
-#if DEBUG
-                              .ShowSql()
-                              .Raw("generate_statistics", "true")
-#endif
-                              .UseOuterJoin()
-                //.Cache(cache =>
-                //           {
-                //               cache.UseQueryCache();
-                //               cache.ProviderClass("NHibernate.Caches.SysCache.SysCacheProvider, NHibernate.Caches.SysCache");
-                //           })
-                )
+                .Database(new PersistenceConfigurer(_databaseSettings))
                 .Mappings(x =>
                               {
                                   x.AutoMappings.Add(new AutoPersistenceModelGenerator().Generate());
@@ -63,6 +52,8 @@ namespace Kokugen.Core.Persistence
                               })
                 .ExposeConfiguration(config => config.Properties.Add("prepare_sql", "true"));
         }
+
+
         
         
 
@@ -94,5 +85,23 @@ namespace Kokugen.Core.Persistence
                 command.ExecuteNonQuery();
             }
         }
+    }
+    public class PersistenceConfigurer : IPersistenceConfigurer
+    {
+        private readonly DatabaseSettings _settings;
+
+        public PersistenceConfigurer(DatabaseSettings settings)
+        {
+            _settings = settings;
+        }
+
+        #region IPersistenceConfigurer Members
+
+        public Configuration ConfigureProperties(Configuration nhibernateConfig)
+        {
+            return nhibernateConfig.SetProperties(_settings.GetProperties());
+        }
+
+        #endregion
     }
 }

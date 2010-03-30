@@ -14,6 +14,7 @@
     <%= this.Script("jquery-ui-1.8.smoothness.min.js")%>
     <%= this.Script("jquery.validate.min.js")%>
     <%= this.Script("jquery.form.js")%>
+    <%= this.Script("jquery.json-2.2.min.js")%>
 <%--    <%= this.CSS("custom-theme/jquery-ui-1.8rc3.custom.css")%>--%>
     <%= this.CSS("smoothness/jquery-ui-1.8.custom.css")%>
     <%= this.CSS("global.css")%>

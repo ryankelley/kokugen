@@ -1,5 +1,6 @@
 using FluentNHibernate;
 using FubuMVC.Core.Behaviors;
+using FubuMVC.Core.Configuration;
 using Kokugen.Core.Persistence;
 using Kokugen.Core.Services;
 using NHibernate;
@@ -33,6 +34,12 @@ namespace Kokugen.Core
             //    .Use<NHibernateUniqueIdentifierService>();
 
             For<ITransactionBoundary>().Use<NHibernateTransactionBoundary>();
+
+            For<DatabaseSettings>().Use(c =>
+            {
+                var settingsProvider = c.GetInstance<ISettingsProvider>();
+                return settingsProvider.SettingsFor<DatabaseSettings>();
+            });
         }
     }
 }

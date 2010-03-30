@@ -1,4 +1,5 @@
 using FluentNHibernate;
+using FubuMVC.Core.Configuration;
 using Kokugen.Core.Persistence;
 using NHibernate;
 using StructureMap.Configuration.DSL;
@@ -9,14 +10,18 @@ namespace Kokugen.Tests
     {
         public PersistenceTestRegistry()
         {
-            ForSingletonOf<ISessionSource>().Use(new NHibernatesessionSource().CreateSessionSource());
-
-            //For<ISessionSource>().Singleton()
-            //    .TheDefault.Is.ConstructedBy(ctx =>
-            //        ctx.GetInstance<NHibernatesessionSource>()
-            //        .CreateSessionSource());
+            //ForSingletonOf<ISessionSource>().Use<NHibernatesessionSource>();
+            For<ISessionSource>().Singleton()
+                .TheDefault.Is.ConstructedBy(ctx =>
+                    ctx.GetInstance<NHibernatesessionSource>()
+                    .CreateSessionSource());
 
             For<ISession>().Use(c => c.GetInstance<ISessionSource>().CreateSession());
+            For<DatabaseSettings>().Use(c =>
+            {
+                var settingsProvider = c.GetInstance<ISettingsProvider>();
+                return settingsProvider.SettingsFor<DatabaseSettings>();
+            });
         }
     }
 }
