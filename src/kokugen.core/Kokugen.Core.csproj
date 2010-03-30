@@ -96,6 +96,7 @@
     <Compile Include="Domain\Address.cs" />
     <Compile Include="Domain\BoardColumn.cs" />
     <Compile Include="Domain\Company.cs" />
+    <Compile Include="Domain\TaskCategory.cs" />
     <Compile Include="Domain\Entity.cs" />
     <Compile Include="Domain\Enumeration.cs" />
     <Compile Include="Domain\IDomainQuery.cs" />
@@ -131,6 +132,7 @@
     <Compile Include="Persistence\IRepository.cs" />
     <Compile Include="Persistence\Overrides\ProjectMappingOverride.cs" />
     <Compile Include="Persistence\Repositories\CompanyRepository.cs" />
+    <Compile Include="Persistence\Repositories\TaskCategoryRepository.cs" />
     <Compile Include="Persistence\Repositories\ProjectRepository.cs" />
     <Compile Include="Persistence\Conventions\RequiredAttributeConvention.cs" />
     <Compile Include="Persistence\SafeDataReader.cs" />
@@ -141,6 +143,7 @@
     <Compile Include="Services\IBoardService.cs" />
     <Compile Include="Services\ICompanyService.cs" />
     <Compile Include="Services\IProjectService.cs" />
+    <Compile Include="Services\TaskCategoryService.cs" />
     <Compile Include="TypeExtensions.cs" />
     <Compile Include="Validation\GreaterOrEqualToZeroAttribute.cs" />
     <Compile Include="Validation\GreaterThanZeroAttribute.cs" />

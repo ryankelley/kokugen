@@ -128,6 +128,8 @@
     <Compile Include="Actions\Project\View_Page_Type_Declarations.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Actions\TaskCategory\ListAction.cs" />
+    <Compile Include="Actions\TaskCategory\TaskCategoryListModel.cs" />
     <Compile Include="Behaviors\TransactionalContainerBehavior.cs" />
     <Compile Include="Conventions\Builders\AfterEachOfPartialBuilder.cs" />
     <Compile Include="Conventions\Builders\BeforeEachOfPartialBuilder.cs" />
