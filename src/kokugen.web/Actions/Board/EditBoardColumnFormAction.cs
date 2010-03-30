@@ -21,9 +21,9 @@ namespace Kokugen.Web.Actions.Board
             if(model.Id.IsNotEmpty())
             {
                 var column = _boardService.GetCustomColumn(model.Id);
-                return new BoardColumnEditModel {Column = column};
+                return new BoardColumnEditModel {Column = column, ProjectId = column.Project.Id};
             }
-            return new BoardColumnEditModel();
+            return new BoardColumnEditModel { ProjectId = model.ProjectId};
         }
     }
 
@@ -32,5 +32,7 @@ namespace Kokugen.Web.Actions.Board
     {
         public Guid Id { get; set; }
         public CustomBoardColumn Column { get; set; }
+
+        public Guid ProjectId { get; set; }
     }
 }

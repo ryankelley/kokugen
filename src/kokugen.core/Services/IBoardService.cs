@@ -47,10 +47,12 @@ namespace Kokugen.Core.Services
         {
             var project = _projectService.GetProjectFromId(projectId);
 
-            if(columnId.IsNotEmpty())
+            if(columnId.IsEmpty())
             {
                 var newColumn = new CustomBoardColumn {Name = name, Description = description, Limit = limit};
                 project.AddBoardColumn(newColumn);
+                _customBoardColumnRepository.Save(newColumn);
+                _projectService.SaveProject(project);
                 return newColumn;
             }
             else

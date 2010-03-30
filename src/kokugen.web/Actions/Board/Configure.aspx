@@ -54,7 +54,7 @@
 <div><a href="#" onclick="showColumnForm();"><img src="/content/images/add_button.png" alt="add column" />Add Column</a></div>
         
 
-<% this.Partial(new BoardColumnEditModel()); %>
+<% this.Partial(new BoardColumnEditModel { ProjectId=Model.Id}); %>
 
 
 <div class="board-column-configure ui-sortable">

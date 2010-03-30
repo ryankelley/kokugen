@@ -10,8 +10,9 @@
     <%= this.Edit(x => x.Column.Description)%>
     <%= this.Edit(x => x.Column.Limit)%>
     <%= this.InputFor(x => x.Id).Hide() %>
+    <%= this.InputFor(x => x.ProjectId) %>
     
-     <input type="submit" name="Submit" value="Save" />
+     <input type="submit" name="Submit" value="Save" id="col-save-button"/>
 </form>
 </div>
 
@@ -20,7 +21,14 @@
     function closeColumnDialog(response) {
 
         $("#new-column-container").slideToggle('slow');
-        // would want to update list here too
+
+        var item = "<li id=\"" + response.Item.Id + "\" class=\"draggable phase\"><div class=\"col-title\"><span>" + response.Item.Name + "</span></div>";
+        item = item + "<div class=\"col-desc\"><span>" + response.Item.Id + "</span></div></li>";
+
+        $(item).before("#board-columns li:last");
+
+
+    
     }
     
     function validateAndSave() {
@@ -35,7 +43,8 @@
         if (isValid) {
             $("#column-form").ajaxSubmit(options);
         }
-        
+
+        return false;
     }
 
     $(document).ready(function() {
@@ -45,6 +54,7 @@
 
 
         // bind form using 'ajaxForm'
-    $('#column-form').ajaxForm(options);
+    //$('#column-form').ajaxForm(options);
+    $('#col-save-button').submit(validateAndSave);
     });
 </script>
