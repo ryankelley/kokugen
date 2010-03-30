@@ -132,6 +132,7 @@
     <Compile Include="Persistence\IRepository.cs" />
     <Compile Include="Persistence\Overrides\ProjectMappingOverride.cs" />
     <Compile Include="Persistence\Repositories\CompanyRepository.cs" />
+    <Compile Include="Persistence\Repositories\ICustomBoardColumnRepository.cs" />
     <Compile Include="Persistence\Repositories\TaskCategoryRepository.cs" />
     <Compile Include="Persistence\Repositories\ProjectRepository.cs" />
     <Compile Include="Persistence\Conventions\RequiredAttributeConvention.cs" />

@@ -34,21 +34,36 @@
         $.ajax({ type: 'POST', url: '/board/reorder', data: raw, dataType: 'JSON' });
         //$("#info").load("process-sortable.php?" + order);
     }
-    
+
+    function showColumnForm() {
+        $("#new-column-container").slideToggle('slow');
+    }
+
     $(document).ready(function() {
         $('#board-columns').sortable({
-        items: '> *:not(".fixed")', placeholder: 'phase-placeholder', forcePlaceholderSize: true,
+            items: '> *:not(".fixed")', placeholder: 'phase-placeholder', forcePlaceholderSize: true,
             update: updateColumns
         });
-        $('#board-columns').disableSelection(); 
+        $('#board-columns').disableSelection();
+
+        $("li.draggable .col-desc").hover(function() {
+            $(this).children('.col-links').fadeIn(500);
+        }, function() {
+            $(this).children('.col-links').fadeOut(300);
+        });
     });
+    
+    
 </script>
 
 </asp:Content>
 <asp:Content ID="THISCONTENTAREAID" ContentPlaceHolderID="mainContent" runat="server">
-<pre> 
-    <div id="info">Waiting for update</div> 
-</pre> 
+
+<div><a href="#" onclick="showColumnForm();"><img src="/content/images/add_button.png" alt="add column" />Add Column</a></div>
+        
+
+<% this.Partial(new BoardColumnEditModel { ProjectId=Model.Id}); %>
+
 
 <div class="board-column-configure ui-sortable">
     <ul id="board-columns">

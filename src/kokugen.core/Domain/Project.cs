@@ -72,7 +72,7 @@ namespace Kokugen.Core.Domain
         public virtual void AddBoardColumn(CustomBoardColumn column)
         {
             if(_boardColumns.Contains(column)) return;
-
+            column.Project = this;
             _boardColumns.Add(column);
         }
 

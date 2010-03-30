@@ -250,12 +250,12 @@ cursor:move;
 
 .board-column-configure div.col-title {
 font-size:1.8em;
-height:80px;
+height:60px;
 padding:24px 12px 12px;
 }
 .board-column-configure div.col-desc {
 border-top:1px dotted #CCCCCC;
-height:28px;
+height:40px;
 padding:8px;
 }
 
