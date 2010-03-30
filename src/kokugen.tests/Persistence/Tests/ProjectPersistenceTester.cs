@@ -11,7 +11,8 @@ namespace Kokugen.Tests.Persistence.Tests
         [Test]
         public void Can_save_Project()
         {
-            var company = new Company {Name = "Test", Address = new Address{ StreetLine1 = "Test Street 123", City = "Weatherford", State = "TX", ZipCode = "78483"}};
+            var address = new Address() { City = "Amarillo", State = "TX", StreetLine1 = "8331 N Western", ZipCode = "52136" };
+            var company = new Company {Name = "Test", Address = address};
             Specification
                 .CheckProperty(x => x.Name, "Test Project Six Two")
                 .CheckProperty(x => x.Description, "This is a test project used for persistence testing")

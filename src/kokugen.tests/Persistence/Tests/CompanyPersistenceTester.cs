@@ -16,15 +16,26 @@ namespace Kokugen.Tests.Persistence.Tests
         [Test]
         public void Test_The_Mappings()
         {
-            var address = new Address {StreetLine1 = "Test Street 123", City = "Weatherford", State = "TX", ZipCode = "78483"};
-
-            Specification.CheckProperty(x => x.Name, "Company XYZ")
+            var address = new Address(){City = "Amarillo", State = "TX", StreetLine1 = "8331 N Western", ZipCode = "52136"};
+            Specification
+                .CheckProperty(x => x.Name, "Company XYZ")
+                .CheckProperty(x => x.Address, address, new TypeComparer())
                 .CheckProperty(x => x.Address, address)
                 .VerifyTheMappings();
-            
+        }
+    }
+
+    public class TypeComparer : IEqualityComparer 
+    {
+        public bool Equals(object x, object y)
+        {
+            return x.GetType() == y.GetType();
         }
 
-        
+        public int GetHashCode(object obj)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class AddressEqualityComparer : IEqualityComparer
