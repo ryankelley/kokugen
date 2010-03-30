@@ -27,7 +27,7 @@ namespace Kokugen.Tests.SchemaCreation
 
             container = StructureMapContainerFacility.GetBasicFubuContainer();
 
-            container.Configure(x => x.AddRegistry(new PersistenceTestRegistry()));
+            container.Configure(x => x.AddRegistry(new SchemaRegistry()));
 
             //ObjectFactory.AssertConfigurationIsValid();
         }

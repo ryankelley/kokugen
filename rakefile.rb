@@ -141,6 +141,20 @@ task :dbCreateVersioned do
 	
 end
 
+desc "Creates the Development Database"
+task :dbCreateDev do
+	Tarantino.manageSQLDatabase :dbname => DBNAME+'Dev', :dbserver => DBSERVER, :action => 'Drop', :scriptdir => DBSCRIPTS
+	
+	Tarantino.manageSQLDatabase :dbname => DBNAME+'Dev', :dbserver => DBSERVER, :action => 'Create', :scriptdir => DBSCRIPTS
+	
+	Tarantino.manageSQLDatabase :dbname => DBNAME+'Dev', :dbserver => DBSERVER, :action => 'Update', :scriptdir => DBSCRIPTS
+end
+
+desc "Update the database"
+task :dbUpdateDev do
+Tarantino.manageSQLDatabase :dbname => DBNAME+'Dev', :dbserver => DBSERVER, :action => 'Update', :scriptdir => DBSCRIPTS
+end
+
 desc "Update the database"
 task :dbUpdate do
 Tarantino.manageSQLDatabase :dbname => DBNAME, :dbserver => DBSERVER, :action => 'Update', :scriptdir => DBSCRIPTS

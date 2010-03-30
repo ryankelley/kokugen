@@ -42,6 +42,7 @@ namespace Kokugen.Web.Conventions
         {
             Editors.Builder<ValueObjectDropdownBuilder>();
             Editors.IfPropertyIs<bool>().BuildBy(request => new CheckboxTag(request.Value<bool>()).Style("width", "auto !important").Attr("value", request.ElementId));
+            Editors.IfPropertyIs<Guid>().BuildBy(request => new HiddenTag().Attr("value", request.StringValue()));
             //Editors.Builder(new FormItemBuilder());
         }
 
