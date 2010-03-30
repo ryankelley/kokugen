@@ -96,6 +96,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContextSpecification.cs" />
+    <Compile Include="Persistence\InMemoryRepository.cs" />
     <Compile Include="Persistence\IntegrationAssemblySetup.cs" />
     <Compile Include="Persistence\PersistenceTesterContext.cs" />
     <Compile Include="Persistence\Tests\CompanyPersistenceTester.cs" />

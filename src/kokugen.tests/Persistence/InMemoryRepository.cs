@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
-using FluentNHibernate;
-using FubuMVC.Core.Util;
+using FubuCore.Reflection;
+using FubuCore.Util;
 using Kokugen.Core.Domain;
 using Kokugen.Core.Persistence;
 using NHibernate;
@@ -36,7 +36,7 @@ namespace Kokugen.Tests.Persistence
 
         private IList<ENTITY> listFor<ENTITY>()
         {
-            return (IList<ENTITY>)_types.Retrieve(typeof(ENTITY));
+            return (IList<ENTITY>)_types[typeof(ENTITY)];
         }
 
 
