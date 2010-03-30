@@ -95,6 +95,7 @@
     <Compile Include="Config\SiteConfigDTO.cs" />
     <Compile Include="Domain\Address.cs" />
     <Compile Include="Domain\BoardColumn.cs" />
+    <Compile Include="Domain\Card.cs" />
     <Compile Include="Domain\Company.cs" />
     <Compile Include="Domain\Entity.cs" />
     <Compile Include="Domain\Enumeration.cs" />
@@ -131,6 +132,7 @@
     <Compile Include="Persistence\IRepository.cs" />
     <Compile Include="Persistence\Overrides\ProjectMappingOverride.cs" />
     <Compile Include="Persistence\Repositories\CompanyRepository.cs" />
+    <Compile Include="Persistence\Repositories\ICardRepository.cs" />
     <Compile Include="Persistence\Repositories\ICustomBoardColumnRepository.cs" />
     <Compile Include="Persistence\Repositories\ProjectRepository.cs" />
     <Compile Include="Persistence\Conventions\RequiredAttributeConvention.cs" />

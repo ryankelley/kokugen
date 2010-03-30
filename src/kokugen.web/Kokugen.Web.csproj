@@ -109,6 +109,10 @@
     <Compile Include="Actions\Board\View_Page_Type_Declarations.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Actions\Card\View_Page_Type_Declarations.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Actions\Card\ListAction.cs" />
     <Compile Include="Actions\Company\AddAction.cs" />
     <Compile Include="Actions\Company\CompanyFormAction.cs" />
     <Compile Include="Actions\Company\ListAction.cs" />
@@ -167,6 +171,7 @@
     <Content Include="Actions\Board\EditBoardColumnForm.aspx" />
     <Content Include="Actions\Board\Configure.aspx" />
     <Content Include="Actions\Board\List.aspx" />
+    <Content Include="Actions\Card\List.aspx" />
     <Content Include="Actions\Company\CompanyForm.aspx" />
     <Content Include="Actions\Company\List.aspx" />
     <Content Include="Actions\Home\Home.aspx" />
