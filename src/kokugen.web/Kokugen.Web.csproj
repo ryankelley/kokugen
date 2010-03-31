@@ -122,6 +122,12 @@
     </Compile>
     <Compile Include="Actions\Home\HomeViewModel.cs" />
     <Compile Include="Actions\Home\IndexAction.cs" />
+    <Compile Include="Actions\Login\LoginAction.cs" />
+    <Compile Include="Actions\Login\LoginForm.aspx.cs">
+      <DependentUpon>LoginForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Actions\Login\LoginFormAction.cs" />
     <Compile Include="Actions\Project\AddAction.cs" />
     <Compile Include="Actions\Project\AddProjectModel.cs" />
     <Compile Include="Actions\Project\GetProjectAction.cs" />
@@ -170,6 +176,7 @@
     <Content Include="Actions\Company\CompanyForm.aspx" />
     <Content Include="Actions\Company\List.aspx" />
     <Content Include="Actions\Home\Home.aspx" />
+    <Content Include="Actions\Login\LoginForm.aspx" />
     <Content Include="Actions\Project\GetProject.aspx" />
     <Content Include="Actions\Project\List.aspx" />
     <Content Include="Actions\Project\ProjectForm.aspx" />
@@ -238,6 +245,9 @@
     <Content Include="Content\Scripts\jquery.json-2.2.min.js" />
     <Content Include="Content\Scripts\jquery.validate.min.js" />
     <Content Include="Shared\Site.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Actions\Users\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\WebApplications\Microsoft.WebApplication.targets" />
