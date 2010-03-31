@@ -9,7 +9,7 @@ to synchronize it with:
 
 You are recommended to back up your database before running this script
 
-Script created by SQL Compare version 8.1.0 from Red Gate Software Ltd at 3/30/2010 8:07:13 PM
+Script created by SQL Compare version 8.1.0 from Red Gate Software Ltd at 3/31/2010 8:37:26 AM
 
 */
 SET NUMERIC_ROUNDABORT OFF
@@ -26,19 +26,18 @@ SET TRANSACTION ISOLATION LEVEL SERIALIZABLE
 GO
 BEGIN TRANSACTION
 GO
-PRINT N'Altering [dbo].[Users]'
+PRINT N'Altering [dbo].[TimeRecords]'
 GO
-ALTER TABLE [dbo].[Users] ADD
-[HashedPassword] [nvarchar] (255) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
-[Login] [nvarchar] (255) COLLATE SQL_Latin1_General_CP1_CI_AS NULL
+ALTER TABLE [dbo].[TimeRecords] ADD
+[TaskCategory_id] [uniqueidentifier] NULL
 GO
 IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
 GO
 IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
 GO
-PRINT N'Creating [dbo].[Roles]'
+PRINT N'Creating [dbo].[TaskCategories]'
 GO
-CREATE TABLE [dbo].[Roles]
+CREATE TABLE [dbo].[TaskCategories]
 (
 [Id] [uniqueidentifier] NOT NULL,
 [Name] [nvarchar] (255) COLLATE SQL_Latin1_General_CP1_CI_AS NULL
@@ -48,9 +47,18 @@ IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
 GO
 IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
 GO
-PRINT N'Creating primary key [PK__Roles__3214EC071367E606] on [dbo].[Roles]'
+PRINT N'Creating primary key [PK__TaskCate__3214EC071367E606] on [dbo].[TaskCategories]'
 GO
-ALTER TABLE [dbo].[Roles] ADD CONSTRAINT [PK__Roles__3214EC071367E606] PRIMARY KEY CLUSTERED  ([Id])
+ALTER TABLE [dbo].[TaskCategories] ADD CONSTRAINT [PK__TaskCate__3214EC071367E606] PRIMARY KEY CLUSTERED  ([Id])
+GO
+IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
+GO
+PRINT N'Adding foreign keys to [dbo].[TimeRecords]'
+GO
+ALTER TABLE [dbo].[TimeRecords] ADD
+CONSTRAINT [fk_TimeRecord_to_TaskCategory] FOREIGN KEY ([TaskCategory_id]) REFERENCES [dbo].[TaskCategories] ([Id])
 GO
 IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
 GO

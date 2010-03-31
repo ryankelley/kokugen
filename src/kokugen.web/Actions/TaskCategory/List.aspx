@@ -4,13 +4,15 @@
 
     
 <asp:Content ID="THISCONTENTAREAID" ContentPlaceHolderID="mainContent" runat="server">
-
-<div class="upper-meta">
-    <div class="add-caption"><a href="#" onclick="showTaskForm();"><img src="/content/images/add_button.png" alt="add project" />Add New Task</a></div>
-</div>
-
     <div class="content">
-    <%= this.PartialForEach(m => m.TaskCategories).Using<TaskItem_Control>() %>
+
+        <div class="upper-meta">
+            <div class="add-caption"><a href="#" onclick="showTaskForm();"><img src="/content/images/add_button.png" alt="add project" />Add New Task</a></div>
+        </div>
+
+    
+        <h2>Tasks</h2>
+        <%= this.PartialForEach(m => m.TaskCategories).Using<TaskItem_Control>() %>
     </div>
    
    
