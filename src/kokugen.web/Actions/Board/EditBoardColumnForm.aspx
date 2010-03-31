@@ -26,6 +26,11 @@
         item = item + "<div class=\"col-desc\"><span>" + response.Item.Description + "</span></div></li>";
 
         $(item).insertBefore($("#board-columns li:last"));
+        updateColumns();
+    }
+
+    function deleteColumn(id) {
+        
     }
     
     function validateAndSave() {

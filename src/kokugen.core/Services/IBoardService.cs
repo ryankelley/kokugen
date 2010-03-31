@@ -11,6 +11,7 @@ namespace Kokugen.Core.Services
         bool ReorderColumns(Guid projectId, IList<ColumnOrderDTO> columns);
         CustomBoardColumn ModifyColumn(Guid projectId, Guid columnId, string name, string description, int limit);
         CustomBoardColumn GetCustomColumn(Guid columnId);
+        bool DeleteColumn(Guid id);
     }
 
     public class BoardService : IBoardService
@@ -78,6 +79,13 @@ namespace Kokugen.Core.Services
         public CustomBoardColumn GetCustomColumn(Guid columnId)
         {
             return _customBoardColumnRepository.Get(columnId);
+        }
+
+        public bool DeleteColumn(Guid id)
+        {
+            var col = _customBoardColumnRepository.Load(id);
+            _customBoardColumnRepository.Delete(col);
+            return true;
         }
     }
 

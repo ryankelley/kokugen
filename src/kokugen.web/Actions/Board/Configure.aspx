@@ -1,4 +1,7 @@
 <%@ Page Language="C#" Inherits="Kokugen.Web.Actions.Board.Configure" AutoEventWireup="true" MasterPageFile="~/Shared/Site.Master" %>
+<%@ Import Namespace="Kokugen.Web.Actions.BoardColumn"%>
+<%@ Import Namespace="FubuMVC.Core.Urls"%>
+<%@ Import Namespace="Kokugen.Web.Actions.Company"%>
 <%@ Import Namespace="Kokugen.Web.Actions.Board"%>
 <asp:Content ID="columnconfigHead" ContentPlaceHolderID="head" runat="server">
 
@@ -38,7 +41,7 @@
     function showColumnForm() {
         $("#new-column-container").slideToggle('slow');
     }
-
+    var removeColumnUrl = "<%= Get<IUrlRegistry>().UrlFor(new DeleteColumnInputModel()) %>";
     $(document).ready(function() {
         $('#board-columns').sortable({
             items: '> *:not(".fixed")', placeholder: 'phase-placeholder', forcePlaceholderSize: true,
@@ -50,6 +53,28 @@
             $(this).children('.col-links').fadeIn(500);
         }, function() {
             $(this).children('.col-links').fadeOut(300);
+        });
+
+        $(".removeLink").live("click", function() {
+            var link = $(this);
+            var columnId = link.attr("data");
+
+            var onSuccess = function(data) {
+                if (data.Success !== true) {
+                    alert("failed to remove");
+                    return;
+                }
+
+                $('#'+data.Item).remove();
+            }
+
+            $.ajax({
+                url: removeColumnUrl,
+                data: { Id: columnId },
+                success: onSuccess,
+                dataType: "json",
+                type: "DELETE"
+            });
         });
     });
     

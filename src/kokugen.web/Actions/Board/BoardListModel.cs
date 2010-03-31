@@ -8,7 +8,7 @@ namespace Kokugen.Web.Actions.Board
     public class BoardListModel : IRequestById
     {
         public Guid Id { get; set; }
-        public IEnumerable<BoardColumn> BoardColumns { get; set; }
+        public IEnumerable<Core.Domain.BoardColumn> BoardColumns { get; set; }
         
     }
 }

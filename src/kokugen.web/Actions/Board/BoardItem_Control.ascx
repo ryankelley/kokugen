@@ -1,4 +1,5 @@
 <%@ Control Language="C#" AutoEventWireup="true" Inherits="Kokugen.Web.Actions.Board.BoardItem_Control"  %>
+<%@ Import Namespace="Kokugen.Web.Actions.BoardColumn"%>
 
 
     <div class="col-title">
@@ -10,7 +11,7 @@
 	
 	    <div class="col-links hidden">
 	    <img src="/content/images/card_edit.png" alt="Edit Column" />
-	    <img src="/content/images/card_delete.png" alt="Delete Column" />
+	    <a href="#" data="<%= Model.Id %>" class="removeLink"><img src="/content/images/card_delete.png" alt="Delete Column" /></a>
 	    </div>
 	</div>
 
