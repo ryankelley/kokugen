@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using FubuMVC.Core;
-using Kokugen.Core.Attributes;
 using Kokugen.Core.Validation;
 
 namespace Kokugen.Core.Domain

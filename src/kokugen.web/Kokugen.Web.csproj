@@ -123,6 +123,12 @@
     </Compile>
     <Compile Include="Actions\Home\HomeViewModel.cs" />
     <Compile Include="Actions\Home\IndexAction.cs" />
+    <Compile Include="Actions\Login\LoginAction.cs" />
+    <Compile Include="Actions\Login\LoginForm.aspx.cs">
+      <DependentUpon>LoginForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Actions\Login\LoginFormAction.cs" />
     <Compile Include="Actions\Project\AddAction.cs" />
     <Compile Include="Actions\Project\AddProjectModel.cs" />
     <Compile Include="Actions\Project\GetProjectAction.cs" />
@@ -131,6 +137,12 @@
     <Compile Include="Actions\Project\View_Page_Type_Declarations.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Actions\TaskCategory\AddAction.cs" />
+    <Compile Include="Actions\TaskCategory\View_Page_Type_Declarations.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Actions\TaskCategory\ListAction.cs" />
+    <Compile Include="Actions\TaskCategory\TaskCategoryListModel.cs" />
     <Compile Include="Behaviors\TransactionalContainerBehavior.cs" />
     <Compile Include="Conventions\Builders\AfterEachOfPartialBuilder.cs" />
     <Compile Include="Conventions\Builders\BeforeEachOfPartialBuilder.cs" />
@@ -171,10 +183,14 @@
     <Content Include="Actions\Company\CompanyForm.aspx" />
     <Content Include="Actions\Company\List.aspx" />
     <Content Include="Actions\Home\Home.aspx" />
+    <Content Include="Actions\Login\LoginForm.aspx" />
     <Content Include="Actions\Project\GetProject.aspx" />
     <Content Include="Actions\Project\List.aspx" />
     <Content Include="Actions\Project\ProjectForm.aspx" />
     <Content Include="Actions\Project\ProjectItem_Control.ascx" />
+    <Content Include="Actions\TaskCategory\TaskForm.aspx" />
+    <Content Include="Actions\TaskCategory\TaskItem_Control.ascx" />
+    <Content Include="Actions\TaskCategory\List.aspx" />
     <Content Include="Content\css\custom-theme\images\ui-bg_fine-grain_10_ffffff_60x60.png" />
     <Content Include="Content\css\custom-theme\images\ui-bg_fine-grain_42_333333_60x60.png" />
     <Content Include="Content\css\custom-theme\images\ui-bg_glass_15_222222_1x400.png" />
@@ -239,6 +255,9 @@
     <Content Include="Content\Scripts\jquery.json-2.2.min.js" />
     <Content Include="Content\Scripts\jquery.validate.min.js" />
     <Content Include="Shared\Site.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Actions\Users\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\WebApplications\Microsoft.WebApplication.targets" />
