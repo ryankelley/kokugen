@@ -6,7 +6,7 @@
 <%@ Import Namespace="Kokugen.Core"%>
 <%@ Import Namespace="FubuMVC.Core.Urls"%>
 <%@ Import Namespace="HtmlTags"%>
-<asp:Content ID="CompanyListHead" ContentPlaceHolderID="head" runat="server">
+<asp:Content ID="BoardListHead" ContentPlaceHolderID="head" runat="server">
 
 </asp:Content>
 <asp:Content ID="THISCONTENTAREAID" ContentPlaceHolderID="mainContent" runat="server">

@@ -96,6 +96,7 @@
     <Compile Include="Domain\Address.cs" />
     <Compile Include="Domain\BoardColumn.cs" />
     <Compile Include="Domain\Company.cs" />
+    <Compile Include="Domain\TaskCategory.cs" />
     <Compile Include="Domain\Entity.cs" />
     <Compile Include="Domain\Enumeration.cs" />
     <Compile Include="Domain\IDomainQuery.cs" />
@@ -133,6 +134,7 @@
     <Compile Include="Persistence\Overrides\ProjectMappingOverride.cs" />
     <Compile Include="Persistence\Repositories\CompanyRepository.cs" />
     <Compile Include="Persistence\Repositories\ICustomBoardColumnRepository.cs" />
+    <Compile Include="Persistence\Repositories\TaskCategoryRepository.cs" />
     <Compile Include="Persistence\Repositories\IRoleRepository.cs" />
     <Compile Include="Persistence\Repositories\IUserRepository.cs" />
     <Compile Include="Persistence\Repositories\ProjectRepository.cs" />
@@ -149,6 +151,7 @@
     <Compile Include="Services\ICompanyService.cs" />
     <Compile Include="Services\IEmailService.cs" />
     <Compile Include="Services\IProjectService.cs" />
+    <Compile Include="Services\TaskCategoryService.cs" />
     <Compile Include="Services\IRoleService.cs" />
     <Compile Include="Services\IUserService.cs" />
     <Compile Include="Services\LoginService.cs" />

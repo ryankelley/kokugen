@@ -136,6 +136,12 @@
     <Compile Include="Actions\Project\View_Page_Type_Declarations.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Actions\TaskCategory\AddAction.cs" />
+    <Compile Include="Actions\TaskCategory\View_Page_Type_Declarations.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Actions\TaskCategory\ListAction.cs" />
+    <Compile Include="Actions\TaskCategory\TaskCategoryListModel.cs" />
     <Compile Include="Behaviors\TransactionalContainerBehavior.cs" />
     <Compile Include="Conventions\Builders\AfterEachOfPartialBuilder.cs" />
     <Compile Include="Conventions\Builders\BeforeEachOfPartialBuilder.cs" />
@@ -181,6 +187,9 @@
     <Content Include="Actions\Project\List.aspx" />
     <Content Include="Actions\Project\ProjectForm.aspx" />
     <Content Include="Actions\Project\ProjectItem_Control.ascx" />
+    <Content Include="Actions\TaskCategory\TaskForm.aspx" />
+    <Content Include="Actions\TaskCategory\TaskItem_Control.ascx" />
+    <Content Include="Actions\TaskCategory\List.aspx" />
     <Content Include="Content\css\custom-theme\images\ui-bg_fine-grain_10_ffffff_60x60.png" />
     <Content Include="Content\css\custom-theme\images\ui-bg_fine-grain_42_333333_60x60.png" />
     <Content Include="Content\css\custom-theme\images\ui-bg_glass_15_222222_1x400.png" />
