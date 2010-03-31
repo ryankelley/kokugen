@@ -32,9 +32,8 @@ namespace Kokugen.Web.Actions.TaskCategory
         }
     }
 
-    public class AddTaskModel
+    public class TaskFormModel
     {
-        public string Name { get; set; }
+        public Core.Domain.TaskCategory Task { get; set; }
     }
-
 }

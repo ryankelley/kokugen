@@ -12,9 +12,9 @@ namespace Kokugen.Web.Actions.TaskCategory
             _taskCategoryService = taskCategoryService;
         }
 
-        public TaskCategoryListModel Query(TaskCategoryListModel model )
+        public TaskListModel Query(TaskListModel model )
         {
-            return new TaskCategoryListModel
+            return new TaskListModel
                        {
                            Id = model.Id,
                            TaskCategories = _taskCategoryService.GetAllCategories().ToList()

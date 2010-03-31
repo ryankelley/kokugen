@@ -2,11 +2,11 @@
 <%@ Import Namespace="Kokugen.Web.Actions.TaskCategory"%>
 <%@ Import Namespace="FubuMVC.Core.Urls"%>
 <%@ Import Namespace="Kokugen.Web.Conventions"%>
-<%@ Import Namespace="Kokugen.Web.Actions.TaskCategory"%>
+
 
 <div id="task-form-container" class="hide">
-<%= this.FormFor(new AddTaskModel()).Id("task-form") %>
-    <%= this.Edit(x => x.Name) %>
+<%= this.FormFor(new AddTaskModel()) %>
+    <%= this.Edit(x => x.Task.Name) %>
     
 </form>
    

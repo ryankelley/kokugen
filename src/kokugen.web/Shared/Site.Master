@@ -32,7 +32,7 @@
 				<li class="bar"><%= this.LinkTo(new ProjectListModel()).Text("Projects") %></li>
 				<li class="lbar"><a href="index.html">Time Records</a></li>
 				<li class="lbar"><a href="create.html">Users</a></li>
-				<li class="last"><%= this.LinkTo(new TaskCategoryListModel()).Text("Tasks") %></li>
+				<li class="last"><%= this.LinkTo(new TaskListModel()).Text("Tasks") %></li>
 			</ul>
 		</div>
 	</div>
