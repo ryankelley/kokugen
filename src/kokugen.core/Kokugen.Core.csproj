@@ -142,6 +142,7 @@
     <Compile Include="PropertyComparer.cs" />
     <Compile Include="Persistence\TransactionProcessor.cs" />
     <Compile Include="Services\IBoardService.cs" />
+    <Compile Include="Services\ICardService.cs" />
     <Compile Include="Services\ICompanyService.cs" />
     <Compile Include="Services\IProjectService.cs" />
     <Compile Include="TypeExtensions.cs" />
