@@ -4,7 +4,7 @@
 
     
 <asp:Content ID="THISCONTENTAREAID" ContentPlaceHolderID="mainContent" runat="server">
-    <div class="content"align=center>
+    <div class="content"align=center  margin-left=auto margin-right=auto width=6em>
 
         
         <div class="add-caption" ><a href="#" onclick="showTaskForm();"><img src="/content/images/add_button.png" alt="add project" />Add New Task</a></div>
@@ -24,10 +24,8 @@
         }
 
         function appendTaskToList(task) {
-            var output = "<li class=\"task first\"><a title=\"Click to view this project\" href=\"/taskcategory\">";
-            output = output + "<span class=\"task-name\">" + task.Name + "</span>";
-            output = output + "<span class=\"task-stats\">Some Status Here</span><div class=\"task-owner\">" + task.Name + "</div></a></li>";
-
+            var output = "<span class=\"task-name\">" + task.Name + "</span>";
+            
             $(".task-list").append(output);
         }    
         

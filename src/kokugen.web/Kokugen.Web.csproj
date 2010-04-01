@@ -190,6 +190,7 @@
     <Content Include="Actions\Project\List.aspx" />
     <Content Include="Actions\Project\ProjectForm.aspx" />
     <Content Include="Actions\Project\ProjectItem_Control.ascx" />
+    <Content Include="Actions\Project\TimeRecord_Control.ascx" />
     <Content Include="Actions\TaskCategory\TaskForm.aspx" />
     <Content Include="Actions\TaskCategory\TaskItem_Control.ascx" />
     <Content Include="Actions\TaskCategory\List.aspx" />

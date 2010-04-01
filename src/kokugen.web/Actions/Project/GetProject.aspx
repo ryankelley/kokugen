@@ -7,9 +7,12 @@
 </asp:Content>
 <asp:Content ID="ProjectListContent" ContentPlaceHolderID="mainContent" runat="server">
 <body>
-    <%= this.DisplayFor(m => m.Project.Name) %>
+<div id="Project Name"><h2><%= this.DisplayFor(m => m.Project.Name) %></h2></div>
+
+<%= this.PartialForEach(p => p.TimeRecords).Using<TimeRecord_Control>() %>
     
-    <%= this.LinkTo(new BoardConfigurationModel{ Id = Model.Project.Id}).Text("Configure Board Columns") %>
+    
+   <div id ="Board Link"><%= this.LinkTo(new BoardConfigurationModel{ Id = Model.Project.Id}).Text("Configure Board Columns") %></div> 
 </body>
     
 
