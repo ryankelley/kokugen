@@ -1,13 +1,4 @@
 /* Global */
-html, body
-{
-    height: 100%;
-}
-
-.content 
-{
-    
-}
 
 img { border: none;}
 
@@ -25,11 +16,11 @@ body{
 
 #head {
 	background: url(../images/head.png) repeat-x top left;
-	height: 122px;
+	height: 192px;
 }
 
 #wrapper{
-	height: 88px;
+	height: 170px;
 	margin: auto;
 	position: relative;
 	width: 960px;
@@ -140,13 +131,6 @@ label.error
 {
     padding: 5px;
     width: 100%;
-}
-
-form input:focus 
-{
-    -moz-box-shado: 0 0 2px #AABBAA;
-    background-color: #DDFFDD;
-    border: 1px solid #CCAAAA;
 }
 
 ol, ul {
@@ -264,7 +248,7 @@ label.error
 cursor:move;
 }
 
-.board-column-configure div.col-title {
+.board-column-configure h4 {
 font-size:1.8em;
 height:60px;
 padding:24px 12px 12px;
@@ -298,3 +282,23 @@ vertical-align:top;
 
 }
 
+.edit-link, .remove-link {
+    width: 24px;
+    height: 24px;
+    overflow: hidden;
+    display: inline-block;
+    text-indent: -7777px;
+}
+
+.col-links {
+    margin: auto;
+    text-align: center;
+}
+
+.edit-link {
+    background: transparent url(/content/images/card_edit.png) no-repeat top left;
+}
+
+.remove-link {
+    background: transparent url(/content/images/card_delete.png) no-repeat top left;
+}

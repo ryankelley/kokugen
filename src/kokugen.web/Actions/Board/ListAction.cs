@@ -41,8 +41,6 @@ namespace Kokugen.Web.Actions.Board
        
     }
 
-
-
     public class BoardColumnReorderModel
     {
         public string columns { get; set; }
