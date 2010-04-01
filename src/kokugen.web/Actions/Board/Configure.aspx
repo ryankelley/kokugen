@@ -9,6 +9,16 @@
 
 var fixedclass = "";
 var removeColumnUrl = "<%= Get<IUrlRegistry>().UrlFor(new DeleteColumnInputModel()) %>";
+var columns = <%= Model.BoardColumns.ToJson() %>;
+var boardColumn = function(id, order) {
+        //var self = this;
+        this.Id = id;
+        this.ColumnOrder = order;
+        this.Description;
+        this.Limit;
+        //this.Element = document.createElement('li');
+    }
+
 
     function bindList(data, template, output) {
             // Stuff data in the template
@@ -29,8 +39,10 @@ var removeColumnUrl = "<%= Get<IUrlRegistry>().UrlFor(new DeleteColumnInputModel
         var order = $('#board-columns li').each(function() {
             
             if ($(this).attr('id') != "") {
+            
+                var id = $(this).attr('id').replace("_COL", "");
 
-                var col = new boardColumn($(this).attr('id'), count);
+                var col = new boardColumn(id, count);
                 boardColumns.push(col);
 
                 count = count + 1;
@@ -83,7 +95,7 @@ var removeColumnUrl = "<%= Get<IUrlRegistry>().UrlFor(new DeleteColumnInputModel
         });
     }
         
-var columns = <%= Model.BoardColumns.ToJson() %>;
+
     
     $(document).ready(function() {
         
@@ -117,7 +129,7 @@ var columns = <%= Model.BoardColumns.ToJson() %>;
 <div class="col-title"><#= Name #><# var limit = Limit != 0 ? "(" + Limit + ")" : "";  #> <#= limit #></div>
 <div class="col-desc"><#= Description #>
     <div class="col-links hidden">
-	    <img src="/content/images/card_edit.png" alt="Edit Column" />
+	    <a href="#" data="<#= Id #>" class="editLink"><img src="/content/images/card_edit.png" alt="Edit Column" /></a>
 	    <a href="#" data="<#= Id #>" class="removeLink"><img src="/content/images/card_delete.png" alt="Delete Column" /></a>
     </div>
 </div>

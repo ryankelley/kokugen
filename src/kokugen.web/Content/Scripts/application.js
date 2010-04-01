@@ -41,3 +41,19 @@
 //        return "<# ERROR: " + err.htmlEncode() + " #>";
     };
 })();
+
+function ValidateAndSave(successCallback, formObject) {
+    var options = {
+        success: closeColumnDialog,  // post-submit callback 
+        type: 'post',        // 'get' or 'post', override for form's 'method' attribute 
+        dataType: 'json',        // 'xml', 'script', or 'json' (expected server response type) 
+        clearForm: true        // clear all form fields after successful submit 
+    };
+    var isValid = formObject.valid();
+
+    if (isValid) {
+        formObject.ajaxSubmit(options);
+    }
+
+    return false;
+}
