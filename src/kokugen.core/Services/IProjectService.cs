@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Kokugen.Core.Domain;
 using Kokugen.Core.Persistence.Repositories;
+using Kokugen.Core.Persistence.Repositories.Kokugen.Core.Persistence.Repositories;
 using Kokugen.Core.Validation;
 
 namespace Kokugen.Core.Services
@@ -15,17 +16,20 @@ namespace Kokugen.Core.Services
         Project GetProjectFromName(string name);
         Project CreateProject(string projectName, string projectDescription, Company company);
         Project GetProjectFromId(Guid id);
+        //IEnumerable<TimeRecord> GetTimeRecords(Guid projectid);
     }
 
     public class ProjectService : IProjectService
     {
         private readonly IProjectRepository _projectRepository;
         private readonly IValidator _validator;
+        private readonly ITimeRecordRepository _timeRecordRepository;
 
-        public ProjectService(IProjectRepository projectRepository, IValidator validator)
+        public ProjectService(IProjectRepository projectRepository, IValidator validator, ITimeRecordRepository timeRecordRepository)
         {
             _projectRepository = projectRepository;
             _validator = validator;
+            _timeRecordRepository = timeRecordRepository;
         }
 
         public IEnumerable<Project> ListProjects()
@@ -78,5 +82,10 @@ namespace Kokugen.Core.Services
         {
             return _projectRepository.Get(id);
         }
+
+//        public IEnumerable<TimeRecord> GetTimeRecords(Guid projectid)
+//        {
+//            return _timeRecordRepository.Query().Where(x => x.Project.Id == projectid);
+//        }
     }
 }

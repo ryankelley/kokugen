@@ -139,6 +139,7 @@
     <Compile Include="Persistence\Repositories\IUserRepository.cs" />
     <Compile Include="Persistence\Repositories\ProjectRepository.cs" />
     <Compile Include="Persistence\Conventions\RequiredAttributeConvention.cs" />
+    <Compile Include="Persistence\Repositories\TimeRecordRepository.cs" />
     <Compile Include="Persistence\SafeDataReader.cs" />
     <Compile Include="Persistence\With.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
