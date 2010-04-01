@@ -26,15 +26,15 @@
             dataType: 'json',        // 'xml', 'script', or 'json' (expected server response type) 
             clearForm: true        // clear all form fields after successful submit 
         };
-        var isValid = $("#task-form").valid();
+        var isValid = $("#mainForm").valid();
 
         if (isValid) {
-            $("#task-form").ajaxSubmit(options);
+            $("#mainForm").ajaxSubmit(options);
         }
     }
 
     $(document).ready(function() {
-        $("#task-form").validate({ errorClass: "error" });
-        $("#task-form-container").dialog({ title: "Add Task", autoOpen: false, buttons: { "Save": function() { validateAndSave(); } } });
+    $("#mainForm").validate({ errorClass: "error" });
+        $("#task-form-container").dialog({ title: "Add Task", autoOpen: false, buttons: { "Save":  validateAndSave } });
     });
 </script>

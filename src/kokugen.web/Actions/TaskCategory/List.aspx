@@ -21,7 +21,15 @@
         function showTaskForm() {
             $("#task-form-container").dialog('open');
             return false;
-        }       
+        }
+
+        function appendTaskToList(task) {
+            var output = "<li class=\"task first\"><a title=\"Click to view this project\" href=\"/taskcategory\">";
+            output = output + "<span class=\"task-name\">" + task.Name + "</span>";
+            output = output + "<span class=\"task-stats\">Some Status Here</span><div class=\"task-owner\">" + task.Name + "</div></a></li>";
+
+            $(".task-list").append(output);
+        }    
         
     </script>
 
