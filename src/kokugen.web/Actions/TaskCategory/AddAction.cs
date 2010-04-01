@@ -16,7 +16,7 @@ namespace Kokugen.Web.Actions.TaskCategory
 
         public AjaxResponse Command(AddTaskModel inModel)
         {
-            var task = new Core.Domain.TaskCategory() { Name = inModel.Name };
+            var task = new Core.Domain.TaskCategory() { Name = inModel.TaskName };
           
            
             var notification = _taskCategoryService.SaveTask(task);

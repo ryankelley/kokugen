@@ -10,7 +10,7 @@ namespace Kokugen.Core.Domain
 
         public virtual string Description { get; set; }
         public virtual Project Project { get; set; }
-        public virtual TaskCategory TaskCategory { get; set; }
+        public virtual TaskCategory Task { get; set; }
 
         public virtual User User { get; set; }
 

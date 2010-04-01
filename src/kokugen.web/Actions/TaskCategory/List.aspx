@@ -4,7 +4,7 @@
 
     
 <asp:Content ID="THISCONTENTAREAID" ContentPlaceHolderID="mainContent" runat="server">
-    <div class="content"align=center>
+    <div class="content"align=center  margin-left=auto margin-right=auto width=6em>
 
         
         <div class="add-caption" ><a href="#" onclick="showTaskForm();"><img src="/content/images/add_button.png" alt="add project" />Add New Task</a></div>
@@ -21,7 +21,13 @@
         function showTaskForm() {
             $("#task-form-container").dialog('open');
             return false;
-        }       
+        }
+
+        function appendTaskToList(task) {
+            var output = "<span class=\"task-name\">" + task.Name + "</span>";
+            
+            $(".task-list").append(output);
+        }    
         
     </script>
 

@@ -1,12 +1,13 @@
-<%@ Page Language="C#" AutoEventWireup="true" Inherits="Kokugen.Web.Actions.TaskCategory.TaskForm"%>
-<%@ Import Namespace="Kokugen.Web.Actions.TaskCategory"%>
+<%@ Page Language="C#" AutoEventWireup="true" Inherits="Kokugen.Web.Actions.TimeRecord.TimeRecordForm"%>
+<%@ Import Namespace="Kokugen.Web.Actions.TimeRecord"%>
 <%@ Import Namespace="FubuMVC.Core.Urls"%>
 <%@ Import Namespace="Kokugen.Web.Conventions"%>
 
 
 <div id="task-form-container" class="hide">
-<%= this.FormFor(new AddTaskModel()) %>
-    <%= this.Edit(x => x.Task.Name) %>
+<%= this.FormFor(new AddTimeRecordModel()) %>
+    <%= this.Edit(x => x.TimeRecord.Description %>
+    <%= this.Edit(x =>x.TimeRecord.Task) %>
     
 </form>
    
@@ -14,9 +15,9 @@
 <script type="text/javascript">
 
     function closeDialog(response) {
-        appendTaskToList(response.Item);
+        appendTimeRecordToList(response.Item);
 
-        $("#task-form-container").dialog('close');
+        $("#timerecord-form-container").dialog('close');
         // would want to update list here too
     }
     function validateAndSave() {
@@ -35,6 +36,6 @@
 
     $(document).ready(function() {
     $("#mainForm").validate({ errorClass: "error" });
-        $("#task-form-container").dialog({ title: "Add Task", autoOpen: false, buttons: { "Save":  validateAndSave } });
+    $("#timerecord-form-container").dialog({ title: "Add Time Record", autoOpen: false, buttons: { "Save": validateAndSave} });
     });
 </script>
