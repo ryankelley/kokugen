@@ -7,12 +7,21 @@
 
 <script type="text/javascript">
 
-    var boardColumn = function(id, order) {
-        //var self = this;
-        this.Id = id;
-        this.ColumnOrder = order;
-        //this.Element = document.createElement('li');
-    }
+var fixedclass = "";
+var removeColumnUrl = "<%= Get<IUrlRegistry>().UrlFor(new DeleteColumnInputModel()) %>";
+
+    function bindList(data, template, output) {
+            // Stuff data in the template
+            
+            for(var i=0; i < data.length; i++) {         
+                var col = data[i]; 
+                fixedclass = i == 0 || i == columns.length-1 ? "fixed" : "draggable";
+                var html = tmpl(template, col);
+                $(html).appendTo(output);
+            // Append the templated item(s) to the output container
+            }
+            fixedclass = "draggable"; // Setting this back to draggable so any new items will have that class added.
+        }
 
     function updateColumns() {
         var count = 1;
@@ -37,13 +46,9 @@
         $.ajax({ type: 'POST', url: '/board/reorder', data: raw, dataType: 'JSON' });
         //$("#info").load("process-sortable.php?" + order);
     }
-
-    function showColumnForm() {
-        $("#new-column-container").slideToggle('slow');
-    }
-    var removeColumnUrl = "<%= Get<IUrlRegistry>().UrlFor(new DeleteColumnInputModel()) %>";
-    $(document).ready(function() {
-        $('#board-columns').sortable({
+    
+    function bindSortingAndButtons(){
+    $('#board-columns').sortable({
             items: '> *:not(".fixed")', placeholder: 'phase-placeholder', forcePlaceholderSize: true,
             update: updateColumns
         });
@@ -52,9 +57,9 @@
         $("li.draggable .col-desc").hover(function() {
             $(this).children('.col-links').fadeIn(500);
         }, function() {
-            $(this).children('.col-links').fadeOut(300);
+            $(this).children('.col-links').fadeOut(100);
         });
-
+        
         $(".removeLink").live("click", function() {
             var link = $(this);
             var columnId = link.attr("data");
@@ -65,7 +70,7 @@
                     return;
                 }
 
-                $('#'+data.Item).remove();
+                $('#'+data.Item + '_COL').remove();
             }
 
             $.ajax({
@@ -76,6 +81,15 @@
                 type: "DELETE"
             });
         });
+    }
+        
+var columns = <%= Model.BoardColumns.ToJson() %>;
+    
+    $(document).ready(function() {
+        
+        bindList(columns, $("#ItemTemplate").html(), $("#board-columns"));
+        
+        bindSortingAndButtons();
     });
     
     
@@ -92,7 +106,23 @@
 
 <div class="board-column-configure ui-sortable">
     <ul id="board-columns">
-        <%= this.PartialForEach(m => m.BoardColumns).Using<BoardItem_Control>() %>
+        
     </ul>
 </div>
+
+
+<script id="ItemTemplate" type="text/html">
+
+<li class="<#= fixedclass #> phase" id="<#= Id #>_COL">
+<div class="col-title"><#= Name #><# var limit = Limit != 0 ? "(" + Limit + ")" : "";  #> <#= limit #></div>
+<div class="col-desc"><#= Description #>
+    <div class="col-links hidden">
+	    <img src="/content/images/card_edit.png" alt="Edit Column" />
+	    <a href="#" data="<#= Id #>" class="removeLink"><img src="/content/images/card_delete.png" alt="Delete Column" /></a>
+    </div>
+</div>
+</li>
+
+</script>
+
 </asp:Content>

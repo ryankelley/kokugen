@@ -103,6 +103,7 @@
   <ItemGroup>
     <Compile Include="Actions\AjaxResponse.cs" />
     <Compile Include="Actions\BoardColumn\RemoveAction.cs" />
+    <Compile Include="Actions\Board\BoardColumnDTO.cs" />
     <Compile Include="Actions\Board\EditBoardColumnFormAction.cs" />
     <Compile Include="Actions\Board\ListAction.cs" />
     <Compile Include="Actions\Board\BoardListModel.cs" />
@@ -250,6 +251,7 @@
     <Content Include="Content\css\ui-darkness\images\ui-icons_cccccc_256x240.png" />
     <Content Include="Content\css\ui-darkness\images\ui-icons_ffffff_256x240.png" />
     <Content Include="Content\css\ui-darkness\jquery-ui-1.7.2.css" />
+    <Content Include="Content\Scripts\application.js" />
     <Content Include="Content\Scripts\jquery-1.4.1-vsdoc.js" />
     <Content Include="Content\Scripts\jquery-1.4.2.min.js" />
     <Content Include="Content\Scripts\jquery-ui-1.8rc3.custom.min.js" />

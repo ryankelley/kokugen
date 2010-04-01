@@ -18,15 +18,20 @@
 
 <script type="text/javascript">
 
+    function showColumnForm() {
+        $("#new-column-container").slideToggle('slow');
+    }
+    
     function closeColumnDialog(response) {
 
+        var html = tmpl($("#ItemTemplate").html(), response.Item);
         $("#new-column-container").slideToggle('slow');
+//        var item = "<li id=\"" + response.Item.Id + "\" class=\"draggable phase\"><div class=\"col-title\"><span>" + response.Item.Name + "</span></div>";
+//        item = item + "<div class=\"col-desc\"><span>" + response.Item.Description + "</span></div></li>";
 
-        var item = "<li id=\"" + response.Item.Id + "\" class=\"draggable phase\"><div class=\"col-title\"><span>" + response.Item.Name + "</span></div>";
-        item = item + "<div class=\"col-desc\"><span>" + response.Item.Description + "</span></div></li>";
-
-        $(item).insertBefore($("#board-columns li:last"));
+        $(html).insertBefore($("#board-columns li:last"));
         updateColumns();
+        bindSortingAndButtons();
     }
 
     function deleteColumn(id) {
