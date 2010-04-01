@@ -1,4 +1,5 @@
-﻿<%@ Import Namespace="Kokugen.Web.Actions.Project"%>
+﻿<%@ Import Namespace="Kokugen.Web.Actions.TaskCategory"%>
+<%@ Import Namespace="Kokugen.Web.Actions.Project"%>
 <%@ Import Namespace="Kokugen.Web.Actions.Company"%>
 <%@ Import Namespace="Kokugen.Web"%>
 <%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="FubuMVC.Core.View.FubuMasterPage" %>
@@ -14,6 +15,7 @@
     <%= this.Script("jquery-ui-1.8.smoothness.min.js")%>
     <%= this.Script("jquery.validate.min.js")%>
     <%= this.Script("jquery.form.js")%>
+    <%= this.Script("application.js")%>
     <%= this.Script("jquery.json-2.2.min.js")%>
 <%--    <%= this.CSS("custom-theme/jquery-ui-1.8rc3.custom.css")%>--%>
     <%= this.CSS("smoothness/jquery-ui-1.8.custom.css")%>
@@ -30,7 +32,8 @@
 				<li class="active"><%= this.LinkTo(new CompanyListModel()).Text("Companies") %></li>
 				<li class="bar"><%= this.LinkTo(new ProjectListModel()).Text("Projects") %></li>
 				<li class="lbar"><a href="index.html">Time Records</a></li>
-				<li class="last"><a href="create.html">Users</a></li>
+				<li class="lbar"><a href="create.html">Users</a></li>
+				<li class="last"><%= this.LinkTo(new TaskListModel()).Text("Tasks") %></li>
 			</ul>
 		</div>
 	</div>

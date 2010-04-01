@@ -21,7 +21,7 @@ namespace Kokugen.Web.Actions.Board
 
             var column = _boardService.ModifyColumn(model.ProjectId, model.ColumnId, model.ColumnName, model.ColumnDescription, model.ColumnLimit);
 
-            var jsonOutput = new BoardColumnDTO {Id = column.Id, Name = column.Name, Description = column.Description};
+            var jsonOutput = new BoardColumnDTO {Id = column.Id, Name = column.Name, Description = column.Description, Limit = column.Limit};
 
             return new AjaxResponse
             {
@@ -29,13 +29,6 @@ namespace Kokugen.Web.Actions.Board
                 Item = jsonOutput
             };
         }
-    }
-
-    public class BoardColumnDTO
-    {
-        public Guid Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
     }
 
     public class BoardColumnInputModel

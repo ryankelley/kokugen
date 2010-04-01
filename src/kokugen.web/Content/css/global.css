@@ -248,14 +248,14 @@ label.error
 cursor:move;
 }
 
-.board-column-configure div.col-title {
+.board-column-configure h4 {
 font-size:1.8em;
-height:80px;
+height:60px;
 padding:24px 12px 12px;
 }
 .board-column-configure div.col-desc {
 border-top:1px dotted #CCCCCC;
-height:28px;
+height:40px;
 padding:8px;
 }
 
@@ -280,4 +280,25 @@ display:inline-block;
 margin:0 0 12px 12px;
 vertical-align:top;
 
+}
+
+.edit-link, .remove-link {
+    width: 24px;
+    height: 24px;
+    overflow: hidden;
+    display: inline-block;
+    text-indent: -7777px;
+}
+
+.col-links {
+    margin: auto;
+    text-align: center;
+}
+
+.edit-link {
+    background: transparent url(/content/images/card_edit.png) no-repeat top left;
+}
+
+.remove-link {
+    background: transparent url(/content/images/card_delete.png) no-repeat top left;
 }

@@ -106,6 +106,7 @@
     <Compile Include="SchemaCreation\SchemaRegistry.cs" />
     <Compile Include="SpecificationExtensions.cs" />
     <Compile Include="PersistenceTestRegistry.cs" />
+    <Compile Include="Validation\MinimumStringLengthAttributeTester.cs" />
     <Compile Include="Validation\EmailValidationTester.cs" />
     <Compile Include="Validation\GreaterOrEqualToZeroAttributeTester.cs" />
     <Compile Include="Validation\GreaterThanZeroAttributeTester.cs" />

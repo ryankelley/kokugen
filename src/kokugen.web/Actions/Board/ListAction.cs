@@ -26,7 +26,7 @@ namespace Kokugen.Web.Actions.Board
                 return new BoardListModel
                            {
                                Id = model.Id,
-                               BoardColumns = _projectService.GetProjectFromId(model.Id).GetAllBoardColumns().Select(x => x as BoardColumn).ToList()
+                               BoardColumns = _projectService.GetProjectFromId(model.Id).GetAllBoardColumns().Select(x => x as Core.Domain.BoardColumn).ToList()
                            };
             
         }
@@ -36,7 +36,7 @@ namespace Kokugen.Web.Actions.Board
             return new BoardConfigurationModel
             {
                 Id = model.Id,
-                BoardColumns = _projectService.GetProjectFromId(model.Id).GetAllBoardColumns().Select(x => x as BoardColumn).ToList()
+                BoardColumns = _projectService.GetProjectFromId(model.Id).GetAllBoardColumns().Select(x => new BoardColumnDTO { Name = x.Name, Description = x.Description, Id = x.Id, Limit = x.Limit }).ToList()
             };
         }
 
@@ -53,8 +53,6 @@ namespace Kokugen.Web.Actions.Board
        
     }
 
-
-
     public class BoardColumnReorderModel
     {
         public string columns { get; set; }
@@ -67,6 +65,6 @@ namespace Kokugen.Web.Actions.Board
     public class BoardConfigurationModel : IRequestById
     {
         public Guid Id { get; set; }
-        public IEnumerable<BoardColumn> BoardColumns { get; set; }
+        public IEnumerable<BoardColumnDTO> BoardColumns { get; set; }
     }
 }

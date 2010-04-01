@@ -1,4 +1,5 @@
 <%@ Page Language="C#" AutoEventWireup="true" Inherits="Kokugen.Web.Actions.Project.List" MasterPageFile="~/Shared/Site.Master"%>
+<%@ Import Namespace="Kokugen.Web.Actions.TaskCategory"%>
 <%@ Import Namespace="FubuMVC.Core.Urls"%>
 <%@ Import Namespace="Kokugen.Web.Actions.Project"%>
 <asp:Content ID="ProjectListHead" ContentPlaceHolderID="head" runat="server">
