@@ -10,6 +10,8 @@
     <%= this.DisplayFor(m => m.Project.Name) %>
     
     <%= this.LinkTo(new BoardConfigurationModel{ Id = Model.Project.Id}).Text("Configure Board Columns") %>
+    
+    <%= this.LinkTo(new ViewBoardInputModel{ Id = Model.Project.Id}).Text("View Board") %>
 </body>
     
 

@@ -106,8 +106,8 @@
     <Compile Include="Actions\Board\BoardColumnDTO.cs" />
     <Compile Include="Actions\Board\EditBoardColumnFormAction.cs" />
     <Compile Include="Actions\Board\ListAction.cs" />
-    <Compile Include="Actions\Board\BoardListModel.cs" />
     <Compile Include="Actions\Board\SaveColumnAction.cs" />
+    <Compile Include="Actions\Board\ViewBoardAction.cs" />
     <Compile Include="Actions\Board\View_Page_Type_Declarations.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -180,9 +180,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Actions\Board\BoardItem_Control.ascx" />
+    <Content Include="Actions\Board\BoardPhase_Control.ascx" />
+    <Content Include="Actions\Board\ViewBoard.aspx" />
     <Content Include="Actions\Board\EditBoardColumnForm.aspx" />
     <Content Include="Actions\Board\Configure.aspx" />
-    <Content Include="Actions\Board\List.aspx" />
     <Content Include="Actions\Company\CompanyForm.aspx" />
     <Content Include="Actions\Company\List.aspx" />
     <Content Include="Actions\Home\Home.aspx" />
@@ -252,6 +253,7 @@
     <Content Include="Content\css\ui-darkness\images\ui-icons_ffffff_256x240.png" />
     <Content Include="Content\css\ui-darkness\jquery-ui-1.7.2.css" />
     <Content Include="Content\Scripts\application.js" />
+    <Content Include="Content\css\board.css" />
     <Content Include="Content\Scripts\jquery-1.4.1-vsdoc.js" />
     <Content Include="Content\Scripts\jquery-1.4.2.min.js" />
     <Content Include="Content\Scripts\jquery-ui-1.8rc3.custom.min.js" />

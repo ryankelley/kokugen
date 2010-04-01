@@ -19,18 +19,6 @@ namespace Kokugen.Web.Actions.Board
             _boardService = boardService;
         }
 
-        public BoardListModel Query(BoardListModel model)
-        {
-
-            
-                return new BoardListModel
-                           {
-                               Id = model.Id,
-                               BoardColumns = _projectService.GetProjectFromId(model.Id).GetAllBoardColumns().Select(x => x as Core.Domain.BoardColumn).ToList()
-                           };
-            
-        }
-
         public BoardConfigurationModel Configure(BoardConfigurationModel model)
         {
             return new BoardConfigurationModel

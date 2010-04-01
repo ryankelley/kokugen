@@ -1,3 +1,12 @@
+$(document).ready(function() {
+    $(window).resize(setContentHeightToFull);
+});
+
+function setContentHeightToFull() {
+    var cheight = $(window).height() - $("#head").height();
+    $(".content").attr("style", "height: " + cheight + "px;");
+}
+
 (function() {
 
     var _tmplCache = {}

@@ -36,8 +36,18 @@
 				<li class="last"><%= this.LinkTo(new TaskListModel()).Text("Tasks") %></li>
 			</ul>
 		</div>
+		<%--<div id="project-nav-wrapper">
+		    <ul id="project-nav">
+		        <li>project list</li>
+		        <li>Home</li>
+		        <li>Board</li>
+		        <li>Work</li>
+		        <li>Performace</li>
+		        <li>Process</li>
+		    </ul>
+		</div>--%>
 	</div>
-    <div>
+    <div class="content">
         <asp:ContentPlaceHolder ID="mainContent" runat="server">
         
         </asp:ContentPlaceHolder>

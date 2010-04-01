@@ -1,4 +1,13 @@
 /* Global */
+html, body
+{
+    height: 100%;
+}
+
+.content 
+{
+    
+}
 
 img { border: none;}
 
@@ -16,11 +25,11 @@ body{
 
 #head {
 	background: url(../images/head.png) repeat-x top left;
-	height: 192px;
+	height: 122px;
 }
 
 #wrapper{
-	height: 170px;
+	height: 88px;
 	margin: auto;
 	position: relative;
 	width: 960px;
@@ -131,6 +140,13 @@ label.error
 {
     padding: 5px;
     width: 100%;
+}
+
+form input:focus 
+{
+    -moz-box-shado: 0 0 2px #AABBAA;
+    background-color: #DDFFDD;
+    border: 1px solid #CCAAAA;
 }
 
 ol, ul {
@@ -281,3 +297,4 @@ margin:0 0 12px 12px;
 vertical-align:top;
 
 }
+
