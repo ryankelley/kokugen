@@ -1,6 +1,7 @@
 ﻿<%@ Import Namespace="Kokugen.Web.Actions.TaskCategory"%>
 <%@ Import Namespace="Kokugen.Web.Actions.Project"%>
 <%@ Import Namespace="Kokugen.Web.Actions.Company"%>
+<%@ Import Namespace="Kokugen.Web.Actions.Home"%>
 <%@ Import Namespace="Kokugen.Web"%>
 <%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="FubuMVC.Core.View.FubuMasterPage" %>
 
@@ -27,7 +28,9 @@
 <body>
 <div id="head">
 		<div id="wrapper">
-			<h1 id="logo"><a href="index.html">Kokugen - Time Managment</a></h1>
+			<h1 id="logo"><%= this.LinkTo(new HomeViewModel()).Text("Kokugen - Time Managment")%></h1>
+		</div>
+		<div class="nav">
 			<ul id="subnav">
 				<li class="active"><%= this.LinkTo(new CompanyListModel()).Text("Companies") %></li>
 				<li class="bar"><%= this.LinkTo(new ProjectListModel()).Text("Projects") %></li>
