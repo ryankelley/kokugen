@@ -93,17 +93,21 @@ namespace Kokugen.Core
     public class ValueObjectInitializer : IValueObjectInitializer
     {
         private readonly ICompanyService _companyService;
+        private readonly ITaskCategoryService _taskCategoryService;
 
-        public ValueObjectInitializer(ICompanyService companyService)
+        public ValueObjectInitializer(ICompanyService companyService, ITaskCategoryService taskCategoryService)
         {
             _companyService = companyService;
+            _taskCategoryService = taskCategoryService;
         }
 
         public void Start()
         {
             var list = _companyService.ListAllCompanies().Select(x => new ValueObject(x.Id.ToString(), x.Name));
+            var taskList = _taskCategoryService.GetAllCategories().Select(x => new ValueObject(x.Id.ToString(), x.Name));
 
             ValueObjectRegistry.AddValueObjects<Company>(list);
+            ValueObjectRegistry.AddValueObjects<TaskCategory>(taskList);
         }
     }
 

@@ -4,10 +4,11 @@
 <%@ Import Namespace="Kokugen.Web.Conventions"%>
 
 
-<div id="task-form-container" class="hide">
-<%= this.FormFor(new AddTimeRecordModel()) %>
-    <%= this.Edit(x => x.TimeRecord.Description %>
-    <%= this.Edit(x =>x.TimeRecord.Task) %>
+<div id="timerecord-form-container" class="hidden">
+<%= this.FormFor(new AddTimeRecordModel() { ProjectId = Model.ProjectId })%>
+    <%= this.Edit(x => x.TimeRecord.Description) %>
+    <%= this.Edit(x =>x.TaskId) %>
+    <%= this.InputFor( x => x.ProjectId) %>
     
 </form>
    

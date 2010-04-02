@@ -9,18 +9,34 @@
 <body>
 <div id="Project Name" align=center><h2><%= this.DisplayFor(m => m.Project.Name) %></h2>
 
-<div class="add-caption" ><a href="#" onclick="showTimeRecordForm();"><img src="/content/images/add_button.png" alt="add time record" />Add New TimeRecord</a></div>
+<div class="upper-meta">
+    <div class="add-caption" ><a href="#" onclick="showTimeRecordForm();"><img src="/content/images/add_button.png" alt="add time record" />Add New TimeRecord</a></div>
+</div>
 
-<%--<% this.Partial(new TimeRecordFormModel()); %>--%>
-
-<%= this.PartialForEach(p => p.TimeRecords).Using<TimeRecord_Control>() %>
+    <table>
+        <thead>    
+            <tr>
+                Description
+            </tr>
+            <tr>
+                Task
+            </tr>
+            <tr>
+                Duration
+            </tr>
+        </thead>
+        <tbody>
+            
+            <%= this.PartialForEach(p => p.TimeRecords).Using<TimeRecord_Control>() %>
+        </tbody>
+    </table>
     
     
    <div id ="Board Link"><%= this.LinkTo(new BoardConfigurationModel{ Id = Model.Project.Id}).Text("Configure Board Columns") %></div> 
    
 </div>
-</body>
-    
+<% this.Partial(new TimeRecordFormModel(){ProjectId = Model.Project.Id}); %>
+
 <script type="text/javascript">
 
     function showTimeRecordForm() {
@@ -31,8 +47,11 @@
     function appendTaskToList(timerecord) {
         var output = "<span class=\"timerecord-name\">" + timerecord.Description + "</span>";
 
-        $(".task-list").append(output);
+        $(".timerecord-list").append(output);
     }    
         
     </script>
+</body>
+    
+
 </asp:Content>

@@ -20,6 +20,10 @@
     <%= this.CSS("smoothness/jquery-ui-1.8.custom.css")%>
     <%= this.CSS("global.css")%>
     <link rel="shortcut icon" href="/content/images/icon.png" />
+    <script src="/Content/Scripts/grid.locale-en.js" type="text/javascript"></script>
+    <script src="/Content/Scripts/jquery.jqGrid.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="/Content/Scripts/jquery-ui-1.7.1.custom.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/Content/Scripts/ui.jqgrid.css" />
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>

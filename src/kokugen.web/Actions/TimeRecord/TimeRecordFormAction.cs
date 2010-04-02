@@ -1,4 +1,6 @@
+using System;
 using FubuMVC.Core;
+using Kokugen.Web.Actions.DTO;
 using Kokugen.Web.Actions.TaskCategory;
 
 namespace Kokugen.Web.Actions.TimeRecord
@@ -8,10 +10,11 @@ namespace Kokugen.Web.Actions.TimeRecord
         [FubuPartial]
         public TimeRecordFormModel Execute(TimeRecordFormModel model)
         {
-            var timeRecord = new Core.Domain.TimeRecord();
+            var timeRecord = new TimeRecordDTO();
 
+            timeRecord = model.TimeRecord;
             
-            return new TimeRecordFormModel { TimeRecord = timeRecord };
+            return new TimeRecordFormModel { TimeRecord = timeRecord, ProjectId = model.ProjectId, TaskId = model.TaskId};
         }
     }
 }

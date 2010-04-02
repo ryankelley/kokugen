@@ -2,7 +2,17 @@
 
 
     <div class="col-title" text-align=left>
-		<%= this.DisplayFor(x => x.Description) %>
+        <td>
+            <%= this.DisplayFor(x => x.Description) %>
+        </td>
+        <td>
+            <%= this.DisplayFor(x => x.Task.Name) %>
+        </td>
+        <td>
+            <%= this.DisplayFor(x => x.Duration) %>
+        </td>
+        
+		
 	</div>
 	
 	
