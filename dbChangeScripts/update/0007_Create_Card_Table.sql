@@ -1,4 +1,4 @@
-/*
+﻿/*
 Run this script on:
 
         localhost.KokugenDataVersioned    -  This database will be modified
@@ -9,7 +9,7 @@ to synchronize it with:
 
 You are recommended to back up your database before running this script
 
-Script created by SQL Compare version 8.0.0 from Red Gate Software Ltd at 4/2/2010 11:20:45 AM
+Script created by SQL Compare version 8.1.0 from Red Gate Software Ltd at 4/2/2010 3:28:57 PM
 
 */
 SET NUMERIC_ROUNDABORT OFF
@@ -47,18 +47,9 @@ IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
 GO
 IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
 GO
-PRINT N'Creating primary key [PK__Cards__3214EC07182C9B23] on [dbo].[Cards]'
+PRINT N'Creating primary key [PK__Cards__3214EC071920BF5C] on [dbo].[Cards]'
 GO
-ALTER TABLE [dbo].[Cards] ADD CONSTRAINT [PK__Cards__3214EC07182C9B23] PRIMARY KEY CLUSTERED  ([Id])
-GO
-IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
-GO
-IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
-GO
-PRINT N'Altering [dbo].[TimeRecords]'
-GO
-ALTER TABLE [dbo].[TimeRecords] ADD
-[Task_id] [uniqueidentifier] NULL
+ALTER TABLE [dbo].[Cards] ADD CONSTRAINT [PK__Cards__3214EC071920BF5C] PRIMARY KEY CLUSTERED  ([Id])
 GO
 IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
 GO
@@ -69,15 +60,6 @@ GO
 ALTER TABLE [dbo].[Cards] ADD
 CONSTRAINT [fk_Card_to_AssignedTo] FOREIGN KEY ([AssignedTo_id]) REFERENCES [dbo].[Users] ([Id]),
 CONSTRAINT [fk_Card_to_Project] FOREIGN KEY ([Project_id]) REFERENCES [dbo].[Projects] ([Id])
-GO
-IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
-GO
-IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
-GO
-PRINT N'Adding foreign keys to [dbo].[TimeRecords]'
-GO
-ALTER TABLE [dbo].[TimeRecords] ADD
-CONSTRAINT [fk_TimeRecord_to_Task] FOREIGN KEY ([Task_id]) REFERENCES [dbo].[TaskCategories] ([Id])
 GO
 IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
 GO
