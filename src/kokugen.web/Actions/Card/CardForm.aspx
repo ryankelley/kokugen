@@ -6,7 +6,7 @@
 <div id="project-form-container" class="hide">
 <%= this.FormFor(new CardInputFormModel()).Id("project-form")%>
     <%= this.Edit(x => x.Card.Title) %>
-    <%= this.Edit(x => x.Card.Description) %>
+    <%= this.Edit(x => x.Card.Details) %>
     <%= this.Edit(x => x.Card.Project) %>
     <input type="submit" value="Submit" />
 </form>

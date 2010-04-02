@@ -21,6 +21,8 @@ namespace Kokugen.Web.Conventions
             validationAttributes();
             editors();
 
+            
+
             BeforePartial.Builder(new BeforePartialBuilder());
             AfterPartial.Builder(new AfterPartialBuilder());
 
@@ -43,6 +45,8 @@ namespace Kokugen.Web.Conventions
             Editors.Builder<ValueObjectDropdownBuilder>();
             Editors.IfPropertyIs<bool>().BuildBy(request => new CheckboxTag(request.Value<bool>()).Style("width", "auto !important").Attr("value", request.ElementId));
             Editors.IfPropertyIs<Guid>().BuildBy(request => new HiddenTag().Attr("value", request.StringValue()));
+
+            Editors.If(x => x.Accessor.OwnerType.IsType<Card>() && x.Accessor.Name == "CardTitle").BuildBy(request => new HtmlTag("textarea").Text(request.StringValue()));
             //Editors.Builder(new FormItemBuilder());
         }
 

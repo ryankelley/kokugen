@@ -7,10 +7,21 @@ namespace Kokugen.Core.Domain
     [Serializable]
     public class Card : Entity
     {
-        [Required]
+        [Required, MaximumStringLength(2047)]
         public virtual string Title { get; set; }
-        public virtual string Description { get; set; }
+        public virtual string Details { get; set; }
         public virtual int TimeEstimate { get; set; }
+        public virtual int Size { get; set; }
+        public virtual string Priority { get; set; }
+        public virtual DateTime? Deadline { get; set; }
+
+        public virtual User AssignedTo { get; set; }
+
+
+        //Dates
+        public virtual DateTime? Started { get; set; }
+        public virtual DateTime DateCompleted { get; set; }
+
         [Required]
         public virtual Project Project { get; set; }
         public virtual CardStatus Status { get; set; }
@@ -20,6 +31,7 @@ namespace Kokugen.Core.Domain
     {
         public static CardStatus New = new CardStatus(1, "New");
         public static CardStatus Complete = new CardStatus(2, "Complete");
+        public static CardStatus Blocked = new CardStatus(3, "Blocked");
         private CardStatus(int value, string displayName) : base(value, displayName)
         {
             

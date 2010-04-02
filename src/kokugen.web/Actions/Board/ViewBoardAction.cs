@@ -20,7 +20,7 @@ namespace Kokugen.Web.Actions.Board
             var project = _projectService.GetProjectFromId(model.Id);
 
             var output = new ViewBoardModel();
-
+            output.Id = project.Id;
             output.BackLog = project.Backlog;
             output.Archive = project.Archive;
             output.Columns = project.GetBoardColumns();
@@ -31,6 +31,7 @@ namespace Kokugen.Web.Actions.Board
 
     public class ViewBoardModel
     {
+        public Guid Id { get; set; }
         public Core.Domain.BoardColumn BackLog { get; set; }
 
         public Core.Domain.BoardColumn Archive { get; set; }

@@ -85,3 +85,25 @@ vertical-align:top;
 {
     
 }
+
+.add-card-compact input, .add-card-compact textarea
+{
+    margin-bottom: 7px;
+}
+.full-width-input 
+{
+    width: 100%;
+}
+.full-width-input input, .full-width-input textarea
+{
+    width: 100%;
+}
+.quarter-input 
+{
+    display: inline;
+    width: 25%;
+}
+.quarter-input input
+{
+    width: 24%;
+}

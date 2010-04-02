@@ -18,6 +18,7 @@
     <%= this.Script("jquery.form.js")%>
     <%= this.Script("application.js")%>
     <%= this.Script("jquery.json-2.2.min.js")%>
+    <%= this.Script("hinting.js")%>
 <%--    <%= this.CSS("custom-theme/jquery-ui-1.8rc3.custom.css")%>--%>
     <%= this.CSS("smoothness/jquery-ui-1.8.custom.css")%>
     <%= this.CSS("global.css")%>
@@ -28,15 +29,19 @@
 <body>
 <div id="head">
 		<div id="wrapper">
-			<h1 id="logo"><%= this.LinkTo(new HomeViewModel()).Text("Kokugen - Time Managment")%></h1>
+			<h1 id="logo"><a href="">Kokugen - Time Managment</a></h1>
 		</div>
 		<div class="nav">
-			<ul id="subnav">
+			<ul class="subnav">
 				<li class="active"><%= this.LinkTo(new CompanyListModel()).Text("Companies") %></li>
 				<li class="bar"><%= this.LinkTo(new ProjectListModel()).Text("Projects") %></li>
 				<li class="lbar"><a href="index.html">Time Records</a></li>
 				<li class="lbar"><a href="create.html">Users</a></li>
 				<li class="last"><%= this.LinkTo(new TaskListModel()).Text("Tasks") %></li>
+			</ul>
+			<ul class="subnav right">
+			    <asp:ContentPlaceHolder ID="extraNavigation" runat="server" />
+			    
 			</ul>
 		</div>
 		<%--<div id="project-nav-wrapper">
@@ -50,7 +55,8 @@
 		    </ul>
 		</div>--%>
 	</div>
-    <div class="content">
+	
+    <div class="content clear">
         <asp:ContentPlaceHolder ID="mainContent" runat="server">
         
         </asp:ContentPlaceHolder>
