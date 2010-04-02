@@ -9,7 +9,6 @@
 <body>
 <div id="Project Name" align=center><h2><%= this.DisplayFor(m => m.Project.Name) %></h2>
 
-<div class="add-caption" ><a href="#" onclick="showTimeRecordForm();"><img src="/content/images/add_button.png" alt="add time record" />Add New TimeRecord</a></div>
 <div class="upper-meta">
     <div class="add-caption" ><a href="#" onclick="showTimeRecordForm();"><img src="/content/images/add_button.png" alt="add time record" />Add New TimeRecord</a></div>
 </div>

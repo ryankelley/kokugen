@@ -10,10 +10,10 @@
         </td>
         <td>
             <%= this.DisplayFor(x => x.Duration) %>
-        </td>
-        
+        </td>       
 		
 	</div>
+	
 	
 	
 
