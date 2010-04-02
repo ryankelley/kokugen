@@ -7,42 +7,77 @@
 
 <script type="text/javascript">
 
-    var boardColumn = function(id, order) {
-        //var self = this;
-        this.Id = id;
-        this.ColumnOrder = order;
-        //this.Element = document.createElement('li');
+    var fixedclass = "";
+    var removeColumnUrl = "<%= Get<IUrlRegistry>().UrlFor(new DeleteColumnInputModel()) %>";
+    var columns = <%= Model.BoardColumns.ToJson() %>;
+    var boardColumns = new Array();
+    var BoardColumn = function(column) {
+        this.Id = column.Id;
+        this.Name = column.Name;
+        this.Order = column.Order;
+        this.Description = column.Description;
+        this.Limit = column.Limit;
+        this.Element = buildColumn(this);
+        
+        var self = this;
+        
+        this.Edit = function() {
+            alert("Implement the edit function");
+            return false;        
+        };
+        
+        this.Remove = function() {
+            alert("Implement the remove function.");
+            return false;
+        };
+    };
+
+    var ColumnOrderDTO = function(boardColumn) {
+        if (!(boardColumn instanceof BoardColumn)) {
+            throw("boardColumn is not an instance of BoardColumn");
+        }
+        
+        this.Id = boardColumn.Id;
+        this.ColumnOrder = boardColumn.Order;
+    }
+
+    function bindList(data, template, output) {
+        for(var i=0; i < data.length; i++) {         
+            var col = new BoardColumn(data[i]);
+            var board = $('#board-columns');
+            var html = col.Element;
+            board.append(html);
+            fixedClass = i == 0 || i == columns.length-1 ? "fixed" : "draggable";
+            $(html).addClass(fixedClass).addClass('phase');
+            boardColumns.push(col);
+        }
+        fixedclass = "draggable"; // Setting this back to draggable so any new items will have that class added.
     }
 
     function updateColumns() {
         var count = 1;
-        var boardColumns = new Array();
         var order = $('#board-columns li').each(function() {
-            
-            if ($(this).attr('id') != "") {
-
-                var col = new boardColumn($(this).attr('id'), count);
-                boardColumns.push(col);
-
-                count = count + 1;
-            }
+            this.UpdateOrder(count++);
         });
-
-        var raw = new Object();
-        raw.ProjectId = "<%= Model.Id %>";
-        raw.columns = $.toJSON(boardColumns);
         
-        //var data = $.toJSON(raw);
-
-        $.ajax({ type: 'POST', url: '/board/reorder', data: raw, dataType: 'JSON' });
+        boardColumns.sort(function(a, b) {
+            return a.Order - b.Order;
+        });
+        
+        var cols = new Array();
+        $(boardColumns).each(function() {
+            cols.push(new ColumnOrderDTO(this));
+        });
+        
+        var data = new Object();
+        data.ProjectId = "<%= Model.Id %>";
+        data.columns = $.toJSON(cols);
+        
+        $.ajax({ type: 'POST', url: '/board/reorder', data: data, dataType: 'JSON' });
         //$("#info").load("process-sortable.php?" + order);
     }
-
-    function showColumnForm() {
-        $("#new-column-container").slideToggle('slow');
-    }
-    var removeColumnUrl = "<%= Get<IUrlRegistry>().UrlFor(new DeleteColumnInputModel()) %>";
-    $(document).ready(function() {
+    
+    function bindSortingAndButtons(){
         $('#board-columns').sortable({
             items: '> *:not(".fixed")', placeholder: 'phase-placeholder', forcePlaceholderSize: true,
             update: updateColumns
@@ -52,9 +87,9 @@
         $("li.draggable .col-desc").hover(function() {
             $(this).children('.col-links').fadeIn(500);
         }, function() {
-            $(this).children('.col-links').fadeOut(300);
+            $(this).children('.col-links').fadeOut(100);
         });
-
+        
         $(".removeLink").live("click", function() {
             var link = $(this);
             var columnId = link.attr("data");
@@ -65,7 +100,7 @@
                     return;
                 }
 
-                $('#'+data.Item).remove();
+                $('#'+data.Item + '_COL').remove();
             }
 
             $.ajax({
@@ -76,9 +111,62 @@
                 type: "DELETE"
             });
         });
+    }
+    
+    $(document).ready(function() {        
+        bindList(columns, $("#ItemTemplate").html(), $("#board-columns"));
+        bindSortingAndButtons();
     });
     
-    
+    var buildColumn = function(boardColumn) {
+        if (!(boardColumn instanceof BoardColumn)) {
+            throw("boardColumn is not an instance of type boardColumn");
+        }
+        
+        var element = document.createElement('li');
+        var title = document.createElement('h4');
+        var description = document.createElement('div');
+        $(description).addClass('col-desc');
+        var links = document.createElement('div');
+        var editLink = document.createElement('a');
+        var removeLink = document.createElement('a');
+        
+        var titleText = boardColumn.Name;
+        if (boardColumn.Limit != 0) titleText = titleText + ' (' + boardColumn.Limit + ')';
+        
+        title.appendChild(document.createTextNode(titleText));
+        
+        description.appendChild(document.createTextNode(boardColumn.Description));
+        
+        element.appendChild(title);
+        element.appendChild(description);
+        description.appendChild(links);
+        links.appendChild(editLink);
+        links.appendChild(removeLink);
+        $(links).addClass('col-links').addClass('hidden');
+        
+        editLink.setAttribute('href', '#');
+        editLink.appendChild(document.createTextNode('Edit'));
+        $(editLink).addClass('edit-link');
+        $(removeLink).addClass('remove-link');
+        editLink.onclick = function() {
+            boardColumn.Edit();
+            return false;
+        };
+        
+        removeLink.setAttribute('href', '#');
+        removeLink.appendChild(document.createTextNode('Remove'));
+        removeLink.onclick = function() {
+            boardColumn.Remove();
+            return false;
+        };
+        
+        element.UpdateOrder = function(order) {
+            boardColumn.Order = order;
+        }
+        
+        return element;
+    };
 </script>
 
 </asp:Content>
@@ -92,7 +180,8 @@
 
 <div class="board-column-configure ui-sortable">
     <ul id="board-columns">
-        <%= this.PartialForEach(m => m.BoardColumns).Using<BoardItem_Control>() %>
+        
     </ul>
 </div>
+
 </asp:Content>

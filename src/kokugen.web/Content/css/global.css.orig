@@ -317,6 +317,8 @@ vertical-align:top;
 
 }
 
+<<<<<<< HEAD
+=======
 .edit-link, .remove-link {
     width: 24px;
     height: 24px;
@@ -370,5 +372,4 @@ vertical-align:top;
 {
     background:url("../images/add_orng.png") no-repeat scroll 5px center #666666;
 }
-}
-
+>>>>>>> b16fc472965ad01b8425fad3972b27997d4f4cb4

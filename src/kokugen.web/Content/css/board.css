@@ -1,0 +1,121 @@
+table {
+border-collapse:collapse;
+border-spacing:0;
+}
+
+
+table.board {
+    width: 100%;
+    height: 100%;
+}
+
+table.board td.phase.first {
+border-left:0 none;
+}
+table.board td.phase {
+border-left:2px dotted #CCCCCC;
+min-width:200px;
+}
+table.board .phase {
+vertical-align:top;
+}
+
+.board-phase-header 
+{
+    font-size: 16px;
+    padding: 8px 8px 0;
+    font-weight: bold;
+    text-align: center;
+}
+.board-phase-header-left
+{
+    display: table-cell;
+    width: 50px;
+    margin-top: 200px;
+}
+.cell 
+{
+    display: table-cell;
+}
+.backlog-column 
+{
+    display: table;
+    width: 100%;
+}
+
+.box_rotate-left {
+     -moz-transform: rotate(-90deg);  /* FF3.5+ */
+       -o-transform: rotate(-90deg);  /* Opera 10.5 */
+  -webkit-transform: rotate(-90deg);  /* Saf3.1+, Chrome */
+             filter:  progid:DXImageTransform.Microsoft.BasicImage(rotation=-1);  /* IE6,IE7 */
+         -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=-1)"; /* IE8 */
+}
+  
+.card-list 
+{
+    height: 100%;
+    padding: 5px;
+    z-index: 100;
+}
+
+.board 
+{
+    display: table;
+    width: 100%;
+}
+
+.column 
+{
+    display: table-cell;
+    border-left:2px dotted #CCCCCC;
+    min-width:200px;
+}
+
+.column.hidden
+{
+    display: none;
+}
+
+.backlog  
+{
+   
+}
+
+.archive 
+{
+    
+}
+.bottom-border
+{
+    width: 100%;
+    border-bottom: 2px solid #333;
+    margin-top:35px;
+}
+.add-card-compact input, .add-card-compact textarea
+{
+    margin-bottom: 7px;
+}
+
+.add-card-compact div.actions 
+{
+    float: right;
+    
+}
+
+.full-width-input 
+{
+    width: 100%;
+}
+.full-width-input input, .full-width-input textarea
+{
+    width: 100%;
+}
+.quarter-input 
+{
+    display: inline;
+    width: 25%;
+}
+.quarter-input input
+{
+    width: 24%;
+}

@@ -41,5 +41,22 @@ namespace Kokugen.Web.Conventions
             }
             return output;
         }
+
+        /// <summary>
+        /// Adds attributes to the HTML for use with jQuery and the "Hint" function which puts the text specified
+        /// into the textbox until you click in it.
+        /// Sets the title attribute
+        /// Sets the _hint attribute
+        /// </summary>
+        /// <param name="hintText">Text that will display inside hint</param>
+        /// <returns></returns>
+        public static HtmlTag Hint(this HtmlTag tag, string hintText)
+        {
+            tag.AddClass("hint");
+            tag.Attr("title", hintText);
+            tag.Attr("_hint", hintText);
+
+            return tag;
+        }
     }
 }

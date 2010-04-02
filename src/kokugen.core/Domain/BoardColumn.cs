@@ -11,13 +11,14 @@ namespace Kokugen.Core.Domain
         [Required]
         public virtual string Name { get; set; }
         public virtual string Description { get; set; }
+        public virtual int Limit { get; set; }
 
     }
 
     [Serializable]
     public class CustomBoardColumn : BoardColumn
     {
-        public virtual int Limit { get; set; }
+        
         public virtual int ColumnOrder { get; set; }
         public virtual Project Project { get; set; }
     }

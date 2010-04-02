@@ -139,6 +139,7 @@
     <Compile Include="Persistence\Repositories\TaskCategoryRepository.cs" />
     <Compile Include="Persistence\Repositories\IRoleRepository.cs" />
     <Compile Include="Persistence\Repositories\IUserRepository.cs" />
+<<<<<<< HEAD
     <Compile Include="Persistence\Repositories\ProjectRepository.cs" />
     <Compile Include="Persistence\Conventions\RequiredAttributeConvention.cs" />
     <Compile Include="Persistence\Repositories\TimeRecordRepository.cs" />
@@ -147,6 +148,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertyComparer.cs" />
     <Compile Include="Persistence\TransactionProcessor.cs" />
+=======
+    <Compile Include="Persistence\Repositories\ProjectRepository.cs" />
+    <Compile Include="Persistence\Conventions\RequiredAttributeConvention.cs" />
+    <Compile Include="Persistence\SafeDataReader.cs" />
+    <Compile Include="Persistence\With.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PropertyComparer.cs" />
+    <Compile Include="Persistence\TransactionProcessor.cs" />
+>>>>>>> b16fc472965ad01b8425fad3972b27997d4f4cb4
     <Compile Include="Security\KokugenPrincipal.cs" />
     <Compile Include="Security\KokugenPrincipalFactory.cs" />
     <Compile Include="Services\IAuthenticationService.cs" />
