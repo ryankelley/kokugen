@@ -128,7 +128,8 @@ h1{
 
 .clear { clear: both;}
 .hidden { display:none;}
-input.error 
+
+input.error, textarea.error
 {
     border: solid thin red;
 }
@@ -370,5 +371,14 @@ vertical-align:top;
 {
     background:url("../images/add_orng.png") no-repeat scroll 5px center #666666;
 }
+
+a.icon 
+{
+    color: #333;
+    
 }
 
+a.icon img 
+{
+    
+}

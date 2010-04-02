@@ -108,13 +108,21 @@
   <ItemGroup>
     <Compile Include="Actions\AjaxResponse.cs" />
     <Compile Include="Actions\BoardColumn\RemoveAction.cs" />
+    <Compile Include="Actions\Board\BoardColumnDTO.cs" />
     <Compile Include="Actions\Board\EditBoardColumnFormAction.cs" />
     <Compile Include="Actions\Board\ListAction.cs" />
-    <Compile Include="Actions\Board\BoardListModel.cs" />
     <Compile Include="Actions\Board\SaveColumnAction.cs" />
+    <Compile Include="Actions\Board\ViewBoardAction.cs" />
     <Compile Include="Actions\Board\View_Page_Type_Declarations.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Actions\Card\AddAction.cs" />
+    <Compile Include="Actions\Card\CardFormAction.cs" />
+    <Compile Include="Actions\Card\CompactCardFormAction.cs" />
+    <Compile Include="Actions\Card\View_Page_Type_Declarations.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Actions\Card\ListAction.cs" />
     <Compile Include="Actions\Company\AddAction.cs" />
     <Compile Include="Actions\Company\CompanyFormAction.cs" />
     <Compile Include="Actions\Company\ListAction.cs" />
@@ -191,9 +199,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Actions\Board\BoardItem_Control.ascx" />
+    <Content Include="Actions\Board\BoardPhase_Control.ascx" />
+    <Content Include="Actions\Board\ViewBoard.aspx" />
     <Content Include="Actions\Board\EditBoardColumnForm.aspx" />
     <Content Include="Actions\Board\Configure.aspx" />
-    <Content Include="Actions\Board\List.aspx" />
+    <Content Include="Actions\Card\CompactCardForm.aspx" />
+    <Content Include="Actions\Card\List.aspx" />
+    <Content Include="Actions\Card\CardForm.aspx" />
     <Content Include="Actions\Company\CompanyForm.aspx" />
     <Content Include="Actions\Company\List.aspx" />
     <Content Include="Actions\Home\Home.aspx" />
@@ -238,12 +250,14 @@
     <Content Include="Content\css\smoothness\jquery-ui-1.8.custom.css" />
     <Content Include="Content\css\ui.jqgrid.css" />
     <Content Include="Content\images\add_button.png" />
+    <Content Include="Content\images\add_orng.png" />
     <Content Include="Content\images\bg.jpg" />
     <Content Include="Content\images\card.png" />
     <Content Include="Content\images\card_delete.png" />
     <Content Include="Content\images\card_edit.png" />
     <Content Include="Content\images\clipboard.png" />
     <Content Include="Content\images\edit.png" />
+    <Content Include="Content\images\h-bar.jpg" />
     <Content Include="Content\images\head.jpg" />
     <Content Include="Content\images\head.png" />
     <Content Include="Content\images\icon.png" />
@@ -265,6 +279,9 @@
     <Content Include="Content\css\ui-darkness\images\ui-icons_cccccc_256x240.png" />
     <Content Include="Content\css\ui-darkness\images\ui-icons_ffffff_256x240.png" />
     <Content Include="Content\css\ui-darkness\jquery-ui-1.7.2.css" />
+    <Content Include="Content\Scripts\application.js" />
+    <Content Include="Content\css\board.css" />
+    <Content Include="Content\Scripts\hinting.js" />
     <Content Include="Content\Scripts\jquery-1.3.2.min.js" />
     <Content Include="Content\Scripts\jquery-1.4.1-vsdoc.js" />
     <Content Include="Content\Scripts\jquery-1.4.2.min.js" />
@@ -313,6 +330,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=0.4.0.150, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\AutoMapper\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="Castle.Core, Version=1.1.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL" />
     <Reference Include="FluentNHibernate, Version=1.0.0.0, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -528,10 +549,12 @@
     <Content Include="Content\images\add_button.png" />
     <Content Include="Content\images\add_orng.png" />
     <Content Include="Content\images\bg.jpg" />
+    <Content Include="Content\images\board_big.png" />
     <Content Include="Content\images\card.png" />
     <Content Include="Content\images\card_delete.png" />
     <Content Include="Content\images\card_edit.png" />
     <Content Include="Content\images\clipboard.png" />
+    <Content Include="Content\images\datepicker.png" />
     <Content Include="Content\images\edit.png" />
     <Content Include="Content\images\h-bar.jpg" />
     <Content Include="Content\images\head.jpg" />
@@ -557,6 +580,7 @@
     <Content Include="Content\css\ui-darkness\jquery-ui-1.7.2.css" />
     <Content Include="Content\Scripts\application.js" />
     <Content Include="Content\css\board.css" />
+    <Content Include="Content\Scripts\board.js" />
     <Content Include="Content\Scripts\hinting.js" />
     <Content Include="Content\Scripts\jquery-1.4.1-vsdoc.js" />
     <Content Include="Content\Scripts\jquery-1.4.2.min.js" />
@@ -571,7 +595,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\WebApplications\Microsoft.WebApplication.targets" />
->>>>>>> b16fc472965ad01b8425fad3972b27997d4f4cb4
+>>>>>>> More work on the board view with cards
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

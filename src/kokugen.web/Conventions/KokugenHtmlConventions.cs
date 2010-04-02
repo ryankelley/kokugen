@@ -45,8 +45,9 @@ namespace Kokugen.Web.Conventions
             Editors.Builder<ValueObjectDropdownBuilder>();
             Editors.IfPropertyIs<bool>().BuildBy(request => new CheckboxTag(request.Value<bool>()).Style("width", "auto !important").Attr("value", request.ElementId));
             Editors.IfPropertyIs<Guid>().BuildBy(request => new HiddenTag().Attr("value", request.StringValue()));
+            Editors.If(x => x.Accessor.PropertyType.IsType<DateTime>() || x.Accessor.PropertyType.IsType<DateTime?>()).Modify(tag => tag.AddClass("datepicker"));
 
-            Editors.If(x => x.Accessor.OwnerType.IsType<Card>() && x.Accessor.Name == "CardTitle").BuildBy(request => new HtmlTag("textarea").Text(request.StringValue()));
+            Editors.If(x => x.Accessor.OwnerType.IsType<Card>() && x.Accessor.Name == "CardTitle").BuildBy(request => new HtmlTag("textarea").Attr("name", request.ElementId).Text(request.StringValue()));
             //Editors.Builder(new FormItemBuilder());
         }
 

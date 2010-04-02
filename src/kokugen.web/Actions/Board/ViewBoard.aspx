@@ -7,6 +7,7 @@
 <%@ Import Namespace="Kokugen.Web.Actions.Board"%>
 <asp:Content ID="columnconfigHead" ContentPlaceHolderID="head" runat="server">
 <%= this.CSS("board.css")%>
+<%= this.Script("board.js") %>
 <script type="text/javascript">
 
     $(document).ready(function() {
@@ -21,6 +22,8 @@
         $("#add-story-button").click(function() {
             $("#compact-card-container").slideToggle('slow');
         });
+
+        $(".ui-sortable").sortable({ connectWith: '.ui-sortable' });
 
     });
 

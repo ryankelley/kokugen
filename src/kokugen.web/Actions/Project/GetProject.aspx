@@ -37,7 +37,7 @@
    
 </div>
     
-    <%= this.LinkTo(new ViewBoardInputModel{ Id = Model.Project.Id}).Text("View Board") %>
+    <%= this.LinkTo(new ViewBoardInputModel{ Id = Model.Project.Id}).NoClosingTag().AddClass("icon") %><img src="/content/images/board_big.png" alt="view board" /></a>
 </body>
     
 <% this.Partial(new TimeRecordFormModel(){ProjectId = Model.Project.Id}); %>

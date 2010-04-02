@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* Global */
 
 img { border: none;}
@@ -317,8 +318,6 @@ vertical-align:top;
 
 }
 
-<<<<<<< HEAD
-=======
 .edit-link, .remove-link {
     width: 24px;
     height: 24px;
@@ -372,4 +371,391 @@ vertical-align:top;
 {
     background:url("../images/add_orng.png") no-repeat scroll 5px center #666666;
 }
->>>>>>> b16fc472965ad01b8425fad3972b27997d4f4cb4
+}
+
+=======
+/* Global */
+
+img { border: none;}
+
+* {margin: 0; padding: 0;}
+
+a:focus
+{
+  -moz-outline: none;
+}
+
+body{
+	background: url(../images/bg.jpg) repeat top left;
+	font-family: Helvetica;
+}
+
+#head {
+	background:url("../images/h-bar.jpg") repeat-x scroll left top transparent;
+	height: 102px;
+}
+
+#wrapper{
+	height: 102px;
+	margin: auto;
+	width: 960px;
+}
+
+h1{
+	background: url(../images/kokugen-logo.png) no-repeat top left;
+	height: 80px;
+	width: 263px;
+}
+
+
+#logo a {
+	text-indent: -7777px;
+	display: block;
+	height: 53px;
+	overflow: hidden;
+}
+
+/*subnav*/
+
+
+
+.nav {
+	background: url(../images/s-bar.jpg) repeat-x top left;
+	height: 35px;
+	margin: auto;
+}
+
+.nav-wrapper {
+	height:35px;
+	margin: auto
+	width:960px;
+
+}
+
+.subnav {
+	list-style:none;
+	margin-left: 15px;
+	text-decoration: none;
+	
+
+}
+
+.subnav li {
+	color: #fff;
+	display:inline-block;
+	xpadding: 7px 0 27px 0;
+	float:left;
+	font-size: 13px;
+	xposition:relative;
+	text-decoration: none;
+	
+}
+
+.subnav.right li 
+{
+    float: right;
+}
+
+.subnav li a {
+	color:#CCC;
+	display:inline-block;
+	font-weight:bold;
+	font-size:12px;
+	height: 21px; 
+	padding:7px 7px;
+	letter-spacing: 1px;
+	text-align:center;
+	text-decoration:none;
+	text-shadow: #000 1px 1px 0;
+	width: 100px;
+}
+
+.subnav li a:hover {
+	background: url(../images/hover.png) top left repeat-x;
+	color:#CCC;
+	height: 21px;
+	font-weight:bold;
+	width:100px;
+
+}
+
+.subnav li a:active{
+	background: #222 url(../images/arrow.png) bottom center no-repeat;
+	color: #fff;
+	font-weight: bold;
+	text-shadow: #000 1px 2px 0;
+	
+}
+
+.subnav li.last a {
+	
+}
+
+.subnav li.bar a {
+	border-right:1px solid #333;
+	border-left:1px solid #333;
+}
+
+.subnav li.lbar a {
+	border-right:1px solid #333;
+}
+
+/*end subnav*/
+
+.clear { clear: both;}
+.hidden { display:none;}
+
+input.error, textarea.error
+{
+    border: solid thin red;
+}
+label.error
+{
+    display:block;
+    color:Red;
+}
+
+/* Form Items */
+
+.form-item 
+{
+    padding: 2px;
+}
+
+.form-item label 
+{
+    padding: 5px;
+    display:block;
+}
+
+.form-item input 
+{
+    padding: 5px;
+    width: 100%;
+}
+
+input[type="text"], input[type="password"], textarea {
+padding:4px;
+}
+
+input[type="text"], input[type="password"], textarea, select {
+border:1px solid #CCCCCC;
+font-family:"Tahoma","Arial","Verdana",sans-serif;
+font-size:1.4em;
+margin:0;
+}
+
+ol, ul {
+list-style-image:none;
+list-style-position:outside;
+list-style-type:none;
+}
+
+li.project 
+{
+    margin-bottom: 5px;
+    margin-left:10px;
+    margin-right:10px;
+}
+
+li.project a {
+-moz-background-clip:border;
+-moz-background-inline-policy:continuous;
+-moz-background-origin:padding;
+background:#EEE url(../images/clipboard.png) no-repeat scroll 6px 6px;
+border:1px solid #333;
+font-family:"Georgia","Times New Roman",serif;
+color:#000000;
+display:block;
+padding:6px;
+text-decoration:none;
+text-indent:24px;
+z-index:10;
+}
+
+li.project.odd a 
+{
+    background:#CCC url(../images/clipboard.png) no-repeat scroll 6px 6px;
+}
+
+li.project.even a 
+{
+    background:#FFF url(../images/clipboard.png) no-repeat scroll 6px 6px;
+}
+
+li.project a:hover {
+-moz-background-clip:border;
+-moz-background-inline-policy:continuous;
+-moz-background-origin:padding;
+background:#D3F3D3 url(../images/clipboard.png) no-repeat scroll 6px 6px;
+border:1px solid #A3D3A3;
+font-family:"Georgia","Times New Roman",serif;
+color:#000000;
+display:block;
+padding:6px;
+text-decoration:none;
+text-indent:24px;
+z-index: 10;
+}
+
+li.project span.project-name 
+{
+    font-weight: bold;
+}
+
+li.project span.project-stats {
+-x-system-font:none;
+color:#333;
+
+font-size: 12px;
+font-style:italic;
+font-variant:normal;
+font-weight:normal;
+line-height:normal;
+}
+
+li.project div.project-owner {
+-x-system-font:none;
+color:#666;
+
+font-size:10px;
+font-style:italic;
+font-variant:normal;
+font-weight:normal;
+line-height:normal;
+}
+.project-meta 
+{
+    display: inline;
+    float: right;
+    z-index:20;
+}
+.upper-meta 
+{
+   margin: 5px;
+}
+
+.add-caption img { vertical-align: middle; margin: 2px; }
+.add-caption a, .add-caption a:visited
+{
+    color: #666;
+    font-family:"Georgia","Times New Roman",serif;
+    font-style: normal;
+    text-decoration: none;
+    
+}
+.clear { clear:both;}
+
+input.error 
+{
+    border:solid 3px red;
+    background-color: #FFEAF1;
+}
+label.error
+{
+    color: Red;
+}
+
+.board-column-configure li.phase.draggable div.col-title{
+cursor:move;
+}
+
+.board-column-configure h4 {
+font-size:1.8em;
+height:60px;
+padding:24px 12px 12px;
+}
+.board-column-configure div.col-desc {
+border-top:1px dotted #CCCCCC;
+height:40px;
+padding:8px;
+}
+
+.board-column-configure li.phase.fixed {
+background-color:#E3E3E3;
+}
+.board-column-configure li.phase {
+-moz-border-radius:8px 8px 8px 8px;
+background-color:#EFEFEF;
+border:1px solid #CCCCCC;
+display:inline-block;
+margin:0 0 12px 12px;
+text-align:center;
+vertical-align:top;
+}
+
+.board-column-configure .phase-placeholder {
+-moz-border-radius:8px 8px 8px 8px;
+background-color:#CCFFCC;
+border:1px solid #BBEEBB !important;
+display:inline-block;
+margin:0 0 12px 12px;
+vertical-align:top;
+
+}
+
+.edit-link, .remove-link {
+    width: 24px;
+    height: 24px;
+    overflow: hidden;
+    display: inline-block;
+    text-indent: -7777px;
+}
+
+.col-links {
+    margin: auto;
+    text-align: center;
+}
+
+.edit-link {
+    background: transparent url(/content/images/card_edit.png) no-repeat top left;
+}
+
+.remove-link {
+    background: transparent url(/content/images/card_delete.png) no-repeat top left;
+}
+
+.hinted  
+{
+    color: #666;
+}
+
+.button 
+{
+    -moz-border-radius: 7px; /* FF1+ */
+  -webkit-border-radius: 7px; /* Saf3+, Chrome */
+    border-radius: 7px; /* Opera 10.5, IE 9 */
+    border:1px outset #333333;
+    color:#FFFFFF;
+    cursor:pointer;
+    padding:5px 5px 5px 30px;
+    text-decoration:none;
+    
+}
+
+.button:hover 
+{
+    border: 1px inset #666;
+}
+
+.button.grn 
+{
+    background:url("../images/add_button.png") no-repeat scroll 5px center #666666;
+}
+
+.button.orng 
+{
+    background:url("../images/add_orng.png") no-repeat scroll 5px center #666666;
+}
+
+a.icon 
+{
+    color: #333;
+    
+}
+
+a.icon img 
+{
+    
+}
+>>>>>>> More work on the board view with cards

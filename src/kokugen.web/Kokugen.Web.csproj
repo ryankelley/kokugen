@@ -251,10 +251,12 @@
     <Content Include="Content\images\add_button.png" />
     <Content Include="Content\images\add_orng.png" />
     <Content Include="Content\images\bg.jpg" />
+    <Content Include="Content\images\board_big.png" />
     <Content Include="Content\images\card.png" />
     <Content Include="Content\images\card_delete.png" />
     <Content Include="Content\images\card_edit.png" />
     <Content Include="Content\images\clipboard.png" />
+    <Content Include="Content\images\datepicker.png" />
     <Content Include="Content\images\edit.png" />
     <Content Include="Content\images\h-bar.jpg" />
     <Content Include="Content\images\head.jpg" />
@@ -280,6 +282,7 @@
     <Content Include="Content\css\ui-darkness\jquery-ui-1.7.2.css" />
     <Content Include="Content\Scripts\application.js" />
     <Content Include="Content\css\board.css" />
+    <Content Include="Content\Scripts\board.js" />
     <Content Include="Content\Scripts\hinting.js" />
     <Content Include="Content\Scripts\jquery-1.3.2.min.js" />
     <Content Include="Content\Scripts\jquery-1.4.1-vsdoc.js" />
