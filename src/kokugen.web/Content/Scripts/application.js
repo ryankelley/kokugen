@@ -1,5 +1,6 @@
 $(document).ready(function() {
     $(window).resize(setContentHeightToFull);
+    $(".datepicker").datepicker({ buttonImage: '/content/images/datepicker.png' });
 });
 
 function setContentHeightToFull() {
@@ -53,7 +54,7 @@ function setContentHeightToFull() {
 
 function ValidateAndSave(successCallback, formObject) {
     var options = {
-        success: closeColumnDialog,  // post-submit callback 
+        success: successCallback,  // post-submit callback 
         type: 'post',        // 'get' or 'post', override for form's 'method' attribute 
         dataType: 'json',        // 'xml', 'script', or 'json' (expected server response type) 
         clearForm: true        // clear all form fields after successful submit 

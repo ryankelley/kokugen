@@ -1,10 +1,11 @@
 <%@ Page Language="C#" AutoEventWireup="true" Inherits="Kokugen.Web.Actions.Card.CompactCardForm"%>
+<%@ Import Namespace="Kokugen.Web.Actions.Card"%>
 <%@ Import Namespace="HtmlTags"%>
 <%@ Import Namespace="Kokugen.Web.Actions.Board"%>
 <%@ Import Namespace="Kokugen.Web.Conventions"%>
 
 <div id="compact-card-container" class="hidden">
-<%= this.FormFor(new BoardColumnInputModel()).Id("card-form-compact")%>
+<%= this.FormFor(new CompactCardFormModel()).Id("card-form-compact")%>
     <div class="add-card-compact">
         <div class="full-width-input">
             <%= this.InputFor(x => x.Card.Title).Hint("Enter description of card") %>
@@ -36,13 +37,20 @@
 
 <script type="text/javascript">
 
+    function updateBoard(data) {
+        var card = new Card(data.Item);
+        $("#backlog-container ul").append(buildCardDisplay(card));
+
+        $("#compact-card-container").slideToggle('medium');
+        $("form").hintify();
+    }
 
     $(document).ready(function() {
         $("#card-form-compact").validate({ errorClass: "error" });
         $('#save-button').submit(function() {
-        ValidateAndSave(closeColumnDialog, $("#card-form-compact"));
+            ValidateAndSave(updateBoard, $("#card-form-compact"));
+            return false;
         });
-        
+
     });
 </script>
-

@@ -14,6 +14,8 @@ namespace Kokugen.Web.Actions.Company
 
             return new CompanyFormModel { Company = company };
         }
+
+        
     }
 
     public class CompanyFormModel
