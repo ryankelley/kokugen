@@ -20,7 +20,7 @@ namespace Kokugen.Core.Domain
 
         //Dates
         public virtual DateTime? Started { get; set; }
-        public virtual DateTime DateCompleted { get; set; }
+        public virtual DateTime? DateCompleted { get; set; }
 
         [Required]
         public virtual Project Project { get; set; }
