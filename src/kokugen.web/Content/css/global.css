@@ -342,3 +342,31 @@ vertical-align:top;
 {
     color: #666;
 }
+
+.button 
+{
+    -moz-border-radius: 7px; /* FF1+ */
+  -webkit-border-radius: 7px; /* Saf3+, Chrome */
+    border-radius: 7px; /* Opera 10.5, IE 9 */
+    border:1px outset #333333;
+    color:#FFFFFF;
+    cursor:pointer;
+    padding:5px 5px 5px 30px;
+    text-decoration:none;
+    
+}
+
+.button:hover 
+{
+    border: 1px inset #666;
+}
+
+.button.grn 
+{
+    background:url("../images/add_button.png") no-repeat scroll 5px center #666666;
+}
+
+.button.orng 
+{
+    background:url("../images/add_orng.png") no-repeat scroll 5px center #666666;
+}

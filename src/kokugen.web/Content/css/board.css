@@ -85,11 +85,23 @@ vertical-align:top;
 {
     
 }
-
+.bottom-border
+{
+    width: 100%;
+    border-bottom: 2px solid #333;
+    margin-top:35px;
+}
 .add-card-compact input, .add-card-compact textarea
 {
     margin-bottom: 7px;
 }
+
+.add-card-compact div.actions 
+{
+    float: right;
+    
+}
+
 .full-width-input 
 {
     width: 100%;

@@ -23,9 +23,13 @@
         </div>
         <%= this.InputFor(x => x.Card.Id).Hide() %>
         <%= this.InputFor(x => x.ProjectId).Hide() %>
-        
-         <input type="submit" name="Submit" value="Save" id="save-button"/>
+        <div class="actions">
+             <input type="submit" name="Submit" value="Add to Backlog" id="save-button" class="button grn"/>
+             <input type="submit" name="Submit" value="Add to Board" id="save-button" class="button orng"/>
+         </div>
      </div>
+     <div class="bottom-border"></div>
+     <div class="clear"></div>
 </form>
 
 </div>

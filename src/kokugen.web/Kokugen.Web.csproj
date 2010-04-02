@@ -243,6 +243,7 @@
     <Content Include="Content\css\smoothness\images\ui-icons_cd0a0a_256x240.png" />
     <Content Include="Content\css\smoothness\jquery-ui-1.8.custom.css" />
     <Content Include="Content\images\add_button.png" />
+    <Content Include="Content\images\add_orng.png" />
     <Content Include="Content\images\bg.jpg" />
     <Content Include="Content\images\card.png" />
     <Content Include="Content\images\card_delete.png" />
