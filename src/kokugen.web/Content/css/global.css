@@ -16,35 +16,21 @@ body{
 
 #head {
 	background: url(../images/head.png) repeat-x top left;
-	height: 192px;
+	height: 102px;
 }
 
 #wrapper{
-	height: 170px;
+	height: 102px;
 	margin: auto;
-	position: relative;
 	width: 960px;
 }
 
 h1{
-	background: url(../images/logo.png) no-repeat top left;
-	height: 77px;
-	left: -50px;
-	position: absolute;
-	xtop: 20px;
-	width: 283px;
-	xposition: absolute;
+	background: url(../images/kokugen-logo.png) no-repeat top left;
+	height: 80px;
+	width: 263px;
 }
-.hidden { display:none;}
-input.error 
-{
-    border: solid thin red;
-}
-label.error
-{
-    display:block;
-    color:Red;
-}
+
 
 #logo a {
 	text-indent: -7777px;
@@ -55,52 +41,74 @@ label.error
 
 /*subnav*/
 
+
+
+.nav {
+	background: url(../images/s-bar.jpg) repeat-x top left;
+	height: 35px;
+	margin: auto;
+}
+
+.nav-wrapper {
+	height:35px;
+	margin: auto
+	width:960px;
+
+}
+
 #subnav {
-	left: 289px;
 	list-style:none;
 	margin:auto;
-	position:absolute;
-	xpadding-left: 320px;
 	text-decoration: none;
-	top: 80px;
+	width: 960px;
+
 }
 
 #subnav li {
-	color: #333;
+	color: #fff;
 	display:inline-block;
-	padding: 13px 0 27px 0;
+	xpadding: 7px 0 27px 0;
 	float:left;
 	font-size: 13px;
-	position:relative;
+	xposition:relative;
 	text-decoration: none;
+	
 }
 
 #subnav li a {
-	text-align:center;
-	text-decoration:none;
+	color:#777;
+	display:inline-block;
 	font-weight:normal;
 	font-size:12px;
-	color:#333;
-	padding:5px 15px;
-	display:inline-block;
-	xtext-shadow: #f1f1f1 1px 2px 0;
+	height: 21px; 
+	padding:7px 15px;
 	letter-spacing: 1px;
+	text-align:center;
+	text-decoration:none;
+	text-shadow: #000 1px 1px 0;
+	width: 136px;
 }
 
 #subnav li a:hover {
-	color:#fff;
+	background: url(../images/hover.png) top left repeat-x;
+	color:#777;
+	height: 21px;
 	font-weight:normal;
+	width:136px;
+
 }
 
 #subnav li a:active{
+	background: #222 url(../images/arrow.png) bottom center no-repeat;
 	color: #fff;
 	font-weight: bold;
 	text-shadow: #000 1px 2px 0;
+	
 }
 
 #subnav li.last a {
 	padding-left: 20px;
-	padding-right: 0px;
+	padding-right: 20px;
 }
 
 #subnav li.bar a {
@@ -113,6 +121,18 @@ label.error
 }
 
 /*end subnav*/
+
+
+.hidden { display:none;}
+input.error 
+{
+    border: solid thin red;
+}
+label.error
+{
+    display:block;
+    color:Red;
+}
 
 /* Form Items */
 
