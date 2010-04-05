@@ -37,18 +37,6 @@ IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION
 GO
 PRINT N'Altering [dbo].[TimeRecords]'
 GO
-ALTER TABLE [dbo].[TimeRecords] ADD
-[Task_id] [uniqueidentifier] NULL
-GO
-IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
-GO
-IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
-GO
-PRINT N'Adding foreign keys to [dbo].[TimeRecords]'
-GO
-ALTER TABLE [dbo].[TimeRecords] ADD
-CONSTRAINT [fk_TimeRecord_to_Task] FOREIGN KEY ([Task_id]) REFERENCES [dbo].[TaskCategories] ([Id])
-GO
 IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
 GO
 IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END

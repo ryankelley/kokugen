@@ -29,7 +29,7 @@ GO
 PRINT N'Altering [dbo].[TimeRecords]'
 GO
 ALTER TABLE [dbo].[TimeRecords] ADD
-[TaskCategory_id] [uniqueidentifier] NULL
+[Task_id] [uniqueidentifier] NULL
 GO
 IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
 GO
@@ -58,7 +58,7 @@ GO
 PRINT N'Adding foreign keys to [dbo].[TimeRecords]'
 GO
 ALTER TABLE [dbo].[TimeRecords] ADD
-CONSTRAINT [fk_TimeRecord_to_TaskCategory] FOREIGN KEY ([TaskCategory_id]) REFERENCES [dbo].[TaskCategories] ([Id])
+CONSTRAINT [fk_TimeRecord_to_TaskCategory] FOREIGN KEY ([Task_id]) REFERENCES [dbo].[TaskCategories] ([Id])
 GO
 IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
 GO
