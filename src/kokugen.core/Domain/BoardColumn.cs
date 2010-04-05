@@ -15,26 +15,7 @@ namespace Kokugen.Core.Domain
         public virtual string Description { get; set; }
         public virtual int Limit { get; set; }
 
-        private IList<Card> _cards = new List<Card>();
-
-        public virtual IEnumerable<Card> GetCards()
-        {
-            return _cards.AsEnumerable();
-        }
-
-        public virtual void AddCard(Card card)
-        {
-            if (_cards.Contains(card)) return;
-
-            card.Column = this;
-            _cards.Add(card);
-        }
-
-        public virtual void RemoveCard(Card card)
-        {
-            if(_cards.Contains(card))
-                _cards.Remove(card);
-        }
+        
     }
 
     [Serializable]

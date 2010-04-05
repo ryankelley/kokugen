@@ -82,6 +82,27 @@ namespace Kokugen.Core.Domain
 
         #endregion
 
+        private IList<Card> _cards = new List<Card>();
+
+        public virtual IEnumerable<Card> GetCards()
+        {
+            return _cards.AsEnumerable();
+        }
+
+        public virtual void AddCard(Card card)
+        {
+            if (_cards.Contains(card)) return;
+
+            card.Project = this;
+            _cards.Add(card);
+        }
+
+        public virtual void RemoveCard(Card card)
+        {
+            if (_cards.Contains(card))
+                _cards.Remove(card);
+        }
+
         public virtual void ComputeTotalTimeAndSessions()
         {
             int i = 0;

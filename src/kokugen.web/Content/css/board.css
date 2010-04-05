@@ -69,6 +69,7 @@ vertical-align:top;
     display: table-cell;
     border-left:2px dotted #CCCCCC;
     min-width:200px;
+    background-color:#F6F6F6;
 }
 
 .column.hidden
@@ -125,13 +126,39 @@ vertical-align:top;
     margin-bottom: 4px;
     -moz-border-radius:4px 4px 4px 4px;
 border:2px solid;
+clear: both;
 }
 
+.card.ready  
+{
+    border:4px solid #21CD18 !important;
+}
+
+.card.blocked 
+{
+    border:4px solid #D05750 !important;
+    
+}
 .card .card-header 
 {
     cursor: move;
     overflow: hidden;
     border-bottom:1px solid;
+}
+.reason-blocked div { width: 100%; }
+.reason-blocked { width: 100% }
+.reason-blocked textarea 
+{
+    margin-left: 8px;
+    width: 90%;
+    height: 35px;
+    font-size: 12px;
+}
+
+.card-blocked 
+{
+    background-color: #D05750;
+    padding-top:8px;
 }
 
 .card.grey 
@@ -140,17 +167,97 @@ border:2px solid;
     border-color:#CCCCCC;
 }
 
+.card.blue
+{
+    background-color:#DBEBFF;
+    border-color:#A8CFFF;
+}
+.card.red
+{
+    background-color:#FFBBBB;
+    border-color:#FF9797;
+}
+.card.green
+{
+    background-color:#BDF4CB;
+    border-color:#4AE371;
+}
+.card.yellow
+{
+    background-color:#F5F7C4;
+    border-color:#DFE32D;
+}
+.card.orange
+{
+    background-color:#FFD7B3;
+    border-color:#FFAC62;
+}
+.card.teal
+{
+    background-color:#CFE7E2;
+    border-color:#8DC7BB;
+}
+
+li.card.hover
+{
+    -moz-box-shadow: 0px 0px 3px #333; /* FF3.5+ */
+  -webkit-box-shadow: 0px 0px 3px #333; /* Saf3.0+, Chrome */
+          box-shadow: 0px 0px 3px #333; /* Opera 10.5, IE 9.0 */
+              filter:  progid:DXImageTransform.Microsoft.dropshadow(OffX=0px, OffY=0px, Color='#333'); /* IE6,IE7 */
+          -ms-filter: "progid:DXImageTransform.Microsoft.dropshadow(OffX=0px, OffY=0px, Color='#333')"; /* IE8 */
+}
+
 .card.grey .card-header 
 {
     background-color:#DDDDDD;
     border-color:#CCCCCC;
 }
 
+.card.blue .card-header 
+{
+    background-color:#add1fe;
+    border-color:#A8CFFF;
+}
+
+.card.red .card-header 
+{
+    background-color:#ff6666;
+    border-color:#d34f52;
+}
+
+
+.card.green .card-header 
+{
+    background-color:#9ce3ae;
+    border-color:#4AE371;
+}
+
+
+.card.yellow .card-header 
+{
+    background-color:#d3d719;
+    border-color:#afb232;
+}
+
+
+.card.orange .card-header 
+{
+    background-color:#f4a258;
+    border-color:#d78841;
+}
+
+
+.card.teal .card-header 
+{
+    background-color:#26e2bb;
+    border-color:#2fbda0;
+}
+
 .card .card-body 
 {
-    font-size:1.2em;
-    line-height:1.2em;
-    margin:0 0.4em;
+    font-size:16px;
+line-height:22px;
+margin:0 5px;
 }
 
 .card .card-header .card-number  
@@ -176,9 +283,10 @@ border:2px solid;
     -moz-border-radius:4px 4px 4px 4px;
     border:1px solid;
     float:left;
-    font-size:13px;
+    font-size:10px;
     margin-top:4px;
     padding:1px 4px;
+    background-color: #BBB;
 }
 
 div.error 
@@ -199,3 +307,176 @@ div.error
     display: none;
     
 }
+
+.card .card-section 
+{
+    border-top: 1px dotted;
+}
+
+ul #card-toolbar
+{
+    height: 24px;
+    clear: both;
+}
+
+#card-toolbar li.icon
+{
+    display: inline;
+    float: left;
+}
+#card-toolbar li.checkbox
+{
+    display: inline;
+    float: right;
+}
+
+#card-toolbar .checkbox 
+{
+    border-left: 1px dotted;
+}
+
+#card-toolbar .icon 
+{
+    border-right: 1px dotted;
+}
+
+#card-toolbar .checkbox a 
+{
+    background: transparent url('/content/images/checkbox_no.png') no-repeat scroll left;
+    padding: 2px 2px 6px 24px;
+    margin-left:2px;
+    padding:3px 3px 6px 19px;
+    font-size: 10px;
+    color: #000;
+    text-decoration: none;
+}
+
+#card-toolbar .checkbox a.unchecked
+{
+    background: transparent url('/content/images/checkbox_no.png') no-repeat scroll left;
+}
+#card-toolbar .checkbox a.checked, #card-toolbar .checkbox a:hover
+{
+    background: transparent url('/content/images/checkbox_yes.png') no-repeat scroll left;
+}
+
+#card-toolbar li.icon a
+{
+    
+    padding: 4px 4px;
+    width: 16px;
+    height: 16px;
+    overflow: hidden;
+    display:block;
+    text-indent: -99999px;
+}
+#card-toolbar li.icon a:hover 
+{
+    background-color: #CCC;
+}
+
+.color-wheel 
+{
+    background: transparent url('/content/images/color_wheel.png') no-repeat center center;
+}
+
+.card-up  
+{
+    background: transparent url('/content/images/up.png') no-repeat center center;
+}
+
+.card-down 
+{
+    background: transparent url('/content/images/down.png') no-repeat center center;
+}
+#card-color-editor ul
+{
+    overflow: hidden;
+    padding: 4px;
+    display: inline;
+}
+
+#card-color-editor li
+{
+    display: inline;
+    float: left;
+    padding: 2px;
+}
+
+#card-color-editor li a 
+{
+    border: 1px solid;
+    display: block;
+    height: 20px;
+    line-height: 20px;
+    margin-right: 4px;
+    text-decoration: none;
+    width: 20px;
+    text-indent: -9998px;
+}
+#card-color-editor li a:hover 
+{
+       -moz-box-shadow: 0px 0px 3px #666; /* FF3.5+ */
+  -webkit-box-shadow: 0px 0px 3px #666; /* Saf3.0+, Chrome */
+          box-shadow: 0px 0px 3px #666; /* Opera 10.5, IE 9.0 */
+              filter:  progid:DXImageTransform.Microsoft.dropshadow(OffX=0px, OffY=0px, Color='#666666'); /* IE6,IE7 */
+          -ms-filter: "progid:DXImageTransform.Microsoft.dropshadow(OffX=0px, OffY=0px, Color='#666666')"; /* IE8 */
+}
+#card-color-editor li a.grey 
+{
+    background-color:#EEEEEE;
+    border-color:#CCCCCC;
+}
+
+#card-color-editor li a.blue 
+{
+    background-color:#DBEBFF;
+    border-color:#A8CFFF;
+}
+
+#card-color-editor li a.red 
+{
+    background-color:#FFBBBB;
+    border-color:#FF9797;
+}
+#card-color-editor li a.green 
+{
+    background-color:#BDF4CB;
+    border-color:#4AE371;
+}
+#card-color-editor li a.yellow 
+{
+    background-color:#F5F7C4;
+    border-color:#DFE32D;
+}
+
+#card-color-editor li a.orange 
+{
+    background-color:#FFD7B3;
+border-color:#FFAC62;
+}
+
+#card-color-editor li a.teal 
+{
+background-color:#CFE7E2;
+border-color:#8DC7BB;
+}
+
+button.cancel 
+{
+    background: transparent url('/content/images/color-cancel.png') no-repeat center center;
+    border:medium none;
+    text-indent:-9999px;
+    width:16px;
+}
+
+.ui-sortable .phase-placeholder {
+-moz-border-radius:8px 8px 8px 8px;
+background-color:#cce5ff;
+border:1px solid #2c76fd !important;
+display:inline-block;
+margin: 0 0 8px 8px;
+vertical-align:top;
+
+}
+

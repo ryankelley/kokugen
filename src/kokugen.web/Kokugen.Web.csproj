@@ -116,6 +116,7 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Actions\Card\AddAction.cs" />
+    <Compile Include="Actions\Card\CardMovedAction.cs" />
     <Compile Include="Actions\Card\CompactCardFormAction.cs" />
     <Compile Include="Actions\Card\View_Page_Type_Declarations.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -251,20 +252,30 @@
     <Content Include="Content\css\ui.jqgrid.css" />
     <Content Include="Content\images\add_button.png" />
     <Content Include="Content\images\add_orng.png" />
+    <Content Include="Content\images\arrow.png" />
     <Content Include="Content\images\bg.jpg" />
     <Content Include="Content\images\board_big.png" />
     <Content Include="Content\images\card.png" />
     <Content Include="Content\images\card_delete.png" />
     <Content Include="Content\images\card_edit.png" />
+    <Content Include="Content\images\checkbox_no.png" />
+    <Content Include="Content\images\checkbox_yes.png" />
     <Content Include="Content\images\clipboard.png" />
+    <Content Include="Content\images\color-cancel.png" />
+    <Content Include="Content\images\color_wheel.png" />
     <Content Include="Content\images\datepicker.png" />
+    <Content Include="Content\images\down.png" />
     <Content Include="Content\images\edit.png" />
     <Content Include="Content\images\h-bar.jpg" />
     <Content Include="Content\images\head.jpg" />
     <Content Include="Content\images\head.png" />
+    <Content Include="Content\images\hover.png" />
     <Content Include="Content\images\icon.png" />
+    <Content Include="Content\images\kokugen-logo.png" />
     <Content Include="Content\images\logo.png" />
+    <Content Include="Content\images\s-bar.jpg" />
     <Content Include="Content\images\sel.png" />
+    <Content Include="Content\images\up.png" />
     <Content Include="Content\main-styles.css" />
     <Content Include="Content\css\ui-darkness\images\ui-bg_flat_30_cccccc_40x100.png" />
     <Content Include="Content\css\ui-darkness\images\ui-bg_flat_50_5c5c5c_40x100.png" />
@@ -288,6 +299,7 @@
     <Content Include="Content\Scripts\jquery-1.3.2.min.js" />
     <Content Include="Content\Scripts\jquery-1.4.1-vsdoc.js" />
     <Content Include="Content\Scripts\jquery-1.4.2.min.js" />
+    <Content Include="Content\Scripts\jquery-ui-1.8.smoothness.min.js" />
     <Content Include="Content\Scripts\jquery-ui-1.8rc3.custom.min.js" />
     <Content Include="Content\Scripts\jquery.form.js" />
     <Content Include="Content\Scripts\jquery.jqGrid.min.js" />
@@ -313,7 +325,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>50002</DevelopmentServerPort>
+          <DevelopmentServerPort>62941</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>

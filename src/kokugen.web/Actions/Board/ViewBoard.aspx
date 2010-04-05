@@ -9,9 +9,8 @@
 <%= this.CSS("board.css")%>
 <%= this.Script("board.js") %>
 <script type="text/javascript">
-    
+    var cards = <%= Model.AllCards.ToJson() %>
     $(document).ready(function() {
-        $(".ui-sortable").sortable("option", "connectWith", '.ui-sortable');
 
         // bind resizing
         $(window).resize(setCardColumnHeight);
@@ -23,9 +22,22 @@
             $("#compact-card-container").slideToggle('slow');
         });
 
-        $(".ui-sortable").sortable({ connectWith: '.ui-sortable' });
+        $(".ui-sortable").sortable({ connectWith: '.ui-sortable', placeholder: 'phase-placeholder', forcePlaceholderSize: true,
+            receive: cardMoved });
 
+        for(var i = 0; i < cards.length; i++)
+        {
+            var newCard = new Card(cards[i]);
+            _cards.push(newCard);
+            
+            var hcard = buildCardDisplay(newCard);
+            
+            $('#'+ newCard.ColumnId).append(hcard);
+        }
         
+        $("div.column").each(function() {
+        var width = 100 / $("div.column").length;
+            $(this).attr("style", "width: "+ width + "%");});
     });
 
     function setCardColumnHeight() {
@@ -44,14 +56,14 @@
 
     <div id="backlog-container"  class="column">
         <div class="board-phase-header"><%= Model.BackLog.Name %></div>
-        <ul class="card-list ui-sortable" ></ul>
+        <ul class="card-list ui-sortable" id="<%= Model.BackLog.Id %>"></ul>
     </div>
 
     <%= this.PartialForEach(m => m.Columns).WithoutItemWrapper().WithoutListWrapper().Using<BoardPhase_Control>() %>
 
     <div id="archive-container" class="column">
         <div class="board-phase-header"><%= Model.Archive.Name %></div>
-        <ul class="card-list ui-sortable" ></ul>
+        <ul class="card-list ui-sortable" id="<%= Model.Archive.Id %>" ></ul>
     </div>
 </div>
 </asp:Content>

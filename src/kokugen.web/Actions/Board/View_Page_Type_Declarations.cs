@@ -8,5 +8,5 @@ namespace Kokugen.Web.Actions.Board
     public class EditBoardColumnForm : FubuPage<BoardColumnEditModel> {}
 
     public class BoardItem_Control : FubuControl<Core.Domain.BoardColumn> { }
-    public class BoardPhase_Control : FubuControl<Core.Domain.BoardColumn> { }
+    public class BoardPhase_Control : FubuControl<BoardColumnDTO> { }
 }
