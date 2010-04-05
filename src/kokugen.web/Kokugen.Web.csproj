@@ -146,8 +146,10 @@
     <Compile Include="Actions\Project\GetProjectAction.cs" />
     <Compile Include="Actions\Project\ListAction.cs" />
     <Compile Include="Actions\Project\ProjectFormAction.cs" />
+    <Compile Include="Actions\TaskCategory\RemoveAction.cs" />
     <Compile Include="Actions\TimeRecord\AddAction.cs" />
     <Compile Include="Actions\TimeRecord\AddTimeRecordModel.cs" />
+    <Compile Include="Actions\TimeRecord\RemoveAction.cs" />
     <Compile Include="Actions\TimeRecord\TimeRecordFormAction.cs" />
     <Compile Include="Actions\Project\View_Page_Type_Declarations.cs">
       <SubType>ASPXCodeBehind</SubType>

@@ -12,17 +12,25 @@
 <div class="upper-meta">
     <div class="add-caption" ><a href="#" onclick="showTimeRecordForm();"><img src="/content/images/add_button.png" alt="add time record" />Add New TimeRecord</a></div>
 </div>
-
-    <table>
-        <thead>    
+<div class="timerecords">
+    <table border=collapse  bgcolor=#DCDCDC bordercolor=black>
+        <thead > 
             <tr>
-                Description
-            </tr>
+            <h2><%=Model.Project.Name+" "%>Time Records</h2>
+            </tr>   
             <tr>
-                Task
-            </tr>
-            <tr>
-                Duration
+            <td>
+                <h3>Description</h3>
+            </td>
+            <td>
+                <h3>Task</h3>
+            </td>
+            <td>
+                <h3>Duration</h3>
+            </td>
+            <td>
+                 <h3>Delete</h3>
+            </td>
             </tr>
         </thead>
         <tbody>
@@ -30,7 +38,7 @@
             <%= this.PartialForEach(p => p.TimeRecords).Using<TimeRecord_Control>() %>
         </tbody>
     </table>
-    
+    </div>
     
    <div id ="Board Link"><%= this.LinkTo(new BoardConfigurationModel{ Id = Model.Project.Id}).Text("Configure Board Columns") %></div> 
    

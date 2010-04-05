@@ -382,3 +382,8 @@ a.icon img
 {
     
 }
+
+.timerecords .table
+{
+    border-style: inset;
+}

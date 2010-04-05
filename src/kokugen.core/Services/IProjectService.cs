@@ -17,6 +17,7 @@ namespace Kokugen.Core.Services
         Project CreateProject(string projectName, string projectDescription, Company company);
         Project GetProjectFromId(Guid id);
         //IEnumerable<TimeRecord> GetTimeRecords(Guid projectid);
+        void DeleteTimeRecord(Guid id);
     }
 
     public class ProjectService : IProjectService
@@ -81,6 +82,12 @@ namespace Kokugen.Core.Services
         public Project GetProjectFromId(Guid id)
         {
             return _projectRepository.Get(id);
+        }
+
+        public void DeleteTimeRecord(Guid id)
+        {
+            var timeRecord= _timeRecordRepository.Get(id);
+            _timeRecordRepository.Delete(timeRecord);
         }
 
 //        public IEnumerable<TimeRecord> GetTimeRecords(Guid projectid)
