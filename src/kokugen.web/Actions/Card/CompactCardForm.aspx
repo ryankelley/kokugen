@@ -5,6 +5,7 @@
 <%@ Import Namespace="Kokugen.Web.Conventions"%>
 
 <div id="compact-card-container" class="hidden">
+<div class="error hidden"><span></span></div>
 <%= this.FormFor(new CompactCardFormModel()).Id("card-form-compact")%>
     <div class="add-card-compact">
         <div class="full-width-input">
@@ -26,7 +27,6 @@
         <%= this.InputFor(x => x.ProjectId).Hide() %>
         <div class="actions">
              <input type="submit" name="Submit" value="Add to Backlog" id="save-button" class="button grn"/>
-             <input type="submit" name="Submit" value="Add to Board" id="save-button" class="button orng"/>
          </div>
      </div>
      <div class="bottom-border"></div>
@@ -46,10 +46,25 @@
     }
 
     $(document).ready(function() {
-        $("#card-form-compact").validate({ errorClass: "error" });
+    $("#card-form-compact").validate({ errorClass: "error", ignoreTitle: true, 
+    rules: { digits: { function(element) {
+        if($}}},
+    invalidHandler: function(e, validator) {
+        var errors = validator.numberOfInvalids();
+        if (errors) {
+            var message = errors == 1 ? 'You missed 1 field. It has been highlighted below' : 'You missed ' + errors + ' fields. They have been highlighted below';
+            $("div.error span").html(message);
+            $("div.error").show();
+        } else {
+            $("div.error").hide();
+        }
+    } 
+    });
         $('#save-button').submit(function() {
             ValidateAndSave(updateBoard, $("#card-form-compact"));
             return false;
+            
+ 
         });
 
     });

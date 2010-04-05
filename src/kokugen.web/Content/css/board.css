@@ -119,3 +119,83 @@ vertical-align:top;
 {
     width: 23%;
 }
+
+.card 
+{
+    margin-bottom: 4px;
+    -moz-border-radius:4px 4px 4px 4px;
+border:2px solid;
+}
+
+.card .card-header 
+{
+    cursor: move;
+    overflow: hidden;
+    border-bottom:1px solid;
+}
+
+.card.grey 
+{
+    background-color:#EEEEEE;
+    border-color:#CCCCCC;
+}
+
+.card.grey .card-header 
+{
+    background-color:#DDDDDD;
+    border-color:#CCCCCC;
+}
+
+.card .card-body 
+{
+    font-size:1.2em;
+    line-height:1.2em;
+    margin:0 0.4em;
+}
+
+.card .card-header .card-number  
+{
+    float:left;
+    font-size:14px;
+    margin-top: 2px;
+    font-weight:bold;
+    line-height:25px;
+}
+
+.card .card-header .card-number a 
+{
+    color:#000000;
+    display:block;
+    margin-left:8px;
+    margin-right:4px;
+    padding-right:4px;
+    text-decoration:none;
+}
+.card .card-header .card-size 
+{
+    -moz-border-radius:4px 4px 4px 4px;
+    border:1px solid;
+    float:left;
+    font-size:13px;
+    margin-top:4px;
+    padding:1px 4px;
+}
+
+div.error 
+{
+    color: Red;
+    background-color: #FFEAF1;
+     -moz-border-radius: 5px; /* FF1+ */
+  -webkit-border-radius: 5px; /* Saf3+, Chrome */
+      border-radius: 5px; /* Opera 10.5, IE 9 */
+      border: solid 1px Red;
+      margin:44px 10px 10px;
+    padding:5px;
+
+}
+
+.quarter-input label.error 
+{
+    display: none;
+    
+}
