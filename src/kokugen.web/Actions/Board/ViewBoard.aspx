@@ -9,7 +9,7 @@
 <%= this.CSS("board.css")%>
 <%= this.Script("board.js") %>
 <script type="text/javascript">
-
+    
     $(document).ready(function() {
         $(".ui-sortable").sortable("option", "connectWith", '.ui-sortable');
 
@@ -25,6 +25,7 @@
 
         $(".ui-sortable").sortable({ connectWith: '.ui-sortable' });
 
+        
     });
 
     function setCardColumnHeight() {

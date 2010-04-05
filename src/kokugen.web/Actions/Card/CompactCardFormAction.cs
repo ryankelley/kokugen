@@ -25,22 +25,32 @@ namespace Kokugen.Web.Actions.Card
         {
             var project = _projectService.GetProjectFromId(model.ProjectId);
             
-            var card = new Core.Domain.Card();
-            card.Title = model.Card.Title;
-            card.Size = model.Card.Size;
-            card.Priority = model.Card.Priority;
-            card.Deadline = model.Card.Deadline;
-            card.AssignedTo = model.Card.AssignedTo;
-            card.Details = model.Card.Details;
+            var card = new Core.Domain.Card
+                           {
+                               Title = model.Card.Title, 
+                               Size = model.Card.Size, 
+                               Priority = model.Card.Priority, 
+                               Deadline = model.Card.Deadline, 
+                               //AssignedTo = model.Card.AssignedTo, 
+                               Details = model.Card.Details,
+                               Project = project
+                               
+                           };
 
             
-            var output = new CardViewDTO();
-            Mapper.DynamicMap(card, output);
+            var notification = _cardService.SaveCard(card);
+            var newcard = _cardService.GetCard(card.Id);
+            if (notification.IsValid())
+            {
+                project.Backlog.AddCard(card);
+                _projectService.SaveProject(project);
+                var output = new CardViewDTO();
+                Mapper.DynamicMap(card, output);
 
-            return new AjaxResponse {Success = true, Item = output};
+                return new AjaxResponse {Success = true, Item = output};
+            }
+            return new AjaxResponse {Success = false};
 
-
-            
         }
     }
 
@@ -52,6 +62,7 @@ namespace Kokugen.Web.Actions.Card
         public int Size { get; set; }
         public string Priority { get; set; }
         public DateTime? Deadline { get; set; }
+        public int CardNumber { get; set; }
     }
 
     public class CompactCardFormInput
@@ -63,5 +74,6 @@ namespace Kokugen.Web.Actions.Card
     {
         public Guid ProjectId { get; set; }
         public Core.Domain.Card Card { get; set; }
+        public string Submit { get; set; }
     }
 }

@@ -7,6 +7,8 @@ var Card = function(card) {
     this.Title = card.Title;
     this.Color = card.Color;
     this.Deadline = card.Deadline;
+    this.CardNumber = card.CardNumber;
+    this.Size = card.Size;
 
     var self = this;
 
@@ -24,26 +26,39 @@ var Card = function(card) {
 
 
 var buildCardDisplay = function(scard) {
- if(!(scard instanceof Card)) {
-    throw("card is not an instance of Card");
- }
- 
- var element = document.createElement('li');
- var head = document.createElement('div');
- var body = document.createElement('div');
- // head items
- var number = document.createElement('div')
- var size = document.createElement('div');
- var worker = document.createElement('div');
- 
- element.appendChild(head);
- element.appendChild(body);
- 
- head.appendChild(number);
- head.appendChild(size);
- head.appendChild(worker);
- 
- body.appendChild(document.createTextNode(scard.Title));
- 
- return element;
+    if (!(scard instanceof Card)) {
+        throw ("card is not an instance of Card");
+    }
+
+    var element = document.createElement('li');
+    $(element).addClass("card").addClass("grey");
+    var head = document.createElement('div');
+    $(head).addClass("card-header");
+
+    var body = document.createElement('div');
+    $(body).addClass("card-body");
+    // head items
+    var number = document.createElement('div')
+    $(number).addClass("card-number");
+
+    var editLink = document.createElement('a');
+    editLink.appendChild(document.createTextNode(scard.CardNumber));
+
+    number.appendChild(editLink);
+
+    var size = document.createElement('div');
+    $(size).addClass("card-size");
+    size.appendChild(document.createTextNode(scard.Size));
+    var worker = document.createElement('div');
+
+    element.appendChild(head);
+    element.appendChild(body);
+
+    head.appendChild(number);
+    head.appendChild(size);
+    head.appendChild(worker);
+
+    body.appendChild(document.createTextNode(scard.Title));
+
+    return element;
 };

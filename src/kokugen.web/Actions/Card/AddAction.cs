@@ -1,3 +1,4 @@
+using FubuMVC.Core.Continuations;
 using Kokugen.Core.Services;
 
 namespace Kokugen.Web.Actions.Card
@@ -11,13 +12,10 @@ namespace Kokugen.Web.Actions.Card
             _cardService = cardService;
         }
 
-        public AjaxResponse Command(CardInputFormModel inModel)
+        public CardInputFormModel Command(CardInputFormModel inModel)
         {
-            return new AjaxResponse()
-                       {
-                           Item = inModel.Card,
-                           Success = true
-                       };
+
+            return new CardInputFormModel();
         }
     }
 

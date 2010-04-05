@@ -11,7 +11,8 @@ namespace Kokugen.Core.Services
     {
         IEnumerable<Card> GetCards();
         IEnumerable<Card> GetCards(Project project);
-        INotification CreateCard(Card card);
+        INotification SaveCard(Card card);
+        Card GetCard(Guid id);
     }
 
     public class CardService : ICardService
@@ -35,12 +36,17 @@ namespace Kokugen.Core.Services
             return _cardRepository.Query().Where(c => c.Project == project);
         }
 
-        public INotification CreateCard(Card card)
+        public INotification SaveCard(Card card)
         {
             var validationResults = _validator.Validate(card);
             if (validationResults.IsValid())
                 _cardRepository.Save(card);
             return validationResults;
+        }
+
+        public Card GetCard(Guid id)
+        {
+            return _cardRepository.Get(id);
         }
     }
 }

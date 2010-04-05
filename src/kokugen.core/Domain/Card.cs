@@ -9,6 +9,9 @@ namespace Kokugen.Core.Domain
     {
         [Required, MaximumStringLength(2047)]
         public virtual string Title { get; set; }
+
+        public virtual int CardNumber { get; set; }
+
         public virtual string Details { get; set; }
         public virtual int TimeEstimate { get; set; }
         public virtual int Size { get; set; }
@@ -25,6 +28,8 @@ namespace Kokugen.Core.Domain
         [Required]
         public virtual Project Project { get; set; }
         public virtual CardStatus Status { get; set; }
+
+        public virtual BoardColumn Column { get; set; }
     }
 
     public class CardStatus : Enumeration
