@@ -11,7 +11,7 @@ var Card = function(card) {
     this.Size = card.Size;
     this.Priority = card.Priority;
     this.Status = card.Status;
-    this.ReasonBlocked = card.ReasonBlocked;
+    this.ReasonBlocked = card.BlockReason;
 
     var self = this;
 
@@ -38,6 +38,10 @@ var buildCardDisplay = function(scard) {
 
     var element = document.createElement('li');
     $(element).addClass("card").addClass(scard.Color);
+
+
+
+
     var head = document.createElement('div');
     $(head).addClass("card-header");
 
@@ -67,7 +71,7 @@ var buildCardDisplay = function(scard) {
 
     blocked.appendChild(reasonBlocked);
 
-    var reasonForm = document.createElement('form');
+    var reasonForm = document.createElement('div');
     $(reasonForm).addClass("reason-form hidden");
 
     var input = document.createElement('textarea');
@@ -89,6 +93,9 @@ var buildCardDisplay = function(scard) {
 
 
     // End blockage reason
+
+    if (scard.Status == "Ready") { $(element).addClass("ready"); }
+    if (scard.Status == "Blocked") { $(element).addClass("blocked"); $(blocked).removeClass("hidden"); }
 
     element.appendChild(head);
     element.appendChild(body);
@@ -174,6 +181,7 @@ var buildCardDisplay = function(scard) {
             dataType: "json",
             type: "POST"
         });
+        return false;
     }
 
     $(reasonBlocked).dblclick(function() {
@@ -185,7 +193,13 @@ var buildCardDisplay = function(scard) {
         element.handleReasonBlocked($(input).val());
     });
     $(cancelReason).click(function() {
-        element.isBlocked(false);
+        if ($(input).val() != "") {
+            $(reasonForm).addClass("hidden");
+            $(reasonBlocked).removeClass("hidden");
+        }
+        else {
+            element.isBlocked(false);
+        }
     });
 
     element.reasonCallback = function(value, settings) {

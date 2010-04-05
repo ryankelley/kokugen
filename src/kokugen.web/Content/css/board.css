@@ -145,7 +145,7 @@ clear: both;
     overflow: hidden;
     border-bottom:1px solid;
 }
-.reason-blocked form { width: 100%; }
+.reason-blocked div { width: 100%; }
 .reason-blocked { width: 100% }
 .reason-blocked textarea 
 {

@@ -49,7 +49,7 @@ namespace Kokugen.Web.Actions.Card
         public AjaxResponse Blocked(CardBlockedInput model)
         {
             var card = _cardService.GetCard(model.Id);
-            card.Status = model.Status ? CardStatus.Blocked : CardStatus.New;
+            card.Status = model.Status == "Blocked" ? CardStatus.Blocked : CardStatus.New;
             card.BlockReason = model.Reason;
             _cardService.SaveCard(card);
             return new AjaxResponse() { Success = true };
@@ -59,7 +59,7 @@ namespace Kokugen.Web.Actions.Card
     public class CardBlockedInput
     {
         public Guid Id { get; set; }
-        public bool Status { get; set; }
+        public string Status { get; set; }
         public string Reason { get; set; }
     }
 

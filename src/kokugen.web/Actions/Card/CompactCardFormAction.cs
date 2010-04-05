@@ -71,6 +71,7 @@ namespace Kokugen.Web.Actions.Card
         public Guid ColumnId { get; set; }
         public string Color { get; set; }
         public string Status { get; set; }
+        public string BlockReason { get; set; }
     }
 
     public class CompactCardFormInput
