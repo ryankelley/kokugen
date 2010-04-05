@@ -1,10 +1,15 @@
+using System;
 using System.Web.Routing;
+using AutoMapper;
 using FubuCore;
 using FubuMVC.Core;
 using FubuMVC.Core.Runtime;
 using FubuMVC.StructureMap;
 using Kokugen.Core;
+using Kokugen.Core.Domain;
 using Kokugen.Core.Persistence;
+using Kokugen.Web.Actions.Board;
+using Kokugen.Web.Actions.Card;
 using Kokugen.Web.Behaviors;
 using Kokugen.Web.Conventions;
 using StructureMap;
@@ -44,6 +49,19 @@ namespace Kokugen.Web
             fubuBootstrapper.Bootstrap(_routes);
 
             ObjectFactory.Container.StartStartables();
+            ConfigureAutoMapper();
+        }
+
+        private void ConfigureAutoMapper()
+        {
+            Mapper.CreateMap<Card, CardViewDTO>()
+                .ForMember(a => a.Status, b=> b.MapFrom(c => c.Status.DisplayName));
+            Mapper.CreateMap<BoardColumn, BoardColumnDTO>()
+                .ForMember(a => a.Limit, b=> b.UseValue(0));
+            Mapper.CreateMap<CustomBoardColumn, BoardColumnDTO>()
+                .ForMember(a => a.Limit, b=> b.NullSubstitute(0));
+
+            Mapper.AssertConfigurationIsValid();
         }
     }
 

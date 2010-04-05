@@ -39,7 +39,8 @@
 
     function updateBoard(data) {
         var card = new Card(data.Item);
-        $("#backlog-container ul").append(buildCardDisplay(card));
+        _cards.push(card);
+        $("#backlog-container ul.card-list").append(buildCardDisplay(card));
 
         $("#compact-card-container").slideToggle('medium');
         $("form").hintify();
@@ -47,8 +48,7 @@
 
     $(document).ready(function() {
     $("#card-form-compact").validate({ errorClass: "error", ignoreTitle: true, 
-    rules: { digits: { function(element) {
-        if($}}},
+
     invalidHandler: function(e, validator) {
         var errors = validator.numberOfInvalids();
         if (errors) {

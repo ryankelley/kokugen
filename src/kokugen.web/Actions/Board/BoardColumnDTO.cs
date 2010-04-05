@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using Kokugen.Web.Actions.Card;
 
 namespace Kokugen.Web.Actions.Board
 {

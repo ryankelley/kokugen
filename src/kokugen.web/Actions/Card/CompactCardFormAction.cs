@@ -33,7 +33,8 @@ namespace Kokugen.Web.Actions.Card
                                Deadline = model.Card.Deadline, 
                                //AssignedTo = model.Card.AssignedTo, 
                                Details = model.Card.Details,
-                               Project = project
+                               Project = project,
+                               Color = "grey"
                                
                            };
 
@@ -42,7 +43,8 @@ namespace Kokugen.Web.Actions.Card
             var newcard = _cardService.GetCard(card.Id);
             if (notification.IsValid())
             {
-                project.Backlog.AddCard(card);
+                card.Column = project.Backlog;
+                project.AddCard(card);
                 _projectService.SaveProject(project);
                 var output = new CardViewDTO();
                 Mapper.DynamicMap(card, output);
@@ -63,6 +65,10 @@ namespace Kokugen.Web.Actions.Card
         public string Priority { get; set; }
         public DateTime? Deadline { get; set; }
         public int CardNumber { get; set; }
+        public Guid Id { get; set; }
+        public Guid ColumnId { get; set; }
+        public string Color { get; set; }
+        public string Status { get; set; }
     }
 
     public class CompactCardFormInput
