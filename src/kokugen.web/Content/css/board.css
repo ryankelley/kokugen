@@ -129,11 +129,36 @@ border:2px solid;
 clear: both;
 }
 
+.card.ready  
+{
+    border:4px solid #21CD18 !important;
+}
+
+.card.blocked 
+{
+    border:4px solid #D05750 !important;
+    
+}
 .card .card-header 
 {
     cursor: move;
     overflow: hidden;
     border-bottom:1px solid;
+}
+.reason-blocked form { width: 100%; }
+.reason-blocked { width: 100% }
+.reason-blocked textarea 
+{
+    margin-left: 8px;
+    width: 90%;
+    height: 35px;
+    font-size: 12px;
+}
+
+.card-blocked 
+{
+    background-color: #D05750;
+    padding-top:8px;
 }
 
 .card.grey 

@@ -1,69 +1,3 @@
-<<<<<<< HEAD
-var _cards = new Array();
-
-var Card = function(card) {
-
-    this.Id = card.Id;
-    this.ColumnId = card.ColumnId;
-    this.Title = card.Title;
-    this.Color = card.Color;
-    this.Deadline = card.Deadline;
-    this.CardNumber = card.CardNumber;
-    this.Size = card.Size;
-
-    var self = this;
-
-    this.Move = function() {
-        alert("Implement the move function");
-        return false;
-    };
-
-    this.Remove = function() {
-        alert("Implement the remove function.");
-        return false;
-    };
-
-}
-
-
-var buildCardDisplay = function(scard) {
-    if (!(scard instanceof Card)) {
-        throw ("card is not an instance of Card");
-    }
-
-    var element = document.createElement('li');
-    $(element).addClass("card").addClass("grey");
-    var head = document.createElement('div');
-    $(head).addClass("card-header");
-
-    var body = document.createElement('div');
-    $(body).addClass("card-body");
-    // head items
-    var number = document.createElement('div')
-    $(number).addClass("card-number");
-
-    var editLink = document.createElement('a');
-    editLink.appendChild(document.createTextNode(scard.CardNumber));
-
-    number.appendChild(editLink);
-
-    var size = document.createElement('div');
-    $(size).addClass("card-size");
-    size.appendChild(document.createTextNode(scard.Size));
-    var worker = document.createElement('div');
-
-    element.appendChild(head);
-    element.appendChild(body);
-
-    head.appendChild(number);
-    head.appendChild(size);
-    head.appendChild(worker);
-
-    body.appendChild(document.createTextNode(scard.Title));
-
-    return element;
-};
-=======
 var _cards = new Array();
 
 var Card = function(card) {
@@ -76,6 +10,8 @@ var Card = function(card) {
     this.CardNumber = card.CardNumber;
     this.Size = card.Size;
     this.Priority = card.Priority;
+    this.Status = card.Status;
+    this.ReasonBlocked = card.ReasonBlocked;
 
     var self = this;
 
@@ -121,10 +57,44 @@ var buildCardDisplay = function(scard) {
     size.appendChild(document.createTextNode(scard.Size));
     var worker = document.createElement('div');
 
+    // Blockage reason
+    var blocked = document.createElement('div');
+    $(blocked).addClass("card-blocked hidden").attr("title", "Double Click To Edit");
+
+    var reasonBlocked = document.createElement('span');
+    $(reasonBlocked).addClass('reason-blocked');
+    reasonBlocked.appendChild(document.createTextNode(scard.ReasonBlocked));
+
+    blocked.appendChild(reasonBlocked);
+
+    var reasonForm = document.createElement('form');
+    $(reasonForm).addClass("reason-form hidden");
+
+    var input = document.createElement('textarea');
+    $(input).attr("cols", "15").attr("rows", "5").attr("name", "value");
+
+    input.appendChild(document.createTextNode(scard.ReasonBlocked));
+
+    blocked.appendChild(reasonForm);
+    reasonForm.appendChild(input);
+
+    var submitReason = document.createElement('button');
+    submitReason.appendChild(document.createTextNode('OK'));
+    var cancelReason = document.createElement('button');
+    cancelReason.appendChild(document.createTextNode('Cancel'));
+
+    reasonForm.appendChild(submitReason);
+    reasonForm.appendChild(cancelReason);
+
+
+
+    // End blockage reason
+
     element.appendChild(head);
     element.appendChild(body);
     element.appendChild(colors);
     element.appendChild(myTools);
+    element.appendChild(blocked);
 
     head.appendChild(number);
     head.appendChild(size);
@@ -158,6 +128,75 @@ var buildCardDisplay = function(scard) {
         });
     }
 
+    element.isReady = function(status) {
+
+        if (status) {
+            this.Status = "Ready";
+            $(element).addClass("ready");
+        }
+        else {
+            this.Status = "New";
+            $(element).removeClass("ready");
+        }
+
+        $.ajax({
+            url: "/card/ready",
+            data: { Id: scard.Id, Status: status },
+            dataType: "json",
+            type: "POST"
+        });
+    }
+
+    element.isBlocked = function(value) {
+        if (value) {
+            $(element).addClass("blocked");
+            $(blocked).removeClass("hidden");
+            $(reasonBlocked).dblclick();
+        }
+        else {
+            $(element).removeClass("blocked");
+            $(blocked).addClass("hidden");
+        }
+
+        scard.Status = value ? "Blocked" : "New";
+
+    }
+
+    element.handleReasonBlocked = function(value) {
+        element.updateBlocked(value);
+    }
+
+    element.updateBlocked = function(reason) {
+
+        $.ajax({
+            url: "/card/blocked",
+            data: { Id: scard.Id, Reason: reason, Status: scard.Status },
+            dataType: "json",
+            type: "POST"
+        });
+    }
+
+    $(reasonBlocked).dblclick(function() {
+        $(reasonBlocked).addClass("hidden");
+        $(reasonForm).removeClass("hidden");
+    });
+
+    $(submitReason).click(function() {
+        element.handleReasonBlocked($(input).val());
+    });
+    $(cancelReason).click(function() {
+        element.isBlocked(false);
+    });
+
+    element.reasonCallback = function(value, settings) {
+        alert('the form was canceled');
+    }
+
+    //$(reasonBlocked).editable(element.handleReasonBlocked, { type: 'textarea', cancel: 'Cancel', submit: 'OK', onblur: 'ignore', cols: 5, rows: 10, event: 'dblclick', callback: element.reasonCallback });
+
+
+
+
     $(head).click(function() {
         $(this).siblings("#card-toolbar").slideToggle();
     });
@@ -165,6 +204,7 @@ var buildCardDisplay = function(scard) {
     $(element).hover(function() { $(this).addClass("hover"); }, function() { $(this).removeClass("hover"); });
     return element;
 };
+
 
 function cardMoved(event, ui) {
     $(ui.item).each(function() {
@@ -224,20 +264,15 @@ function buildToolbar(card) {
     var readyLink = buildAnchor("Ready", "#", "card-toolbar-ready");
     ready.appendChild(readyLink);
 
+   
+
     var blocked = document.createElement('li');
     blocked.setAttribute("class", "checkbox");
 
     var blockedLink = buildAnchor("Blocked", "#", "card-toolbar-blocked");
     blocked.appendChild(blockedLink);
 
-    if (card.Status == "Ready") {
-        $(blockedLink).addClass("hidden");
-        $(readyLink).addClass("checked");
-    }
-    else if (card.Status == "Blocked") {
-    $(readyLink).addClass("hidden");
-    $(blockedLink).addClass("checked");
-    }
+    
 
     element.appendChild(up);
     element.appendChild(down);
@@ -246,6 +281,42 @@ function buildToolbar(card) {
     element.appendChild(ready);
     element.appendChild(blocked);
 
+    if (card.Status == "Ready") {
+        $(blockedLink).addClass("hidden");
+        $(readyLink).addClass("checked");
+    }
+    else if (card.Status == "Blocked") {
+        $(readyLink).addClass("hidden");
+        $(blockedLink).addClass("checked");
+    }
+
+    $(readyLink).click(function() {
+        if ($(readyLink).hasClass("checked")) {
+            $(readyLink).removeClass("checked");
+            readyLink.parentNode.parentNode.parentNode.isReady(false);
+            $(blockedLink).removeClass("hidden");
+        }
+        else {
+            $(readyLink).addClass("checked");
+            readyLink.parentNode.parentNode.parentNode.isReady(true);
+            $(blockedLink).addClass("hidden");
+        }
+
+    });
+
+    $(blockedLink).click(function() {
+    if ($(blockedLink).hasClass("checked")) {
+        $(blockedLink).removeClass("checked");
+        blockedLink.parentNode.parentNode.parentNode.isBlocked(false);
+        $(readyLink).removeClass("hidden");
+    }
+    else {
+        $(blockedLink).addClass("checked");
+        blockedLink.parentNode.parentNode.parentNode.isBlocked(true);
+        $(readyLink).addClass("hidden");
+    }
+    });
+    
     return element;
 };
 
@@ -401,4 +472,4 @@ function determineColor(element) {
         return "teal"; }
   
 }
->>>>>>> Lots of work on the JS for board
+

@@ -1,4 +1,5 @@
 using System;
+using Kokugen.Core.Domain;
 using Kokugen.Core.Services;
 using Kokugen.Web.Conventions;
 
@@ -35,6 +36,37 @@ namespace Kokugen.Web.Actions.Card
 
             return new AjaxResponse(){Success = true};
         }
+
+        public AjaxResponse Ready(CardReadyInput model)
+        {
+            var card = _cardService.GetCard(model.Id);
+            card.Status = model.Status ? CardStatus.Ready : CardStatus.New;
+            _cardService.SaveCard(card);
+
+            return new AjaxResponse() {Success = true};
+        }
+
+        public AjaxResponse Blocked(CardBlockedInput model)
+        {
+            var card = _cardService.GetCard(model.Id);
+            card.Status = model.Status ? CardStatus.Blocked : CardStatus.New;
+            card.BlockReason = model.Reason;
+            _cardService.SaveCard(card);
+            return new AjaxResponse() { Success = true };
+        }
+    }
+
+    public class CardBlockedInput
+    {
+        public Guid Id { get; set; }
+        public bool Status { get; set; }
+        public string Reason { get; set; }
+    }
+
+    public class CardReadyInput
+    {
+        public Guid Id { get; set; }
+        public bool Status { get; set; }
     }
 
     public class CardColorChangeInput

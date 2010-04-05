@@ -1,5 +1,6 @@
 using System;
 using FubuMVC.Core;
+using Kokugen.Core.Domain;
 using Kokugen.Core.Services;
 using AutoMapper;
 namespace Kokugen.Web.Actions.Card
@@ -34,7 +35,8 @@ namespace Kokugen.Web.Actions.Card
                                //AssignedTo = model.Card.AssignedTo, 
                                Details = model.Card.Details,
                                Project = project,
-                               Color = "grey"
+                               Color = "grey",
+                               Status = CardStatus.New
                                
                            };
 

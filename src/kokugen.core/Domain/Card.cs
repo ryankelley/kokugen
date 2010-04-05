@@ -42,6 +42,8 @@ namespace Kokugen.Core.Domain
         }
 
         public virtual BoardColumn Column { get; set; }
+
+        public virtual string BlockReason { get; set; }
     }
 
     public class CardStatus : Enumeration
