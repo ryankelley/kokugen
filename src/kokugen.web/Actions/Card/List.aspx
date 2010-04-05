@@ -6,5 +6,4 @@
 </asp:Content>
 <asp:Content ID="THISCONTENTAREAID" ContentPlaceHolderID="mainContent" runat="server">
     <p>Hello, world!</p>
-    <% this.Partial(new CardInputFormModel()); %>
 </asp:Content>

@@ -132,6 +132,8 @@
     <Compile Include="Persistence\FluentMappings\CAPersistenceModel.cs" />
     <Compile Include="Persistence\FluentMappings\DomainEntityMap.cs" />
     <Compile Include="Persistence\IRepository.cs" />
+    <Compile Include="Persistence\Overrides\BoardColumnMappingOverride.cs" />
+    <Compile Include="Persistence\Overrides\CardMappingOverride.cs" />
     <Compile Include="Persistence\Overrides\ProjectMappingOverride.cs" />
     <Compile Include="Persistence\Repositories\CompanyRepository.cs" />
     <Compile Include="Persistence\Repositories\ICardRepository.cs" />

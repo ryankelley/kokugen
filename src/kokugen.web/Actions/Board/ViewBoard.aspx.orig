@@ -23,9 +23,14 @@
             $("#compact-card-container").slideToggle('slow');
         });
 
+<<<<<<< HEAD
+        $(".ui-sortable").sortable({ connectWith: '.ui-sortable' });
+
+=======
         $(".ui-sortable").sortable({ connectWith: '.ui-sortable' });
 
         
+>>>>>>> dec1711638c3cbfb142e9afa5c40b699f25a3b84
     });
 
     function setCardColumnHeight() {

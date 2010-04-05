@@ -129,7 +129,8 @@ h1{
 
 .clear { clear: both;}
 .hidden { display:none;}
-input.error 
+
+input.error, textarea.error
 {
     border: solid thin red;
 }
@@ -371,8 +372,17 @@ vertical-align:top;
 {
     background:url("../images/add_orng.png") no-repeat scroll 5px center #666666;
 }
+
+a.icon 
+{
+    color: #333;
+    
 }
 
+a.icon img 
+{
+    
+}
 =======
 /* Global */
 
@@ -758,4 +768,4 @@ a.icon img
 {
     
 }
->>>>>>> More work on the board view with cards
+>>>>>>> dec1711638c3cbfb142e9afa5c40b699f25a3b84

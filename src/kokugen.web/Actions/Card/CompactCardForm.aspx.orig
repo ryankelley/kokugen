@@ -45,6 +45,17 @@
         $("form").hintify();
     }
 
+<<<<<<< HEAD
+    $(document).ready(function() {
+        $("#card-form-compact").validate({ errorClass: "error" });
+        $('#save-button').submit(function() {
+            ValidateAndSave(updateBoard, $("#card-form-compact"));
+            return false;
+=======
+        $("#compact-card-container").slideToggle('medium');
+        $("form").hintify();
+    }
+
     $(document).ready(function() {
     $("#card-form-compact").validate({ errorClass: "error", ignoreTitle: true, 
     rules: { digits: { function(element) {
@@ -65,6 +76,7 @@
             return false;
             
  
+>>>>>>> dec1711638c3cbfb142e9afa5c40b699f25a3b84
         });
 
     });

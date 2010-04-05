@@ -60,7 +60,7 @@ namespace Kokugen.Web.Conventions
             Editors.IfPropertyIs<Int32>().Attr("max", Int32.MaxValue);
             Editors.IfPropertyIs<Int16>().Attr("max", Int16.MaxValue);
             Editors.IfPropertyIs<Int64>().Attr("max", Int64.MaxValue);
-            Editors.IfPropertyTypeIs(IsIntegerBased).AddClass("integer");
+            Editors.IfPropertyTypeIs(IsIntegerBased).AddClass("digits");
             Editors.IfPropertyTypeIs(IsFloatingPoint).AddClass("number");
         }
 
