@@ -17,7 +17,7 @@ namespace Kokugen.Tests
                     .CreateSessionSource());
 
             For<ISession>().Use(c => c.GetInstance<ISessionSource>().CreateSession());
-            For<DatabaseSettings>().Use(c =>
+            For<IConfigurationProperties>().Use(c =>
             {
                 var settingsProvider = c.GetInstance<ISettingsProvider>();
                 return settingsProvider.SettingsFor<DatabaseSettings>();
