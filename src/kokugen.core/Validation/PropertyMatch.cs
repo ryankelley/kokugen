@@ -1,8 +1,4 @@
-#region Using Directives
-
-using FubuMVC.Core.Util;
-
-#endregion
+using FubuCore.Reflection;
 
 namespace Kokugen.Core.Validation
 {

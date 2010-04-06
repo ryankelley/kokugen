@@ -8,18 +8,14 @@ namespace Kokugen.Web.Actions.Project
     public class ListAction
     {
         private readonly IProjectService _projectService;
-        private readonly IValueObjectInitializer _initLists;
 
-        public ListAction(IProjectService projectService, IValueObjectInitializer initLists)
+        public ListAction(IProjectService projectService)
         {
             _projectService = projectService;
-            _initLists = initLists;
         }
 
         public ProjectListModel Query( ProjectListModel projectListModel)
         {
-            _initLists.Start();
-
             return new ProjectListModel
                        {
                            Projects = _projectService.ListProjects()

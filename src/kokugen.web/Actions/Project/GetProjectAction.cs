@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Kokugen.Core.Services;
 using Kokugen.Web.Conventions;
 
@@ -16,7 +18,8 @@ namespace Kokugen.Web.Actions.Project
         public ProjectModel Query(GetProjectModel model)
         {
             var project = _projectService.GetProjectFromId(model.Id);
-            return new ProjectModel() {Project = project };
+            var timeRecords = project.GetTimeRecords().ToList();
+            return new ProjectModel() {Project = project, TimeRecords = timeRecords};
         }
     }
 
@@ -28,5 +31,7 @@ namespace Kokugen.Web.Actions.Project
     public class ProjectModel
     {
         public Core.Domain.Project Project { get; set; }
+
+        public IList<Core.Domain.TimeRecord> TimeRecords { get; set; }
     }
 }

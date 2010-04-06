@@ -17,6 +17,7 @@ DBNAME = "KokugenData"
 VERSIONEDDB = "KokugenDataVersioned"
 DBSCRIPTS = "dbChangeScripts"
 DBSERVER = "localhost"
+VIRDBSERVER = "CASQLSRV01"
 
 
 props = { :archive => "build" }
@@ -139,6 +140,35 @@ task :dbCreateVersioned do
 	
 	Tarantino.manageSQLDatabase :dbname => DBNAME+'Versioned', :dbserver => DBSERVER, :action => 'Create', :scriptdir => DBSCRIPTS
 	
+end
+
+desc "Creates the Development Database"
+task :dbCreateDev do
+	Tarantino.manageSQLDatabase :dbname => DBNAME+'Dev', :dbserver => DBSERVER, :action => 'Drop', :scriptdir => DBSCRIPTS
+	
+	Tarantino.manageSQLDatabase :dbname => DBNAME+'Dev', :dbserver => DBSERVER, :action => 'Create', :scriptdir => DBSCRIPTS
+	
+	Tarantino.manageSQLDatabase :dbname => DBNAME+'Dev', :dbserver => DBSERVER, :action => 'Update', :scriptdir => DBSCRIPTS
+end
+
+desc "Creates the Development Database"
+task :dbCreateDesign do
+	Tarantino.manageSQLDatabase :dbname => DBNAME+'Dev', :dbserver => VIRDBSERVER, :action => 'Drop', :scriptdir => DBSCRIPTS
+	
+	Tarantino.manageSQLDatabase :dbname => DBNAME+'Dev', :dbserver => VIRDBSERVER, :action => 'Create', :scriptdir => DBSCRIPTS
+	
+	Tarantino.manageSQLDatabase :dbname => DBNAME+'Dev', :dbserver => VIRDBSERVER, :action => 'Update', :scriptdir => DBSCRIPTS
+end
+
+desc "Update the database"
+task :dbUpdateDesign do
+Tarantino.manageSQLDatabase :dbname => DBNAME+'Dev', :dbserver => VIRDBSERVER, :action => 'Update', :scriptdir => DBSCRIPTS
+end
+
+
+desc "Update the database"
+task :dbUpdateDev do
+Tarantino.manageSQLDatabase :dbname => DBNAME+'Dev', :dbserver => DBSERVER, :action => 'Update', :scriptdir => DBSCRIPTS
 end
 
 desc "Update the database"

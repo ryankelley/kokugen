@@ -1,4 +1,5 @@
 <%@ Page Language="C#" AutoEventWireup="true" Inherits="Kokugen.Web.Actions.Project.List" MasterPageFile="~/Shared/Site.Master"%>
+<%@ Import Namespace="Kokugen.Web.Actions.TaskCategory"%>
 <%@ Import Namespace="FubuMVC.Core.Urls"%>
 <%@ Import Namespace="Kokugen.Web.Actions.Project"%>
 <asp:Content ID="ProjectListHead" ContentPlaceHolderID="head" runat="server">
@@ -6,7 +7,9 @@
 </asp:Content>
 <asp:Content ID="ProjectListContent" ContentPlaceHolderID="mainContent" runat="server">
 <body>
-    <div><a href="#" onclick="showProjectForm();"><img src="/content/images/add_button.png" alt="add project" /></a></div>
+<div class="upper-meta">
+    <div class="add-caption"><a href="#" onclick="showProjectForm();"><img src="/content/images/add_button.png" alt="add project" />Add New Project</a></div>
+</div>
     <ul class="project-list"><%= this.PartialForEach(x => x.Projects).Using<ProjectItem_Control>() %></ul>
     
     <% this.Partial(new ProjectFormModel()); %>

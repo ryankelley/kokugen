@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using FubuMVC.Core;
-using Kokugen.Core.Attributes;
 using Kokugen.Core.Validation;
 
 namespace Kokugen.Core.Domain
@@ -54,6 +52,16 @@ namespace Kokugen.Core.Domain
 
         #region Board Columns
 
+        public virtual IEnumerable<BoardColumn> GetAllBoardColumns()
+        {
+            var output = new List<BoardColumn>();
+            output.Add(Backlog);
+            output.AddRange(GetBoardColumns().OrderBy(x => x.ColumnOrder).Select(x => x as BoardColumn));
+            output.Add(Archive);
+
+            return output;
+        }
+
         public virtual IEnumerable<CustomBoardColumn> GetBoardColumns()
         {
             return _boardColumns.AsEnumerable();
@@ -62,7 +70,7 @@ namespace Kokugen.Core.Domain
         public virtual void AddBoardColumn(CustomBoardColumn column)
         {
             if(_boardColumns.Contains(column)) return;
-
+            column.Project = this;
             _boardColumns.Add(column);
         }
 
@@ -73,6 +81,27 @@ namespace Kokugen.Core.Domain
         }
 
         #endregion
+
+        private IList<Card> _cards = new List<Card>();
+
+        public virtual IEnumerable<Card> GetCards()
+        {
+            return _cards.AsEnumerable();
+        }
+
+        public virtual void AddCard(Card card)
+        {
+            if (_cards.Contains(card)) return;
+
+            card.Project = this;
+            _cards.Add(card);
+        }
+
+        public virtual void RemoveCard(Card card)
+        {
+            if (_cards.Contains(card))
+                _cards.Remove(card);
+        }
 
         public virtual void ComputeTotalTimeAndSessions()
         {

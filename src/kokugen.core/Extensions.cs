@@ -178,14 +178,12 @@ namespace Kokugen.Core
         }
 
         [DebuggerStepThrough]
-        public static IEnumerable<T> Each<T>(this IEnumerable<T> values, Action<T> eachAction)
+        public static void Each<T>(this IEnumerable<T> values, Action<T> eachAction)
         {
             foreach (T item in values)
             {
                 eachAction(item);
             }
-
-            return values;
         }
 
         [DebuggerStepThrough]

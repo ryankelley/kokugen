@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
+using FubuCore;
+using FubuCore.Binding;
 using FubuMVC.Core;
-using FubuMVC.Core.Models;
 
 namespace Kokugen.Core.Persistence
 {

@@ -1,5 +1,6 @@
 using System;
 using FubuMVC.UI.Configuration;
+using Kokugen.Core;
 
 namespace Kokugen.Web.Conventions
 {

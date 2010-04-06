@@ -41,7 +41,7 @@
     }
 
     $(document).ready(function() {
-        $("#company-form").validate({ errorClass: "ui-state-error" });
+        $("#company-form").validate({ errorClass: "error" });
 
         $("#company-form-container").dialog({ title: "Add Company", autoOpen: false, width: 450, buttons: { "Cancel": function() { $("#company-form-container").dialog('close'); }, "Save": function() { validateAndSave(); } } });
 

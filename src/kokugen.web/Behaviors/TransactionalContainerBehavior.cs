@@ -1,6 +1,6 @@
 using System;
 using FubuMVC.Core.Behaviors;
-using FubuMVC.Core.Runtime;
+using FubuCore.Binding;
 using Kokugen.Core;
 using StructureMap;
 

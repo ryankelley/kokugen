@@ -1,4 +1,5 @@
 using System.Web.UI;
+using FubuCore;
 using FubuMVC.Core;
 using FubuMVC.Core.View;
 using HtmlTags;

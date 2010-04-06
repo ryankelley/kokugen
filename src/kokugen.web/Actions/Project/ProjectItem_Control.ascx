@@ -1,5 +1,5 @@
 <%@ Control Language="C#" AutoEventWireup="true" Inherits="Kokugen.Web.Actions.Project.ProjectItem_Control"  %>
-<li class="project first">
+<%@ Import Namespace="StructureMap.Query"%>
 <a title="Click to view this project" href="/project/<%= Model.Id %>">
     <span class="project-name">
 		<%= this.DisplayFor(x => x.Name) %>
@@ -9,6 +9,8 @@
 	</span>
 	<div class="project-owner">
 		<%= this.DisplayFor(x => x.Company.Name) %>
+
 	</div>
 </a>
-</li>
+
+

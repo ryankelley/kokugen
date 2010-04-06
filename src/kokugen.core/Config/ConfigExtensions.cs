@@ -1,7 +1,6 @@
 #region Using Directives
 
 using System.Configuration;
-using FubuMVC.Core.Util;
 using HtmlTags;
 using Kokugen.Core.Domain;
 

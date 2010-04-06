@@ -34,7 +34,7 @@
     }
 
     $(document).ready(function() {
-        $("#project-form").validate({ errorClass: "ui-state-error" });
+        $("#project-form").validate({ errorClass: "error" });
         $("#project-form-container").dialog({ title: "Add Project", autoOpen: false, buttons: { "Save": function() { validateAndSave(); } } });
     });
 </script>

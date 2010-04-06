@@ -1,8 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using FubuCore.Binding;
 using FubuMVC.Core.Runtime;
-using FubuMVC.Core.Util;
 using Kokugen.Core.Persistence;
 using StructureMap;
 using StructureMap.Pipeline;
@@ -15,6 +15,16 @@ namespace Kokugen.Core
         {
             var transactionProcessor = new TransactionProcessor(container);
             transactionProcessor.WithinTransaction(action);
+            
+        }
+
+        public static void StartStartables(this IContainer container)
+        {
+            container.ExecuteInTransaction(c => c.Model.GetAllPossible<IStartable>()
+#if !DEBUG
+                        .Where(x => !x.GetType().HasCustomAttribute<DebugOnlyAttribute>())
+#endif
+                        .Each(x => x.Start()));
             
         }
     }

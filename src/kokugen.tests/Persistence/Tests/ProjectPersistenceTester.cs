@@ -35,7 +35,8 @@ namespace Kokugen.Tests.Persistence.Tests
             Specification
                 .CheckProperty(x => x.FirstName, "John")
                 .CheckProperty(x => x.LastName, "User")
-                .CheckProperty(x => x.EmailAddress, "john@john.com");
+                .CheckProperty(x => x.EmailAddress, "john@john.com")
+                .VerifyTheMappings();
         }
     }
 }
