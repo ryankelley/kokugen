@@ -267,12 +267,14 @@
     <Content Include="Content\images\down.png" />
     <Content Include="Content\images\edit.png" />
     <Content Include="Content\images\h-bar.jpg" />
+    <Content Include="Content\images\h-bar2.jpg" />
     <Content Include="Content\images\head.jpg" />
     <Content Include="Content\images\head.png" />
     <Content Include="Content\images\hover.png" />
     <Content Include="Content\images\icon.png" />
     <Content Include="Content\images\kokugen-logo.png" />
     <Content Include="Content\images\logo.png" />
+    <Content Include="Content\images\logo2.png" />
     <Content Include="Content\images\s-bar.jpg" />
     <Content Include="Content\images\sel.png" />
     <Content Include="Content\images\up.png" />

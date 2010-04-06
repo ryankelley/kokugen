@@ -3,25 +3,22 @@
 
 
     <div class="col-title" text-align=left>
-    <tr>
-        <td>
+    <ul>
+        <li>
             <%= this.DisplayFor(x => x.Description) %>
-        </td>
-        <td>
+        
             <%= this.DisplayFor(x => x.Task.Name) %>
-        </td>
-        <td>
+        
             <%= this.DisplayFor(x => x.Duration) %>
-        </td>
-        <td>
-             <%= this.LinkTo(new RemoveTimeRecordInput()
+        
+            <%= this.LinkTo(new RemoveTimeRecordInput()
                                         {
-                                            Id=Model.Id
+                                            Id = Model.Id
                                         }
                                                      ).Text("Delete") %>
-        </td>
+        </li>
               
-	</tr>	
+	</ul>	
 	</div>
 	
 	
