@@ -147,7 +147,7 @@ clear: both;
 }
 .reason-blocked div { width: 100%; }
 .reason-blocked { width: 100% }
-.reason-blocked textarea 
+.reason-form textarea 
 {
     margin-left: 8px;
     width: 90%;

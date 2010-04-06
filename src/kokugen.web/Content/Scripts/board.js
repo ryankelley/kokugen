@@ -75,7 +75,7 @@ var buildCardDisplay = function(scard) {
     $(reasonForm).addClass("reason-form hidden");
 
     var input = document.createElement('textarea');
-    $(input).attr("cols", "15").attr("rows", "5").attr("name", "value");
+    $(input).attr("cols", "15").attr("rows", "5").attr("name", "value").addClass("required");
 
     input.appendChild(document.createTextNode(scard.ReasonBlocked));
 
@@ -155,6 +155,7 @@ var buildCardDisplay = function(scard) {
     }
 
     element.isBlocked = function(value) {
+        scard.Status = value ? "Blocked" : "New";
         if (value) {
             $(element).addClass("blocked");
             $(blocked).removeClass("hidden");
@@ -163,25 +164,38 @@ var buildCardDisplay = function(scard) {
         else {
             $(element).removeClass("blocked");
             $(blocked).addClass("hidden");
+            element.updateBlocked(false);
         }
-
-        scard.Status = value ? "Blocked" : "New";
 
     }
 
     element.handleReasonBlocked = function(value) {
-        element.updateBlocked(value);
+        element.updateBlocked(true, value);
     }
 
-    element.updateBlocked = function(reason) {
+    element.updateBlocked = function(status, reason) {
+        if (status) {
+            var isValid = ($(input).val() != "" && $(input).val() != undefined);
+            if (isValid) {
+                $.ajax({
+                    url: "/card/blocked",
+                    data: { Id: scard.Id, Reason: reason, Status: scard.Status },
+                    dataType: "json",
+                    type: "POST"
+                });
 
-        $.ajax({
-            url: "/card/blocked",
-            data: { Id: scard.Id, Reason: reason, Status: scard.Status },
-            dataType: "json",
-            type: "POST"
-        });
-        return false;
+                scard.ReasonBlocked = reason;
+                return false;
+            }
+        }
+        else {
+            $.ajax({
+                url: "/card/blocked",
+                data: { Id: scard.Id, Reason: "", Status: scard.Status },
+                dataType: "json",
+                type: "POST"
+            });
+        }
     }
 
     $(reasonBlocked).dblclick(function() {
@@ -190,10 +204,13 @@ var buildCardDisplay = function(scard) {
     });
 
     $(submitReason).click(function() {
-        element.handleReasonBlocked($(input).val());
+        element.updateBlocked(true, $(input).val());
+        $(reasonForm).addClass("hidden");
+        $(reasonBlocked).removeClass("hidden");
+        $(reasonBlocked).html(scard.ReasonBlocked);
     });
     $(cancelReason).click(function() {
-        if ($(input).val() != "") {
+        if (scard.Status == "Blocked") {
             $(reasonForm).addClass("hidden");
             $(reasonBlocked).removeClass("hidden");
         }
@@ -201,15 +218,6 @@ var buildCardDisplay = function(scard) {
             element.isBlocked(false);
         }
     });
-
-    element.reasonCallback = function(value, settings) {
-        alert('the form was canceled');
-    }
-
-    //$(reasonBlocked).editable(element.handleReasonBlocked, { type: 'textarea', cancel: 'Cancel', submit: 'OK', onblur: 'ignore', cols: 5, rows: 10, event: 'dblclick', callback: element.reasonCallback });
-
-
-
 
     $(head).click(function() {
         $(this).siblings("#card-toolbar").slideToggle();
