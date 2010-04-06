@@ -15,7 +15,7 @@ body{
 }
 
 #head {
-	background:url("../images/h-bar.jpg") repeat-x scroll left top transparent;
+	background:url("../images/h-bar2.jpg") repeat-x scroll left top transparent;
 	height: 102px;
 }
 
@@ -381,4 +381,11 @@ a.icon
 a.icon img 
 {
     
+}
+
+.time-records ul
+{
+    margin-bottom: 5px;
+    margin-left:10px;
+    margin-right:10px;
 }

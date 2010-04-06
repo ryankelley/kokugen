@@ -12,25 +12,30 @@
 <div class="upper-meta">
     <div class="add-caption" ><a href="#" onclick="showTimeRecordForm();"><img src="/content/images/add_button.png" alt="add time record" />Add New TimeRecord</a></div>
 </div>
-
-    <table>
-        <thead>    
-            <tr>
-                Description
-            </tr>
-            <tr>
-                Task
-            </tr>
-            <tr>
-                Duration
-            </tr>
-        </thead>
-        <tbody>
+<div class="timerecords">
+    
+         
+            <ul>
+                <li>
+                    <h2><%=Model.Project.Name+" "%>Time Records</h2>
+                </li>                      
+           
+                <li>
+                    <h3>
+                    Description
+                    Task
+                    Duration                    
+                    </h3>
+                </li>
+            </ul>
+       
+        
             
             <%= this.PartialForEach(p => p.TimeRecords).Using<TimeRecord_Control>() %>
-        </tbody>
-    </table>
+            <ul id="companyList"></ul>
+       
     
+    </div>
     
    <div id ="Board Link"><%= this.LinkTo(new BoardConfigurationModel{ Id = Model.Project.Id}).Text("Configure Board Columns") %></div> 
    
@@ -55,6 +60,65 @@
     }    
         
     </script>
+<%--    <script type="text/javascript">--%>
+<%--    var addCompanyUrl = "<%= Get<IUrlRegistry>().UrlFor(new TimeRecordFormModel()) %>";--%>
+<%--    var removeCompanyUrl = "<%= Get<IUrlRegistry>().UrlFor(new RemoveTimeRecordInput()) %>";--%>
+<%--    var companies = <%= Model.TimeRecords.ToJson() %>;--%>
+<%----%>
+<%--    $(document).ready(function(){--%>
+<%--        var companyList = $("#companyList");--%>
+<%----%>
+<%--        var addCompanyToList = function(company){--%>
+<%--            var listItem = $("<li>").text(company.Name);--%>
+<%--            listItem.append( $("<a>").text("x")--%>
+<%--                .attr("href", "#")--%>
+<%--                .addClass("removeLink")--%>
+<%--                .data("companyId", company.Id) );--%>
+<%--            companyList.append( listItem );--%>
+<%--        };--%>
+<%--        --%>
+<%--          var saveCompanyResponse = function(data){--%>
+<%--            if (data.Success !== true) {--%>
+<%--                alert("failed to add your time record");--%>
+<%--                return;--%>
+<%--            }--%>
+<%--            --%>
+<%--            $("#company-name").val("");--%>
+<%--            addCompanyToList(data.Item);--%>
+<%--        };--%>
+<%--        --%>
+<%--        $.each(companies, function(i, elem){--%>
+<%--            addCompanyToList(elem);--%>
+<%--        });--%>
+<%--        --%>
+<%--        $(".removeLink").live("click", function(){--%>
+<%--            var link = $(this);--%>
+<%--            var companyId = link.data("companyId");--%>
+<%--            --%>
+<%--            var onSuccess = function(data){--%>
+<%--                if (data.Success !== true){--%>
+<%--                    alert("failed to remove");--%>
+<%--                    return;--%>
+<%--                }--%>
+<%--                --%>
+<%--                var listItem = link.parent("li");--%>
+<%--                listItem.remove();--%>
+<%--            }--%>
+<%--            --%>
+<%--            $.ajax({--%>
+<%--                url: removeCompanyUrl,--%>
+<%--                data: {Id: companyId},--%>
+<%--                success: onSuccess,--%>
+<%--                dataType: "json",--%>
+<%--                type: "DELETE"--%>
+<%--            });--%>
+<%--        });--%>
+<%--        --%>
+<%--        --%>
+<%--    });--%>
+<%----%>
+<%----%>
+<%--</script>--%>
 </body>
     
 

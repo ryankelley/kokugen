@@ -13,6 +13,7 @@ namespace Kokugen.Core.Services
         IEnumerable<TaskCategory> GetAllCategories();
         INotification SaveTask(TaskCategory taskCategory);
         TaskCategory Get(Guid taskId);
+        void DeleteTask(Guid guid);
     }
 
     public class TaskCategoryService : ITaskCategoryService
@@ -46,6 +47,12 @@ namespace Kokugen.Core.Services
         public TaskCategory Get(Guid taskId)
         {
             return _taskCategoryRepository.Get(taskId);
+        }
+
+        public void DeleteTask(Guid guid)
+        {
+            var task=_taskCategoryRepository.Get(guid);
+            _taskCategoryRepository.Delete(task);
         }
     }
 }
