@@ -20,8 +20,11 @@ namespace Kokugen.Tests
             For<IConfigurationProperties>().Use(c =>
             {
                 var settingsProvider = c.GetInstance<ISettingsProvider>();
-                return settingsProvider.SettingsFor<DatabaseSettings>();
+                return settingsProvider.SettingsFor<SpecificationSettings>();
             });
         }
     }
+
+    public class SpecificationSettings :DatabaseSettings{}
+
 }
