@@ -23,19 +23,6 @@
         });
 
         $(".ui-sortable").sortable({ connectWith: '.ui-sortable', placeholder: 'phase-placeholder', forcePlaceholderSize: true,
-<<<<<<< HEAD
-            receive: cardMoved });
-
-        for(var i = 0; i < cards.length; i++)
-        {
-            var newCard = new Card(cards[i]);
-            _cards.push(newCard);
-            
-            var hcard = buildCardDisplay(newCard);
-            
-            $('#'+ newCard.ColumnId).append(hcard);
-        }
-=======
             receive: cardMoved });
 $(".ui-sortable").disableSelection();
         for(var i = 0; i < cards.length; i++)
@@ -47,7 +34,6 @@ $(".ui-sortable").disableSelection();
             
             $('#'+ newCard.ColumnId).append(hcard);
         }
->>>>>>> Column configuration is done and so is most board stuff
         
         $("div.column").each(function() {
         var width = 100 / $("div.column").length;
