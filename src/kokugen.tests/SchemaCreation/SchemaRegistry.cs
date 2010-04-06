@@ -25,7 +25,7 @@ namespace Kokugen.Tests.SchemaCreation
             });
 
             For<ITransactionBoundary>().Use<NHibernateTransactionBoundary>();
-            For<DatabaseSettings>().Use(c =>
+            For<IConfigurationProperties>().Use(c =>
             {
                 var settingsProvider = c.GetInstance<ISettingsProvider>();
                 return settingsProvider.SettingsFor<DatabaseSettings>();

@@ -6,7 +6,12 @@ using FubuMVC.Core;
 
 namespace Kokugen.Core.Persistence
 {
-    public class DatabaseSettings
+    public interface IConfigurationProperties
+    {
+        IDictionary<string, string> GetProperties();
+    }
+
+    public class DatabaseSettings : IConfigurationProperties
     {
         public string Provider { get; set; }
         public string Driver { get; set; }

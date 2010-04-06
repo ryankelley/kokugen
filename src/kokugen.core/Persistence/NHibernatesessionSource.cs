@@ -10,14 +10,14 @@ namespace Kokugen.Core.Persistence
 {
     public class NHibernatesessionSource : ISessionSource
     {
-        private readonly DatabaseSettings _databaseSettings;
+        private readonly IConfigurationProperties _configurationProperties;
         private readonly object _factorySyncRoot = new object();
         private Configuration _configuration;
         private ISessionFactory _sessionFactory;
 
-        public NHibernatesessionSource(DatabaseSettings databaseSettings)
+        public NHibernatesessionSource(IConfigurationProperties configurationProperties)
         {
-            _databaseSettings = databaseSettings;
+            _configurationProperties = configurationProperties;
             if(_sessionFactory != null) return;
 
             lock(_factorySyncRoot)
@@ -43,7 +43,7 @@ namespace Kokugen.Core.Persistence
         private FluentConfiguration BuildFluentConfig()
         {
             return Fluently.Configure()
-                .Database(new PersistenceConfigurer(_databaseSettings))
+                .Database(new PersistenceConfigurer(_configurationProperties))
                 .Mappings(x =>
                               {
                                   x.AutoMappings.Add(new AutoPersistenceModelGenerator().Generate());
@@ -88,9 +88,9 @@ namespace Kokugen.Core.Persistence
     }
     public class PersistenceConfigurer : IPersistenceConfigurer
     {
-        private readonly DatabaseSettings _settings;
+        private readonly IConfigurationProperties _settings;
 
-        public PersistenceConfigurer(DatabaseSettings settings)
+        public PersistenceConfigurer(IConfigurationProperties settings)
         {
             _settings = settings;
         }
