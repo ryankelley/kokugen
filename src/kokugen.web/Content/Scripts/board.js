@@ -44,7 +44,7 @@ var buildCardDisplay = function(scard) {
     number.appendChild(editLink);
 
     var size = document.createElement('div');
-    $(size).addClass("card-size");
+    $(size).addClass("card-size").attr("title", "Estimated Size of this card");
     size.appendChild(document.createTextNode(scard.Size));
     var worker = document.createElement('div');
 
