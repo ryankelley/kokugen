@@ -26,7 +26,7 @@ namespace Kokugen.Web.Actions.Board
             output.Id = project.Id;
             output.BackLog = Mapper.DynamicMap<BoardColumnDTO>(project.Backlog);
             output.Archive = Mapper.DynamicMap < BoardColumnDTO > (project.Archive);
-            output.Columns = project.GetBoardColumns().Select(x => Mapper.DynamicMap<BoardColumnDTO>(x));
+            output.Columns = project.GetBoardColumns().OrderBy(a => a.ColumnOrder).Select(x => Mapper.DynamicMap<BoardColumnDTO>(x));
 
             output.AllCards = project.GetCards().Select(x => Mapper.Map<Core.Domain.Card, CardViewDTO>(x)).ToList();
 

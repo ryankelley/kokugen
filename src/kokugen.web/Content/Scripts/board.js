@@ -100,10 +100,18 @@ var buildCardDisplay = function(scard) {
         $(element).removeClass("blocked");
         $(blocked).addClass("hidden");
         myTools.isBlocked(false);
+        element.updateBlocked(false);
+    }
+
+    function notReady() {
+        scard.Status = "New";
+        element.isReady(false);
+        myTools.isReady(false);
     }
 
     element.receive = function(newColumnId) {
         unblock();
+        notReady();
         $.ajax({
             url: "/card/move",
             data: { Id: scard.Id, ColumnId: newColumnId },
@@ -201,7 +209,7 @@ var buildCardDisplay = function(scard) {
         $(reasonBlocked).removeClass("hidden");
         $(reasonBlocked).html(scard.ReasonBlocked);
     });
-    
+
     $(cancelReason).click(function() {
         if (scard.Status == "Blocked") {
             $(reasonForm).addClass("hidden");
@@ -303,14 +311,14 @@ function buildToolbar(card) {
 
     $(readyLink).click(function() {
         if ($(readyLink).hasClass("checked")) {
-            $(readyLink).removeClass("checked");
+            element.isReady(false);
             readyLink.parentNode.parentNode.parentNode.isReady(false);
-            $(blockedLink).removeClass("hidden");
+
         }
         else {
-            $(readyLink).addClass("checked");
+            element.isReady(true);
             readyLink.parentNode.parentNode.parentNode.isReady(true);
-            $(blockedLink).addClass("hidden");
+
         }
 
     });
@@ -335,6 +343,18 @@ function buildToolbar(card) {
             $(readyLink).removeClass("hidden");
         }
     }
+
+    element.isReady = function(ready) {
+        if (ready) {
+            $(readyLink).addClass("checked");
+            $(blockedLink).addClass("hidden");
+
+        } else {
+        $(readyLink).removeClass("checked");
+        $(blockedLink).removeClass("hidden");
+
+        }
+    }
     
     return element;
 };
@@ -351,7 +371,7 @@ function buildColorEditor() {
     var element = document.createElement('ul');
     $(element).addClass("card-section").attr("id", "card-color-editor").addClass("hidden");
 
-    var buttons = buildColorButtons(['grey', 'blue', 'red', 'green', 'yellow', 'orange', 'teal']);
+    var buttons = buildColorButtons(['grey', 'blue',  'yellow', 'orange', 'teal']);
     for (var i in buttons) {
         element.appendChild(buttons[i]);
     }
