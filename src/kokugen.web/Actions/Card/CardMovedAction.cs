@@ -21,6 +21,9 @@ namespace Kokugen.Web.Actions.Card
             var card = _cardService.GetCard(model.Id);
             var column = _boardService.GetColumn(model.ColumnId);
 
+            card.Status = CardStatus.New;
+            card.BlockReason = "";
+
             card.Column = column;
 
             _cardService.SaveCard(card);
