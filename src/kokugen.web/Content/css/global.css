@@ -383,12 +383,7 @@ a.icon img
     
 }
 
-.timerecords .table
-{
-    border-style: inset;
-}
-
-li.timerecords
+.time-records ul
 {
     margin-bottom: 5px;
     margin-left:10px;

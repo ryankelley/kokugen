@@ -274,7 +274,6 @@
     <Content Include="Content\images\icon.png" />
     <Content Include="Content\images\kokugen-logo.png" />
     <Content Include="Content\images\logo.png" />
-    <Content Include="Content\images\logo2.png" />
     <Content Include="Content\images\s-bar.jpg" />
     <Content Include="Content\images\sel.png" />
     <Content Include="Content\images\up.png" />

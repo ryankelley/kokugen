@@ -2,8 +2,8 @@
 <%@ Import Namespace="Kokugen.Web.Actions.TimeRecord"%>
 
 
-    <div class="col-title" text-align=left>
-    <ul>
+
+    <ul id="time-records">
         <li>
             <%= this.DisplayFor(x => x.Description) %>
         
@@ -19,7 +19,7 @@
         </li>
               
 	</ul>	
-	</div>
+	
 	
 	
 	
