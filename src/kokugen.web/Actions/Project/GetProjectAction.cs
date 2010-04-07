@@ -19,7 +19,7 @@ namespace Kokugen.Web.Actions.Project
         {
             var project = _projectService.GetProjectFromId(model.Id);
             var timeRecords = project.GetTimeRecords().ToList();
-            return new ProjectModel() {Project = project, TimeRecords = timeRecords};
+            return new ProjectModel() {Project = project, TimeRecords = timeRecords, ProjectId = project.Id};
         }
     }
 
@@ -28,7 +28,7 @@ namespace Kokugen.Web.Actions.Project
         public Guid Id { get; set; }
     }
 
-    public class ProjectModel
+    public class ProjectModel : ProjectBaseViewModel
     {
         public Core.Domain.Project Project { get; set; }
 

@@ -1,4 +1,4 @@
-<%@ Page Language="C#" Inherits="Kokugen.Web.Actions.Board.ViewBoard" AutoEventWireup="true" MasterPageFile="~/Shared/Site.Master" %>
+<%@ Page Language="C#" Inherits="Kokugen.Web.Actions.Board.ViewBoard" AutoEventWireup="true" MasterPageFile="~/Shared/Project.Master" %>
 <%@ Import Namespace="Kokugen.Web.Actions.Card"%>
 <%@ Import Namespace="Kokugen.Web"%>
 <%@ Import Namespace="Kokugen.Web.Actions.BoardColumn"%>
@@ -23,7 +23,7 @@
         });
 
         $(".ui-sortable").sortable({ connectWith: '.ui-sortable', placeholder: 'phase-placeholder', forcePlaceholderSize: true,
-            receive: cardMoved, over: cardOverColumn });
+            receive: cardMoved, over: cardOverColumn, update: reOrderCards });
         $(".ui-sortable").disableSelection();
         for(var i = 0; i < cards.length; i++)
         {
