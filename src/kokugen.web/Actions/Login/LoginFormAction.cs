@@ -17,6 +17,7 @@ namespace Kokugen.Web.Actions.Login
         }
     }
 
+
     public class LoginFormModel
     {
     }
@@ -25,5 +26,7 @@ namespace Kokugen.Web.Actions.Login
     {
         public virtual string Password { get; set; }
         public virtual string Login { get; set; }
+        public virtual bool RememberMe { get; set; }
+        
     }
 }
