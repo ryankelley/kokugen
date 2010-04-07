@@ -17,15 +17,13 @@ margin:10px;
 }
 table, td, th
 {
-border:2px solid black;
+border:3px solid black;
+border-style:inset;
 text-align:center;
+background-color:#CEBEB4;
+color:#49657D;
 }
 th
-{
-background-color:#9e9993;
-color:black;
-}
-thead
 {
 background-color:#9e9993;
 color:black;

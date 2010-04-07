@@ -16,8 +16,11 @@ margin:10px;
 }
 table, td, th
 {
-border:2px solid black;
+border:3px solid black;
+border-style:inset;
 text-align:center;
+background-color:#CEBEB4;
+color:#49657D;
 }
 th
 {
