@@ -1,4 +1,4 @@
-using Kokugen.Core.Services;
+using Kokugen.Core.Membership.Services;
 
 namespace Kokugen.Web.Actions.Login
 {

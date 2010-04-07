@@ -3,8 +3,8 @@ using FluentNHibernate;
 using FubuMVC.Core.Behaviors;
 using FubuMVC.Core.Configuration;
 using FubuMVC.Core.Security;
+using Kokugen.Core.Membership.Security;
 using Kokugen.Core.Persistence;
-using Kokugen.Core.Security;
 using Kokugen.Core.Services;
 using NHibernate;
 using StructureMap.Configuration.DSL;
@@ -26,8 +26,8 @@ namespace Kokugen.Core
         private void setupNHibernate()
         {
             ForSingletonOf<ISessionSource>().Use<NHibernatesessionSource>();
-            For<IPrincipalFactory>().Use<KokugenPrincipalFactory>();
-            For<IPrincipal>().Use<KokugenPrincipal>();
+            For<IPrincipalFactory>().Use<FubuPrincipalFactory>();
+            For<IPrincipal>().Use<FubuPrincipal>();
 
 
             For<ISession>().Use(c =>
