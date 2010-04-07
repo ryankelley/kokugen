@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Web.Security;
 using Kokugen.Core.Membership.Security;
 using Kokugen.Core.Persistence.Repositories;
 using Kokugen.Core.Validation;
@@ -7,7 +9,16 @@ namespace Kokugen.Core.Membership.Services
 {
     public interface IRoleService
     {
-        
+        INotification Create(string role);
+        INotification AddToRole(User user);
+        INotification RemoveFromRole(User user, string role);
+        INotification Remove(string role);
+
+        IEnumerable<string> FindAll();
+        IEnumerable<string> FindByUser(User user);
+        IEnumerable<string> FindByUserName(string userName);
+        IEnumerable<string> FindUserNamesByRole(string roleName);
+        bool IsInRole(User user, string roleName);
     }
 
     //public class RoleService : IRoleService

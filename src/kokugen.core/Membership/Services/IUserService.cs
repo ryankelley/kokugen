@@ -12,7 +12,6 @@ namespace Kokugen.Core.Membership.Services
 {
     public interface IUserService
     {
-
         INotification Create(User user);
         INotification Update(User user);
         INotification Delete(User user);

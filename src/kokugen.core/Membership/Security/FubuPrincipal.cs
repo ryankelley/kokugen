@@ -2,14 +2,16 @@ using System;
 using System.Security.Principal;
 using System.Threading;
 using System.Web;
+using Kokugen.Core.Membership.Services;
 
 namespace Kokugen.Core.Membership.Security
 {
     public class FubuPrincipal : IPrincipal
     {
+        private readonly User _user;
+        private readonly IRoleService _roleService;
         private readonly IIdentity _identity;
         private readonly Guid _userId;
-        private User _user;
 
         public FubuPrincipal(IIdentity identity)
         {
@@ -17,10 +19,11 @@ namespace Kokugen.Core.Membership.Security
             _userId = new Guid(_identity.Name);
         }
 
-        public FubuPrincipal(IIdentity identity, User user)
+        public FubuPrincipal(IIdentity identity, User user, IRoleService roleService)
             : this(identity)
         {
             _user = user;
+            _roleService = roleService;
         }
 
         public Guid UserId
@@ -44,8 +47,8 @@ namespace Kokugen.Core.Membership.Security
 
         public bool IsInRole(string role)
         {
-            if(_user != null)
-                return _user.IsInRole(role);
+            if(_roleService != null && _user != null)
+                return _roleService.IsInRole(_user,role);
             return false;
         }
 

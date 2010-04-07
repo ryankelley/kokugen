@@ -106,7 +106,6 @@
     <Compile Include="Domain\Enumeration.cs" />
     <Compile Include="Domain\IDomainQuery.cs" />
     <Compile Include="Domain\Project.cs" />
-    <Compile Include="Membership\Security\Role.cs" />
     <Compile Include="Domain\SiteConfiguration.cs" />
     <Compile Include="Domain\TimeRecord.cs" />
     <Compile Include="Membership\Security\User.cs" />
