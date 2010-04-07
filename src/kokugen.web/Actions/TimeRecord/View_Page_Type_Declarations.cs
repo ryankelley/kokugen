@@ -4,4 +4,5 @@ namespace Kokugen.Web.Actions.TimeRecord
 {
     public class TimeRecord_Control : FubuControl<Core.Domain.TimeRecord>{}
     public class TimeRecordForm : FubuPage<TimeRecordFormModel> { }
+    public class List : FubuPage<TimeRecordListModel> { }
 }

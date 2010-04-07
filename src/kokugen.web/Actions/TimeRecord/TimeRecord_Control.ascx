@@ -2,24 +2,35 @@
 <%@ Import Namespace="Kokugen.Web.Actions.TimeRecord"%>
 
 
-
-    <ul id="time-records">
-        <li>
+<div>
+    <tr>
+        <td>
+            User Name
+        </td>
+        <td>
             <%= this.DisplayFor(x => x.Description) %>
-        
+        </td>
+        <td>
             <%= this.DisplayFor(x => x.Task.Name) %>
-        
+        </td>
+        <td>
+            <%= this.DisplayFor(x => x.StartTime) %>
+        </td>
+        <td>
+            <%= this.DisplayFor(x => x.EndTime) %>
+        </td>
+        <td>
             <%= this.DisplayFor(x => x.Duration) %>
-        
-            <%= this.LinkTo(new RemoveTimeRecordInput()
-                                        {
-                                            Id = Model.Id
-                                        }
-                                                     ).Text("Delete") %>
-        </li>
+        </td>
+        <td>
+            <%= this.DisplayFor(x => x.Duration) %>
+        </td>
+        <td>
+            <%= this.DisplayFor(x => x.Task.Name) %>
+        </td>
               
-	</ul>	
-	
+	</tr>	
+</div>	
 	
 	
 	

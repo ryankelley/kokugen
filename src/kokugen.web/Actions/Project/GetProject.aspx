@@ -14,21 +14,49 @@
 </div>
 <div class="timerecords">
     
-         
-            <ul>
-                <li>
+         <table>
+                <tr>
                     <h2><%=Model.Project.Name+" "%>Time Records</h2>
-                </li>                      
-           
-                <li>
+                </tr>                      
+           <tr>
+                <td>
                     <h3>
-                    Description
-                    Task
-                    Duration                    
+                        User
                     </h3>
-                </li>
-            </ul>
-       
+                </td>
+                <td>
+                    <h3>
+                        Description
+                    </h3>
+                </td>
+                <td>
+                    <h3>
+                        Start
+                    </h3>
+                </td>
+                <td>
+                    <h3>
+                        End
+                    </h3>
+                </td>
+                <td>
+                    <h3>
+                        Duration
+                    </h3>
+                </td>
+                <td>
+                    <h3>
+                        Billable
+                    </h3>
+                </td>
+                
+                    <td>
+                    <h3>
+                        Task
+                    </h3>
+                </td>                    
+            </tr>
+       </table>
         
             
             <%= this.PartialForEach(p => p.TimeRecords).Using<TimeRecord_Control>() %>
