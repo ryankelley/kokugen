@@ -1,4 +1,4 @@
-<%@ Page Language="C#" AutoEventWireup="true" Inherits="Kokugen.Web.Actions.Project.GetProject" MasterPageFile="~/Shared/Site.Master"%>
+<%@ Page Language="C#" AutoEventWireup="true" Inherits="Kokugen.Web.Actions.Project.GetProject" MasterPageFile="~/Shared/Project.Master"%>
 <%@ Import Namespace="Kokugen.Web.Actions.TimeRecord"%>
 <%@ Import Namespace="Kokugen.Web.Actions.Board"%>
 <%@ Import Namespace="FubuMVC.Core.Urls"%>
@@ -6,6 +6,29 @@
 
 </asp:Content>
 <asp:Content ID="ProjectListContent" ContentPlaceHolderID="mainContent" runat="server">
+<style type="text/css">
+table
+{
+border-collapse:collapse;
+width:1024px;
+padding:10px;
+border:5px solid gray;
+margin:10px;
+}
+table, td, th
+{
+border:3px solid black;
+border-style:inset;
+text-align:center;
+background-color:#CEBEB4;
+color:#49657D;
+}
+th
+{
+background-color:#9e9993;
+color:black;
+}
+</style>
 <body>
 <div id="Project Name" align=center><h2><%= this.DisplayFor(m => m.Project.Name) %></h2>
 
@@ -15,51 +38,57 @@
 <div class="timerecords">
     
          <table>
-                <tr>
-                    <h2><%=Model.Project.Name+" "%>Time Records</h2>
-                </tr>                      
+                <thead>                   
+                    <h2><%=Model.Project.Name+" "%>Time Records</h2>               
+                </thead>                      
            <tr>
-                <td>
+                <th>
                     <h3>
                         User
                     </h3>
-                </td>
-                <td>
+                </th>
+                <th>
                     <h3>
                         Description
                     </h3>
-                </td>
-                <td>
+                </th>
+                <th>
                     <h3>
                         Start
                     </h3>
-                </td>
-                <td>
+                </th>
+                <th>
                     <h3>
                         End
                     </h3>
-                </td>
-                <td>
+                </th>
+                <th>
                     <h3>
                         Duration
                     </h3>
-                </td>
-                <td>
+                </th>
+                <th>
                     <h3>
                         Billable
                     </h3>
-                </td>
+                </th>
                 
-                    <td>
+                <th>
                     <h3>
                         Task
                     </h3>
-                </td>                    
+                </th> 
+                 <th>
+                    <h3>
+                        Project
+                    </h3>
+                </th>                       
             </tr>
+            <%= this.PartialForEach(p => p.TimeRecords).Using<TimeRecord_Control>() %>
        </table>
         
             
-            <%= this.PartialForEach(p => p.TimeRecords).Using<TimeRecord_Control>() %>
+            
             <ul id="companyList"></ul>
        
     
@@ -72,7 +101,7 @@
     <%= this.LinkTo(new ViewBoardInputModel{ Id = Model.Project.Id}).NoClosingTag().AddClass("icon") %><img src="/content/images/board_big.png" alt="view board" /></a>
 </body>
     
-<% this.Partial(new TimeRecordFormModel(){ProjectId = Model.Project.Id}); %>
+<% this.Partial(new TimeRecordFormModel(){ProjectIdGuid = Model.Project.Id}); %>
 
 <script type="text/javascript">
 

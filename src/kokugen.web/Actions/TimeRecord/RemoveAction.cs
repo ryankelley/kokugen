@@ -5,17 +5,17 @@ namespace Kokugen.Web.Actions.TimeRecord
 {
     public class RemoveAction
     {
-        
-            private readonly IProjectService _projectService;
+        private readonly ITimeRecordService _timeRecordService;
 
-            public RemoveAction(IProjectService projectService)
+
+        public RemoveAction(ITimeRecordService timeRecordService)
             {
-                _projectService = projectService;
+                _timeRecordService = timeRecordService;
             }
 
-            public AjaxResponse Remove(RemoveTimeRecordInput model)
+        public AjaxResponse Remove(RemoveTimeRecordInput model)
             {
-                _projectService.DeleteTimeRecord(model.Id);
+                _timeRecordService.DeleteTimeRecord(model.Id);
                 return new AjaxResponse
                 {
                     Success = true

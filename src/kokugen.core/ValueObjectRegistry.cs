@@ -94,20 +94,24 @@ namespace Kokugen.Core
     {
         private readonly ICompanyService _companyService;
         private readonly ITaskCategoryService _taskCategoryService;
+        private readonly IProjectService _projectService;
 
-        public ValueObjectInitializer(ICompanyService companyService, ITaskCategoryService taskCategoryService)
+        public ValueObjectInitializer(ICompanyService companyService, ITaskCategoryService taskCategoryService, IProjectService projectService)
         {
             _companyService = companyService;
             _taskCategoryService = taskCategoryService;
+            _projectService = projectService;
         }
 
         public void Start()
         {
             var list = _companyService.ListAllCompanies().Select(x => new ValueObject(x.Id.ToString(), x.Name));
             var taskList = _taskCategoryService.GetAllCategories().Select(x => new ValueObject(x.Id.ToString(), x.Name));
+            var projectList = _projectService.ListProjects().Select(x => new ValueObject(x.Id.ToString(), x.Name));
 
             ValueObjectRegistry.AddValueObjects<Company>(list);
             ValueObjectRegistry.AddValueObjects<TaskCategory>(taskList);
+            ValueObjectRegistry.AddValueObjects<Project>(projectList);
         }
     }
 

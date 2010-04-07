@@ -16,21 +16,21 @@ namespace Kokugen.Core.Services
         Project GetProjectFromName(string name);
         Project CreateProject(string projectName, string projectDescription, Company company);
         Project GetProjectFromId(Guid id);
-        //IEnumerable<TimeRecord> GetTimeRecords(Guid projectid);
-        void DeleteTimeRecord(Guid id);
+
+        
     }
 
     public class ProjectService : IProjectService
     {
         private readonly IProjectRepository _projectRepository;
         private readonly IValidator _validator;
-        private readonly ITimeRecordRepository _timeRecordRepository;
+       
 
-        public ProjectService(IProjectRepository projectRepository, IValidator validator, ITimeRecordRepository timeRecordRepository)
+        public ProjectService(IProjectRepository projectRepository, IValidator validator)
         {
             _projectRepository = projectRepository;
             _validator = validator;
-            _timeRecordRepository = timeRecordRepository;
+          
         }
 
         public IEnumerable<Project> ListProjects()
@@ -84,15 +84,7 @@ namespace Kokugen.Core.Services
             return _projectRepository.Get(id);
         }
 
-        public void DeleteTimeRecord(Guid id)
-        {
-            var timeRecord= _timeRecordRepository.Get(id);
-            _timeRecordRepository.Delete(timeRecord);
-        }
-
-//        public IEnumerable<TimeRecord> GetTimeRecords(Guid projectid)
-//        {
-//            return _timeRecordRepository.Query().Where(x => x.Project.Id == projectid);
-//        }
+       
+     
     }
 }
