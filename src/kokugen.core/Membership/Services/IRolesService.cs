@@ -7,12 +7,12 @@ using Kokugen.Core.Validation;
 
 namespace Kokugen.Core.Membership.Services
 {
-    public interface IRoleService
+    public interface IRolesService
     {
-        INotification Create(string role);
-        INotification AddToRole(MembershipUser user);
-        INotification RemoveFromRole(MembershipUser user, string role);
-        INotification Remove(string role);
+        void Create(string roleName);
+        void AddToRole(MembershipUser user, string roleName);
+        void RemoveFromRole(MembershipUser user, string roleName);
+        void Delete(string roleName);
 
         IEnumerable<string> FindAll();
         IEnumerable<string> FindByUser(MembershipUser user);
@@ -21,7 +21,7 @@ namespace Kokugen.Core.Membership.Services
         bool IsInRole(MembershipUser user, string roleName);
     }
 
-    //public class RoleService : IRoleService
+    //public class RoleService : IRolesService
     //{
 
     //    private readonly IRoleRepository _roleRepository;

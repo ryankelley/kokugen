@@ -8,18 +8,18 @@ namespace Kokugen.Core.Membership.Security
     public class FubuPrincipalFactory : IPrincipalFactory
     {
         private readonly IUserService _userService;
-        private readonly IRoleService _roleService;
+        private readonly IRolesService _rolesService;
 
-        public FubuPrincipalFactory(IUserService userService, IRoleService roleService)
+        public FubuPrincipalFactory(IUserService userService, IRolesService rolesService)
         {
             _userService = userService;
-            _roleService = roleService;
+            _rolesService = rolesService;
         }
 
         public IPrincipal CreatePrincipal(IIdentity identity)
         {
             var user = _userService.Retrieve(new Guid(identity.Name));
-            return new FubuPrincipal(identity,user,_roleService);
+            return new FubuPrincipal(identity,user,_rolesService);
         }
     }
 }

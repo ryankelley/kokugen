@@ -108,11 +108,14 @@
     <Compile Include="Domain\Project.cs" />
     <Compile Include="Domain\SiteConfiguration.cs" />
     <Compile Include="Domain\TimeRecord.cs" />
+    <Compile Include="Membership\Abstractions\AspNetMembershipProviderWrapper.cs" />
+    <Compile Include="Membership\Abstractions\AspNetRoleProviderWrapper.cs" />
     <Compile Include="Membership\Abstractions\EnumerableToEnumerableTConverter.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Inflector.cs" />
     <Compile Include="IStartable.cs" />
     <Compile Include="Membership\Abstractions\AspNetMembershipSettingsProvider.cs" />
+    <Compile Include="Membership\Services\IMembershipValidator.cs" />
     <Compile Include="Membership\Settings\LoginSettings.cs" />
     <Compile Include="Membership\Settings\MembershipSettingsBag.cs" />
     <Compile Include="Membership\Abstractions\MembershipSettingsDictionary.cs" />
@@ -169,7 +172,7 @@
     <Compile Include="Services\IProjectService.cs" />
     <Compile Include="Services\ITimeRecordService.cs" />
     <Compile Include="Services\TaskCategoryService.cs" />
-    <Compile Include="Membership\Services\IRoleService.cs" />
+    <Compile Include="Membership\Services\IRolesService.cs" />
     <Compile Include="Membership\Services\IUserService.cs" />
     <Compile Include="Membership\Services\LoginService.cs" />
     <Compile Include="Membership\Services\PasswordService.cs" />

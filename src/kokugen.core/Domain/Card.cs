@@ -20,7 +20,7 @@ namespace Kokugen.Core.Domain
         public virtual string Priority { get; set; }
         public virtual DateTime? Deadline { get; set; }
         public virtual string Color { get; set; }
-        public virtual MembershipUser AssignedTo { get; set; }
+        public virtual Guid AssignedTo { get; set; }
 
 
         //Dates

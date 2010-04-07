@@ -1,6 +1,7 @@
 #region
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Security;
 using Kokugen.Core.Membership.Security;
@@ -13,13 +14,16 @@ namespace Kokugen.Core.Membership.Services
 {
     public interface IUserService
     {
-        INotification Create(MembershipUser user);
-        INotification Update(MembershipUser user);
-        INotification Delete(MembershipUser user);
+        MembershipCreateStatus Create(MembershipUser user);
+        void Update(MembershipUser user);
+        void Delete(MembershipUser user);
         MembershipUser Retrieve(Guid Id);
 
         MembershipUser GetUserByLogin(string name);
         MembershipUser GetUserByEmail(string email);
+        
+        int TotalUsers { get; }
+        int UsersOnline { get; }
     }
 
     //public class UserService : IUserService
