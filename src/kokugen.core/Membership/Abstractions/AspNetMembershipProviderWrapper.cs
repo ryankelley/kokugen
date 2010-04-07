@@ -4,6 +4,7 @@ using System.Web.Security;
 using Kokugen.Core.Membership.Services;
 using Kokugen.Core.Membership.Settings;
 using Kokugen.Core.Validation;
+using PagedList;
 
 namespace Kokugen.Core.Membership.Abstractions
 {
@@ -73,7 +74,18 @@ namespace Kokugen.Core.Membership.Abstractions
             return _provider.GetUser(_provider.GetUserNameByEmail(email),true);
         }
 
+        public IPagedList<MembershipUser> FindAll(int pageIndex, int pageSize)
+        {
+            // get one page of users
+            int totalUserCount;
+            var usersCollection = _provider.GetAllUsers(pageIndex, pageSize, out totalUserCount);
 
+            // convert from MembershipUserColletion to PagedList<MembershipUser> and return
+            var converter = new EnumerableToEnumerableTConverter<MembershipUserCollection, MembershipUser>();
+            var usersList = converter.ConvertTo<IEnumerable<MembershipUser>>(usersCollection);
+            var usersPagedList = new StaticPagedList<MembershipUser>(usersList, pageIndex, pageSize, totalUserCount);
+            return usersPagedList;
+        }
 
         public int TotalUsers
         {

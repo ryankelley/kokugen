@@ -7,6 +7,7 @@ using System.Web.Security;
 using Kokugen.Core.Membership.Security;
 using Kokugen.Core.Persistence.Repositories;
 using Kokugen.Core.Validation;
+using PagedList;
 
 #endregion
 
@@ -20,7 +21,8 @@ namespace Kokugen.Core.Membership.Services
 
         MembershipUser GetUserByLogin(string name);
         MembershipUser GetUserByEmail(string email);
-        
+        IPagedList<MembershipUser> FindAll(int pageIndex, int pageSize);
+
         int TotalUsers { get; }
         int UsersOnline { get; }
 
