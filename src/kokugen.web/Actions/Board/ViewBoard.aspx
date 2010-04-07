@@ -23,8 +23,8 @@
         });
 
         $(".ui-sortable").sortable({ connectWith: '.ui-sortable', placeholder: 'phase-placeholder', forcePlaceholderSize: true,
-            receive: cardMoved });
-$(".ui-sortable").disableSelection();
+            receive: cardMoved, over: cardOverColumn });
+        $(".ui-sortable").disableSelection();
         for(var i = 0; i < cards.length; i++)
         {
             var newCard = new Card(cards[i]);
@@ -56,14 +56,14 @@ $(".ui-sortable").disableSelection();
 
     <div id="backlog-container"  class="column">
         <div class="board-phase-header"><%= Model.BackLog.Name %></div>
-        <ul class="card-list ui-sortable" id="<%= Model.BackLog.Id %>"></ul>
+        <ul class="card-list ui-sortable" id="<%= Model.BackLog.Id %>" limit="<%= Model.BackLog.Limit %>"></ul>
     </div>
 
     <%= this.PartialForEach(m => m.Columns).WithoutItemWrapper().WithoutListWrapper().Using<BoardPhase_Control>() %>
 
     <div id="archive-container" class="column">
         <div class="board-phase-header"><%= Model.Archive.Name %></div>
-        <ul class="card-list ui-sortable" id="<%= Model.Archive.Id %>" ></ul>
+        <ul class="card-list ui-sortable" id="<%= Model.Archive.Id %>" limit="<%= Model.Archive.Limit %>"></ul>
     </div>
 </div>
 </asp:Content>

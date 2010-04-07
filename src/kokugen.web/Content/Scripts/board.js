@@ -233,6 +233,31 @@ function cardMoved(event, ui) {
     $(ui.item).each(function() {
         this.receive(this.parentNode.id);
     });
+
+    checkLimit(this);
+}
+function checkLimit(list) {
+    $(".ui-sortable").each(function() { 
+    list = this;
+    var limit = $(list).attr("limit");
+
+    if (limit != undefined && limit != "" && limit > 0) {
+        var count = $(list).children().length;
+        if (count > limit) {
+            $(list).parent().addClass("over-limit");
+        }
+        else {
+            $(list).parent().removeClass("over-limit");
+        }
+    }
+});
+}
+function cardOverColumn(event, ui) {
+    checkLimit(this);
+}
+
+function cardMovedOut(event, ui) {
+    checkLimit(this);
 }
 
 function buildToolbar(card) {
