@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using FluentNHibernate;
+using System.Linq;
 using FubuCore.Binding;
 using FubuMVC.Core.Runtime;
 using Kokugen.Core.Persistence;
@@ -25,9 +26,7 @@ namespace Kokugen.Core
             container.GetInstance<ISessionSource>().BuildSchema();   
 #endif
             container.ExecuteInTransaction(c => c.Model.GetAllPossible<IStartable>()
-#if !DEBUG
-                        .Where(x => !x.GetType().HasCustomAttribute<DebugOnlyAttribute>())
-#endif
+
                         .Each(x => x.Start()));
             
         }

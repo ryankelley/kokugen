@@ -15,7 +15,7 @@ body{
 }
 
 #head {
-	background:url("../images/h-bar.jpg") repeat-x scroll left top transparent;
+	background:url("../images/h-bar2.jpg") repeat-x scroll left top transparent;
 	height: 102px;
 }
 
@@ -307,7 +307,10 @@ margin:0 0 12px 12px;
 text-align:center;
 vertical-align:top;
 }
-
+li.phase h4 
+{
+    cursor: move;
+}
 .board-column-configure .phase-placeholder {
 -moz-border-radius:8px 8px 8px 8px;
 background-color:#CCFFCC;
@@ -381,4 +384,11 @@ a.icon
 a.icon img 
 {
     
+}
+
+.time-records ul
+{
+    margin-bottom: 5px;
+    margin-left:10px;
+    margin-right:10px;
 }

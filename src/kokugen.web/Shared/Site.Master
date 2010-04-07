@@ -1,11 +1,12 @@
-﻿<%@ Import Namespace="Kokugen.Web.Actions.TaskCategory"%>
+﻿<%@ Import Namespace="Kokugen.Web.Actions.TimeRecord"%>
+<%@ Import Namespace="Kokugen.Web.Actions.TaskCategory"%>
 <%@ Import Namespace="Kokugen.Web.Actions.Project"%>
 <%@ Import Namespace="Kokugen.Web.Actions.Company"%>
 <%@ Import Namespace="Kokugen.Web.Actions.Home"%>
 <%@ Import Namespace="Kokugen.Web"%>
 <%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="FubuMVC.Core.View.FubuMasterPage" %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head runat="server">
@@ -23,10 +24,6 @@
     <%= this.CSS("smoothness/jquery-ui-1.8.custom.css")%>
     <%= this.CSS("global.css")%>
     <link rel="shortcut icon" href="/content/images/icon.png" />
-    <script src="/Content/Scripts/grid.locale-en.js" type="text/javascript"></script>
-    <script src="/Content/Scripts/jquery.jqGrid.min.js" type="text/javascript"></script>
-    <link rel="stylesheet" type="text/css" media="screen" href="/Content/Scripts/jquery-ui-1.7.1.custom.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="/Content/Scripts/ui.jqgrid.css" />
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -39,7 +36,7 @@
 			<ul class="subnav">
 				<li class="active"><%= this.LinkTo(new CompanyListModel()).Text("Companies") %></li>
 				<li class="bar"><%= this.LinkTo(new ProjectListModel()).Text("Projects") %></li>
-				<li class="lbar"><a href="index.html">Time Records</a></li>
+				<li class="lbar"><%= this.LinkTo(new TimeRecordListModel()).Text("Time") %></li>
 				<li class="lbar"><a href="create.html">Users</a></li>
 				<li class="last"><%= this.LinkTo(new TaskListModel()).Text("Tasks") %></li>
 			</ul>

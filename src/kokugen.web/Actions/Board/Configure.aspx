@@ -22,12 +22,24 @@
         var self = this;
         
         this.Edit = function() {
-            alert("Implement the edit function");
-            return false;        
+            $('#column-form [name=ColumnName]').val(self.Name);
+            $('#column-form [name=ColumnDescription]').val(self.Description);
+            $('#column-form [name=ColumnLimit]').val(self.Limit);
+            $('#column-form [name=Id]').val(self.Id);
+            $('#column-form [name=ProjectId]').val(self.ProjectId);
+            showColumnForm();
+            updateColumns();
+            return false;
         };
         
         this.Remove = function() {
-            alert("Implement the remove function.");
+             $.ajax({
+                url: removeColumnUrl,
+                data: { Id: this.Id },
+                dataType: "json",
+                type: "DELETE"
+            });
+            $(this.Element).remove();
             return false;
         };
     };
@@ -84,11 +96,7 @@
         });
         $('#board-columns').disableSelection();
 
-        $("li.draggable .col-desc").hover(function() {
-            $(this).children('.col-links').fadeIn(500);
-        }, function() {
-            $(this).children('.col-links').fadeOut(100);
-        });
+       
         
         $(".removeLink").live("click", function() {
             var link = $(this);
@@ -165,6 +173,13 @@
             boardColumn.Order = order;
         }
         
+        
+         $(description).hover(function() {
+            $(this).children('.col-links').fadeIn(500);
+        }, function() {
+            $(this).children('.col-links').fadeOut(100);
+        });
+        
         return element;
     };
 </script>
@@ -172,7 +187,7 @@
 </asp:Content>
 <asp:Content ID="THISCONTENTAREAID" ContentPlaceHolderID="mainContent" runat="server">
 
-<div><a href="#" onclick="showColumnForm();"><img src="/content/images/add_button.png" alt="add column" />Add Column</a></div>
+<div><a href="#" onclick="addColumn();"><img src="/content/images/add_button.png" alt="add column" />Add Column</a></div>
         
 
 <% this.Partial(new BoardColumnEditModel { ProjectId=Model.Id}); %>

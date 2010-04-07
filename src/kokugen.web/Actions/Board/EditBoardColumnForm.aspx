@@ -18,23 +18,51 @@
 </div>
 
 <script type="text/javascript">
-
+    // Array Remove - By John Resig (MIT Licensed)
+    Array.prototype.remove = function(from, to) {
+        var rest = this.slice((to || from) + 1 || this.length);
+        this.length = from < 0 ? this.length + from : from;
+        return this.push.apply(this, rest);
+    };
     function showColumnForm() {
+        
         $("#new-column-container").slideToggle('slow');
     }
-    
-    function closeColumnDialog(response) {
-        var html = tmpl($("#ItemTemplate").html(), response.Item);
-        $("#new-column-container").slideToggle('slow');
 
-        $(html).insertBefore($("#board-columns li:last"));
-        updateColumns();
-        bindSortingAndButtons();
+    function addColumn() {
+        $('#column-form [name=Id]').val(null);
+        showColumnForm();
+    }
+    function closeColumnDialog(response) {
+
+        var column = null;
+        
+        for (var i in boardColumns) {
+            if (boardColumns[i].Id == response.Item.Id) {
+                column = boardColumns[i];
+                $(column.Element).remove();
+                boardColumns.remove(i);
+            }
+        }
+
+
+            var item = new BoardColumn(response.Item);
+            boardColumns.push(item);
+            $(item.Element).addClass("draggable phase");
+
+            $("#new-column-container").slideToggle('slow');
+
+            $(item.Element).insertBefore($("#board-columns li:last"));
+            updateColumns();
+            bindSortingAndButtons();
     }
 
     $(document).ready(function() {
         $("#column-form").validate({ errorClass: "error" });
-        $('#col-save-button').submit(ValidateAndSave(closeColumnDialog, $("#column-form")));
+        $('#col-save-button').submit(function() {
+            ValidateAndSave(closeColumnDialog, $("#column-form"));
+            return false;
+        });
     });
 </script>
 

@@ -151,8 +151,11 @@
     <Compile Include="Actions\Project\GetProjectAction.cs" />
     <Compile Include="Actions\Project\ListAction.cs" />
     <Compile Include="Actions\Project\ProjectFormAction.cs" />
+    <Compile Include="Actions\TaskCategory\RemoveAction.cs" />
     <Compile Include="Actions\TimeRecord\AddAction.cs" />
     <Compile Include="Actions\TimeRecord\AddTimeRecordModel.cs" />
+    <Compile Include="Actions\TimeRecord\ListAction.cs" />
+    <Compile Include="Actions\TimeRecord\RemoveAction.cs" />
     <Compile Include="Actions\TimeRecord\TimeRecordFormAction.cs" />
     <Compile Include="Actions\Project\View_Page_Type_Declarations.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -217,6 +220,7 @@
     <Content Include="Actions\Project\List.aspx" />
     <Content Include="Actions\Project\ProjectForm.aspx" />
     <Content Include="Actions\Project\ProjectItem_Control.ascx" />
+    <Content Include="Actions\TimeRecord\List.aspx" />
     <Content Include="Actions\TimeRecord\TimeRecordForm.aspx" />
     <Content Include="Actions\TimeRecord\TimeRecord_Control.ascx" />
     <Content Include="Actions\TaskCategory\TaskForm.aspx" />
@@ -257,6 +261,7 @@
     <Content Include="Content\images\arrow.png" />
     <Content Include="Content\images\bg.jpg" />
     <Content Include="Content\images\board_big.png" />
+    <Content Include="Content\images\card-overlay.png" />
     <Content Include="Content\images\card.png" />
     <Content Include="Content\images\card_delete.png" />
     <Content Include="Content\images\card_edit.png" />
@@ -269,6 +274,7 @@
     <Content Include="Content\images\down.png" />
     <Content Include="Content\images\edit.png" />
     <Content Include="Content\images\h-bar.jpg" />
+    <Content Include="Content\images\h-bar2.jpg" />
     <Content Include="Content\images\head.jpg" />
     <Content Include="Content\images\head.png" />
     <Content Include="Content\images\hover.png" />
