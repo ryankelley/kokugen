@@ -25,6 +25,8 @@ namespace Kokugen.Tests.Core.Membership.Settings
         public void smoke_test()
         {
             var loginSettings = _provider.SettingsFor<LoginSettings>();
+            loginSettings.MaxInvalidPasswordAttempts.ShouldEqual(5);
+            loginSettings.PasswordAttemptWindow.ShouldEqual(10);
         }
     }
 }
