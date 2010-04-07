@@ -2,7 +2,7 @@
 
 using System.Net;
 using System.Net.Mail;
-using Kokugen.Core.Domain;
+using Kokugen.Core.Membership.Security;
 
 #endregion
 

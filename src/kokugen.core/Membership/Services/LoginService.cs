@@ -1,7 +1,7 @@
 #region
 
 using FubuMVC.Core.Security;
-using Kokugen.Core.Domain;
+using Kokugen.Core.Membership.Security;
 
 #endregion
 

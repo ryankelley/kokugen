@@ -1,12 +1,7 @@
 ﻿namespace Kokugen.Core.Membership.Settings
 {
-    public class RegistrationSettings : IRegistrationSettings
+    public class RegistrationSettings 
     {
-
-        #region IRegistrationSettings Members
-
-        public bool RequiresUniqueEmailAddress { get; set; }
-
-        #endregion
+        public bool RequiresUniqueEmail { get; set; }
     }
 }

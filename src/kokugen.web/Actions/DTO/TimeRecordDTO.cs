@@ -1,5 +1,5 @@
 using System;
-using Kokugen.Core.Domain;
+using Kokugen.Core.Membership.Security;
 
 namespace Kokugen.Web.Actions.DTO
 {

@@ -1,7 +1,6 @@
 using System;
 using System.Security.Principal;
 using FubuMVC.Core.Security;
-using Kokugen.Core.Domain;
 using Kokugen.Core.Membership.Security;
 
 namespace Kokugen.Core.Membership.Services

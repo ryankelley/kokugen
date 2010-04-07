@@ -1,4 +1,5 @@
 using System;
+using Kokugen.Core.Membership.Security;
 
 namespace Kokugen.Core.Domain
 {

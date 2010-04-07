@@ -2,7 +2,6 @@ using System;
 using System.Security.Principal;
 using System.Threading;
 using System.Web;
-using Kokugen.Core.Domain;
 
 namespace Kokugen.Core.Membership.Security
 {

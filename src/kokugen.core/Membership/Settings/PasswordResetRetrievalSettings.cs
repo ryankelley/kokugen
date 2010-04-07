@@ -1,22 +1,10 @@
-﻿using Kokugen.Core.Membership.Settings;
-
-namespace MvcMembership.Settings
+﻿
+namespace Kokugen.Core.Membership.Settings
 {
-	public class PasswordResetRetrievalSettings : IPasswordResetRetrievalSettings
-	{
-		public PasswordResetRetrievalSettings(bool canReset, bool canRetrieve, bool requiresQuestionAndAnswer)
-		{
-			CanReset = canReset;
-			CanRetrieve = canRetrieve;
-			RequiresQuestionAndAnswer = requiresQuestionAndAnswer;
-		}
-
-		#region IPasswordResetRetrievalSettings Members
-
-		public bool CanReset { get; private set; }
-		public bool CanRetrieve { get; private set; }
-		public bool RequiresQuestionAndAnswer { get; private set; }
-
-		#endregion
-	}
+    public class PasswordResetRetrievalSettings
+    {
+        public bool EnablePasswordReset { get; private set; }
+        public bool EnablePasswordRetrieval { get; private set; }
+        public bool RequiresQuestionAndAnswer { get; private set; }
+    }
 }

@@ -1,5 +1,6 @@
 using System;
 using Kokugen.Core.Domain;
+using Kokugen.Core.Membership.Security;
 using Kokugen.Core.Validation;
 
 namespace Kokugen.Core.Domain

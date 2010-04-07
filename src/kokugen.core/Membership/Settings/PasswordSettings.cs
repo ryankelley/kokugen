@@ -2,25 +2,12 @@
 
 namespace Kokugen.Core.Membership.Settings
 {
-    public class PasswordSettings : IPasswordSettings
+    public class PasswordSettings
     {
-        public PasswordSettings( IPasswordResetRetrievalSettings resetOrRetrieval, int minimumLength, int minimumNonAlphanumericCharacters, string regularExpressionToMatch, MembershipPasswordFormat storageFormat)
-        {
-            ResetOrRetrieval = resetOrRetrieval;
-            MinimumLength = minimumLength;
-            MinimumNonAlphanumericCharacters = minimumNonAlphanumericCharacters;
-            RegularExpressionToMatch = regularExpressionToMatch;
-            StorageFormat = storageFormat;
-        }
+        public int MinRequiredPasswordLength { get; private set; }
+        public int MinRequiredNonAlphanumericCharacters { get; private set; }
+        public string PasswordStrengthRegularExpression { get; private set; }
+        public MembershipPasswordFormat PasswordFormat { get; private set; }
 
-        #region IPasswordSettings Members
-
-        public IPasswordResetRetrievalSettings ResetOrRetrieval { get; private set; }
-        public int MinimumLength { get; private set; }
-        public int MinimumNonAlphanumericCharacters { get; private set; }
-        public string RegularExpressionToMatch { get; private set; }
-        public MembershipPasswordFormat StorageFormat { get; private set; }
-
-        #endregion
     }
 }
