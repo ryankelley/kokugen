@@ -19,5 +19,7 @@ namespace Kokugen.Web.Actions.Login
                        ? new AjaxResponse() { Success = true, Item = user}
                        : new AjaxResponse() { Success = false };
         }
+
+        
     }
 }
