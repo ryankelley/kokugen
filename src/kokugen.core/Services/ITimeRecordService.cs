@@ -8,7 +8,8 @@ namespace Kokugen.Core.Services
     public interface ITimeRecordService
     {
         IEnumerable<TimeRecord> GetAllTimeRecords();
-        
+
+        void DeleteTimeRecord(Guid id);
     }
 
     public class TimeRecordService : ITimeRecordService
@@ -25,5 +26,12 @@ namespace Kokugen.Core.Services
         {
             return _timeRecordRepository.Query();
         }
+
+        public void DeleteTimeRecord(Guid id)
+        {
+            var timeRecord = _timeRecordRepository.Get(id);
+            _timeRecordRepository.Delete(timeRecord);
+        }
+
     }
 }

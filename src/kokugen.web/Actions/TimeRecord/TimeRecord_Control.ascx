@@ -2,16 +2,13 @@
 <%@ Import Namespace="Kokugen.Web.Actions.TimeRecord"%>
 
 
-<div>
+
     <tr>
         <td>
             User Name
         </td>
         <td>
             <%= this.DisplayFor(x => x.Description) %>
-        </td>
-        <td>
-            <%= this.DisplayFor(x => x.Task.Name) %>
         </td>
         <td>
             <%= this.DisplayFor(x => x.StartTime) %>
@@ -28,9 +25,11 @@
         <td>
             <%= this.DisplayFor(x => x.Task.Name) %>
         </td>
-              
+        <td> 
+            <%= this.DisplayFor(x => x.Project.Name) %>
+        </td>              
 	</tr>	
-</div>	
+
 	
 	
 	

@@ -61,8 +61,10 @@ namespace Kokugen.Web.Actions.TimeRecord
     public class TimeRecordFormModel
     {
         public TimeRecordDTO TimeRecord{ get; set; }
+        [ValueOf("Project")]
+        public ValueObject ProjectId { get; set; }
 
-        public Guid ProjectId { get; set; }
+        public Guid ProjectIdGuid { get; set; }
 
         [ValueOf("TaskCategory")]
         public ValueObject TaskId { get; set; }

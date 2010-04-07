@@ -5,10 +5,12 @@
 
 
 <div id="timerecord-form-container" class="hidden">
-<%= this.FormFor(new AddTimeRecordModel() { ProjectId = Model.ProjectId })%>
+<%= this.FormFor(new AddTimeRecordModel() { })%>
+    <%= this.Edit(x => x.TimeRecord.StartTime) %>    
     <%= this.Edit(x => x.TimeRecord.Description) %>
     <%= this.Edit(x =>x.TaskId) %>
-    <%= this.InputFor( x => x.ProjectId) %>
+    <%= this.Edit( x => x.ProjectId) %>
+    
     
 </form>
    
