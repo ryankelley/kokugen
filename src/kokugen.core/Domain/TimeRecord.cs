@@ -1,4 +1,5 @@
 using System;
+using System.Web.Security;
 using Kokugen.Core.Membership.Security;
 
 namespace Kokugen.Core.Domain
@@ -13,7 +14,7 @@ namespace Kokugen.Core.Domain
         public virtual Project Project { get; set; }
         public virtual TaskCategory Task { get; set; }
 
-        public virtual User User { get; set; }
+        public virtual MembershipUser User { get; set; }
 
         public virtual void Start()
         {

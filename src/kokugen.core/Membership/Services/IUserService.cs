@@ -2,6 +2,7 @@
 
 using System;
 using System.Linq;
+using System.Web.Security;
 using Kokugen.Core.Membership.Security;
 using Kokugen.Core.Persistence.Repositories;
 using Kokugen.Core.Validation;
@@ -12,13 +13,13 @@ namespace Kokugen.Core.Membership.Services
 {
     public interface IUserService
     {
-        INotification Create(User user);
-        INotification Update(User user);
-        INotification Delete(User user);
-        User Retrieve(Guid Id);
+        INotification Create(MembershipUser user);
+        INotification Update(MembershipUser user);
+        INotification Delete(MembershipUser user);
+        MembershipUser Retrieve(Guid Id);
 
-        User GetUserByLogin(string name);
-        User GetUserByEmail(string email);
+        MembershipUser GetUserByLogin(string name);
+        MembershipUser GetUserByEmail(string email);
     }
 
     //public class UserService : IUserService

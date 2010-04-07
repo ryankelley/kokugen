@@ -1,5 +1,6 @@
 using System;
 using System.Security.Principal;
+using System.Web.Security;
 using FubuMVC.Core.Security;
 using Kokugen.Core.Membership.Security;
 
@@ -8,7 +9,7 @@ namespace Kokugen.Core.Membership.Services
     public interface IAuthenticationService
     {
         void AfterUserAuthenticated();
-        User GetCurrentLoggedInUser();
+        MembershipUser GetCurrentLoggedInUser();
     }
 
     public class AuthenticationService : IAuthenticationService
@@ -32,7 +33,7 @@ namespace Kokugen.Core.Membership.Services
             _context.CurrentUser = _factory.CreatePrincipal(identity);
         }
 
-        public User GetCurrentLoggedInUser()
+        public MembershipUser GetCurrentLoggedInUser()
         {
             var userId = ((FubuPrincipal)_context.CurrentUser).UserId;
             return userId != Guid.Empty ? _userService.Retrieve(userId) : null;

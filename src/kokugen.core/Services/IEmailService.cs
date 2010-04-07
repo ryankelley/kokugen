@@ -2,6 +2,7 @@
 
 using System.Net;
 using System.Net.Mail;
+using System.Web.Security;
 using Kokugen.Core.Membership.Security;
 
 #endregion
@@ -10,7 +11,7 @@ namespace Kokugen.Core.Services
 {
     public interface IEmailService
     {
-        void SendPasswordResetEmail(User user);
+        void SendPasswordResetEmail(MembershipUser user);
     }
 
     public class EmailService : IEmailService
@@ -26,10 +27,10 @@ namespace Kokugen.Core.Services
 
         #region IEmailService Members
 
-        public void SendPasswordResetEmail(User user)
+        public void SendPasswordResetEmail(MembershipUser user)
         {
             const string message = "";
-            SendEmail(user.EmailAddress,"test@test.com","Password Reset", message);
+            SendEmail(user.Email,"test@test.com","Password Reset", message);
         }
 
         private void SendEmail(string to, string from, string subject, string body)

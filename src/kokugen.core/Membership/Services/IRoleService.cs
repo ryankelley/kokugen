@@ -10,15 +10,15 @@ namespace Kokugen.Core.Membership.Services
     public interface IRoleService
     {
         INotification Create(string role);
-        INotification AddToRole(User user);
-        INotification RemoveFromRole(User user, string role);
+        INotification AddToRole(MembershipUser user);
+        INotification RemoveFromRole(MembershipUser user, string role);
         INotification Remove(string role);
 
         IEnumerable<string> FindAll();
-        IEnumerable<string> FindByUser(User user);
+        IEnumerable<string> FindByUser(MembershipUser user);
         IEnumerable<string> FindByUserName(string userName);
         IEnumerable<string> FindUserNamesByRole(string roleName);
-        bool IsInRole(User user, string roleName);
+        bool IsInRole(MembershipUser user, string roleName);
     }
 
     //public class RoleService : IRoleService

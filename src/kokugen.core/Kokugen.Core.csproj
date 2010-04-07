@@ -108,7 +108,7 @@
     <Compile Include="Domain\Project.cs" />
     <Compile Include="Domain\SiteConfiguration.cs" />
     <Compile Include="Domain\TimeRecord.cs" />
-    <Compile Include="Membership\Security\User.cs" />
+    <Compile Include="Membership\Abstractions\EnumerableToEnumerableTConverter.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Inflector.cs" />
     <Compile Include="IStartable.cs" />

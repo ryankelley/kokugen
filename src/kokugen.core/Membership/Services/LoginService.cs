@@ -1,5 +1,6 @@
 #region
 
+using System.Web.Security;
 using FubuMVC.Core.Security;
 using Kokugen.Core.Membership.Security;
 
@@ -9,7 +10,7 @@ namespace Kokugen.Core.Membership.Services
 {
     public interface ILoginService
     {
-        User AuthenticateUser(string userName, string password);
+        MembershipUser AuthenticateUser(string userName, string password);
     }
 
     public class LoginService : ILoginService
@@ -27,15 +28,15 @@ namespace Kokugen.Core.Membership.Services
             _passService = passService;
         }
 
-        public User AuthenticateUser(string userName, string password)
+        public MembershipUser AuthenticateUser(string userName, string password)
         {
-            var user = _userService.GetUserByLogin(userName);
+            //var user = _userService.GetUserByLogin(userName);
             
-            if(user != null && _passService.ComparePasswordToHash(password, user.HashedPassword))
-            {
-                _authContext.ThisUserHasBeenAuthenticated(user.Id.ToString(),false);
-                return user;
-            }
+            //if(user != null && _passService.ComparePasswordToHash(password, user.HashedPassword))
+            //{
+            //    _authContext.ThisUserHasBeenAuthenticated(user.Id.ToString(),false);
+            //    return user;
+            //}
             return null;
             
         }
