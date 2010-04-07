@@ -1,4 +1,6 @@
-﻿namespace MvcMembership.Settings
+﻿using Kokugen.Core.Membership.Settings;
+
+namespace MvcMembership.Settings
 {
 	public class PasswordResetRetrievalSettings : IPasswordResetRetrievalSettings
 	{

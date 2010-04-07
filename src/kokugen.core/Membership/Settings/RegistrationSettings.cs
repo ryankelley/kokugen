@@ -1,16 +1,16 @@
-﻿namespace MvcMembership.Settings
+﻿namespace Kokugen.Core.Membership.Settings
 {
-	public class RegistrationSettings : IRegistrationSettings
-	{
-		public RegistrationSettings(bool requiresUniqueEmailAddress)
-		{
-			RequiresUniqueEmailAddress = requiresUniqueEmailAddress;
-		}
+    public class RegistrationSettings : IRegistrationSettings
+    {
+        public RegistrationSettings(bool requiresUniqueEmailAddress)
+        {
+            RequiresUniqueEmailAddress = requiresUniqueEmailAddress;
+        }
 
-		#region IRegistrationSettings Members
+        #region IRegistrationSettings Members
 
-		public bool RequiresUniqueEmailAddress { get; private set; }
+        public bool RequiresUniqueEmailAddress { get; private set; }
 
-		#endregion
-	}
+        #endregion
+    }
 }

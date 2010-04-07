@@ -47,6 +47,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\FubuMVC\HtmlTags.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\Common Service Locator\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
     <Reference Include="NHibernate, Version=2.1.2.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\NHibernate\NHibernate.dll</HintPath>
@@ -109,6 +113,17 @@
     <Compile Include="Extensions.cs" />
     <Compile Include="Inflector.cs" />
     <Compile Include="IStartable.cs" />
+    <Compile Include="Membership\Settings\AspNetMembershipSettingsProvider.cs" />
+    <Compile Include="Membership\Settings\ILoginSettings.cs" />
+    <Compile Include="Membership\Settings\IMembershipSettings.cs" />
+    <Compile Include="Membership\Settings\IPasswordResetRetrievalSettings.cs" />
+    <Compile Include="Membership\Settings\IPasswordSettings.cs" />
+    <Compile Include="Membership\Settings\IRegistrationSettings.cs" />
+    <Compile Include="Membership\Settings\LoginSettings.cs" />
+    <Compile Include="Membership\Settings\MembershipSettingsDictionary.cs" />
+    <Compile Include="Membership\Settings\PasswordResetRetrievalSettings.cs" />
+    <Compile Include="Membership\Settings\PasswordSettings.cs" />
+    <Compile Include="Membership\Settings\RegistrationSettings.cs" />
     <Compile Include="ModelExtensions.cs" />
     <Compile Include="Persistence\Conventions\MaximumStingLengthConvention.cs" />
     <Compile Include="Persistence\ITransactionBoundary.cs" />

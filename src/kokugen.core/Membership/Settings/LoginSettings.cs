@@ -1,18 +1,8 @@
-﻿namespace MvcMembership.Settings
+﻿namespace Kokugen.Core.Membership.Settings
 {
-	public class LoginSettings : ILoginSettings
-	{
-		public LoginSettings(int maximumInvalidPasswordAttempts, int passwordAttemptWindowInMinutes)
-		{
-			MaximumInvalidPasswordAttempts = maximumInvalidPasswordAttempts;
-			PasswordAttemptWindowInMinutes = passwordAttemptWindowInMinutes;
-		}
-
-		#region ILoginSettings Members
-
-		public int MaximumInvalidPasswordAttempts { get; private set; }
-		public int PasswordAttemptWindowInMinutes { get; private set; }
-
-		#endregion
-	}
+    public class LoginSettings
+    {
+        public int MaxInvalidPasswordAttempts { get;  set; }
+        public int PasswordAttemptWindow { get;  set; }
+    }
 }

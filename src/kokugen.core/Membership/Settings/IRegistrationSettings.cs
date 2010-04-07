@@ -1,7 +1,7 @@
-﻿namespace MvcMembership.Settings
+﻿namespace Kokugen.Core.Membership.Settings
 {
-	public interface IRegistrationSettings
-	{
-		bool RequiresUniqueEmailAddress{ get; }
-	}
+    public interface IRegistrationSettings
+    {
+        bool RequiresUniqueEmailAddress{ get; }
+    }
 }
