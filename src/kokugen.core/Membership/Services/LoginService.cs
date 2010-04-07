@@ -18,10 +18,10 @@ namespace Kokugen.Core.Membership.Services
         private readonly IAuthenticationContext _authContext;
         private readonly IUserService _userService;
 
-        private readonly IPasswordHelperService _passService;
+        private readonly IPasswordService _passService;
 
         public LoginService(IAuthenticationContext authContext, IUserService userService,
-                            IPasswordHelperService passService)
+                            IPasswordService passService)
         {
             _authContext = authContext;
             _userService = userService;
