@@ -15,6 +15,7 @@
 {
     display: table-cell;
 }
+
 .backlog-column 
 {
     display: table;
@@ -32,8 +33,9 @@
 .card-list 
 {
     height: 100%;
-    padding: 5px;
+    padding: 20px 5px 5px;
     z-index: 100;
+    
 }
 
 .board 
@@ -46,13 +48,69 @@
         -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#d0d0d0', EndColorStr='#FFFFFF')"; /* IE8 */
 
 }
+.left-slider, .right-slider
+{
+    display: table-cell;
+    width: 35px;
+    background-color: #CCC;
+}
+.left-slider.hidden, .right-slider.hidden
+{
+    display: none;
+}
+.slider .slide-title 
+{
+    margin-top: 35%;
+    font-size: 14px;
+    font-weight: bold;
+}
 
+.slider .slide-title.left
+{
+    background: #CCC url('/content/images/backlog-title.png') no-repeat top left;
+   width: 30px;
+   height: 450px;
+   margin-left: 2px;
+   margin-right: 2px;
+   margin-top: 0px;
+}
+.slider .slide-title.right
+{
+    background: #CCC url('/content/images/archive-title.png') no-repeat top left;
+   width: 30px;
+   height: 450px;
+   margin-left: 2px;
+   margin-right: 2px;
+   margin-top: 0px;
+}
+.collapse-left
+{
+    background: transparent url('/content/images/collapse-left.png') no-repeat top left;
+   float:left;
+height:32px;
+margin-top:5px;
+padding:5px;
+width:32px;
+}
+.collapse-right
+{
+        background: transparent url('/content/images/collapse-right.png') no-repeat top left;
+   float:right;
+height:32px;
+margin-top:-23px;
+padding:5px;
+width:32px;
+}
 .column 
 {
     display: table-cell;
     border-left:2px dotted #CCCCCC;
     min-width:200px;
     /*background-color:#F6F6F6;*/
+}
+.column.hidden
+{
+    display: none;
 }
 .column.over-limit
 {

@@ -35,10 +35,31 @@
             $('#'+ newCard.ColumnId).append(hcard);
         }
         
-        $("div.column").each(function() {
-        var width = 100 / $("div.column").length;
-            $(this).attr("style", "width: "+ width + "%");});
+       setWidths();
+            
+            $('.backlog-toggle').click(function() {
+                $('#backlog-title').toggleClass('hidden');//.animate({width: 'toggle'});
+                //$('#backlog-container').animate({width: 'toggle'});
+                $('#backlog-container').toggleClass('hidden');
+                setWidths();
+                
+            });
+            
+            $('.archive-toggle').click(function() {
+                $('#archive-title').toggleClass('hidden');
+                //$('#backlog-container').animate({width: 'toggle'});
+                $('#archive-container').toggleClass('hidden');
+                setWidths();
+                
+            });
+            
     });
+    
+    function setWidths() {
+     $("div.column").not(".hidden").each(function() {
+        var width = 100 / $("div.column").not(".hidden").length;
+            $(this).attr("style", "width: "+ width + "%");});
+    }
 
     function setCardColumnHeight() {
         var newHeight = ($(window).height() - $(".card-list").position().top)-20;
@@ -53,17 +74,22 @@
 <asp:Content ID="THISCONTENTAREAID" ContentPlaceHolderID="mainContent" runat="server">
 <% this.Partial(new CompactCardFormInput{ Id = Model.Id}); %>
 <div class="board">
-
-    <div id="backlog-container"  class="column">
-        <div class="board-phase-header"><%= Model.BackLog.Name %></div>
+    <div id="backlog-title" class="slider left-slider">
+        <div id="backlog-toggle" class="slide-title left backlog-toggle">&nbsp;</div>
+    </div>
+    <div id="backlog-container"  class="column hidden">
+        <div class="collapse-left backlog-toggle">&nbsp;</div><div class="board-phase-header"><%= Model.BackLog.Name %></div>
         <ul class="card-list ui-sortable" id="<%= Model.BackLog.Id %>" limit="<%= Model.BackLog.Limit %>"></ul>
     </div>
 
     <%= this.PartialForEach(m => m.Columns).WithoutItemWrapper().WithoutListWrapper().Using<BoardPhase_Control>() %>
 
-    <div id="archive-container" class="column">
-        <div class="board-phase-header"><%= Model.Archive.Name %></div>
+    <div id="archive-container" class="column hidden">
+        <div class="board-phase-header"><%= Model.Archive.Name %></div><div class="collapse-right archive-toggle">&nbsp;</div>
         <ul class="card-list ui-sortable" id="<%= Model.Archive.Id %>" limit="<%= Model.Archive.Limit %>"></ul>
+    </div>
+    <div id="archive-title" class="slider right-slider">
+        <div id="archive-toggle" class="slide-title right archive-toggle">&nbsp;</div>
     </div>
 </div>
 </asp:Content>
