@@ -1,25 +1,3 @@
-table {
-border-collapse:collapse;
-border-spacing:0;
-}
-
-
-table.board {
-    width: 100%;
-    height: 100%;
-}
-
-table.board td.phase.first {
-border-left:0 none;
-}
-table.board td.phase {
-border-left:2px dotted #CCCCCC;
-min-width:200px;
-}
-table.board .phase {
-vertical-align:top;
-}
-
 .board-phase-header 
 {
     font-size: 16px;
@@ -62,6 +40,11 @@ vertical-align:top;
 {
     display: table;
     width: 100%;
+  background-image: -moz-linear-gradient(top, #F0F0F0, #FFFFFF 20%); /* FF3.6 */
+  background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #d0d0d0),color-stop(1, #FFFFFF)); /* Saf4+, Chrome */
+            filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#d0d0d0', EndColorStr='#FFFFFF'); /* IE6,IE7 */
+        -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#d0d0d0', EndColorStr='#FFFFFF')"; /* IE8 */
+
 }
 
 .column 
@@ -69,7 +52,7 @@ vertical-align:top;
     display: table-cell;
     border-left:2px dotted #CCCCCC;
     min-width:200px;
-    background-color:#F6F6F6;
+    /*background-color:#F6F6F6;*/
 }
 
 .column.hidden
@@ -77,15 +60,6 @@ vertical-align:top;
     display: none;
 }
 
-.backlog  
-{
-   
-}
-
-.archive 
-{
-    
-}
 .bottom-border
 {
     width: 100%;
@@ -121,33 +95,27 @@ vertical-align:top;
     width: 23%;
 }
 
-.card 
-{
-    margin-bottom: 4px;
-    -moz-border-radius:4px 4px 4px 4px;
-border:2px solid;
-clear: both;
-}
+
 
 .card.ready  
 {
-    border:4px solid #21CD18 !important;
 }
 
 .card.blocked 
 {
-    border:4px solid #D05750 !important;
-    
 }
-.card .card-header 
-{
-    cursor: move;
-    overflow: hidden;
-    border-bottom:1px solid;
-}
+
 .reason-blocked div { width: 100%; }
-.reason-blocked { width: 100% }
-.reason-blocked textarea 
+.reason-blocked  
+{
+    color:White;
+    font-size:14px;
+    font-weight:bold;
+    line-height:24px;
+    padding:4px;
+    width:100%;
+}
+.reason-form textarea 
 {
     margin-left: 8px;
     width: 90%;
@@ -161,42 +129,6 @@ clear: both;
     padding-top:8px;
 }
 
-.card.grey 
-{
-    background-color:#EEEEEE;
-    border-color:#CCCCCC;
-}
-
-.card.blue
-{
-    background-color:#DBEBFF;
-    border-color:#A8CFFF;
-}
-.card.red
-{
-    background-color:#FFBBBB;
-    border-color:#FF9797;
-}
-.card.green
-{
-    background-color:#BDF4CB;
-    border-color:#4AE371;
-}
-.card.yellow
-{
-    background-color:#F5F7C4;
-    border-color:#DFE32D;
-}
-.card.orange
-{
-    background-color:#FFD7B3;
-    border-color:#FFAC62;
-}
-.card.teal
-{
-    background-color:#CFE7E2;
-    border-color:#8DC7BB;
-}
 
 li.card.hover
 {
@@ -207,58 +139,17 @@ li.card.hover
           -ms-filter: "progid:DXImageTransform.Microsoft.dropshadow(OffX=0px, OffY=0px, Color='#333')"; /* IE8 */
 }
 
-.card.grey .card-header 
-{
-    background-color:#DDDDDD;
-    border-color:#CCCCCC;
-}
 
-.card.blue .card-header 
-{
-    background-color:#add1fe;
-    border-color:#A8CFFF;
-}
-
-.card.red .card-header 
-{
-    background-color:#ff6666;
-    border-color:#d34f52;
-}
-
-
-.card.green .card-header 
-{
-    background-color:#9ce3ae;
-    border-color:#4AE371;
-}
-
-
-.card.yellow .card-header 
-{
-    background-color:#d3d719;
-    border-color:#afb232;
-}
-
-
-.card.orange .card-header 
-{
-    background-color:#f4a258;
-    border-color:#d78841;
-}
-
-
-.card.teal .card-header 
-{
-    background-color:#26e2bb;
-    border-color:#2fbda0;
-}
 
 .card .card-body 
 {
-    font-size:16px;
+    font-size:14px;
 line-height:22px;
-margin:0 5px;
+margin: 0px;
+padding: 5px;
+background-color: #FFF;
 }
+
 
 .card .card-header .card-number  
 {
@@ -278,16 +169,7 @@ margin:0 5px;
     padding-right:4px;
     text-decoration:none;
 }
-.card .card-header .card-size 
-{
-    -moz-border-radius:4px 4px 4px 4px;
-    border:1px solid;
-    float:left;
-    font-size:10px;
-    margin-top:4px;
-    padding:1px 4px;
-    background-color: #BBB;
-}
+
 
 div.error 
 {
@@ -311,12 +193,19 @@ div.error
 .card .card-section 
 {
     border-top: 1px dotted;
+    background-color: #FFF;
+}
+
+.card-section 
+{
+    background-color: #FFF;
 }
 
 ul #card-toolbar
 {
     height: 24px;
     clear: both;
+    min-width: 220px;
 }
 
 #card-toolbar li.icon
@@ -328,6 +217,7 @@ ul #card-toolbar
 {
     display: inline;
     float: right;
+    height: 25px;
 }
 
 #card-toolbar .checkbox 
@@ -389,18 +279,20 @@ ul #card-toolbar
 {
     background: transparent url('/content/images/down.png') no-repeat center center;
 }
-#card-color-editor ul
+
+#card-color-editor 
 {
-    overflow: hidden;
-    padding: 4px;
-    display: inline;
+    height: 26px;
+    min-width: 230px;
 }
+
 
 #card-color-editor li
 {
     display: inline;
     float: left;
     padding: 2px;
+    background-color: #FFF;
 }
 
 #card-color-editor li a 
@@ -422,45 +314,6 @@ ul #card-toolbar
               filter:  progid:DXImageTransform.Microsoft.dropshadow(OffX=0px, OffY=0px, Color='#666666'); /* IE6,IE7 */
           -ms-filter: "progid:DXImageTransform.Microsoft.dropshadow(OffX=0px, OffY=0px, Color='#666666')"; /* IE8 */
 }
-#card-color-editor li a.grey 
-{
-    background-color:#EEEEEE;
-    border-color:#CCCCCC;
-}
-
-#card-color-editor li a.blue 
-{
-    background-color:#DBEBFF;
-    border-color:#A8CFFF;
-}
-
-#card-color-editor li a.red 
-{
-    background-color:#FFBBBB;
-    border-color:#FF9797;
-}
-#card-color-editor li a.green 
-{
-    background-color:#BDF4CB;
-    border-color:#4AE371;
-}
-#card-color-editor li a.yellow 
-{
-    background-color:#F5F7C4;
-    border-color:#DFE32D;
-}
-
-#card-color-editor li a.orange 
-{
-    background-color:#FFD7B3;
-border-color:#FFAC62;
-}
-
-#card-color-editor li a.teal 
-{
-background-color:#CFE7E2;
-border-color:#8DC7BB;
-}
 
 button.cancel 
 {
@@ -473,10 +326,239 @@ button.cancel
 .ui-sortable .phase-placeholder {
 -moz-border-radius:8px 8px 8px 8px;
 background-color:#cce5ff;
-border:1px solid #2c76fd !important;
+border:1px dashed #2c76fd !important;
 display:inline-block;
 margin: 0 0 8px 8px;
 vertical-align:top;
 
 }
 
+.card .card-header 
+{
+    cursor: move;
+    overflow: hidden;
+    border-bottom:1px solid;
+    
+}
+
+.card 
+{
+   /* background: none url('/content/images/card-overlay.png') repeat-x top left;*/
+    margin-bottom: 4px;
+    -moz-border-radius:4px 4px 4px 4px;
+    border: none;   
+    padding: 5px;
+    clear: both;
+}
+
+.card.grey 
+{
+    /*background-color:#FFF;
+    border-color:#555;*/
+    
+      background-image: -moz-linear-gradient(top, #555555, #343434); /* FF3.6 */
+  background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #555555),color-stop(1, #343434)); /* Saf4+, Chrome */
+            filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#555555', EndColorStr='#343434'); /* IE6,IE7 */
+        -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#555555', EndColorStr='#343434')";
+}
+
+.card.blue
+{
+   
+    /*background-color:#466c8a;*/
+    
+  background-image: -moz-linear-gradient(top, #4c7594, #223543); /* FF3.6 */
+  background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #4c7594),color-stop(1, #223543)); /* Saf4+, Chrome */
+            filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#4c7594', EndColorStr='#223543'); /* IE6,IE7 */
+        -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#4c7594', EndColorStr='#223543')"; /* IE8 */
+
+}
+.card.blocked
+{
+    /*background-color:#FFBBBB;
+    background-color:#FFF;
+    border-color:#ae2511;*/
+    
+  background-image: -moz-linear-gradient(top, #AE2511, #571908); /* FF3.6 */
+  background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #AE2511),color-stop(1, #571908)); /* Saf4+, Chrome */
+            filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#AE2511', EndColorStr='#571908'); /* IE6,IE7 */
+        -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#AE2511', EndColorStr='#571908')"; /* IE8 */
+
+}
+.card.ready
+{
+    /*background-color:#BDF4CB;
+    background-color:#FFF;
+    border-color:#2e8015;*/
+    
+  background-image: -moz-linear-gradient(top, #1cac3a, #0d4f1b); /* FF3.6 */
+  background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #1cac3a),color-stop(1, #0d4f1b)); /* Saf4+, Chrome */
+            filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#1cac3a', EndColorStr='#0d4f1b'); /* IE6,IE7 */
+        -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#1cac3a', EndColorStr='#0d4f1b')"; /* IE8 */
+
+}
+.card.yellow
+{
+    /*background-color:#F5F7C4;
+    background-color:#FFF;
+    border-color:#9C8C02;*/
+    
+  background-image: -moz-linear-gradient(top, #9C8C02, #5E5403); /* FF3.6 */
+  background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #9C8C02),color-stop(1, #5E5403)); /* Saf4+, Chrome */
+            filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#9C8C02', EndColorStr='#5E5403'); /* IE6,IE7 */
+        -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#9C8C02', EndColorStr='#5E5403')"; /* IE8 */
+
+}
+.card.orange
+{
+    /*background-color:#FFD7B3;
+    background-color:#FFF;
+    border-color:#B67902;*/
+      background-image: -moz-linear-gradient(top, #ECAA2F, #665538); /* FF3.6 */
+  background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #ECAA2F),color-stop(1, #665538)); /* Saf4+, Chrome */
+            filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#ECAA2F', EndColorStr='#665538'); /* IE6,IE7 */
+        -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#ECAA2F', EndColorStr='#665538')";
+}
+.card.teal
+{
+    /*background-color:#CFE7E2;
+    background-color:#FFF;
+    border-color:#027E92;*/
+      background-image: -moz-linear-gradient(top, #027E92, #012C31); /* FF3.6 */
+  background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #027E92),color-stop(1, #012C31)); /* Saf4+, Chrome */
+            filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#027E92', EndColorStr='#012C31'); /* IE6,IE7 */
+        -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#027E92', EndColorStr='#012C31')"; 
+}
+
+.card.grey .card-header 
+{
+    background-color:#DDDDDD;
+    border-color:#CCCCCC;
+}
+
+.card.blue .card-header 
+{
+    background-color:#70a5d8;
+    border-color:#233644;
+}
+
+.card.blocked .card-header 
+{
+    background-color:#e65540;
+    border-color:#d34f52;
+}
+
+
+.card.ready .card-header 
+{
+    background-color:#80C84B;
+    border-color:#2e8015;
+}
+
+
+.card.yellow .card-header 
+{
+    background-color:#ECD800;
+    border-color:#9C8C02;
+}
+
+
+.card.orange .card-header 
+{
+    background-color:#E49703;
+    border-color:#B67902;
+}
+
+
+.card.teal .card-header 
+{
+    background-color:#029DB6;
+    border-color:#027E92;
+}
+
+#card-color-editor li a.grey 
+{
+    background-color:#EEEEEE;
+    border-color:#CCCCCC;
+}
+
+#card-color-editor li a.blue 
+{
+    background-color:#70a5d8;
+    border-color:#233644;
+}
+
+#card-color-editor li a.blocked 
+{
+    background-color:#e65540;
+    border-color:#d34f52;
+}
+#card-color-editor li a.ready 
+{
+    background-color:#80C84B;
+    border-color:#2e8015;
+}
+#card-color-editor li a.yellow 
+{
+    background-color:#ECD800;
+    border-color:#9C8C02;
+}
+
+#card-color-editor li a.orange 
+{
+    background-color:#E49703;
+    border-color:#B67902;
+}
+
+#card-color-editor li a.teal 
+{
+    background-color:#029DB6;
+    border-color:#027E92;
+}
+
+.card .card-header .card-size 
+{
+    -moz-border-radius:4px 4px 4px 4px;
+    border:1px solid;
+    float:left;
+    font-size:10px;
+    margin-top:5px;
+    padding:1px 4px 2px 4px;
+    border-color: #FFF;
+    color: #FFF;
+    font-weight: bold;
+}
+
+.card.grey .card-header .card-size 
+{
+    background-color:#BBB;
+    color: #000;
+}
+
+.card.blue .card-header .card-size
+{
+    background-color:#233644;
+}
+
+.card.blocked .card-header .card-size
+{
+    background-color:#d34f52;
+}
+.card.ready .card-header .card-size
+{
+    background-color:#2e8015;
+}
+.card.yellow .card-header .card-size
+{
+    background-color:#9C8C02;
+}
+
+.card.orange .card-header .card-size
+{
+    background-color:#B67902;
+}
+
+.card.teal .card-header .card-size
+{
+    background-color:#027E92;
+}

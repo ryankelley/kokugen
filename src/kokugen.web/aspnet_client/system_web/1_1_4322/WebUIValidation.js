@@ -123,8 +123,10 @@ function Page_ClientValidate() {
     return Page_IsValid;
 }
 function ValidatorCommonOnSubmit() {
-    event.returnValue = !Page_BlockSubmit;
+    var result = !Page_BlockSubmit;
     Page_BlockSubmit = false;
+    event.returnValue = result;
+    return result;
 }
 function ValidatorEnable(val, enable) {
     val.enabled = (enable != false);
@@ -210,7 +212,7 @@ function ValidatorConvert(op, dataType, val) {
         return (isNaN(num) ? null : num);            
     }
     else if (dataType == "Date") {
-        var yearFirstExp = new RegExp("^\\s*((\\d{4})|(\\d{2}))([-./])(\\d{1,2})\\4(\\d{1,2})\\s*$");
+        var yearFirstExp = new RegExp("^\\s*((\\d{4})|(\\d{2}))([-/]|\\. ?)(\\d{1,2})\\4(\\d{1,2})\\s*$");
         m = op.match(yearFirstExp);
         var day, month, year;
         if (m != null && (m[2].length == 4 || val.dateorder == "ymd")) {
@@ -222,7 +224,7 @@ function ValidatorConvert(op, dataType, val) {
             if (val.dateorder == "ymd"){
                 return null;		
             }						
-            var yearLastExp = new RegExp("^\\s*(\\d{1,2})([-./])(\\d{1,2})\\2((\\d{4})|(\\d{2}))\\s*$");
+            var yearLastExp = new RegExp("^\\s*(\\d{1,2})([-/]|\\. ?)(\\d{1,2})\\2((\\d{4})|(\\d{2}))\\s*$");
             m = op.match(yearLastExp);
             if (m == null) {
                 return null;

@@ -27,12 +27,6 @@ if (window.__smartNav == null)
         if ((index != -1 && index == fdurl.length-snSrc.length)
             || fdurl == "about:blank")
             return;
-        var fdurlb = fdurl.split("?")[0];
-        if (document.location.href.indexOf(fdurlb) < 0)
-        {
-            document.location.href=fdurl;
-            return;
-        }
         if (sn.sHif != null)
         {
             sn.sHif.removeNode(true);
@@ -76,7 +70,8 @@ if (window.__smartNav == null)
                 k = o.firstChild;
                 break;
             }
-            hdm.appendChild(k);
+            if(k!=null)
+                hdm.appendChild(k);
         }
         document.body.clearAttributes();
         document.body.id = fd.body.id;

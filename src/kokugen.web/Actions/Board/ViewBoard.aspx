@@ -24,7 +24,7 @@
 
         $(".ui-sortable").sortable({ connectWith: '.ui-sortable', placeholder: 'phase-placeholder', forcePlaceholderSize: true,
             receive: cardMoved });
-
+$(".ui-sortable").disableSelection();
         for(var i = 0; i < cards.length; i++)
         {
             var newCard = new Card(cards[i]);

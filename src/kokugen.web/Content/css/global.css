@@ -307,7 +307,10 @@ margin:0 0 12px 12px;
 text-align:center;
 vertical-align:top;
 }
-
+li.phase h4 
+{
+    cursor: move;
+}
 .board-column-configure .phase-placeholder {
 -moz-border-radius:8px 8px 8px 8px;
 background-color:#CCFFCC;

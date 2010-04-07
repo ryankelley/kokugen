@@ -257,6 +257,7 @@
     <Content Include="Content\images\arrow.png" />
     <Content Include="Content\images\bg.jpg" />
     <Content Include="Content\images\board_big.png" />
+    <Content Include="Content\images\card-overlay.png" />
     <Content Include="Content\images\card.png" />
     <Content Include="Content\images\card_delete.png" />
     <Content Include="Content\images\card_edit.png" />

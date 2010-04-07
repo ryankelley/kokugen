@@ -14,17 +14,6 @@ var Card = function(card) {
     this.ReasonBlocked = card.BlockReason;
 
     var self = this;
-
-    this.Move = function() {
-        alert("Implement the move function");
-        return false;
-    };
-
-    this.Remove = function() {
-        alert("Implement the remove function.");
-        return false;
-    };
-
 }
 
 
@@ -36,11 +25,9 @@ var buildCardDisplay = function(scard) {
     var myTools = buildToolbar(scard);
     var colors = buildColorEditor();
 
+    // makes outer container
     var element = document.createElement('li');
     $(element).addClass("card").addClass(scard.Color);
-
-
-
 
     var head = document.createElement('div');
     $(head).addClass("card-header");
@@ -57,7 +44,7 @@ var buildCardDisplay = function(scard) {
     number.appendChild(editLink);
 
     var size = document.createElement('div');
-    $(size).addClass("card-size");
+    $(size).addClass("card-size").attr("title", "Estimated Size of this card");
     size.appendChild(document.createTextNode(scard.Size));
     var worker = document.createElement('div');
 
@@ -75,7 +62,7 @@ var buildCardDisplay = function(scard) {
     $(reasonForm).addClass("reason-form hidden");
 
     var input = document.createElement('textarea');
-    $(input).attr("cols", "15").attr("rows", "5").attr("name", "value");
+    $(input).attr("cols", "15").attr("rows", "5").attr("name", "value").addClass("required");
 
     input.appendChild(document.createTextNode(scard.ReasonBlocked));
 
@@ -89,8 +76,6 @@ var buildCardDisplay = function(scard) {
 
     reasonForm.appendChild(submitReason);
     reasonForm.appendChild(cancelReason);
-
-
 
     // End blockage reason
 
@@ -109,14 +94,30 @@ var buildCardDisplay = function(scard) {
 
     body.appendChild(document.createTextNode(scard.Title));
 
+    function unblock() {
+        scard.Status = "New";
+        scard.ReasonBlocked = "";
+        $(element).removeClass("blocked");
+        $(blocked).addClass("hidden");
+        myTools.isBlocked(false);
+        element.updateBlocked(false);
+    }
+
+    function notReady() {
+        scard.Status = "New";
+        element.isReady(false);
+        myTools.isReady(false);
+    }
+
     element.receive = function(newColumnId) {
+        unblock();
+        notReady();
         $.ajax({
             url: "/card/move",
             data: { Id: scard.Id, ColumnId: newColumnId },
             dataType: "json",
             type: "POST"
         });
-        //alert(newColumnId);
     };
 
     element.colorChange = function(color) {
@@ -136,7 +137,6 @@ var buildCardDisplay = function(scard) {
     }
 
     element.isReady = function(status) {
-
         if (status) {
             this.Status = "Ready";
             $(element).addClass("ready");
@@ -155,6 +155,7 @@ var buildCardDisplay = function(scard) {
     }
 
     element.isBlocked = function(value) {
+        scard.Status = value ? "Blocked" : "New";
         if (value) {
             $(element).addClass("blocked");
             $(blocked).removeClass("hidden");
@@ -163,25 +164,38 @@ var buildCardDisplay = function(scard) {
         else {
             $(element).removeClass("blocked");
             $(blocked).addClass("hidden");
+            element.updateBlocked(false);
         }
-
-        scard.Status = value ? "Blocked" : "New";
 
     }
 
     element.handleReasonBlocked = function(value) {
-        element.updateBlocked(value);
+        element.updateBlocked(true, value);
     }
 
-    element.updateBlocked = function(reason) {
+    element.updateBlocked = function(status, reason) {
+        if (status) {
+            var isValid = ($(input).val() != "" && $(input).val() != undefined);
+            if (isValid) {
+                $.ajax({
+                    url: "/card/blocked",
+                    data: { Id: scard.Id, Reason: reason, Status: scard.Status },
+                    dataType: "json",
+                    type: "POST"
+                });
 
-        $.ajax({
-            url: "/card/blocked",
-            data: { Id: scard.Id, Reason: reason, Status: scard.Status },
-            dataType: "json",
-            type: "POST"
-        });
-        return false;
+                scard.ReasonBlocked = reason;
+                return false;
+            }
+        }
+        else {
+            $.ajax({
+                url: "/card/blocked",
+                data: { Id: scard.Id, Reason: "", Status: scard.Status },
+                dataType: "json",
+                type: "POST"
+            });
+        }
     }
 
     $(reasonBlocked).dblclick(function() {
@@ -190,10 +204,14 @@ var buildCardDisplay = function(scard) {
     });
 
     $(submitReason).click(function() {
-        element.handleReasonBlocked($(input).val());
+        element.updateBlocked(true, $(input).val());
+        $(reasonForm).addClass("hidden");
+        $(reasonBlocked).removeClass("hidden");
+        $(reasonBlocked).html(scard.ReasonBlocked);
     });
+
     $(cancelReason).click(function() {
-        if ($(input).val() != "") {
+        if (scard.Status == "Blocked") {
             $(reasonForm).addClass("hidden");
             $(reasonBlocked).removeClass("hidden");
         }
@@ -201,15 +219,6 @@ var buildCardDisplay = function(scard) {
             element.isBlocked(false);
         }
     });
-
-    element.reasonCallback = function(value, settings) {
-        alert('the form was canceled');
-    }
-
-    //$(reasonBlocked).editable(element.handleReasonBlocked, { type: 'textarea', cancel: 'Cancel', submit: 'OK', onblur: 'ignore', cols: 5, rows: 10, event: 'dblclick', callback: element.reasonCallback });
-
-
-
 
     $(head).click(function() {
         $(this).siblings("#card-toolbar").slideToggle();
@@ -219,7 +228,7 @@ var buildCardDisplay = function(scard) {
     return element;
 };
 
-
+// Used by the sortable for handling card moves
 function cardMoved(event, ui) {
     $(ui.item).each(function() {
         this.receive(this.parentNode.id);
@@ -278,15 +287,11 @@ function buildToolbar(card) {
     var readyLink = buildAnchor("Ready", "#", "card-toolbar-ready");
     ready.appendChild(readyLink);
 
-   
-
     var blocked = document.createElement('li');
     blocked.setAttribute("class", "checkbox");
 
     var blockedLink = buildAnchor("Blocked", "#", "card-toolbar-blocked");
     blocked.appendChild(blockedLink);
-
-    
 
     element.appendChild(up);
     element.appendChild(down);
@@ -306,30 +311,50 @@ function buildToolbar(card) {
 
     $(readyLink).click(function() {
         if ($(readyLink).hasClass("checked")) {
-            $(readyLink).removeClass("checked");
+            element.isReady(false);
             readyLink.parentNode.parentNode.parentNode.isReady(false);
-            $(blockedLink).removeClass("hidden");
+
         }
         else {
-            $(readyLink).addClass("checked");
+            element.isReady(true);
             readyLink.parentNode.parentNode.parentNode.isReady(true);
-            $(blockedLink).addClass("hidden");
+
         }
 
     });
 
     $(blockedLink).click(function() {
-    if ($(blockedLink).hasClass("checked")) {
-        $(blockedLink).removeClass("checked");
-        blockedLink.parentNode.parentNode.parentNode.isBlocked(false);
-        $(readyLink).removeClass("hidden");
-    }
-    else {
-        $(blockedLink).addClass("checked");
-        blockedLink.parentNode.parentNode.parentNode.isBlocked(true);
-        $(readyLink).addClass("hidden");
-    }
+        if ($(blockedLink).hasClass("checked")) {
+            element.isBlocked(false);
+            blockedLink.parentNode.parentNode.parentNode.isBlocked(false);
+        }
+        else {
+            element.isBlocked(true);
+            blockedLink.parentNode.parentNode.parentNode.isBlocked(true);
+        }
     });
+
+    element.isBlocked = function(blocked) {
+        if (blocked) {
+            $(blockedLink).addClass("checked");
+            $(readyLink).addClass("hidden");
+        } else {
+            $(blockedLink).removeClass("checked");
+            $(readyLink).removeClass("hidden");
+        }
+    }
+
+    element.isReady = function(ready) {
+        if (ready) {
+            $(readyLink).addClass("checked");
+            $(blockedLink).addClass("hidden");
+
+        } else {
+        $(readyLink).removeClass("checked");
+        $(blockedLink).removeClass("hidden");
+
+        }
+    }
     
     return element;
 };
@@ -346,109 +371,51 @@ function buildColorEditor() {
     var element = document.createElement('ul');
     $(element).addClass("card-section").attr("id", "card-color-editor").addClass("hidden");
 
-    var grey = document.createElement('li');
-    var blue = document.createElement('li');
-    var red = document.createElement('li');
-    var green = document.createElement('li');
-    var yellow = document.createElement('li');
-    var orange = document.createElement('li');
-    var teal = document.createElement('li');
+    var buttons = buildColorButtons(['grey', 'blue',  'yellow', 'orange', 'teal']);
+    for (var i in buttons) {
+        element.appendChild(buttons[i]);
+    }
+    
+    
     var cancel = document.createElement('li');
-
-    var greyLink = document.createElement('a');
-    $(greyLink).attr("rel", "grey").attr("href", "#").addClass("card-color grey");
-    greyLink.appendChild(document.createTextNode("&nbsp;"));
-    setupColorHover(greyLink, "grey");
-    grey.appendChild(greyLink);
-    
-    var blueLink = document.createElement('a');
-    $(blueLink).attr("rel", "blue").attr("href", "#").addClass("card-color blue");
-    blueLink.appendChild(document.createTextNode("&nbsp;"));
-
-    setupColorHover(blueLink, "blue");
-    blue.appendChild(blueLink);
-    
-    var redLink = document.createElement('a');
-    $(redLink).attr("rel", "red").attr("href", "#").addClass("card-color red");
-    redLink.appendChild(document.createTextNode("&nbsp;"));
-    setupColorHover(redLink, "red");
-    
-    red.appendChild(redLink);
-    
-    var greenLink = document.createElement('a');
-    $(greenLink).attr("rel", "green").attr("href", "#").addClass("card-color green");
-    greenLink.appendChild(document.createTextNode("&nbsp;"));
-    setupColorHover(greenLink, "green");
-    green.appendChild(greenLink);
-    
-    var yellowLink = document.createElement('a');
-    $(yellowLink).attr("rel", "yellow").attr("href", "#").addClass("card-color yellow");
-    yellowLink.appendChild(document.createTextNode("&nbsp;"));
-    setupColorHover(yellowLink, "yellow");
-    yellow.appendChild(yellowLink);
-    
-    var orangeLink = document.createElement('a');
-    $(orangeLink).attr("rel", "orange").attr("href", "#").addClass("card-color orange");
-    orangeLink.appendChild(document.createTextNode("&nbsp;"));
-    setupColorHover(orangeLink, "orange");
-    orange.appendChild(orangeLink);
-    
-    var tealLink = document.createElement('a');
-    $(tealLink).attr("rel", "teal").attr("href", "#").addClass("card-color teal");
-    setupColorHover(tealLink, "teal");
-    
-    tealLink.appendChild(document.createTextNode("&nbsp;"));
-    
-    
-    
-    teal.appendChild(tealLink);
-
     var cancelbutton = document.createElement('button');
     $(cancelbutton).addClass("cancel");
     cancelbutton.appendChild(document.createTextNode("Cancel"));
     $(cancelbutton).click(function() { $(element).slideToggle(); });
     cancel.appendChild(cancelbutton);
 
-    element.appendChild(grey);
-    element.appendChild(blue);
-    element.appendChild(red);
-    element.appendChild(green);
-    element.appendChild(yellow);
-    element.appendChild(orange);
-    element.appendChild(teal);
     element.appendChild(cancel);
 
-    // Setup click functions on color links
-    $(greyLink).click(function() {
-        changeColor(greyLink, "grey");
-    });
-    
-    $(blueLink).click(function() {
-        changeColor(blueLink, "blue");
-    });
-    
-    $(redLink).click(function() {
-        changeColor(redLink, "red");
-    });
-    
-    $(greenLink).click(function() {
-        changeColor(greenLink, "green");
-    });
-    
-    $(yellowLink).click(function() {
-        changeColor(yellowLink, "yellow");
-    });
-
-    $(orangeLink).click(function() {
-        changeColor(orangeLink, "orange");
-    });
-    
-    $(tealLink).click(function() {
-        changeColor(tealLink, "teal");
-    });
-    
     return element;
 }
+
+function buildColorButtons(listOfColors) {
+    var _colorButtons = new Array();
+    for (var i in listOfColors) {
+        _colorButtons.push(buildColorButton(listOfColors[i]));
+    }
+
+    return _colorButtons;
+}
+
+function buildColorButton(color) {
+    var container = document.createElement('li');
+
+    var link = document.createElement('a');
+    $(link).attr("href", "#").addClass("card-color").addClass(color);
+    link.appendChild(document.createTextNode("&nbsp;"));
+    setupColorHover(link, color);
+    container.appendChild(link);
+
+    // Setup click functions on color links
+    $(link).click(function() {
+        changeColor(link, color);
+    });
+    
+    return container;
+}
+
+
 function changeColor(element, color) {
     //$(element).hover(function() { }, function() { });
     element.parentNode.parentNode.parentNode.colorChange(color);
@@ -484,6 +451,5 @@ function determineColor(element) {
         return "orange"; }
     if(element.hasClass("teal")) {
         return "teal"; }
-  
 }
 
