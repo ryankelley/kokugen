@@ -29,12 +29,12 @@ namespace Kokugen.Web.Actions.Board
             output.Columns = project.GetBoardColumns().OrderBy(a => a.ColumnOrder).Select(x => Mapper.DynamicMap<BoardColumnDTO>(x));
 
             output.AllCards = project.GetCards().Select(x => Mapper.Map<Core.Domain.Card, CardViewDTO>(x)).ToList();
-
+            output.ProjectId = project.Id;
             return output;
         }
     }
 
-    public class ViewBoardModel
+    public class ViewBoardModel : ProjectBaseViewModel
     {
         public Guid Id { get; set; }
         public BoardColumnDTO BackLog { get; set; }

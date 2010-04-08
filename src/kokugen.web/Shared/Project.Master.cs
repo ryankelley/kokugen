@@ -5,7 +5,7 @@ using Kokugen.Web.Actions;
 
 namespace Kokugen.Web.Shared
 {
-    public class Site : FubuMasterPage
+    public class ProjectMaster : FubuMasterPage<ProjectBaseViewModel>
     {
         
     }

@@ -260,6 +260,10 @@ function cardMovedOut(event, ui) {
     checkLimit(this);
 }
 
+function reOrderCards(event, ui) {
+
+}
+
 function buildToolbar(card) {
 
     var element = document.createElement('ul');
