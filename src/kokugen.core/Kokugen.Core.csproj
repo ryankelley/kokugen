@@ -153,6 +153,7 @@
     <Compile Include="Persistence\TransactionProcessor.cs" />
     <Compile Include="Security\KokugenPrincipal.cs" />
     <Compile Include="Security\KokugenPrincipalFactory.cs" />
+    <Compile Include="Services\CardViewDTO.cs" />
     <Compile Include="Services\IAuthenticationService.cs" />
     <Compile Include="Services\IBoardService.cs" />
     <Compile Include="Services\ICardService.cs" />

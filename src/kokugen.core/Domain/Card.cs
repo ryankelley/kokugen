@@ -42,7 +42,7 @@ namespace Kokugen.Core.Domain
         }
 
         public virtual BoardColumn Column { get; set; }
-
+        public virtual int CardOrder { get; set; }
         public virtual string BlockReason { get; set; }
     }
 
