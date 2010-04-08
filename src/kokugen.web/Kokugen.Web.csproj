@@ -324,6 +324,7 @@
     <Content Include="Shared\Site.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\images\k-logo.png" />
     <Content Include="Shared\Project.Master" />
   </ItemGroup>
   <ItemGroup>
