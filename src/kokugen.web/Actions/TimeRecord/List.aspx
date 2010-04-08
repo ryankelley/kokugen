@@ -6,27 +6,27 @@
 <asp:Content ID="TimeRecordListHead" ContentPlaceHolderID="mainContent" runat="server">
 
 <style type="text/css">
-table
-{
-border-collapse:collapse;
-width:1024px;
-padding:10px;
-border:5px solid gray;
-margin:10px;
-}
+    table
+        {
+            border-collapse:collapse;
+            width:1024px;
+            padding:10px;
+            border:5px solid gray;
+            margin:10px;
+        }
 table, td, th
-{
-border:3px solid black;
-border-style:inset;
-text-align:center;
-background-color:#CEBEB4;
-color:#49657D;
-}
+    {
+        border:3px solid black;
+        border-style:inset;
+        text-align:center;
+        background-color:#CEBEB4;
+        color:#49657D;
+    }
 th
-{
-background-color:#9e9993;
-color:black;
-}
+    {
+        background-color:#9e9993;
+        color:black;
+    }
 </style>
 
 <body>

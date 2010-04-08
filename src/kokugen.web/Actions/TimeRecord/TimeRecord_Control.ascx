@@ -30,7 +30,7 @@
             <%= this.DisplayFor(x => x.Task.Name) %>
         </td>
         <td> 
-            <%= this.DisplayFor(x => x.Project.Name) %>
+            <a href="/project/<%= Model.Project.Id %>"><%=Model.Project.Name %></a>
         </td>              
 	</tr>	
 
