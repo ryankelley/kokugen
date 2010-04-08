@@ -35,6 +35,14 @@
             $('#'+ newCard.ColumnId).append(hcard);
         }
         
+        $("#backlog-container .ui-sortable").bind("sortremove", backlogRemove);
+        
+        $("#backlog-container .ui-sortable").bind("sortreceive", backlogReceive);
+        
+        $("#archive-container .ui-sortable").bind("sortreceive", archiveReceive);
+        $("#archive-container .ui-sortable").bind("sortremove", archiveRemove);
+        
+        
        setWidths();
             
             $('.backlog-toggle').click(function() {

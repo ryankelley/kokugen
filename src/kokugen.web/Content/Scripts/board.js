@@ -7,9 +7,9 @@ var Card = function(card) {
     this.Title = card.Title;
     this.Color = card.Color;
 
-    
-    this.Deadline = card.Deadline == null ? null : card.Deadline.toString();
-    if (this.Deadline != null) {
+
+    this.Deadline = card.Deadline === null ? null : card.Deadline.toString();
+    if (this.Deadline !== null) {
         this.Deadline = new Date(parseInt(this.Deadline.replace("/Date(", "").replace(")/", ""), 10));
     }
     this.CardNumber = card.CardNumber;
@@ -18,9 +18,8 @@ var Card = function(card) {
     this.Status = card.Status;
     this.ReasonBlocked = card.BlockReason;
     this.CardOrder = card.CardOrder;
-
-    var self = this;
-}
+    
+};
 
 
 var buildCardDisplay = function(scard) {
@@ -148,6 +147,42 @@ var buildCardDisplay = function(scard) {
         this.myCard = scard;
     };
 
+    element.started = function() {
+        $.ajax({
+            url: "/card/dates",
+            data: { Id: scard.Id, Status: "Started" },
+            dataType: "json",
+            type: "POST"
+        });
+    };
+
+    element.notStarted = function() {
+        $.ajax({
+            url: "/card/dates",
+            data: { Id: scard.Id, Status: "NotStarted" },
+            dataType: "json",
+            type: "POST"
+        });
+    };
+
+    element.done = function() {
+        $.ajax({
+            url: "/card/dates",
+            data: { Id: scard.Id, Status: "Done" },
+            dataType: "json",
+            type: "POST"
+        });
+    };
+
+    element.notDone = function() {
+        $.ajax({
+            url: "/card/dates",
+            data: { Id: scard.Id, Status: "NotDone" },
+            dataType: "json",
+            type: "POST"
+        });
+    };
+
     element.isReady = function(status) {
         if (status) {
             this.Status = "Ready";
@@ -156,7 +191,7 @@ var buildCardDisplay = function(scard) {
         else {
             this.Status = "New";
             $(element).removeClass("ready");
-        };
+        }
 
         $.ajax({
             url: "/card/ready",
@@ -164,7 +199,7 @@ var buildCardDisplay = function(scard) {
             dataType: "json",
             type: "POST"
         });
-    }
+    };
 
     element.isBlocked = function(value) {
         scard.Status = value ? "Blocked" : "New";
@@ -179,7 +214,7 @@ var buildCardDisplay = function(scard) {
             element.updateBlocked(false);
         }
 
-    }
+    };
 
     element.handleReasonBlocked = function(value) {
         element.updateBlocked(true, value);
@@ -187,7 +222,7 @@ var buildCardDisplay = function(scard) {
 
     element.updateBlocked = function(status, reason) {
         if (status) {
-            var isValid = ($(input).val() != "" && $(input).val() != undefined);
+            var isValid = ($(input).val() != "" && $(input).val() !== undefined);
             if (isValid) {
                 $.ajax({
                     url: "/card/blocked",
@@ -253,7 +288,7 @@ function checkLimit(list) {
     list = this;
     var limit = $(list).attr("limit");
 
-    if (limit != undefined && limit != "" && limit > 0) {
+    if (limit !== undefined && limit != "" && limit > 0) {
         var count = $(list).children().length;
         if (count > limit) {
             $(list).parent().addClass("over-limit");
@@ -400,7 +435,7 @@ function buildToolbar(card) {
             $(blockedLink).removeClass("checked");
             $(readyLink).removeClass("hidden");
         }
-    }
+    };
 
     element.isReady = function(ready) {
         if (ready) {
@@ -408,14 +443,14 @@ function buildToolbar(card) {
             $(blockedLink).addClass("hidden");
 
         } else {
-        $(readyLink).removeClass("checked");
-        $(blockedLink).removeClass("hidden");
+            $(readyLink).removeClass("checked");
+            $(blockedLink).removeClass("hidden");
 
         }
-    }
+    };
     
     return element;
-};
+}
 
 function buildAnchor(text, href, cssClass) {
     var element = document.createElement('a');
@@ -511,3 +546,18 @@ function determineColor(element) {
         return "teal"; }
 }
 
+function backlogRemove(event, ui) {
+    ui.item[0].started();
+}
+
+function backlogReceive(event, ui) {
+    ui.item[0].notStarted();
+}
+
+function archiveRemove(event, ui) {
+    ui.item[0].notDone();
+}
+
+function archiveReceive(event, ui) {
+    ui.item[0].done();
+}
