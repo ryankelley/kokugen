@@ -10,6 +10,8 @@ namespace Kokugen.Core.Services
         IEnumerable<TimeRecord> GetAllTimeRecords();
 
         void DeleteTimeRecord(Guid id);
+        TimeRecord GetTimeRecord(Guid id);
+        void Save(TimeRecord timeRecord);
     }
 
     public class TimeRecordService : ITimeRecordService
@@ -33,5 +35,14 @@ namespace Kokugen.Core.Services
             _timeRecordRepository.Delete(timeRecord);
         }
 
+        public TimeRecord GetTimeRecord(Guid id)
+        {
+            return _timeRecordRepository.Get(id);
+        }
+
+        public void Save(TimeRecord timeRecord)
+        {
+            _timeRecordRepository.Save(timeRecord);
+        }
     }
 }

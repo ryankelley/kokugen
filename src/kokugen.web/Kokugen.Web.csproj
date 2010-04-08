@@ -160,6 +160,9 @@
     <Compile Include="Actions\TaskCategory\RemoveAction.cs" />
     <Compile Include="Actions\TimeRecord\AddAction.cs" />
     <Compile Include="Actions\TimeRecord\AddTimeRecordModel.cs" />
+    <Compile Include="Actions\TimeRecord\StopTimeRecordFormAction.cs" />
+    <Compile Include="Actions\TimeRecord\StopAction.cs" />
+    <Compile Include="Actions\TimeRecord\ProjectTimeRecordFormAction.cs" />
     <Compile Include="Actions\TimeRecord\ListAction.cs" />
     <Compile Include="Actions\TimeRecord\RemoveAction.cs" />
     <Compile Include="Actions\TimeRecord\TimeRecordFormAction.cs" />
@@ -174,6 +177,7 @@
     </Compile>
     <Compile Include="Actions\TaskCategory\ListAction.cs" />
     <Compile Include="Actions\TaskCategory\TaskListModel.cs" />
+    <Compile Include="Actions\TimeRecord\StopTimeRecordModel.cs" />
     <Compile Include="Actions\TimeRecord\View_Page_Type_Declarations.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -233,6 +237,8 @@
     <Content Include="Actions\Project\List.aspx" />
     <Content Include="Actions\Project\ProjectForm.aspx" />
     <Content Include="Actions\Project\ProjectItem_Control.ascx" />
+    <Content Include="Actions\TimeRecord\StopTimeRecordForm.aspx" />
+    <Content Include="Actions\TimeRecord\ProjectTimeRecordForm.aspx" />
     <Content Include="Actions\TimeRecord\List.aspx" />
     <Content Include="Actions\TimeRecord\TimeRecordForm.aspx" />
     <Content Include="Actions\TimeRecord\TimeRecord_Control.ascx" />
@@ -297,6 +303,7 @@
     <Content Include="Content\images\logo.png" />
     <Content Include="Content\images\s-bar.jpg" />
     <Content Include="Content\images\sel.png" />
+    <Content Include="Content\images\stopsign.png" />
     <Content Include="Content\images\up.png" />
     <Content Include="Content\main-styles.css" />
     <Content Include="Content\css\ui-darkness\images\ui-bg_flat_30_cccccc_40x100.png" />
