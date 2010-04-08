@@ -1,4 +1,5 @@
 using System.Web.Security;
+using FubuMVC.Core;
 using FubuMVC.Core.Urls;
 using FubuMVC.Core.View;
 using Kokugen.Core.Membership.Services;
@@ -38,6 +39,7 @@ namespace Kokugen.Web.Actions.Users
 
     public class UserListRequest    
     {
+        [RouteInput]
         public int Page { get; set;}
     }
 

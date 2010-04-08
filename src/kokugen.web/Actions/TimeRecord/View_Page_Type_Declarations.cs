@@ -1,8 +1,9 @@
 using FubuMVC.Core.View;
+using Kokugen.Web.Actions.DTO;
 
 namespace Kokugen.Web.Actions.TimeRecord
 {
-    public class TimeRecord_Control : FubuControl<Core.Domain.TimeRecord>{}
+    public class TimeRecord_Control : FubuControl<TimeRecordDTO>{}
     public class TimeRecordForm : FubuPage<TimeRecordFormModel> { }
     public class StopForm : FubuPage<StopTimeRecordFormModel> {}
     public class ProjectTimeRecordForm : FubuPage<ProjectTimeRecordFormModel>{}

@@ -25,11 +25,16 @@ namespace Kokugen.Web.Startables
         private void addDefaultRoles()
         {
 
-           _rolesService.CreateIfMissing("Administrator");
-           _rolesService.CreateIfMissing("Coordinator");
-           _rolesService.CreateIfMissing("Contributor");
-           _rolesService.CreateIfMissing("Reader");
-           _rolesService.AddToRole(_userService.GetUserByLogin("KokugenAdmin"),"Administrator");
+            _rolesService.CreateIfMissing("Administrator");
+            _rolesService.CreateIfMissing("Coordinator");
+            _rolesService.CreateIfMissing("Contributor");
+            _rolesService.CreateIfMissing("Reader");
+
+            var admin = _userService.GetUserByLogin("KokugenAdmin");
+            if (!_rolesService.IsInRole(admin, "Administrator"))
+            {
+                _rolesService.AddToRole(admin, "Administrator");
+            }
         }
 
         private void addDefaultAdmin()
@@ -41,9 +46,33 @@ namespace Kokugen.Web.Startables
     [DebugOnly]
     public class StubLotsOfUsers : IStartable
     {
+        private readonly IUserService _userService;
+        private readonly IRolesService _rolesService;
+
+        public StubLotsOfUsers(IUserService userService, IRolesService rolesService)
+        {
+            _userService = userService;
+            _rolesService = rolesService;
+        }
+
         public void Start()
         {
-            
+           AddFakeUser("George");
+           AddFakeUser("Jane");
+           AddFakeUser("Jim");
+           AddFakeUser("Jeff");
+           AddFakeUser("Fred");
+           AddFakeUser("Bill");
+           AddFakeUser("Tom");
+           AddFakeUser("Chris");
+           AddFakeUser("Corey");
+           AddFakeUser("Tony"); 
+           AddFakeUser("Dave");
+        }
+
+        private void AddFakeUser(string userName)
+        {
+            _userService.CreateUser(userName, "F@keUser", userName + "@" + userName + ".com", true);
         }
     }
 }

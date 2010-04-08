@@ -1,5 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" Inherits="Kokugen.Web.Actions.Users.List"
  MasterPageFile="~/Shared/Site.Master" %>
+<%@ Import Namespace="HtmlTags"%>
 <%@ Import Namespace="Kokugen.Web.Actions.Users"%>
 <%@ Import Namespace="Kokugen.Web.Actions.Users.Roles"%>
 <%@ Import Namespace="System.Linq"%>
@@ -40,8 +41,8 @@
 			<li>First</li>
 			<li>Previous</li>
 			<% }else{ %>
-			<li><%=this.LinkTo(new UserListModel()).Text("First") %></li>
-			<li><a >Previous</a></li>
+			<li><%=new LinkTag("First",Model.FirstPageLink)%></li>
+			<li><%=new LinkTag("Previous",Model.PrevLink)%></li>
 			<% } %>
 
 			<li>Page <% =Model.Users.PageNumber%> of <% =Model.Users.PageCount%></li>
@@ -50,8 +51,8 @@
 			<li>Next</li>
 			<li>Last</li>
 			<% }else{ %>
-			<li><a>Next</a></li>
-			<li><a>Last</a></li>
+			<li><%=new LinkTag("Next",Model.NextLink)%></li>
+			<li><%=new LinkTag("Last",Model.LastPageLink)%></li>
 			<% } %>
 		</ul>
 	<% }else{ %>
