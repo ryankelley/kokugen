@@ -3,7 +3,6 @@ using AutoMapper;
 using Kokugen.Core;
 using Kokugen.Core.Attributes;
 using Kokugen.Core.Services;
-using Kokugen.Core.Validation;
 using Kokugen.Web.Actions.DTO;
 
 namespace Kokugen.Web.Actions.TimeRecord
@@ -24,13 +23,12 @@ namespace Kokugen.Web.Actions.TimeRecord
             var task = _taskCategoryService.Get(inModel.TaskId);
             
             var project = _projectService.GetProjectFromId(inModel.ProjectId);
-
+            
             var timeRecordDTO = new TimeRecordDTO()
                                     {
                                         Description = inModel.TimeRecordDescription,
                                         Task = task,
-                                        StartTime = DateTime.Now,
-                                        EndTime = DateTime.Now
+                                        
                                     };
 
             
@@ -39,8 +37,10 @@ namespace Kokugen.Web.Actions.TimeRecord
 
             Mapper.DynamicMap(timeRecordDTO, timeRecord);
 
-            project.AddTime(timeRecord);
+            timeRecord.Start();
 
+            project.AddTime(timeRecord);
+            
             var notification = _projectService.SaveProject(project);
 
             var timeRecord1 = new Core.Domain.TimeRecord();
@@ -64,7 +64,15 @@ namespace Kokugen.Web.Actions.TimeRecord
         [ValueOf("Project")]
         public ValueObject ProjectId { get; set; }
 
-        public Guid ProjectIdGuid { get; set; }
+        [ValueOf("TaskCategory")]
+        public ValueObject TaskId { get; set; }
+    }
+
+    public class ProjectTimeRecordFormModel
+    {
+        public TimeRecordDTO TimeRecord { get; set; }
+        
+        public Guid ProjectId { get; set; }
 
         [ValueOf("TaskCategory")]
         public ValueObject TaskId { get; set; }

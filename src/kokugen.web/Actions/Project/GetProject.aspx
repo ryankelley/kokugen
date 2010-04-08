@@ -101,7 +101,7 @@ color:black;
     <%= this.LinkTo(new ViewBoardInputModel{ Id = Model.Project.Id}).NoClosingTag().AddClass("icon") %><img src="/content/images/board_big.png" alt="view board" /></a>
 </body>
     
-<% this.Partial(new TimeRecordFormModel(){ProjectIdGuid = Model.Project.Id}); %>
+<% this.Partial(new ProjectTimeRecordFormModel(){ProjectId = Model.Project.Id}); %>
 
 <script type="text/javascript">
 

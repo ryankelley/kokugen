@@ -1,4 +1,4 @@
-<%@ Page Language="C#" AutoEventWireup="true" Inherits="Kokugen.Web.Actions.TimeRecord.TimeRecordForm"%>
+<%@ Page Language="C#" AutoEventWireup="true" Inherits="Kokugen.Web.Actions.TimeRecord.ProjectTimeRecordForm"%>
 <%@ Import Namespace="Kokugen.Web.Actions.TimeRecord"%>
 <%@ Import Namespace="FubuMVC.Core.Urls"%>
 <%@ Import Namespace="Kokugen.Web.Conventions"%>
@@ -8,7 +8,7 @@
 <%= this.FormFor(new AddTimeRecordModel() {})%>
     <%= this.Edit(x => x.TimeRecord.Description) %>
     <%= this.Edit(x =>x.TaskId) %>
-    <%= this.Edit( x => x.ProjectId) %>
+    <%= this.InputFor( x => x.ProjectId) %>
     
     
 </form>
