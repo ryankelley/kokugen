@@ -1,5 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" Inherits="Kokugen.Web.Actions.Users.List"
  MasterPageFile="~/Shared/Site.Master" %>
+<%@ Import Namespace="Kokugen.Web.Actions.Users.Details"%>
 <%@ Import Namespace="HtmlTags"%>
 <%@ Import Namespace="Kokugen.Web.Actions.Users"%>
 <%@ Import Namespace="Kokugen.Web.Actions.Users.Roles"%>
@@ -12,7 +13,7 @@
 		<ul class="users">
 			<% foreach(var user in Model.Users){ %>
 			<li>
-				<span class="username"><a href="#"><%=user.UserName %></a></span>
+				<span class="username"><a href="<%=Urls.UrlFor(new UserDetailsRequest(){Id = user.ProviderUserKey as Guid?}) %>"><%=user.UserName %></a></span>
 				<span class="email"><a href="mailto:<% =user.Email%>"><% =user.Email %></a></span>
 				<% if(user.IsOnline){ %>
 					<span class="isOnline">Online</span>

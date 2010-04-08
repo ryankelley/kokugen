@@ -181,6 +181,9 @@
     <Compile Include="Actions\TimeRecord\View_Page_Type_Declarations.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Actions\Users\Details\DetailsAction.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Actions\Users\ListAction.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -348,6 +351,7 @@
     <Content Include="Shared\Site.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Actions\Users\Details\Details.aspx" />
     <Content Include="Actions\Users\Roles\List.aspx" />
     <Content Include="Content\css\ellipsis-xbl.xml" />
     <Content Include="Content\images\archive-title.png" />
