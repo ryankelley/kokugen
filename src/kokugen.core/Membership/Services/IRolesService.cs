@@ -10,6 +10,7 @@ namespace Kokugen.Core.Membership.Services
     public interface IRolesService
     {
         void Create(string roleName);
+        void CreateIfMissing(string roleName);
         void AddToRole(MembershipUser user, string roleName);
         void RemoveFromRole(MembershipUser user, string roleName);
         void Delete(string roleName);

@@ -73,6 +73,8 @@ namespace Kokugen.Web
                      {
                          x.TheCallingAssembly();
                          x.WithDefaultConventions();
+
+                         x.AddAllTypesOf<IStartable>();
                      }
                 );
         }

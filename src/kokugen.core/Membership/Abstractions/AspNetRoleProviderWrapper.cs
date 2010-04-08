@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Web.Security;
 using Kokugen.Core.Membership.Services;
@@ -35,6 +36,12 @@ namespace Kokugen.Core.Membership.Abstractions
         public IEnumerable<string> FindUserNamesByRole(string roleName)
         {
             return _roleProvider.GetUsersInRole(roleName);
+        }
+
+        public void CreateIfMissing(string roleName)
+        {
+            if(!_roleProvider.GetAllRoles().Contains(roleName))
+                _roleProvider.CreateRole(roleName);
         }
 
         public void AddToRole(MembershipUser user, string roleName)
