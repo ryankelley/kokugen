@@ -1,14 +1,14 @@
-<%@ Page Language="C#" AutoEventWireup="true" Inherits="Kokugen.Web.Actions.TimeRecord.TimeRecordForm"%>
+<%@ Page Language="C#" AutoEventWireup="true" Inherits="Kokugen.Web.Actions.TimeRecord.StopForm"%>
 <%@ Import Namespace="Kokugen.Web.Actions.TimeRecord"%>
 <%@ Import Namespace="FubuMVC.Core.Urls"%>
 <%@ Import Namespace="Kokugen.Web.Conventions"%>
 
 
 <div id="timerecord-form-container" class="hidden">
-<%= this.FormFor(new AddTimeRecordModel() {})%>
-    <%= this.Edit(x => x.TimeRecord.Description) %>
-    <%= this.Edit(x =>x.TaskId) %>
-    <%= this.Edit( x => x.ProjectId) %>
+<%= this.FormFor(new StopTimeRecordModel() {Id= Model.TimeRecord.Id})%>
+    <%= this.DisplayFor(x => x.TimeRecord.Duration) %>
+    <%= this.Edit(x =>x.TimeRecord.Billable) %>
+    
     
     
 </form>

@@ -5,7 +5,7 @@
 
     <tr>
         <td>
-            User Name
+            <%= this.DisplayFor(x => x.User.FirstName) +" "+  this.DisplayFor(x => x.User.LastName) %>
         </td>
         <td>
             <%= this.DisplayFor(x => x.Description) %>
@@ -14,13 +14,17 @@
             <%= this.DisplayFor(x => x.StartTime) %>
         </td>
         <td>
-            <%= this.DisplayFor(x => x.EndTime) %>
+<%--        <% this.Partial(new StopTimeRecordFormModel(){TimeRecord = Model}); %>--%>
+            <%if (Model.EndTime == null)
+                    Response.Write(this.LinkTo(new StopTimeRecordModel(){Id =Model.Id}).NoClosingTag().AddClass("icon") + "<img src=\" /content/images/stopsign.png\" alt=\"view board\" /></a>");
+                else
+                    Response.Write(this.DisplayFor(x => x.EndTime));%>
         </td>
         <td>
             <%= this.DisplayFor(x => x.Duration) %>
         </td>
         <td>
-            <%= this.DisplayFor(x => x.Duration) %>
+            <%= this.DisplayFor(x => x.Billable) %>
         </td>
         <td>
             <%= this.DisplayFor(x => x.Task.Name) %>

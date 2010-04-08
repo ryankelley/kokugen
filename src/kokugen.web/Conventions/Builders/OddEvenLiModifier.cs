@@ -16,7 +16,9 @@ namespace Kokugen.Web.Conventions.Builders
             return accessorDef.ModelType.IsType<ProjectListModel>();
         }
 
-        private EachPartialTagModifier modifier = (request, tag, index, count) =>
+        public OddEvenLiModifier()
+        {
+            modifier = (request, tag, index, count) =>
                                                       {
                                                           if ((index % 2) == 0)
                                                               tag.AddClass("odd");
@@ -29,6 +31,8 @@ namespace Kokugen.Web.Conventions.Builders
                                                           if (index == count - 1)
                                                               tag.AddClass("last");
                                                       };
+       
+        }
        
     }
 
