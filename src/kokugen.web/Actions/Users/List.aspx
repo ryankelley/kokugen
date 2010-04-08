@@ -16,3 +16,11 @@
     <%} %>
 
 </asp:Content>
+
+<asp:Content ContentPlaceHolderID=head runat=server>
+<script type="text/javascript">
+    $(function() {
+         
+     });
+</script>
+</asp:Content>

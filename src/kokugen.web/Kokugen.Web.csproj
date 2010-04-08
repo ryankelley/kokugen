@@ -184,6 +184,7 @@
     <Compile Include="Actions\Users\ListAction.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Actions\Users\Roles\ListAction.cs" />
     <Compile Include="Behaviors\TransactionalContainerBehavior.cs" />
     <Compile Include="Conventions\Builders\AfterEachOfPartialBuilder.cs" />
     <Compile Include="Conventions\Builders\BeforeEachOfPartialBuilder.cs" />
@@ -337,6 +338,12 @@
     <Content Include="Shared\Site.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\ellipsis-xbl.xml" />
+    <Content Include="Content\images\archive-title.png" />
+    <Content Include="Content\images\backlog-title.png" />
+    <Content Include="Content\images\collapse-left.png" />
+    <Content Include="Content\images\collapse-right.png" />
+    <Content Include="Content\Scripts\jquery.jeditable.mini.js" />
     <Content Include="Shared\Project.Master" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
