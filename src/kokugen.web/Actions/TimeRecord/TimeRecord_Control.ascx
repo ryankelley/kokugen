@@ -1,4 +1,5 @@
 <%@ Control Language="C#" AutoEventWireup="true" Inherits="Kokugen.Web.Actions.TimeRecord.TimeRecord_Control"  %>
+<%@ Import Namespace="HtmlTags"%>
 <%@ Import Namespace="Kokugen.Web.Actions.TimeRecord"%>
 
 
@@ -13,14 +14,14 @@
         <td>
             <%= this.DisplayFor(x => x.StartTime) %>
         </td>
-        <td>
-<%--        <% this.Partial(new StopTimeRecordFormModel(){TimeRecord = Model}); %>--%>
+        <td class="end-time">
+        
             <%if (Model.EndTime == null)
-                    Response.Write(this.LinkTo(new StopTimeRecordModel(){Id =Model.Id}).NoClosingTag().AddClass("icon") + "<img src=\" /content/images/stopsign.png\" alt=\"view board\" /></a>");
+                    Response.Write(new LinkTag("", "#").AddClass("stop-button").Attr("data", Model.Id).NoClosingTag().AddClass("icon") + "<img src=\" /content/images/stopsign.png\" alt=\"view board\" /></a>");
                 else
                     Response.Write(this.DisplayFor(x => x.EndTime));%>
         </td>
-        <td>
+        <td class="duration">
             <%= this.DisplayFor(x => x.Duration) %>
         </td>
         <td>

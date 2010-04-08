@@ -10,9 +10,10 @@ namespace Kokugen.Web.Actions.DTO
         public virtual DateTime? EndTime { get; set; }
 
         public virtual string Description { get; set; }
-        public virtual Core.Domain.Project Project { get; set; }
+        public virtual Guid ProjectId { get; set; }
+        public virtual string ProjectName { get; set; }
         public virtual Core.Domain.TaskCategory Task { get; set; }
 
-        public virtual User User { get; set; }
+        //public virtual User User { get; set; }
     }
 }

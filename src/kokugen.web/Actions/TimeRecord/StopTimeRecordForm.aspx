@@ -1,10 +1,10 @@
-<%@ Page Language="C#" AutoEventWireup="true" Inherits="Kokugen.Web.Actions.TimeRecord.StopForm"%>
+<%@ Page Language="C#" AutoEventWireup="true" Inherits="Kokugen.Web.Actions.TimeRecord.StopTimeRecordForm"%>
 <%@ Import Namespace="Kokugen.Web.Actions.TimeRecord"%>
 <%@ Import Namespace="FubuMVC.Core.Urls"%>
 <%@ Import Namespace="Kokugen.Web.Conventions"%>
 
 
-<div id="timerecord-form-container" class="hidden">
+<div id="timerecord-stop-form-container" class="hidden">
 <%= this.FormFor(new StopTimeRecordModel() {Id= Model.TimeRecord.Id})%>
     <%= this.DisplayFor(x => x.TimeRecord.Duration) %>
     <%= this.Edit(x =>x.TimeRecord.Billable) %>
@@ -19,7 +19,7 @@
     function closeDialog(response) {
         appendTimeRecordToList(response.Item);
 
-        $("#timerecord-form-container").dialog('close');
+        $("#timerecord-stop-form-container").dialog('close');
         // would want to update list here too
     }
     function validateAndSave() {
@@ -38,6 +38,6 @@
 
     $(document).ready(function() {
     $("#mainForm").validate({ errorClass: "error" });
-    $("#timerecord-form-container").dialog({ title: "Add Time Record", autoOpen: false, buttons: { "Save": validateAndSave} });
+    $("#timerecord-stop-form-container").dialog({ title: "Add Time Record", autoOpen: false, buttons: { "Save": validateAndSave} });
     });
 </script>

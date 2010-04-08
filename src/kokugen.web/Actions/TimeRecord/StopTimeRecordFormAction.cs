@@ -8,13 +8,18 @@ namespace Kokugen.Web.Actions.TimeRecord
     public class StopTimeRecordFormAction
     {
         [FubuPartial]
-        public StopTimeRecordFormModel Execute(StopTimeRecordFormModel model)
+        public StopTimeRecordFormModel Execute(StopTimeRecordFormInputModel model)
         {
             var timeRecord = new Core.Domain.TimeRecord();
 
-            timeRecord = model.TimeRecord;
+            
             
             return new StopTimeRecordFormModel { TimeRecord = timeRecord};
         }
+    }
+
+    public class StopTimeRecordFormInputModel
+    {
+
     }
 }

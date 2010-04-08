@@ -1,7 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
+using Kokugen.Core;
 using Kokugen.Core.Services;
+using Kokugen.Web.Actions.DTO;
 
 namespace Kokugen.Web.Actions.TimeRecord
 {
@@ -16,11 +19,15 @@ namespace Kokugen.Web.Actions.TimeRecord
 
         public AjaxResponse Stop(StopTimeRecordModel model)
         {
-            var timeRecord = _timeRecordService.GetTimeRecord(model.Id);
-            timeRecord.Stop();
-            timeRecord.ComputeDuration();
-            _timeRecordService.Save(timeRecord);
-            return new AjaxResponse{Success = true };
+            if (model.Id.IsNotEmpty())
+            {
+                var timeRecord = _timeRecordService.GetTimeRecord(model.Id);
+                timeRecord.Stop();
+                timeRecord.ComputeDuration();
+                _timeRecordService.Save(timeRecord);
+                return new AjaxResponse {Success = true, Item = Mapper.DynamicMap<TimeRecordDTO>(timeRecord)};
+            }
+            return new AjaxResponse() {Success = false};    
         }
     }
 
