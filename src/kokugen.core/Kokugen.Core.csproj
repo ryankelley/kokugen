@@ -168,12 +168,9 @@
     <Compile Include="PropertyComparer.cs" />
     <Compile Include="Persistence\TransactionProcessor.cs" />
     <Compile Include="Membership\Security\FubuPrincipal.cs" />
-    <Compile Include="Security\KokugenPrincipal.cs" />
     <Compile Include="Membership\Security\FubuPrincipalFactory.cs" />
-    <Compile Include="Security\KokugenPrincipalFactory.cs" />
     <Compile Include="Services\CardViewDTO.cs" />
     <Compile Include="Membership\Services\IAuthenticationService.cs" />
-    <Compile Include="Services\IAuthenticationService.cs" />
     <Compile Include="Services\IBoardService.cs" />
     <Compile Include="Services\ICardService.cs" />
     <Compile Include="Services\ICompanyService.cs" />
