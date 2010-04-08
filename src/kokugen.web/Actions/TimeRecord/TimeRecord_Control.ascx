@@ -24,7 +24,7 @@
         <td class="duration">
             <%= this.DisplayFor(x => x.Duration) %>
         </td>
-        <td>
+        <td class="billable">
             <%= this.DisplayFor(x => x.Billable) %>
         </td>
         <td>

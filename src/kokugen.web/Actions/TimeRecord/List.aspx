@@ -41,6 +41,10 @@ th
     function showExtraDialog(response) {
 
         if (response.Success) {
+            $("#time-record-billable").val(response.Item.Billable);
+            $("#time-record-duration").html(response.Item.Duration);
+            $("#time-record-id").val(response.Item.Id);
+            
             $("#timerecord-stop-form-container").dialog('open');
         }
     }

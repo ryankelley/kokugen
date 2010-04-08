@@ -5,7 +5,9 @@ namespace Kokugen.Web.Actions.DTO
 {
     public class TimeRecordDTO
     {
+        public virtual Guid Id { get; set; }
         public virtual double Duration { get; set; }
+        public virtual double Billable { get; set; }
         public virtual DateTime StartTime { get; set; }
         public virtual DateTime? EndTime { get; set; }
 
@@ -14,6 +16,7 @@ namespace Kokugen.Web.Actions.DTO
         public virtual string ProjectName { get; set; }
         public virtual Core.Domain.TaskCategory Task { get; set; }
 
-        //public virtual User User { get; set; }
+        public virtual string UserFirstName { get; set; }
+        public virtual string UserLastName { get; set; }
     }
 }
