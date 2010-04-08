@@ -18,7 +18,7 @@ namespace Kokugen.Web.Actions.TimeRecord
         public TimeRecordListModel Query(TimeRecordListModel listModel)
         {
             var timeRecords = _timeRecordService.GetAllTimeRecords().ToArray();
-            var dtos = Mapper.DynamicMap<Kokugen.Core.Domain.TimeRecord[], TimeRecordDTO[]>(timeRecords);
+            var dtos = Mapper.Map<Kokugen.Core.Domain.TimeRecord[], TimeRecordDTO[]>(timeRecords);
             return new TimeRecordListModel() { TimeRecords = dtos };
         }
     }
