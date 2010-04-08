@@ -351,6 +351,7 @@
     <Content Include="Shared\Site.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\images\k-logo.png" />
     <Content Include="Actions\Users\Details\Details.aspx" />
     <Content Include="Actions\Users\Roles\List.aspx" />
     <Content Include="Content\css\ellipsis-xbl.xml" />
