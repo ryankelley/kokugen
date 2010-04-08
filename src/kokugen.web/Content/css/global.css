@@ -15,20 +15,28 @@ body{
 }
 
 #head {
-	background:url("../images/h-bar2.jpg") repeat-x scroll left top transparent;
+	background-color: #1d71b1;
 	height: 102px;
+	
+  background-image: -moz-linear-gradient(top, #1d71b1, #064b80); /* FF3.6 */
+  background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #1d71b1),color-stop(1, #064b80)); /* Saf4+, Chrome */
+            filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#1d71b1', EndColorStr='#064b80'); /* IE6,IE7 */
+        -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#1d71b1', EndColorStr='#064b80')"; /* IE8 */
+
 }
 
 #wrapper{
-	height: 102px;
-	margin: auto;
-	width: 960px;
+	height:92px;
+    margin:auto;
+    padding-bottom:0;
+    padding-top:10px;
+    width:960px;
 }
 
 h1{
-	background: url(../images/kokugen-logo.png) no-repeat top left;
-	height: 80px;
-	width: 263px;
+	background: url(../images/k-logo.png) no-repeat top left;
+	height: 66px;
+	width: 232px;
 }
 
 

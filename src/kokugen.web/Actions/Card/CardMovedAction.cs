@@ -1,7 +1,9 @@
 using System;
+using System.Web.Script.Serialization;
 using Kokugen.Core.Domain;
 using Kokugen.Core.Services;
 using Kokugen.Web.Conventions;
+using System.Collections.Generic;
 
 namespace Kokugen.Web.Actions.Card
 {
@@ -57,6 +59,21 @@ namespace Kokugen.Web.Actions.Card
             _cardService.SaveCard(card);
             return new AjaxResponse() { Success = true };
         }
+
+        public AjaxResponse ReOrder(CardOrderInputModel model)
+        {
+            var data = new JavaScriptSerializer().Deserialize<List<CardViewDTO>>(model.Cards);
+
+            _cardService.ReOrderCards(data);
+
+
+            return new AjaxResponse();
+        }
+    }
+
+    public class CardOrderInputModel
+    {
+        public string Cards { get; set; }
     }
 
     public class CardBlockedInput

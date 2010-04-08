@@ -4,7 +4,6 @@ using System.Linq;
 using AutoMapper;
 using Kokugen.Core.Domain;
 using Kokugen.Core.Services;
-using Kokugen.Web.Actions.Card;
 using Kokugen.Web.Conventions;
 
 namespace Kokugen.Web.Actions.Board
@@ -28,7 +27,7 @@ namespace Kokugen.Web.Actions.Board
             output.Archive = Mapper.DynamicMap < BoardColumnDTO > (project.Archive);
             output.Columns = project.GetBoardColumns().OrderBy(a => a.ColumnOrder).Select(x => Mapper.DynamicMap<BoardColumnDTO>(x));
 
-            output.AllCards = project.GetCards().Select(x => Mapper.Map<Core.Domain.Card, CardViewDTO>(x)).ToList();
+            output.AllCards = project.GetCards().OrderBy(x => x.Column.Id).ThenBy(x => x.CardOrder).Select(x => Mapper.Map<Core.Domain.Card, CardViewDTO>(x)).ToList();
             output.ProjectId = project.Id;
             return output;
         }

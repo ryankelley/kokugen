@@ -6,12 +6,18 @@ var Card = function(card) {
     this.ColumnId = card.ColumnId;
     this.Title = card.Title;
     this.Color = card.Color;
-    this.Deadline = card.Deadline;
+
+    
+    this.Deadline = card.Deadline == null ? null : card.Deadline.toString();
+    if (this.Deadline != null) {
+        this.Deadline = new Date(parseInt(this.Deadline.replace("/Date(", "").replace(")/", ""), 10));
+    }
     this.CardNumber = card.CardNumber;
     this.Size = card.Size;
     this.Priority = card.Priority;
     this.Status = card.Status;
     this.ReasonBlocked = card.BlockReason;
+    this.CardOrder = card.CardOrder;
 
     var self = this;
 }
@@ -21,6 +27,7 @@ var buildCardDisplay = function(scard) {
     if (!(scard instanceof Card)) {
         throw ("card is not an instance of Card");
     }
+    this.myCard = scard;
 
     var myTools = buildToolbar(scard);
     var colors = buildColorEditor();
@@ -35,7 +42,7 @@ var buildCardDisplay = function(scard) {
     var body = document.createElement('div');
     $(body).addClass("card-body");
     // head items
-    var number = document.createElement('div')
+    var number = document.createElement('div');
     $(number).addClass("card-number");
 
     var editLink = document.createElement('a');
@@ -134,7 +141,12 @@ var buildCardDisplay = function(scard) {
             dataType: "json",
             type: "POST"
         });
-    }
+    };
+
+    element.UpdateOrder = function(number) {
+        scard.CardOrder = number;
+        this.myCard = scard;
+    };
 
     element.isReady = function(status) {
         if (status) {
@@ -144,7 +156,7 @@ var buildCardDisplay = function(scard) {
         else {
             this.Status = "New";
             $(element).removeClass("ready");
-        }
+        };
 
         $.ajax({
             url: "/card/ready",
@@ -171,7 +183,7 @@ var buildCardDisplay = function(scard) {
 
     element.handleReasonBlocked = function(value) {
         element.updateBlocked(true, value);
-    }
+    };
 
     element.updateBlocked = function(status, reason) {
         if (status) {
@@ -196,7 +208,7 @@ var buildCardDisplay = function(scard) {
                 type: "POST"
             });
         }
-    }
+    };
 
     $(reasonBlocked).dblclick(function() {
         $(reasonBlocked).addClass("hidden");
@@ -261,7 +273,24 @@ function cardMovedOut(event, ui) {
 }
 
 function reOrderCards(event, ui) {
+    var cardsInColumn = new Array();
+    var column = this;
+    var count = 1;
+    $(column).children().each(function() {
+        this.UpdateOrder(count++);
+        cardsInColumn.push(this.myCard);
+    });
 
+    cardsInColumn.sort(function(a, b) {
+        return a.Order - b.Order;
+    });
+
+
+    var data = new Object();
+    data.Cards = $.toJSON(cardsInColumn);
+
+    $.ajax({ type: 'POST', url: '/card/reorder', data: data, dataType: 'JSON' });
+    //$("#info").load("process-sortable.php?" + order);
 }
 
 function buildToolbar(card) {

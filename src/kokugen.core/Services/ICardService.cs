@@ -13,17 +13,20 @@ namespace Kokugen.Core.Services
         IEnumerable<Card> GetCards(Project project);
         INotification SaveCard(Card card);
         Card GetCard(Guid id);
+        bool ReOrderCards(List<CardViewDTO> cards);
     }
 
     public class CardService : ICardService
     {
         private readonly ICardRepository _cardRepository;
         private readonly IValidator _validator;
+        private readonly IProjectService _projectService;
 
-        public CardService(ICardRepository cardRepository, IValidator validator)
+        public CardService(ICardRepository cardRepository, IValidator validator, IProjectService projectService)
         {
             _cardRepository = cardRepository;
             _validator = validator;
+            _projectService = projectService;
         }
 
         public IEnumerable<Card> GetCards()
@@ -47,6 +50,20 @@ namespace Kokugen.Core.Services
         public Card GetCard(Guid id)
         {
             return _cardRepository.Get(id);
+        }
+
+        public bool ReOrderCards(List<CardViewDTO> cards)
+        {
+            cards.Each(x =>
+                           {
+                               var card = _cardRepository.Get(x.Id);
+                               card.CardOrder = x.CardOrder;
+                               _cardRepository.Save(card);
+
+                           });
+
+
+            return true;
         }
     }
 }
