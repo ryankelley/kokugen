@@ -5,13 +5,14 @@
 <asp:Content ContentPlaceHolderID="mainContent" runat="server">
     <%if (Model.Users.Any())
       { %>
+      <ul>
                 <%
           foreach (var user in Model.Users)
           {%>
-              
+              <li><span><%=user.UserName %></span></li>
               
          <% } %>
-                
+      </ul>   
     <%} %>
 
 </asp:Content>
