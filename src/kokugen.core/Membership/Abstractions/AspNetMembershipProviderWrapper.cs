@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Web.Security;
+using Kokugen.Core.Membership.Security;
 using Kokugen.Core.Membership.Services;
 using Kokugen.Core.Membership.Settings;
 using Kokugen.Core.Validation;
@@ -49,41 +50,46 @@ namespace Kokugen.Core.Membership.Abstractions
             return status;
         }
 
-        public void Update(MembershipUser user)
+        public void Update(IUser user)
         {
-           _provider.UpdateUser(user);
+            var membershipUser = _provider.GetUser(user.UserName, false);
+            membershipUser.Email = user.Email;
+            _provider.UpdateUser(membershipUser);
         }
 
-        public void Delete(MembershipUser user)
+        public void Delete(IUser user)
         {
             _provider.DeleteUser(user.UserName, true);
         }
 
-        public MembershipUser Retrieve(object Id)
+        public IUser Retrieve(object Id)
         {
-            return _provider.GetUser(Id, true);
+            var membershipUser = _provider.GetUser(Id, false);
+            return new User(membershipUser.UserName, membershipUser.Email, membershipUser.ProviderUserKey);
         }
 
-        public MembershipUser GetUserByLogin(string name)
+        public IUser GetUserByLogin(string name)
         {
-            return _provider.GetUser(name, true);
+            var membershipUser = _provider.GetUser(name, false);
+            return new User(membershipUser.UserName, membershipUser.Email, membershipUser.ProviderUserKey);
         }
 
-        public MembershipUser GetUserByEmail(string email)
+        public IUser GetUserByEmail(string email)
         {
-            return _provider.GetUser(_provider.GetUserNameByEmail(email),true);
+            var membershipUser = _provider.GetUser(_provider.GetUserNameByEmail(email), false);
+            return new User(membershipUser.UserName, membershipUser.Email, membershipUser.ProviderUserKey);
         }
 
-        public IPagedList<MembershipUser> FindAll(int pageIndex, int pageSize)
+        public IPagedList<IUser> FindAll(int pageIndex, int pageSize)
         {
             // get one page of users
             int totalUserCount;
             var usersCollection = _provider.GetAllUsers(pageIndex, pageSize, out totalUserCount);
 
             // convert from MembershipUserColletion to PagedList<MembershipUser> and return
-            var converter = new EnumerableToEnumerableTConverter<MembershipUserCollection, MembershipUser>();
-            var usersList = converter.ConvertTo<IEnumerable<MembershipUser>>(usersCollection);
-            var usersPagedList = new StaticPagedList<MembershipUser>(usersList, pageIndex, pageSize, totalUserCount);
+            var converter = new MembershipUserCollectionToIUserConverter();
+            var usersList = converter.ConvertTo<IEnumerable<IUser>>(usersCollection);
+            var usersPagedList = new StaticPagedList<IUser>(usersList, pageIndex, pageSize, totalUserCount);
             return usersPagedList;
         }
 
@@ -112,39 +118,39 @@ namespace Kokugen.Core.Membership.Abstractions
 
         #region IPasswordService Members
 
-        public void Unlock(MembershipUser user)
+        public void Unlock(IUser user)
         {
             _provider.UnlockUser(user.UserName);
         }
 
-        public void ChangePassword(MembershipUser user, string oldPassword, string newPassword)
+        public void ChangePassword(IUser user, string oldPassword, string newPassword)
         {
             _provider.ChangePassword(user.UserName, oldPassword, newPassword);
         }
 
-        public void ChangePasswordQuestionAndAnswer(MembershipUser user, string password, string question, string answer)
+        public void ChangePasswordQuestionAndAnswer(IUser user, string password, string question, string answer)
         {
             _provider.ChangePasswordQuestionAndAnswer(user.UserName, password, question, answer);
         }
 
-        public string GetPassword(MembershipUser user, string passwordAnswer)
+        public string GetPassword(IUser user, string passwordAnswer)
         {
             return _provider.GetPassword(user.UserName, passwordAnswer);
         }
 
-        public string GetPassword(MembershipUser user)
+        public string GetPassword(IUser user)
         {
-            return user.GetPassword();
+            return _provider.GetUser(user.UserName, false).GetPassword();
         }
 
-        public string ResetPassword(MembershipUser user, string passwordAnswer)
+        public string ResetPassword(IUser user, string passwordAnswer)
         {
             return _provider.ResetPassword(user.UserName, passwordAnswer);
         }
 
-        public string ResetPassword(MembershipUser user)
+        public string ResetPassword(IUser user)
         {
-            return user.ResetPassword();
+            return _provider.GetUser(user.UserName, false).ResetPassword();
         }
 
         #endregion

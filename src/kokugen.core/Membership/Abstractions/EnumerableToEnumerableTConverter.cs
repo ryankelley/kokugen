@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Web.Security;
+using Kokugen.Core.Membership.Security;
 
 namespace Kokugen.Core.Membership.Abstractions
 {
@@ -25,6 +27,18 @@ namespace Kokugen.Core.Membership.Abstractions
             var destination = new List<TItemType>();
             foreach( var item in items )
                 destination.Add((TItemType)item);
+            return destination;
+        }
+    }
+
+    public class MembershipUserCollectionToIUserConverter : EnumerableToEnumerableTConverter<MembershipUserCollection, IUser>
+    {
+        public override object ConvertTo(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType)
+        {
+            var items = (MembershipUserCollection)value;
+            var destination = new List<IUser>();
+            foreach (MembershipUser item in items)
+                destination.Add(new User(item.UserName,item.Email,item.ProviderUserKey));
             return destination;
         }
     }

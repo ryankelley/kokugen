@@ -15,13 +15,13 @@ namespace Kokugen.Core.Membership.Services
 {
     public interface IUserService
     {
-        void Update(MembershipUser user);
-        void Delete(MembershipUser user);
-        MembershipUser Retrieve(object id);
+        void Update(IUser user);
+        void Delete(IUser user);
+        IUser Retrieve(object id);
 
-        MembershipUser GetUserByLogin(string name);
-        MembershipUser GetUserByEmail(string email);
-        IPagedList<MembershipUser> FindAll(int pageIndex, int pageSize);
+        IUser GetUserByLogin(string name);
+        IUser GetUserByEmail(string email);
+        IPagedList<IUser> FindAll(int pageIndex, int pageSize);
 
         int TotalUsers { get; }
         int UsersOnline { get; }

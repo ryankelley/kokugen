@@ -120,6 +120,7 @@
     <Compile Include="Inflector.cs" />
     <Compile Include="IStartable.cs" />
     <Compile Include="Membership\Abstractions\AspNetMembershipSettingsProvider.cs" />
+    <Compile Include="Membership\Security\User.cs" />
     <Compile Include="Membership\Services\IMembershipValidator.cs" />
     <Compile Include="Membership\Settings\LoginSettings.cs" />
     <Compile Include="Membership\Settings\MembershipSettingsBag.cs" />

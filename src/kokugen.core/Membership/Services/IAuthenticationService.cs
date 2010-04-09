@@ -9,7 +9,7 @@ namespace Kokugen.Core.Membership.Services
     public interface IAuthenticationService
     {
         void AfterUserAuthenticated();
-        MembershipUser GetCurrentLoggedInUser();
+        IUser GetCurrentLoggedInUser();
     }
 
     public class AuthenticationService : IAuthenticationService
@@ -33,7 +33,7 @@ namespace Kokugen.Core.Membership.Services
             _context.CurrentUser = _factory.CreatePrincipal(identity);
         }
 
-        public MembershipUser GetCurrentLoggedInUser()
+        public IUser GetCurrentLoggedInUser()
         {
             var name = _context.CurrentIdentity.Name;
             return name != string.Empty ? _userService.GetUserByLogin(name) : null;

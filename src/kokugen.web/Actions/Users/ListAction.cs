@@ -2,6 +2,7 @@ using System.Web.Security;
 using FubuMVC.Core;
 using FubuMVC.Core.Urls;
 using FubuMVC.Core.View;
+using Kokugen.Core.Membership.Security;
 using Kokugen.Core.Membership.Services;
 using PagedList;
 
@@ -45,7 +46,7 @@ namespace Kokugen.Web.Actions.Users
 
     public class UserListModel
     {
-       public IPagedList<MembershipUser> Users { get; set; }
+       public IPagedList<IUser> Users { get; set; }
        public string LastPageLink { get; set; }
        public string FirstPageLink { get; set; }
        public string NextLink { get; set; }

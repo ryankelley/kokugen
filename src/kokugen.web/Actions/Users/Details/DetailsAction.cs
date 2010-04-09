@@ -2,6 +2,7 @@ using System;
 using System.Web.Security;
 using FubuMVC.Core;
 using FubuMVC.Core.View;
+using Kokugen.Core.Membership.Security;
 using Kokugen.Core.Membership.Services;
 using Kokugen.Web.Conventions;
 
@@ -30,7 +31,7 @@ namespace Kokugen.Web.Actions.Users.Details
 
     public class UserDetailsModel
     {
-        public MembershipUser User { get; set; }
+        public IUser User { get; set; }
     }
 
     public class Details : FubuPage<UserDetailsModel>{}
