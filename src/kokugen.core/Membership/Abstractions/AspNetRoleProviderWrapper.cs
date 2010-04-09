@@ -23,11 +23,6 @@ namespace Kokugen.Core.Membership.Abstractions
             return _roleProvider.GetAllRoles();
         }
 
-        public IEnumerable<string> FindByUser(MembershipUser user)
-        {
-            return _roleProvider.GetRolesForUser(user.UserName);
-        }
-
         public IEnumerable<string> FindByUserName(string userName)
         {
             return _roleProvider.GetRolesForUser(userName);
@@ -44,19 +39,19 @@ namespace Kokugen.Core.Membership.Abstractions
                 _roleProvider.CreateRole(roleName);
         }
 
-        public void AddToRole(MembershipUser user, string roleName)
+        public void AddToRole(string user, string roleName)
         {
-            _roleProvider.AddUsersToRoles(new[] { user.UserName }, new[] { roleName });
+            _roleProvider.AddUsersToRoles(new[] { user }, new[] { roleName });
         }
 
-        public void RemoveFromRole(MembershipUser user, string roleName)
+        public void RemoveFromRole(string user, string roleName)
         {
-            _roleProvider.RemoveUsersFromRoles(new[] { user.UserName }, new[] { roleName });
+            _roleProvider.RemoveUsersFromRoles(new[] { user }, new[] { roleName });
         }
 
-        public bool IsInRole(MembershipUser user, string roleName)
+        public bool IsInRole(string user, string roleName)
         {
-            return _roleProvider.IsUserInRole(user.UserName, roleName);
+            return _roleProvider.IsUserInRole(user, roleName);
         }
 
         public void Create(string roleName)

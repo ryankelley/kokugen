@@ -12,24 +12,16 @@ namespace Kokugen.Core.Membership.Security
         private readonly MembershipUser _user;
         private readonly IRolesService _rolesService;
         private readonly IIdentity _identity;
-        private readonly Guid _userId;
 
-        public FubuPrincipal(IIdentity identity)
+        private FubuPrincipal(IIdentity identity)
         {
             _identity = identity;
-            _userId = new Guid(_identity.Name);
         }
 
-        public FubuPrincipal(IIdentity identity, MembershipUser user, IRolesService rolesService)
+        public FubuPrincipal(IIdentity identity, IRolesService rolesService)
             : this(identity)
         {
-            _user = user;
             _rolesService = rolesService;
-        }
-
-        public Guid UserId
-        {
-            get { return _userId; }
         }
         
         public static FubuPrincipal Current
@@ -48,8 +40,8 @@ namespace Kokugen.Core.Membership.Security
 
         public bool IsInRole(string role)
         {
-            if(_rolesService != null && _user != null)
-                return _rolesService.IsInRole(_user,role);
+            if(_rolesService != null)
+                return _rolesService.IsInRole(_identity.Name,role);
             return false;
         }
 

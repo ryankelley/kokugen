@@ -11,15 +11,14 @@ namespace Kokugen.Core.Membership.Services
     {
         void Create(string roleName);
         void CreateIfMissing(string roleName);
-        void AddToRole(MembershipUser user, string roleName);
-        void RemoveFromRole(MembershipUser user, string roleName);
+        void AddToRole(string userName, string roleName);
+        void RemoveFromRole(string userName, string roleName);
         void Delete(string roleName);
 
         IEnumerable<string> FindAll();
-        IEnumerable<string> FindByUser(MembershipUser user);
         IEnumerable<string> FindByUserName(string userName);
         IEnumerable<string> FindUserNamesByRole(string roleName);
-        bool IsInRole(MembershipUser user, string roleName);
+        bool IsInRole(string userName, string roleName);
     }
 
 }

@@ -29,11 +29,10 @@ namespace Kokugen.Web.Startables
             _rolesService.CreateIfMissing("Coordinator");
             _rolesService.CreateIfMissing("Contributor");
             _rolesService.CreateIfMissing("Reader");
-
-            var admin = _userService.GetUserByLogin("KokugenAdmin");
-            if (!_rolesService.IsInRole(admin, "Administrator"))
+           
+            if (!_rolesService.IsInRole("KokugenAdmin", "Administrator"))
             {
-                _rolesService.AddToRole(admin, "Administrator");
+                _rolesService.AddToRole("KokugenAdmin", "Administrator");
             }
         }
 

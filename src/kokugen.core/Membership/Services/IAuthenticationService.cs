@@ -35,8 +35,8 @@ namespace Kokugen.Core.Membership.Services
 
         public MembershipUser GetCurrentLoggedInUser()
         {
-            var userId = ((FubuPrincipal)_context.CurrentUser).UserId;
-            return userId != Guid.Empty ? _userService.Retrieve(userId) : null;
+            var name = _context.CurrentIdentity.Name;
+            return name != string.Empty ? _userService.GetUserByLogin(name) : null;
         }
     }
 }
