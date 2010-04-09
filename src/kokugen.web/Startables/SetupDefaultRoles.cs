@@ -32,7 +32,7 @@ namespace Kokugen.Web.Startables
            
             if (!_rolesService.IsInRole("KokugenAdmin", "Administrator"))
             {
-                _rolesService.AddToRole("KokugenAdmin", "Administrator");
+                _rolesService.AddUserToRole("KokugenAdmin", "Administrator");
             }
         }
 
@@ -74,7 +74,7 @@ namespace Kokugen.Web.Startables
             _userService.CreateUser(userName, "F@keUser", userName + "@" + userName + ".com", true);
             if (!_rolesService.IsInRole(userName, "Reader"))
             {
-                _rolesService.AddUserToRoles(userName, "Reader");
+                _rolesService.AddUserToRole(userName, "Reader");
             }
         }
     }

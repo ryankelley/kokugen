@@ -9,15 +9,8 @@ namespace Kokugen.Core.Membership.Services
 {
     public interface IRolesService<T> : IRolesService where T : IRole
     {
-        void Create(T roleName);
-        void CreateIfMissing(T roleName);
-        void AddToRole(IUser userName, T roleName);
-        void RemoveFromRole(IUser user, T role);
-        void Delete(T roleName);
-
-        IEnumerable<string> FindUserNamesByRole(T roleName);
-        bool IsInRole(IUser userName, T roleName);
     }
+
     public interface IRolesService
     {
         void Create(IRole roleName);
@@ -32,8 +25,7 @@ namespace Kokugen.Core.Membership.Services
         bool IsInRole(IUser userName, IRole roleName);
         bool IsInRole(string name, string role);
         void CreateIfMissing(string administrator);
-        void AddToRole(string kokugenadmin, string administrator);
-        void AddUserToRoles(string name, string reader);
+        void AddUserToRole(string name, string reader);
     }
 
 }

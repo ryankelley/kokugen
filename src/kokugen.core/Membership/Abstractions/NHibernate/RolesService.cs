@@ -62,6 +62,11 @@ namespace Kokugen.Core.Membership.Abstractions.NHibernate
             throw new NotImplementedException();
         }
 
+        public void AddUserToRole(string name, string reader)
+        {
+            throw new NotImplementedException();
+        }
+
         public void AddToRole(string kokugenadmin, string administrator)
         {
             throw new NotImplementedException();

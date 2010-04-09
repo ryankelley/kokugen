@@ -58,22 +58,19 @@ namespace Kokugen.Core.Membership.Abstractions.ASP_NET
 
         public bool IsInRole(string name, string role)
         {
-            throw new NotImplementedException();
+           return _roleProvider.IsUserInRole(name, role);
         }
 
-        public void CreateIfMissing(string administrator)
+        public void CreateIfMissing(string role)
         {
-            throw new NotImplementedException();
+            if(_roleProvider.RoleExists(role))
+                _roleProvider.CreateRole(role);
         }
 
-        public void AddToRole(string kokugenadmin, string administrator)
-        {
-            throw new NotImplementedException();
-        }
 
-        public void AddUserToRoles(string name, string reader)
+        public void AddUserToRole(string name, string role)
         {
-            throw new NotImplementedException();
+            _roleProvider.AddUsersToRoles(new[] { name }, new[] { role });
         }
 
         public void Create(IRole roleName)
