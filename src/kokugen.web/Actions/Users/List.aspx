@@ -13,9 +13,9 @@
 		<ul class="users">
 			<% foreach(var user in Model.Users){ %>
 			<li>
-				<span class="username"><a href="<%=Urls.UrlFor(new UserDetailsRequest(){Id = user.ProviderUserKey as Guid?}) %>"><%=user.UserName %></a></span>
+				<span class="username"><a href="<%=Urls.UrlFor(new UserDetailsRequest(){Username = user.UserName}) %>"><%=user.UserName %></a></span>
 				<span class="email"><a href="mailto:<% =user.Email%>"><% =user.Email %></a></span>
-				<% if(user.IsOnline){ %>
+<%--				<% if(user.IsOnline){ %>
 					<span class="isOnline">Online</span>
 				<% }else{ %>
 					<span class="isOffline">Offline for
@@ -32,7 +32,7 @@
 				<% } %>
 				<% if(!string.IsNullOrEmpty(user.Comment)){ %>
 					<span class="comment"><% =user.Comment%></span>
-				<% } %>
+				<% } %>--%>
 			</li>
 			<% } %>
 		</ul>

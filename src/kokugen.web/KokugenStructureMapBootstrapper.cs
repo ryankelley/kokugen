@@ -50,7 +50,7 @@ namespace Kokugen.Web
                                            };
             fubuBootstrapper.Bootstrap(_routes);
 
-            ObjectFactory.Container.StartStartables();
+            //ObjectFactory.Container.StartStartables();
             ConfigureAutoMapper();
         }
 
