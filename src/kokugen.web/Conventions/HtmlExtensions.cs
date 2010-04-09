@@ -1,6 +1,6 @@
 using System;
 using System.Linq.Expressions;
-
+using FubuCore.Reflection;
 using FubuMVC.Core.View;
 using FubuMVC.UI;
 using HtmlTags;
@@ -24,6 +24,19 @@ namespace Kokugen.Web.Conventions
 
 
 
+        }
+
+        public static HtmlTag Show<T>(this IFubuPage<T> page, Expression<Func<T, object>> expression) where T : class
+        {
+            var divWrapper = new HtmlTag("div").AddClass("show-item");
+            var accesor = expression.ToAccessor();
+            var label = new HtmlTag("label").Text(accesor.FieldName.SplitCamelCase());
+            var span = page.DisplayFor(expression);
+
+            divWrapper.Child(label);
+            divWrapper.Child(span);
+
+            return divWrapper;
         }
 
         public static string BuildHtmlID(this string name)

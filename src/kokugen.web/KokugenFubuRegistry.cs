@@ -35,7 +35,9 @@ namespace Kokugen.Web
             this.UseDefaultHtmlConventions();
             this.HtmlConvention(new KokugenHtmlConventions());
 
+#if RELEASE
             HomeIs<IndexAction>(x => x.Query());
+#endif
 
             this.StringConversions(x =>
             {

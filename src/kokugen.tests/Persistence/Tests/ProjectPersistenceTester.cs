@@ -1,5 +1,6 @@
 using System;
 using Kokugen.Core.Domain;
+using Kokugen.Core.Membership.Security;
 using NUnit.Framework;
 using FluentNHibernate.Testing;
 
@@ -26,19 +27,5 @@ namespace Kokugen.Tests.Persistence.Tests
         }
     }
 
-    [TestFixture]
-    public class UserPersistenceTester : PersistenceTesterContext<User>
-    {
-        [Test]
-        public void Can_Save_User()
-        {
-            Specification
-                .CheckProperty(x => x.FirstName, "John")
-                .CheckProperty(x => x.LastName, "User")
-                .CheckProperty(x => x.EmailAddress, "john@john.com")
-                .CheckProperty(x => x.HashedPassword, "!@#%KA$%")
-                .CheckProperty(x => x.Login, "JohnnyUser")
-                .VerifyTheMappings();
-        }
-    }
+
 }

@@ -6,7 +6,7 @@
 
     <tr>
         <td>
-            <%= this.DisplayFor(x => x.User.FirstName) +" "+  this.DisplayFor(x => x.User.LastName) %>
+            <%= this.DisplayFor(x => x.User.UserName) +" "+  this.DisplayFor(x => x.User.UserName) %>
         </td>
         <td>
             <%= this.DisplayFor(x => x.Description) %>

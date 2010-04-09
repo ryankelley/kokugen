@@ -1,5 +1,7 @@
 using System;
+using System.Web.Security;
 using Kokugen.Core.Domain;
+using Kokugen.Core.Membership.Security;
 using Kokugen.Core.Validation;
 
 namespace Kokugen.Core.Domain
@@ -18,7 +20,7 @@ namespace Kokugen.Core.Domain
         public virtual string Priority { get; set; }
         public virtual DateTime? Deadline { get; set; }
         public virtual string Color { get; set; }
-        public virtual User AssignedTo { get; set; }
+        public virtual Guid AssignedTo { get; set; }
 
 
         //Dates

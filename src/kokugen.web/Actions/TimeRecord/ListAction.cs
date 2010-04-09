@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
 using Kokugen.Core.Services;
+using Kokugen.Web.Actions.DTO;
 
 namespace Kokugen.Web.Actions.TimeRecord
 {
@@ -15,13 +17,14 @@ namespace Kokugen.Web.Actions.TimeRecord
 
         public TimeRecordListModel Query(TimeRecordListModel listModel)
         {
-            var timeRecords = _timeRecordService.GetAllTimeRecords().OrderByDescending(x => x.StartTime).ToList();
-            return new TimeRecordListModel() { TimeRecords = timeRecords };
+            var timeRecords = _timeRecordService.GetAllTimeRecords().OrderByDescending(x => x.StartTime).ToArray();
+            var dtos = Mapper.Map<Kokugen.Core.Domain.TimeRecord[], TimeRecordDTO[]>(timeRecords);
+            return new TimeRecordListModel() { TimeRecords = dtos };
         }
     }
 
     public class TimeRecordListModel
     {
-        public IList<Core.Domain.TimeRecord> TimeRecords { get; set; }
+        public IList<TimeRecordDTO> TimeRecords { get; set; }
     }
 }

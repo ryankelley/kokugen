@@ -1,4 +1,4 @@
-using Kokugen.Core.Services;
+using Kokugen.Core.Membership.Services;
 
 namespace Kokugen.Web.Actions.Login
 {
@@ -19,5 +19,7 @@ namespace Kokugen.Web.Actions.Login
                        ? new AjaxResponse() { Success = true, Item = user}
                        : new AjaxResponse() { Success = false };
         }
+
+        
     }
 }

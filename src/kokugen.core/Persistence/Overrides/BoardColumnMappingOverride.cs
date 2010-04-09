@@ -1,3 +1,4 @@
+
 using System;
 using FluentNHibernate.Automapping;
 using FluentNHibernate.Automapping.Alterations;
