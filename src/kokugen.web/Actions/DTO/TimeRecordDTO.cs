@@ -11,8 +11,6 @@ namespace Kokugen.Web.Actions.DTO
         public virtual double Billable { get; set; }
         public virtual DateTime StartTime { get; set; }
         public virtual DateTime? EndTime { get; set; }
-        public virtual double Billable { get; set; }
-
         public virtual string Description { get; set; }
         public virtual Guid ProjectId { get; set; }
         public virtual string ProjectName { get; set; }
