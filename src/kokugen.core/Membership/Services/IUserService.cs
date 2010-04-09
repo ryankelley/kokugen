@@ -13,6 +13,24 @@ using PagedList;
 
 namespace Kokugen.Core.Membership.Services
 {
+    public interface IUserService<T>: IUserService where T : IUser
+    {
+        void Update(T user);
+        void Delete(T user);
+        IUser Retrieve(object id);
+
+        IUser GetUserByLogin(string name);
+        IUser GetUserByEmail(string email);
+        IPagedList<T> FindAll(int pageIndex, int pageSize);
+
+        int TotalUsers { get; }
+        int UsersOnline { get; }
+
+        MembershipCreateStatus CreateUser(string userName, string password, string email, bool isAppoved);
+        MembershipCreateStatus CreateUser(string userName, string password, string email,string passwordQuestion,string passwordAnswer,bool isApproved);
+        MembershipCreateStatus CreateUser(string userName,string password,string email,string passwordQuestion,string passwordAnswer,bool isApproved,object key);
+    }
+
     public interface IUserService
     {
         void Update(IUser user);
@@ -27,7 +45,7 @@ namespace Kokugen.Core.Membership.Services
         int UsersOnline { get; }
 
         MembershipCreateStatus CreateUser(string userName, string password, string email, bool isAppoved);
-        MembershipCreateStatus CreateUser(string userName, string password, string email,string passwordQuestion,string passwordAnswer,bool isApproved);
-        MembershipCreateStatus CreateUser(string userName,string password,string email,string passwordQuestion,string passwordAnswer,bool isApproved,object key);
+        MembershipCreateStatus CreateUser(string userName, string password, string email, string passwordQuestion, string passwordAnswer, bool isApproved);
+        MembershipCreateStatus CreateUser(string userName, string password, string email, string passwordQuestion, string passwordAnswer, bool isApproved, object key);
     }
 }

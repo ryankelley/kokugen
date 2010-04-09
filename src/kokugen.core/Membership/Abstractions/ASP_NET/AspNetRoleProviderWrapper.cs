@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Web.Security;
+using Kokugen.Core.Membership.Security;
 using Kokugen.Core.Membership.Services;
 
 namespace Kokugen.Core.Membership.Abstractions.ASP_NET
@@ -23,50 +24,66 @@ namespace Kokugen.Core.Membership.Abstractions.ASP_NET
             return _roleProvider.GetAllRoles();
         }
 
-        public IEnumerable<string> FindByUserName(string userName)
+        public IEnumerable<string> FindByUserName(IUser userName)
         {
-            return _roleProvider.GetRolesForUser(userName);
+            return _roleProvider.GetRolesForUser(userName.UserName);
         }
 
-        public IEnumerable<string> FindUserNamesByRole(string roleName)
+        public IEnumerable<string> FindUserNamesByRole(IRole roleName)
         {
-            return _roleProvider.GetUsersInRole(roleName);
+            return _roleProvider.GetUsersInRole(roleName.Role);
         }
 
-        public void CreateIfMissing(string roleName)
+        public void CreateIfMissing(IRole roleName)
         {
-            if(!_roleProvider.GetAllRoles().Contains(roleName))
-                _roleProvider.CreateRole(roleName);
+            if(!_roleProvider.RoleExists(roleName.Role))
+                _roleProvider.CreateRole(roleName.Role);
         }
 
-        public void AddToRole(string user, string roleName)
+        public void AddToRole(IUser user, IRole roleName)
         {
-            _roleProvider.AddUsersToRoles(new[] { user }, new[] { roleName });
+            _roleProvider.AddUsersToRoles(new[] { user.UserName }, new[] { roleName.Role });
         }
 
-        public void AddUserToRoles(string userName, params string[] roles)
+
+        public void RemoveFromRole(IUser user, IRole roleName)
         {
-            _roleProvider.AddUsersToRoles(new[] { userName }, roles);
+            _roleProvider.RemoveUsersFromRoles(new[] { user.UserName }, new[] { roleName.Role });
         }
 
-        public void RemoveFromRole(string user, string roleName)
+        public bool IsInRole(IUser user, IRole roleName)
         {
-            _roleProvider.RemoveUsersFromRoles(new[] { user }, new[] { roleName });
+            return _roleProvider.IsUserInRole(user.UserName, roleName.Role);
         }
 
-        public bool IsInRole(string user, string roleName)
+        public bool IsInRole(string name, string role)
         {
-            return _roleProvider.IsUserInRole(user, roleName);
+            throw new NotImplementedException();
         }
 
-        public void Create(string roleName)
+        public void CreateIfMissing(string administrator)
         {
-            _roleProvider.CreateRole(roleName);
+            throw new NotImplementedException();
         }
 
-        public void Delete(string roleName)
+        public void AddToRole(string kokugenadmin, string administrator)
         {
-            _roleProvider.DeleteRole(roleName, false);
+            throw new NotImplementedException();
+        }
+
+        public void AddUserToRoles(string name, string reader)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Create(IRole roleName)
+        {
+            _roleProvider.CreateRole(roleName.Role);
+        }
+
+        public void Delete(IRole roleName)
+        {
+            _roleProvider.DeleteRole(roleName.Role, false);
         }
 
         #endregion

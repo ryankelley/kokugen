@@ -111,9 +111,14 @@ namespace Kokugen.Core.Membership.Abstractions.ASP_NET
             }
         }
 
-        public bool ValidateUser(string userName, string password)
+        public bool ValidateUser(IUser userName, string password)
         {
-            return  _provider.ValidateUser(userName, password);
+            return  _provider.ValidateUser(userName.UserName, password);
+        }
+
+        public bool ValidateUser(string name, string password)
+        {
+            return _provider.ValidateUser(name, password);
         }
 
         #region IPasswordService Members

@@ -3,13 +3,6 @@ using System.Web.Security;
 
 namespace Kokugen.Core.Membership.Security
 {
-    public interface IUser
-    {
-        string UserName { get; }
-        object ProviderUserKey { get; }
-        string Email { get; set; }
-    }
-
     public class User :  IUser
     {
 
