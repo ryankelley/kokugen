@@ -36,11 +36,13 @@
 		<div class="nav">
 			<ul class="subnav">
 				<li class="active"><%= this.LinkTo(new GetProjectModel { Id = Model.ProjectId}).Text("Project Home") %></li>
-				<li class="active"><%= this.LinkTo(new ViewBoardInputModel{ Id = Model.ProjectId}).Text("Board")%></li>
+				<li class="bar"><%= this.LinkTo(new ViewBoardInputModel{ Id = Model.ProjectId}).Text("Board")%></li>
+				<li class="bar"><%= this.LinkTo(new CompanyListModel()).Text("Companies") %></li>
+				<li class="bar"><%= this.LinkTo(new ProjectListModel()).Text("Projects") %></li>
 				<li class="bar"><%= this.LinkTo(new BoardConfigurationModel{ Id = Model.ProjectId}).Text("Process") %></li>
-				<li class="lbar"><%= this.LinkTo(new TimeRecordListModel()).Text("Time") %></li>
-				<li class="lbar"><a href="create.html">Users</a></li>
-				<li class="last"><%= this.LinkTo(new TaskListModel()).Text("Tasks") %></li>
+				<li class="bar"><%= this.LinkTo(new TimeRecordListModel()).Text("Time") %></li>
+				<li class="bar"><a href="create.html">Users</a></li>
+				<li class="lbar"><%= this.LinkTo(new TaskListModel()).Text("Tasks") %></li>
 			</ul>
 			<ul class="subnav right">
 			    <asp:ContentPlaceHolder ID="extraNavigation" runat="server" />

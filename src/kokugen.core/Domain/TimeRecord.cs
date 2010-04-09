@@ -28,7 +28,8 @@ namespace Kokugen.Core.Domain
 
         public virtual void ComputeDuration()
         {
-             Duration = ((double)(EndTime - StartTime).Value.Seconds)/3600; // gets timespent in hours
+            var time = EndTime.Value.Subtract(StartTime);
+            Duration = (time.Days * 24) + time.Hours + ((double)time.Minutes / 60) + ((double)time.Seconds / 3600); // gets timespent in hours
         }
     }
 }
