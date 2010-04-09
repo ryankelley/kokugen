@@ -13,7 +13,7 @@ namespace Kokugen.Web.Actions.Login
 
         public AjaxResponse Command(LoginModel inModel)
         {
-            var user = _loginService.AuthenticateUser(inModel.Login, inModel.Password);
+            var user = _loginService.LoginUser(inModel.Login, inModel.Password, inModel.RememberMe);
 
             return user != null
                        ? new AjaxResponse() { Success = true, Item = user}

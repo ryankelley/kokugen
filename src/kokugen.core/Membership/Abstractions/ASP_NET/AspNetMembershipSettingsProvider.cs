@@ -3,7 +3,7 @@ using FubuCore.Binding;
 using FubuMVC.Core.Configuration;
 using Microsoft.Practices.ServiceLocation;
 
-namespace Kokugen.Core.Membership.Abstractions
+namespace Kokugen.Core.Membership.Abstractions.ASP_NET
 {
     public class AspNetMembershipSettingsProvider : IMembershipSettingsProvider
     {

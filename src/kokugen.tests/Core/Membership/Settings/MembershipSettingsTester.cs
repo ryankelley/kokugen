@@ -2,7 +2,7 @@ using System;
 using System.Web.Security;
 using FubuMVC.StructureMap;
 using Kokugen.Core;
-using Kokugen.Core.Membership.Abstractions;
+using Kokugen.Core.Membership.Abstractions.ASP_NET;
 using Kokugen.Core.Membership.Settings;
 using NUnit.Framework;
 using StructureMap;

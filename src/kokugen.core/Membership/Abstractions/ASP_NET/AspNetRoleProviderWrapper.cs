@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Web.Security;
 using Kokugen.Core.Membership.Services;
 
-namespace Kokugen.Core.Membership.Abstractions
+namespace Kokugen.Core.Membership.Abstractions.ASP_NET
 {
     public class AspNetRoleProviderWrapper : IRolesService
     {

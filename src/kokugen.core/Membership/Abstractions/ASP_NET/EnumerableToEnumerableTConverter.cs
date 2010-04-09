@@ -5,7 +5,7 @@ using System.ComponentModel;
 using System.Web.Security;
 using Kokugen.Core.Membership.Security;
 
-namespace Kokugen.Core.Membership.Abstractions
+namespace Kokugen.Core.Membership.Abstractions.ASP_NET
 {
     public class EnumerableToEnumerableTConverter<TCollectionType, TItemType> : TypeConverter where TCollectionType : IEnumerable
     {

@@ -7,7 +7,7 @@ using Kokugen.Core.Membership.Settings;
 using Kokugen.Core.Validation;
 using PagedList;
 
-namespace Kokugen.Core.Membership.Abstractions
+namespace Kokugen.Core.Membership.Abstractions.ASP_NET
 {
     public class AspNetMembershipProviderWrapper : IUserService, IMembershipValidator, IPasswordService
     {
@@ -15,7 +15,7 @@ namespace Kokugen.Core.Membership.Abstractions
         private readonly MembershipSettingsBag _settingsBag;
 
         public AspNetMembershipProviderWrapper(MembershipProvider provider, 
-            MembershipSettingsBag settingsBag)
+                                               MembershipSettingsBag settingsBag)
         {
             _provider = provider;
             _settingsBag = settingsBag;
@@ -27,20 +27,20 @@ namespace Kokugen.Core.Membership.Abstractions
         }
 
         public MembershipCreateStatus CreateUser(string userName, string password, string email,
-            string passwordQuestion,
-            string passwordAnswer,
-            bool isApproved)
+                                                 string passwordQuestion,
+                                                 string passwordAnswer,
+                                                 bool isApproved)
         {
             return CreateUser(userName, password, email, passwordQuestion, passwordAnswer, isApproved, null);
         }
 
         public MembershipCreateStatus CreateUser(string userName,
-            string password,
-            string email,
-            string passwordQuestion,
-            string passwordAnswer,
-            bool isApproved,
-            object key)
+                                                 string password,
+                                                 string email,
+                                                 string passwordQuestion,
+                                                 string passwordAnswer,
+                                                 bool isApproved,
+                                                 object key)
         {
 
 
@@ -113,7 +113,7 @@ namespace Kokugen.Core.Membership.Abstractions
 
         public bool ValidateUser(string userName, string password)
         {
-           return  _provider.ValidateUser(userName, password);
+            return  _provider.ValidateUser(userName, password);
         }
 
         #region IPasswordService Members

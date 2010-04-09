@@ -5,7 +5,7 @@ using System.Web.Security;
 using FubuCore.Binding;
 using FubuCore.Reflection;
 
-namespace Kokugen.Core.Membership.Abstractions
+namespace Kokugen.Core.Membership.Abstractions.ASP_NET
 {
     public class MembershipSettingsDictionary : IRequestData
     {
