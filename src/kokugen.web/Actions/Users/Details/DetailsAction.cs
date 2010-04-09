@@ -18,14 +18,14 @@ namespace Kokugen.Web.Actions.Users.Details
 
         public UserDetailsModel Query(UserDetailsRequest request)
         {
-            return new UserDetailsModel(){User = _userService.Retrieve((Guid) request.Id)};
+            return new UserDetailsModel(){User = _userService.GetUserByLogin(request.Username)};
         }
     }
 
     public class UserDetailsRequest
     {
         [RouteInput]
-        public Guid? Id { get; set;}
+        public string Username { get; set; }
     }
 
     public class UserDetailsModel

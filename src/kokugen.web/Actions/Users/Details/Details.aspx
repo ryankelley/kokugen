@@ -5,7 +5,7 @@
 
 <%=this.Show(x => x.User.UserName) %>
 <%=this.Show(x => x.User.Email) %>
-<%=this.Show(x => x.User.LastLoginDate) %>
+
 
 
 </asp:Content>

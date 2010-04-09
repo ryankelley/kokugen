@@ -59,7 +59,7 @@ namespace Kokugen.Core.Membership.Abstractions
             _provider.DeleteUser(user.UserName, true);
         }
 
-        public MembershipUser Retrieve(Guid Id)
+        public MembershipUser Retrieve(object Id)
         {
             return _provider.GetUser(Id, true);
         }

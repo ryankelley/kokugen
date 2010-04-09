@@ -17,7 +17,7 @@ namespace Kokugen.Core.Membership.Services
     {
         void Update(MembershipUser user);
         void Delete(MembershipUser user);
-        MembershipUser Retrieve(Guid id);
+        MembershipUser Retrieve(object id);
 
         MembershipUser GetUserByLogin(string name);
         MembershipUser GetUserByEmail(string email);
