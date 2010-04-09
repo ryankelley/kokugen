@@ -72,6 +72,10 @@ namespace Kokugen.Web.Startables
         private void AddFakeUser(string userName)
         {
             _userService.CreateUser(userName, "F@keUser", userName + "@" + userName + ".com", true);
+            if (!_rolesService.IsInRole(userName, "Reader"))
+            {
+                _rolesService.AddUserToRoles(userName, "Reader");
+            }
         }
     }
 }

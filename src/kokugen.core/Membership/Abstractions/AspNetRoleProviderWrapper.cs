@@ -44,6 +44,11 @@ namespace Kokugen.Core.Membership.Abstractions
             _roleProvider.AddUsersToRoles(new[] { user }, new[] { roleName });
         }
 
+        public void AddUserToRoles(string userName, params string[] roles)
+        {
+            _roleProvider.AddUsersToRoles(new[] { userName }, roles);
+        }
+
         public void RemoveFromRole(string user, string roleName)
         {
             _roleProvider.RemoveUsersFromRoles(new[] { user }, new[] { roleName });

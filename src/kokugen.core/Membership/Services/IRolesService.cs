@@ -12,6 +12,7 @@ namespace Kokugen.Core.Membership.Services
         void Create(string roleName);
         void CreateIfMissing(string roleName);
         void AddToRole(string userName, string roleName);
+        void AddUserToRoles(string userName, params string[] roles);
         void RemoveFromRole(string userName, string roleName);
         void Delete(string roleName);
 
