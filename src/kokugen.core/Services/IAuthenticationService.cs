@@ -3,8 +3,9 @@ using System.Security.Principal;
 using System.Web.Security;
 using FubuMVC.Core.Security;
 using Kokugen.Core.Membership.Security;
+using Kokugen.Core.Membership.Services;
 
-namespace Kokugen.Core.Membership.Services
+namespace Kokugen.Core.Services
 {
     public interface IAuthenticationService
     {

@@ -1,6 +1,6 @@
 using Kokugen.Core.Membership.Security;
 
-namespace Kokugen.Core.Membership.Services
+namespace Kokugen.Core.Services
 {
     public interface ILoginService
     {

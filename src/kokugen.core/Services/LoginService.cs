@@ -4,10 +4,11 @@ using System;
 using System.Web.Security;
 using FubuMVC.Core.Security;
 using Kokugen.Core.Membership.Security;
+using Kokugen.Core.Membership.Services;
 
 #endregion
 
-namespace Kokugen.Core.Membership.Services
+namespace Kokugen.Core.Services
 {
     public class LoginService : ILoginService
     {
@@ -30,7 +31,6 @@ namespace Kokugen.Core.Membership.Services
                 return _userService.GetUserByLogin(userName);
             }
             return null;
-            
         }
 
         public void Logout()

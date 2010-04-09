@@ -62,5 +62,6 @@ namespace Kokugen.Core.Membership.Abstractions.NHibernate
         {
             throw new NotImplementedException();
         }
+
     }
 }
