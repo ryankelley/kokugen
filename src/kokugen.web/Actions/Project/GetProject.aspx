@@ -29,6 +29,41 @@ background-color:#9e9993;
 color:black;
 }
 </style>
+<script type="text/javascript">
+
+    $(document).ready(function() {
+    $(".stop-button").click(function() { 
+        
+        makeStopCall($(this).attr("data"));
+        
+        });
+    });
+
+    function showExtraDialog(response) {
+
+        if (response.Success) {
+            $("#time-record-billable").val(response.Item.Billable);
+            $("#time-record-duration").html(response.Item.Duration);
+            $("#time-record-id").val(response.Item.Id);
+            
+            $("#timerecord-stop-form-container").dialog('open');
+        }
+    }
+    
+    function makeStopCall(id){
+        
+        $.ajax({
+            url: "/timerecord/stop",
+            data: { Id: id },
+            dataType: "json",
+            type: "POST",
+            success: showExtraDialog
+        });
+    
+    
+    }
+
+</script>
 <body>
 <div id="Project Name" align=center><h2><%= this.DisplayFor(m => m.Project.Name) %></h2>
 
@@ -99,6 +134,7 @@ color:black;
 </div>
     
     <%= this.LinkTo(new ViewBoardInputModel{ Id = Model.Project.Id}).NoClosingTag().AddClass("icon") %><img src="/content/images/board_big.png" alt="view board" /></a>
+    <% this.Partial(new StopTimeRecordFormInputModel()); %>
 </body>
     
 <% this.Partial(new ProjectTimeRecordFormModel(){ProjectId = Model.Project.Id}); %>
@@ -117,65 +153,7 @@ color:black;
     }    
         
     </script>
-<%--    <script type="text/javascript">--%>
-<%--    var addCompanyUrl = "<%= Get<IUrlRegistry>().UrlFor(new TimeRecordFormModel()) %>";--%>
-<%--    var removeCompanyUrl = "<%= Get<IUrlRegistry>().UrlFor(new RemoveTimeRecordInput()) %>";--%>
-<%--    var companies = <%= Model.TimeRecords.ToJson() %>;--%>
-<%----%>
-<%--    $(document).ready(function(){--%>
-<%--        var companyList = $("#companyList");--%>
-<%----%>
-<%--        var addCompanyToList = function(company){--%>
-<%--            var listItem = $("<li>").text(company.Name);--%>
-<%--            listItem.append( $("<a>").text("x")--%>
-<%--                .attr("href", "#")--%>
-<%--                .addClass("removeLink")--%>
-<%--                .data("companyId", company.Id) );--%>
-<%--            companyList.append( listItem );--%>
-<%--        };--%>
-<%--        --%>
-<%--          var saveCompanyResponse = function(data){--%>
-<%--            if (data.Success !== true) {--%>
-<%--                alert("failed to add your time record");--%>
-<%--                return;--%>
-<%--            }--%>
-<%--            --%>
-<%--            $("#company-name").val("");--%>
-<%--            addCompanyToList(data.Item);--%>
-<%--        };--%>
-<%--        --%>
-<%--        $.each(companies, function(i, elem){--%>
-<%--            addCompanyToList(elem);--%>
-<%--        });--%>
-<%--        --%>
-<%--        $(".removeLink").live("click", function(){--%>
-<%--            var link = $(this);--%>
-<%--            var companyId = link.data("companyId");--%>
-<%--            --%>
-<%--            var onSuccess = function(data){--%>
-<%--                if (data.Success !== true){--%>
-<%--                    alert("failed to remove");--%>
-<%--                    return;--%>
-<%--                }--%>
-<%--                --%>
-<%--                var listItem = link.parent("li");--%>
-<%--                listItem.remove();--%>
-<%--            }--%>
-<%--            --%>
-<%--            $.ajax({--%>
-<%--                url: removeCompanyUrl,--%>
-<%--                data: {Id: companyId},--%>
-<%--                success: onSuccess,--%>
-<%--                dataType: "json",--%>
-<%--                type: "DELETE"--%>
-<%--            });--%>
-<%--        });--%>
-<%--        --%>
-<%--        --%>
-<%--    });--%>
-<%----%>
-<%----%>
-<%--</script>--%>
+
 </body>
     
 

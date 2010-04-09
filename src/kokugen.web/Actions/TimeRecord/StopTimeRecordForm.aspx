@@ -73,6 +73,7 @@ return output;
          parent.append(span);
          
          parent.siblings('.billable').children('span').html(response.Item.Billable);
+         parent.siblings('.duration').children('span').html(response.Item.Duration);
          
          
 

@@ -22,10 +22,10 @@
                     Response.Write(this.DisplayFor(x => x.EndTime));%>
         </td>
         <td class="duration">
-            <%= this.DisplayFor(x => x.Duration) %>
+            <%= this.DisplayFor(x => x.Duration) + " " %>hrs
         </td>
         <td class="billable">
-            <%= this.DisplayFor(x => x.Billable) %>
+            <%= this.DisplayFor(x => x.Billable) + " " %>hrs
         </td>
         <td>
             <%= this.DisplayFor(x => x.Task.Name) %>
