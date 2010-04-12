@@ -82,7 +82,7 @@ namespace Kokugen.Web
         {
             var myBehavs = graph.Behaviors.Where(c => c.FirstCall().Category == BehaviorCategory.Call).ToList();
             var myActions = graph.Actions().ToList();
-            myActions.Each(act => act.AddBefore(Wrapper.For<MustBeAuthorizedBehavior>()));
+            //myActions.Each(act => act.AddBefore(Wrapper.For<MustBeAuthorizedBehavior>()));
             //graph.Behaviors.Where(c => c.FirstCall().Category == BehaviorCategory.Call).Each(c => c.Prepend(new Wrapper(typeof(MustBeAuthorizedBehavior)))); 
         }
     }
