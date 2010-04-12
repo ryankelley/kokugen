@@ -1,8 +1,11 @@
 using System;
+using FubuCore;
 using FubuMVC.Core;
 using Kokugen.Web.Actions;
+using Kokugen.Web.Actions.Board;
 using Kokugen.Web.Actions.Home;
 using FubuMVC.UI;
+using Kokugen.Web.Behaviors;
 using Kokugen.Web.Conventions;
 
 namespace Kokugen.Web
@@ -46,8 +49,11 @@ namespace Kokugen.Web
                 x.IfIsType<float>(f => f.ToString("N2"));
                 x.IfIsType<double>(d => d.ToString("N2"));
             });
+
+            //Policies.Add(new AuthorizationBehavior());
+            //Policies.ConditionallyWrapBehaviorChainsWith<MustBeAuthorizedBehavior>(c => c.OutputType() == typeof (BoardConfigurationModel));
             
-            //Policies.WrapBehaviorChainsWith<TransactionalContainerBehavior>();
+            //Policies.WrapBehaviorChainsWith<MustBeAuthorizedBehavior>();
             
             Output.ToJson.WhenCallMatches(action => action.Returns<AjaxResponse>());
 
@@ -57,6 +63,9 @@ namespace Kokugen.Web
                                       x.by_ViewModel_and_Namespace();
                                       x.by_ViewModel();
                                   });
+
+            
+            
         }
     }
 

@@ -186,7 +186,8 @@
     <Compile Include="Actions\Users\Roles\ListAction.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Behaviors\Check_Permissions_On_Action.cs" />
+    <Compile Include="AuthorizationBehavior.cs" />
+    <Compile Include="Behaviors\MustBeAuthorizedBehavior.cs" />
     <Compile Include="Behaviors\TransactionalContainerBehavior.cs" />
     <Compile Include="Conventions\Builders\AfterEachOfPartialBuilder.cs" />
     <Compile Include="Conventions\Builders\BeforeEachOfPartialBuilder.cs" />

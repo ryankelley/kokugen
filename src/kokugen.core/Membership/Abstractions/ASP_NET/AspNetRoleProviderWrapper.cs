@@ -63,7 +63,7 @@ namespace Kokugen.Core.Membership.Abstractions.ASP_NET
 
         public void CreateIfMissing(string role)
         {
-            if(_roleProvider.RoleExists(role))
+            if(!_roleProvider.RoleExists(role))
                 _roleProvider.CreateRole(role);
         }
 
