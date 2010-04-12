@@ -97,7 +97,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContextSpecification.cs" />
-    <Compile Include="Core\Membership\Settings\MembershipSettingsTester.cs" />
     <Compile Include="Persistence\InMemoryRepository.cs" />
     <Compile Include="Persistence\IntegrationAssemblySetup.cs" />
     <Compile Include="Persistence\PersistenceTesterContext.cs" />
@@ -129,6 +128,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Core\Membership\Security\" />
+    <Folder Include="Core\Membership\Settings\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

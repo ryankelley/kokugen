@@ -1,6 +1,7 @@
 using System;
 using Kokugen.Core;
 using Kokugen.Core.Attributes;
+using Kokugen.Core.Domain;
 using Kokugen.Core.Membership.Services;
 
 namespace Kokugen.Web.Startables
@@ -9,6 +10,7 @@ namespace Kokugen.Web.Startables
     {
         private readonly IUserService _userService;
         private readonly IRolesService _rolesService;
+        private User _user;
 
         public SetupDefaultRoles(IUserService userService, IRolesService rolesService)
         {
@@ -19,36 +21,26 @@ namespace Kokugen.Web.Startables
         public void Start()
         {
             addDefaultAdmin();
-            //addDefaultRoles();
         }
 
-        private void addDefaultRoles()
-        {
-
-            _rolesService.Create(new Core.Domain.Role("Administrator"));
-            _rolesService.Create(new Core.Domain.Role("Coordinator"));
-            _rolesService.Create(new Core.Domain.Role("Contributor"));
-            _rolesService.Create(new Core.Domain.Role("Reader"));
-
-            var login = _userService.GetUserByLogin("KokugenAdmin");
-
-            if (!_rolesService.IsInRole(login, "Administrator"))
-            {
-                _rolesService.AddToRole(login, "Administrator");
-            }
-        }
 
         private void addDefaultAdmin()
         {
-            _userService.Create(new Core.Domain.User("KokugenAdmin", "KokugenAdmin@Kokugen.com", "K0kugen@dmin"));
+            var role = new Role("Administrator");
+            _rolesService.Create(role);
+
+            _user = new User("KokugenAdmin", "KokugenAdmin@Kokugen.com", "K0kugen@dmin");
+            _user.AddRole(role);
+            _userService.Create(_user);
         }
     }
 
     [DebugOnly]
-    public class StubLotsOfUsers //: IStartable
+    public class StubLotsOfUsers : IStartable
     {
         private readonly IUserService _userService;
         private readonly IRolesService _rolesService;
+        private Role _role;
 
         public StubLotsOfUsers(IUserService userService, IRolesService rolesService)
         {
@@ -58,6 +50,8 @@ namespace Kokugen.Web.Startables
 
         public void Start()
         {
+            _role = new Role("Reader");
+            _rolesService.Create(_role);
            AddFakeUser("George");
            AddFakeUser("Jane");
            AddFakeUser("Jim");
@@ -74,6 +68,7 @@ namespace Kokugen.Web.Startables
         private void AddFakeUser(string userName)
         {
             var user = new Core.Domain.User(userName, userName + "@" + userName + ".com", "F@keUser");
+            user.AddRole(_role);
             _userService.Create(user);
 
             //if (!_rolesService.IsInRole(user, "Reader"))

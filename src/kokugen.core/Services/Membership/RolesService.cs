@@ -37,8 +37,13 @@ namespace Kokugen.Core.Services
                 return;
 
             var validation = _validator.Validate(entity);
-            if(validation.IsValid())
-                _roleRepository.Save(entity);
+            if (validation.IsValid())
+            {
+                //ensure role.Name is unique
+                if (_roleRepository.FindBy(x => x.Name, role.Name) == null)
+                    _roleRepository.Save(entity);
+
+            }
         }
 
         private void ValidateAndSave(Domain.User entity)
@@ -48,19 +53,19 @@ namespace Kokugen.Core.Services
                 _userRepository.Save(entity);
         }
 
-        public void AddToRole(IUser userName, string roleName)
+        public void AddToRole(IUser userName, IRole roleName)
         {
             var entity = userName as Domain.User;
 
             if(entity == null)
                 return;
 
-            entity.AddRole(_roleRepository.FindBy(x => x.Name, roleName));
+            entity.AddRole(_roleRepository.FindBy(x => x.Name, roleName.Name));
 
             ValidateAndSave(entity);
         }
 
-        public void RemoveFromRole(IUser userName, string roleName)
+        public void RemoveFromRole(IUser userName, IRole roleName)
         {
             var entity = userName as Domain.User;
 
@@ -89,17 +94,17 @@ namespace Kokugen.Core.Services
             return null;
         }
 
-        public IEnumerable<string> FindUserNamesByRole(string roleName)
+        public IEnumerable<string> FindUserNamesByRole(IRole roleName)
         {
-            return _roleRepository.FindBy(x => x.Name, roleName)
+            return _roleRepository.FindBy(x => x.Name, roleName.Name)
                 .GetUsers()
                 .Select(x => x.UserName);
         }
 
-        public bool IsInRole(IUser userName, string roleName)
+        public bool IsInRole(IUser userName, IRole roleName)
         {
             return _userRepository.FindBy(x => x.UserName, userName.UserName)
-                .GetRoles().Select(x => x.Name).Contains(roleName);
+                .GetRoles().Select(x => x.Name).Contains(roleName.Name);
         }
 
         #endregion

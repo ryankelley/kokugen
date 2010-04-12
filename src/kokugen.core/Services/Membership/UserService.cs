@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Security;
-using Kokugen.Core.Membership.Abstractions.ASP_NET;
 using Kokugen.Core.Membership.Security;
 using Kokugen.Core.Membership.Services;
 using Kokugen.Core.Membership.Settings;
@@ -33,7 +32,7 @@ namespace Kokugen.Core.Services
         public void Update(IUser user)
         {
             var entity = user as Domain.User;
-            if (entity != null) _userRepository.Save(entity);
+            if (entity != null) ValidateAndSave(entity);
         }
 
         public void Delete(IUser user)
@@ -54,6 +53,9 @@ namespace Kokugen.Core.Services
 
         public IUser GetUserByEmail(string email)
         {
+            if(!_settings.Registration.RequiresUniqueEmail)
+                throw new InvalidOperationException("RegistrationSettings.RequireUniqueEmail must be true to retrieve users by email");
+
             return _userRepository.FindBy(x => x.Email, email);
         }
 
@@ -62,11 +64,8 @@ namespace Kokugen.Core.Services
             var users = _userRepository.Query()
                 .Take(pageSize)
                 .Skip((pageIndex - 1)*pageSize);
-
-            //var converter = new EnumerableToEnumerableTConverter<IEnumerable<User>, IUser>();
-            //var usersList = converter.ConvertTo<IEnumerable<IUser>>(users);
-
-            return new StaticPagedList<IUser>( users.Where(x => true).Select(u => u as IUser), pageIndex, pageSize, _userRepository.Query().Count());
+            return new StaticPagedList<IUser>( users.Where(x => true)
+                .Select(u => u as IUser), pageIndex, pageSize, TotalUsers);
         }
 
         public int TotalUsers
@@ -88,7 +87,20 @@ namespace Kokugen.Core.Services
                 return notification;
             }
 
-            entity.HashPassword(_passwordHelperService);
+            switch (_settings.Password.PasswordFormat)
+            {
+                case PasswordFormat.Hashed:
+                    entity.SetPassword(_passwordHelperService);
+                    break;
+                case PasswordFormat.Clear:
+                    entity.SetPassword(new ClearPasswordHelper());
+                    break;
+                case PasswordFormat.Encrypted:
+                    throw new NotImplementedException();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
 
             return ValidateAndSave(entity);
         }
@@ -98,10 +110,43 @@ namespace Kokugen.Core.Services
             var notification = _validator.Validate(user);
             if (notification.IsValid())
             {
+                //make sure user is unique
+                if(_userRepository.FindBy(x => x.UserName, user.UserName) != null)
+                {
+                    notification.RegisterMessage("UserName", "User name already exists!", Severity.Error);
+                    return notification;
+                }
                 _userRepository.Save(user);
             }
             return notification;
         }
 
+    }
+
+    public class ClearPasswordHelper : IPasswordHelperService
+    {
+        #region Implementation of IPasswordHelperService
+
+        public string CreatePasswordHash(string password)
+        {
+            return password;
+        }
+
+        public bool ComparePasswordToHash(string password, string passwordHash)
+        {
+            return password == passwordHash;
+        }
+
+        public string RandomPasswordNoHash(int length)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string RandomPasswordHashed(int length)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }
