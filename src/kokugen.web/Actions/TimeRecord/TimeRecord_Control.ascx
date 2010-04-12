@@ -6,7 +6,10 @@
 
     <tr>
         <td>
-            <%= this.DisplayFor(x => x.User.UserName) +" "+  this.DisplayFor(x => x.User.UserName) %>
+<%--        <% --%>
+<%--            if (Model.User != null)--%>
+<%--     Response.Write(this.DisplayFor(x => x.User.UserName) + " " + this.DisplayFor(x => x.User.UserName));--%>
+<%--             %>--%>
         </td>
         <td>
             <%= this.DisplayFor(x => x.Description) %>
@@ -31,7 +34,7 @@
             <%= this.DisplayFor(x => x.Task.Name) %>
         </td>
         <td> 
-            <a href="/project/<%= Model.ProjectId %>"><%=Model.ProjectName %></a>
+            <a href="/project/<%= Model.Project.Id %>"><%=Model.Project.Name %></a>
         </td>              
 	</tr>	
 

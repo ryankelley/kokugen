@@ -16,6 +16,6 @@ namespace Kokugen.Web.Actions.DTO
         public virtual string ProjectName { get; set; }
         public virtual Core.Domain.TaskCategory Task { get; set; }
 
-        public virtual MembershipUser User { get; set; }
+        //public virtual MembershipUser User { get; set; }
     }
 }
