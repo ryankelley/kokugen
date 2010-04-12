@@ -51,6 +51,10 @@ namespace Kokugen.Web
             fubuBootstrapper.Bootstrap(_routes);
 
             ObjectFactory.Container.StartStartables();
+
+            // Configure permissions/security
+            new KokugenSecurityRegistry();
+
             ConfigureAutoMapper();
         }
 

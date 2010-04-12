@@ -7,7 +7,7 @@ using FubuCore.Util;
 
 namespace Kokugen.Core.Membership
 {
-    public class SecurityRegistry
+    public class SecurityRegistry : ISecurityRegistry
     {
         private static Cache<MethodInfo, SecurityConfigExpression> _securityInfo = new Cache<MethodInfo, SecurityConfigExpression>();
 
@@ -22,6 +22,11 @@ namespace Kokugen.Core.Membership
             _securityInfo.Fill(method, output);
             return output;
         }
+    }
+
+    public interface ISecurityRegistry
+    {
+
     }
 
     public class SecurityConfigExpression
