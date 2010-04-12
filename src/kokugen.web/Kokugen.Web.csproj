@@ -118,7 +118,7 @@
     <Compile Include="Actions\BoardColumn\RemoveAction.cs" />
     <Compile Include="Actions\Board\BoardColumnDTO.cs" />
     <Compile Include="Actions\Board\EditBoardColumnFormAction.cs" />
-    <Compile Include="Actions\Board\ListAction.cs" />
+    <Compile Include="Actions\Board\BoardAction.cs" />
     <Compile Include="Actions\Board\SaveColumnAction.cs" />
     <Compile Include="Actions\Board\ViewBoardAction.cs" />
     <Compile Include="Actions\Board\View_Page_Type_Declarations.cs">
@@ -190,6 +190,7 @@
     <Compile Include="Actions\Users\Roles\ListAction.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Behaviors\Check_Permissions_On_Action.cs" />
     <Compile Include="Behaviors\TransactionalContainerBehavior.cs" />
     <Compile Include="Conventions\Builders\AfterEachOfPartialBuilder.cs" />
     <Compile Include="Conventions\Builders\BeforeEachOfPartialBuilder.cs" />
@@ -217,7 +218,9 @@
     <Compile Include="KokugenFubuStructureMapApplication.cs" />
     <Compile Include="KokugenFubuRegistry.cs" />
     <Compile Include="KokugenStructureMapBootstrapper.cs" />
+    <Compile Include="KokugenWebRegistry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SecurityConfiguration.cs" />
     <Compile Include="Shared\Project.Master.cs">
       <DependentUpon>Project.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -351,11 +354,6 @@
     <Content Include="Shared\Site.Master" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\ASPNETDB.MDF">
-    </Content>
-    <Content Include="App_Data\aspnetdb_log.ldf">
-      <DependentUpon>ASPNETDB.MDF</DependentUpon>
-    </Content>
     <Content Include="Content\images\k-logo.png" />
     <Content Include="Actions\Users\Details\Details.aspx" />
     <Content Include="Actions\Users\Roles\List.aspx" />
@@ -368,9 +366,6 @@
     <Content Include="Default.aspx" />
     <Content Include="Content\images\stopsign.png" />
     <Content Include="Shared\Project.Master" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App_Data\nhibernate.db" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\WebApplications\Microsoft.WebApplication.targets" />
