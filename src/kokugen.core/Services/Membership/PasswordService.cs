@@ -2,7 +2,7 @@ using System;
 using Kokugen.Core.Membership.Security;
 using Kokugen.Core.Membership.Services;
 
-namespace Kokugen.Core.Membership.Abstractions.NHibernate
+namespace Kokugen.Core.Services
 {
     public class PasswordService : IPasswordService
     {

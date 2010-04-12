@@ -22,7 +22,8 @@ namespace Kokugen.Core
         public KokugenCoreRegistry()
         {
             setupNHibernate();
-            setupMembership();
+            setupNHMembership();
+            //setupAspMembership();
             Scan(x =>
                      {
                          x.TheCallingAssembly();
@@ -30,7 +31,14 @@ namespace Kokugen.Core
                      });
         }
 
-        private void setupMembership()
+        private void setupNHMembership()
+        {
+            //ForSingletonOf<IUserService>()
+            //    .Use<UserService>();
+
+        }
+
+        private void setupAspMembership()
         {
             For<MembershipProvider>().Use(c => System.Web.Security.Membership.Provider);
             For<RoleProvider>().Use(c => Roles.Provider);

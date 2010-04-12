@@ -29,9 +29,19 @@ namespace Kokugen.Core.Membership.Abstractions.ASP_NET
             return _roleProvider.GetRolesForUser(userName.UserName);
         }
 
+        public IEnumerable<string> FindUserNamesByRole(string roleName)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<string> FindUserNamesByRole(IRole roleName)
         {
             return _roleProvider.GetUsersInRole(roleName.Name);
+        }
+
+        public bool IsInRole(IUser userName, string roleName)
+        {
+            throw new NotImplementedException();
         }
 
         public void CreateIfMissing(IRole roleName)
@@ -76,6 +86,16 @@ namespace Kokugen.Core.Membership.Abstractions.ASP_NET
         public void Create(IRole roleName)
         {
             _roleProvider.CreateRole(roleName.Name);
+        }
+
+        public void AddToRole(IUser userName, string roleName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveFromRole(IUser userName, string roleName)
+        {
+            throw new NotImplementedException();
         }
 
         public void Delete(IRole roleName)

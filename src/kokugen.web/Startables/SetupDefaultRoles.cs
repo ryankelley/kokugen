@@ -19,26 +19,28 @@ namespace Kokugen.Web.Startables
         public void Start()
         {
             addDefaultAdmin();
-            addDefaultRoles();
+            //addDefaultRoles();
         }
 
         private void addDefaultRoles()
         {
 
-            _rolesService.CreateIfMissing("Administrator");
-            _rolesService.CreateIfMissing("Coordinator");
-            _rolesService.CreateIfMissing("Contributor");
-            _rolesService.CreateIfMissing("Reader");
-           
-            if (!_rolesService.IsInRole("KokugenAdmin", "Administrator"))
+            _rolesService.Create(new Core.Domain.Role("Administrator"));
+            _rolesService.Create(new Core.Domain.Role("Coordinator"));
+            _rolesService.Create(new Core.Domain.Role("Contributor"));
+            _rolesService.Create(new Core.Domain.Role("Reader"));
+
+            var login = _userService.GetUserByLogin("KokugenAdmin");
+
+            if (!_rolesService.IsInRole(login, "Administrator"))
             {
-                _rolesService.AddUserToRole("KokugenAdmin", "Administrator");
+                _rolesService.AddToRole(login, "Administrator");
             }
         }
 
         private void addDefaultAdmin()
         {
-            _userService.CreateUser("KokugenAdmin", "K0kugen@dmin", "admin@kokugen.com", true);
+            _userService.Create(new Core.Domain.User("KokugenAdmin", "KokugenAdmin@Kokugen.com", "K0kugen@dmin"));
         }
     }
 
@@ -71,11 +73,13 @@ namespace Kokugen.Web.Startables
 
         private void AddFakeUser(string userName)
         {
-            _userService.CreateUser(userName, "F@keUser", userName + "@" + userName + ".com", true);
-            if (!_rolesService.IsInRole(userName, "Reader"))
-            {
-                _rolesService.AddUserToRole(userName, "Reader");
-            }
+            var user = new Core.Domain.User(userName, userName + "@" + userName + ".com", "F@keUser");
+            _userService.Create(user);
+
+            //if (!_rolesService.IsInRole(user, "Reader"))
+            //{
+            //    _rolesService.AddToRole(user, "Reader");
+            //}
         }
     }
 }

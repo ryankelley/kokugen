@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using FluentNHibernate.Utils;
 using Kokugen.Core.Domain;
 using NHibernate;
 using NHibernate.Connection;
@@ -13,6 +14,7 @@ using NHibernate.Engine;
 using NHibernate.Linq;
 using NHibernate.Mapping;
 using NHibernate.Type;
+using System.Linq.Expressions;
 
 #endregion
 
@@ -26,6 +28,8 @@ namespace Kokugen.Core.Persistence
         ENTITY Load(Guid id);
 
         ENTITY Get(Guid id);
+
+        ENTITY FindBy<U>(Expression<Func<ENTITY, U>> expression, U search);
 
         IQueryable<ENTITY> Query();
 
@@ -146,6 +150,14 @@ namespace Kokugen.Core.Persistence
             return crit.Future<ENTITY>();
         }
 
+        public ENTITY FindBy<TU>(Expression<Func<ENTITY, TU>> expression, TU search) 
+        {
+            string propertyName = ReflectionHelper.GetAccessor(expression).FieldName;
+            ICriteria criteria =
+                _session.CreateCriteria(typeof(ENTITY)).Add(
+                    Restrictions.Eq(propertyName, search));
+            return criteria.UniqueResult() as ENTITY;
+        }
         
 
         /// <summary>

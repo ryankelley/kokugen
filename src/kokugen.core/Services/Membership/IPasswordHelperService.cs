@@ -1,4 +1,4 @@
-namespace Kokugen.Core.Membership.Abstractions.NHibernate
+namespace Kokugen.Core.Services
 {
     public interface IPasswordHelperService
     {

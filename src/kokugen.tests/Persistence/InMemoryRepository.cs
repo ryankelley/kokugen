@@ -54,7 +54,7 @@ namespace Kokugen.Tests.Persistence
                 .FirstOrDefault(x => x.Id == id);
         }
 
-        public virtual ENTITY FindBy<ENTITY, TU>(Expression<Func<ENTITY, TU>> expression, TU search) where ENTITY : class
+        public virtual ENTITY FindBy<TU>(Expression<Func<ENTITY, TU>> expression, TU search)
         {
             var accessor = ReflectionHelper.GetAccessor(expression);
             Func<ENTITY, bool> predicate = delegate(ENTITY t)
@@ -159,9 +159,6 @@ namespace Kokugen.Tests.Persistence
         }
     }
 
-    public class InMemoryRepository : InMemoryRepository<Entity>, IRepository<Entity>
-    {
 
-    }
 
 }

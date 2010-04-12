@@ -71,7 +71,7 @@ namespace Kokugen.Tests.SchemaCreation
                 con.Open();
                 var cmd = con.CreateCommand();
 
-                cmd.CommandText = "SELECT Name FROM sys.objects WHERE ([Type] In (N'U')) ORDER BY Name";
+                cmd.CommandText = "SELECT Name FROM sys.objects WHERE ([Type] In (N'TU')) ORDER BY Name";
                 cmd.CommandType = CommandType.Text;
 
                 var reader = cmd.ExecuteReader();
