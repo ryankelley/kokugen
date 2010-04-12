@@ -35,7 +35,11 @@ namespace Kokugen.Core
         {
             var holder = _valueObjectCache.Find(x => x.GetKey() == typeof (T).Name);
 
-            holder.AddValue(valueObject);
+            if(!_valueObjectCache.GetAllKeys().Contains(valueObject.Key))
+            {
+                holder.AddValue(valueObject);
+            }
+            
         }
 
         public static void AddValueObjects<T>(IEnumerable<ValueObject> objects)
