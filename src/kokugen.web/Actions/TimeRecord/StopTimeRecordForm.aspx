@@ -92,6 +92,6 @@ return output;
     }
 
     $(document).ready(function() {
-    $("#timerecord-stop-form-container").dialog({ title: "Add Time Record", autoOpen: false, buttons: { "Save": validateAndSaveStop} });
+    $("#timerecord-stop-form-container").dialog({ title: "Stop Time Record", autoOpen: false, buttons: { "Save": validateAndSaveStop} });
     });
 </script>
