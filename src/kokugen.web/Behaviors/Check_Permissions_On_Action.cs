@@ -1,3 +1,4 @@
+using FubuMVC.Core;
 using FubuMVC.Core.Behaviors;
 using FubuMVC.Core.Runtime;
 using FubuMVC.Core.Security;
@@ -27,7 +28,7 @@ namespace Kokugen.Web.Behaviors
                 // The User is not logged in, better send back to login form
             }
 
-            
+            return DoNext.Continue;
         }
     }
 }
