@@ -126,6 +126,8 @@
     <Compile Include="Membership\Abstractions\NHibernate\RolesService.cs" />
     <Compile Include="Membership\Abstractions\NHibernate\SimpleHash.cs" />
     <Compile Include="Membership\Abstractions\NHibernate\UserService.cs" />
+    <Compile Include="Membership\Permission.cs" />
+    <Compile Include="Membership\SecurityRegistry.cs" />
     <Compile Include="Membership\Security\IRole.cs" />
     <Compile Include="Membership\Security\IUser.cs" />
     <Compile Include="Membership\Security\User.cs" />

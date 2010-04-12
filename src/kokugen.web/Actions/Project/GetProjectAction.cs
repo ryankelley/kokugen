@@ -18,7 +18,7 @@ namespace Kokugen.Web.Actions.Project
         public ProjectModel Query(GetProjectModel model)
         {
             var project = _projectService.GetProjectFromId(model.Id);
-            var timeRecords = project.GetTimeRecords().ToList();
+            var timeRecords = project.GetTimeRecords().OrderByDescending(x => x.StartTime).ToList();
             return new ProjectModel() {Project = project, TimeRecords = timeRecords, ProjectId = project.Id};
         }
     }

@@ -5,7 +5,7 @@ namespace Kokugen.Web.Actions.TimeRecord
 {
     public class TimeRecord_Control : FubuControl<TimeRecordDTO>{}
     public class TimeRecordForm : FubuPage<TimeRecordFormModel> { }
-    public class StopForm : FubuPage<StopTimeRecordFormModel> {}
+    public class StopTimeRecordForm : FubuPage<StopTimeRecordFormModel> {}
     public class ProjectTimeRecordForm : FubuPage<ProjectTimeRecordFormModel>{}
     public class List : FubuPage<TimeRecordListModel> { }
 }

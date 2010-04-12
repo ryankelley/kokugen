@@ -183,8 +183,14 @@ task :dbDeploy do
 end
 
 desc 'Creates the next migration script'
-task :dbMigrate => [:dbReset, :dbCreateVersioned] do
+task :dbMigrate => [:dbReset, :dbCreateMembership, :dbCreateVersioned] do
 	
 Tarantino.CompareDatabases :dbname => DBNAME, :dbserver => DBSERVER, :scriptdir => DBSCRIPTS
 	
+end
+
+desc 'Creates the ASP.Net Membership stuff in the database'
+task :dbCreateMembership do
+    
+    system("C:\\Windows\\Microsoft.NET\\Framework\\v2.0.50727\\aspnet_regsql -S #{DBSERVER} -E -d #{DBNAME} -A all")
 end

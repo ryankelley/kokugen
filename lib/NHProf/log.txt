@@ -1,1 +1,6 @@
 2010-03-16 09:06:25,429 [1] WARN  Rhino.Licensing.LicenseValidator [(null)] - Could not find license file: C:\Users\ryanr\AppData\Local\NHibernate Profiler\license.xml
+2010-04-09 14:24:14,706 [1] WARN  Rhino.Licensing.LicenseValidator [(null)] - Could not find license file: C:\Users\calebbriggs\AppData\Local\NHibernate Profiler\license.xml
+2010-04-09 14:24:22,744 [1] INFO  Rhino.Licensing.LicenseValidator [(null)] - License D:\code\calebs-kokugen\lib\NHProf\Ryan.xml expiration date is 12/31/9999 23:59:59
+2010-04-09 14:24:22,745 [1] DEBUG Rhino.Licensing.LicenseValidator [(null)] - License accepted for NHibernate Profiler
+2010-04-09 14:24:23,035 [1] INFO  Rhino.Licensing.LicenseValidator [(null)] - License C:\Users\calebbriggs\AppData\Local\NHibernate Profiler\license.xml expiration date is 12/31/9999 23:59:59
+2010-04-09 14:24:23,036 [1] DEBUG Rhino.Licensing.LicenseValidator [(null)] - License accepted for NHibernate Profiler

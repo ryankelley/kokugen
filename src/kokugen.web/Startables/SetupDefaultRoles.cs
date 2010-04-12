@@ -43,7 +43,7 @@ namespace Kokugen.Web.Startables
     }
 
     [DebugOnly]
-    public class StubLotsOfUsers : IStartable
+    public class StubLotsOfUsers //: IStartable
     {
         private readonly IUserService _userService;
         private readonly IRolesService _rolesService;

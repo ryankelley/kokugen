@@ -26,7 +26,7 @@ namespace Kokugen.Core
         public static void StartStartables(this IContainer container)
         {
 #if DEBUG
-            container.GetInstance<ISessionSource>().BuildSchema();   
+            //container.GetInstance<ISessionSource>().BuildSchema();   
 #endif
             container.ExecuteInTransaction(c => c.Model.GetAllPossible<IStartable>()
 #if !DEBUG
