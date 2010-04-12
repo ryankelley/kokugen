@@ -46,6 +46,7 @@ namespace Kokugen.Core.Services
             if(notification.IsValid())
             {
                 _projectRepository.Save(project);
+                ValueObjectRegistry.AddValueObject<Project>(new ValueObject(project.Id.ToString(), project.Name));
             }
 
             return notification;

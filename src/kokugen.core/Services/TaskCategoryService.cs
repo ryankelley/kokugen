@@ -39,6 +39,7 @@ namespace Kokugen.Core.Services
             if(notification.IsValid())
             {
                 _taskCategoryRepository.Save(taskCategory);
+                ValueObjectRegistry.AddValueObject<TaskCategory>(new ValueObject(taskCategory.Id.ToString(), taskCategory.Name));
             }
 
             return notification;
