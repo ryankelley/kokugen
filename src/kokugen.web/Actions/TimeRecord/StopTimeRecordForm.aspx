@@ -13,7 +13,7 @@
     <%= this.InputFor(x => x.TimeRecord.Id).Id("time-record-id") %>
     
     
-</form>
+<%= this.EndForm() %>
    
 </div>
 <script type="text/javascript">

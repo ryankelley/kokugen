@@ -8,6 +8,7 @@ using FubuMVC.Core.Runtime;
 using FubuMVC.StructureMap;
 using Kokugen.Core;
 using Kokugen.Core.Domain;
+using Kokugen.Core.Membership;
 using Kokugen.Core.Persistence;
 using Kokugen.Core.Services;
 using Kokugen.Web.Actions.Board;
@@ -52,8 +53,9 @@ namespace Kokugen.Web
             ObjectFactory.Container.StartStartables();
             HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
             
-            // Configure permissions/security
-            new KokugenSecurityRegistry();
+            // Configure Permissions
+            // Not Working: //ObjectFactory.Container.GetInstance<ISecurityProvider>().Configure(new KokugenSecurityRegistry());
+
             ConfigureAutoMapper();
         }
 

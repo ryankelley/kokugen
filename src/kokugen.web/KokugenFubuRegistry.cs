@@ -39,7 +39,7 @@ namespace Kokugen.Web
                 .ConstrainToHttpMethod(action => action.Method.Name.EndsWith("Command"), "POST")
                 .ConstrainToHttpMethod(action => action.Method.Name.StartsWith("Query"), "GET")
                 .ConstrainToHttpMethod(action => action.Method.Name.StartsWith("Remove"), "DELETE")
-                .ForInputTypesOf<IRequestById>(x => x.RouteInputFor(request => request.Id));
+                .ForInputTypesOf<IRequestById>(x => x.RouteInputFor(request => request.Id).DefaultValue = "");
 
             this.UseDefaultHtmlConventions();
             this.HtmlConvention(new KokugenHtmlConventions());
@@ -56,7 +56,7 @@ namespace Kokugen.Web
                 x.IfIsType<double>(d => d.ToString("N2"));
             });
 
-            //Policies.Add<TestBehaviorPolicy>();
+            Policies.Add<TestBehaviorPolicy>();
             //Policies.WrapBehaviorChainsWith<MustBeAuthorizedBehavior>();
             //Policies.ConditionallyWrapBehaviorChainsWith<MustBeAuthorizedBehavior>(c => c.OutputType() == typeof (BoardConfigurationModel));
             
@@ -71,6 +71,7 @@ namespace Kokugen.Web
                                       x.by_ViewModel();
                                   });
 
+
             
             
         }
@@ -81,9 +82,27 @@ namespace Kokugen.Web
         public void Configure(BehaviorGraph graph)
         {
             var myBehavs = graph.Behaviors.Where(c => c.FirstCall().Category == BehaviorCategory.Call).ToList();
-            var myActions = graph.Actions().ToList();
-            //myActions.Each(act => act.AddBefore(Wrapper.For<MustBeAuthorizedBehavior>()));
+            var myActions = graph.Actions().Where(c => c.Category == BehaviorCategory.Call).ToList();
+            myActions.Each(act => act.AddBefore(new AuthorizationWrapper(act)));// Wrapper.For<MustBeAuthorizedBehavior>()));
             //graph.Behaviors.Where(c => c.FirstCall().Category == BehaviorCategory.Call).Each(c => c.Prepend(new Wrapper(typeof(MustBeAuthorizedBehavior)))); 
+        }
+    }
+
+    public class AuthorizationWrapper : BehaviorNode
+    {
+        public AuthorizationWrapper(object act)
+        {
+            
+        }
+
+        protected override ObjectDef buildObjectDef()
+        {
+            return new ObjectDef(typeof(MustBeAuthorizedBehavior));
+        }
+
+        public override BehaviorCategory Category
+        {
+            get { return BehaviorCategory.Wrapper; }
         }
     }
 
@@ -99,47 +118,5 @@ namespace Kokugen.Web
     //                .Select(view => view);
     //    }
     //}
-    public static class PolicyExtensions
-    {
-        public static PoliciesExpression WrapWithData<T>(this PoliciesExpression expr, object dataToPass)
-        {
-            var configAction = new VisitBehaviorsAction(v =>
-                v.Actions += chain => chain.Prepend(new AuthWrapper()),
-                "wrap with the {0} behavior".ToFormat(typeof(T).Name));
-
-            
-            expr.Add(configAction);
-
-
-            return expr;
-        }
-    }
-
-    public class AuthWrapper : BehaviorNode
-    {
-        private ObjectDef _objectDef;
-
-        public AuthWrapper()
-        {
-            _objectDef = new ObjectDef
-            {
-                Type = typeof(MustBeAuthorizedBehavior)
-            };
-        }
-
-        protected override ObjectDef buildObjectDef()
-        {
-            return _objectDef;
-        }
-
-        public override BehaviorCategory Category
-        {
-            get { return BehaviorCategory.Wrapper; }
-        }
-
-        public override string ToString()
-        {
-            return "Wrapped by " + _objectDef.Type.FullName;
-        }
-    }
+    
 }

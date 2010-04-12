@@ -11,7 +11,7 @@
     <%= this.InputFor( x => x.ProjectId) %>
     
     
-</form>
+<%= this.EndForm() %>
    
 </div>
 <script type="text/javascript">

@@ -8,7 +8,7 @@
 <%= this.FormFor(new AddTaskModel()) %>
     <%= this.Edit(x => x.Task.Name) %>
     
-</form>
+<%= this.EndForm() %>
    
 </div>
 <script type="text/javascript">
