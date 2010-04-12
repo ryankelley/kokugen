@@ -40,7 +40,7 @@ namespace Kokugen.Core.Domain
         public virtual string LastName { get; set; }
 
         [Required]
-        public virtual string HashedPassword { get; set; }
+        public virtual string Password { get; set; }
 
         public virtual IEnumerable<Role> GetRoles()
         {
@@ -73,9 +73,9 @@ namespace Kokugen.Core.Domain
             return _roles.Where(x => x.Name == roleName).Count() > 0;
         }
 
-        public virtual void HashPassword(IPasswordHelperService service)
+        public virtual void SetPassword(IPasswordHelperService service)
         {
-            this.HashedPassword = service.CreatePasswordHash(_password);
+            this.Password = service.CreatePasswordHash(_password);
         }
 
      
