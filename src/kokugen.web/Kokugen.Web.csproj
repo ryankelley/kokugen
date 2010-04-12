@@ -186,6 +186,7 @@
     <Compile Include="Actions\Users\Roles\ListAction.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Behaviors\Check_Permissions_On_Action.cs" />
     <Compile Include="Behaviors\TransactionalContainerBehavior.cs" />
     <Compile Include="Conventions\Builders\AfterEachOfPartialBuilder.cs" />
     <Compile Include="Conventions\Builders\BeforeEachOfPartialBuilder.cs" />
@@ -213,6 +214,7 @@
     <Compile Include="KokugenFubuStructureMapApplication.cs" />
     <Compile Include="KokugenFubuRegistry.cs" />
     <Compile Include="KokugenStructureMapBootstrapper.cs" />
+    <Compile Include="KokugenWebRegistry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SecurityConfiguration.cs" />
     <Compile Include="Shared\Project.Master.cs">
