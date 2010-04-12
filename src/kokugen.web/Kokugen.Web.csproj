@@ -190,7 +190,6 @@
     <Compile Include="Actions\Users\Roles\ListAction.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AuthorizationBehavior.cs" />
     <Compile Include="Behaviors\MustBeAuthorizedBehavior.cs" />
     <Compile Include="Behaviors\TransactionalContainerBehavior.cs" />
     <Compile Include="Conventions\Builders\AfterEachOfPartialBuilder.cs" />
