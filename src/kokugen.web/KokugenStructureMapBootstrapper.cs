@@ -15,7 +15,6 @@ using Kokugen.Web.Actions.DTO;
 using Kokugen.Web.Behaviors;
 using Kokugen.Web.Conventions;
 using StructureMap;
-using StructureMap.Configuration.DSL;
 
 namespace Kokugen.Web
 {
@@ -50,9 +49,11 @@ namespace Kokugen.Web
                                            };
             fubuBootstrapper.Bootstrap(_routes);
 
-            HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
-
             ObjectFactory.Container.StartStartables();
+            HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
+            
+            // Configure permissions/security
+            new KokugenSecurityRegistry();
             ConfigureAutoMapper();
         }
 
@@ -69,21 +70,6 @@ namespace Kokugen.Web
 
 
             Mapper.AssertConfigurationIsValid();
-        }
-    }
-
-    public class KokugenWebRegistry : Registry
-    {
-        public KokugenWebRegistry()
-        {
-            Scan(x =>
-                     {
-                         x.TheCallingAssembly();
-                         x.WithDefaultConventions();
-
-                         x.AddAllTypesOf<IStartable>();
-                     }
-                );
         }
     }
 }
