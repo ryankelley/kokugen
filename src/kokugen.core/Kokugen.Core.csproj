@@ -106,6 +106,7 @@
     <Compile Include="Domain\BoardColumn.cs" />
     <Compile Include="Domain\Card.cs" />
     <Compile Include="Domain\Company.cs" />
+    <Compile Include="Domain\Role.cs" />
     <Compile Include="Domain\TaskCategory.cs" />
     <Compile Include="Domain\Entity.cs" />
     <Compile Include="Domain\Enumeration.cs" />
@@ -113,6 +114,7 @@
     <Compile Include="Domain\Project.cs" />
     <Compile Include="Domain\SiteConfiguration.cs" />
     <Compile Include="Domain\TimeRecord.cs" />
+    <Compile Include="Domain\User.cs" />
     <Compile Include="Membership\Abstractions\ASP_NET\AspNetMembershipProviderWrapper.cs" />
     <Compile Include="Membership\Abstractions\ASP_NET\AspNetRoleProviderWrapper.cs" />
     <Compile Include="Membership\Abstractions\ASP_NET\EnumerableToEnumerableTConverter.cs" />

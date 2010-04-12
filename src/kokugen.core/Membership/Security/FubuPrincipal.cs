@@ -9,7 +9,6 @@ namespace Kokugen.Core.Membership.Security
 {
     public class FubuPrincipal : IPrincipal
     {
-        private readonly MembershipUser _user;
         private readonly IRolesService _rolesService;
         private readonly IIdentity _identity;
 

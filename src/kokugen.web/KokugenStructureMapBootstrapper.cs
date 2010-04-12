@@ -49,13 +49,11 @@ namespace Kokugen.Web
                                            };
             fubuBootstrapper.Bootstrap(_routes);
 
-            HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
-
             ObjectFactory.Container.StartStartables();
-
+            HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
+            
             // Configure permissions/security
             new KokugenSecurityRegistry();
-
             ConfigureAutoMapper();
         }
 

@@ -31,29 +31,29 @@ namespace Kokugen.Core.Membership.Abstractions.ASP_NET
 
         public IEnumerable<string> FindUserNamesByRole(IRole roleName)
         {
-            return _roleProvider.GetUsersInRole(roleName.Role);
+            return _roleProvider.GetUsersInRole(roleName.Name);
         }
 
         public void CreateIfMissing(IRole roleName)
         {
-            if(!_roleProvider.RoleExists(roleName.Role))
-                _roleProvider.CreateRole(roleName.Role);
+            if (!_roleProvider.RoleExists(roleName.Name))
+                _roleProvider.CreateRole(roleName.Name);
         }
 
         public void AddToRole(IUser user, IRole roleName)
         {
-            _roleProvider.AddUsersToRoles(new[] { user.UserName }, new[] { roleName.Role });
+            _roleProvider.AddUsersToRoles(new[] { user.UserName }, new[] { roleName.Name });
         }
 
 
         public void RemoveFromRole(IUser user, IRole roleName)
         {
-            _roleProvider.RemoveUsersFromRoles(new[] { user.UserName }, new[] { roleName.Role });
+            _roleProvider.RemoveUsersFromRoles(new[] { user.UserName }, new[] { roleName.Name });
         }
 
         public bool IsInRole(IUser user, IRole roleName)
         {
-            return _roleProvider.IsUserInRole(user.UserName, roleName.Role);
+            return _roleProvider.IsUserInRole(user.UserName, roleName.Name);
         }
 
         public bool IsInRole(string name, string role)
@@ -75,12 +75,12 @@ namespace Kokugen.Core.Membership.Abstractions.ASP_NET
 
         public void Create(IRole roleName)
         {
-            _roleProvider.CreateRole(roleName.Role);
+            _roleProvider.CreateRole(roleName.Name);
         }
 
         public void Delete(IRole roleName)
         {
-            _roleProvider.DeleteRole(roleName.Role, false);
+            _roleProvider.DeleteRole(roleName.Name, false);
         }
 
         #endregion
