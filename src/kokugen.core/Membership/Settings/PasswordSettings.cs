@@ -8,13 +8,21 @@ namespace Kokugen.Core.Membership.Settings
         {
             MinRequiredPasswordLength = 8;
             MinRequiredNonAlphanumericCharacters = 1;
-            PasswordFormat = MembershipPasswordFormat.Hashed; 
+            PasswordFormat = PasswordFormat.Hashed;
+            PasswordStrengthRegularExpression = "";
         }
 
         public int MinRequiredPasswordLength { get; private set; }
         public int MinRequiredNonAlphanumericCharacters { get; private set; }
         public string PasswordStrengthRegularExpression { get; private set; }
-        public MembershipPasswordFormat PasswordFormat { get; private set; }
+        public PasswordFormat PasswordFormat { get; private set; }
 
+    }
+
+    public enum PasswordFormat
+    {
+        Hashed,
+        Clear,
+        Encrypted
     }
 }

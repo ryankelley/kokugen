@@ -37,8 +37,13 @@ namespace Kokugen.Core.Services
                 return;
 
             var validation = _validator.Validate(entity);
-            if(validation.IsValid())
-                _roleRepository.Save(entity);
+            if (validation.IsValid())
+            {
+                //ensure role.Name is unique
+                if (_roleRepository.FindBy(x => x.Name, role.Name) == null)
+                    _roleRepository.Save(entity);
+
+            }
         }
 
         private void ValidateAndSave(Domain.User entity)
