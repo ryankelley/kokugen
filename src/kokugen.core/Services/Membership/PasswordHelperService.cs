@@ -1,7 +1,7 @@
 using System;
 using System.Text;
 
-namespace Kokugen.Core.Membership.Abstractions.NHibernate
+namespace Kokugen.Core.Services
 {
     public class PasswordHelperService : IPasswordHelperService
     {

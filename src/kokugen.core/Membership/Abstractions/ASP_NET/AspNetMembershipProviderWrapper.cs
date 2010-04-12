@@ -21,9 +21,9 @@ namespace Kokugen.Core.Membership.Abstractions.ASP_NET
             _settingsBag = settingsBag;
         }
 
-        public MembershipCreateStatus CreateUser(string userName, string password, string email, bool isApproved)
+        public INotification CreateUser(string userName, string password, string email, bool isApproved)
         {
-            return CreateUser(userName, password, email, null, null, isApproved, null);
+            throw new NotImplementedException();
         }
 
         public MembershipCreateStatus CreateUser(string userName, string password, string email,
@@ -66,6 +66,11 @@ namespace Kokugen.Core.Membership.Abstractions.ASP_NET
         {
             var membershipUser = _provider.GetUser(Id, false);
             return new User(membershipUser.UserName, membershipUser.Email, membershipUser.ProviderUserKey);
+        }
+
+        public INotification Create(IUser user)
+        {
+            throw new NotImplementedException();
         }
 
         public IUser GetUserByLogin(string name)

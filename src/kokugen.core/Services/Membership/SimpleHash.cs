@@ -2,7 +2,7 @@ using System;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Kokugen.Core.Membership.Abstractions.NHibernate
+namespace Kokugen.Core.Services
 {
     public static class SimpleHash
     {
