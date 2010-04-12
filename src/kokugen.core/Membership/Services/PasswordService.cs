@@ -4,6 +4,7 @@ using System;
 using System.Security.Cryptography;
 using System.Text;
 using System.Web.Security;
+using Kokugen.Core.Membership.Security;
 
 #endregion
 
@@ -11,15 +12,15 @@ namespace Kokugen.Core.Membership.Services
 {
     public interface IPasswordService
     {
-        void Unlock(MembershipUser user);
-        void ChangePassword(MembershipUser user, string oldPassword, string newPassword);
-        void ChangePasswordQuestionAndAnswer(MembershipUser user, string password, string question, string answer);
-       
-        string GetPassword(MembershipUser user, string passwordAnswer);
-        string GetPassword(MembershipUser user);
+        void Unlock(IUser user);
+        void ChangePassword(IUser user, string oldPassword, string newPassword);
+        void ChangePasswordQuestionAndAnswer(IUser user, string password, string question, string answer);
 
-        string ResetPassword(MembershipUser user, string passwordAnswer);
-        string ResetPassword(MembershipUser user);
+        string GetPassword(IUser user, string passwordAnswer);
+        string GetPassword(IUser user);
+
+        string ResetPassword(IUser user, string passwordAnswer);
+        string ResetPassword(IUser user);
     }
 
    

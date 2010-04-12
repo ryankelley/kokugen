@@ -7,19 +7,25 @@ using Kokugen.Core.Validation;
 
 namespace Kokugen.Core.Membership.Services
 {
+    public interface IRolesService<T> : IRolesService where T : IRole
+    {
+    }
+
     public interface IRolesService
     {
-        void Create(string roleName);
-        void CreateIfMissing(string roleName);
-        void AddToRole(MembershipUser user, string roleName);
-        void RemoveFromRole(MembershipUser user, string roleName);
-        void Delete(string roleName);
+        void Create(IRole roleName);
+        void CreateIfMissing(IRole roleName);
+        void AddToRole(IUser userName, IRole roleName);
+        void RemoveFromRole(IUser userName, IRole roleName);
+        void Delete(IRole roleName);
 
         IEnumerable<string> FindAll();
-        IEnumerable<string> FindByUser(MembershipUser user);
-        IEnumerable<string> FindByUserName(string userName);
-        IEnumerable<string> FindUserNamesByRole(string roleName);
-        bool IsInRole(MembershipUser user, string roleName);
+        IEnumerable<string> FindByUserName(IUser userName);
+        IEnumerable<string> FindUserNamesByRole(IRole roleName);
+        bool IsInRole(IUser userName, IRole roleName);
+        bool IsInRole(string name, string role);
+        void CreateIfMissing(string administrator);
+        void AddUserToRole(string name, string reader);
     }
 
 }

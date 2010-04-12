@@ -1,5 +1,6 @@
 using System;
 using System.Web;
+using Kokugen.Core.Services;
 using StructureMap;
 
 namespace Kokugen.Core.Membership.Services

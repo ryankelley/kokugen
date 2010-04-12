@@ -5,7 +5,7 @@ using FluentNHibernate;
 using FubuMVC.Core.Behaviors;
 using FubuMVC.Core.Configuration;
 using FubuMVC.Core.Security;
-using Kokugen.Core.Membership.Abstractions;
+using Kokugen.Core.Membership.Abstractions.ASP_NET;
 using Kokugen.Core.Membership.Security;
 using Kokugen.Core.Membership.Services;
 using Kokugen.Core.Membership.Settings;
