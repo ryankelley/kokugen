@@ -50,6 +50,8 @@ namespace Kokugen.Web
                                            };
             fubuBootstrapper.Bootstrap(_routes);
 
+            HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
+
             ObjectFactory.Container.StartStartables();
             ConfigureAutoMapper();
         }
