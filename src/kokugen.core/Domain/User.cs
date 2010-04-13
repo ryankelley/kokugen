@@ -31,6 +31,8 @@ namespace Kokugen.Core.Domain
 
         public virtual bool IsLocked { get; private set; }
 
+        public virtual bool IsActivated { get; set; }
+
         public virtual object ProviderUserKey
         {
             get { return Id; }
