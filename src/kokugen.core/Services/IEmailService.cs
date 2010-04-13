@@ -20,6 +20,7 @@ namespace Kokugen.Core.Services
 
         public EmailService(SmtpClient smtpClient, string mailUser, string mailPassword, bool authRequired)
         {
+            
             _smtpClient = smtpClient;
             if (authRequired)
                 _smtpClient.Credentials = new NetworkCredential(mailUser, mailPassword);
@@ -34,5 +35,19 @@ namespace Kokugen.Core.Services
         }
 
         #endregion
+    }
+
+    public class EmailSettings
+    {
+        public EmailSettings()
+        {
+            Port = 25;
+        }
+
+        public string Host { get; set; }
+        public int Port { get; set; }
+        public bool AuthorizationRequired { get; set; }
+        public string User { get; set; }
+        public string Password { get; set; }
     }
 }
