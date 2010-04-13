@@ -1,3 +1,4 @@
+using FubuMVC.Core.Continuations;
 using Kokugen.Core.Services;
 
 namespace Kokugen.Web.Actions.Account.Login
@@ -11,13 +12,16 @@ namespace Kokugen.Web.Actions.Account.Login
             _loginService = loginService;
         }
 
-        public AjaxResponse Command(LoginModel inModel)
+        public FubuContinuation Command(LoginModel inModel)
         {
             var user = _loginService.LoginUser(inModel.Login, inModel.Password, inModel.RememberMe);
 
+            //redirect here instead
             return user != null
-                       ? new AjaxResponse() { Success = true, Item = user}
-                       : new AjaxResponse() { Success = false };
+                       ? FubuContinuation.RedirectTo(inModel.ReturnUrl)
+                       : FubuContinuation.RedirectTo(new LoginFormModel()
+                                                         {Message = "User name or password was incorrect.",
+                                                         ReturnUrl = inModel.ReturnUrl});
         }
 
         
