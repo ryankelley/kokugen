@@ -205,6 +205,7 @@
     <Compile Include="Actions\Users\ListAction.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Behaviors\AuthenticationBehaviorPolicy.cs" />
     <Compile Include="Behaviors\BehaviorCall.cs" />
     <Compile Include="Behaviors\MustBeAuthorizedBehavior.cs" />
     <Compile Include="Behaviors\TransactionalContainerBehavior.cs" />

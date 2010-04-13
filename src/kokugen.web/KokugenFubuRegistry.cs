@@ -1,11 +1,7 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using FubuCore;
 using FubuMVC.Core;
-using FubuMVC.Core.Registration;
 using FubuMVC.Core.Registration.DSL;
-using FubuMVC.Core.Registration.Nodes;
 using FubuMVC.Core.Registration.ObjectGraph;
 using Kokugen.Core.Membership;
 using Kokugen.Web.Actions;
@@ -60,7 +56,7 @@ namespace Kokugen.Web
             // Configure Permissions
             SecurityProvider.Configure(new KokugenSecurityRegistry());
 
-            Policies.Add<TestBehaviorPolicy>();
+            Policies.Add<AuthenticationBehaviorPolicy>();
             //Policies.WrapBehaviorChainsWith<MustBeAuthorizedBehavior>();
             //Policies.ConditionallyWrapBehaviorChainsWith<MustBeAuthorizedBehavior>(c => c.OutputType() == typeof (BoardConfigurationModel));
             
@@ -81,21 +77,6 @@ namespace Kokugen.Web
         }
     }
 
-    public class TestBehaviorPolicy : IConfigurationAction
-    {
-        public void Configure(BehaviorGraph graph)
-        {
-            var myBehavs = graph.Behaviors.Where(c => c.FirstCall().Category == BehaviorCategory.Call).ToList();
-            var myActions = graph.Actions().Where(c => c.Category == BehaviorCategory.Call).ToList();
-            myActions.Each(act =>
-                               {
-                                   if (SecurityProvider.HasPermissionForMethod(act.HandlerType, act.Method))
-                                       act.AddBefore(new BehaviorCall(act));
-                               });
-        }
-    }
-
-    
 
     //public class KokugenViewAttachmentStrategy : IViewsForActionFilter
     //{
