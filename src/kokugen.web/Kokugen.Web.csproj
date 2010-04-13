@@ -123,6 +123,7 @@
     <Content Include="Actions\Card\Get.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Web.config">
+      <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>

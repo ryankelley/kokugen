@@ -13,7 +13,7 @@ namespace Kokugen.Web.Actions.Account.Register
     public interface IRegistrationService
     {
         INotification RegisterUser(User user);
-        void ActivateAccount(object id);
+        void ActivateAccount(Guid id);
     }
 
     public class RegistrationService  : IRegistrationService
@@ -42,9 +42,11 @@ namespace Kokugen.Web.Actions.Account.Register
 
         }
 
-        public void ActivateAccount(object id)
+        public void ActivateAccount(Guid id)
         {
-                
+            var user = _userService.Retrieve(id);
+            user.IsActivated = true;
+            _userService.Update(user);
         }
 
         private void SendConfirmationEmail(User user)
