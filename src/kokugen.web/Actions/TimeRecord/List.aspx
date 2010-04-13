@@ -1,6 +1,5 @@
 <%@ Page Language="C#" AutoEventWireup="true" Inherits="Kokugen.Web.Actions.TimeRecord.List" MasterPageFile="~/Shared/Site.Master"%>
 <%@ Import Namespace="Kokugen.Web.Actions.TimeRecord"%>
-<%@ Import Namespace="FubuMVC.Core.Urls"%>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="TimeRecordListHead" ContentPlaceHolderID="mainContent" runat="server">
@@ -131,8 +130,8 @@ th
             return false;
         }
 
-        function appendTaskToList(timerecord) {
-            var output = "<span class=\"timerecord-name\">" + timerecord.Description + "</span>";
+        function appendTimeRecordToList(timerecord) {
+            var output = "<td class=\"description\">" + timerecord.Description + "</td>";
 
             $(".timerecord-list").append(output);
         }    

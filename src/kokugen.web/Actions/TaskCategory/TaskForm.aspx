@@ -31,10 +31,12 @@
         if (isValid) {
             $("#mainForm").ajaxSubmit(options);
         }
+        return false;
     }
 
-    $(document).ready(function() {
-    $("#mainForm").validate({ errorClass: "error" });
-        $("#task-form-container").dialog({ title: "Add Task", autoOpen: false, buttons: { "Save":  validateAndSave } });
+    $(document).ready(function () {
+        $("#mainForm").validate({ errorClass: "error" });
+        $("#task-form-container").dialog({ title: "Add Task", autoOpen: false, buttons: { "Save": validateAndSave} });
+        $("#task-form-container").submit(validateAndSave);
     });
 </script>

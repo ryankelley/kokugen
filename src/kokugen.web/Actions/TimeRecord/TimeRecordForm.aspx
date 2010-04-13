@@ -16,9 +16,10 @@
 <script type="text/javascript">
 
     function closeDialog(response) {
+    $("#timerecord-form-container").dialog('close');
         appendTimeRecordToList(response.Item);
 
-        $("#timerecord-form-container").dialog('close');
+        
         // would want to update list here too
     }
     function validateAndSave() {
@@ -26,7 +27,8 @@
             success: closeDialog,  // post-submit callback 
             type: 'post',        // 'get' or 'post', override for form's 'method' attribute 
             dataType: 'json',        // 'xml', 'script', or 'json' (expected server response type) 
-            clearForm: true        // clear all form fields after successful submit 
+            clearForm: true
+             
         };
         var isValid = $("#time-record-form").valid();
 
@@ -35,8 +37,9 @@
         }
     }
 
-    $(document).ready(function() {
-    $("#time-record-form").validate({ errorClass: "error" });
-        $("#timerecord-form-container").dialog({ title: "Add Time Record", autoOpen: false, buttons: { "Save":  validateAndSave} });
+    $(document).ready(function () {
+        $("#time-record-form").validate({ errorClass: "error" });
+        $("#timerecord-form-container").dialog({ title: "Add Time Record", autoOpen: false, buttons: { "Save": validateAndSave} });
+        $("#timerecord-form-container").submit(validateAndSave);
     });
 </script>
