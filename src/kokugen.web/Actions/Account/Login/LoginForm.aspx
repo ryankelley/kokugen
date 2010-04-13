@@ -1,6 +1,6 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" Inherits="Kokugen.Web.Actions.Login.LoginForm"  
+﻿<%@ Page Language="C#" AutoEventWireup="true" Inherits="Kokugen.Web.Actions.Account.Login.LoginForm"  
 MasterPageFile="~/Shared/Site.Master" %>
-<%@ Import Namespace="Kokugen.Web.Actions.Login"%>
+<%@ Import Namespace="Kokugen.Web.Actions.Account.Login" %>
 
  
 <asp:Content ContentPlaceHolderID="mainContent" runat="server">

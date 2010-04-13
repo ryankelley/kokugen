@@ -1,7 +1,6 @@
-using System;
-using Kokugen.Core.Services;
+using FubuMVC.Core.View;
 
-namespace Kokugen.Web.Actions.Login
+namespace Kokugen.Web.Actions.Account.Login
 {
     public class LoginFormAction
     {
@@ -23,5 +22,9 @@ namespace Kokugen.Web.Actions.Login
         public virtual string Login { get; set; }
         public virtual bool RememberMe { get; set; }
         
+    }
+
+    public class LoginForm : FubuPage<LoginModel>
+    {
     }
 }

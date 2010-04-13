@@ -1,7 +1,6 @@
-using Kokugen.Core.Membership.Services;
 using Kokugen.Core.Services;
 
-namespace Kokugen.Web.Actions.Login
+namespace Kokugen.Web.Actions.Account.Login
 {
     public class LoginAction
     {

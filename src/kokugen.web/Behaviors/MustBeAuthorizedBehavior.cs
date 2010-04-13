@@ -5,7 +5,7 @@ using FubuMVC.Core.Runtime;
 using FubuMVC.Core.Security;
 using FubuMVC.Core.Urls;
 using Kokugen.Core.Membership;
-using Kokugen.Web.Actions.Login;
+using Kokugen.Web.Actions.Account.Login;
 
 namespace Kokugen.Web.Behaviors
 {

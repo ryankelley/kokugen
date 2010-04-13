@@ -170,12 +170,8 @@
     </Compile>
     <Compile Include="Actions\Home\HomeViewModel.cs" />
     <Compile Include="Actions\Home\IndexAction.cs" />
-    <Compile Include="Actions\Login\LoginAction.cs" />
-    <Compile Include="Actions\Login\LoginForm.aspx.cs">
-      <DependentUpon>LoginForm.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Actions\Login\LoginFormAction.cs" />
+    <Compile Include="Actions\Account\Login\LoginAction.cs" />
+    <Compile Include="Actions\Account\Login\LoginFormAction.cs" />
     <Compile Include="Actions\ProjectBaseViewModel.cs" />
     <Compile Include="Actions\Project\AddAction.cs" />
     <Compile Include="Actions\Project\AddProjectModel.cs" />
@@ -274,7 +270,7 @@
     <Content Include="Actions\Company\CompanyForm.aspx" />
     <Content Include="Actions\Company\List.aspx" />
     <Content Include="Actions\Home\Home.aspx" />
-    <Content Include="Actions\Login\LoginForm.aspx" />
+    <Content Include="Actions\Account\Login\LoginForm.aspx" />
     <Content Include="Actions\Project\GetProject.aspx" />
     <Content Include="Actions\Project\List.aspx" />
     <Content Include="Actions\Project\ProjectForm.aspx" />
