@@ -13,3 +13,4 @@ _ReSharper.*
 *.cache
 ~$*
 *.orig
+*.5.0.ReSharper

@@ -51,6 +51,7 @@ namespace Kokugen.Web
             fubuBootstrapper.Bootstrap(_routes);
 
             ObjectFactory.Container.StartStartables();
+
             HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
             
             // Configure Permissions

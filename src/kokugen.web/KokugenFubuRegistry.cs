@@ -104,6 +104,8 @@ namespace Kokugen.Web
         {
             get { return BehaviorCategory.Wrapper; }
         }
+
+
     }
 
     //public class KokugenViewAttachmentStrategy : IViewsForActionFilter

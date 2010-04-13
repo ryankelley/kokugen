@@ -43,13 +43,14 @@ namespace Kokugen.Core.Services
         {
             var validationResults = _validator.Validate(card);
             if (validationResults.IsValid())
-                _cardRepository.Save(card);
+                _cardRepository.SaveAndFlush(card);
             return validationResults;
         }
 
         public Card GetCard(Guid id)
         {
-            return _cardRepository.Get(id);
+            return _cardRepository.Query().Where(x => x.Id == id).FirstOrDefault();
+            //return _cardRepository.Get(id);
         }
 
         public bool ReOrderCards(List<CardViewDTO> cards)

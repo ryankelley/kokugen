@@ -120,6 +120,7 @@
     <Reference Include="System.Web.Mobile" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Actions\Card\Get.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Web.config">
     </Content>
@@ -143,6 +144,7 @@
     <Compile Include="Actions\Card\AddAction.cs" />
     <Compile Include="Actions\Card\CardMovedAction.cs" />
     <Compile Include="Actions\Card\CompactCardFormAction.cs" />
+    <Compile Include="Actions\Card\GetAction.cs" />
     <Compile Include="Actions\Card\View_Page_Type_Declarations.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -242,7 +244,6 @@
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Startables\SetupSuperUser.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\kokugen.core\Kokugen.Core.csproj">
@@ -379,6 +380,9 @@
     <Content Include="Default.aspx" />
     <Content Include="Content\images\stopsign.png" />
     <Content Include="Shared\Project.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Startables\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
