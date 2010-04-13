@@ -11,7 +11,7 @@ namespace Kokugen.Core.Services
 {
     public interface IEmailService
     {
-        void SendPasswordResetEmail(MembershipUser user);
+        void SendEmail(string to, string from, string subject, string body);
     }
 
     public class EmailService : IEmailService
@@ -27,15 +27,9 @@ namespace Kokugen.Core.Services
 
         #region IEmailService Members
 
-        public void SendPasswordResetEmail(MembershipUser user)
+        public void SendEmail(string to, string from, string subject, string body)
         {
-            const string message = "";
-            SendEmail(user.Email,"test@test.com","Password Reset", message);
-        }
-
-        private void SendEmail(string to, string from, string subject, string body)
-        {
-            var msg = new MailMessage(from, to, subject, body);
+            var msg = new MailMessage(from, to, subject, body){IsBodyHtml = true};
             _smtpClient.Send(msg);
         }
 
