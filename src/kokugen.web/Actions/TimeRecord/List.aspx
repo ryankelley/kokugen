@@ -27,41 +27,7 @@ th
         color:black;
     }
 </style>
-<script type="text/javascript">
 
-    $(document).ready(function() {
-    $(".stop-button").click(function() { 
-        
-        makeStopCall($(this).attr("data"));
-        
-        });
-    });
-
-    function showExtraDialog(response) {
-
-        if (response.Success) {
-            $("#time-record-billable").val(response.Item.Billable);
-            $("#time-record-duration").html(response.Item.Duration);
-            $("#time-record-id").val(response.Item.Id);
-            
-            $("#timerecord-stop-form-container").dialog('open');
-        }
-    }
-    
-    function makeStopCall(id){
-        
-        $.ajax({
-            url: "/timerecord/stop",
-            data: { Id: id },
-            dataType: "json",
-            type: "POST",
-            success: showExtraDialog
-        });
-    
-    
-    }
-
-</script>
 <body>
 <li>
 </li>

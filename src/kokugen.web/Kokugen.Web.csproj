@@ -122,6 +122,7 @@
   <ItemGroup>
     <Content Include="Actions\Account\LoginStatus\LoginStatus.aspx" />
     <Content Include="Actions\Card\Get.aspx" />
+    <Content Include="Content\images\delete.png" />
     <Content Include="Global.asax" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
