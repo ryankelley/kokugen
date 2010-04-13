@@ -64,8 +64,8 @@ namespace Kokugen.Core.Services
         {
             var users = _userRepository.Query()
                 .Take(pageSize)
-                .Skip((pageIndex - 1)*pageSize);
-            return new StaticPagedList<User>( users, pageIndex, pageSize, TotalUsers);
+                .Skip(pageIndex*pageSize);
+            return new StaticPagedList<User>(users, pageIndex, pageSize, TotalUsers);
         }
 
         public int TotalUsers

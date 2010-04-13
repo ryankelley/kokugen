@@ -198,9 +198,6 @@
     <Compile Include="Actions\Users\ListAction.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Actions\Users\Roles\ListAction.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Behaviors\MustBeAuthorizedBehavior.cs" />
     <Compile Include="Behaviors\TransactionalContainerBehavior.cs" />
     <Compile Include="Conventions\Builders\AfterEachOfPartialBuilder.cs" />
@@ -367,7 +364,6 @@
   <ItemGroup>
     <Content Include="Content\images\k-logo.png" />
     <Content Include="Actions\Users\Details\Details.aspx" />
-    <Content Include="Actions\Users\Roles\List.aspx" />
     <Content Include="Content\css\ellipsis-xbl.xml" />
     <Content Include="Content\images\archive-title.png" />
     <Content Include="Content\images\backlog-title.png" />
