@@ -35,11 +35,7 @@ namespace Kokugen.Core
         {
             var holder = _valueObjectCache.Find(x => x.GetKey() == typeof (T).Name);
 
-            if(!_valueObjectCache.GetAllKeys().Contains(valueObject.Key))
-            {
-                holder.AddValue(valueObject);
-            }
-            
+            holder.AddValue(valueObject);
         }
 
         public static void AddValueObjects<T>(IEnumerable<ValueObject> objects)
@@ -90,8 +86,17 @@ namespace Kokugen.Core
 
         public void AddValue(ValueObject valueObject)
         {
+            if(_values.Contains(valueObject))
+                RemoveValue(valueObject);
+            
             _values.Add(valueObject);
         }
+
+        public void RemoveValue( ValueObject valueObject)
+        {
+            _values.Remove(valueObject);
+        }
+
     }
 
     public class ValueObjectInitializer : IValueObjectInitializer
