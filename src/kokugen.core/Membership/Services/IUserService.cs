@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Security;
+using Kokugen.Core.Domain;
 using Kokugen.Core.Membership.Security;
 using Kokugen.Core.Persistence.Repositories;
 using Kokugen.Core.Validation;
@@ -14,18 +15,20 @@ using PagedList;
 namespace Kokugen.Core.Membership.Services
 {
 
-    public interface IUserService
+    public interface IUserService<USER> where USER : IUser
     {
-        void Update(IUser user);
-        void Delete(IUser user);
-        IUser Retrieve(object id);
-        INotification Create(IUser user);
+        void Update(USER user);
+        void Delete(USER user);
+        USER Retrieve(object id);
+        INotification Create(USER user);
 
-        IUser GetUserByLogin(string name);
-        IUser GetUserByEmail(string email);
-        IPagedList<IUser> FindAll(int pageIndex, int pageSize);
+        USER GetUserByLogin(string name);
+        USER GetUserByEmail(string email);
+        IPagedList<USER> FindAll(int pageIndex, int pageSize);
 
         int TotalUsers { get; }
 
     }
+
+    public interface IUserService : IUserService<User>{}
 }
