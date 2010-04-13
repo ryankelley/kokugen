@@ -24,7 +24,7 @@ namespace Kokugen.Core.Services
             _settings = settings;
         }
 
-        public void Unlock(IUser user)
+        public void Unlock(User user)
         {
             var entity = user as User;
 
@@ -42,7 +42,7 @@ namespace Kokugen.Core.Services
                 _userRepository.Save(entity);
         }
 
-        public void ChangePassword(IUser user, string oldPassword, string newPassword)
+        public void ChangePassword(User user, string oldPassword, string newPassword)
         {
             if(_settings.PasswordResetRetrievalSettings.RequiresQuestionAndAnswer)
                 throw new InvalidOperationException("Password requires question and answer to change");
@@ -72,17 +72,17 @@ namespace Kokugen.Core.Services
             
         }
 
-        public void ChangePasswordQuestionAndAnswer(IUser user, string password, string question, string answer)
+        public void ChangePasswordQuestionAndAnswer(User user, string password, string question, string answer)
         {
             throw new NotImplementedException();
         }
 
-        public string GetPassword(IUser user, string passwordAnswer)
+        public string GetPassword(User user, string passwordAnswer)
         {
             throw new NotImplementedException();
         }
 
-        public string GetPassword(IUser user)
+        public string GetPassword(User user)
         {
             if(_settings.PasswordResetRetrievalSettings.RequiresQuestionAndAnswer)
                 throw new InvalidOperationException("Password requires question and answer to retrieve");
@@ -105,12 +105,12 @@ namespace Kokugen.Core.Services
             }
         }
 
-        public string ResetPassword(IUser user, string passwordAnswer)
+        public string ResetPassword(User user, string passwordAnswer)
         {
             throw new NotImplementedException();
         }
 
-        public string ResetPassword(IUser user)
+        public string ResetPassword(User user)
         {
             var entity = user as User;
             if (!_settings.PasswordResetRetrievalSettings.EnablePasswordReset)
