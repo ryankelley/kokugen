@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Security;
+using Kokugen.Core.Domain;
 using Kokugen.Core.Membership.Security;
 using Kokugen.Core.Membership.Services;
 using Kokugen.Core.Membership.Settings;
@@ -29,29 +30,29 @@ namespace Kokugen.Core.Services
             _settings = settings;
         }
 
-        public void Update(IUser user)
+        public void Update(User user)
         {
             var entity = user as Domain.User;
             if (entity != null) ValidateAndSave(entity);
         }
 
-        public void Delete(IUser user)
+        public void Delete(User user)
         {
             var entity = user as Domain.User;
             if (entity != null) _userRepository.Delete(entity);
         }
 
-        public IUser Retrieve(object id)
+        public User Retrieve(object id)
         {
             return _userRepository.Get((Guid) id);
         }
 
-        public IUser GetUserByLogin(string name)
+        public User GetUserByLogin(string name)
         {
             return _userRepository.FindBy(x => x.UserName, name);
         }
 
-        public IUser GetUserByEmail(string email)
+        public User GetUserByEmail(string email)
         {
             if(!_settings.Registration.RequiresUniqueEmail)
                 throw new InvalidOperationException("RegistrationSettings.RequireUniqueEmail must be true to retrieve users by email");
@@ -59,13 +60,12 @@ namespace Kokugen.Core.Services
             return _userRepository.FindBy(x => x.Email, email);
         }
 
-        public IPagedList<IUser> FindAll(int pageIndex, int pageSize)
+        public IPagedList<User> FindAll(int pageIndex, int pageSize)
         {
             var users = _userRepository.Query()
                 .Take(pageSize)
                 .Skip((pageIndex - 1)*pageSize);
-            return new StaticPagedList<IUser>( users.Where(x => true)
-                .Select(u => u as IUser), pageIndex, pageSize, TotalUsers);
+            return new StaticPagedList<User>( users, pageIndex, pageSize, TotalUsers);
         }
 
         public int TotalUsers
@@ -74,7 +74,7 @@ namespace Kokugen.Core.Services
         }
 
 
-        public INotification Create(IUser user)
+        public INotification Create(User user)
         {
             var notification = new Notification();
 
