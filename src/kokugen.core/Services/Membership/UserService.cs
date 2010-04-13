@@ -33,7 +33,16 @@ namespace Kokugen.Core.Services
         public void Update(User user)
         {
             var entity = user as Domain.User;
-            if (entity != null) ValidateAndSave(entity);
+            if (entity != null) ValidateAndUpdate(entity);
+        }
+
+        private void ValidateAndUpdate(User entity)
+        {
+            var notification = _validator.Validate(entity);
+            if (notification.IsValid())
+            {
+                _userRepository.Save(entity);
+            }
         }
 
         public void Delete(User user)
@@ -114,6 +123,13 @@ namespace Kokugen.Core.Services
                 if(_userRepository.FindBy(x => x.UserName, user.UserName) != null)
                 {
                     notification.RegisterMessage("UserName", "User name already exists!", Severity.Error);
+                    return notification;
+                }
+
+                //make sure email is unique
+                if (_userRepository.FindBy(x => x.Email, user.Email) != null)
+                {
+                    notification.RegisterMessage("Email", "Email already exists!", Severity.Error);
                     return notification;
                 }
                 _userRepository.Save(user);
