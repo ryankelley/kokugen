@@ -27,7 +27,7 @@ namespace Kokugen.Core.Membership.Services
         IPagedList<USER> FindAll(int pageIndex, int pageSize);
 
         int TotalUsers { get; }
-
+        
     }
 
     public interface IUserService : IUserService<User>{}
