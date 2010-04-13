@@ -86,8 +86,17 @@ namespace Kokugen.Core
 
         public void AddValue(ValueObject valueObject)
         {
+            if(_values.Contains(valueObject))
+                RemoveValue(valueObject);
+            
             _values.Add(valueObject);
         }
+
+        public void RemoveValue( ValueObject valueObject)
+        {
+            _values.Remove(valueObject);
+        }
+
     }
 
     public class ValueObjectInitializer : IValueObjectInitializer

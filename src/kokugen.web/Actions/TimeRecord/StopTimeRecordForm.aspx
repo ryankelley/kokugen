@@ -13,7 +13,7 @@
     <%= this.InputFor(x => x.TimeRecord.Id).Id("time-record-id") %>
     
     
-</form>
+<%= this.EndForm() %>
    
 </div>
 <script type="text/javascript">
@@ -80,7 +80,7 @@ return output;
         $("#timerecord-stop-form-container").dialog('close');
         // would want to update list here too
     }
-    function validateAndSaveStop() {
+    function validateAndStopSave() {
             var billable = $("#time-record-billable").val();
             $.ajax({
             url: "/timerecord/stop",
@@ -89,9 +89,12 @@ return output;
             type:'POST',
             dataType: 'json',
             });
+            
+            return false;
     }
 
     $(document).ready(function() {
-    $("#timerecord-stop-form-container").dialog({ title: "Add Time Record", autoOpen: false, buttons: { "Save": validateAndSaveStop} });
+    $("#timerecord-stop-form-container").dialog({ title: "Stop Time Record", autoOpen: false, buttons: { "Save": validateAndStopSave} });
+    $("#timerecord-stop-form-container form").submit(validateAndStopSave);
     });
 </script>

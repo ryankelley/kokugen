@@ -135,7 +135,7 @@ color:black;
     
     <%= this.LinkTo(new ViewBoardInputModel{ Id = Model.Project.Id}).NoClosingTag().AddClass("icon") %><img src="/content/images/board_big.png" alt="view board" /></a>
     <% this.Partial(new StopTimeRecordFormInputModel()); %>
-</body>
+
     
 <% this.Partial(new ProjectTimeRecordFormModel(){ProjectId = Model.Project.Id}); %>
 
@@ -146,8 +146,8 @@ color:black;
         return false;
     }
 
-    function appendTaskToList(timerecord) {
-        var output = "<span class=\"timerecord-name\">" + timerecord.Description + "</span>";
+    function appendTimeRecordToList(timerecord) {
+        var output = "<tr><td class=\"description\">" + timerecord.Description + "</td></tr>";
 
         $(".timerecord-list").append(output);
     }    
