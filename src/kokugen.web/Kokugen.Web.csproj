@@ -120,6 +120,7 @@
     <Reference Include="System.Web.Mobile" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\images\delete.png" />
     <Content Include="Global.asax" />
     <Content Include="Web.config">
     </Content>

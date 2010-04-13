@@ -1,6 +1,5 @@
 <%@ Control Language="C#" AutoEventWireup="true" Inherits="Kokugen.Web.Actions.TimeRecord.TimeRecord_Control"  %>
 <%@ Import Namespace="HtmlTags"%>
-<%@ Import Namespace="Kokugen.Web.Actions.TimeRecord"%>
 
 
 
