@@ -87,22 +87,16 @@ namespace Kokugen.Core.Services
         {
             var notification = new Notification();
 
-            var entity = user as Domain.User;
-            if(entity == null)
-            {
-                notification.RegisterMessage("User",
-                                             string.Format("User cannot be cast to {0}", typeof (Domain.User).FullName),
-                                             Severity.Error);
-                return notification;
-            }
 
+
+            
             switch (_settings.Password.PasswordFormat)
             {
                 case PasswordFormat.Hashed:
-                    entity.SetPassword(_passwordHelperService);
+                    user.SetPassword(_passwordHelperService);
                     break;
                 case PasswordFormat.Clear:
-                    entity.SetPassword(new ClearPasswordHelper());
+                    user.SetPassword(new ClearPasswordHelper());
                     break;
                 case PasswordFormat.Encrypted:
                     throw new NotImplementedException();
@@ -111,7 +105,7 @@ namespace Kokugen.Core.Services
                     throw new ArgumentOutOfRangeException();
             }
 
-            return ValidateAndSave(entity);
+            return ValidateAndSave(user);
         }
 
         private INotification ValidateAndSave(Domain.User user)
