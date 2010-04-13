@@ -171,7 +171,9 @@
     <Compile Include="Actions\Home\HomeViewModel.cs" />
     <Compile Include="Actions\Home\IndexAction.cs" />
     <Compile Include="Actions\Account\Login\LoginAction.cs" />
-    <Compile Include="Actions\Account\Login\LoginFormAction.cs" />
+    <Compile Include="Actions\Account\Login\LoginFormAction.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Actions\ProjectBaseViewModel.cs" />
     <Compile Include="Actions\Project\AddAction.cs" />
     <Compile Include="Actions\Project\AddProjectModel.cs" />

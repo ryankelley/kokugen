@@ -6,7 +6,7 @@
 <%@ Import Namespace="Kokugen.Web.Actions.Home"%>
 <%@ Import Namespace="Kokugen.Web"%>
 <%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="FubuMVC.Core.View.FubuMasterPage" %>
-<%@ Import Namespace="Kokugen.Web.Actions.Login" %>
+
 <%@ Import Namespace="Kokugen.Web.Actions.Account.Register" %>
 <%@ Import Namespace="Kokugen.Web.Actions.Account.LoginStatus" %>
 
