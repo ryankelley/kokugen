@@ -1,7 +1,6 @@
 using FubuMVC.Core.View;
 using Kokugen.Core.Domain;
 using Kokugen.Core.Membership.Services;
-using Kokugen.Core.Services;
 using Kokugen.Core.Validation;
 
 namespace Kokugen.Web.Actions.Account.Register
