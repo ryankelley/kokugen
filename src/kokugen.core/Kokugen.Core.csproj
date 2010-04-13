@@ -132,6 +132,7 @@
     <Compile Include="Domain\BoardColumn.cs" />
     <Compile Include="Domain\Card.cs" />
     <Compile Include="Domain\Company.cs" />
+    <Compile Include="Domain\Permission.cs" />
     <Compile Include="Domain\Role.cs" />
     <Compile Include="Domain\TaskCategory.cs" />
     <Compile Include="Domain\Entity.cs" />
@@ -144,12 +145,13 @@
     <Compile Include="Extensions.cs" />
     <Compile Include="Inflector.cs" />
     <Compile Include="IStartable.cs" />
-    <Compile Include="Membership\Permission.cs" />
+    <Compile Include="Membership\PermissionName.cs" />
     <Compile Include="Membership\SecurityRegistry.cs" />
     <Compile Include="Membership\Security\IRole.cs" />
     <Compile Include="Membership\Security\IUser.cs" />
     <Compile Include="Persistence\Overrides\RoleMappingOverride.cs" />
     <Compile Include="Persistence\Overrides\UserMappingOverride.cs" />
+    <Compile Include="Persistence\Repositories\IPermissionRepository.cs" />
     <Compile Include="Persistence\Repositories\RoleRepository.cs" />
     <Compile Include="Persistence\Repositories\UserRepository.cs" />
     <Compile Include="Services\ILoginService.cs" />

@@ -34,6 +34,4 @@ namespace Kokugen.Web.Startables
             _userService.Create(_user);
         }
     }
-
- 
 }
