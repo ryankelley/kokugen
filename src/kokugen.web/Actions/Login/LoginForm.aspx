@@ -7,6 +7,8 @@ MasterPageFile="~/Shared/Site.Master" %>
 
 <%= this.FormFor(new LoginModel()) %>
     <%= this.Edit(x => x.Login) %>
+    <%=this.Edit(x => x.Password) %>
+    <%=this.Edit(x => x.RememberMe) %>
     <input type='submit' value='login' />
 <%= this.EndForm() %>
 </asp:Content>

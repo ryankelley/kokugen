@@ -1,10 +1,12 @@
+using Kokugen.Core.Domain;
 using Kokugen.Core.Membership.Security;
 
 namespace Kokugen.Core.Membership.Services
 {
-    public interface IMembershipValidator
+    public interface IMembershipValidator<USER> where USER : IUser
     {
-        bool ValidateUser(IUser userName, string password);
-        bool ValidateUser(string name, string password);
+        bool ValidateUser(USER userName, string password);
     }
+
+    public interface IMembershipValidator : IMembershipValidator<User>{}
 }
