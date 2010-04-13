@@ -37,8 +37,9 @@
         }
     }
 
-    $(document).ready(function() {
-    $("#time-record-form").validate({ errorClass: "error" });
-        $("#timerecord-form-container").dialog({ title: "Add Time Record", autoOpen: false, buttons: { "Save":  validateAndSave} });
+    $(document).ready(function () {
+        $("#time-record-form").validate({ errorClass: "error" });
+        $("#timerecord-form-container").dialog({ title: "Add Time Record", autoOpen: false, buttons: { "Save": validateAndSave} });
+        $("#timerecord-form-container").submit(validateAndSave);
     });
 </script>
