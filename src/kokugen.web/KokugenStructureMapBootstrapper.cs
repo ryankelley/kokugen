@@ -67,8 +67,8 @@ namespace Kokugen.Web
                 .ForMember(a => a.Limit, b=> b.UseValue(0));
             Mapper.CreateMap<CustomBoardColumn, BoardColumnDTO>()
                 .ForMember(a => a.Limit, b=> b.NullSubstitute(0));
-            Mapper.CreateMap<TimeRecord, TimeRecordDTO>()
-                .ForMember(a => a.User, b => b.NullSubstitute(null));
+//            Mapper.CreateMap<TimeRecord, TimeRecordDTO>()
+//                .ForMember(a => a.User, b => b.NullSubstitute(null));
 
 
             Mapper.AssertConfigurationIsValid();
