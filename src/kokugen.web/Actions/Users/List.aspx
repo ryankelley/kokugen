@@ -3,7 +3,6 @@
 <%@ Import Namespace="Kokugen.Web.Actions.Users.Details"%>
 <%@ Import Namespace="HtmlTags"%>
 <%@ Import Namespace="Kokugen.Web.Actions.Users"%>
-<%@ Import Namespace="Kokugen.Web.Actions.Users.Roles"%>
 <%@ Import Namespace="System.Linq"%>
 
 <asp:Content ContentPlaceHolderID="mainContent" runat="server">
@@ -15,24 +14,7 @@
 			<li>
 				<span class="username"><a href="<%=Urls.UrlFor(new UserDetailsRequest(){Username = user.UserName}) %>"><%=user.UserName %></a></span>
 				<span class="email"><a href="mailto:<% =user.Email%>"><% =user.Email %></a></span>
-<%--				<% if(user.IsOnline){ %>
-					<span class="isOnline">Online</span>
-				<% }else{ %>
-					<span class="isOffline">Offline for
-						<%
-							var offlineSince = (DateTime.Now - user.LastActivityDate);
-							if (offlineSince.TotalSeconds <= 60) Response.Write("1 minute.");
-							else if(offlineSince.TotalMinutes < 60) Response.Write(Math.Floor(offlineSince.TotalMinutes) + " minutes.");
-							else if (offlineSince.TotalMinutes < 120) Response.Write("1 hour.");
-							else if (offlineSince.TotalHours < 24) Response.Write(Math.Floor(offlineSince.TotalHours) + " hours.");
-							else if (offlineSince.TotalHours < 48) Response.Write("1 day.");
-							else Response.Write(Math.Floor(offlineSince.TotalDays) + " days.");
-						%>
-					</span>
-				<% } %>
-				<% if(!string.IsNullOrEmpty(user.Comment)){ %>
-					<span class="comment"><% =user.Comment%></span>
-				<% } %>--%>
+                
 			</li>
 			<% } %>
 		</ul>
