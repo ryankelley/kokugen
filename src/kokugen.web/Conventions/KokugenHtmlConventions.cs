@@ -49,6 +49,9 @@ namespace Kokugen.Web.Conventions
 
             Editors.If(x => x.Accessor.OwnerType.IsType<Card>() && x.Accessor.Name == "CardTitle").BuildBy(request => new HtmlTag("textarea").Attr("name", request.ElementId).Text(request.StringValue()));
             //Editors.Builder(new FormItemBuilder());
+
+            Editors.If(x => x.Accessor.FieldName.ToLower().Contains("password"))
+                .BuildBy(build => new HtmlTag("input").Attr("type", "password"));
         }
 
         // Setting up rules for tagging elements with jQuery validation
