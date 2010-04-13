@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using FubuCore.Reflection;
@@ -19,7 +21,29 @@ namespace Kokugen.Core.Membership
         public Type HandlerType { get; set; }
         public MethodInfo ActionCall { get; set; }
 
+        // override object.Equals
+        public override bool Equals(object obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
+
+            var data = obj as SecurityDataHolder;
+
+            return (HandlerType.Equals(data.HandlerType) && ActionCall.Equals(data.ActionCall));
+
+        }
+
+        // override object.GetHashCode
+        public override int GetHashCode()
+        {
+            return ((HandlerType != null ? HandlerType.GetHashCode() : 0) * 256) ^
+                       (ActionCall != null ? ActionCall.GetHashCode() : 0);
+        }
+
     }
+
     public class SecurityRegistry
     {
 
@@ -45,38 +69,33 @@ namespace Kokugen.Core.Membership
         }
     }
 
-    public class SecurityProvider : ISecurityProvider
+    public class SecurityProvider
     {
-        private static Cache<string, SecurityConfigExpression> _securityInfo = new Cache<string, SecurityConfigExpression>();
-
-        private readonly IUrlRegistry _urlRegistry;
+        private static Cache<SecurityDataHolder, SecurityConfigExpression> _securityInfo = new Cache<SecurityDataHolder, SecurityConfigExpression>();
 
 
-        public SecurityProvider(IUrlRegistry urlRegistry)
+        public static void Configure(SecurityRegistry registry)
         {
-            _urlRegistry = urlRegistry;
+            registry.GetRegisteredMembers().Each((key, value) => _securityInfo.Fill(key, value));
         }
 
-        public void Configure(SecurityRegistry registry)
+        public static bool HasPermissionForMethod(Type handlerType, MethodInfo method)
         {
-            registry.GetRegisteredMembers().Each((key, value) =>
-                                                     {
-                                                         var url = _urlRegistry.UrlFor(key.HandlerType, key.ActionCall);
-                                                         _securityInfo.Fill(url, value);
-                                                     });
+            return _securityInfo.Has(makeKey(handlerType, method));
         }
 
-        public bool HasPermissionForUrl(string url)
+        public static IEnumerable<Permission> GetPermissionsForMethod(Type handlerType, MethodInfo method)
         {
-            return false;
+            return _securityInfo[makeKey(handlerType, method)].GetPermissions();
+        }
+
+        private static SecurityDataHolder makeKey(Type handlerType, MethodInfo method)
+        {
+            return new SecurityDataHolder(handlerType, method);
         }
     }
 
-    public interface ISecurityProvider
-    {
-        void Configure(SecurityRegistry registry);
-        bool HasPermissionForUrl(string url);
-    }
+    
 
 
 
@@ -95,6 +114,11 @@ namespace Kokugen.Core.Membership
         {
             _permissions.Add(permission);
             return this;
+        }
+
+        public IEnumerable<Permission> GetPermissions()
+        {
+            return _permissions.AsEnumerable();
         }
     }
 }

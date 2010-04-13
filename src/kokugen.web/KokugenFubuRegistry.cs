@@ -7,6 +7,7 @@ using FubuMVC.Core.Registration;
 using FubuMVC.Core.Registration.DSL;
 using FubuMVC.Core.Registration.Nodes;
 using FubuMVC.Core.Registration.ObjectGraph;
+using Kokugen.Core.Membership;
 using Kokugen.Web.Actions;
 using Kokugen.Web.Actions.Board;
 using Kokugen.Web.Actions.Home;
@@ -56,6 +57,9 @@ namespace Kokugen.Web
                 x.IfIsType<double>(d => d.ToString("N2"));
             });
 
+            // Configure Permissions
+            SecurityProvider.Configure(new KokugenSecurityRegistry());
+
             Policies.Add<TestBehaviorPolicy>();
             //Policies.WrapBehaviorChainsWith<MustBeAuthorizedBehavior>();
             //Policies.ConditionallyWrapBehaviorChainsWith<MustBeAuthorizedBehavior>(c => c.OutputType() == typeof (BoardConfigurationModel));
@@ -83,30 +87,15 @@ namespace Kokugen.Web
         {
             var myBehavs = graph.Behaviors.Where(c => c.FirstCall().Category == BehaviorCategory.Call).ToList();
             var myActions = graph.Actions().Where(c => c.Category == BehaviorCategory.Call).ToList();
-            myActions.Each(act => act.AddBefore(new AuthorizationWrapper(act)));// Wrapper.For<MustBeAuthorizedBehavior>()));
-            //graph.Behaviors.Where(c => c.FirstCall().Category == BehaviorCategory.Call).Each(c => c.Prepend(new Wrapper(typeof(MustBeAuthorizedBehavior)))); 
+            myActions.Each(act =>
+                               {
+                                   if (SecurityProvider.HasPermissionForMethod(act.HandlerType, act.Method))
+                                       act.AddBefore(new BehaviorCall(act));
+                               });
         }
     }
 
-    public class AuthorizationWrapper : BehaviorNode
-    {
-        public AuthorizationWrapper(object act)
-        {
-            
-        }
-
-        protected override ObjectDef buildObjectDef()
-        {
-            return new ObjectDef(typeof(MustBeAuthorizedBehavior));
-        }
-
-        public override BehaviorCategory Category
-        {
-            get { return BehaviorCategory.Wrapper; }
-        }
-
-
-    }
+    
 
     //public class KokugenViewAttachmentStrategy : IViewsForActionFilter
     //{
