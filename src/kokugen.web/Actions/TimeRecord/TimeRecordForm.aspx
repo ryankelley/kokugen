@@ -10,7 +10,7 @@
     <%= this.Edit(x =>x.TaskId) %>
     <%= this.Edit( x => x.ProjectId) %>    
     
-</form>
+<%= this.EndForm() %>
    
 </div>
 <script type="text/javascript">
