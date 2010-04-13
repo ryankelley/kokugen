@@ -252,6 +252,7 @@
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Startables\CheckPermissionsInDb.cs" />
     <Compile Include="Startables\SetupSuperUser.cs" />
   </ItemGroup>
   <ItemGroup>

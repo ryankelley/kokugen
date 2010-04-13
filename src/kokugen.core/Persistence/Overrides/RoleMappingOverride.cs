@@ -15,8 +15,12 @@ namespace Kokugen.Core.Persistence.Overrides
             mapping.HasManyToMany(x => x.GetUsers()).Access.CamelCaseField(Prefix.Underscore)
                 .Cascade.All().Table("RoleToUser");
             mapping.Map(x => x.Name).Unique();
+
+            mapping.HasManyToMany(x => x.Permissions).Access.CamelCaseField(Prefix.Underscore).Cascade.SaveUpdate().Table("RoleToPermission").ForeignKeyConstraintNames("fk_role_to_permission", "fk_permission_to_role").BatchSize(5);
         }
 
         #endregion
     }
+
+    
 }

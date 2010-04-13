@@ -2,6 +2,7 @@
 
 using FluentNHibernate.Mapping;
 using Kokugen.Core.Domain;
+using Kokugen.Core.Membership;
 
 #endregion
 
@@ -27,4 +28,6 @@ namespace Kokugen.Core.Persistence.FluentMappings
         {
         }
     }
+
+    
 }

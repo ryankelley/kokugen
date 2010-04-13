@@ -84,7 +84,7 @@ namespace Kokugen.Core.Membership
             return _securityInfo.Has(makeKey(handlerType, method));
         }
 
-        public static IEnumerable<Permission> GetPermissionsForMethod(Type handlerType, MethodInfo method)
+        public static IEnumerable<PermissionName> GetPermissionsForMethod(Type handlerType, MethodInfo method)
         {
             return _securityInfo[makeKey(handlerType, method)].GetPermissions();
         }
@@ -101,7 +101,7 @@ namespace Kokugen.Core.Membership
 
     public class SecurityConfigExpression
     {
-        private readonly IList<Permission> _permissions = new List<Permission>();
+        private readonly IList<PermissionName> _permissions = new List<PermissionName>();
 
         public SecurityConfigExpression(MethodInfo methodInfo)
         {
@@ -110,13 +110,13 @@ namespace Kokugen.Core.Membership
 
         protected MethodInfo MethodInfo { get; set; }
 
-        public SecurityConfigExpression RequirePermission(Permission permission)
+        public SecurityConfigExpression RequirePermission(PermissionName permissionName)
         {
-            _permissions.Add(permission);
+            _permissions.Add(permissionName);
             return this;
         }
 
-        public IEnumerable<Permission> GetPermissions()
+        public IEnumerable<PermissionName> GetPermissions()
         {
             return _permissions.AsEnumerable();
         }
