@@ -1,20 +1,15 @@
-using System;
 using System.Web.Routing;
-using System.Web.Security;
 using AutoMapper;
 using FubuCore;
 using FubuMVC.Core;
-using FubuMVC.Core.Runtime;
 using FubuMVC.StructureMap;
 using Kokugen.Core;
 using Kokugen.Core.Domain;
 using Kokugen.Core.Membership;
-using Kokugen.Core.Persistence;
 using Kokugen.Core.Services;
 using Kokugen.Web.Actions.Board;
 using Kokugen.Web.Actions.DTO;
 using Kokugen.Web.Behaviors;
-using Kokugen.Web.Conventions;
 using StructureMap;
 
 namespace Kokugen.Web
@@ -51,10 +46,10 @@ namespace Kokugen.Web
             fubuBootstrapper.Bootstrap(_routes);
 
             ObjectFactory.Container.StartStartables();
+
             HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
             
-            // Configure Permissions
-            // Not Working: //ObjectFactory.Container.GetInstance<ISecurityProvider>().Configure(new KokugenSecurityRegistry());
+            
 
             ConfigureAutoMapper();
         }

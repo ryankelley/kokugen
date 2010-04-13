@@ -1,3 +1,4 @@
+using System;
 using Kokugen.Core.Services;
 
 namespace Kokugen.Web.Actions.Login
@@ -20,6 +21,7 @@ namespace Kokugen.Web.Actions.Login
 
     public class LoginFormModel
     {
+        public string ReturnUrl { get; set; }
     }
 
     public class LoginModel

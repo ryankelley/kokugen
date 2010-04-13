@@ -42,7 +42,6 @@ namespace Kokugen.Web.Actions.Card
 
             
             var notification = _cardService.SaveCard(card);
-            var newcard = _cardService.GetCard(card.Id);
             if (notification.IsValid())
             {
                 card.Column = project.Backlog;

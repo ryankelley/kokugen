@@ -3,6 +3,7 @@
 using System;
 using System.Web.Security;
 using FubuMVC.Core.Security;
+using Kokugen.Core.Domain;
 using Kokugen.Core.Membership.Security;
 using Kokugen.Core.Membership.Services;
 
@@ -25,10 +26,11 @@ namespace Kokugen.Core.Services
 
         public IUser LoginUser(string userName, string password, bool rememberMe)
         {
-            if (_validator.ValidateUser(userName, password))
+            var login = _userService.GetUserByLogin(userName);
+            if (_validator.ValidateUser(login, password))
             {
                 _authContext.ThisUserHasBeenAuthenticated(userName, rememberMe);
-                return _userService.GetUserByLogin(userName);
+                return login;
             }
             return null;
         }

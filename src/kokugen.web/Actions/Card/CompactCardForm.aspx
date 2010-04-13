@@ -31,7 +31,7 @@
      </div>
      <div class="bottom-border"></div>
      <div class="clear"></div>
-</form>
+<%= this.EndForm() %>
 
 </div>
 

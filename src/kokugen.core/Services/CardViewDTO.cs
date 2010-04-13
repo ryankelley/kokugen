@@ -17,5 +17,6 @@ namespace Kokugen.Core.Services
         public string Status { get; set; }
         public string BlockReason { get; set; }
         public int CardOrder { get; set; }
+        public Guid ProjectId { get; set; }
     }
 }

@@ -13,7 +13,7 @@
     <%= this.InputFor(x => x.ProjectId) %>
     
      <input type="submit" name="Submit" value="Save" id="col-save-button"/>
-</form>
+<%= this.EndForm() %>
 
 </div>
 

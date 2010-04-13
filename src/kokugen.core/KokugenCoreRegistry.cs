@@ -1,4 +1,5 @@
 using System;
+using System.Net.Mail;
 using System.Security.Principal;
 using System.Web.Security;
 using FluentNHibernate;
@@ -28,6 +29,21 @@ namespace Kokugen.Core
                          x.WithDefaultConventions();
                          x.Convention<SettingsConvention>();
                      });
+
+            setupEmail();
+        }
+
+        private void setupEmail()
+        {
+            For<IEmailService>()
+                .Use(c =>
+                         {
+                             var settingsProvider = c.GetInstance<ISettingsProvider>();
+                             var emailSettings = settingsProvider.SettingsFor<EmailSettings>();
+                             return new EmailService(new SmtpClient(emailSettings.Host, emailSettings.Port),
+                                                     emailSettings.User, emailSettings.Password,
+                                                     emailSettings.AuthorizationRequired);
+                         });
         }
 
         private void setupNHibernate()

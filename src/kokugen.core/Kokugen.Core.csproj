@@ -209,6 +209,7 @@
     <Compile Include="Services\IEmailService.cs" />
     <Compile Include="Services\IProjectService.cs" />
     <Compile Include="Services\ITimeRecordService.cs" />
+    <Compile Include="Services\Membership\ClearPasswordHelper.cs" />
     <Compile Include="Services\Membership\IPasswordHelperService.cs" />
     <Compile Include="Services\Membership\PasswordHelperService.cs" />
     <Compile Include="Services\Membership\PasswordService.cs" />

@@ -120,12 +120,24 @@
     <Reference Include="System.Web.Mobile" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Actions\Account\LoginStatus\LoginStatus.aspx" />
+    <Content Include="Actions\Card\Get.aspx" />
     <Content Include="Content\images\delete.png" />
     <Content Include="Global.asax" />
     <Content Include="Web.config">
+      <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actions\Account\Activate\ActivateAccountAction.cs" />
+    <Compile Include="Actions\Account\LoginStatus\LoginStatusAction.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Actions\Account\LogOff\LogOffAction.cs" />
+    <Compile Include="Actions\Account\Register\IRegistrationService.cs" />
+    <Compile Include="Actions\Account\Register\RegisterAccountAction.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Actions\AjaxResponse.cs" />
     <Compile Include="Actions\BoardColumn\RemoveAction.cs" />
     <Compile Include="Actions\Board\BoardColumnDTO.cs" />
@@ -139,6 +151,7 @@
     <Compile Include="Actions\Card\AddAction.cs" />
     <Compile Include="Actions\Card\CardMovedAction.cs" />
     <Compile Include="Actions\Card\CompactCardFormAction.cs" />
+    <Compile Include="Actions\Card\GetAction.cs" />
     <Compile Include="Actions\Card\View_Page_Type_Declarations.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -199,9 +212,8 @@
     <Compile Include="Actions\Users\ListAction.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Actions\Users\Roles\ListAction.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
+    <Compile Include="Behaviors\AuthenticationBehaviorPolicy.cs" />
+    <Compile Include="Behaviors\BehaviorCall.cs" />
     <Compile Include="Behaviors\MustBeAuthorizedBehavior.cs" />
     <Compile Include="Behaviors\TransactionalContainerBehavior.cs" />
     <Compile Include="Conventions\Builders\AfterEachOfPartialBuilder.cs" />
@@ -241,7 +253,7 @@
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Startables\SetupDefaultRoles.cs" />
+    <Compile Include="Startables\SetupSuperUser.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\kokugen.core\Kokugen.Core.csproj">
@@ -366,9 +378,9 @@
     <Content Include="Shared\Site.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Actions\Account\Register\Register.aspx" />
     <Content Include="Content\images\k-logo.png" />
     <Content Include="Actions\Users\Details\Details.aspx" />
-    <Content Include="Actions\Users\Roles\List.aspx" />
     <Content Include="Content\css\ellipsis-xbl.xml" />
     <Content Include="Content\images\archive-title.png" />
     <Content Include="Content\images\backlog-title.png" />
@@ -379,6 +391,7 @@
     <Content Include="Content\images\stopsign.png" />
     <Content Include="Shared\Project.Master" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

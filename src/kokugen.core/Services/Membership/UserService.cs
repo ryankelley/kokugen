@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Security;
+using Kokugen.Core.Domain;
 using Kokugen.Core.Membership.Security;
 using Kokugen.Core.Membership.Services;
 using Kokugen.Core.Membership.Settings;
@@ -29,29 +30,38 @@ namespace Kokugen.Core.Services
             _settings = settings;
         }
 
-        public void Update(IUser user)
+        public void Update(User user)
         {
             var entity = user as Domain.User;
-            if (entity != null) ValidateAndSave(entity);
+            if (entity != null) ValidateAndUpdate(entity);
         }
 
-        public void Delete(IUser user)
+        private void ValidateAndUpdate(User entity)
+        {
+            var notification = _validator.Validate(entity);
+            if (notification.IsValid())
+            {
+                _userRepository.Save(entity);
+            }
+        }
+
+        public void Delete(User user)
         {
             var entity = user as Domain.User;
             if (entity != null) _userRepository.Delete(entity);
         }
 
-        public IUser Retrieve(object id)
+        public User Retrieve(object id)
         {
             return _userRepository.Get((Guid) id);
         }
 
-        public IUser GetUserByLogin(string name)
+        public User GetUserByLogin(string name)
         {
             return _userRepository.FindBy(x => x.UserName, name);
         }
 
-        public IUser GetUserByEmail(string email)
+        public User GetUserByEmail(string email)
         {
             if(!_settings.Registration.RequiresUniqueEmail)
                 throw new InvalidOperationException("RegistrationSettings.RequireUniqueEmail must be true to retrieve users by email");
@@ -59,13 +69,12 @@ namespace Kokugen.Core.Services
             return _userRepository.FindBy(x => x.Email, email);
         }
 
-        public IPagedList<IUser> FindAll(int pageIndex, int pageSize)
+        public IPagedList<User> FindAll(int pageIndex, int pageSize)
         {
             var users = _userRepository.Query()
                 .Take(pageSize)
-                .Skip((pageIndex - 1)*pageSize);
-            return new StaticPagedList<IUser>( users.Where(x => true)
-                .Select(u => u as IUser), pageIndex, pageSize, TotalUsers);
+                .Skip(pageIndex*pageSize);
+            return new StaticPagedList<User>(users, pageIndex, pageSize, TotalUsers);
         }
 
         public int TotalUsers
@@ -74,7 +83,7 @@ namespace Kokugen.Core.Services
         }
 
 
-        public INotification Create(IUser user)
+        public INotification Create(User user)
         {
             var notification = new Notification();
 
@@ -116,37 +125,17 @@ namespace Kokugen.Core.Services
                     notification.RegisterMessage("UserName", "User name already exists!", Severity.Error);
                     return notification;
                 }
+
+                //make sure email is unique
+                if (_userRepository.FindBy(x => x.Email, user.Email) != null)
+                {
+                    notification.RegisterMessage("Email", "Email already exists!", Severity.Error);
+                    return notification;
+                }
                 _userRepository.Save(user);
             }
             return notification;
         }
 
-    }
-
-    public class ClearPasswordHelper : IPasswordHelperService
-    {
-        #region Implementation of IPasswordHelperService
-
-        public string CreatePasswordHash(string password)
-        {
-            return password;
-        }
-
-        public bool ComparePasswordToHash(string password, string passwordHash)
-        {
-            return password == passwordHash;
-        }
-
-        public string RandomPasswordNoHash(int length)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string RandomPasswordHashed(int length)
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion
     }
 }

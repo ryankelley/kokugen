@@ -25,6 +25,8 @@ namespace Kokugen.Core.Persistence
     {
         void Save(ENTITY entity);
 
+        void SaveAndFlush(ENTITY entity);
+
         ENTITY Load(Guid id);
 
         ENTITY Get(Guid id);
@@ -106,6 +108,12 @@ namespace Kokugen.Core.Persistence
         public void Save(ENTITY entity)
         {
            _session.SaveOrUpdate(entity);
+        }
+
+        public void SaveAndFlush(ENTITY entity)
+        {
+            _session.SaveOrUpdate(entity);
+            _session.Flush();
         }
 
         public ENTITY Load(Guid id)
