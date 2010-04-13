@@ -19,7 +19,7 @@
         function showProjectForm() {
             $("#project-form-container").dialog('open');
             return false;
-        }
+        }      
 
         function appendProjectToList(project) {
             var output = "<li class=\"project first\"><a title=\"Click to view this project\" href=\"/project/ "+ project.Id + "\">";

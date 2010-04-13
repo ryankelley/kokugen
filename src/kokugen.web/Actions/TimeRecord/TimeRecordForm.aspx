@@ -4,12 +4,11 @@
 <%@ Import Namespace="Kokugen.Web.Conventions"%>
 
 
-<div id="timerecord-form-container" class="hidden">
-<%= this.FormFor(new AddTimeRecordModel() {})%>
+<div id="timerecord-form-container" class="hide">
+<%= this.FormFor(new AddTimeRecordModel() {}).Id("time-record-form")%>
     <%= this.Edit(x => x.TimeRecord.Description) %>
     <%= this.Edit(x =>x.TaskId) %>
-    <%= this.Edit( x => x.ProjectId) %>
-    
+    <%= this.Edit( x => x.ProjectId) %>    
     
 </form>
    
@@ -29,15 +28,15 @@
             dataType: 'json',        // 'xml', 'script', or 'json' (expected server response type) 
             clearForm: true        // clear all form fields after successful submit 
         };
-        var isValid = $("#mainForm").valid();
+        var isValid = $("#time-record-form").valid();
 
         if (isValid) {
-            $("#mainForm").ajaxSubmit(options);
+            $("#time-record-form").ajaxSubmit(options);
         }
     }
 
     $(document).ready(function() {
-    $("#mainForm").validate({ errorClass: "error" });
-    $("#timerecord-form-container").dialog({ title: "Add Time Record", autoOpen: false, buttons: { "Save": validateAndSave} });
+    $("#time-record-form").validate({ errorClass: "error" });
+        $("#timerecord-form-container").dialog({ title: "Add Time Record", autoOpen: false, buttons: { "Save":  validateAndSave} });
     });
 </script>

@@ -9,7 +9,7 @@ namespace Kokugen.Core.Membership.Security
 {
     public class FubuPrincipal : IPrincipal
     {
-        private readonly MembershipUser _user;
+        private readonly Domain.User _user;
         private readonly IRolesService _rolesService;
         private readonly IIdentity _identity;
 
@@ -18,12 +18,12 @@ namespace Kokugen.Core.Membership.Security
             _identity = identity;
         }
 
-        public FubuPrincipal(IIdentity identity, IRolesService rolesService)
+        public FubuPrincipal(IIdentity identity, Domain.User user)
             : this(identity)
         {
-            _rolesService = rolesService;
+            _user = user;
         }
-        
+
         public static FubuPrincipal Current
         {
             get
@@ -40,8 +40,8 @@ namespace Kokugen.Core.Membership.Security
 
         public bool IsInRole(string role)
         {
-            if(_rolesService != null)
-                return _rolesService.IsInRole(_identity.Name,role);
+            if (_user != null)
+                return _user.IsInRole(role);
             return false;
         }
 

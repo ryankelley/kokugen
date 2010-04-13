@@ -177,24 +177,24 @@ namespace Kokugen.Core
             return toBeSorted;
         }
 
-        [DebuggerStepThrough]
-        public static void Each<T>(this IEnumerable<T> values, Action<T> eachAction)
-        {
-            foreach (T item in values)
-            {
-                eachAction(item);
-            }
-        }
+        //[DebuggerStepThrough]
+        //public static void Each<T>(this IEnumerable<T> values, Action<T> eachAction)
+        //{
+        //    foreach (T item in values)
+        //    {
+        //        eachAction(item);
+        //    }
+        //}
 
-        [DebuggerStepThrough]
-        public static IEnumerable Each(this IEnumerable values, Action<object> eachAction)
-        {
-            foreach (object item in values)
-            {
-                eachAction(item);
-            }
+        //[DebuggerStepThrough]
+        //public static IEnumerable Each(this IEnumerable values, Action<object> eachAction)
+        //{
+        //    foreach (object item in values)
+        //    {
+        //        eachAction(item);
+        //    }
 
-            return values;
-        }
+        //    return values;
+        //}
     }      
 }

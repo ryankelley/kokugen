@@ -8,6 +8,7 @@ using FubuMVC.Core.Runtime;
 using FubuMVC.StructureMap;
 using Kokugen.Core;
 using Kokugen.Core.Domain;
+using Kokugen.Core.Membership;
 using Kokugen.Core.Persistence;
 using Kokugen.Core.Services;
 using Kokugen.Web.Actions.Board;
@@ -49,12 +50,11 @@ namespace Kokugen.Web
                                            };
             fubuBootstrapper.Bootstrap(_routes);
 
-            HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
-
             ObjectFactory.Container.StartStartables();
-
-            // Configure permissions/security
-            new KokugenSecurityRegistry();
+            HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
+            
+            // Configure Permissions
+            // Not Working: //ObjectFactory.Container.GetInstance<ISecurityProvider>().Configure(new KokugenSecurityRegistry());
 
             ConfigureAutoMapper();
         }
@@ -67,8 +67,8 @@ namespace Kokugen.Web
                 .ForMember(a => a.Limit, b=> b.UseValue(0));
             Mapper.CreateMap<CustomBoardColumn, BoardColumnDTO>()
                 .ForMember(a => a.Limit, b=> b.NullSubstitute(0));
-            Mapper.CreateMap<TimeRecord, TimeRecordDTO>()
-                .ForMember(a => a.User, b => b.NullSubstitute(null));
+//            Mapper.CreateMap<TimeRecord, TimeRecordDTO>()
+//                .ForMember(a => a.User, b => b.NullSubstitute(null));
 
 
             Mapper.AssertConfigurationIsValid();
