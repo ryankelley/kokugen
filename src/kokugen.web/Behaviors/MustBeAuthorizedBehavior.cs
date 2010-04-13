@@ -31,13 +31,13 @@ namespace Kokugen.Web.Behaviors
         {
             if(SecurityProvider.HasPermissionForMethod(_actionCall.HandlerType, _actionCall.Method))
             {
-                //if(!_securityContext.IsAuthenticated())
-                //{
-                //    var model = _request.Get<ReturnUrlModel>();
-                //    var url = _urls.UrlFor(new LoginFormModel { ReturnUrl = model.RawUrl });
-                //    _writer.RedirectToUrl(url);
-                //    return DoNext.Stop;
-                //}
+                if (!_securityContext.IsAuthenticated())
+                {
+                    var model = _request.Get<ReturnUrlModel>();
+                    var url = _urls.UrlFor(new LoginFormModel { ReturnUrl = model.RawUrl });
+                    _writer.RedirectToUrl(url);
+                    return DoNext.Stop;
+                }
 
                 var validPermissions = SecurityProvider.GetPermissionsForMethod(_actionCall.HandlerType, _actionCall.Method);
 
