@@ -11,7 +11,7 @@ namespace Kokugen.Core.Persistence.Overrides
     {
         public void Override(AutoMapping<BoardColumn> mapping)
         {
-            mapping.Map(x => x.Limit, "[Limit]");
+            
         }
     }
 }

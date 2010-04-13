@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using FluentNHibernate;
+using FubuCore;
 using FubuMVC.StructureMap;
 using Kokugen.Core;
 using Kokugen.Core.Persistence;
@@ -65,27 +66,32 @@ namespace Kokugen.Tests.SchemaCreation
 
         private static void CreateOrUpdateSchema(Configuration config)
         {
-            var tables = new List<string>();
+            string value = string.Empty;
             using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["KokugenData"].ConnectionString))
             {
                 con.Open();
                 var cmd = con.CreateCommand();
 
-                cmd.CommandText = "SELECT Name FROM sys.objects WHERE ([Type] In (N'TU')) ORDER BY Name";
+                cmd.CommandText = @"IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE='BASE TABLE' " +
+                                    "AND TABLE_NAME='BoardColumns') "+
+	                                "select 'True'; "+
+                                    "ELSE "+
+	                                 "select 'False' ";
+
                 cmd.CommandType = CommandType.Text;
 
                 var reader = cmd.ExecuteReader();
 
                 while (reader.Read())
                 {
-                    tables.Add(reader.GetString(0));
+                    value = reader.GetString(0);
                 }
             }
 
 
             // replace this with your test for existence of schema
             // (i.e., with SQLite, you can just test for the DB file)
-            if (tables.Count < 1)
+            if (value.IsEmpty() || value == "False")
             {
                 try
                 {

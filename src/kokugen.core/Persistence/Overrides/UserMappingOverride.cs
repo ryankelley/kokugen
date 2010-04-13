@@ -13,6 +13,7 @@ namespace Kokugen.Core.Persistence.Overrides
         public void Override(AutoMapping<User> mapping)
         {
             mapping.HasManyToMany(x => x.GetRoles()).Access.CamelCaseField(Prefix.Underscore)
+                .ForeignKeyConstraintNames("fk_user_to_role", "fk_role_to_user")
                 .Cascade.All().Table("RoleToUser");
             mapping.Map(x => x.UserName).Unique();
             mapping.Map(x => x.Email).Unique();
