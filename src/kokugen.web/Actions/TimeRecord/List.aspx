@@ -131,8 +131,8 @@ th
             return false;
         }
 
-        function appendTaskToList(timerecord) {
-            var output = "<span class=\"timerecord-name\">" + timerecord.Description + "</span>";
+        function appendTimeRecordToList(timerecord) {
+            var output = "<td class=\"description\">" + timerecord.Description + "</span>";
 
             $(".timerecord-list").append(output);
         }    
