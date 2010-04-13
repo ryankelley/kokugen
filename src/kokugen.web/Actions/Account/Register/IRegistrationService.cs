@@ -1,4 +1,5 @@
 using System;
+using FubuCore;
 using FubuMVC.Core.Urls;
 using HtmlTags;
 using Kokugen.Core.Domain;
@@ -48,11 +49,12 @@ namespace Kokugen.Web.Actions.Account.Register
 
         private void SendConfirmationEmail(User user)
         {
+            
             var email = new HtmlTag("body")
                 .Child(new HtmlTag("h3").Text("Thank you for registering"))
                 .Child(new HtmlTag("div").Id("wrapper")
                            .Child(new LinkTag("Click here to activate your account",
-                                              _urlRegistry.UrlFor(new ActivateAccountModel() {Id = user.Id}))));
+                                              UrlContext.ToFull(_urlRegistry.UrlFor(new ActivateAccountModel() {Id = user.Id})))));
             _emailService.SendEmail(user.Email, "no-reply@kokugen.com", "Activate your account", email.ToString());
         }
 
