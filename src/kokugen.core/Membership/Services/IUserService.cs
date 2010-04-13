@@ -27,8 +27,5 @@ namespace Kokugen.Core.Membership.Services
 
         int TotalUsers { get; }
 
-        
-        //MembershipCreateStatus CreateUser(string userName, string password, string email, string passwordQuestion, string passwordAnswer, bool isApproved);
-        //MembershipCreateStatus CreateUser(string userName, string password, string email, string passwordQuestion, string passwordAnswer, bool isApproved, object key);
     }
 }

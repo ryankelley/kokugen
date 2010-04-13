@@ -29,6 +29,8 @@ namespace Kokugen.Core.Domain
         [Required, ValidEmail]
         public virtual string Email { get; set; }
 
+        public virtual bool IsLocked { get; private set; }
+
         public virtual object ProviderUserKey
         {
             get { return Id; }
@@ -40,7 +42,7 @@ namespace Kokugen.Core.Domain
         public virtual string LastName { get; set; }
 
         [Required]
-        public virtual string Password { get; set; }
+        public virtual string Password { get; protected set; }
 
         public virtual IEnumerable<Role> GetRoles()
         {
@@ -78,6 +80,14 @@ namespace Kokugen.Core.Domain
             this.Password = service.CreatePasswordHash(_password);
         }
 
-     
+        public virtual void ChangePassword(IPasswordHelperService service, string newPassword)
+        {
+            this.Password = service.CreatePasswordHash(newPassword);
+        }
+
+        public virtual void Unlock()
+        {
+            IsLocked = false;
+        }
     }
 }

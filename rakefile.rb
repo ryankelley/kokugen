@@ -16,7 +16,7 @@ TARANTINO = "lib\\tarantino\\Tarantino.DatabaseManager.Console.exe"
 DBNAME = "KokugenData"
 VERSIONEDDB = "KokugenDataVersioned"
 DBSCRIPTS = "dbChangeScripts"
-DBSERVER = "localhost"
+DBSERVER = "localhost\\sqlexpress"
 VIRDBSERVER = "CASQLSRV01"
 
 

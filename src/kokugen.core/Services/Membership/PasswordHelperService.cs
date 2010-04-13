@@ -35,6 +35,22 @@ namespace Kokugen.Core.Services
             return newString.ToString();
         }
 
+        public string RandomPasswordNoHash(int length, int nonAlphaNumberic)
+        {
+            
+            var newString = new StringBuilder();
+            newString.Append(RandomPasswordNoHash(length));
+
+            var random = new Random();
+            String characters = "~!@#$%^&*()_+";
+            while (nonAlphaNumberic-- > 0)
+            {
+                newString.Append(characters[(int)(random.NextDouble() * characters.Length)]);
+            }
+
+            return newString.ToString();
+        }
+
         public string RandomPasswordHashed(int length)
         {
             return CreatePasswordHash(RandomPasswordNoHash(length));
