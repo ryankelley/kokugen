@@ -247,6 +247,7 @@
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Startables\SetupSuperUser.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\kokugen.core\Kokugen.Core.csproj">
@@ -384,9 +385,7 @@
     <Content Include="Content\images\stopsign.png" />
     <Content Include="Shared\Project.Master" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Startables\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

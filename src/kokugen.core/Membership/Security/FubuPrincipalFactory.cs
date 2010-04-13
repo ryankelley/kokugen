@@ -18,7 +18,7 @@ namespace Kokugen.Core.Membership.Security
 
         public IPrincipal CreatePrincipal(IIdentity identity)
         {
-            return new FubuPrincipal(identity,_userService.Retrieve(identity.Name) as Domain.User);
+            return new FubuPrincipal(identity,_userService.GetUserByLogin(identity.Name));
         }
     }
 }
