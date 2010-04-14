@@ -88,9 +88,6 @@ namespace Kokugen.Core.Services
         public INotification Create(User user)
         {
             var notification = new Notification();
-
-
-
             
             switch (_settings.Password.PasswordFormat)
             {
