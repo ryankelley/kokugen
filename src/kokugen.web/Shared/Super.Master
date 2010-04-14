@@ -1,13 +1,4 @@
-﻿<%@ Import Namespace="Kokugen.Web.Actions.Users"%>
-<%@ Import Namespace="Kokugen.Web.Actions.TimeRecord"%>
-<%@ Import Namespace="Kokugen.Web.Actions.TaskCategory"%>
-<%@ Import Namespace="Kokugen.Web.Actions.Project"%>
-<%@ Import Namespace="Kokugen.Web.Actions.Company"%>
-<%@ Import Namespace="Kokugen.Web.Actions.Home"%>
-<%@ Import Namespace="Kokugen.Web"%>
-<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Super.Master.cs" Inherits="FubuMVC.Core.View.FubuMasterPage" %>
-
-<%@ Import Namespace="Kokugen.Web.Actions.Account.Register" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Super.Master.cs" Inherits="FubuMVC.Core.View.FubuMasterPage" %>
 <%@ Import Namespace="Kokugen.Web.Actions.Account.LoginStatus" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -34,34 +25,12 @@
 		<div id="wrapper">
 			<h1 id="logo"><a href="/">Kokugen - Time Managment</a></h1>
             <div class="user-stuff"> <%this.Partial<LoginStatusModel>(); %></div>
-		</div>
-		<div class="nav">
-			<ul class="subnav">
-				<li class="active"><%= this.LinkTo(new CompanyListModel()).Text("Companies") %></li>
-				<li class="bar"><%= this.LinkTo(new ProjectListModel()).Text("Projects") %></li>
-				<li class="lbar"><%= this.LinkTo(new TimeRecordListModel()).Text("Time") %></li>
-				<li class="lbar"><%=this.LinkTo(new UserListRequest()).Text("Users") %></li>
-				<li class="last"><%= this.LinkTo(new TaskListModel()).Text("Tasks") %></li>
-			</ul>
-			<ul class="subnav right">
-			    <asp:ContentPlaceHolder ID="extraNavigation" runat="server" />
-			    
-			</ul>
-		</div>
-		<%--<div id="project-nav-wrapper">
-		    <ul id="project-nav">
-		        <li>project list</li>
-		        <li>Home</li>
-		        <li>Board</li>
-		        <li>Work</li>
-		        <li>Performace</li>
-		        <li>Process</li>
-		    </ul>
-		</div>--%>
+		</div>	<asp:ContentPlaceHolder ID="MasterNavigation" runat="server" />	
+		
 	</div>
 	
     <div class="content clear">
-        <asp:ContentPlaceHolder ID="mainContent" runat="server">
+        <asp:ContentPlaceHolder ID="SupermainContent" runat="server">
         
         </asp:ContentPlaceHolder>
     </div>
