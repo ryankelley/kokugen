@@ -132,6 +132,35 @@ h1{
 	border-right:1px solid #333;
 }
 
+ul.subnav li span.subhover {background-position: center bottom; cursor: pointer;} /*--Hover effect for trigger--*/
+ul.subnav li ul.dropdown {
+	list-style: none;
+	position: absolute; /*--Important - Keeps dropdown from affecting main navigation flow--*/
+	left: 0; top: 130px;
+	background: #333;
+	margin: 0; padding: 0;
+	display: none;
+	float: left;
+	width: 170px;
+	border: 1px solid #111;
+}
+ul.subnav li ul.dropdown li{
+	margin: 0; padding: 0;
+	border-top: 1px solid #252525; /*--Create bevel effect--*/
+	border-bottom: 1px solid #444; /*--Create bevel effect--*/
+	clear: both;
+	width: 170px;
+}
+html ul.subnav li ul.dropdown li a {
+	float: left;
+	width: 145px;
+	background: #333 url(dropdown_linkbg.gif) no-repeat 10px center;
+	padding-left: 20px;
+}
+html ul.subnav li ul.dropdown li a:hover { /*--Hover effect for dropdown links--*/
+	background: #222 url(dropdown_linkbg.gif) no-repeat 10px center;
+}
+
 /*end subnav*/
 
 .clear { clear: both;}
