@@ -19,6 +19,6 @@ MasterPageFile="~/Shared/Site.Master" %>
     <input type='submit' value='login' />
 <%= this.EndForm() %>
 
-<%this.Partial<RecoverPasswordPartialModel>(); %>
+<%this.Partial<ResetPasswordPartialModel>(); %>
 
 </asp:Content>

@@ -1,4 +1,5 @@
 using System;
+using HtmlTags;
 using Kokugen.Core.Domain;
 using Kokugen.Core.Membership.Security;
 using Kokugen.Core.Membership.Services;
@@ -106,17 +107,51 @@ namespace Kokugen.Core.Services
             }
         }
 
-        public string ResetPassword(User user, string passwordAnswer)
+        public void ResetPassword(User user, string passwordAnswer)
         {
-            throw new NotImplementedException();
+            if (!_settings.PasswordResetRetrievalSettings.EnablePasswordReset)
+                throw new InvalidOperationException("Password reset is not enabled");
+            
+            
+            if(_settings.PasswordResetRetrievalSettings.RequiresQuestionAndAnswer)
+            {
+               if(user.Answer != passwordAnswer)
+                   throw new InvalidOperationException("Password answer does not match");
+            }
+
+            var newPassword = resetPassword(user);
+
+            emailUserNewPassword(newPassword, user);
+
         }
 
-        public string ResetPassword(User user)
+        private void emailUserNewPassword(string newPassword, User user)
         {
-            var entity = user as User;
-            if (!_settings.PasswordResetRetrievalSettings.EnablePasswordReset)
-                throw new InvalidOperationException("Password retrieval is not enabled");
+            var email = new HtmlTag("div")
+                .Child(new HtmlTag("h3", tag =>
+                               {
+                                   tag.Text("Your password has been reset");
+                               }))
+                .Child(new HtmlTag("span", tag => tag.Text("Your new password is: ")))
+                .Child(new HtmlTag("span", tag => tag.Text(newPassword)));
 
+            _emailService.SendEmail(user.Email, "no-reply@kokugen.com","Your Password Has Been Reset", email.ToString());
+        }
+
+        public void ResetPassword(User user)
+        {
+            
+            if (!_settings.PasswordResetRetrievalSettings.EnablePasswordReset)
+                throw new InvalidOperationException("Password reset is not enabled");
+
+
+            var newPassword = resetPassword(user);
+
+            emailUserNewPassword(newPassword, user);
+        }
+
+        private string resetPassword(User entity)
+        {
             var newPassword = _passwordHelper.RandomPasswordNoHash(_settings.Password.MinRequiredPasswordLength,
                                                                    _settings.Password.
                                                                        MinRequiredNonAlphanumericCharacters);
@@ -138,7 +173,7 @@ namespace Kokugen.Core.Services
 
             ValidateAndSave(entity);
 
-            return entity.Password;
+            return newPassword;
         }
     }
 }

@@ -1,20 +1,22 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true"  Inherits="Kokugen.Web.Actions.Account.Password.PasswordRecoveryForm" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true"  Inherits="Kokugen.Web.Actions.Account.Password.PasswordResetForm" %>
 <%@ Import Namespace="Kokugen.Web.Actions.Account.Password" %>
 
 
 
 <%if(Model.Settings.RequiresQuestionAndAnswer) {%>
 
-<%=this.FormFor<RecoverPasswordModel>() %>
+<%=this.FormFor<ResetPasswordModel>() %>
+    <%=this.InputFor(x=> x.Email).Id("email").Hide() %>
     <%=this.Edit(x=>x.Question) %>
     <%=this.Edit(x=>x.Answer) %>
+    <input type="submit" value="Reset" />
 <%=this.EndForm() %>
 
 <%}else{ %>
 
 <script type="text/javascript">
     $(function () {
-        recoverPassword('<%=Urls.UrlFor(new RecoverPasswordModel()) %>', {}, function (data) { alert(data.Item); });
+        recoverPassword('<%=Urls.UrlFor(new ResetPasswordModel()) %>', {Email:<%=Model.Email %>}, function (data) { alert(data.Item); });
     });
 
 </script>

@@ -2,25 +2,25 @@
 <%@ Import Namespace="Kokugen.Web.Actions.Account.Password" %>
 
 <div id="password-recover-wrapper">
-<% if (Model.Settings.EnablePasswordReset || Model.Settings.EnablePasswordRetrieval)
+<% if (Model.Settings.EnablePasswordReset)
    {%>
-    <%=this.LinkTo(new RecoverPasswordRequest()).Id("forgot-password-link").Text("Forgot your password?")%>
+    <%=this.LinkTo(new ResetPasswordRequest()).Id("forgot-password-link").Text("Forgot your password?")%>
 
-    <div id="recover-wrapper" style="display:none;">
+    <div id="reset-wrapper" style="display:none;">
          <%=this.Edit(x => x.Email) %>
-         <input type="button" value="Recover Password" id="recover" />
+         <input type="button" value="Reset Password" id="reset" />
     </div>
 
     <script type="text/javascript">
         $(function () {
             $('#forgot-password-link').click(function (e) {
                 e.preventDefault();
-                $('#recover-wrapper').toggle();
+                $('#reset-wrapper').toggle();
             });
 
-            $('#recover').click(function (e) {
+            $('#reset').click(function (e) {
                 e.preventDefault();
-                $('#password-recover-placeholder').load($('#forgot-password-link').attr('href')+$('#email').val());
+                $('#password-reset-placeholder').load($('#forgot-password-link').attr('href') + $('#email').val());
             });
 
         });
@@ -33,5 +33,5 @@
 
 </div>
 
-<div id="password-recover-placeholder"></div>
+<div id="password-reset-placeholder"></div>
 
