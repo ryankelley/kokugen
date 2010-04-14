@@ -9,6 +9,7 @@
 
 <%@ Import Namespace="Kokugen.Web.Actions.Account.Register" %>
 <%@ Import Namespace="Kokugen.Web.Actions.Account.LoginStatus" %>
+<%@ Import Namespace="Kokugen.Web.Actions.DailyTimeRecord" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -43,7 +44,8 @@
 				<li class="bar"><%= this.LinkTo(new ProjectListModel()).Text("Projects") %></li>
 				<li class="lbar"><%= this.LinkTo(new TimeRecordListModel()).Text("Time") %></li>
 				<li class="lbar"><%=this.LinkTo(new UserListRequest()).Text("Users") %></li>
-				<li class="last"><%= this.LinkTo(new TaskListModel()).Text("Tasks") %></li>
+				<li class="lbar"><%= this.LinkTo(new TaskListModel()).Text("Tasks") %></li>
+                <li class="last"><%= this.LinkTo(new DailyTimeRecordListModel()).Text("Daily Time") %></li>
 			</ul>
 			<ul class="subnav right">
 			    <asp:ContentPlaceHolder ID="extraNavigation" runat="server" />
