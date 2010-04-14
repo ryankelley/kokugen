@@ -13,23 +13,24 @@ namespace Kokugen.Core.Services
         private readonly IPasswordHelperService _passwordHelper;
         private readonly IUserRepository _userRepository;
         private readonly IValidator _validator;
+        private readonly IEmailService _emailService;
         private readonly MembershipSettingsBag _settings;
 
-        public PasswordService(IPasswordHelperService passwordHelper,IUserRepository userRepository, 
-            IValidator validator, MembershipSettingsBag settings)
+        public PasswordService(IPasswordHelperService passwordHelper,
+            IUserRepository userRepository, 
+            IValidator validator,
+            IEmailService emailService,
+            MembershipSettingsBag settings)
         {
             _passwordHelper = passwordHelper;
             _userRepository = userRepository;
             _validator = validator;
+            _emailService = emailService;
             _settings = settings;
         }
 
-        public void Unlock(User user)
+        public void Unlock(User entity)
         {
-            var entity = user as User;
-
-            if (entity == null) return;
-
             entity.Unlock();
 
             ValidateAndSave(entity);
@@ -134,6 +135,8 @@ namespace Kokugen.Core.Services
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+
+            ValidateAndSave(entity);
 
             return entity.Password;
         }

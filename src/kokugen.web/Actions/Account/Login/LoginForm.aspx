@@ -2,6 +2,7 @@
 MasterPageFile="~/Shared/Site.Master" %>
 <%@ Import Namespace="Kokugen.Web.Actions.Account.Login" %>
 <%@ Import Namespace="FubuCore" %>
+<%@ Import Namespace="Kokugen.Web.Actions.Account.Password" %>
 
  
 <asp:Content ContentPlaceHolderID="mainContent" runat="server">
@@ -17,4 +18,7 @@ MasterPageFile="~/Shared/Site.Master" %>
 
     <input type='submit' value='login' />
 <%= this.EndForm() %>
+
+<%this.Partial<RecoverPasswordPartialModel>(); %>
+
 </asp:Content>

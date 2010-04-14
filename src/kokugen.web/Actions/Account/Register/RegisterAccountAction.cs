@@ -1,6 +1,7 @@
 using FubuMVC.Core.View;
 using Kokugen.Core.Domain;
 using Kokugen.Core.Membership.Services;
+using Kokugen.Core.Membership.Settings;
 using Kokugen.Core.Validation;
 
 namespace Kokugen.Web.Actions.Account.Register
@@ -8,15 +9,18 @@ namespace Kokugen.Web.Actions.Account.Register
     public class RegisterAccountAction
     {
         private readonly IRegistrationService _registrationService;
+        private readonly PasswordResetRetrievalSettings _passwordResetRetrievalSettings;
 
-        public RegisterAccountAction(IRegistrationService registrationService)
+        public RegisterAccountAction(IRegistrationService registrationService,
+            PasswordResetRetrievalSettings passwordResetRetrievalSettings)
         {
             _registrationService = registrationService;
+            _passwordResetRetrievalSettings = passwordResetRetrievalSettings;
         }
 
         public RegisterAccountModel Query(RegisterAccountRequest request)
         {
-            return new RegisterAccountModel();
+            return new RegisterAccountModel(){Settings = _passwordResetRetrievalSettings};
         }
 
         public AjaxResponse Command(RegisterAccountModel inModel)
@@ -55,10 +59,15 @@ namespace Kokugen.Web.Actions.Account.Register
         public string Password { get; set; }
         [Required,ValidEmail]
         public string Email { get; set; }
+
+        public string Question { get; set; }
+        public string Answer { get; set; }
     }
 
     public class RegisterAccountModel
     {
+        public PasswordResetRetrievalSettings Settings { get; set; }
+
         public UserDTO User { get; set; }
     }
 
