@@ -127,7 +127,9 @@
     <Content Include="Actions\Account\Password\PasswordResetForm.aspx" />
     <Content Include="Actions\Card\Get.aspx" />
     <Content Include="Actions\Errors\FourZeroThree.aspx" />
+    <Content Include="Actions\Project\ProjectMenu.aspx" />
     <Content Include="Content\css\jquery.jgrowl.css" />
+    <Content Include="Actions\Project\ProjectMenu_Item.ascx" />
     <Content Include="Content\images\delete.png" />
     <Content Include="Content\images\edit2.png" />
     <Content Include="Content\images\spite.jpg" />
@@ -210,6 +212,7 @@
     <Compile Include="Actions\Project\GetProjectAction.cs" />
     <Compile Include="Actions\Project\ListAction.cs" />
     <Compile Include="Actions\Project\ProjectFormAction.cs" />
+    <Compile Include="Actions\Project\ProjectMenuAction.cs" />
     <Compile Include="Actions\TaskCategory\RemoveAction.cs" />
     <Compile Include="Actions\TimeRecord\AddAction.cs" />
     <Compile Include="Actions\TimeRecord\AddTimeRecordModel.cs" />
@@ -273,6 +276,10 @@
     <Compile Include="KokugenWebRegistry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SecurityConfiguration.cs" />
+    <Compile Include="Shared\Super.Master.cs">
+      <DependentUpon>Super.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Shared\Project.Master.cs">
       <DependentUpon>Project.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -420,7 +427,9 @@
     <Content Include="Content\images\stopsign.png" />
     <Content Include="Shared\Project.Master" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Shared\Super.Master" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

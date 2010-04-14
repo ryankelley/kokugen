@@ -5,7 +5,7 @@
 <%@ Import Namespace="Kokugen.Web.Actions.Company"%>
 <%@ Import Namespace="Kokugen.Web.Actions.Home"%>
 <%@ Import Namespace="Kokugen.Web"%>
-<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Project.Master.cs" Inherits="Kokugen.Web.Shared.ProjectMaster" %>
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Project.Master.cs" Inherits="Kokugen.Web.Shared.ProjectMaster" MasterPageFile="Super.Master" %>
 <%@ Import Namespace="Kokugen.Web.Actions.Account.LoginStatus" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -28,6 +28,31 @@
     <link rel="shortcut icon" href="/content/images/icon.png" />
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            //$("ul.dropdown").parent().append("<span>&nbsp;</span>"); //Only shows drop down trigger when js is enabled (Adds empty span tag after ul.subnav*)
+
+            $("ul.subnav #projects").click(function () { //When trigger is clicked...
+
+                //Following events are applied to the subnav itself (moving subnav up and down)
+                $(this).parent().find("ul.dropdown").slideDown('fast').show(); //Drop down the subnav on click
+
+                $(this).parent().hover(function () {
+                }, function () {
+                    $(this).parent().find("ul.dropdown").slideUp('slow'); //When the mouse hovers out of the subnav, move it back up
+                });
+
+                //Following events are applied to the trigger (Hover events for the trigger)
+            }).hover(function () {
+                $(this).addClass("subhover"); //On hover over, add class "subhover"
+            }, function () {	//On Hover Out
+                $(this).removeClass("subhover"); //On hover out, remove class "subhover"
+            });
+
+        });
+
+    </script>
 </head>
 <body>
 <div id="head">
@@ -37,14 +62,12 @@
 		</div>
 		<div class="nav">
 			<ul class="subnav">
+                <li id="projects" class="bar"><a href="#">Projects</a><% this.Partial(new ProjectMenuModel()); %></li>
 				<li class="active"><%= this.LinkTo(new GetProjectModel { Id = Model.ProjectId}).Text("Project Home") %></li>
 				<li class="bar"><%= this.LinkTo(new ViewBoardInputModel{ Id = Model.ProjectId}).Text("Board")%></li>
-				<li class="bar"><%= this.LinkTo(new CompanyListModel()).Text("Companies") %></li>
-				<li class="bar"><%= this.LinkTo(new ProjectListModel()).Text("Projects") %></li>
 				<li class="bar"><%= this.LinkTo(new BoardConfigurationModel{ Id = Model.ProjectId}).Text("Process") %></li>
 				<li class="bar"><%= this.LinkTo(new TimeRecordListModel()).Text("Time") %></li>
-				<li class="bar"><a href="create.html">Users</a></li>
-				<li class="lbar"><%= this.LinkTo(new TaskListModel()).Text("Tasks") %></li>
+				
 			</ul>
 			<ul class="subnav right">
 			    <asp:ContentPlaceHolder ID="extraNavigation" runat="server" />
