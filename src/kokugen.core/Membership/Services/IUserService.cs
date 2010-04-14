@@ -17,7 +17,7 @@ namespace Kokugen.Core.Membership.Services
 
     public interface IUserService<USER> where USER : IUser
     {
-        void Update(USER user);
+        INotification Update(USER user);
         void Delete(USER user);
         USER Retrieve(object id);
         INotification Create(USER user);
