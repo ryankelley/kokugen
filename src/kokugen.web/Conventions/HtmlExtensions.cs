@@ -20,10 +20,6 @@ namespace Kokugen.Web.Conventions
             divWrapper.Child(textbox);
 
             return divWrapper;
-
-
-
-
         }
 
         public static HtmlTag Show<T>(this IFubuPage<T> page, Expression<Func<T, object>> expression) where T : class

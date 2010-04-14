@@ -26,10 +26,12 @@ namespace Kokugen.Core
             return _valueObjectCache[listName].Default();
         }
 
-        //public static void AddValueObjects(string key, IEnumerable<ValueObject> objects)
-        //{
-        //    _valueObjectCache.Store(key, objects);
-        //}
+        public static void AddValueObjects(string key, IEnumerable<ValueObject> objects)
+        {
+            var holder = new ValueObjectHolder(key);
+            holder.Values = objects;
+            _valueObjectCache.Fill(holder.GetKey(), holder);
+        }
 
         public static void AddValueObject<T>(ValueObject valueObject)
         {

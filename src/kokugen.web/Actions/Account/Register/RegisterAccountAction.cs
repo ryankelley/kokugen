@@ -1,4 +1,5 @@
 using FubuMVC.Core.View;
+using Kokugen.Core.Attributes;
 using Kokugen.Core.Domain;
 using Kokugen.Core.Membership.Services;
 using Kokugen.Core.Membership.Settings;
@@ -28,7 +29,9 @@ namespace Kokugen.Web.Actions.Account.Register
             var user = new User(inModel.User.UserName, inModel.User.Email, inModel.User.Password)
                            {
                                FirstName = inModel.User.FirstName,
-                               LastName = inModel.User.LastName
+                               LastName = inModel.User.LastName,
+                               Question = inModel.User.Question,
+                               Answer = inModel.User.Answer
                            };
 
             var notification = _registrationService.RegisterUser(user);
@@ -59,8 +62,9 @@ namespace Kokugen.Web.Actions.Account.Register
         public string Password { get; set; }
         [Required,ValidEmail]
         public string Email { get; set; }
-
+        [ValueOf("Question"), Required]
         public string Question { get; set; }
+        [Required]
         public string Answer { get; set; }
     }
 

@@ -262,6 +262,7 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Startables\CheckPermissionsInDb.cs" />
+    <Compile Include="Startables\PasswordQuestionInitializer.cs" />
     <Compile Include="Startables\SetupSuperUser.cs" />
   </ItemGroup>
   <ItemGroup>

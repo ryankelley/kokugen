@@ -6,18 +6,31 @@
    {%>
     <%=this.LinkTo(new RecoverPasswordRequest()).Id("forgot-password-link").Text("Forgot your password?")%>
 
+    <div id="recover-wrapper" style="display:none;">
+         <%=this.Edit(x => x.Email) %>
+         <input type="button" value="Recover Password" id="recover" />
+    </div>
+
     <script type="text/javascript">
         $(function () {
             $('#forgot-password-link').click(function (e) {
                 e.preventDefault();
-                $('#password-recover-placeholder').load(this.href);
+                $('#recover-wrapper').toggle();
             });
+
+            $('#recover').click(function (e) {
+                e.preventDefault();
+                $('#password-recover-placeholder').load($('#forgot-password-link').attr('href')+$('#email').val());
+            });
+
         });
 
     </script>
 
     <%
    }%>
+
+
 </div>
 
 <div id="password-recover-placeholder"></div>

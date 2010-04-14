@@ -1,16 +1,23 @@
 using FubuMVC.Core;
+using FubuMVC.Core.Security;
 using FubuMVC.Core.View;
 using HtmlTags;
+using Kokugen.Core.Membership.Services;
 using Kokugen.Core.Membership.Settings;
 
 namespace Kokugen.Web.Actions.Account.Password
 {
     public class RecoverPasswordAction
     {
+        private readonly IUserService _userService;
+        private readonly ISecurityContext _securityContext;
         private readonly PasswordResetRetrievalSettings _passwordResetRetrievalSettings;
 
-        public RecoverPasswordAction(PasswordResetRetrievalSettings passwordResetRetrievalSettings)
+        public RecoverPasswordAction(IUserService userService, ISecurityContext securityContext,
+            PasswordResetRetrievalSettings passwordResetRetrievalSettings)
         {
+            _userService = userService;
+            _securityContext = securityContext;
             _passwordResetRetrievalSettings = passwordResetRetrievalSettings;
         }
 
@@ -22,7 +29,16 @@ namespace Kokugen.Web.Actions.Account.Password
 
         public RecoverPasswordModel Query(RecoverPasswordRequest request)
         {
-            return new RecoverPasswordModel(){Settings = _passwordResetRetrievalSettings};
+            var returnModel = new RecoverPasswordModel(){Settings = _passwordResetRetrievalSettings};
+
+            if(_passwordResetRetrievalSettings.RequiresQuestionAndAnswer)
+            {
+                var userByEmail = _userService.GetUserByEmail(request.Email);
+                if (userByEmail != null) returnModel.Question = userByEmail.Question;
+            }
+
+            return returnModel;
+
         }
 
         public AjaxResponse Command(RecoverPasswordModel model)
@@ -33,6 +49,8 @@ namespace Kokugen.Web.Actions.Account.Password
 
     public class RecoverPasswordRequest
     {
+        [QueryString]
+        public string Email { get; set; }
     }
 
     public class RecoverPasswordModel
@@ -44,6 +62,7 @@ namespace Kokugen.Web.Actions.Account.Password
 
     public class RecoverPasswordPartialModel
     {
+        public string Email { get; set; }
         public PasswordResetRetrievalSettings Settings { get; set; }
     }
 
