@@ -38,6 +38,13 @@ namespace Kokugen.Core
             holder.AddValue(valueObject);
         }
 
+        public static void RemoveValueObject<T>(ValueObject valueObject)
+        {
+            var holder = _valueObjectCache.Find(x => x.GetKey() == typeof(T).Name);
+
+            holder.RemoveValue(valueObject);
+        }
+
         public static void AddValueObjects<T>(IEnumerable<ValueObject> objects)
         {
             var holder = new ValueObjectHolder(typeof (T).Name);
