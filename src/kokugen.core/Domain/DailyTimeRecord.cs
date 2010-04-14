@@ -7,7 +7,7 @@ namespace Kokugen.Core.Domain
         public virtual double Duration { get; set; }
         public virtual DateTime StartTime { get; set; }
         public virtual DateTime? EndTime { get; set; }
-        public virtual Guid UserId { get; set; }
+        public virtual User User { get; set; }
 
         public virtual void Start()
         {
