@@ -185,7 +185,7 @@
                     if(options.CallbackAfterSuccessfulEdit) {
                         window[options.CallbackAfterSuccessfulEdit]();
                     }
-                    dovetail.windowManager.refresh();
+                    //dovetail.windowManager.refresh();
                 } else {
                     this.reset();
                 }

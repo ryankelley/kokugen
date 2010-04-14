@@ -1,4 +1,5 @@
 using System;
+using FubuCore.Reflection;
 using FubuMVC.UI;
 using FubuMVC.UI.Configuration;
 using FubuMVC.UI.Tags;
@@ -106,13 +107,40 @@ namespace Kokugen.Web.Conventions
 
         public override HtmlTag Build(ElementRequest request)
         {
-            var tag = new HtmlTag("span").Text(request.StringValue()).AddClass("editable").Id(request.ElementId.Replace(request.Model.GetType().Name,""));
+            var tag = new HtmlTag("div").Text(request.StringValue()).AddClass("editable").Id(request.Accessor.Name);
 
-            var multiLine = request.Accessor.Name.Contains("Detail") ? "MultiLine:'true'" : "";
-                
+            var options = new EditOptions();
 
-            tag.Attr("data", "{editoptions:{EntityId:'',SaveUrl:'',RequiresExplicitUserActionForSave:'true', "+ multiLine+"}}");
+            options.MultiLine = request.Accessor.Name == "Details";
+            options.RequiresExplicitUserActionForSave = true;
+            
+            options.MaximumLength = request.Accessor.PropertyType.Equals(typeof(string)) ? Entity.UnboundedStringLength : 0;
+            options.IsDate = request.Accessor.PropertyType.IsDateTime();
+            options.IsTime = request.Accessor.Name.ToLower().Contains("time");
+            options.IsNumber = request.Accessor.PropertyType.IsIntegerBased() || request.Accessor.PropertyType.IsFloatingPoint();
+            options.Required = request.Accessor.HasAttribute<RequiredAttribute>();
+
+
+            var data = options.ToJson();    
+
+            tag.Attr("data", "{editoptions:"+data+"}");
             return tag;
         }
+    }
+
+    public class EditOptions
+    {
+        public string EntityId { get; set; }
+        public string SaveUrl { get; set; }
+        public bool RequiresExplicitUserActionForSave { get; set; }
+        public bool MultiLine { get; set; }
+
+        public int MaximumLength { get; set; }
+        public bool Required { get; set; }
+        //public int MinimumValue { get; set; }
+        //public int MaximumValue { get; set; }
+        public bool IsNumber { get; set; }
+        public bool IsDate { get; set; }
+        public bool IsTime { get; set; }
     }
 }
