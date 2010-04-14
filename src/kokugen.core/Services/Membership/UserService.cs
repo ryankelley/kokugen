@@ -30,19 +30,20 @@ namespace Kokugen.Core.Services
             _settings = settings;
         }
 
-        public void Update(User user)
+        public INotification Update(User user)
         {
-            var entity = user as Domain.User;
-            if (entity != null) ValidateAndUpdate(entity);
+            return ValidateAndUpdate(user);
         }
 
-        private void ValidateAndUpdate(User entity)
+        private INotification ValidateAndUpdate(User entity)
         {
             var notification = _validator.Validate(entity);
             if (notification.IsValid())
             {
+                //Todo: check for unique email address
                 _userRepository.Save(entity);
             }
+            return notification;
         }
 
         public void Delete(User user)

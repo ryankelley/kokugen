@@ -1,6 +1,7 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/Shared/Site.Master" Inherits="Kokugen.Web.Actions.Account.Manage.ManageAccount" %>
 <%@ Import Namespace="Kokugen.Web.Actions.Account.Manage" %>
 <%@ Import Namespace="Kokugen.Web.Actions.Account.Manage.ChangePassword" %>
+<%@ Import Namespace="System.Linq" %>
 
 <asp:Content ContentPlaceHolderID="mainContent" runat="server">
 
@@ -21,8 +22,23 @@
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="head" runat="server">
+        
+        <%if(Model.Messages.Any())
+          { 
+              foreach (var notificationMessage in Model.Messages)
+          {%>
+   <script type="text/javascript">
+       $(function () {
+           $.jGrowl('<%=notificationMessage %>', { theme: 'jgrowl-error', sticky: true });
+       });
+    </script>
+        <%} 
+       } %>
     <script type="text/javascript">
+
+
         $(function () {
+
             $('#change-password').ajaxDialog({
                 onComplete: HandleAjaxResponse,
                 dataType: 'json'
