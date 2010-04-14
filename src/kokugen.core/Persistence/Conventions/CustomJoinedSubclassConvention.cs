@@ -8,6 +8,7 @@ namespace Kokugen.Core.Persistence.Conventions
         public void Apply(IJoinedSubclassInstance instance)
         {
             instance.Key.Column("Id");
+            instance.Key.ForeignKey("fk_" + instance.EntityType.Name);
         }
     }
 }

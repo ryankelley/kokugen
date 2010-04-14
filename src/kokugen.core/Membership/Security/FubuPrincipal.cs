@@ -41,7 +41,7 @@ namespace Kokugen.Core.Membership.Security
         public bool IsInRole(string role)
         {
             if (_user != null)
-                return _user.IsInRole(role);
+                return _user.HasPermission(role);//.IsInRole(role));
             return false;
         }
 

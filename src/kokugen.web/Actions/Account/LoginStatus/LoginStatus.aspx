@@ -6,6 +6,6 @@
       [ <a href="<%=Model.RawUrl %>">Log Off</a> ]
 <%} else {%>
       [ <a href="<%=Model.RawUrl %>">Log In</a> ]
-      <span><%=this.LinkTo(new RegisterAccountRequest()).Text("Click Here to Register") %></span>
+      <span><%=this.LinkTo(new RegisterAccountRequest()).Text("Register") %></span>
 <%} %>
 

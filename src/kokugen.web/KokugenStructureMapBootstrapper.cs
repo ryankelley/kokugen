@@ -59,9 +59,9 @@ namespace Kokugen.Web
             Mapper.CreateMap<Card, CardViewDTO>()
                 .ForMember(a => a.Status, b=> b.MapFrom(c => c.Status.DisplayName));
             Mapper.CreateMap<BoardColumn, BoardColumnDTO>()
-                .ForMember(a => a.Limit, b=> b.UseValue(0));
+                .ForMember(a => a.CardLimit, b=> b.UseValue(0));
             Mapper.CreateMap<CustomBoardColumn, BoardColumnDTO>()
-                .ForMember(a => a.Limit, b=> b.NullSubstitute(0));
+                .ForMember(a => a.CardLimit, b=> b.NullSubstitute(0));
 //            Mapper.CreateMap<TimeRecord, TimeRecordDTO>()
 //                .ForMember(a => a.User, b => b.NullSubstitute(null));
 

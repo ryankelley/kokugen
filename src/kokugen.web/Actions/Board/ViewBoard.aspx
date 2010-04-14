@@ -87,14 +87,14 @@
     </div>
     <div id="backlog-container"  class="column hidden">
         <div class="collapse-left backlog-toggle">&nbsp;</div><div class="board-phase-header"><%= Model.BackLog.Name %></div>
-        <ul class="card-list ui-sortable" id="<%= Model.BackLog.Id %>" limit="<%= Model.BackLog.Limit %>"></ul>
+        <ul class="card-list ui-sortable" id="<%= Model.BackLog.Id %>" limit="<%= Model.BackLog.CardLimit %>"></ul>
     </div>
 
     <%= this.PartialForEach(m => m.Columns).WithoutItemWrapper().WithoutListWrapper().Using<BoardPhase_Control>() %>
 
     <div id="archive-container" class="column hidden">
         <div class="board-phase-header"><%= Model.Archive.Name %></div><div class="collapse-right archive-toggle">&nbsp;</div>
-        <ul class="card-list ui-sortable" id="<%= Model.Archive.Id %>" limit="<%= Model.Archive.Limit %>"></ul>
+        <ul class="card-list ui-sortable" id="<%= Model.Archive.Id %>" limit="<%= Model.Archive.CardLimit %>"></ul>
     </div>
     <div id="archive-title" class="slider right-slider">
         <div id="archive-toggle" class="slide-title right archive-toggle">&nbsp;</div>

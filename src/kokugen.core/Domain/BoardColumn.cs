@@ -13,7 +13,7 @@ namespace Kokugen.Core.Domain
         [Required]
         public virtual string Name { get; set; }
         public virtual string Description { get; set; }
-        public virtual int Limit { get; set; }
+        public virtual int CardLimit { get; set; }
 
         
     }

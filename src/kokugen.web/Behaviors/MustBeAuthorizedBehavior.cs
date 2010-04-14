@@ -5,7 +5,7 @@ using FubuMVC.Core.Runtime;
 using FubuMVC.Core.Security;
 using FubuMVC.Core.Urls;
 using Kokugen.Core.Membership;
-using Kokugen.Web.Actions.Login;
+using Kokugen.Web.Actions.Account.Login;
 
 namespace Kokugen.Web.Behaviors
 {
@@ -34,7 +34,7 @@ namespace Kokugen.Web.Behaviors
                 if (!_securityContext.IsAuthenticated())
                 {
                     var model = _request.Get<ReturnUrlModel>();
-                    var url = _urls.UrlFor(new LoginFormModel { ReturnUrl = model.RawUrl });
+                    var url = _urls.UrlFor(new LoginFormModel { ReturnUrl = model.RawUrl, Message = "You must be logged to view this page"});
                     _writer.RedirectToUrl(url);
                     return DoNext.Stop;
                 }

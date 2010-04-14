@@ -2,8 +2,8 @@ using FubuMVC.Core;
 using FubuMVC.Core.Security;
 using FubuMVC.Core.Urls;
 using FubuMVC.Core.View;
+using Kokugen.Web.Actions.Account.Login;
 using Kokugen.Web.Actions.Account.LogOff;
-using Kokugen.Web.Actions.Login;
 
 namespace Kokugen.Web.Actions.Account.LoginStatus
 {
@@ -37,7 +37,7 @@ namespace Kokugen.Web.Actions.Account.LoginStatus
             {
                 IsAuthenticated = false,
                 UserName = "",
-                RawUrl = _urlRegistry.UrlFor(new LoginModel())
+                RawUrl = _urlRegistry.UrlFor(new LoginFormModel())
             };
 
         }
