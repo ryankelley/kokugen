@@ -14,8 +14,6 @@ namespace Kokugen.Core.Persistence
             _container = container;
         }
 
-         
-
         private void execute(Action<IContainer> action)
         {
             IContainer container = null;
