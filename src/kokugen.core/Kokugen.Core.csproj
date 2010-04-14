@@ -132,6 +132,7 @@
     <Compile Include="Domain\BoardColumn.cs" />
     <Compile Include="Domain\Card.cs" />
     <Compile Include="Domain\Company.cs" />
+    <Compile Include="Domain\DailyTimeRecord.cs" />
     <Compile Include="Domain\Permission.cs" />
     <Compile Include="Domain\Role.cs" />
     <Compile Include="Domain\TaskCategory.cs" />

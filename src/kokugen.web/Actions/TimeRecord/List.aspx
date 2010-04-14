@@ -48,6 +48,8 @@ th
         }
     }
 
+    
+
     function makeStopCall(id) {
 
         $.ajax({
@@ -125,7 +127,7 @@ th
             
     <script type="text/javascript">
 
-        function showTimeRecordForm() {
+        function showTimeRecordForm(data) {
             $("#timerecord-form-container").dialog('open');
             return false;
         }
