@@ -24,9 +24,7 @@
     <script type="text/javascript">
         $(function () {
             $('#change-password').ajaxDialog({
-                onComplete: function () {
-                   
-                },
+                onComplete: HandleAjaxResponse,
                 dataType: 'json'
             });
 

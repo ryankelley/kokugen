@@ -28,6 +28,18 @@ function ValidateAndSave(successCallback, formObject) {
     return false;
 }
 
+function HandleAjaxResponse(response) {
+    if (typeof (response) === 'string')
+        response = JSON.parse(response);
+
+    if (response.Success) {
+        $.jGrowl(response.Item, {theme:'jgrowl-dark'});
+
+    } else {
+    $.jGrowl(response.Item, {header: 'Error occurred!', sticky:true, theme:'jgrowl-error'});
+    }
+}
+
 String.prototype.escapeHTML = function () {
     var val = this;
     // NOTE: the 'unescapeslashn' stuff is because in IE, innerHTML snarfs

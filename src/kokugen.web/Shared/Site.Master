@@ -25,10 +25,12 @@
     <%= this.Script("jquery.json-2.2.min.js")%>
     <%= this.Script("hinting.js")%>
     <%= this.Script("jquery.ui.ajax.dialog.js") %>
+    <%= this.Script("jquery.jgrowl.js") %>
 
 <%--    <%= this.CSS("custom-theme/jquery-ui-1.8rc3.custom.css")%>--%>
     <%= this.CSS("smoothness/jquery-ui-1.8.custom.css")%>
     <%= this.CSS("global.css")%>
+    <%=this.CSS("jquery.jgrowl.css")%>
     <link rel="shortcut icon" href="/content/images/icon.png" />
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -65,6 +67,7 @@
 	</div>
 	
     <div class="content clear">
+ 
         <asp:ContentPlaceHolder ID="mainContent" runat="server">
         
         </asp:ContentPlaceHolder>

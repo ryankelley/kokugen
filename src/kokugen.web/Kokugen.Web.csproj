@@ -126,11 +126,16 @@
     <Content Include="Actions\Account\Password\PasswordResetForm.aspx" />
     <Content Include="Actions\Card\Get.aspx" />
     <Content Include="Actions\Errors\FourZeroThree.aspx" />
+    <Content Include="Content\css\jquery.jgrowl.css" />
     <Content Include="Content\images\delete.png" />
     <Content Include="Content\images\edit2.png" />
     <Content Include="Content\images\spite.jpg" />
     <Content Include="Content\Scripts\dovetail.editing.js" />
     <Content Include="Content\Scripts\jquery.jeditable.js" />
+    <Content Include="Content\Scripts\jquery.jgrowl.js" />
+    <Content Include="Content\Scripts\jquery.jgrowl_compressed.js" />
+    <Content Include="Content\Scripts\jquery.jgrowl_minimized.js" />
+    <Content Include="Content\Scripts\jquery.ui.ajax.dialog.js" />
     <Content Include="Content\Scripts\jquery.metadata.js" />
     <Content Include="Content\Scripts\kokugenEditable.js" />
     <Content Include="Global.asax" />

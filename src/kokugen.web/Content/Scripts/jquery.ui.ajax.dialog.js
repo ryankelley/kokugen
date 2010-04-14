@@ -25,7 +25,7 @@
                     dataType: config.dataType,
                     data: $form.serialize(),
                     complete: function (req) {
-                        config.onComplete(req);
+                        config.onComplete(req.responseText);
                     }
                 });
             }
