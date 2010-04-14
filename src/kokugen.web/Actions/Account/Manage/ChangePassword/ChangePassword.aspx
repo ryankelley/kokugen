@@ -3,13 +3,11 @@
 
 
 <%=this.FormFor<ChangePasswordModel>() %>
-<fieldset>
-    <legend>Change Password</legend>
+
     <%=this.InputFor(x => x.Id).Hide() %>
     <%=this.Edit(x => x.OldPassword) %>
     <%=this.Edit(x => x.NewPassword) %>
     <%=this.Edit(x => x.ConfirmPassword) %>
 
-</fieldset>
-<%=this.EndForm() %>
 
+<%=this.EndForm() %>

@@ -11,7 +11,7 @@
 <%=this.Edit(x => x.User.LastName) %>
 <%=this.Edit(x => x.User.Email) %>
 
-<%=this.LinkTo(new ChangePasswordRequest(){Id = Model.Id}).Text("Change Password").Id("change-password") %>
+<%=this.LinkTo(new ChangePasswordRequest(){Id = Model.Id}).Text("Change Password").Id("change-password").Title("Change Password") %>
 
 </fieldset>
 
@@ -25,7 +25,7 @@
         $(function () {
             $('#change-password').ajaxDialog({
                 onComplete: function () {
-
+                   
                 },
                 dataType: 'json'
             });
