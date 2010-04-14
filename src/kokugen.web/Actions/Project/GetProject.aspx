@@ -2,6 +2,7 @@
 <%@ Import Namespace="Kokugen.Web.Actions.TimeRecord"%>
 <%@ Import Namespace="Kokugen.Web.Actions.Board"%>
 <%@ Import Namespace="FubuMVC.Core.Urls"%>
+<%@ Import Namespace="HtmlTags" %>
 <asp:Content ID="ProjectListHead" ContentPlaceHolderID="head" runat="server">
 
 </asp:Content>
@@ -133,7 +134,12 @@ color:black;
    
 </div>
     
-    <%= this.LinkTo(new ViewBoardInputModel{ Id = Model.Project.Id}).NoClosingTag().AddClass("icon") %><img src="/content/images/board_big.png" alt="view board" /></a>
+    <%= this.LinkTo(new ViewBoardInputModel { Id = Model.Project.Id }).AddClass("icon")
+        .Child(new HtmlTag("img", tag =>
+                                        {
+                                            tag.Attr("src","/content/images/board_big.png");
+                                            tag.Attr("alt","veiw board");
+                                        }))%>
     <% this.Partial(new StopTimeRecordFormInputModel()); %>
 
     
