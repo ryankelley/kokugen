@@ -1,66 +1,39 @@
 ﻿<%@ Import Namespace="Kokugen.Web.Actions.Board"%>
 <%@ Import Namespace="Kokugen.Web.Actions.TimeRecord"%>
-<%@ Import Namespace="Kokugen.Web.Actions.TaskCategory"%>
 <%@ Import Namespace="Kokugen.Web.Actions.Project"%>
-<%@ Import Namespace="Kokugen.Web.Actions.Company"%>
-<%@ Import Namespace="Kokugen.Web.Actions.Home"%>
-<%@ Import Namespace="Kokugen.Web"%>
-<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Project.Master.cs" Inherits="Kokugen.Web.Shared.ProjectMaster" MasterPageFile="Super.Master" %>
-<%@ Import Namespace="Kokugen.Web.Actions.Account.LoginStatus" %>
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Project.Master.cs" Inherits="Kokugen.Web.Shared.ProjectMaster" MasterPageFile="~/Shared/Super.Master" %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<asp:Content ContentPlaceHolderID="Masterhead" ID="projecthead" runat="server">
+<script type="text/javascript">
+    $(document).ready(function () {
 
-<html xmlns="http://www.w3.org/1999/xhtml" >
-<head runat="server">
-    <title>Kokugen - Time Tracking</title>
-    <%= this.Script("jquery-1.4.2.min.js")%>
-    <script src="/Content/Scripts/jquery-1.4.1-vsdoc.js"></script>
-<%--    <%= this.Script("jquery-ui-1.8rc3.custom.min.js")%>--%>
-    <%= this.Script("jquery-ui-1.8.smoothness.min.js")%>
-    <%= this.Script("jquery.validate.min.js")%>
-    <%= this.Script("jquery.form.js")%>
-    <%= this.Script("application.js")%>
-    <%= this.Script("jquery.json-2.2.min.js")%>
-    <%= this.Script("hinting.js")%>
-<%--    <%= this.CSS("custom-theme/jquery-ui-1.8rc3.custom.css")%>--%>
-    <%= this.CSS("smoothness/jquery-ui-1.8.custom.css")%>
-    <%= this.CSS("global.css")%>
-    <link rel="shortcut icon" href="/content/images/icon.png" />
-    <asp:ContentPlaceHolder ID="head" runat="server">
-    </asp:ContentPlaceHolder>
-    <script type="text/javascript">
-        $(document).ready(function () {
+        //$("ul.dropdown").parent().append("<span>&nbsp;</span>"); //Only shows drop down trigger when js is enabled (Adds empty span tag after ul.subnav*)
 
-            //$("ul.dropdown").parent().append("<span>&nbsp;</span>"); //Only shows drop down trigger when js is enabled (Adds empty span tag after ul.subnav*)
+        $("ul.subnav #projects").click(function () { //When trigger is clicked...
 
-            $("ul.subnav #projects").click(function () { //When trigger is clicked...
+            //Following events are applied to the subnav itself (moving subnav up and down)
+            $(this).parent().find("ul.dropdown").slideDown('fast').show(); //Drop down the subnav on click
 
-                //Following events are applied to the subnav itself (moving subnav up and down)
-                $(this).parent().find("ul.dropdown").slideDown('fast').show(); //Drop down the subnav on click
-
-                $(this).parent().hover(function () {
-                }, function () {
-                    $(this).parent().find("ul.dropdown").slideUp('slow'); //When the mouse hovers out of the subnav, move it back up
-                });
-
-                //Following events are applied to the trigger (Hover events for the trigger)
-            }).hover(function () {
-                $(this).addClass("subhover"); //On hover over, add class "subhover"
-            }, function () {	//On Hover Out
-                $(this).removeClass("subhover"); //On hover out, remove class "subhover"
+            $(this).parent().hover(function () {
+            }, function () {
+                $(this).parent().find("ul.dropdown").slideUp('slow'); //When the mouse hovers out of the subnav, move it back up
             });
 
+            //Following events are applied to the trigger (Hover events for the trigger)
+        }).hover(function () {
+            $(this).addClass("subhover"); //On hover over, add class "subhover"
+        }, function () {	//On Hover Out
+            $(this).removeClass("subhover"); //On hover out, remove class "subhover"
         });
 
+    });
+
     </script>
-</head>
-<body>
-<div id="head">
-		<div id="wrapper">
-			<h1 id="logo"><a href="/">Kokugen - Time Managment</a></h1>
-            <div class="user-stuff"> <%this.Partial<LoginStatusModel>(); %></div>
-		</div>
-		<div class="nav">
+<asp:ContentPlaceHolder ID="head" runat="server" />
+</asp:Content>
+
+        <asp:Content ID="projectnav" ContentPlaceHolderID="MasterNavigation" runat="server">
+        <div class="nav">
 			<ul class="subnav">
                 <li id="projects" class="bar"><a href="#">Projects</a><% this.Partial(new ProjectMenuModel()); %></li>
 				<li class="active"><%= this.LinkTo(new GetProjectModel { Id = Model.ProjectId}).Text("Project Home") %></li>
@@ -74,22 +47,11 @@
 			    
 			</ul>
 		</div>
-		<%--<div id="project-nav-wrapper">
-		    <ul id="project-nav">
-		        <li>project list</li>
-		        <li>Home</li>
-		        <li>Board</li>
-		        <li>Work</li>
-		        <li>Performace</li>
-		        <li>Process</li>
-		    </ul>
-		</div>--%>
-	</div>
+        </asp:Content>
 	
-    <div class="content clear">
+    <asp:Content ContentPlaceHolderID="SupermainContent" runat="server">
         <asp:ContentPlaceHolder ID="mainContent" runat="server">
         
         </asp:ContentPlaceHolder>
-    </div>
-</body>
-</html>
+    </asp:Content>
+

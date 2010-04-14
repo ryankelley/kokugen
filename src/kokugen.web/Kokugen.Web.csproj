@@ -147,7 +147,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Actions\Account\Manage\ChangePassword\ChangePasswordAction.cs" />
+    <Compile Include="Actions\Account\Manage\ChangePassword\ChangePasswordAction.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Actions\Account\Manage\ManageAccountAction.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
