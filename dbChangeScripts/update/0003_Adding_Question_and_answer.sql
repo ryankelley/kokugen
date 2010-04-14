@@ -1,4 +1,4 @@
-﻿/*
+/*
 Run this script on:
 
         localhost.KokugenDataVersioned    -  This database will be modified
@@ -9,7 +9,7 @@ to synchronize it with:
 
 You are recommended to back up your database before running this script
 
-Script created by SQL Compare version 8.1.0 from Red Gate Software Ltd at 4/14/2010 2:28:36 PM
+Script created by SQL Compare version 8.0.0 from Red Gate Software Ltd at 4/14/2010 4:16:04 PM
 
 */
 SET NUMERIC_ROUNDABORT OFF
@@ -26,24 +26,20 @@ SET TRANSACTION ISOLATION LEVEL SERIALIZABLE
 GO
 BEGIN TRANSACTION
 GO
-PRINT N'Creating [dbo].[DailyTimeRecords]'
+PRINT N'Altering [dbo].[Users]'
 GO
-CREATE TABLE [dbo].[DailyTimeRecords]
-(
-[Id] [uniqueidentifier] NOT NULL,
-[Duration] [float] NULL,
-[StartTime] [datetime] NULL,
-[EndTime] [datetime] NULL,
-[User_id] [uniqueidentifier] NULL
-)
+ALTER TABLE [dbo].[Users] ADD
+[Question] [nvarchar] (255) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[Answer] [nvarchar] (255) COLLATE SQL_Latin1_General_CP1_CI_AS NULL
 GO
 IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
 GO
 IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
 GO
-PRINT N'Creating primary key [PK__DailyTim__3214EC07267ABA7A] on [dbo].[DailyTimeRecords]'
+PRINT N'Altering [dbo].[DailyTimeRecords]'
 GO
-ALTER TABLE [dbo].[DailyTimeRecords] ADD CONSTRAINT [PK__DailyTim__3214EC07267ABA7A] PRIMARY KEY CLUSTERED  ([Id])
+ALTER TABLE [dbo].[DailyTimeRecords] ADD
+[User_id] [uniqueidentifier] NULL
 GO
 IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
 GO

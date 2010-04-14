@@ -46,8 +46,6 @@ namespace Kokugen.Core.Services
 
         public void ChangePassword(User user, string oldPassword, string newPassword)
         {
-            if(_settings.PasswordResetRetrievalSettings.RequiresQuestionAndAnswer)
-                throw new InvalidOperationException("Password requires question and answer to change");
 
             var entity = user as User;
             if (entity == null) return;

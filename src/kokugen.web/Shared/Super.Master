@@ -5,11 +5,10 @@
 <%@ Import Namespace="Kokugen.Web.Actions.Company"%>
 <%@ Import Namespace="Kokugen.Web.Actions.Home"%>
 <%@ Import Namespace="Kokugen.Web"%>
-<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="FubuMVC.Core.View.FubuMasterPage" %>
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Super.Master.cs" Inherits="FubuMVC.Core.View.FubuMasterPage" %>
 
 <%@ Import Namespace="Kokugen.Web.Actions.Account.Register" %>
 <%@ Import Namespace="Kokugen.Web.Actions.Account.LoginStatus" %>
-<%@ Import Namespace="Kokugen.Web.Actions.DailyTimeRecord" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -18,22 +17,16 @@
     <title>Kokugen - Time Tracking</title>
     <%= this.Script("jquery-1.4.2.min.js")%>
     <script src="/Content/Scripts/jquery-1.4.1-vsdoc.js"></script>
-<%--    <%= this.Script("jquery-ui-1.8rc3.custom.min.js")%>--%>
     <%= this.Script("jquery-ui-1.8.smoothness.min.js")%>
     <%= this.Script("jquery.validate.min.js")%>
     <%= this.Script("jquery.form.js")%>
     <%= this.Script("application.js")%>
     <%= this.Script("jquery.json-2.2.min.js")%>
     <%= this.Script("hinting.js")%>
-    <%= this.Script("jquery.ui.ajax.dialog.js") %>
-    <%= this.Script("jquery.jgrowl.js") %>
-
-<%--    <%= this.CSS("custom-theme/jquery-ui-1.8rc3.custom.css")%>--%>
     <%= this.CSS("smoothness/jquery-ui-1.8.custom.css")%>
     <%= this.CSS("global.css")%>
-    <%=this.CSS("jquery.jgrowl.css")%>
     <link rel="shortcut icon" href="/content/images/icon.png" />
-    <asp:ContentPlaceHolder ID="head" runat="server">
+    <asp:ContentPlaceHolder ID="Masterhead" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
@@ -48,8 +41,7 @@
 				<li class="bar"><%= this.LinkTo(new ProjectListModel()).Text("Projects") %></li>
 				<li class="lbar"><%= this.LinkTo(new TimeRecordListModel()).Text("Time") %></li>
 				<li class="lbar"><%=this.LinkTo(new UserListRequest()).Text("Users") %></li>
-				<li class="lbar"><%= this.LinkTo(new TaskListModel()).Text("Tasks") %></li>
-                <li class="last"><%= this.LinkTo(new DailyTimeRecordListModel()).Text("Daily Time") %></li>
+				<li class="last"><%= this.LinkTo(new TaskListModel()).Text("Tasks") %></li>
 			</ul>
 			<ul class="subnav right">
 			    <asp:ContentPlaceHolder ID="extraNavigation" runat="server" />
@@ -69,7 +61,6 @@
 	</div>
 	
     <div class="content clear">
- 
         <asp:ContentPlaceHolder ID="mainContent" runat="server">
         
         </asp:ContentPlaceHolder>
