@@ -24,6 +24,8 @@
     <%= this.Script("application.js")%>
     <%= this.Script("jquery.json-2.2.min.js")%>
     <%= this.Script("hinting.js")%>
+    <%= this.Script("jquery.ui.ajax.dialog.js") %>
+
 <%--    <%= this.CSS("custom-theme/jquery-ui-1.8rc3.custom.css")%>--%>
     <%= this.CSS("smoothness/jquery-ui-1.8.custom.css")%>
     <%= this.CSS("global.css")%>
