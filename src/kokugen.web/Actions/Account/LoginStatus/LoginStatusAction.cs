@@ -37,7 +37,7 @@ namespace Kokugen.Web.Actions.Account.LoginStatus
             {
                 IsAuthenticated = false,
                 UserName = "",
-                RawUrl = _urlRegistry.UrlFor(new LoginModel())
+                RawUrl = _urlRegistry.UrlFor(new LoginFormModel())
             };
 
         }
