@@ -127,6 +127,11 @@
     <Content Include="Actions\Errors\FourZeroThree.aspx" />
     <Content Include="Content\images\delete.png" />
     <Content Include="Content\images\edit2.png" />
+    <Content Include="Content\images\spite.jpg" />
+    <Content Include="Content\Scripts\dovetail.editing.js" />
+    <Content Include="Content\Scripts\jquery.jeditable.js" />
+    <Content Include="Content\Scripts\jquery.metadata.js" />
+    <Content Include="Content\Scripts\kokugenEditable.js" />
     <Content Include="Global.asax" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -136,6 +141,7 @@
     <Compile Include="Actions\Account\Password\ResetPasswordAction.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Actions\Card\UpdateAction.cs" />
     <Compile Include="Actions\Errors\ForbiddenAction.cs" />
     <Compile Include="Actions\Account\Activate\ActivateAccountAction.cs" />
     <Compile Include="Actions\Account\LoginStatus\LoginStatusAction.cs">
@@ -397,7 +403,6 @@
     <Content Include="Content\images\backlog-title.png" />
     <Content Include="Content\images\collapse-left.png" />
     <Content Include="Content\images\collapse-right.png" />
-    <Content Include="Content\Scripts\jquery.jeditable.mini.js" />
     <Content Include="Default.aspx" />
     <Content Include="Content\images\stopsign.png" />
     <Content Include="Shared\Project.Master" />

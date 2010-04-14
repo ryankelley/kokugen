@@ -8,6 +8,7 @@ using Kokugen.Core.Domain;
 using Kokugen.Core.Membership;
 using Kokugen.Core.Services;
 using Kokugen.Web.Actions.Board;
+using Kokugen.Web.Actions.Card;
 using Kokugen.Web.Actions.DTO;
 using Kokugen.Web.Behaviors;
 using StructureMap;
@@ -58,6 +59,8 @@ namespace Kokugen.Web
         {
             Mapper.CreateMap<Card, CardViewDTO>()
                 .ForMember(a => a.Status, b=> b.MapFrom(c => c.Status.DisplayName));
+            Mapper.CreateMap<Card, CardDetailModel>()
+                .ForMember(a => a.Status, b => b.MapFrom(c => c.Status.DisplayName));
             Mapper.CreateMap<BoardColumn, BoardColumnDTO>()
                 .ForMember(a => a.CardLimit, b=> b.UseValue(0));
             Mapper.CreateMap<CustomBoardColumn, BoardColumnDTO>()

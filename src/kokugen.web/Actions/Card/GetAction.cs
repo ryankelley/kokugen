@@ -21,13 +21,27 @@ namespace Kokugen.Web.Actions.Card
 
             var card = _cardService.GetCard(model.Id);
 
-            return new CardDetailModel {Card = Mapper.Map<Core.Domain.Card, CardViewDTO>(card), ProjectId = card.Project.Id};
+            return Mapper.Map<Core.Domain.Card, CardDetailModel>(card);
+            
         }
     }
 
     public class CardDetailModel : ProjectBaseViewModel
     {
-        public CardViewDTO Card { get; set; }
+        public string Title { get; set; }
+        public string Details { get; set; }
+        public int TimeEstimate { get; set; }
+        public int Size { get; set; }
+        public string Priority { get; set; }
+        public DateTime? Deadline { get; set; }
+        public int CardNumber { get; set; }
+        public Guid Id { get; set; }
+        public Guid ColumnId { get; set; }
+        public string Color { get; set; }
+        public string Status { get; set; }
+        public string BlockReason { get; set; }
+        public int CardOrder { get; set; }
+        
     }
 
     public class CardDetailInputModel : IRequestById

@@ -72,6 +72,7 @@ namespace Kokugen.Web
             //Policies.WrapBehaviorChainsWith<MustBeAuthorizedBehavior>();
             
             Output.ToJson.WhenCallMatches(action => action.Returns<AjaxResponse>());
+            Output.ToJson.WhenCallMatches(action => action.Returns<InPlaceAjaxResponse>());
 
             Views.TryToAttach(x =>
                                   {

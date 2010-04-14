@@ -1,5 +1,6 @@
 using System;
 using System.Linq.Expressions;
+using FubuCore;
 using FubuCore.Reflection;
 using FubuMVC.Core.View;
 using FubuMVC.UI;
@@ -20,6 +21,13 @@ namespace Kokugen.Web.Conventions
             divWrapper.Child(textbox);
 
             return divWrapper;
+        }
+
+        public static HtmlTag EditInPlace<T>(this IFubuPage<T> page, Expression<Func<T, object>> expression) where T: class
+        {
+            page.Tags().SetProfile("inplace");
+            var output = page.InputFor(expression);
+            return output;
         }
 
         public static HtmlTag Show<T>(this IFubuPage<T> page, Expression<Func<T, object>> expression) where T : class

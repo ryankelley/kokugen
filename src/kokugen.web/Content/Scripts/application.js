@@ -1,6 +1,7 @@
-$(document).ready(function() {
+$(document).ready(function () {
     $(window).resize(setContentHeightToFull);
-    $(".datepicker").datepicker({ buttonImage: '/content/images/datepicker.png' });
+    setContentHeightToFull();
+    $("input.datepicker").datepicker({ buttonImage: '/content/images/datepicker.png' });
 });
 
 function setContentHeightToFull() {
@@ -27,3 +28,35 @@ function ValidateAndSave(successCallback, formObject) {
     return false;
 }
 
+String.prototype.escapeHTML = function () {
+    var val = this;
+    // NOTE: the 'unescapeslashn' stuff is because in IE, innerHTML snarfs
+    // \n's and destroys edit-in-place for multi-line textboxes
+    val = val.replace(/\r?\n/ig, "---unescapeslashn");
+
+    var div = document.createElement('div');
+    var text = document.createTextNode(val);
+    div.appendChild(text);
+    var result = div.innerHTML;
+
+    result = result.replace(/---unescapeslashn/ig, "\n");
+    return result;
+};
+
+String.prototype.unescapeHTML = function () {
+    var val = this;
+
+    // NOTE: the 'unescapeslashn' stuff is because in IE, innerHTML snarfs
+    // \n's and destroys edit-in-place for multi-line textboxes
+    val = val.replace(/\r?\n/ig, "---unescapeslashn");
+    var temp = document.createElement("pre");
+    temp.innerHTML = val;
+    var childNode = temp.childNodes[0];
+    var result = '';
+    if (childNode) {
+        result = temp.childNodes[0].nodeValue;
+        temp.removeChild(temp.firstChild)
+    }
+    result = result.replace(/---unescapeslashn/ig, "\n");
+    return result;
+};
