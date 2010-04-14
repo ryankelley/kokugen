@@ -33,6 +33,8 @@ namespace Kokugen.Web.Conventions
             BeforeEachOfPartial.If(x => x.ModelType == typeof(ProjectListModel)).Modify(x => x.AddClass("project"));
             BeforeEachOfPartial.If(x => x.ModelType == typeof(BoardConfigurationModel)).Modify(x => x.AddClass("phase"));
             
+            Profile("inplace", x=> x.Editors.Builder<EditInPlaceBuilder>());
+
             //BeforeEachOfPartial.If(x => x.Accessor.)
 
             //BeforeEachOfPartial.If(x => x.Is<ProjectListModel>()).Modify();
@@ -95,5 +97,22 @@ namespace Kokugen.Web.Conventions
         }
     }
 
-    
+    public class EditInPlaceBuilder : ElementBuilder
+    {
+        protected override bool matches(AccessorDef def)
+        {
+            return true;
+        }
+
+        public override HtmlTag Build(ElementRequest request)
+        {
+            var tag = new HtmlTag("span").Text(request.StringValue()).AddClass("editable").Id(request.ElementId.Replace(request.Model.GetType().Name,""));
+
+            var multiLine = request.Accessor.Name.Contains("Detail") ? "MultiLine:'true'" : "";
+                
+
+            tag.Attr("data", "{editoptions:{EntityId:'',SaveUrl:'',RequiresExplicitUserActionForSave:'true', "+ multiLine+"}}");
+            return tag;
+        }
+    }
 }

@@ -16,12 +16,12 @@ namespace Kokugen.Core.Membership.Services
         void Unlock(USER user);
         void ChangePassword(USER user, string oldPassword, string newPassword);
         void ChangePasswordQuestionAndAnswer(USER user, string password, string question, string answer);
+        void ResetPassword(USER user, string passwordAnswer);
+        void ResetPassword(USER user);
+
 
         string GetPassword(USER user, string passwordAnswer);
         string GetPassword(USER user);
-
-        string ResetPassword(USER user, string passwordAnswer);
-        string ResetPassword(USER user);
     }
 
     public interface IPasswordService : IPasswordService<User>{}

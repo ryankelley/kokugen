@@ -13,6 +13,13 @@
              <%=this.Edit(x => x.User.LastName) %>
              <%=this.Edit(x => x.User.Email) %>
              <%=this.Edit(x => x.User.Password) %>
+             <%if (Model.Settings.RequiresQuestionAndAnswer)
+               {%>
+             <%=this.Edit(x => x.User.Question) %>
+             <%=this.Edit(x => x.User.Answer) %>
+             <%
+               }%>
+
              <input type='submit' value='Register' />
     </fieldset>
 

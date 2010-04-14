@@ -72,6 +72,7 @@ namespace Kokugen.Core.Services
         public IPagedList<User> FindAll(int pageIndex, int pageSize)
         {
             var users = _userRepository.Query()
+                .Where(x => x.IsActivated)
                 .Take(pageSize)
                 .Skip(pageIndex*pageSize);
             return new StaticPagedList<User>(users, pageIndex, pageSize, TotalUsers);

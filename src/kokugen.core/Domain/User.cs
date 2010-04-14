@@ -23,8 +23,6 @@ namespace Kokugen.Core.Domain
             Email = email;
         }
 
-
-        #region Implementation of IUser
         [Required]
         public virtual string UserName { get; protected set; }
         [Required, ValidEmail]
@@ -39,13 +37,17 @@ namespace Kokugen.Core.Domain
             get { return Id; }
         }
 
-        #endregion
+
         
         public virtual string FirstName { get; set; }
+
         public virtual string LastName { get; set; }
 
         [Required]
         public virtual string Password { get; protected set; }
+
+        public virtual string Question { get; set; }
+        public virtual string Answer { get; set; }
 
         public virtual IEnumerable<Role> GetRoles()
         {
