@@ -49,6 +49,7 @@ namespace Kokugen.Core.Services
         public void DeleteCompany(Guid guid)
         {
             var company = _companyRepository.Get(guid);
+            ValueObjectRegistry.RemoveValueObject<Company>(new ValueObject(company.Id.ToString(), company.Name));
             _companyRepository.Delete(company);
         }
 

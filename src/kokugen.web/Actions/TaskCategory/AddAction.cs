@@ -1,3 +1,4 @@
+using System;
 using Kokugen.Core;
 using Kokugen.Core.Attributes;
 using Kokugen.Core.Services;
@@ -16,7 +17,14 @@ namespace Kokugen.Web.Actions.TaskCategory
 
         public AjaxResponse Command(AddTaskModel inModel)
         {
-            var task = new Core.Domain.TaskCategory() { Name = inModel.TaskName };
+            var task = new Core.Domain.TaskCategory();
+
+            if(inModel.TaskId.IsNotEmpty())
+            {
+               task = _taskCategoryService.Get(inModel.TaskId);
+            }
+
+            task.Name = inModel.TaskName;
           
            
             var notification = _taskCategoryService.SaveTask(task);

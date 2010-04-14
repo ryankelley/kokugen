@@ -8,7 +8,8 @@
             <%= this.DisplayFor(x => x.Name) %>
         </td>
         <td>
-            <%= new LinkTag("", "#").AddClass("delete-button").Attr("data", Model.Id).NoClosingTag() + "<img src=\" /content/images/delete.png\" alt=\"delete\" /></a>"%>
+            <%= new LinkTag("", "#").AddClass("edit-button").Attr("name", Model.Name).Attr("id", Model.Id).NoClosingTag() + "<img src=\"/content/images/edit2.png\" alt=\"edit\" /></a>" 
+                                + " | " +  new LinkTag("", "#").AddClass("delete-button").Attr("data", Model.Id).NoClosingTag() + "<img src=\" /content/images/delete.png\" alt=\"delete\" /></a>"%>
         </td>
 
     </tr>

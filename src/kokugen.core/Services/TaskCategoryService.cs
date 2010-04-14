@@ -53,6 +53,7 @@ namespace Kokugen.Core.Services
         public void DeleteTask(Guid guid)
         {
             var task=_taskCategoryRepository.Get(guid);
+            ValueObjectRegistry.RemoveValueObject<TaskCategory>(new ValueObject(task.Id.ToString(), task.Name));
             _taskCategoryRepository.Delete(task);
         }
     }
