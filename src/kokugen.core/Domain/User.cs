@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Kokugen.Core.Membership;
 using Kokugen.Core.Membership.Security;
 using Kokugen.Core.Services;
 using Kokugen.Core.Validation;
@@ -75,6 +76,25 @@ namespace Kokugen.Core.Domain
         public virtual bool IsInRole(string roleName)
         {
             return _roles.Where(x => x.Name == roleName).Count() > 0;
+        }
+
+        public virtual bool HasPermission(string permissionName)
+        {
+            //if (IsAdmin())
+            //{
+            //    return true;
+            //}
+
+            foreach (var role in _roles)
+            {
+                if (role.Permissions == null) continue;
+                foreach (var permission in role.Permissions)
+                {
+                    if (permission.Name.DisplayName == permissionName) return true;
+                }
+            }
+
+            return false;
         }
 
         public virtual void SetPassword(IPasswordHelperService service)

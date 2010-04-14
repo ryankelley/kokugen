@@ -24,7 +24,7 @@ namespace Kokugen.Web.Actions.Board
             return new BoardConfigurationModel
             {
                 Id = model.Id,
-                BoardColumns = _projectService.GetProjectFromId(model.Id).GetAllBoardColumns().Select(x => new BoardColumnDTO { Name = x.Name, Description = x.Description, Id = x.Id, Limit = x.CardLimit }).ToList(),
+                BoardColumns = _projectService.GetProjectFromId(model.Id).GetAllBoardColumns().Select(x => new BoardColumnDTO { Name = x.Name, Description = x.Description, Id = x.Id, CardLimit = x.CardLimit }).ToList(),
                 ProjectId = model.Id
                 
             };
