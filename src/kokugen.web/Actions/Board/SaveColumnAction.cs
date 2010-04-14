@@ -21,7 +21,7 @@ namespace Kokugen.Web.Actions.Board
 
             var column = _boardService.ModifyColumn(model.ProjectId, model.Id, model.ColumnName, model.ColumnDescription, model.ColumnLimit);
 
-            var jsonOutput = new BoardColumnDTO {Id = column.Id, Name = column.Name, Description = column.Description, Limit = column.CardLimit};
+            var jsonOutput = new BoardColumnDTO {Id = column.Id, Name = column.Name, Description = column.Description, CardLimit = column.CardLimit};
 
             return new AjaxResponse
             {

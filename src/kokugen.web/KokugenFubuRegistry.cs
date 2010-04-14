@@ -1,11 +1,14 @@
 using System;
 using FubuCore;
 using FubuMVC.Core;
+using FubuMVC.Core.Behaviors;
 using FubuMVC.Core.Registration.DSL;
 using FubuMVC.Core.Registration.ObjectGraph;
+using FubuMVC.Core.Urls;
 using Kokugen.Core.Membership;
 using Kokugen.Web.Actions;
 using Kokugen.Web.Actions.Board;
+using Kokugen.Web.Actions.Errors;
 using Kokugen.Web.Actions.Home;
 using FubuMVC.UI;
 using Kokugen.Web.Behaviors;
@@ -38,12 +41,15 @@ namespace Kokugen.Web
                 .ConstrainToHttpMethod(action => action.Method.Name.StartsWith("Remove"), "DELETE")
                 .ForInputTypesOf<IRequestById>(x => x.RouteInputFor(request => request.Id).DefaultValue = "");
 
+
             this.UseDefaultHtmlConventions();
             this.HtmlConvention(new KokugenHtmlConventions());
 
 #if RELEASE
             HomeIs<IndexAction>(x => x.Query());
 #endif
+
+            
 
             this.StringConversions(x =>
             {
@@ -56,7 +62,10 @@ namespace Kokugen.Web
             // Configure Permissions
             SecurityProvider.Configure(new KokugenSecurityRegistry());
 
+
+            Policies.WrapBehaviorChainsWith<load_the_current_principal>();
             Policies.Add<AuthenticationBehaviorPolicy>();
+
             //Policies.WrapBehaviorChainsWith<MustBeAuthorizedBehavior>();
             //Policies.ConditionallyWrapBehaviorChainsWith<MustBeAuthorizedBehavior>(c => c.OutputType() == typeof (BoardConfigurationModel));
             
