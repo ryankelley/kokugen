@@ -16,7 +16,7 @@ namespace Kokugen.Core.Domain
         public virtual Card Card { get; set; }
         public virtual TaskCategory Task { get; set; }
 
-        public virtual Guid UserId { get; set; }
+        public virtual User User { get; set; }
 
         public virtual void Start()
         {

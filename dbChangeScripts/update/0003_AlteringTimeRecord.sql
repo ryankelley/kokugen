@@ -1,4 +1,4 @@
-/*
+﻿/*
 Run this script on:
 
         localhost.KokugenDataVersioned    -  This database will be modified
@@ -9,7 +9,7 @@ to synchronize it with:
 
 You are recommended to back up your database before running this script
 
-Script created by SQL Compare version 8.0.0 from Red Gate Software Ltd at 4/14/2010 4:16:04 PM
+Script created by SQL Compare version 8.1.0 from Red Gate Software Ltd at 4/14/2010 4:23:30 PM
 
 */
 SET NUMERIC_ROUNDABORT OFF
@@ -26,29 +26,19 @@ SET TRANSACTION ISOLATION LEVEL SERIALIZABLE
 GO
 BEGIN TRANSACTION
 GO
-PRINT N'Altering [dbo].[Users]'
+PRINT N'Altering [dbo].[TimeRecords]'
 GO
-ALTER TABLE [dbo].[Users] ADD
-[Question] [nvarchar] (255) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
-[Answer] [nvarchar] (255) COLLATE SQL_Latin1_General_CP1_CI_AS NULL
-GO
-IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
-GO
-IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
-GO
-PRINT N'Altering [dbo].[DailyTimeRecords]'
-GO
-ALTER TABLE [dbo].[DailyTimeRecords] ADD
+ALTER TABLE [dbo].[TimeRecords] ADD
 [User_id] [uniqueidentifier] NULL
 GO
 IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
 GO
 IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
 GO
-PRINT N'Adding foreign keys to [dbo].[DailyTimeRecords]'
+PRINT N'Adding foreign keys to [dbo].[TimeRecords]'
 GO
-ALTER TABLE [dbo].[DailyTimeRecords] ADD
-CONSTRAINT [fk_DailyTimeRecord_to_User] FOREIGN KEY ([User_id]) REFERENCES [dbo].[Users] ([Id])
+ALTER TABLE [dbo].[TimeRecords] ADD
+CONSTRAINT [fk_TimeRecord_to_User] FOREIGN KEY ([User_id]) REFERENCES [dbo].[Users] ([Id])
 GO
 IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
 GO
