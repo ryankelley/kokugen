@@ -1,4 +1,5 @@
 using System;
+using HtmlTags;
 using Kokugen.Core.Domain;
 using Kokugen.Core.Membership.Security;
 using Kokugen.Core.Membership.Services;
@@ -13,23 +14,24 @@ namespace Kokugen.Core.Services
         private readonly IPasswordHelperService _passwordHelper;
         private readonly IUserRepository _userRepository;
         private readonly IValidator _validator;
+        private readonly IEmailService _emailService;
         private readonly MembershipSettingsBag _settings;
 
-        public PasswordService(IPasswordHelperService passwordHelper,IUserRepository userRepository, 
-            IValidator validator, MembershipSettingsBag settings)
+        public PasswordService(IPasswordHelperService passwordHelper,
+            IUserRepository userRepository, 
+            IValidator validator,
+            IEmailService emailService,
+            MembershipSettingsBag settings)
         {
             _passwordHelper = passwordHelper;
             _userRepository = userRepository;
             _validator = validator;
+            _emailService = emailService;
             _settings = settings;
         }
 
-        public void Unlock(User user)
+        public void Unlock(User entity)
         {
-            var entity = user as User;
-
-            if (entity == null) return;
-
             entity.Unlock();
 
             ValidateAndSave(entity);
@@ -105,17 +107,51 @@ namespace Kokugen.Core.Services
             }
         }
 
-        public string ResetPassword(User user, string passwordAnswer)
+        public void ResetPassword(User user, string passwordAnswer)
         {
-            throw new NotImplementedException();
+            if (!_settings.PasswordResetRetrievalSettings.EnablePasswordReset)
+                throw new InvalidOperationException("Password reset is not enabled");
+            
+            
+            if(_settings.PasswordResetRetrievalSettings.RequiresQuestionAndAnswer)
+            {
+               if(user.Answer != passwordAnswer)
+                   throw new InvalidOperationException("Password answer does not match");
+            }
+
+            var newPassword = resetPassword(user);
+
+            emailUserNewPassword(newPassword, user);
+
         }
 
-        public string ResetPassword(User user)
+        private void emailUserNewPassword(string newPassword, User user)
         {
-            var entity = user as User;
-            if (!_settings.PasswordResetRetrievalSettings.EnablePasswordReset)
-                throw new InvalidOperationException("Password retrieval is not enabled");
+            var email = new HtmlTag("div")
+                .Child(new HtmlTag("h3", tag =>
+                               {
+                                   tag.Text("Your password has been reset");
+                               }))
+                .Child(new HtmlTag("span", tag => tag.Text("Your new password is: ")))
+                .Child(new HtmlTag("span", tag => tag.Text(newPassword)));
 
+            _emailService.SendEmail(user.Email, "no-reply@kokugen.com","Your Password Has Been Reset", email.ToString());
+        }
+
+        public void ResetPassword(User user)
+        {
+            
+            if (!_settings.PasswordResetRetrievalSettings.EnablePasswordReset)
+                throw new InvalidOperationException("Password reset is not enabled");
+
+
+            var newPassword = resetPassword(user);
+
+            emailUserNewPassword(newPassword, user);
+        }
+
+        private string resetPassword(User entity)
+        {
             var newPassword = _passwordHelper.RandomPasswordNoHash(_settings.Password.MinRequiredPasswordLength,
                                                                    _settings.Password.
                                                                        MinRequiredNonAlphanumericCharacters);
@@ -135,7 +171,9 @@ namespace Kokugen.Core.Services
                     throw new ArgumentOutOfRangeException();
             }
 
-            return entity.Password;
+            ValidateAndSave(entity);
+
+            return newPassword;
         }
     }
 }

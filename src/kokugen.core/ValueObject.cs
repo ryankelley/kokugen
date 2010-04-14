@@ -9,6 +9,12 @@ namespace Kokugen.Core
 
         public bool IsDefault { get; set; }
 
+        public ValueObject(string key)
+        {
+            Key = key;
+            Value = key;
+        }
+
         public ValueObject(string key, string value)
         {
             Key = key;

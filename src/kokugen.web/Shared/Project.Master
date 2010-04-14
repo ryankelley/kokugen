@@ -6,6 +6,7 @@
 <%@ Import Namespace="Kokugen.Web.Actions.Home"%>
 <%@ Import Namespace="Kokugen.Web"%>
 <%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Project.Master.cs" Inherits="Kokugen.Web.Shared.ProjectMaster" %>
+<%@ Import Namespace="Kokugen.Web.Actions.Account.LoginStatus" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -32,6 +33,7 @@
 <div id="head">
 		<div id="wrapper">
 			<h1 id="logo"><a href="/">Kokugen - Time Managment</a></h1>
+            <div class="user-stuff"> <%this.Partial<LoginStatusModel>(); %></div>
 		</div>
 		<div class="nav">
 			<ul class="subnav">
