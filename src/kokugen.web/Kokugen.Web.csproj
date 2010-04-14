@@ -126,6 +126,8 @@
     <Content Include="Actions\Account\Password\PasswordPartial.aspx" />
     <Content Include="Actions\Account\Password\PasswordResetForm.aspx" />
     <Content Include="Actions\Card\Get.aspx" />
+    <Content Include="Actions\DailyTimeRecord\List.aspx" />
+    <Content Include="Actions\DailyTimeRecord\DailyTimeRecord_Control.ascx" />
     <Content Include="Actions\Errors\FourZeroThree.aspx" />
     <Content Include="Actions\Project\ProjectMenu.aspx" />
     <Content Include="Content\css\jquery.jgrowl.css" />
@@ -157,6 +159,9 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Actions\Card\UpdateAction.cs" />
+    <Compile Include="Actions\DailyTimeRecord\View_Page_Type_Declarations.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Actions\Errors\ForbiddenAction.cs" />
     <Compile Include="Actions\Account\Activate\ActivateAccountAction.cs" />
     <Compile Include="Actions\Account\LoginStatus\LoginStatusAction.cs">
@@ -216,10 +221,11 @@
     <Compile Include="Actions\TaskCategory\RemoveAction.cs" />
     <Compile Include="Actions\TimeRecord\AddAction.cs" />
     <Compile Include="Actions\TimeRecord\AddTimeRecordModel.cs" />
+    <Compile Include="Actions\TimeRecord\ListAction.cs" />
     <Compile Include="Actions\TimeRecord\StopTimeRecordFormAction.cs" />
     <Compile Include="Actions\TimeRecord\StopAction.cs" />
     <Compile Include="Actions\TimeRecord\ProjectTimeRecordFormAction.cs" />
-    <Compile Include="Actions\TimeRecord\ListAction.cs" />
+    <Compile Include="Actions\DailyTimeRecord\ListAction.cs" />
     <Compile Include="Actions\TimeRecord\RemoveAction.cs" />
     <Compile Include="Actions\TimeRecord\TimeRecordFormAction.cs" />
     <Compile Include="Actions\Project\View_Page_Type_Declarations.cs">

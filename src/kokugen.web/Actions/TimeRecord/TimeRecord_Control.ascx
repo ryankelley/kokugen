@@ -5,10 +5,10 @@
 
     <tr>
         <td>
-<%--        <% --%>
-<%--            if (Model.User != null)--%>
-<%--     Response.Write(this.DisplayFor(x => x.User.UserName) + " " + this.DisplayFor(x => x.User.UserName));--%>
-<%--             %>--%>
+        <% 
+            if (Model.User != null)
+     Response.Write(this.DisplayFor(x => x.User.UserName));
+             %>
         </td>
         <td class="description">
             <%= this.DisplayFor(x => x.Description) %>
