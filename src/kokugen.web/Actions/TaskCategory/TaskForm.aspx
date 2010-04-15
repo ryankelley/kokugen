@@ -15,9 +15,9 @@
 <script type="text/javascript">
 
     function closeDialog(response) {
-        appendTaskToList(response.Item);
-
+        
         $("#task-form-container").dialog('close');
+        addtaskToList(response.Item);
         // would want to update list here too
     }
     function validateAndSave() {
