@@ -22,6 +22,7 @@
     <link rel="shortcut icon" href="/content/images/icon.png" />
     <asp:ContentPlaceHolder ID="Masterhead" runat="server">
     </asp:ContentPlaceHolder>
+
 </head>
 <body>
 <div id="head">
