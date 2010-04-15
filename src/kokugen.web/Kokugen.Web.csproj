@@ -137,6 +137,7 @@
     <Content Include="Content\images\delete.png" />
     <Content Include="Content\images\edit2.png" />
     <Content Include="Content\images\spite.jpg" />
+    <Content Include="Content\Scripts\company.js" />
     <Content Include="Content\Scripts\dovetail.editing.js" />
     <Content Include="Content\Scripts\jquery.jeditable.js" />
     <Content Include="Content\Scripts\jquery.jgrowl.js" />

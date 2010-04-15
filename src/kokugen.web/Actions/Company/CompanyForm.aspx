@@ -23,7 +23,7 @@
     function closeDialog(response) {
         
         $("#company-form-container").dialog('close');
-        // would want to update list here too
+        addCompanyToList(response.Item);
     }
     
     function validateAndSave() {
