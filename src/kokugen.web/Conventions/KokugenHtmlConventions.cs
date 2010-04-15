@@ -142,5 +142,13 @@ namespace Kokugen.Web.Conventions
         public bool IsNumber { get; set; }
         public bool IsDate { get; set; }
         public bool IsTime { get; set; }
+        public string SaveButtonText { get; set; }
+        public string CancelButtonText { get; set; }
+
+        public EditOptions()
+        {
+            SaveButtonText = "Save";
+            CancelButtonText = "Cancel";
+        }
     }
 }

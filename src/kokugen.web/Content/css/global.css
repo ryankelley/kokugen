@@ -30,13 +30,14 @@ body{
     margin:auto;
     padding-bottom:0;
     padding-top:10px;
-    width:960px;
+    
 }
 
-h1{
+#wrapper h1{
 	background: url(../images/k-logo.png) no-repeat top left;
 	height: 66px;
 	width: 232px;
+	margin-left: 150px;
 }
 
 
@@ -45,6 +46,15 @@ h1{
 	display: block;
 	height: 53px;
 	overflow: hidden;
+}
+
+
+div.user-stuff 
+{
+    float: right;
+    color: #FFF;
+    margin-right:15px;
+    margin-top:-45px;
 }
 
 /*subnav*/
@@ -566,15 +576,38 @@ border:none;
 
 .save-button 
 {
-    background: transparent url('/content/images/btn-check24.png') no-repeat top left;
-margin:5px;
-padding:5px 5px 5px 25px;
+    background:url("/content/images/btn-check16.png") no-repeat scroll 7px 6px transparent;
+    color:Green;
+    text-indent:5px;
 }
 
-.cancel-button { background: transparent url('/content/images/btn-delete24.png') no-repeat top left;
-                 
-margin:5px;
-padding:5px 5px 5px 25px; }
+.cancel-button  
+{
+    background: url('/content/images/btn-delete16.png') no-repeat 7px 6px;
+    color:Red;
+    text-indent:5px;
+}
+
+form.editing .button 
+{
+    background-color:#EFEFEF;
+    font-weight:bold;
+    margin-bottom:14px;
+    margin-right:5px;
+    text-decoration:none;
+    font-size:.75em;
+    width:65px;
+     -moz-border-radius: 3px; /* FF1+ */
+  -webkit-border-radius: 3px; /* Saf3+, Chrome */
+    border-radius: 3px; /* Opera 10.5, IE 9 */
+    border:1px solid #CCC;
+}
+
+form.editing .button:hover
+{
+    border: 1px solid #333;
+    
+
 }
 
 .jgrowl-dark{color: #FFF; border: 1px solid #3281b7; background: #000 !important;}

@@ -28,7 +28,9 @@
 		<div id="wrapper">
 			<h1 id="logo"><a href="/">Kokugen - Time Managment</a></h1>
             <div class="user-stuff"> <%this.Partial<LoginStatusModel>(); %></div>
-		</div>	<asp:ContentPlaceHolder ID="MasterNavigation" runat="server" />	
+            <div class="clear"></div>
+		</div>
+        	<asp:ContentPlaceHolder ID="MasterNavigation" runat="server" />	
 		
 	</div>
 	
