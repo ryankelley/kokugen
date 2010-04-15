@@ -2,6 +2,7 @@ using FubuMVC.Core;
 using FubuMVC.Core.Security;
 using FubuMVC.Core.Urls;
 using FubuMVC.Core.View;
+using Kokugen.Core.Membership.Security;
 using Kokugen.Web.Actions.Account.Login;
 using Kokugen.Web.Actions.Account.LogOff;
 
@@ -24,10 +25,12 @@ namespace Kokugen.Web.Actions.Account.LoginStatus
         {
             if (_securityContext.IsAuthenticated())
             {
+                var user = (_securityContext.CurrentUser as FubuPrincipal).User;
                 return new LoginStatusModel()
-                {
-                    IsAuthenticated = true,
-                    UserName = _securityContext.CurrentUser.Identity.Name,
+                           {
+                               IsAuthenticated = true,
+                               UserName = _securityContext.CurrentUser.Identity.Name,
+                               EmailAddress = user != null ? user.Email : "",
                     RawUrl = _urlRegistry.UrlFor(new LogOffRequest())
                 };
 
@@ -37,6 +40,7 @@ namespace Kokugen.Web.Actions.Account.LoginStatus
             {
                 IsAuthenticated = false,
                 UserName = "",
+                EmailAddress = "",
                 RawUrl = _urlRegistry.UrlFor(new LoginFormModel())
             };
 
@@ -47,6 +51,7 @@ namespace Kokugen.Web.Actions.Account.LoginStatus
     {
         public string RawUrl { get; set; }
         public string UserName { get; set; }
+        public string EmailAddress { get; set; }
         public bool IsAuthenticated { get; set; }
     }
 

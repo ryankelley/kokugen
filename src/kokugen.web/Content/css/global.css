@@ -53,10 +53,24 @@ div.user-stuff
 {
     float: right;
     color: #FFF;
-    margin-right:15px;
-    margin-top:-45px;
+    
+    margin-top:-75px;
+    width: 300px;
 }
 
+div.user-actions 
+{
+    float: right;
+    display: inline;
+    margin-right:10px;
+margin-top:25px;
+}
+
+div.gravatar 
+{
+    float: right;
+    display: inline;
+}
 /*subnav*/
 
 
@@ -538,7 +552,7 @@ background-color: #DDD;
 form.editing input 
 {
     width: 100%;
-    padding: 5px;
+    padding: 5px 0;
     border:1px solid #CCCCCC;
 font-family:"Tahoma","Arial","Verdana",sans-serif;
 font-size:1.4em;
@@ -559,6 +573,67 @@ margin:2px;
 padding-bottom:2px;
 padding-left:2px;
 padding-right:2px;
+}
+
+.right-panel li div 
+{
+    font-size: 1em;
+    margin-left: 10px;
+}
+
+
+.right-panel li.card-number 
+{
+    font-size:2em;
+    font-weight:bold;
+    text-align:right;
+    padding-right: 15px;
+}
+
+.right-panel li.card-number.grey 
+{
+    background-color:#EEEEEE;
+    border-color:#CCCCCC;
+}
+
+.right-panel li.card-number.blue 
+{
+    background-color:#70a5d8;
+    border-color:#233644;
+}
+
+
+.right-panel li.card-number.yellow 
+{
+    background-color:#ECD800;
+    border-color:#9C8C02;
+}
+
+.right-panel li.card-number.orange 
+{
+    background-color:#E49703;
+    border-color:#B67902;
+}
+
+.right-panel li.card-number.teal 
+{
+    background-color:#029DB6;
+    border-color:#027E92;
+}
+
+.right-panel li div.sidebar-title 
+{
+    font-size: 1.2em;
+    margin-left: 2px;
+}
+
+ .editable-empty 
+{
+    font-size: 1em;
+    color:#999999;
+font-family:"Georgia","Times New Roman",serif;
+font-style:italic;
+    
 }
 
 .ui-widget-content { border: none; }

@@ -1,4 +1,5 @@
 using System;
+using Kokugen.Core;
 using Kokugen.Core.Services;
 
 namespace Kokugen.Web.Actions.Card
@@ -16,8 +17,19 @@ namespace Kokugen.Web.Actions.Card
         {
             var card = _cardService.GetCard(model.id);
             Type cardType = card.GetType();
-            cardType.GetProperty(model.PropertyName).SetValue(card, model.PropertyValue,null);
 
+            if(cardType.GetProperty(model.PropertyName).PropertyType.IsIntegerBased())
+            {
+                cardType.GetProperty(model.PropertyName).SetValue(card, Convert.ToInt32(model.PropertyValue), null);    
+            }
+            else if (cardType.GetProperty(model.PropertyName).PropertyType.IsDateTime())
+            {
+                cardType.GetProperty(model.PropertyName).SetValue(card, DateTime.Parse(model.PropertyValue.ToString()), null);
+            }
+            else
+            {
+                cardType.GetProperty(model.PropertyName).SetValue(card, model.PropertyValue, null);
+            }
             _cardService.SaveCard(card);
 
             return new InPlaceAjaxResponse { success = true, NewValueToDisplay = model.PropertyValue};

@@ -12,7 +12,7 @@
             <%= this.InputFor(x => x.Card.Title).Hint("Enter description of card") %>
         </div>
         <div class="quarter-input">
-            <%= this.InputFor(x => x.Card.Size).Hint("Card Size (Optional)") %>
+            <%= this.InputFor(x => x.Card.Size).Id("card-size-box").Hint("Card Size (Optional)") %>
         </div>
         <div class="quarter-input">
             <%= this.InputFor(x => x.Card.Priority).Hint("Priority") %>
@@ -46,25 +46,32 @@
         $("form").hintify();
     }
 
-    $(document).ready(function() {
-    $("#card-form-compact").validate({ errorClass: "error", ignoreTitle: true, 
+    $(document).ready(function () {
 
-    invalidHandler: function(e, validator) {
-        var errors = validator.numberOfInvalids();
-        if (errors) {
-            var message = errors == 1 ? 'You missed 1 field. It has been highlighted below' : 'You missed ' + errors + ' fields. They have been highlighted below';
-            $("div.error span").html(message);
-            $("div.error").show();
-        } else {
-            $("div.error").hide();
-        }
-    } 
-    });
-        $('#save-button').submit(function() {
+        $("#card-form-compact").validate({ errorClass: "error", ignoreTitle: true,
+
+            invalidHandler: function (e, validator) {
+                var errors = validator.numberOfInvalids();
+                if (errors) {
+                    var message = errors == 1 ? 'You missed 1 field. It has been highlighted below' : 'You missed ' + errors + ' fields. They have been highlighted below';
+                    $("div.error span").html(message);
+                    $("div.error").show();
+                } else {
+                    $("div.error").hide();
+                }
+            }
+        });
+        $('#save-button').submit(function () {
+//            if ($('#card-size-box').val() == "Card Size (Optional)")
+//            { $('#card-size-box').val(''); }
+
+            
+                $("[_hint]").each(function () { $(this).removeHint() });
+            
             ValidateAndSave(updateBoard, $("#card-form-compact"));
             return false;
-            
- 
+
+
         });
 
     });
