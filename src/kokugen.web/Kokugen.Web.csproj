@@ -71,6 +71,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\FubuMVC\HtmlTags.dll</HintPath>
     </Reference>
+    <Reference Include="MarkdownSharp">
+      <HintPath>..\..\lib\markdownsharp\MarkdownSharp.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\Common Service Locator\Microsoft.Practices.ServiceLocation.dll</HintPath>
@@ -262,10 +265,12 @@
     <Compile Include="Conventions\Builders\BeforePartialBuilder.cs" />
     <Compile Include="Conventions\Builders\AfterPartialBuilder.cs" />
     <Compile Include="Conventions\Builders\OddEvenLiModifier.cs" />
+    <Compile Include="Conventions\EditInPlaceBuilder.cs" />
     <Compile Include="Conventions\HtmlExtensions.cs" />
     <Compile Include="Conventions\IRequestById.cs" />
     <Compile Include="Conventions\KokugenHtmlConventions.cs" />
     <Compile Include="Conventions\Builders\LabelBuilder.cs" />
+    <Compile Include="Conventions\MarkdownAttribute.cs" />
     <Compile Include="Conventions\SplitCamelCaseExtension.cs" />
     <Compile Include="Conventions\ValueObjectDropdownBuilder.cs" />
     <Compile Include="Conventions\ValueObjectDropdownExtensions.cs" />
