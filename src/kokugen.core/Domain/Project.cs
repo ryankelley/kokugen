@@ -10,6 +10,8 @@ namespace Kokugen.Core.Domain
     {
         private IList<TimeRecord> _timeRecords = new List<TimeRecord>();
         private IList<CustomBoardColumn> _boardColumns = new List<CustomBoardColumn>();
+        private IList<User> _users = new List<User>();
+        
 
         [Required]
         public virtual string Name { get; set; }
@@ -22,9 +24,28 @@ namespace Kokugen.Core.Domain
         public virtual string Description { get; set; }
         
         public virtual Company Company { get; set; }
+        [Required]
+        public virtual User Owner { get; set; }
+       
 
         public virtual BoardColumn Backlog { get; set; }
         public virtual BoardColumn Archive { get; set; }
+
+        public virtual IEnumerable<User> GetUsers()
+        {
+            return _users;
+        }
+
+        public virtual void AddUser(User user)
+        {
+            _users.Add(user);
+        }
+
+        public virtual void RemoveUser(User user)
+        {
+            if (_users.Contains(user))
+                _users.Remove(user);
+        }
 
         #region Time Records
 

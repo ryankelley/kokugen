@@ -14,7 +14,7 @@ namespace Kokugen.Core.Services
         INotification SaveProject(Project project);
         Project Load(Guid Id);
         Project GetProjectFromName(string name);
-        Project CreateProject(string projectName, string projectDescription, Company company);
+        Project CreateProject(string projectName, string projectDescription, Company company, User owner);
         Project GetProjectFromId(Guid id);
 
         
@@ -26,7 +26,8 @@ namespace Kokugen.Core.Services
         private readonly IValidator _validator;
        
 
-        public ProjectService(IProjectRepository projectRepository, IValidator validator)
+        public ProjectService(IProjectRepository projectRepository, 
+            IValidator validator)
         {
             _projectRepository = projectRepository;
             _validator = validator;
@@ -63,7 +64,7 @@ namespace Kokugen.Core.Services
             return _projectRepository.Query().Where(c => c.Name == name).FirstOrDefault();
         }
 
-        public Project CreateProject(string projectName, string projectDescription, Company company)
+        public Project CreateProject(string projectName, string projectDescription, Company company, User owner)
         {
             var project = new Project();
             project.Name = projectName;
@@ -76,6 +77,8 @@ namespace Kokugen.Core.Services
             project.AddBoardColumn(new CustomBoardColumn { ColumnOrder = 3, Name = "Done", Description = "Items in this column are Done"});
 
             project.Company = company;
+
+            project.Owner = owner;
 
             return project;
         }
