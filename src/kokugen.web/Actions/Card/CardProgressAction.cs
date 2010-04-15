@@ -26,7 +26,7 @@ namespace Kokugen.Web.Actions.Card
 
             var backLog = Mapper.DynamicMap<BoardColumnDTO>(project.Backlog);
             var archive = Mapper.DynamicMap<BoardColumnDTO>(project.Archive);
-            var columns = project.GetBoardColumns().OrderBy(a => a.ColumnOrder).Select(Mapper.DynamicMap<BoardColumnDTO>);
+            var columns = project.GetBoardColumns().OrderBy(a => a.ColumnOrder).Select(x => Mapper.DynamicMap<BoardColumnDTO>(x));
 
             var outputList = new List<BoardColumnDTO>();
             outputList.Add(backLog);
