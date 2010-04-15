@@ -13,15 +13,15 @@ namespace Kokugen.Core.Membership.Services
             where ROLE : IRole
     {
         void Create(ROLE roleName);
-
         void AddUserToRole(USER userName, ROLE roleName);
         void RemoveUserFromRole(USER userName, ROLE roleName);
-
         void Delete(ROLE roleName);
 
         IEnumerable<string> FindAll();
         IEnumerable<string> FindByUserName(USER userName);
         IEnumerable<string> FindUserNamesByRole(ROLE roleName);
+        ROLE Retrieve(object id);
+
         bool IsInRole(USER userName, ROLE roleName);
 
     }

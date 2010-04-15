@@ -100,6 +100,11 @@ namespace Kokugen.Core.Services
                 .Select(x => x.UserName);
         }
 
+        public Role Retrieve(object id)
+        {
+            return _roleRepository.Get((Guid) id);
+        }
+
         public bool IsInRole(User userName, Role roleName)
         {
             return _userRepository.FindBy(x => x.UserName, userName.UserName)
