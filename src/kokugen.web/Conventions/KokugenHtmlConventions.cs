@@ -119,7 +119,7 @@ namespace Kokugen.Web.Conventions
             options.IsTime = request.Accessor.Name.ToLower().Contains("time");
             options.IsNumber = request.Accessor.PropertyType.IsIntegerBased() || request.Accessor.PropertyType.IsFloatingPoint();
             options.Required = request.Accessor.HasAttribute<RequiredAttribute>();
-
+            options.PlaceholderText = "Double-Click to edit " + request.Accessor.Name.ToLower() + ".";
 
             var data = options.ToJson();    
 
@@ -142,5 +142,13 @@ namespace Kokugen.Web.Conventions
         public bool IsNumber { get; set; }
         public bool IsDate { get; set; }
         public bool IsTime { get; set; }
+        public string SaveButtonText { get; set; }
+        public string CancelButtonText { get; set; }
+        public string PlaceholderText { get; set; }
+        public EditOptions()
+        {
+            SaveButtonText = "Save";
+            CancelButtonText = "Cancel";
+        }
     }
 }

@@ -39,11 +39,15 @@
 </div>
 <div class="right-panel">
         <ul>
-            <li class="card-number"><%= this.DisplayFor(m => m.CardNumber) %></li>
-            <li class=""></li>
-            <li class=""><%= this.EditInPlace(m => m.Size)%></li>
-            <li class=""><%= this.EditInPlace(m => m.Priority)%></li>
-            <li class=""><%= this.EditInPlace(m => m.Deadline) %></li>
+            <li class="card-number <%= Model.Color %>"><%= this.DisplayFor(m => m.CardNumber) %></li>
+            <li class="hidden">Ready and blocked state can go here</li>
+            <li class=""><div class="sidebar-title">Size</div><%= this.EditInPlace(m => m.Size)%></li>
+            <li class=""><div class="sidebar-title">Priority</div><%= this.EditInPlace(m => m.Priority)%></li>
+            <li class=""><div class="sidebar-title">Deadline</div><%= this.EditInPlace(m => m.Deadline) %></li>
+            <li class=""><div class="sidebar-title">Owner</div></li>
+            <li class=""><div class="sidebar-title">Created</div></li>
+            <li class=""><div class="sidebar-title">Started</div></li>
+            <li class=""><div class="sidebar-title">Finished</div></li>
             
             <li class=""></li>
         </ul>

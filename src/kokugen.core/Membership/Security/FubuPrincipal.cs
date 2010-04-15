@@ -3,6 +3,7 @@ using System.Security.Principal;
 using System.Threading;
 using System.Web;
 using System.Web.Security;
+using Kokugen.Core.Domain;
 using Kokugen.Core.Membership.Services;
 
 namespace Kokugen.Core.Membership.Security
@@ -48,6 +49,14 @@ namespace Kokugen.Core.Membership.Security
         public IIdentity Identity
         {
             get { return _identity; }
+        }
+
+        public User User
+        {
+            get {
+                return _user;
+            }
+
         }
 
         #endregion

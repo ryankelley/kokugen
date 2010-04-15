@@ -132,6 +132,8 @@
     <Content Include="Actions\Project\ProjectMenu.aspx" />
     <Content Include="Content\css\jquery.jgrowl.css" />
     <Content Include="Actions\Project\ProjectMenu_Item.ascx" />
+    <Content Include="Content\images\btn-check16.png" />
+    <Content Include="Content\images\btn-delete16.png" />
     <Content Include="Content\images\delete.png" />
     <Content Include="Content\images\edit2.png" />
     <Content Include="Content\images\spite.jpg" />
