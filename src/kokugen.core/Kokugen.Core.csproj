@@ -253,6 +253,7 @@
     <Compile Include="Validation\ValidEmailAttribute.cs" />
     <Compile Include="Validation\ValidYear.cs" />
     <Compile Include="ValueObject.cs" />
+    <Compile Include="ValueObjectInitializer.cs" />
     <Compile Include="ValueObjectRegistry.cs" />
   </ItemGroup>
   <ItemGroup>

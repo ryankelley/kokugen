@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using FubuCore;
 using Kokugen.Core.Membership;
 using Kokugen.Core.Membership.Security;
 using Kokugen.Core.Services;
@@ -38,7 +39,10 @@ namespace Kokugen.Core.Domain
             get { return Id; }
         }
 
-
+        public virtual string DisplayName()
+        {
+            return FirstName.IsEmpty() ? UserName : FirstName + " " + LastName;
+        }
         
         public virtual string FirstName { get; set; }
 

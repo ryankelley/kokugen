@@ -1,6 +1,8 @@
 using System;
 using FubuMVC.Core;
 using FubuMVC.Core.Security;
+using Kokugen.Core;
+using Kokugen.Core.Attributes;
 using Kokugen.Core.Domain;
 using Kokugen.Core.Membership.Services;
 using Kokugen.Core.Services;
@@ -31,7 +33,9 @@ namespace Kokugen.Web.Actions.Card
         public AjaxResponse Save(CompactCardFormModel model)
         {
             var project = _projectService.GetProjectFromId(model.ProjectId);
-            
+
+            var user = model.UserId.IsEmpty() ? _userService.GetUserByLogin(_securityContext.CurrentIdentity.Name) : _userService.GetUserById(model.UserId);
+
             var card = new Core.Domain.Card
                            {
                                Title = model.Card.Title, 
@@ -42,7 +46,7 @@ namespace Kokugen.Web.Actions.Card
                                Project = project,
                                Color = "grey",
                                Status = CardStatus.New,
-                               AssignedTo = _userService.GetUserByLogin(_securityContext.CurrentIdentity.Name)
+                               AssignedTo = user 
                                
                            };
 
@@ -72,6 +76,10 @@ namespace Kokugen.Web.Actions.Card
     {
         public Guid ProjectId { get; set; }
         public Core.Domain.Card Card { get; set; }
+
+        [ValueOf("User")]
+        public Guid UserId { get; set; }
+
         public string Submit { get; set; }
     }
 }

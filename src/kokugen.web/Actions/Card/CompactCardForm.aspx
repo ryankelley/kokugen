@@ -21,7 +21,7 @@
             <%= this.InputFor(x => x.Card.Deadline).Hint("Deadline") %>
         </div>
         <div class="quarter-input">
-            <%= this.InputFor(x => x.Card.AssignedTo).Hint("Who is Assigned to this") %>
+            <%= this.InputFor(x => x.UserId).Hint("Who is Assigned to this") %>
         </div>
         <%= this.InputFor(x => x.Card.Id).Hide() %>
         <%= this.InputFor(x => x.ProjectId).Hide() %>
