@@ -5,12 +5,13 @@
 <div id="company-form-container" class="hide">
 <%= this.FormFor(new AddCompanyInput()).Id("company-form") %>
        
-    <%= this.Edit(x => x.Company.Name) %>
+    <%= this.Edit(x => x.Company.Name).Id("company-edit-form-name") %>
     <%= this.Edit(x => x.Company.Address.StreetLine1)%>
     <%= this.Edit(x => x.Company.Address.StreetLine2)%>
     <%= this.Edit(x => x.Company.Address.City)%>
     <%= this.Edit(x => x.Company.Address.State)%>
     <%= this.Edit(x => x.Company.Address.ZipCode)%>
+    <%= this.InputFor(x => x.Company.Id).Id("company-edit-form-id") %>
 <%= this.EndForm() %>
 
 
