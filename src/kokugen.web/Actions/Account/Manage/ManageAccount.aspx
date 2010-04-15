@@ -5,7 +5,7 @@
 
 <asp:Content ContentPlaceHolderID="mainContent" runat="server">
 
-<%=this.FormFor(new ManageAccountModel(){Id = Model.Id}) %>
+<%=this.FormFor(new ManageAccountModel(){Id = Model.Id}).Id("manage-form") %>
 <fieldset>
 <legend>Manage Account</legend>
 <%=this.Edit(x => x.User.FirstName) %>
@@ -23,21 +23,16 @@
 
 <asp:Content ContentPlaceHolderID="head" runat="server">
         
-        <%if(Model.Messages.Any())
-          { 
-              foreach (var notificationMessage in Model.Messages)
-          {%>
-   <script type="text/javascript">
-       $(function () {
-           $.jGrowl('<%=notificationMessage %>', { theme: 'jgrowl-error', sticky: true });
-       });
-    </script>
-        <%} 
-       } %>
+
     <script type="text/javascript">
 
 
         $(function () {
+            $('#manage-form').submit(function () {
+                ValidateAndSave(HandleAjaxResponse, $(this), false);
+                return false;
+            });
+
 
             $('#change-password').ajaxDialog({
                 onComplete: HandleAjaxResponse,

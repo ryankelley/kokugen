@@ -11,12 +11,12 @@ function setContentHeightToFull() {
 
 
 
-function ValidateAndSave(successCallback, formObject) {
+function ValidateAndSave(successCallback, formObject, clearForm) {
     var options = {
         success: successCallback,  // post-submit callback 
         type: 'post',        // 'get' or 'post', override for form's 'method' attribute 
         dataType: 'json',        // 'xml', 'script', or 'json' (expected server response type) 
-        clearForm: true        // clear all form fields after successful submit 
+        clearForm: clearForm == null ? true : clearForm        // clear all form fields after successful submit 
     };
     var isValid = formObject.valid();
 

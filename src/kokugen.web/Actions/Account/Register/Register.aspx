@@ -4,7 +4,7 @@
 <%@ Import Namespace="Kokugen.Web.Actions.Account.Register"%>
 
 <asp:Content ContentPlaceHolderID=mainContent runat=server>
-<%=this.FormFor<RegisterAccountModel>() %>
+<%=this.FormFor<RegisterAccountModel>().Id("register-form") %>
 
     <fieldset>
         <legend>Register</legend>
@@ -24,5 +24,19 @@
     </fieldset>
 
 <%=this.EndForm() %>
+
+</asp:Content>
+
+<asp:Content  ContentPlaceHolderID=head runat=server>
+<script type="text/javascript">
+    $(function () {
+        $('#register-form').submit(function () {
+            ValidateAndSave(HandleAjaxResponse, $(this));
+            return false;
+        });
+
+    });
+
+</script>
 
 </asp:Content>

@@ -126,10 +126,7 @@ namespace Kokugen.Core.Services
         private void emailUserNewPassword(string newPassword, User user)
         {
             var email = new HtmlTag("div")
-                .Child(new HtmlTag("h3", tag =>
-                               {
-                                   tag.Text("Your password has been reset");
-                               }))
+                .Child(new HtmlTag("h3", tag => tag.Text("Your password has been reset")))
                 .Child(new HtmlTag("span", tag => tag.Text("Your new password is: ")))
                 .Child(new HtmlTag("span", tag => tag.Text(newPassword)));
 
