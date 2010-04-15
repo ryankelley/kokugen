@@ -2,6 +2,7 @@
 
 using System;
 using System.Web.Security;
+using FubuCore;
 using FubuMVC.Core.Security;
 using Kokugen.Core.Domain;
 using Kokugen.Core.Membership.Security;
@@ -30,6 +31,13 @@ namespace Kokugen.Core.Services
             if (_validator.ValidateUser(login, password))
             {
                 _authContext.ThisUserHasBeenAuthenticated(userName, rememberMe);
+
+                if(login.GravatarHash.IsEmpty())
+                {
+                    login.GravatarHash = login.Email.ToGravatarHash();
+                    _userService.Update(login);
+                }
+
                 return login;
             }
             return null;

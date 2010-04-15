@@ -54,6 +54,8 @@ namespace Kokugen.Core.Domain
         public virtual string Question { get; set; }
         public virtual string Answer { get; set; }
 
+        public virtual string GravatarHash { get; set; }
+
         public virtual IEnumerable<Role> GetRoles()
         {
             return _roles;

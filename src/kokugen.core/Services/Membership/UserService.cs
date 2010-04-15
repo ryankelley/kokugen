@@ -129,6 +129,8 @@ namespace Kokugen.Core.Services
                     throw new ArgumentOutOfRangeException();
             }
 
+            user.GravatarHash = user.Email.ToGravatarHash();
+
             return ValidateAndSave(user);
         }
 
