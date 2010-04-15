@@ -19,6 +19,7 @@ var Card = function (card) {
     this.ReasonBlocked = card.BlockReason;
     this.CardOrder = card.CardOrder;
     this.ProjectId = card.ProjectId;
+    this.GravatarHash = card.GravatarHash
 
 };
 
@@ -54,7 +55,12 @@ var buildCardDisplay = function (scard) {
     var size = document.createElement('div');
     $(size).addClass("card-size").attr("title", "Estimated Size of this card");
     size.appendChild(document.createTextNode(scard.Size));
+
     var worker = document.createElement('div');
+    worker.setAttribute('class', 'gravatar');
+    var gravatar = document.createElement('img');
+    gravatar.setAttribute('src', 'http://gravatar.com/avatar/' + scard.GravatarHash + '?s=27');
+    worker.appendChild(gravatar);
 
     // Blockage reason
     var blocked = document.createElement('div');

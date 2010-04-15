@@ -659,7 +659,7 @@ ul.card-progress li
 div.card-process 
 {
     background-color:#DDDDDD;
-    border-top:1px solid #333333;
+    border-top:1px solid #999;
     min-height:40px;
     padding-top:20px;
 }
@@ -684,8 +684,18 @@ ul.card-progress li.green
 }
 
 .ui-widget-header  {
-background-color:#CCCCCC;
+background: none;
+background-color:#DDDDDD;
 border:none;
+border-top: 1px solid #999;
+
+}
+
+.markdown-instruct 
+{
+    float: right;
+    color: #666;
+    font-size: .8em;
 }
 
 .save-button 

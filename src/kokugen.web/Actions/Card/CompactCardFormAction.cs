@@ -1,6 +1,10 @@
 using System;
 using FubuMVC.Core;
+using FubuMVC.Core.Security;
+using Kokugen.Core;
+using Kokugen.Core.Attributes;
 using Kokugen.Core.Domain;
+using Kokugen.Core.Membership.Services;
 using Kokugen.Core.Services;
 using AutoMapper;
 namespace Kokugen.Web.Actions.Card
@@ -9,11 +13,15 @@ namespace Kokugen.Web.Actions.Card
     {
         private readonly ICardService _cardService;
         private readonly IProjectService _projectService;
+        private readonly IUserService _userService;
+        private readonly ISecurityContext _securityContext;
 
-        public CompactCardFormAction(ICardService cardService, IProjectService projectService)
+        public CompactCardFormAction(ICardService cardService, IProjectService projectService, IUserService userService, ISecurityContext securityContext)
         {
             _cardService = cardService;
             _projectService = projectService;
+            _userService = userService;
+            _securityContext = securityContext;
         }
 
         [FubuPartial]
@@ -25,18 +33,20 @@ namespace Kokugen.Web.Actions.Card
         public AjaxResponse Save(CompactCardFormModel model)
         {
             var project = _projectService.GetProjectFromId(model.ProjectId);
-            
+
+            var user = model.UserId.IsEmpty() ? _userService.GetUserByLogin(_securityContext.CurrentIdentity.Name) : _userService.GetUserById(model.UserId);
+
             var card = new Core.Domain.Card
                            {
                                Title = model.Card.Title, 
                                Size = model.Card.Size, 
                                Priority = model.Card.Priority, 
                                Deadline = model.Card.Deadline, 
-                               //AssignedTo = model.Card.AssignedTo, 
                                Details = model.Card.Details,
                                Project = project,
                                Color = "grey",
-                               Status = CardStatus.New
+                               Status = CardStatus.New,
+                               AssignedTo = user 
                                
                            };
 
@@ -66,6 +76,10 @@ namespace Kokugen.Web.Actions.Card
     {
         public Guid ProjectId { get; set; }
         public Core.Domain.Card Card { get; set; }
+
+        [ValueOf("User")]
+        public Guid UserId { get; set; }
+
         public string Submit { get; set; }
     }
 }

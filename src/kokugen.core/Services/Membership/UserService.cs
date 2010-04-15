@@ -85,6 +85,16 @@ namespace Kokugen.Core.Services
             return _userRepository.FindBy(x => x.Email, email);
         }
 
+        public IEnumerable<User> FindAll()
+        {
+            return _userRepository.Query().OrderBy(x => x.LastName).ToList();
+        }
+
+        public User GetUserById(Guid userId)
+        {
+            return _userRepository.Get(userId);
+        }
+
         public IPagedList<User> FindAll(int pageIndex, int pageSize)
         {
             var users = _userRepository.Query()
@@ -118,6 +128,8 @@ namespace Kokugen.Core.Services
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+
+            user.GravatarHash = user.Email.ToGravatarHash();
 
             return ValidateAndSave(user);
         }

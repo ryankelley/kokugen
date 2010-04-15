@@ -1,4 +1,5 @@
 ﻿var dovetailEditableValues = {};
+var converter = new Showdown.converter();
 
 (function($) {
     $.editable.addInputType('datepicker', {
@@ -125,8 +126,15 @@
         };
         
         $.editable.types["defaults"].revertValue = function() {
-        var out = $(this).data('editdata');
-        return out;
+        if(userOptions.Markdown) {
+            var out = converter.makeHtml($(this).data('editdata'));
+            return out;
+        }
+        else{
+            var out = $(this).data('editdata');
+            return out;
+        }
+        
             //return $(this).data('editdata');//.escapeHTML().convertCRLFToBreaks();
         };
         
@@ -172,8 +180,14 @@
                     dovetail.windowManager.flashMessages(response.errors);
                 }
                 if(response.NewValueToDisplay || response.NewValueToDisplay === "") {
+                if(userOptions.Markdown) {
+                    var markdown = converter.makeHtml(response.NewValueToDisplay);
+                    element.html(markdown);
+                } else {
                     var escapedHTML = response.NewValueToDisplay.escapeHTML();//.convertCRLFToBreaks();
                     element.html(escapedHTML);
+                    
+                    }
                     element.data("editdata",response.NewValueToDisplay);
                 }
                 
@@ -193,6 +207,7 @@
         };
 
         if (options.MultiLine) {
+            editableOptions.Markdown = options.Markdown;
             editableOptions.type = "textarea";
             editableOptions.onblur = "ignore";
             editableOptions.cols = "45";

@@ -30,5 +30,8 @@ namespace Kokugen.Core.Membership.Services
         
     }
 
-    public interface IUserService : IUserService<User>{}
+    public interface IUserService : IUserService<User>{
+        IEnumerable<User> FindAll();
+        User GetUserById(Guid userId);
+    }
 }

@@ -70,7 +70,8 @@
             loadtext: 'Loading...',
             placeholder: 'Click to edit',
             loaddata: {},
-            submitdata: {}
+            submitdata: {},
+            Markdown: false
         };
 
         if (options) {
@@ -432,6 +433,11 @@
                         textarea.width(settings.width);
                     }
                     $(this).append(textarea);
+                    if (settings.Markdown) {
+                        var mdi = $('<div>').addClass("markdown-instruct");
+                        mdi.html('This field supports <a target="_blank" href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>');
+                        $(this).append(mdi);
+                    }
                     return (textarea);
                 }
             },

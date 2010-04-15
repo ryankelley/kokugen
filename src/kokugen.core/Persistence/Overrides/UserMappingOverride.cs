@@ -21,7 +21,8 @@ namespace Kokugen.Core.Persistence.Overrides
             mapping.HasManyToMany(x => x.GetProjects())
                 .Access.CamelCaseField(Prefix.Underscore)
                 .Inverse()
-                .ForeignKeyConstraintNames("FK_User_To_Project_Columns","FK_Project_To_User_Columns");
+                .ForeignKeyConstraintNames("FK_User_To_Project_Columns","FK_Project_To_User_Columns")
+                .Table("ProjectToUser");
         }
 
         #endregion

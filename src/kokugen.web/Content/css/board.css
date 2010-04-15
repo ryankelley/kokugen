@@ -401,6 +401,7 @@ vertical-align:top;
     cursor: move;
     overflow: hidden;
     border-bottom:1px solid;
+    height: 27px;
     
 }
 

@@ -70,6 +70,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\FubuMVC\HtmlTags.dll</HintPath>
     </Reference>
+    <Reference Include="MarkdownSharp">
+      <HintPath>..\..\lib\markdownsharp\MarkdownSharp.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\Common Service Locator\Microsoft.Practices.ServiceLocation.dll</HintPath>
@@ -250,6 +253,7 @@
     <Compile Include="Validation\ValidEmailAttribute.cs" />
     <Compile Include="Validation\ValidYear.cs" />
     <Compile Include="ValueObject.cs" />
+    <Compile Include="ValueObjectInitializer.cs" />
     <Compile Include="ValueObjectRegistry.cs" />
   </ItemGroup>
   <ItemGroup>

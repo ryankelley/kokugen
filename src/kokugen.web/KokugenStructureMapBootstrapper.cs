@@ -58,7 +58,8 @@ namespace Kokugen.Web
         private void ConfigureAutoMapper()
         {
             Mapper.CreateMap<Card, CardViewDTO>()
-                .ForMember(a => a.Status, b=> b.MapFrom(c => c.Status.DisplayName));
+                .ForMember(a => a.Status, b=> b.MapFrom(c => c.Status.DisplayName))
+                .ForMember(a => a.GravatarHash, b=> b.MapFrom(c => c.AssignedTo.GravatarHash));
             Mapper.CreateMap<Card, CardDetailModel>()
                 .ForMember(a => a.Status, b => b.MapFrom(c => c.Status.DisplayName));
             Mapper.CreateMap<BoardColumn, BoardColumnDTO>()
