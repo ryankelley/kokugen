@@ -17,6 +17,11 @@ namespace Kokugen.Core.Persistence.Overrides
                 .Cascade.All().Table("RoleToUser");
             mapping.Map(x => x.UserName).Unique();
             mapping.Map(x => x.Email).Unique();
+
+            mapping.HasManyToMany(x => x.GetProjects())
+                .Access.CamelCaseField(Prefix.Underscore)
+                .Inverse()
+                .ForeignKeyConstraintNames("FK_User_To_Project_Columns","FK_Project_To_User_Columns");
         }
 
         #endregion
