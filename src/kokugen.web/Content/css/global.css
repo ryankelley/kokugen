@@ -55,7 +55,7 @@ div.user-stuff
     color: #FFF;
     
     margin-top:-75px;
-    width: 300px;
+    /*width: 300px;*/
 }
 
 div.user-actions 
@@ -581,6 +581,11 @@ padding-right:2px;
     margin-left: 10px;
 }
 
+.right-panel li span
+{
+    font-size: 1em;
+    margin-left: 10px;
+}
 
 .right-panel li.card-number 
 {
@@ -634,6 +639,40 @@ padding-right:2px;
 font-family:"Georgia","Times New Roman",serif;
 font-style:italic;
     
+}
+
+ul.card-progress 
+{
+    display: inline;
+    margin: auto;
+}
+ul.card-progress li 
+{
+    display: inline;
+    width: 150px;
+    border: 1px solid #333;
+    height: 75px;
+    padding: 15px;
+    
+}
+
+div.card-process 
+{
+    background-color:#DDDDDD;
+    border-top:1px solid #333333;
+    min-height:40px;
+    padding-top:20px;
+}
+
+ul.card-progress li.grey 
+{
+    background-color:#EEEEEE;
+    border-color:#CCCCCC;
+}
+ul.card-progress li.green 
+{
+   background-color:#80C84B;
+    border-color:#2e8015;
 }
 
 .ui-widget-content { border: none; }

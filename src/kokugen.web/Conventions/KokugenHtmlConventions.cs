@@ -1,4 +1,5 @@
 using System;
+using FubuCore;
 using FubuCore.Reflection;
 using FubuMVC.UI;
 using FubuMVC.UI.Configuration;
@@ -40,6 +41,12 @@ namespace Kokugen.Web.Conventions
 
             //BeforeEachOfPartial.If(x => x.Is<ProjectListModel>()).Modify();
             AfterEachOfPartial.Builder<AfterEachOfPartialBuilder>();
+
+            Displays.If(x => x.Accessor.PropertyType.IsType<DateTime?>()).Modify(tag =>
+                                                                                     {
+                                                                                         if(tag.Text().IsEmpty())
+                                                                                             tag.Text("-");
+                                                                                     });
 
         }
 

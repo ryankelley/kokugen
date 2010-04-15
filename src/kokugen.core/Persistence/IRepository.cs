@@ -107,12 +107,16 @@ namespace Kokugen.Core.Persistence
 
         public void Save(ENTITY entity)
         {
+            //if (entity.Id.IsEmpty())
+            //    entity.Created = DateTime.Now;
+            //entity.LastUpdated = DateTime.Now;
+
            _session.SaveOrUpdate(entity);
         }
 
         public void SaveAndFlush(ENTITY entity)
         {
-            _session.SaveOrUpdate(entity);
+           Save(entity);
             _session.Flush();
         }
 
