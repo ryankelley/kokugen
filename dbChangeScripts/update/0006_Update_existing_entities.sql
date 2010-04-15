@@ -1,0 +1,10 @@
+update BoardColumns set Created = GETDATE(), LastUpdated = GETDATE();
+update Cards set Created = GETDATE(), LastUpdated = GETDATE();
+update Companies set Created = GETDATE(), LastUpdated = GETDATE();
+update DailyTimeRecords set Created = GETDATE(), LastUpdated = GETDATE();
+update Permissions set Created = GETDATE(), LastUpdated = GETDATE();
+update Projects set Created = GETDATE(), LastUpdated = GETDATE();
+update Roles set Created = GETDATE(), LastUpdated = GETDATE();
+update TaskCategories set Created = GETDATE(), LastUpdated = GETDATE();
+update TimeRecords set Created = GETDATE(), LastUpdated = GETDATE();
+update Users set Created = GETDATE(), LastUpdated = GETDATE();

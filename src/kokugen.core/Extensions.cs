@@ -16,7 +16,7 @@ namespace Kokugen.Core
     {
         public static bool IsDateTime(this Type type)
         {
-            return typeof (DateTime) == type.GetType();
+            return typeof (DateTime) == type || typeof(DateTime?) == type;
         }
 
         public static bool IsIntegerBased(this Type type)

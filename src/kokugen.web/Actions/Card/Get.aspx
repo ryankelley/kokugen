@@ -27,7 +27,7 @@
 		<li id="delete"><a href="#">Delete</a></li>
 	</ul></div>
         <div class="card-title"><%= this.EditInPlace(m => m.Title) %></div>
-        <div class="card-process">This could Show different phases that the card has completed</div>
+        <div class="card-process"><% this.Partial(new CardProgressModel{ProjectId = Model.ProjectId, CurrentColumnId = Model.ColumnId}); %></div>
         <div id="tabs">
             <ul>
                 <li><a href="#details"><span>Details</span></a></li>
@@ -45,9 +45,9 @@
             <li class=""><div class="sidebar-title">Priority</div><%= this.EditInPlace(m => m.Priority)%></li>
             <li class=""><div class="sidebar-title">Deadline</div><%= this.EditInPlace(m => m.Deadline) %></li>
             <li class=""><div class="sidebar-title">Owner</div></li>
-            <li class=""><div class="sidebar-title">Created</div></li>
-            <li class=""><div class="sidebar-title">Started</div></li>
-            <li class=""><div class="sidebar-title">Finished</div></li>
+            <li class=""><div class="sidebar-title">Created</div><%= this.DisplayFor(m => m.Created) %></li>
+            <li class=""><div class="sidebar-title">Started</div><%= this.DisplayFor(m => m.Started) %></li>
+            <li class=""><div class="sidebar-title">Finished</div><%= this.DisplayFor(m => m.DateCompleted) %></li>
             
             <li class=""></li>
         </ul>

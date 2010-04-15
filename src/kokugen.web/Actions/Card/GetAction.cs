@@ -41,6 +41,9 @@ namespace Kokugen.Web.Actions.Card
         public string Status { get; set; }
         public string BlockReason { get; set; }
         public int CardOrder { get; set; }
+        public virtual DateTime Created { get; set; }
+        public virtual DateTime? Started { get; set; }
+        public virtual DateTime? DateCompleted { get; set; }
         
     }
 
