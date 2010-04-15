@@ -1,6 +1,5 @@
 <%@ Page Language="C#" AutoEventWireup="true" Inherits="Kokugen.Web.Actions.TimeRecord.List" MasterPageFile="~/Shared/Site.Master"%>
 <%@ Import Namespace="Kokugen.Web.Actions.TimeRecord"%>
-<%@ Import Namespace="FubuMVC.Core.Urls"%>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="TimeRecordListHead" ContentPlaceHolderID="mainContent" runat="server">
@@ -30,11 +29,11 @@ th
 </style>
 <script type="text/javascript">
 
-    $(document).ready(function() {
-    $(".stop-button").click(function() { 
-        
-        makeStopCall($(this).attr("data"));
-        
+    $(document).ready(function () {
+        $(".stop-button").click(function () {
+
+            makeStopCall($(this).attr("data"));
+
         });
     });
 
@@ -44,13 +43,15 @@ th
             $("#time-record-billable").val(response.Item.Billable);
             $("#time-record-duration").html(response.Item.Duration);
             $("#time-record-id").val(response.Item.Id);
-            
+
             $("#timerecord-stop-form-container").dialog('open');
         }
     }
+
     
-    function makeStopCall(id){
-        
+
+    function makeStopCall(id) {
+
         $.ajax({
             url: "/timerecord/stop",
             data: { Id: id },
@@ -58,8 +59,8 @@ th
             type: "POST",
             success: showExtraDialog
         });
-    
-    
+
+
     }
 
 </script>
@@ -126,13 +127,13 @@ th
             
     <script type="text/javascript">
 
-        function showTimeRecordForm() {
+        function showTimeRecordForm(data) {
             $("#timerecord-form-container").dialog('open');
             return false;
         }
 
-        function appendTaskToList(timerecord) {
-            var output = "<span class=\"timerecord-name\">" + timerecord.Description + "</span>";
+        function appendTimeRecordToList(timerecord) {
+            var output = "<td class=\"description\">" + timerecord.Description + "</td>";
 
             $(".timerecord-list").append(output);
         }    

@@ -16,7 +16,7 @@
         this.Name = column.Name;
         this.Order = column.Order;
         this.Description = column.Description;
-        this.Limit = column.Limit;
+        this.CardLimit = column.CardLimit;
         this.Element = buildColumn(this);
         
         var self = this;
@@ -24,7 +24,7 @@
         this.Edit = function() {
             $('#column-form [name=ColumnName]').val(self.Name);
             $('#column-form [name=ColumnDescription]').val(self.Description);
-            $('#column-form [name=ColumnLimit]').val(self.Limit);
+            $('#column-form [name=ColumnLimit]').val(self.CardLimit);
             $('#column-form [name=Id]').val(self.Id);
             $('#column-form [name=ProjectId]').val(self.ProjectId);
             showColumnForm();
@@ -140,7 +140,7 @@
         var removeLink = document.createElement('a');
         
         var titleText = boardColumn.Name;
-        if (boardColumn.Limit != 0) titleText = titleText + ' (' + boardColumn.Limit + ')';
+        if (boardColumn.CardLimit != 0) titleText = titleText + ' (' + boardColumn.CardLimit + ')';
         
         title.appendChild(document.createTextNode(titleText));
         

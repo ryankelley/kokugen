@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -12,6 +12,27 @@
     <AssemblyName>Kokugen.Core</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,6 +42,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,6 +51,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="FluentNHibernate, Version=1.0.0.0, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
@@ -84,6 +107,9 @@
     <Reference Include="System.Web.Abstractions">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Web.Routing">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -106,6 +132,9 @@
     <Compile Include="Domain\BoardColumn.cs" />
     <Compile Include="Domain\Card.cs" />
     <Compile Include="Domain\Company.cs" />
+    <Compile Include="Domain\DailyTimeRecord.cs" />
+    <Compile Include="Domain\Permission.cs" />
+    <Compile Include="Domain\Role.cs" />
     <Compile Include="Domain\TaskCategory.cs" />
     <Compile Include="Domain\Entity.cs" />
     <Compile Include="Domain\Enumeration.cs" />
@@ -113,29 +142,25 @@
     <Compile Include="Domain\Project.cs" />
     <Compile Include="Domain\SiteConfiguration.cs" />
     <Compile Include="Domain\TimeRecord.cs" />
-    <Compile Include="Membership\Abstractions\ASP_NET\AspNetMembershipProviderWrapper.cs" />
-    <Compile Include="Membership\Abstractions\ASP_NET\AspNetRoleProviderWrapper.cs" />
-    <Compile Include="Membership\Abstractions\ASP_NET\EnumerableToEnumerableTConverter.cs" />
+    <Compile Include="Domain\User.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Inflector.cs" />
     <Compile Include="IStartable.cs" />
-    <Compile Include="Membership\Abstractions\ASP_NET\AspNetMembershipSettingsProvider.cs" />
-    <Compile Include="Membership\Abstractions\NHibernate\PasswordHelperService.cs" />
-    <Compile Include="Membership\Abstractions\NHibernate\IPasswordHelperService.cs" />
-    <Compile Include="Membership\Abstractions\NHibernate\PasswordService.cs" />
-    <Compile Include="Membership\Abstractions\NHibernate\RolesService.cs" />
-    <Compile Include="Membership\Abstractions\NHibernate\SimpleHash.cs" />
-    <Compile Include="Membership\Abstractions\NHibernate\UserService.cs" />
-    <Compile Include="Membership\Permission.cs" />
+    <Compile Include="Membership\PermissionName.cs" />
     <Compile Include="Membership\SecurityRegistry.cs" />
     <Compile Include="Membership\Security\IRole.cs" />
     <Compile Include="Membership\Security\IUser.cs" />
-    <Compile Include="Membership\Security\User.cs" />
+    <Compile Include="Persistence\Overrides\RoleMappingOverride.cs" />
+    <Compile Include="Persistence\Overrides\UserMappingOverride.cs" />
+    <Compile Include="Persistence\Repositories\IDailyTimeRecordRepository.cs" />
+    <Compile Include="Persistence\Repositories\IPermissionRepository.cs" />
+    <Compile Include="Persistence\Repositories\RoleRepository.cs" />
+    <Compile Include="Persistence\Repositories\UserRepository.cs" />
+    <Compile Include="Services\IDailyTimeRecordService.cs" />
     <Compile Include="Services\ILoginService.cs" />
     <Compile Include="Membership\Services\IMembershipValidator.cs" />
     <Compile Include="Membership\Settings\LoginSettings.cs" />
     <Compile Include="Membership\Settings\MembershipSettingsBag.cs" />
-    <Compile Include="Membership\Abstractions\ASP_NET\MembershipSettingsDictionary.cs" />
     <Compile Include="Membership\Settings\PasswordResetRetrievalSettings.cs" />
     <Compile Include="Membership\Settings\PasswordSettings.cs" />
     <Compile Include="Membership\Settings\RegistrationSettings.cs" />
@@ -189,11 +214,18 @@
     <Compile Include="Services\IEmailService.cs" />
     <Compile Include="Services\IProjectService.cs" />
     <Compile Include="Services\ITimeRecordService.cs" />
+    <Compile Include="Services\Membership\ClearPasswordHelper.cs" />
+    <Compile Include="Services\Membership\IPasswordHelperService.cs" />
+    <Compile Include="Services\Membership\PasswordHelperService.cs" />
+    <Compile Include="Services\Membership\PasswordService.cs" />
+    <Compile Include="Services\Membership\RolesService.cs" />
+    <Compile Include="Services\Membership\SimpleHash.cs" />
+    <Compile Include="Services\Membership\UserService.cs" />
     <Compile Include="Services\TaskCategoryService.cs" />
     <Compile Include="Membership\Services\IRolesService.cs" />
     <Compile Include="Membership\Services\IUserService.cs" />
     <Compile Include="Services\LoginService.cs" />
-    <Compile Include="Membership\Services\PasswordService.cs" />
+    <Compile Include="Membership\Services\IPasswordService.cs" />
     <Compile Include="Membership\Services\SecurityHttpModule.cs" />
     <Compile Include="TypeExtensions.cs" />
     <Compile Include="Validation\MinimumStringLengthAttribute.cs" />
@@ -222,6 +254,23 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Domain\Domain Diagram.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

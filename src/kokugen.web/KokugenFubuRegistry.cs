@@ -1,8 +1,17 @@
 using System;
+using FubuCore;
 using FubuMVC.Core;
+using FubuMVC.Core.Behaviors;
+using FubuMVC.Core.Registration.DSL;
+using FubuMVC.Core.Registration.ObjectGraph;
+using FubuMVC.Core.Urls;
+using Kokugen.Core.Membership;
 using Kokugen.Web.Actions;
+using Kokugen.Web.Actions.Board;
+using Kokugen.Web.Actions.Errors;
 using Kokugen.Web.Actions.Home;
 using FubuMVC.UI;
+using Kokugen.Web.Behaviors;
 using Kokugen.Web.Conventions;
 
 namespace Kokugen.Web
@@ -30,7 +39,8 @@ namespace Kokugen.Web
                 .ConstrainToHttpMethod(action => action.Method.Name.EndsWith("Command"), "POST")
                 .ConstrainToHttpMethod(action => action.Method.Name.StartsWith("Query"), "GET")
                 .ConstrainToHttpMethod(action => action.Method.Name.StartsWith("Remove"), "DELETE")
-                .ForInputTypesOf<IRequestById>(x => x.RouteInputFor(request => request.Id));
+                .ForInputTypesOf<IRequestById>(x => x.RouteInputFor(request => request.Id).DefaultValue = "");
+
 
             this.UseDefaultHtmlConventions();
             this.HtmlConvention(new KokugenHtmlConventions());
@@ -39,6 +49,8 @@ namespace Kokugen.Web
             HomeIs<IndexAction>(x => x.Query());
 #endif
 
+            
+
             this.StringConversions(x =>
             {
                 x.IfIsType<DateTime>(d => d.ToString("g"));
@@ -46,10 +58,21 @@ namespace Kokugen.Web
                 x.IfIsType<float>(f => f.ToString("N2"));
                 x.IfIsType<double>(d => d.ToString("N2"));
             });
+
+            // Configure Permissions
+            SecurityProvider.Configure(new KokugenSecurityRegistry());
+
+
+            Policies.WrapBehaviorChainsWith<load_the_current_principal>();
+            Policies.Add<AuthenticationBehaviorPolicy>();
+
+            //Policies.WrapBehaviorChainsWith<MustBeAuthorizedBehavior>();
+            //Policies.ConditionallyWrapBehaviorChainsWith<MustBeAuthorizedBehavior>(c => c.OutputType() == typeof (BoardConfigurationModel));
             
-            //Policies.WrapBehaviorChainsWith<TransactionalContainerBehavior>();
+            //Policies.WrapBehaviorChainsWith<MustBeAuthorizedBehavior>();
             
             Output.ToJson.WhenCallMatches(action => action.Returns<AjaxResponse>());
+            Output.ToJson.WhenCallMatches(action => action.Returns<InPlaceAjaxResponse>());
 
             Views.TryToAttach(x =>
                                   {
@@ -57,8 +80,13 @@ namespace Kokugen.Web
                                       x.by_ViewModel_and_Namespace();
                                       x.by_ViewModel();
                                   });
+
+
+            
+            
         }
     }
+
 
     //public class KokugenViewAttachmentStrategy : IViewsForActionFilter
     //{
@@ -72,5 +100,5 @@ namespace Kokugen.Web
     //                .Select(view => view);
     //    }
     //}
-
+    
 }

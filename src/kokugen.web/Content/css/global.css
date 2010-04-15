@@ -30,13 +30,14 @@ body{
     margin:auto;
     padding-bottom:0;
     padding-top:10px;
-    width:960px;
+    
 }
 
-h1{
+#wrapper h1{
 	background: url(../images/k-logo.png) no-repeat top left;
 	height: 66px;
 	width: 232px;
+	margin-left: 150px;
 }
 
 
@@ -47,6 +48,29 @@ h1{
 	overflow: hidden;
 }
 
+
+div.user-stuff 
+{
+    float: right;
+    color: #FFF;
+    
+    margin-top:-75px;
+    /*width: 300px;*/
+}
+
+div.user-actions 
+{
+    float: right;
+    display: inline;
+    margin-right:10px;
+margin-top:25px;
+}
+
+div.gravatar 
+{
+    float: right;
+    display: inline;
+}
 /*subnav*/
 
 
@@ -130,6 +154,35 @@ h1{
 
 .subnav li.lbar a {
 	border-right:1px solid #333;
+}
+
+ul.subnav li span.subhover {background-position: center bottom; cursor: pointer;} /*--Hover effect for trigger--*/
+ul.subnav li ul.dropdown {
+	list-style: none;
+	position: absolute; /*--Important - Keeps dropdown from affecting main navigation flow--*/
+	left: 0; top: 130px;
+	background: #333;
+	margin: 0; padding: 0;
+	display: none;
+	float: left;
+	width: 170px;
+	border: 1px solid #111;
+}
+ul.subnav li ul.dropdown li{
+	margin: 0; padding: 0;
+	border-top: 1px solid #252525; /*--Create bevel effect--*/
+	border-bottom: 1px solid #444; /*--Create bevel effect--*/
+	clear: both;
+	width: 170px;
+}
+html ul.subnav li ul.dropdown li a {
+	float: left;
+	width: 145px;
+	background: #333 url(dropdown_linkbg.gif) no-repeat 10px center;
+	padding-left: 20px;
+}
+html ul.subnav li ul.dropdown li a:hover { /*--Hover effect for dropdown links--*/
+	background: #222 url(dropdown_linkbg.gif) no-repeat 10px center;
 }
 
 /*end subnav*/
@@ -400,3 +453,276 @@ a.icon img
     margin-left:10px;
     margin-right:10px;
 }
+
+a:focus
+{
+  -moz-outline: none;
+  -moz-user-select: none;
+}
+
+body {
+}
+
+
+/*nav*/
+
+
+.btns {
+	height: 37px;
+	margin: auto;
+}
+
+
+
+.btns {
+	list-style:none;
+	margin:auto;
+	text-decoration: none;
+	/*width: 960px;*/
+
+}
+
+.btns li {
+	display:inline-block;
+	float:left;
+	text-decoration: none;
+	
+}
+
+.btns li a {
+	background: url(../images/spite.jpg) no-repeat;
+	xbackground-color: fuchsia;
+	display: inline-block;
+	height: 40px;
+	margin-left:5px;
+	text-indent: -7777px;
+	width: 94px;
+}
+
+
+.btns #ready a {background-position: -0px 0px;}
+.btns #block a {background-position: -94px 0px;}
+.btns #color a {background-position: -188px 0px;}
+.btns #claim a {background-position: -282px 0px;}
+.btns #delete a {background-position: -376px 0px;}
+
+.btns #ready a:hover {background-position: -0px -39px;}
+.btns #block a:hover {background-position: -94px -39px;}
+.btns #color a:hover {background-position: -188px -39px;}
+.btns #claim a:hover {background-position: -282px -39px;}
+.btns #delete a:hover {background-position: -376px -39px;}
+
+
+.btns #ready.active a {background-position: -95px -120px;}
+.btns #block.active a {background-position: -293px -120px;}
+.btns #color.active a {background-position: -491px -120px;}
+.btns #claim.active a {background-position: -695px -120px;}
+.btns #delete.active a {background-position: -695px -120px;}
+
+.contentWrapper {float: left; background-color: #FFF;
+width: 100%;
+height:100%; }
+ .main-panel 
+{
+    margin-right: 250px; /*Set right margin to RightColumnWidth*/
+}
+
+.right-panel
+{
+    height:100%;
+    float: left;
+width: 250px; /*Width of right column*/
+margin-left: -250px; /*Set left margin to -(RightColumnWidth) */
+background-color: #DDD;
+
+}
+
+.main-panel div { padding: 4px; }
+
+.main-panel .action-bar { background-color: #DDD }
+
+.main-panel .card-title 
+{
+    font-size: 1.25em;
+    font-weight: bold;
+    background-color: #FFF;
+    min-height: 35px;
+    margin: 10px;
+}
+form.editing input 
+{
+    width: 100%;
+    padding: 5px 0;
+    border:1px solid #CCCCCC;
+font-family:"Tahoma","Arial","Verdana",sans-serif;
+font-size:1.4em;
+margin:0;
+margin-bottom: 10px;
+}
+.card-detail textarea 
+{
+    width: 100%;
+    margin-bottom:8px;
+}
+
+.right-panel li 
+{ 
+    background-color:#EEEEEE;
+line-height:1.75em;
+margin:2px;
+padding-bottom:2px;
+padding-left:2px;
+padding-right:2px;
+}
+
+.right-panel li div 
+{
+    font-size: 1em;
+    margin-left: 10px;
+}
+
+.right-panel li span
+{
+    font-size: 1em;
+    margin-left: 10px;
+}
+
+.right-panel li.card-number 
+{
+    font-size:2em;
+    font-weight:bold;
+    text-align:right;
+    padding-right: 15px;
+}
+
+.right-panel li.card-number.grey 
+{
+    background-color:#EEEEEE;
+    border-color:#CCCCCC;
+}
+
+.right-panel li.card-number.blue 
+{
+    background-color:#70a5d8;
+    border-color:#233644;
+}
+
+
+.right-panel li.card-number.yellow 
+{
+    background-color:#ECD800;
+    border-color:#9C8C02;
+}
+
+.right-panel li.card-number.orange 
+{
+    background-color:#E49703;
+    border-color:#B67902;
+}
+
+.right-panel li.card-number.teal 
+{
+    background-color:#029DB6;
+    border-color:#027E92;
+}
+
+.right-panel li div.sidebar-title 
+{
+    font-size: 1.2em;
+    margin-left: 2px;
+}
+
+ .editable-empty 
+{
+    font-size: 1em;
+    color:#999999;
+font-family:"Georgia","Times New Roman",serif;
+font-style:italic;
+    
+}
+
+ul.card-progress 
+{
+    display: inline;
+    margin: auto;
+}
+ul.card-progress li 
+{
+    display: inline;
+    width: 150px;
+    border: 1px solid #333;
+    height: 75px;
+    padding: 15px;
+    
+}
+
+div.card-process 
+{
+    background-color:#DDDDDD;
+    border-top:1px solid #333333;
+    min-height:40px;
+    padding-top:20px;
+}
+
+ul.card-progress li.grey 
+{
+    background-color:#EEEEEE;
+    border-color:#CCCCCC;
+}
+ul.card-progress li.green 
+{
+   background-color:#80C84B;
+    border-color:#2e8015;
+}
+
+.ui-widget-content { border: none; }
+
+#tabs { padding: 0; }
+
+.ui-corner-all {
+-moz-border-radius:0;
+}
+
+.ui-widget-header  {
+background-color:#CCCCCC;
+border:none;
+}
+
+.save-button 
+{
+    background:url("/content/images/btn-check16.png") no-repeat scroll 7px 6px transparent;
+    color:Green;
+    text-indent:5px;
+}
+
+.cancel-button  
+{
+    background: url('/content/images/btn-delete16.png') no-repeat 7px 6px;
+    color:Red;
+    text-indent:5px;
+}
+
+form.editing .button 
+{
+    background-color:#EFEFEF;
+    font-weight:bold;
+    margin-bottom:14px;
+    margin-right:5px;
+    text-decoration:none;
+    font-size:.75em;
+    width:65px;
+     -moz-border-radius: 3px; /* FF1+ */
+  -webkit-border-radius: 3px; /* Saf3+, Chrome */
+    border-radius: 3px; /* Opera 10.5, IE 9 */
+    border:1px solid #CCC;
+}
+
+form.editing .button:hover
+{
+    border: 1px solid #333;
+    
+
+}
+
+.jgrowl-dark{color: #FFF; border: 1px solid #3281b7; background: #000 !important;}
+.jgrowl-error{background:#f1cece !important; color:#bb2222; border: 1px solid #f19696;}

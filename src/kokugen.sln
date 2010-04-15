@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kokugen.Core", "kokugen.core\Kokugen.Core.csproj", "{2226C91A-5067-4434-9782-65543250ECBB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kokugen.Web", "kokugen.web\Kokugen.Web.csproj", "{4A7E0834-EF09-446A-95BB-06BBE6F8077C}"

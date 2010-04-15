@@ -1,4 +1,6 @@
 using System;
+using FubuCore;
+using FubuCore.Reflection;
 using FubuMVC.UI;
 using FubuMVC.UI.Configuration;
 using FubuMVC.UI.Tags;
@@ -33,10 +35,18 @@ namespace Kokugen.Web.Conventions
             BeforeEachOfPartial.If(x => x.ModelType == typeof(ProjectListModel)).Modify(x => x.AddClass("project"));
             BeforeEachOfPartial.If(x => x.ModelType == typeof(BoardConfigurationModel)).Modify(x => x.AddClass("phase"));
             
+            Profile("inplace", x=> x.Editors.Builder<EditInPlaceBuilder>());
+
             //BeforeEachOfPartial.If(x => x.Accessor.)
 
             //BeforeEachOfPartial.If(x => x.Is<ProjectListModel>()).Modify();
             AfterEachOfPartial.Builder<AfterEachOfPartialBuilder>();
+
+            Displays.If(x => x.Accessor.PropertyType.IsType<DateTime?>()).Modify(tag =>
+                                                                                     {
+                                                                                         if(tag.Text().IsEmpty())
+                                                                                             tag.Text("-");
+                                                                                     });
 
         }
 
@@ -49,6 +59,9 @@ namespace Kokugen.Web.Conventions
 
             Editors.If(x => x.Accessor.OwnerType.IsType<Card>() && x.Accessor.Name == "CardTitle").BuildBy(request => new HtmlTag("textarea").Attr("name", request.ElementId).Text(request.StringValue()));
             //Editors.Builder(new FormItemBuilder());
+
+            Editors.If(x => x.Accessor.FieldName.ToLower().Contains("password"))
+                .BuildBy(build => new HtmlTag("input").Attr("type", "password"));
         }
 
         // Setting up rules for tagging elements with jQuery validation
@@ -92,5 +105,57 @@ namespace Kokugen.Web.Conventions
         }
     }
 
-    
+    public class EditInPlaceBuilder : ElementBuilder
+    {
+        protected override bool matches(AccessorDef def)
+        {
+            return true;
+        }
+
+        public override HtmlTag Build(ElementRequest request)
+        {
+            var tag = new HtmlTag("div").Text(request.StringValue()).AddClass("editable").Id(request.Accessor.Name);
+
+            var options = new EditOptions();
+
+            options.MultiLine = request.Accessor.Name == "Details";
+            options.RequiresExplicitUserActionForSave = true;
+            
+            options.MaximumLength = request.Accessor.PropertyType.Equals(typeof(string)) ? Entity.UnboundedStringLength : 0;
+            options.IsDate = request.Accessor.PropertyType.IsDateTime();
+            options.IsTime = request.Accessor.Name.ToLower().Contains("time");
+            options.IsNumber = request.Accessor.PropertyType.IsIntegerBased() || request.Accessor.PropertyType.IsFloatingPoint();
+            options.Required = request.Accessor.HasAttribute<RequiredAttribute>();
+            options.PlaceholderText = "Double-Click to edit " + request.Accessor.Name.ToLower() + ".";
+
+            var data = options.ToJson();    
+
+            tag.Attr("data", "{editoptions:"+data+"}");
+            return tag;
+        }
+    }
+
+    public class EditOptions
+    {
+        public string EntityId { get; set; }
+        public string SaveUrl { get; set; }
+        public bool RequiresExplicitUserActionForSave { get; set; }
+        public bool MultiLine { get; set; }
+
+        public int MaximumLength { get; set; }
+        public bool Required { get; set; }
+        //public int MinimumValue { get; set; }
+        //public int MaximumValue { get; set; }
+        public bool IsNumber { get; set; }
+        public bool IsDate { get; set; }
+        public bool IsTime { get; set; }
+        public string SaveButtonText { get; set; }
+        public string CancelButtonText { get; set; }
+        public string PlaceholderText { get; set; }
+        public EditOptions()
+        {
+            SaveButtonText = "Save";
+            CancelButtonText = "Cancel";
+        }
+    }
 }

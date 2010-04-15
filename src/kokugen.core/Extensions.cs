@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Text.RegularExpressions;
 using FubuMVC.Core;
 using Kokugen.Core.Domain;
@@ -15,12 +16,25 @@ namespace Kokugen.Core
     {
         public static bool IsDateTime(this Type type)
         {
-            return typeof (DateTime) == type.GetType();
+            return typeof (DateTime) == type || typeof(DateTime?) == type;
         }
 
         public static bool IsIntegerBased(this Type type)
         {
             return type == typeof (Int32) || type == typeof(Int16) || type == typeof(Int64) || type == typeof(int);
+        }
+
+        public static string ToGravatarHash(this string email)
+        {
+            var hasher = new System.Security.Cryptography.MD5CryptoServiceProvider();
+            var hash = new StringBuilder();
+
+            foreach (byte b in hasher.ComputeHash(Encoding.UTF8.GetBytes(email.ToLower())))
+            {
+                hash.Append(b.ToString("x2").ToLower());
+            }
+
+            return hash.ToString();
         }
 
         public static bool IsFloatingPoint(this Type type)
@@ -177,24 +191,24 @@ namespace Kokugen.Core
             return toBeSorted;
         }
 
-        [DebuggerStepThrough]
-        public static void Each<T>(this IEnumerable<T> values, Action<T> eachAction)
-        {
-            foreach (T item in values)
-            {
-                eachAction(item);
-            }
-        }
+        //[DebuggerStepThrough]
+        //public static void Each<T>(this IEnumerable<T> values, Action<T> eachAction)
+        //{
+        //    foreach (T item in values)
+        //    {
+        //        eachAction(item);
+        //    }
+        //}
 
-        [DebuggerStepThrough]
-        public static IEnumerable Each(this IEnumerable values, Action<object> eachAction)
-        {
-            foreach (object item in values)
-            {
-                eachAction(item);
-            }
+        //[DebuggerStepThrough]
+        //public static IEnumerable Each(this IEnumerable values, Action<object> eachAction)
+        //{
+        //    foreach (object item in values)
+        //    {
+        //        eachAction(item);
+        //    }
 
-            return values;
-        }
+        //    return values;
+        //}
     }      
 }

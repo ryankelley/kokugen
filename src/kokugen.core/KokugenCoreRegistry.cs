@@ -1,11 +1,11 @@
 using System;
+using System.Net.Mail;
 using System.Security.Principal;
 using System.Web.Security;
 using FluentNHibernate;
 using FubuMVC.Core.Behaviors;
 using FubuMVC.Core.Configuration;
 using FubuMVC.Core.Security;
-using Kokugen.Core.Membership.Abstractions.ASP_NET;
 using Kokugen.Core.Membership.Security;
 using Kokugen.Core.Membership.Services;
 using Kokugen.Core.Membership.Settings;
@@ -22,39 +22,28 @@ namespace Kokugen.Core
         public KokugenCoreRegistry()
         {
             setupNHibernate();
-            setupMembership();
+
             Scan(x =>
                      {
                          x.TheCallingAssembly();
                          x.WithDefaultConventions();
+                         x.Convention<SettingsConvention>();
                      });
+
+            setupEmail();
         }
 
-        private void setupMembership()
+        private void setupEmail()
         {
-            For<MembershipProvider>().Use(c => System.Web.Security.Membership.Provider);
-            For<RoleProvider>().Use(c => Roles.Provider);
-
-            ForSingletonOf<IUserService>()
-              .Use<AspNetMembershipProviderWrapper>();
-
-            ForSingletonOf<IMembershipValidator>()
-                .Use<AspNetMembershipProviderWrapper>();
-
-            ForSingletonOf<IPasswordService>()
-               .Use<AspNetMembershipProviderWrapper>();
-
-            ForSingletonOf<IRolesService>()
-                .Use<AspNetRoleProviderWrapper>();
-
-            For<IMembershipSettingsProvider>().Use<AspNetMembershipSettingsProvider>();
-
-            Scan(x =>
-                     {
-                         x.AssemblyContainingType<LoginSettings>();
-                         x.IncludeNamespaceContainingType<LoginSettings>();
-                         x.Convention<MembershipSettingsConvention>();
-                     });    
+            For<IEmailService>()
+                .Use(c =>
+                         {
+                             var settingsProvider = c.GetInstance<ISettingsProvider>();
+                             var emailSettings = settingsProvider.SettingsFor<EmailSettings>();
+                             return new EmailService(new SmtpClient(emailSettings.Host, emailSettings.Port),
+                                                     emailSettings.User, emailSettings.Password,
+                                                     emailSettings.AuthorizationRequired);
+                         });
         }
 
         private void setupNHibernate()
@@ -85,7 +74,7 @@ namespace Kokugen.Core
 
     }
 
-    public class MembershipSettingsConvention : IRegistrationConvention
+    public class SettingsConvention : IRegistrationConvention
     {
         public void Process(Type type, Registry registry)
         {
@@ -94,7 +83,7 @@ namespace Kokugen.Core
             if (type.Name.EndsWith("Settings"))
                 registry.For(type).Use(x =>
                 {
-                    var provider = x.GetInstance<IMembershipSettingsProvider>();
+                    var provider = x.GetInstance<ISettingsProvider>();
                     return provider.SettingsFor(type);
                 });
         }

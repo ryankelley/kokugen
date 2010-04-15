@@ -12,6 +12,7 @@ namespace Kokugen.Core.Services
         void DeleteCompany(Guid guid);
         Company Get(Guid id);
         Company AddCompany(string companyName, string addressStreetLine1, string addressStreetLine2, string addressCity, string addressState, string addressZipCode);
+        void Save(Company company);
     }
 
     public class CompanyService : ICompanyService
@@ -41,6 +42,11 @@ namespace Kokugen.Core.Services
             return company;
         }
 
+        public void Save(Company company)
+        {
+            _companyRepository.Save(company);
+        }
+
         public IEnumerable<Company> ListAllCompanies()
         {
             return _companyRepository.Query().OrderBy(x => x.Name).ToList();
@@ -49,6 +55,7 @@ namespace Kokugen.Core.Services
         public void DeleteCompany(Guid guid)
         {
             var company = _companyRepository.Get(guid);
+            ValueObjectRegistry.RemoveValueObject<Company>(new ValueObject(company.Id.ToString(), company.Name));
             _companyRepository.Delete(company);
         }
 

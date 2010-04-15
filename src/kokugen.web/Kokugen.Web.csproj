@@ -1,4 +1,5 @@
-﻿<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -11,6 +12,11 @@
     <RootNamespace>Kokugen.Web</RootNamespace>
     <AssemblyName>Kokugen.Web</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -20,6 +26,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -28,6 +35,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AutoMapper, Version=0.4.0.150, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
@@ -91,6 +99,9 @@
     <Reference Include="System.Data.DataSetExtensions">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Web.Abstractions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Web.Extensions">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -109,11 +120,61 @@
     <Reference Include="System.Web.Mobile" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Actions\Account\LoginStatus\LoginStatus.aspx" />
+    <Content Include="Actions\Account\Manage\ChangePassword\ChangePassword.aspx" />
+    <Content Include="Actions\Account\Manage\ManageAccount.aspx" />
+    <Content Include="Actions\Account\Password\PasswordPartial.aspx" />
+    <Content Include="Actions\Account\Password\PasswordResetForm.aspx" />
+    <Content Include="Actions\Card\CardProgress.aspx" />
+    <Content Include="Actions\Card\Get.aspx" />
+    <Content Include="Actions\Company\CompanyItem_Control.ascx" />
+    <Content Include="Actions\DailyTimeRecord\List.aspx" />
+    <Content Include="Actions\DailyTimeRecord\DailyTimeRecord_Control.ascx" />
+    <Content Include="Actions\Errors\FourZeroThree.aspx" />
+    <Content Include="Actions\Project\ProjectMenu.aspx" />
+    <Content Include="Content\css\jquery.jgrowl.css" />
+    <Content Include="Actions\Project\ProjectMenu_Item.ascx" />
+    <Content Include="Content\images\delete.png" />
+    <Content Include="Content\images\edit2.png" />
+    <Content Include="Content\images\spite.jpg" />
+    <Content Include="Content\Scripts\dovetail.editing.js" />
+    <Content Include="Content\Scripts\jquery.jeditable.js" />
+    <Content Include="Content\Scripts\jquery.jgrowl.js" />
+    <Content Include="Content\Scripts\jquery.jgrowl_compressed.js" />
+    <Content Include="Content\Scripts\jquery.jgrowl_minimized.js" />
+    <Content Include="Content\Scripts\jquery.ui.ajax.dialog.js" />
+    <Content Include="Content\Scripts\jquery.metadata.js" />
+    <Content Include="Content\Scripts\kokugenEditable.js" />
     <Content Include="Global.asax" />
     <Content Include="Web.config">
+      <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actions\Account\Manage\ChangePassword\ChangePasswordAction.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Actions\Account\Manage\ManageAccountAction.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Actions\Account\Password\ResetPasswordAction.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Actions\Card\CardProgressAction.cs" />
+    <Compile Include="Actions\Card\UpdateAction.cs" />
+    <Compile Include="Actions\DailyTimeRecord\View_Page_Type_Declarations.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Actions\Errors\ForbiddenAction.cs" />
+    <Compile Include="Actions\Account\Activate\ActivateAccountAction.cs" />
+    <Compile Include="Actions\Account\LoginStatus\LoginStatusAction.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Actions\Account\LogOff\LogOffAction.cs" />
+    <Compile Include="Actions\Account\Register\IRegistrationService.cs" />
+    <Compile Include="Actions\Account\Register\RegisterAccountAction.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Actions\AjaxResponse.cs" />
     <Compile Include="Actions\BoardColumn\RemoveAction.cs" />
     <Compile Include="Actions\Board\BoardColumnDTO.cs" />
@@ -127,6 +188,7 @@
     <Compile Include="Actions\Card\AddAction.cs" />
     <Compile Include="Actions\Card\CardMovedAction.cs" />
     <Compile Include="Actions\Card\CompactCardFormAction.cs" />
+    <Compile Include="Actions\Card\GetAction.cs" />
     <Compile Include="Actions\Card\View_Page_Type_Declarations.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -139,31 +201,34 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Actions\DTO\TimeRecordDTO.cs" />
+    <Compile Include="Actions\Errors\view_page_type_declarations.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Actions\Home\Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Actions\Home\HomeViewModel.cs" />
     <Compile Include="Actions\Home\IndexAction.cs" />
-    <Compile Include="Actions\Login\LoginAction.cs" />
-    <Compile Include="Actions\Login\LoginForm.aspx.cs">
-      <DependentUpon>LoginForm.aspx</DependentUpon>
+    <Compile Include="Actions\Account\Login\LoginAction.cs" />
+    <Compile Include="Actions\Account\Login\LoginFormAction.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Actions\Login\LoginFormAction.cs" />
     <Compile Include="Actions\ProjectBaseViewModel.cs" />
     <Compile Include="Actions\Project\AddAction.cs" />
     <Compile Include="Actions\Project\AddProjectModel.cs" />
     <Compile Include="Actions\Project\GetProjectAction.cs" />
     <Compile Include="Actions\Project\ListAction.cs" />
     <Compile Include="Actions\Project\ProjectFormAction.cs" />
+    <Compile Include="Actions\Project\ProjectMenuAction.cs" />
     <Compile Include="Actions\TaskCategory\RemoveAction.cs" />
     <Compile Include="Actions\TimeRecord\AddAction.cs" />
     <Compile Include="Actions\TimeRecord\AddTimeRecordModel.cs" />
+    <Compile Include="Actions\TimeRecord\ListAction.cs" />
     <Compile Include="Actions\TimeRecord\StopTimeRecordFormAction.cs" />
     <Compile Include="Actions\TimeRecord\StopAction.cs" />
     <Compile Include="Actions\TimeRecord\ProjectTimeRecordFormAction.cs" />
-    <Compile Include="Actions\TimeRecord\ListAction.cs" />
+    <Compile Include="Actions\DailyTimeRecord\ListAction.cs" />
     <Compile Include="Actions\TimeRecord\RemoveAction.cs" />
     <Compile Include="Actions\TimeRecord\TimeRecordFormAction.cs" />
     <Compile Include="Actions\Project\View_Page_Type_Declarations.cs">
@@ -187,10 +252,9 @@
     <Compile Include="Actions\Users\ListAction.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Actions\Users\Roles\ListAction.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Behaviors\Check_Permissions_On_Action.cs" />
+    <Compile Include="Behaviors\AuthenticationBehaviorPolicy.cs" />
+    <Compile Include="Behaviors\BehaviorCall.cs" />
+    <Compile Include="Behaviors\MustBeAuthorizedBehavior.cs" />
     <Compile Include="Behaviors\TransactionalContainerBehavior.cs" />
     <Compile Include="Conventions\Builders\AfterEachOfPartialBuilder.cs" />
     <Compile Include="Conventions\Builders\BeforeEachOfPartialBuilder.cs" />
@@ -221,6 +285,10 @@
     <Compile Include="KokugenWebRegistry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SecurityConfiguration.cs" />
+    <Compile Include="Shared\Super.Master.cs">
+      <DependentUpon>Super.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Shared\Project.Master.cs">
       <DependentUpon>Project.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -229,7 +297,9 @@
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Startables\SetupDefaultRoles.cs" />
+    <Compile Include="Startables\CheckPermissionsInDb.cs" />
+    <Compile Include="Startables\PasswordQuestionInitializer.cs" />
+    <Compile Include="Startables\SetupSuperUser.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\kokugen.core\Kokugen.Core.csproj">
@@ -249,7 +319,7 @@
     <Content Include="Actions\Company\CompanyForm.aspx" />
     <Content Include="Actions\Company\List.aspx" />
     <Content Include="Actions\Home\Home.aspx" />
-    <Content Include="Actions\Login\LoginForm.aspx" />
+    <Content Include="Actions\Account\Login\LoginForm.aspx" />
     <Content Include="Actions\Project\GetProject.aspx" />
     <Content Include="Actions\Project\List.aspx" />
     <Content Include="Actions\Project\ProjectForm.aspx" />
@@ -354,21 +424,23 @@
     <Content Include="Shared\Site.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Actions\Account\Register\Register.aspx" />
     <Content Include="Content\images\k-logo.png" />
     <Content Include="Actions\Users\Details\Details.aspx" />
-    <Content Include="Actions\Users\Roles\List.aspx" />
     <Content Include="Content\css\ellipsis-xbl.xml" />
     <Content Include="Content\images\archive-title.png" />
     <Content Include="Content\images\backlog-title.png" />
     <Content Include="Content\images\collapse-left.png" />
     <Content Include="Content\images\collapse-right.png" />
-    <Content Include="Content\Scripts\jquery.jeditable.mini.js" />
     <Content Include="Default.aspx" />
     <Content Include="Content\images\stopsign.png" />
     <Content Include="Shared\Project.Master" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Shared\Super.Master" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\WebApplications\Microsoft.WebApplication.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

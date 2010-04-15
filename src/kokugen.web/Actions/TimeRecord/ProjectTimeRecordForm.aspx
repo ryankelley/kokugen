@@ -5,21 +5,22 @@
 
 
 <div id="timerecord-form-container" class="hidden">
-<%= this.FormFor(new AddTimeRecordModel() {})%>
+<%= this.FormFor(new AddTimeRecordModel() {}).Id("time-record-form")%>
     <%= this.Edit(x => x.TimeRecord.Description) %>
     <%= this.Edit(x =>x.TaskId) %>
     <%= this.InputFor( x => x.ProjectId) %>
     
     
-</form>
+<%= this.EndForm() %>
    
 </div>
 <script type="text/javascript">
 
     function closeDialog(response) {
+    $("#timerecord-form-container").dialog('close');
         appendTimeRecordToList(response.Item);
 
-        $("#timerecord-form-container").dialog('close');
+        
         // would want to update list here too
     }
     function validateAndSave() {
@@ -29,15 +30,16 @@
             dataType: 'json',        // 'xml', 'script', or 'json' (expected server response type) 
             clearForm: true        // clear all form fields after successful submit 
         };
-        var isValid = $("#mainForm").valid();
+        var isValid = $("#time-record-form").valid();
 
         if (isValid) {
-            $("#mainForm").ajaxSubmit(options);
+            $("#time-record-form").ajaxSubmit(options);
         }
     }
 
-    $(document).ready(function() {
-    $("#mainForm").validate({ errorClass: "error" });
-    $("#timerecord-form-container").dialog({ title: "Add Time Record", autoOpen: false, buttons: { "Save": validateAndSave} });
+    $(document).ready(function () {
+        $("#time-record-form").validate({ errorClass: "error" });
+        $("#timerecord-form-container").dialog({ title: "Add Time Record", autoOpen: false, buttons: { "Save": validateAndSave} });
+        $("#timerecord-form-container").submit(validateAndSave);
     });
 </script>

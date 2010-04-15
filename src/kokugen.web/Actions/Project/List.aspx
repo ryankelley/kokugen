@@ -1,6 +1,4 @@
 <%@ Page Language="C#" AutoEventWireup="true" Inherits="Kokugen.Web.Actions.Project.List" MasterPageFile="~/Shared/Site.Master"%>
-<%@ Import Namespace="Kokugen.Web.Actions.TaskCategory"%>
-<%@ Import Namespace="FubuMVC.Core.Urls"%>
 <%@ Import Namespace="Kokugen.Web.Actions.Project"%>
 <asp:Content ID="ProjectListHead" ContentPlaceHolderID="head" runat="server">
 
@@ -19,7 +17,7 @@
         function showProjectForm() {
             $("#project-form-container").dialog('open');
             return false;
-        }
+        }      
 
         function appendProjectToList(project) {
             var output = "<li class=\"project first\"><a title=\"Click to view this project\" href=\"/project/ "+ project.Id + "\">";
@@ -27,6 +25,7 @@
             output = output +  "<span class=\"project-stats\">Some Status Here</span><div class=\"project-owner\">" + project.Company.Name + "</div></a></li>";
 
             $(".project-list").append(output);
+            return false;
         }
     
     </script>

@@ -10,10 +10,12 @@ namespace Kokugen.Core.Domain
     [Serializable]
     public class BoardColumn : Entity
     {
+
+
         [Required]
         public virtual string Name { get; set; }
         public virtual string Description { get; set; }
-        public virtual int Limit { get; set; }
+        public virtual int CardLimit { get; set; }
 
         
     }

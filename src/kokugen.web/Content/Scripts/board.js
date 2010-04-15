@@ -1,6 +1,6 @@
 var _cards = new Array();
 
-var Card = function(card) {
+var Card = function (card) {
 
     this.Id = card.Id;
     this.ColumnId = card.ColumnId;
@@ -18,11 +18,12 @@ var Card = function(card) {
     this.Status = card.Status;
     this.ReasonBlocked = card.BlockReason;
     this.CardOrder = card.CardOrder;
-    
+    this.ProjectId = card.ProjectId;
+
 };
 
 
-var buildCardDisplay = function(scard) {
+var buildCardDisplay = function (scard) {
     if (!(scard instanceof Card)) {
         throw ("card is not an instance of Card");
     }
@@ -46,6 +47,7 @@ var buildCardDisplay = function(scard) {
 
     var editLink = document.createElement('a');
     editLink.appendChild(document.createTextNode(scard.CardNumber));
+    editLink.setAttribute("href", "/card/" + scard.Id);
 
     number.appendChild(editLink);
 
@@ -115,7 +117,7 @@ var buildCardDisplay = function(scard) {
         myTools.isReady(false);
     }
 
-    element.receive = function(newColumnId) {
+    element.receive = function (newColumnId) {
         unblock();
         notReady();
         $.ajax({
@@ -126,7 +128,7 @@ var buildCardDisplay = function(scard) {
         });
     };
 
-    element.colorChange = function(color) {
+    element.colorChange = function (color) {
         this.Color = color;
 
         originalColor = determineColor($(element));
@@ -142,12 +144,12 @@ var buildCardDisplay = function(scard) {
         });
     };
 
-    element.UpdateOrder = function(number) {
+    element.UpdateOrder = function (number) {
         scard.CardOrder = number;
         this.myCard = scard;
     };
 
-    element.started = function() {
+    element.started = function () {
         $.ajax({
             url: "/card/dates",
             data: { Id: scard.Id, Status: "Started" },
@@ -156,7 +158,7 @@ var buildCardDisplay = function(scard) {
         });
     };
 
-    element.notStarted = function() {
+    element.notStarted = function () {
         $.ajax({
             url: "/card/dates",
             data: { Id: scard.Id, Status: "NotStarted" },
@@ -165,7 +167,7 @@ var buildCardDisplay = function(scard) {
         });
     };
 
-    element.done = function() {
+    element.done = function () {
         $.ajax({
             url: "/card/dates",
             data: { Id: scard.Id, Status: "Done" },
@@ -174,7 +176,7 @@ var buildCardDisplay = function(scard) {
         });
     };
 
-    element.notDone = function() {
+    element.notDone = function () {
         $.ajax({
             url: "/card/dates",
             data: { Id: scard.Id, Status: "NotDone" },
@@ -183,7 +185,7 @@ var buildCardDisplay = function(scard) {
         });
     };
 
-    element.isReady = function(status) {
+    element.isReady = function (status) {
         if (status) {
             this.Status = "Ready";
             $(element).addClass("ready");
@@ -201,7 +203,7 @@ var buildCardDisplay = function(scard) {
         });
     };
 
-    element.isBlocked = function(value) {
+    element.isBlocked = function (value) {
         scard.Status = value ? "Blocked" : "New";
         if (value) {
             $(element).addClass("blocked");
@@ -216,11 +218,11 @@ var buildCardDisplay = function(scard) {
 
     };
 
-    element.handleReasonBlocked = function(value) {
+    element.handleReasonBlocked = function (value) {
         element.updateBlocked(true, value);
     };
 
-    element.updateBlocked = function(status, reason) {
+    element.updateBlocked = function (status, reason) {
         if (status) {
             var isValid = ($(input).val() != "" && $(input).val() !== undefined);
             if (isValid) {
@@ -245,19 +247,19 @@ var buildCardDisplay = function(scard) {
         }
     };
 
-    $(reasonBlocked).dblclick(function() {
+    $(reasonBlocked).dblclick(function () {
         $(reasonBlocked).addClass("hidden");
         $(reasonForm).removeClass("hidden");
     });
 
-    $(submitReason).click(function() {
+    $(submitReason).click(function () {
         element.updateBlocked(true, $(input).val());
         $(reasonForm).addClass("hidden");
         $(reasonBlocked).removeClass("hidden");
         $(reasonBlocked).html(scard.ReasonBlocked);
     });
 
-    $(cancelReason).click(function() {
+    $(cancelReason).click(function () {
         if (scard.Status == "Blocked") {
             $(reasonForm).addClass("hidden");
             $(reasonBlocked).removeClass("hidden");
@@ -267,11 +269,11 @@ var buildCardDisplay = function(scard) {
         }
     });
 
-    $(head).click(function() {
+    $(head).click(function () {
         $(this).siblings("#card-toolbar").slideToggle();
     });
 
-    $(element).hover(function() { $(this).addClass("hover"); }, function() { $(this).removeClass("hover"); });
+    $(element).hover(function () { $(this).addClass("hover"); }, function () { $(this).removeClass("hover"); });
     return element;
 };
 

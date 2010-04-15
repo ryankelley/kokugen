@@ -3,13 +3,14 @@ using System.Security.Principal;
 using System.Threading;
 using System.Web;
 using System.Web.Security;
+using Kokugen.Core.Domain;
 using Kokugen.Core.Membership.Services;
 
 namespace Kokugen.Core.Membership.Security
 {
     public class FubuPrincipal : IPrincipal
     {
-        private readonly MembershipUser _user;
+        private readonly Domain.User _user;
         private readonly IRolesService _rolesService;
         private readonly IIdentity _identity;
 
@@ -18,12 +19,12 @@ namespace Kokugen.Core.Membership.Security
             _identity = identity;
         }
 
-        public FubuPrincipal(IIdentity identity, IRolesService rolesService)
+        public FubuPrincipal(IIdentity identity, Domain.User user)
             : this(identity)
         {
-            _rolesService = rolesService;
+            _user = user;
         }
-        
+
         public static FubuPrincipal Current
         {
             get
@@ -40,14 +41,22 @@ namespace Kokugen.Core.Membership.Security
 
         public bool IsInRole(string role)
         {
-            if(_rolesService != null)
-                return _rolesService.IsInRole(_identity.Name,role);
+            if (_user != null)
+                return _user.HasPermission(role);//.IsInRole(role));
             return false;
         }
 
         public IIdentity Identity
         {
             get { return _identity; }
+        }
+
+        public User User
+        {
+            get {
+                return _user;
+            }
+
         }
 
         #endregion

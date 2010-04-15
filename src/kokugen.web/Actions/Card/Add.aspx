@@ -6,6 +6,6 @@
     <%= this.Edit(x => x.Card.Details) %>
     <%= this.Edit(x => x.Card.Project) %>
     <input type="submit" value="Submit" />
-</form>
+<%= this.EndForm() %>
    
 </div>

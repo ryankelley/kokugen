@@ -2,6 +2,7 @@
 <%@ Import Namespace="Kokugen.Web.Actions.TimeRecord"%>
 <%@ Import Namespace="Kokugen.Web.Actions.Board"%>
 <%@ Import Namespace="FubuMVC.Core.Urls"%>
+<%@ Import Namespace="HtmlTags" %>
 <asp:Content ID="ProjectListHead" ContentPlaceHolderID="head" runat="server">
 
 </asp:Content>
@@ -133,9 +134,14 @@ color:black;
    
 </div>
     
-    <%= this.LinkTo(new ViewBoardInputModel{ Id = Model.Project.Id}).NoClosingTag().AddClass("icon") %><img src="/content/images/board_big.png" alt="view board" /></a>
+    <%= this.LinkTo(new ViewBoardInputModel { Id = Model.Project.Id }).AddClass("icon")
+        .Child(new HtmlTag("img", tag =>
+                                        {
+                                            tag.Attr("src","/content/images/board_big.png");
+                                            tag.Attr("alt","veiw board");
+                                        }))%>
     <% this.Partial(new StopTimeRecordFormInputModel()); %>
-</body>
+
     
 <% this.Partial(new ProjectTimeRecordFormModel(){ProjectId = Model.Project.Id}); %>
 
@@ -146,8 +152,8 @@ color:black;
         return false;
     }
 
-    function appendTaskToList(timerecord) {
-        var output = "<span class=\"timerecord-name\">" + timerecord.Description + "</span>";
+    function appendTimeRecordToList(timerecord) {
+        var output = "<tr><td class=\"description\">" + timerecord.Description + "</td></tr>";
 
         $(".timerecord-list").append(output);
     }    

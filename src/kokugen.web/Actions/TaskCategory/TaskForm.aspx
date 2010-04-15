@@ -6,9 +6,10 @@
 
 <div id="task-form-container" class="hide">
 <%= this.FormFor(new AddTaskModel()) %>
-    <%= this.Edit(x => x.Task.Name) %>
+    <%= this.Edit(x => x.Task.Name).Id("task-form-name") %>
+    <%=this.InputFor(x => x.Task.Id).Id("task-edit-form-id") %>
     
-</form>
+<%= this.EndForm() %>
    
 </div>
 <script type="text/javascript">
@@ -31,10 +32,12 @@
         if (isValid) {
             $("#mainForm").ajaxSubmit(options);
         }
+        return false;
     }
 
-    $(document).ready(function() {
-    $("#mainForm").validate({ errorClass: "error" });
-        $("#task-form-container").dialog({ title: "Add Task", autoOpen: false, buttons: { "Save":  validateAndSave } });
+    $(document).ready(function () {
+        $("#mainForm").validate({ errorClass: "error" });
+        $("#task-form-container").dialog({ title: "Add Task", autoOpen: false, buttons: { "Save": validateAndSave} });
+        $("#task-form-container").submit(validateAndSave);
     });
 </script>

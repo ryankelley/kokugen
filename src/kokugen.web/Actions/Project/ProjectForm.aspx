@@ -8,7 +8,7 @@
     <%= this.Edit(x => x.Project.Name) %>
     <%= this.Edit(x => x.Project.Description) %>
     <%= this.Edit(x => x.CompanyId) %>
-</form>
+<%= this.EndForm() %>
    
 </div>
 <script type="text/javascript">

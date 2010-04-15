@@ -53,7 +53,7 @@ namespace Kokugen.Core.Services
 
             if(columnId.IsEmpty())
             {
-                var newColumn = new CustomBoardColumn {Name = name, Description = description, Limit = limit};
+                var newColumn = new CustomBoardColumn {Name = name, Description = description, CardLimit = limit};
                 project.AddBoardColumn(newColumn);
                 _customBoardColumnRepository.Save(newColumn);
                 _projectService.SaveProject(project);
@@ -67,7 +67,7 @@ namespace Kokugen.Core.Services
                 {
                     column.Name = name;
                     column.Description = description;
-                    column.Limit = limit;
+                    column.CardLimit = limit;
 
                     _customBoardColumnRepository.Save(column);
                     return column;

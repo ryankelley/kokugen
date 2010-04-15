@@ -11,10 +11,10 @@ namespace Kokugen.Web
         public KokugenSecurityRegistry()
         {
             For<ListAction>(c => c.Query(null))
-                .RequirePermission(Permission.CanListProjects);
+                .RequirePermission(PermissionName.CanListProjects);
 
             For<BoardAction>(c => c.Configure(null))
-                .RequirePermission(Permission.CanConfigureProcess);
+                .RequirePermission(PermissionName.CanConfigureProcess);
         }
 
         
