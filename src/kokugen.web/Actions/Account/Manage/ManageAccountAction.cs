@@ -25,10 +25,10 @@ namespace Kokugen.Web.Actions.Account.Manage
         {
             var user = _userService.GetUserByLogin(request.UserName);
             var dto = Mapper.DynamicMap<User, UserDTO>(user);
-            return new ManageAccountModel(){User = dto, Id = user.Id, Messages = new List<string>()};
+            return new ManageAccountModel(){User = dto, Id = user.Id};
         }
 
-        public ManageAccountModel Command(ManageAccountModel model)
+        public AjaxResponse Command(ManageAccountModel model)
         {
             var user = _userService.Retrieve(model.Id);
 
@@ -38,9 +38,13 @@ namespace Kokugen.Web.Actions.Account.Manage
 
             var validation = _userService.Update(user);
 
-            model.Messages = validation.AllMessages.Select(x=>x.Message).ToArray();
+            if(validation.IsValid())
+                return new AjaxResponse(){Success = true, Item = "Save successful!"};
 
-            return model;
+
+            var messages = validation.AllMessages.Select(x=>x.Message).ToArray();
+
+            return new AjaxResponse(){Item = messages};
         }
     }
 
@@ -56,6 +60,5 @@ namespace Kokugen.Web.Actions.Account.Manage
     {
         public Guid Id { get; set; }
         public UserDTO User { get; set; }
-        public IEnumerable<string> Messages { get; set; }
     }
 }

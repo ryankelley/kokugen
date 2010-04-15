@@ -40,7 +40,18 @@ namespace Kokugen.Core.Services
             var notification = _validator.Validate(entity);
             if (notification.IsValid())
             {
-                //Todo: check for unique email address
+                //make sure email is unique
+                var user = _userRepository.FindBy(x => x.Email, entity.Email);
+                if (user != null)
+                {
+                    if (user.Id != entity.Id)
+                    {
+                        notification.RegisterMessage("Email", "Email already exists!", Severity.Error);
+                        _userRepository.Evict(entity);
+                        return notification;
+                    }
+                }
+
                 _userRepository.Save(entity);
             }
             else

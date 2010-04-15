@@ -125,6 +125,7 @@
     <Content Include="Actions\Account\Manage\ManageAccount.aspx" />
     <Content Include="Actions\Account\Password\PasswordPartial.aspx" />
     <Content Include="Actions\Account\Password\PasswordResetForm.aspx" />
+    <Content Include="Actions\Card\CardProgress.aspx" />
     <Content Include="Actions\Card\Get.aspx" />
     <Content Include="Actions\Company\CompanyItem_Control.ascx" />
     <Content Include="Actions\DailyTimeRecord\List.aspx" />
@@ -159,6 +160,7 @@
     <Compile Include="Actions\Account\Password\ResetPasswordAction.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Actions\Card\CardProgressAction.cs" />
     <Compile Include="Actions\Card\UpdateAction.cs" />
     <Compile Include="Actions\DailyTimeRecord\View_Page_Type_Declarations.cs">
       <SubType>ASPXCodeBehind</SubType>

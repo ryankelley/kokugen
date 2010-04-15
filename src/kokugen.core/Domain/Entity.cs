@@ -9,6 +9,14 @@ namespace Kokugen.Core.Domain
     {
         public static int UnboundedStringLength = 2000;
         public virtual Guid Id { get; set; }
+        public virtual DateTime Created { get; set; }
+        public virtual DateTime LastUpdated { get; set; }
+
+        protected Entity()
+        {
+            Created = DateTime.Now;
+            LastUpdated = DateTime.Now;
+        }
 
         #region IEquatable<Entity> Members
 
