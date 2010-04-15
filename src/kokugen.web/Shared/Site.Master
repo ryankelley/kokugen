@@ -4,6 +4,7 @@
 <%@ Import Namespace="Kokugen.Web.Actions.Project"%>
 <%@ Import Namespace="Kokugen.Web.Actions.Company"%>
 <%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="FubuMVC.Core.View.FubuMasterPage" MasterPageFile="~/Shared/Super.Master" %>
+<%@ Import Namespace="Kokugen.Web.Actions.DailyTimeRecord" %>
 <asp:Content ContentPlaceHolderID="Masterhead" ID="sitehead" runat="server">
 <asp:ContentPlaceHolder ID="head" runat="server" />
 </asp:Content>
@@ -16,7 +17,8 @@
 		    <li class="bar"><%= this.LinkTo(new ProjectListModel()).Text("Projects") %></li>
 		    <li class="lbar"><%= this.LinkTo(new TimeRecordListModel()).Text("Time") %></li>
 		    <li class="lbar"><%=this.LinkTo(new UserListRequest()).Text("Users") %></li>
-		    <li class="last"><%= this.LinkTo(new TaskListModel()).Text("Tasks") %></li>
+		    <li class="lbar"><%= this.LinkTo(new TaskListModel()).Text("Tasks") %></li>
+            <li class="last"><%= this.LinkTo(new DailyTimeRecordListModel()).Text("Daily Time") %></li>
 	    </ul>
 	    <ul class="subnav right">
 		    <asp:ContentPlaceHolder ID="extraNavigation" runat="server" />
