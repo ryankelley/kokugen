@@ -43,6 +43,10 @@ namespace Kokugen.Core.Services
                 //Todo: check for unique email address
                 _userRepository.Save(entity);
             }
+            else
+            {
+                _userRepository.Evict(entity);
+            }
             return notification;
         }
 
