@@ -26,7 +26,7 @@ namespace Kokugen.Web.Actions.Project.Manage.Menu
             menus.Child(new HtmlTag("li").Child(
                 new LinkTag("Add User",
                             _urlRegistry.UrlFor(new AddUserToProjectRequest() {Id = request.Id}),
-                            "manage-proj-menu").Title("Add User")));
+                            "manage-proj-menu").Title("Add User")).AddClass("bar"));
 
             var script = new HtmlTag("script").Attr("type", "text/javascript")
                 .Text(

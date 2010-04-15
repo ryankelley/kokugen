@@ -20,7 +20,7 @@ namespace Kokugen.Web.Startables
 
         public void Start()
         {
-            var users = _userRepository.Query().AsEnumerable();
+            var users = _userRepository.Query().Where(x => x.IsActivated).AsEnumerable();
 
             var values = from u in users
                          select new ValueObject(u.Id.ToString(), u.UserName);
