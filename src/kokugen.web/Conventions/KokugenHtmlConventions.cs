@@ -103,27 +103,5 @@ namespace Kokugen.Web.Conventions
         }
     }
 
-    public class EditOptions
-    {
-        public string EntityId { get; set; }
-        public string SaveUrl { get; set; }
-        public bool RequiresExplicitUserActionForSave { get; set; }
-        public bool MultiLine { get; set; }
 
-        public int MaximumLength { get; set; }
-        public bool Required { get; set; }
-        //public int MinimumValue { get; set; }
-        //public int MaximumValue { get; set; }
-        public bool IsNumber { get; set; }
-        public bool IsDate { get; set; }
-        public bool IsTime { get; set; }
-        public string SaveButtonText { get; set; }
-        public string CancelButtonText { get; set; }
-        public string PlaceholderText { get; set; }
-        public EditOptions()
-        {
-            SaveButtonText = "Save";
-            CancelButtonText = "Cancel";
-        }
-    }
 }

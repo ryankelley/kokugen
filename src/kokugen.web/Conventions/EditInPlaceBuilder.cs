@@ -23,7 +23,8 @@ namespace Kokugen.Web.Conventions
 
             if (request.Accessor.HasAttribute<MarkdownAttribute>())
             {
-                tag.Text(new Markdown().Transform(request.RawValue.ToString()));
+                tag.DontEncode().Text(new Markdown().Transform(request.RawValue.ToString()));
+                options.Markdown = true;
             }
 
             options.MultiLine = request.Accessor.Name == "Details";
@@ -40,6 +41,31 @@ namespace Kokugen.Web.Conventions
 
             tag.Attr("data", "{editoptions:"+data+"}");
             return tag;
+        }
+    }
+
+    public class EditOptions
+    {
+        public string EntityId { get; set; }
+        public string SaveUrl { get; set; }
+        public bool RequiresExplicitUserActionForSave { get; set; }
+        public bool MultiLine { get; set; }
+
+        public int MaximumLength { get; set; }
+        public bool Required { get; set; }
+        //public int MinimumValue { get; set; }
+        //public int MaximumValue { get; set; }
+        public bool IsNumber { get; set; }
+        public bool IsDate { get; set; }
+        public bool IsTime { get; set; }
+        public string SaveButtonText { get; set; }
+        public string CancelButtonText { get; set; }
+        public string PlaceholderText { get; set; }
+        public bool Markdown { get; set; }
+        public EditOptions()
+        {
+            SaveButtonText = "Save";
+            CancelButtonText = "Cancel";
         }
     }
 }

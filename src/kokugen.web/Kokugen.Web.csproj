@@ -148,7 +148,7 @@
     <Content Include="Content\Scripts\jquery.jgrowl_minimized.js" />
     <Content Include="Content\Scripts\jquery.ui.ajax.dialog.js" />
     <Content Include="Content\Scripts\jquery.metadata.js" />
-    <Content Include="Content\Scripts\kokugenEditable.js" />
+    <Content Include="Content\Scripts\showdown.js" />
     <Content Include="Global.asax" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

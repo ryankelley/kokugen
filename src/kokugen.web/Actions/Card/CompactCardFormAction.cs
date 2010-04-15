@@ -36,7 +36,8 @@ namespace Kokugen.Web.Actions.Card
                                Details = model.Card.Details,
                                Project = project,
                                Color = "grey",
-                               Status = CardStatus.New
+                               Status = CardStatus.New,
+                               
                                
                            };
 
