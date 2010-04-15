@@ -12,6 +12,7 @@ namespace Kokugen.Core.Domain
     {
         private readonly string _password;
         private IList<Role> _roles = new List<Role>();
+        private IList<Project> _projects = new List<Project>();
 
         protected User()
         {}
@@ -113,5 +114,11 @@ namespace Kokugen.Core.Domain
         {
             IsLocked = false;
         }
+
+        public virtual IEnumerable<Project> GetProjects()
+        {
+            return _projects;
+        }
+        
     }
 }
