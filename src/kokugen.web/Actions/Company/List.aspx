@@ -5,12 +5,13 @@
 <%= this.Script("company.js") %>
 <style type="text/css">
 body
-{
-    background-color: Black;
-    font-family:arial,helvetica,sans-serif;
-}
-
- table
+ h2
+    {
+    color:#333;	
+    
+    }
+    
+    table
         {
             border-collapse:collapse;
             width:250px;
@@ -23,29 +24,15 @@ table, td, th
         border:3px solid black;
         border-style:inset;
         text-align:center;
-        background-color:#CEBEB4;
-        color:#49657D;
+        background-color:#ddd;
+        color:#555;
     }
 th
     {
-        background-color:#9e9993;
-        color:black;
+        background-color:#888;
+        color:#222;
+        text-shadow: 0 1px #bbb;
     }
-
-.content
-{
-    background-color: White;
-    height: 400px;
-    width: 600px;
-    margin-left:auto;
-    margin-right:auto;
-    padding: 0px 4px 2px 4px;
-}
-
-.removeLink
-{
-    margin-left:3px;
-}
     </style>
 
             

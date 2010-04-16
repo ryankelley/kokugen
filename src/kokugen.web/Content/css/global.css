@@ -62,14 +62,20 @@ div.user-actions
 {
     float: right;
     display: inline;
-    margin-right:10px;
-margin-top:25px;
+    margin-right:-62px;
+margin-top:75px;
+font-size:11px;
 }
 
+
 div.gravatar 
-{
+{	
+
     float: right;
     display: inline;
+    margin-top:5px;
+    margin-right:40px;
+;
 }
 /*subnav*/
 
@@ -249,9 +255,9 @@ li.project a {
 -moz-background-inline-policy:continuous;
 -moz-background-origin:padding;
 background:#EEE url(../images/clipboard.png) no-repeat scroll 6px 6px;
-border:1px solid #333;
-font-family:"Georgia","Times New Roman",serif;
-color:#000000;
+border:thin solid #999;
+font-family:Sans-Serif;
+color:#222;
 display:block;
 padding:6px;
 text-decoration:none;
@@ -261,12 +267,12 @@ z-index:10;
 
 li.project.odd a 
 {
-    background:#CCC url(../images/clipboard.png) no-repeat scroll 6px 6px;
+    background:#aaa url(../images/clipboard.png) no-repeat scroll 6px 6px;
 }
 
 li.project.even a 
 {
-    background:#FFF url(../images/clipboard.png) no-repeat scroll 6px 6px;
+    background:#ccc url(../images/clipboard.png) no-repeat scroll 6px 6px;
 }
 
 li.project a:hover {
@@ -274,8 +280,8 @@ li.project a:hover {
 -moz-background-inline-policy:continuous;
 -moz-background-origin:padding;
 background:#D3F3D3 url(../images/clipboard.png) no-repeat scroll 6px 6px;
-border:1px solid #A3D3A3;
-font-family:"Georgia","Times New Roman",serif;
+border:thin solid #00AA0A;
+font-family: Sans-Serif;
 color:#000000;
 display:block;
 padding:6px;
@@ -286,7 +292,9 @@ z-index: 10;
 
 li.project span.project-name 
 {
+	color:#333;
     font-weight: bold;
+    text-shadow: 0 1px #eee;
 }
 
 li.project span.project-stats {
@@ -298,6 +306,7 @@ font-style:italic;
 font-variant:normal;
 font-weight:normal;
 line-height:normal;
+text-shadow:0 1px #eee;
 }
 
 li.project div.project-owner {
@@ -324,10 +333,12 @@ line-height:normal;
 .add-caption img { vertical-align: middle; margin: 2px; }
 .add-caption a, .add-caption a:visited
 {
+	
     color: #666;
-    font-family:"Georgia","Times New Roman",serif;
-    font-style: normal;
+    font-family:Sans-Serif;
+    font-weight:bold;
     text-decoration: none;
+    text-shadow:0 1px #fff;
     
 }
 .clear { clear:both;}
