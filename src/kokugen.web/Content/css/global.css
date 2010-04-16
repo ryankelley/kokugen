@@ -588,6 +588,19 @@ padding-right:2px;
     margin-left: 10px;
 }
 
+.right-panel li.indicator
+{
+    color:#FFFFFF;
+font-size:1.2em;
+line-height:3em;
+text-align:center;
+}
+.right-panel li.indicator.ready { background-color:#80C84B;
+    border-color:#2e8015; }
+
+.right-panel li.indicator.block { background-color:#e65540;
+    border-color:#d34f52; }
+
 .right-panel li.card-number 
 {
     font-size:2em;
@@ -656,6 +669,21 @@ ul.card-progress li
     padding: 15px;
     
 }
+
+div.card-blocked 
+{
+    background-color:#D05750;
+    color:#FFFFFF;
+    margin-left:10px;
+    margin-right:10px;
+    padding:5px;
+    text-indent:1em;
+}
+div.card-color-bar, div.card-color-bar #card-color-editor, div.card-color-bar #card-color-editor li
+{
+    background-color:#DDDDDD;
+}
+
 
 div.card-process 
 {

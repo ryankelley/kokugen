@@ -16,9 +16,22 @@ MasterPageFile="~/Shared/Site.Master" %>
     <%=this.Edit(x => x.Password) %>
     <%=this.Edit(x => x.RememberMe) %>
 
-    <input type='submit' value='login' />
+    <input type='submit' value='login' class="button" />
 <%= this.EndForm() %>
 
 <%this.Partial<ResetPasswordPartialModel>(); %>
 
+<script type="text/javascript">
+    $(function () {
+        $('.button').button();
+    });
+
+</script>
+
+<style type="text/css">
+.button{color:Black;}
+
+</style>
+
 </asp:Content>
+
