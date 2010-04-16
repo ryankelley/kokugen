@@ -659,3 +659,38 @@ vertical-align:top;
     background-color:#2e8015;
 }
 
+.grey 
+{
+    background-color:#DDDDDD;
+    border-color:#CCCCCC;
+}
+
+.blue 
+{
+    background-color:#70a5d8;
+    border-color:#233644;
+}
+
+
+
+
+.yellow 
+{
+    background-color:#ECD800;
+    border-color:#9C8C02;
+}
+
+
+.orange 
+{
+    background-color:#E49703;
+    border-color:#B67902;
+}
+
+
+.teal 
+{
+    background-color:#029DB6;
+    border-color:#027E92;
+}
+

@@ -7,14 +7,14 @@
             <%= this.DisplayFor(x => x.CardNumber) %>
         </td>
         
-        <td class="<%=Model.Color %>">
+        <td class="<%=Model.Color %>" >
 <%--            <%= this.DisplayFor(x => x.Color) %>--%>
         </td>
         <td>
             <%= this.DisplayFor(x => x.Details) %>
         </td>
          <td>
-            <%= this.DisplayFor(x => x.Deadline) %>
+            <%= this.DisplayFor(x => x.Deadline.Value.Month) + "/" + this.DisplayFor(x => x.Deadline.Value.Day) + "/" + this.DisplayFor(x => x.Deadline.Value.Year)%>
         </td>
          
 
