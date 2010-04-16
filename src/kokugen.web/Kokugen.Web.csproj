@@ -130,7 +130,6 @@
     <Content Include="Actions\Account\Password\PasswordResetForm.aspx" />
     <Content Include="Actions\Card\CardProgress.aspx" />
     <Content Include="Actions\Card\Get.aspx" />
-    <Content Include="Actions\Company\CompanyItem_Control.ascx" />
     <Content Include="Actions\DailyTimeRecord\List.aspx" />
     <Content Include="Actions\DailyTimeRecord\DailyTimeRecord_Control.ascx" />
     <Content Include="Actions\Errors\FourZeroThree.aspx" />
@@ -141,8 +140,9 @@
     <Content Include="Actions\Project\ProjectMenu_Item.ascx" />
     <Content Include="Content\images\delete.png" />
     <Content Include="Content\images\edit2.png" />
-    <Content Include="Content\images\spite.jpg" />
+    <Content Include="Content\images\spite.png" />
     <Content Include="Content\Scripts\company.js" />
+    <Content Include="Content\Scripts\task.js" />
     <Content Include="Content\Scripts\dovetail.editing.js" />
     <Content Include="Content\Scripts\jquery.jeditable.js" />
     <Content Include="Content\Scripts\jquery.jgrowl.js" />
@@ -346,7 +346,6 @@
     <Content Include="Actions\TimeRecord\TimeRecordForm.aspx" />
     <Content Include="Actions\TimeRecord\TimeRecord_Control.ascx" />
     <Content Include="Actions\TaskCategory\TaskForm.aspx" />
-    <Content Include="Actions\TaskCategory\TaskItem_Control.ascx" />
     <Content Include="Actions\TaskCategory\List.aspx" />
     <Content Include="Actions\Users\List.aspx" />
     <Content Include="Content\css\custom-theme\images\ui-bg_fine-grain_10_ffffff_60x60.png" />
