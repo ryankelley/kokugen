@@ -167,6 +167,7 @@ ul.subnav li ul.dropdown {
 	float: left;
 	width: 170px;
 	border: 1px solid #111;
+	z-index: 1000;
 }
 ul.subnav li ul.dropdown li{
 	margin: 0; padding: 0;
