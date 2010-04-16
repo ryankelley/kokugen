@@ -130,6 +130,7 @@
     <Content Include="Actions\Account\Password\PasswordResetForm.aspx" />
     <Content Include="Actions\Card\CardProgress.aspx" />
     <Content Include="Actions\Card\Get.aspx" />
+    <Content Include="Actions\Card\CardItem_Control.ascx" />
     <Content Include="Actions\DailyTimeRecord\List.aspx" />
     <Content Include="Actions\DailyTimeRecord\DailyTimeRecord_Control.ascx" />
     <Content Include="Actions\Errors\FourZeroThree.aspx" />

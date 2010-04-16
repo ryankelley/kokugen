@@ -8,4 +8,5 @@ namespace Kokugen.Web.Actions.Card
     public class Add : FubuPage<CardInputFormModel> {}
     public class CompactCardForm : FubuPage<CompactCardFormModel> { }
     public class CardProgress : FubuPage<CardProgressModel>{}
+    public class CardItem_Control : FubuControl<Kokugen.Core.Domain.Card> { }
 }
