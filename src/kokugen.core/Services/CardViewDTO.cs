@@ -18,5 +18,7 @@ namespace Kokugen.Core.Services
         public string BlockReason { get; set; }
         public int CardOrder { get; set; }
         public Guid ProjectId { get; set; }
+
+        public string GravatarHash { get; set; }
     }
 }

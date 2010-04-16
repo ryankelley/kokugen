@@ -2,7 +2,7 @@
 <%@ Import Namespace="HtmlTags" %>
 
 
-    <tr>
+    <tr id="<%=Model.Id %>">
         <td>
             <%= this.DisplayFor(x => x.Name) %>
         </td>

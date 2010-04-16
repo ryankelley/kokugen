@@ -35,7 +35,8 @@ namespace Kokugen.Web.Actions.Company
 
                 return new AjaxResponse
                            {
-                               Success = true
+                               Success = true,
+                               Item = comp
                            };
 
 

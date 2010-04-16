@@ -12,6 +12,7 @@ namespace Kokugen.Core.Persistence.Overrides
             mapping.Map(x => x.CardNumber).Generated.Always().Not.Update().Not.Insert().Not.LazyLoad().ReadOnly().CustomSqlType("int identity").Not.Nullable();
             mapping.References(x => x.Column, "Column_id").Cascade.SaveUpdate().ForeignKey("fk_card_to_column");
             mapping.References(x => x.Project).Cascade.SaveUpdate().ForeignKey("fk_card_to_project");
+            mapping.References(x => x.AssignedTo).Cascade.SaveUpdate().Fetch.Join().ForeignKey("fk_Card_to_AssignedTo");
         }
     }
 }

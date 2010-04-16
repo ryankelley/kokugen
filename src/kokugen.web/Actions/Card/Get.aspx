@@ -2,9 +2,11 @@
 <%@ Import Namespace="Kokugen.Web.Actions.Card" %>
 <asp:Content ID="CardGetHead" ContentPlaceHolderID="head" runat="server">
 <%= this.Script("board.js") %>
+<%= this.Script("showdown.js")%>
 <%= this.Script("jquery.metadata.js")%>
 <%= this.Script("jquery.jeditable.js")%>
 <%= this.Script("dovetail.editing.js")%>
+
 <script type="text/javascript">
     $(document).ready(function () {
         $('#tabs').tabs();

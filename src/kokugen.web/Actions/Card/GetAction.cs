@@ -29,6 +29,7 @@ namespace Kokugen.Web.Actions.Card
     public class CardDetailModel : ProjectBaseViewModel
     {
         public string Title { get; set; }
+        [Markdown]
         public string Details { get; set; }
         public int TimeEstimate { get; set; }
         public int Size { get; set; }

@@ -71,6 +71,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\FubuMVC\HtmlTags.dll</HintPath>
     </Reference>
+    <Reference Include="MarkdownSharp">
+      <HintPath>..\..\lib\markdownsharp\MarkdownSharp.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\Common Service Locator\Microsoft.Practices.ServiceLocation.dll</HintPath>
@@ -139,6 +142,7 @@
     <Content Include="Content\images\delete.png" />
     <Content Include="Content\images\edit2.png" />
     <Content Include="Content\images\spite.jpg" />
+    <Content Include="Content\Scripts\company.js" />
     <Content Include="Content\Scripts\dovetail.editing.js" />
     <Content Include="Content\Scripts\jquery.jeditable.js" />
     <Content Include="Content\Scripts\jquery.jgrowl.js" />
@@ -146,7 +150,7 @@
     <Content Include="Content\Scripts\jquery.jgrowl_minimized.js" />
     <Content Include="Content\Scripts\jquery.ui.ajax.dialog.js" />
     <Content Include="Content\Scripts\jquery.metadata.js" />
-    <Content Include="Content\Scripts\kokugenEditable.js" />
+    <Content Include="Content\Scripts\showdown.js" />
     <Content Include="Global.asax" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -270,10 +274,12 @@
     <Compile Include="Conventions\Builders\BeforePartialBuilder.cs" />
     <Compile Include="Conventions\Builders\AfterPartialBuilder.cs" />
     <Compile Include="Conventions\Builders\OddEvenLiModifier.cs" />
+    <Compile Include="Conventions\EditInPlaceBuilder.cs" />
     <Compile Include="Conventions\HtmlExtensions.cs" />
     <Compile Include="Conventions\IRequestById.cs" />
     <Compile Include="Conventions\KokugenHtmlConventions.cs" />
     <Compile Include="Conventions\Builders\LabelBuilder.cs" />
+    <Compile Include="Conventions\MarkdownAttribute.cs" />
     <Compile Include="Conventions\SplitCamelCaseExtension.cs" />
     <Compile Include="Conventions\ValueObjectDropdownBuilder.cs" />
     <Compile Include="Conventions\ValueObjectDropdownExtensions.cs" />
@@ -448,6 +454,17 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Shared\Super.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
