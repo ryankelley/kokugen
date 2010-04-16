@@ -4,11 +4,18 @@
 
 <asp:Content ID="THISCONTENTAREAID" ContentPlaceHolderID="mainContent" runat="server">
     <%= this.CSS("board.css") %>
-    <style type="text/css">
+        <style type="text/css">
+    
+    h2
+    {
+    color:#333;	
+    
+    }
+    
     table
         {
             border-collapse:collapse;
-            width:640px;
+            width:1024px;
             padding:10px;
             border:5px solid gray;
             margin:10px;
@@ -18,20 +25,22 @@ table, td, th
         border:3px solid black;
         border-style:inset;
         text-align:center;
-        background-color:#CEBEB4;
-        color:#49657D;
+        background-color:#ddd;
+        color:#555;
     }
 th
     {
-        background-color:#9e9993;
-        color:black;
+        background-color:#888;
+        color:#222;
+        text-shadow: 0 1px #bbb;
     }
 </style>
+
 <div align=center>
     <table> 
     <tr>
         <th>
-            Card Number
+            #
         </th>
         <th>
             Assigned 
