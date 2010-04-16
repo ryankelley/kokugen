@@ -169,8 +169,14 @@
     <Compile Include="Actions\Account\Password\ResetPasswordAction.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Actions\Card\Blocked\BlockedAction.cs" />
     <Compile Include="Actions\Card\CardProgressAction.cs" />
-    <Compile Include="Actions\Card\claim\CardClaimAction.cs" />
+    <Compile Include="Actions\Card\Claim\CardClaimAction.cs" />
+    <Compile Include="Actions\Card\Color\ColorAction.cs" />
+    <Compile Include="Actions\Card\Dates\CardDatesAction.cs" />
+    <Compile Include="Actions\Card\Move\CardMovedAction.cs" />
+    <Compile Include="Actions\Card\Ready\CardReadyAction.cs" />
+    <Compile Include="Actions\Card\ReOrder\ReOrderAction.cs" />
     <Compile Include="Actions\Card\UpdateAction.cs" />
     <Compile Include="Actions\DailyTimeRecord\View_Page_Type_Declarations.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -196,7 +202,7 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Actions\Card\AddAction.cs" />
-    <Compile Include="Actions\Card\CardMovedAction.cs" />
+    <Compile Include="Actions\Card\CardModels.cs" />
     <Compile Include="Actions\Card\CompactCardFormAction.cs" />
     <Compile Include="Actions\Card\GetAction.cs" />
     <Compile Include="Actions\Card\View_Page_Type_Declarations.cs">
@@ -469,6 +475,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

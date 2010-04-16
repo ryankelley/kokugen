@@ -416,6 +416,12 @@ vertical-align:top;
     
 }
 
+.card .card-header div.gravatar 
+{
+    margin-right: 0px;
+    margin-top: 0px;
+}
+
 .card 
 {
    /* background: none url('/content/images/card-overlay.png') repeat-x top left;*/
@@ -426,7 +432,7 @@ vertical-align:top;
     clear: both;
 }
 
-.grey 
+.card.grey 
 {
     /*background-color:#FFF;
     border-color:#555;*/
@@ -437,7 +443,7 @@ vertical-align:top;
         -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#555555', EndColorStr='#343434')";
 }
 
-.blue
+.card.blue
 {
    
     /*background-color:#466c8a;*/
@@ -450,7 +456,7 @@ vertical-align:top;
 }
 
 
-.yellow
+.card.yellow
 {
     /*background-color:#F5F7C4;
     background-color:#FFF;
@@ -462,7 +468,7 @@ vertical-align:top;
         -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#9C8C02', EndColorStr='#5E5403')"; /* IE8 */
 
 }
-.orange
+.card.orange
 {
     /*background-color:#FFD7B3;
     background-color:#FFF;
@@ -472,7 +478,7 @@ vertical-align:top;
             filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#ECAA2F', EndColorStr='#665538'); /* IE6,IE7 */
         -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#ECAA2F', EndColorStr='#665538')";
 }
-.teal
+.card.teal
 {
     /*background-color:#CFE7E2;
     background-color:#FFF;
