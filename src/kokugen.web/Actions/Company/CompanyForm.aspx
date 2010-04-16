@@ -21,8 +21,14 @@
 <script type="text/javascript">
 
     function closeDialog(response) {
-        
+
         $("#company-form-container").dialog('close');
+
+        var elements = document.getElementById("company-form").elements;
+        for (var i in elements) {
+            elements[i].value = '';
+        }
+
         addCompanyToList(response.Item);
     }
     

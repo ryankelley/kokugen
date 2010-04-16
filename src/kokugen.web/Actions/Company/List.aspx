@@ -89,6 +89,7 @@ th
             $("#company-address-city").val(comp.Address.City);
             $("#company-address-state").val(comp.Address.State);
             $("#company-address-zip-code").val(comp.Address.ZipCode);
+            $("#"+ comp.Id).remove();
             $("#company-form-container").dialog('open');
             return false;
         }

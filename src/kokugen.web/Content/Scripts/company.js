@@ -22,6 +22,7 @@ var buildCompanyDisplay = function (comp) {
     if (!(comp instanceof Company)) { throw ("comp is not an instance of Company"); }
 
     var tr = document.createElement("tr");
+    tr.setAttribute('id', comp.Id);
 
     tr.myCompany = comp;
 
@@ -53,7 +54,7 @@ var buildCompanyDisplay = function (comp) {
     el.setAttribute('alt', 'delete');
     deleteLink.appendChild(el);
     $(deleteLink).addClass("delete-button");
-    
+
 
     $(deleteLink).click(function () {
         var myParent = $(this).parent().parent()[0];

@@ -15,8 +15,14 @@
 <script type="text/javascript">
 
     function closeDialog(response) {
-        
+
         $("#task-form-container").dialog('close');
+        var elements = document.getElementById("mainForm").elements;
+        for (var i in elements) {
+            elements[i].value = '';
+        }
+        
+        
         addtaskToList(response.Item);
         // would want to update list here too
     }
@@ -31,7 +37,11 @@
 
         if (isValid) {
             $("#mainForm").ajaxSubmit(options);
+            
         }
+
+        
+
         return false;
     }
 
@@ -39,5 +49,6 @@
         $("#mainForm").validate({ errorClass: "error" });
         $("#task-form-container").dialog({ title: "Add Task", autoOpen: false, buttons: { "Save": validateAndSave} });
         $("#task-form-container").submit(validateAndSave);
+        
     });
 </script>

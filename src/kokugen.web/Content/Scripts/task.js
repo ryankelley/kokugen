@@ -15,6 +15,8 @@ var buildtaskDisplay = function (t) {
 
     var tr = document.createElement("tr");
 
+    tr.setAttribute('id', t.Id);
+
     tr.mytask = t;
 
     var name = document.createElement("td");
@@ -45,7 +47,7 @@ var buildtaskDisplay = function (t) {
     el.setAttribute('alt', 'delete');
     deleteLink.appendChild(el);
     $(deleteLink).addClass("delete-button");
-    
+
 
     $(deleteLink).click(function () {
         var myParent = $(this).parent().parent()[0];

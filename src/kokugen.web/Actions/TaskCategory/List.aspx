@@ -63,6 +63,7 @@ th
 
         $("#task-name").val(task.Name);
         $("#task-edit-form-id").val(task.Id);
+        $("#" + task.Id).remove();
         $("#task-form-container").dialog('open');  
             
             
