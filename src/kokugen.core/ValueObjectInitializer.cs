@@ -29,7 +29,7 @@ namespace Kokugen.Core
             var list = _companyService.ListAllCompanies().Select(x => new ValueObject(x.Id.ToString(), x.Name));
             var taskList = _taskCategoryService.GetAllCategories().Select(x => new ValueObject(x.Id.ToString(), x.Name));
             var projectList = _projectService.ListProjects().Select(x => new ValueObject(x.Id.ToString(), x.Name));
-            var userList = _userService.FindAll().Where(x => x.IsActivated).Select(x => new ValueObject(x.Id.ToString(), x.DisplayName()));
+            var userList = _userService.FindAll().Select(x => new ValueObject(x.Id.ToString(), x.DisplayName()));
             ValueObjectRegistry.AddValueObjects<Company>(list);
             ValueObjectRegistry.AddValueObjects<TaskCategory>(taskList);
             ValueObjectRegistry.AddValueObjects<Project>(projectList);
