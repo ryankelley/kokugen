@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using FubuMVC.Core.View;
-using Kokugen.Core.Attributes;
 using Kokugen.Core.Domain;
 using Kokugen.Core.Membership.Services;
 using Kokugen.Core.Services;
