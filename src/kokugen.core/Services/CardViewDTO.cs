@@ -20,5 +20,6 @@ namespace Kokugen.Core.Services
         public Guid ProjectId { get; set; }
 
         public string GravatarHash { get; set; }
+        public string UserDisplay { get; set; }
     }
 }

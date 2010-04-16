@@ -46,14 +46,16 @@
 
         var reasonForm = document.createElement('div');
         $(reasonForm).addClass("reason-form hidden");
-
+        var container = document.createElement('div');
         var input = document.createElement('textarea');
-        $(input).attr("cols", "105").attr("rows", "2").attr("name", "value").addClass("required");
+        $(input).attr("cols", "105").attr("rows", "3").attr("name", "value").addClass("required");
 
         input.appendChild(document.createTextNode(reasonBlockedMessage));
 
         $('div.card-blocked').append(reasonForm);
-        reasonForm.appendChild(input);
+
+        container.appendChild(input);
+        reasonForm.appendChild(container);
 
         var submitReason = document.createElement('button');
         submitReason.appendChild(document.createTextNode('OK'));
@@ -99,6 +101,17 @@
         $(".card-color-bar").slideToggle();
         return false;
     };
+
+    function updateUserGravatar(response) {
+        if(response.Item != null) {
+        var newImg = document.createElement('img');
+        newImg.setAttribute("src", "http://gravatar.com/avatar/" + response.Item.GravatarHash + "?s=56");
+         $("li.owner img").replaceWith(newImg);
+
+         $("li.owner .user-display").html(response.Item.UserDisplay);
+
+        }
+    }
 
     $(document).ready(function () {
         $('#tabs').tabs();
@@ -159,11 +172,19 @@
             }
         });
         
-        
-        
         $("#color").click(function() {
             
             $(".card-color-bar").slideToggle();
+        });
+
+        $("#claim").click(function() { 
+            $.ajax({
+                    url: "/card/claim",
+                    data: { CardId: cardId },
+                    dataType: "json",
+                    type: "POST",
+                    success: updateUserGravatar
+                });
         });
         
     });
@@ -212,7 +233,7 @@
             <li class=""><div class="sidebar-title">Size</div><%= this.EditInPlace(m => m.Size)%></li>
             <li class=""><div class="sidebar-title">Priority</div><%= this.EditInPlace(m => m.Priority)%></li>
             <li class=""><div class="sidebar-title">Deadline</div><%= this.EditInPlace(m => m.Deadline) %></li>
-            <li class=""><div class="sidebar-title">Owner</div></li>
+            <li class="owner"><div class="sidebar-title">Owner</div><img src="<%= "http://gravatar.com/avatar/" + Model.GravatarHash + "?s=56"  %>" alt="gravatar" /><div class="user-display"><%= Model.UserDisplay %></div></li>
             <li class=""><div class="sidebar-title">Created</div><%= this.DisplayFor(m => m.Created) %></li>
             <li class=""><div class="sidebar-title">Started</div><%= this.DisplayFor(m => m.Started) %></li>
             <li class=""><div class="sidebar-title">Finished</div><%= this.DisplayFor(m => m.DateCompleted) %></li>

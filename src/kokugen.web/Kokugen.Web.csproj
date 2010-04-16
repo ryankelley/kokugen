@@ -168,6 +168,7 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Actions\Card\CardProgressAction.cs" />
+    <Compile Include="Actions\Card\claim\CardClaimAction.cs" />
     <Compile Include="Actions\Card\UpdateAction.cs" />
     <Compile Include="Actions\DailyTimeRecord\View_Page_Type_Declarations.cs">
       <SubType>ASPXCodeBehind</SubType>

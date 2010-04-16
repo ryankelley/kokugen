@@ -600,6 +600,12 @@ vertical-align:top;
     font-weight: bold;
 }
 
+.card .card-header .username 
+{
+    float:right;
+    margin-right:4px;
+    margin-top:2px;
+}
 .card.grey .card-header .card-size 
 {
     background-color:#BBB;

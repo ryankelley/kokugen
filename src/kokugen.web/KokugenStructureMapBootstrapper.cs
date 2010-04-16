@@ -59,9 +59,12 @@ namespace Kokugen.Web
         {
             Mapper.CreateMap<Card, CardViewDTO>()
                 .ForMember(a => a.Status, b=> b.MapFrom(c => c.Status.DisplayName))
-                .ForMember(a => a.GravatarHash, b=> b.MapFrom(c => c.AssignedTo.GravatarHash));
+                .ForMember(a => a.GravatarHash, b=> b.MapFrom(c => c.AssignedTo.GravatarHash))
+                .ForMember(a => a.UserDisplay, b=> b.MapFrom(c => c.AssignedTo.DisplayName()));
             Mapper.CreateMap<Card, CardDetailModel>()
-                .ForMember(a => a.Status, b => b.MapFrom(c => c.Status.DisplayName));
+                .ForMember(a => a.Status, b => b.MapFrom(c => c.Status.DisplayName))
+                .ForMember(a => a.GravatarHash, b=> b.MapFrom(c => c.AssignedTo.GravatarHash))
+                .ForMember(a => a.UserDisplay, b=> b.MapFrom(c => c.AssignedTo.DisplayName()));
             Mapper.CreateMap<BoardColumn, BoardColumnDTO>()
                 .ForMember(a => a.CardLimit, b=> b.UseValue(0));
             Mapper.CreateMap<CustomBoardColumn, BoardColumnDTO>()

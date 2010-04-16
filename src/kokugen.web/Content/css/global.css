@@ -551,7 +551,7 @@ background-color: #DDD;
 
 .main-panel div { padding: 4px; }
 
-.main-panel .action-bar { background-color: #DDD }
+.main-panel .action-bar { background-color: #DDD; border-bottom:1px solid #666666;}
 
 .main-panel .card-title 
 {
@@ -597,6 +597,11 @@ padding-right:2px;
 {
     font-size: 1em;
     margin-left: 10px;
+}
+
+.right-panel li .button span 
+{
+    margin-left:0;
 }
 
 .right-panel li.indicator
@@ -656,6 +661,19 @@ text-align:center;
     font-size: 1.2em;
     margin-left: 2px;
 }
+
+.right-panel li.owner img 
+{
+    float:right;
+    margin-top: -26px;
+}
+
+.right-panel li.owner 
+{
+    height: 57px;
+}
+
+
 
  .editable-empty 
 {
