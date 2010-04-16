@@ -34,7 +34,12 @@ namespace Kokugen.Core.Domain
 
         public virtual IEnumerable<User> GetUsers()
         {
-            return _users;
+            var list = new List<User>();
+            list.Add(Owner);
+
+            list.AddRange(_users);
+
+            return list;
         }
 
         public virtual void AddUser(User user)
