@@ -40,7 +40,7 @@ namespace Kokugen.Web.Conventions
                                                           page.ElementNameFor(expression),
                                                           giveMeTheList).Id(label.Attr("for"));
 
-            select.AddClasses(input.GetClasses().ToList());
+            //select.AddClasses(input.GetClasses().ToList());
 
 
             divWrapper.Child(label);
