@@ -5,6 +5,6 @@
 <div>
     <%=this.FormFor<DeleteProjectUserModel>().Attr("method","DELETE") %>
         <%=this.InputFor(x => x.ProjectId).Hide() %>
-        <%=ValueObjectDropdownBuilder.Build("User","UserId",()=>Model.Users.Select(x=> new ValueObject(x.Id.ToString(),x.DisplayName()))) %>
+        <%=this.DropDownFor(x => x.User,()=>Model.Users.Select(x=> new ValueObject(x.Id.ToString(),x.DisplayName()))) %>
     <%=this.EndForm() %>
 </div>
