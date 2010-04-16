@@ -489,7 +489,7 @@ body {
 }
 
 .btns li a {
-	background: url(images/spite.png) no-repeat;
+	background: url(../images/spite.png) no-repeat;
 	xbackground-color: fuchsia;
 	display: inline-block;
 	height: 33px;
