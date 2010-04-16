@@ -131,6 +131,7 @@
     <Content Include="Actions\DailyTimeRecord\List.aspx" />
     <Content Include="Actions\DailyTimeRecord\DailyTimeRecord_Control.ascx" />
     <Content Include="Actions\Errors\FourZeroThree.aspx" />
+    <Content Include="Actions\Project\Manage\Users\Delete\DeleteProjectUser.aspx" />
     <Content Include="Actions\Project\ProjectMenu.aspx" />
     <Content Include="Actions\Project\Manage\Users\Add\AddUserToProject.aspx" />
     <Content Include="Content\css\jquery.jgrowl.css" />
@@ -221,6 +222,9 @@
     <Compile Include="Actions\Project\GetProjectAction.cs" />
     <Compile Include="Actions\Project\ListAction.cs" />
     <Compile Include="Actions\Project\Manage\Menu\ManageProjectMenuAction.cs" />
+    <Compile Include="Actions\Project\Manage\Users\Delete\DeleteProjectUserAction.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Actions\Project\ProjectFormAction.cs" />
     <Compile Include="Actions\Project\ProjectMenuAction.cs" />
     <Compile Include="Actions\Project\Manage\Users\Add\AddUserToProjectAction.cs">
