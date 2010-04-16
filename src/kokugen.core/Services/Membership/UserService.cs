@@ -87,7 +87,7 @@ namespace Kokugen.Core.Services
 
         public IEnumerable<User> FindAll()
         {
-            return _userRepository.Query().OrderBy(x => x.LastName).ToList();
+            return _userRepository.Query().Where(x => x.IsActivated).OrderBy(x => x.LastName).ToList();
         }
 
         public User GetUserById(Guid userId)

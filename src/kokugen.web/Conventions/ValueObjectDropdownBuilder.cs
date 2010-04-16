@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using FubuCore;
@@ -45,19 +46,14 @@ namespace Kokugen.Web.Conventions
                                      });
         }
 
-        public static HtmlTag Build(string listName)
+        public static HtmlTag Build(string listName, string @for, Func<IEnumerable<ValueObject>> giveMeTheList)
         {
-            //return new SelectTag(tag =>
-            //{
-            //    ValueObjectRegistry.GetAllActive(listName).Each(x => tag.Option(x.LocalizedText(), x.Key));
-
-            //    var defaultVO = ValueObjectRegistry.FindDefault(listName);
-            //    if (defaultVO != null)
-            //    {
-            //        tag.SelectByValue(defaultVO.Key);
-            //    }
-            //});
-            return new HtmlTag("DIV");
+            return new SelectTag(tag =>
+                                     {
+                                         tag.Attr("name", @for);
+                                         tag.TopOption(string.Format("-- Select {0} --", listName), null);
+                                         giveMeTheList().Each(vo => tag.Option(vo.Value, vo.Key));
+                                     });
         }
     }
 }
