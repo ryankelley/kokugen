@@ -7,6 +7,13 @@
 <%= this.Script("task.js") %>
     <div class="content"align=center  margin-left=auto margin-right=auto width=6em>
     <style type="text/css">
+    
+    h2
+    {
+    color:#333;	
+    
+    }
+    
     table
         {
             border-collapse:collapse;
@@ -20,13 +27,14 @@ table, td, th
         border:3px solid black;
         border-style:inset;
         text-align:center;
-        background-color:#CEBEB4;
-        color:#49657D;
+        background-color:#ddd;
+        color:#555;
     }
 th
     {
-        background-color:#9e9993;
-        color:black;
+        background-color:#888;
+        color:#222;
+        text-shadow: 0 1px #bbb;
     }
 </style>
 
