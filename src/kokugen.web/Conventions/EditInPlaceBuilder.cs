@@ -23,7 +23,7 @@ namespace Kokugen.Web.Conventions
 
             if (request.Accessor.HasAttribute<MarkdownAttribute>())
             {
-                tag.DontEncode().Text(new Markdown().Transform(request.RawValue.ToString()));
+                tag.UnEncoded().Text(new Markdown().Transform(request.RawValue.ToString()));
                 options.Markdown = true;
             }
 

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Iesi.Collections.Generic;
 using Kokugen.Core.Validation;
 
 namespace Kokugen.Core.Domain
@@ -10,7 +11,7 @@ namespace Kokugen.Core.Domain
     {
         private IList<TimeRecord> _timeRecords = new List<TimeRecord>();
         private IList<CustomBoardColumn> _boardColumns = new List<CustomBoardColumn>();
-        private IList<User> _users = new List<User>();
+        private ISet<User> _users = new HashedSet<User>();
         
 
         [Required]
@@ -33,7 +34,12 @@ namespace Kokugen.Core.Domain
 
         public virtual IEnumerable<User> GetUsers()
         {
-            return _users;
+            var list = new List<User>();
+            list.Add(Owner);
+
+            list.AddRange(_users);
+
+            return list;
         }
 
         public virtual void AddUser(User user)

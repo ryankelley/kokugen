@@ -7,25 +7,18 @@ using Kokugen.Core.Persistence.Repositories;
 
 namespace Kokugen.Web.Startables
 {
-    public class UserInitializer : IValueObjectInitializer 
+    public class RoleInitializer : IValueObjectInitializer 
     {
-        private readonly IUserRepository _userRepository;
+
         private readonly IRoleRepository _roleRepository;
 
-        public UserInitializer(IUserRepository userRepository, IRoleRepository roleRepository)
+        public RoleInitializer(IRoleRepository roleRepository)
         {
-            _userRepository = userRepository;
             _roleRepository = roleRepository;
         }
 
         public void Start()
         {
-            var users = _userRepository.Query().Where(x => x.IsActivated).AsEnumerable();
-
-            var values = from u in users
-                         select new ValueObject(u.Id.ToString(), u.UserName);
-
-            ValueObjectRegistry.AddValueObjects<User>(values);
 
             var roles = _roleRepository.Query().AsEnumerable();
 
