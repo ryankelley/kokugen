@@ -140,7 +140,7 @@
     <Content Include="Actions\Project\ProjectMenu_Item.ascx" />
     <Content Include="Content\images\delete.png" />
     <Content Include="Content\images\edit2.png" />
-    <Content Include="Content\images\spite.jpg" />
+    <Content Include="Content\images\spite.png" />
     <Content Include="Content\Scripts\company.js" />
     <Content Include="Content\Scripts\dovetail.editing.js" />
     <Content Include="Content\Scripts\jquery.jeditable.js" />

@@ -466,7 +466,6 @@ body {
 
 /*nav*/
 
-
 .btns {
 	height: 37px;
 	margin: auto;
@@ -490,34 +489,35 @@ body {
 }
 
 .btns li a {
-	background: url(../images/spite.jpg) no-repeat;
+	background: url(images/spite.png) no-repeat;
 	xbackground-color: fuchsia;
 	display: inline-block;
-	height: 40px;
+	height: 33px;
 	margin-left:5px;
 	text-indent: -7777px;
-	width: 94px;
+	width: 97px;
 }
 
 
 .btns #ready a {background-position: -0px 0px;}
-.btns #block a {background-position: -94px 0px;}
-.btns #color a {background-position: -188px 0px;}
-.btns #claim a {background-position: -282px 0px;}
-.btns #delete a {background-position: -376px 0px;}
+.btns #block a {background-position: -96px 0px;}
+.btns #color a {background-position: -192px 0px;}
+.btns #claim a {background-position: -288px 0px;}
+.btns #delete a {background-position: -384px 0px;}
 
-.btns #ready a:hover {background-position: -0px -39px;}
-.btns #block a:hover {background-position: -94px -39px;}
-.btns #color a:hover {background-position: -188px -39px;}
-.btns #claim a:hover {background-position: -282px -39px;}
-.btns #delete a:hover {background-position: -376px -39px;}
+.btns #ready a:hover {background-position: -0px -32px;}
+.btns #block a:hover {background-position: -96px -32px;}
+.btns #color a:hover {background-position: -192px -32px;}
+.btns #claim a:hover {background-position: -288px -32px;}
+.btns #delete a:hover {background-position: -384px -32px;}
 
 
-.btns #ready.active a {background-position: -95px -120px;}
-.btns #block.active a {background-position: -293px -120px;}
-.btns #color.active a {background-position: -491px -120px;}
-.btns #claim.active a {background-position: -695px -120px;}
-.btns #delete.active a {background-position: -695px -120px;}
+.btns #ready.active a {background-position: -0px -64px;}
+.btns #block.active a {background-position: -96px -64px;}
+.btns #color.active a {background-position: -192px -64px;}
+.btns #claim.active a {background-position: -288px -64px;}
+.btns #delete.active a {background-position: -384px -64px;}
+
 
 .contentWrapper {float: left; background-color: #FFF;
 width: 100%;
