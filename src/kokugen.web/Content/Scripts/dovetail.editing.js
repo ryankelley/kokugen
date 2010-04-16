@@ -127,8 +127,11 @@ var converter = new Showdown.converter();
         
         $.editable.types["defaults"].revertValue = function() {
         if(userOptions.Markdown) {
+            if($(this).data('editdata') !== null && $(this).data('editdata') != "") {
             var out = converter.makeHtml($(this).data('editdata'));
             return out;
+            }
+            return "";
         }
         else{
             var out = $(this).data('editdata');
