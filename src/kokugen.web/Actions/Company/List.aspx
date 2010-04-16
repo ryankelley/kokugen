@@ -53,7 +53,7 @@ th
 <asp:Content ID="THISCONTENTAREAID" ContentPlaceHolderID="mainContent" runat="server">
 
     <div class="content" align=center>
-    <div><a href="#" onclick="showCompanyForm(null);"><img src="/content/images/add_button.png" alt="add company" />Add New Company </a></div>
+    <div class="add-caption"><a href="#" onclick="showCompanyForm(null);"><img src="/content/images/add_button.png" alt="add company" />Add New Company </a></div>
         <h2>Companies</h2>
         <table class="companyList" id="companyList">
         <tr>
