@@ -401,6 +401,8 @@ function buildToolbar(card) {
     claim.setAttribute("class", "icon");
 
     var claimLink = document.createElement('a');
+    claimLink.setAttribute("class", "claim");
+    claimLink.setAttribute("title", "Click to Claim");
     claimLink.appendChild(document.createTextNode("Claim"));
     claim.appendChild(claimLink);
 

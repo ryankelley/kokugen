@@ -233,6 +233,12 @@ background-color: #FFF;
     text-decoration:none;
 }
 
+.card .card-header .card-number a:hover
+{
+    background: transparent url('/content/images/magnify16.png') no-repeat -2px 6px;
+    text-indent: 16px;
+}
+
 
 div.error 
 {
@@ -331,6 +337,11 @@ ul #card-toolbar
 .color-wheel 
 {
     background: transparent url('/content/images/color_wheel.png') no-repeat center center;
+}
+
+.claim 
+{
+    background: transparent url('/content/images/claim16.png') no-repeat center center;
 }
 
 .card-up  
