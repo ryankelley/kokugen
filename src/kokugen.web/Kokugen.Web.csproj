@@ -133,13 +133,14 @@
     <Content Include="Actions\DailyTimeRecord\List.aspx" />
     <Content Include="Actions\DailyTimeRecord\DailyTimeRecord_Control.ascx" />
     <Content Include="Actions\Errors\FourZeroThree.aspx" />
+    <Content Include="Actions\Project\Manage\Users\Delete\DeleteProjectUser.aspx" />
     <Content Include="Actions\Project\ProjectMenu.aspx" />
     <Content Include="Actions\Project\Manage\Users\Add\AddUserToProject.aspx" />
     <Content Include="Content\css\jquery.jgrowl.css" />
     <Content Include="Actions\Project\ProjectMenu_Item.ascx" />
     <Content Include="Content\images\delete.png" />
     <Content Include="Content\images\edit2.png" />
-    <Content Include="Content\images\spite.jpg" />
+    <Content Include="Content\images\spite.png" />
     <Content Include="Content\Scripts\company.js" />
     <Content Include="Content\Scripts\task.js" />
     <Content Include="Content\Scripts\dovetail.editing.js" />
@@ -225,6 +226,9 @@
     <Compile Include="Actions\Project\GetProjectAction.cs" />
     <Compile Include="Actions\Project\ListAction.cs" />
     <Compile Include="Actions\Project\Manage\Menu\ManageProjectMenuAction.cs" />
+    <Compile Include="Actions\Project\Manage\Users\Delete\DeleteProjectUserAction.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Actions\Project\ProjectFormAction.cs" />
     <Compile Include="Actions\Project\ProjectMenuAction.cs" />
     <Compile Include="Actions\Project\Manage\Users\Add\AddUserToProjectAction.cs">
@@ -311,7 +315,7 @@
     <Compile Include="Startables\CheckPermissionsInDb.cs" />
     <Compile Include="Startables\ValueObjectInitializers\PasswordQuestionInitializer.cs" />
     <Compile Include="Startables\SetupSuperUser.cs" />
-    <Compile Include="Startables\ValueObjectInitializers\UserInitializer.cs" />
+    <Compile Include="Startables\ValueObjectInitializers\RoleInitializer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\kokugen.core\Kokugen.Core.csproj">

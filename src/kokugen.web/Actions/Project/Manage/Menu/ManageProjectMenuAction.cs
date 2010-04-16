@@ -5,6 +5,7 @@ using FubuMVC.Core.Urls;
 using FubuMVC.Core.View;
 using HtmlTags;
 using Kokugen.Web.Actions.Project.Manage.Users.Add;
+using Kokugen.Web.Actions.Project.Manage.Users.Delete;
 using Kokugen.Web.Conventions;
 
 namespace Kokugen.Web.Actions.Project.Manage.Menu
@@ -22,6 +23,11 @@ namespace Kokugen.Web.Actions.Project.Manage.Menu
         public HtmlTag Execute(ManageProjectMenuRequest request)
         {
             var menus = new HtmlTag("ul");
+
+            menus.Child(new HtmlTag("li").Child(
+             new LinkTag("Remove User",
+                         _urlRegistry.UrlFor(new DeleteProjectUserRequest() { Id = request.Id }),
+                         "manage-proj-menu").Title("Remove User")).AddClass("bar"));
 
             menus.Child(new HtmlTag("li").Child(
                 new LinkTag("Add User",
