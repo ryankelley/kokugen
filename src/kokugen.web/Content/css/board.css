@@ -415,7 +415,7 @@ vertical-align:top;
     clear: both;
 }
 
-.card.grey 
+.grey 
 {
     /*background-color:#FFF;
     border-color:#555;*/
@@ -426,7 +426,7 @@ vertical-align:top;
         -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#555555', EndColorStr='#343434')";
 }
 
-.card.blue
+.blue
 {
    
     /*background-color:#466c8a;*/
@@ -439,7 +439,7 @@ vertical-align:top;
 }
 
 
-.card.yellow
+.yellow
 {
     /*background-color:#F5F7C4;
     background-color:#FFF;
@@ -451,7 +451,7 @@ vertical-align:top;
         -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#9C8C02', EndColorStr='#5E5403')"; /* IE8 */
 
 }
-.card.orange
+.orange
 {
     /*background-color:#FFD7B3;
     background-color:#FFF;
@@ -461,7 +461,7 @@ vertical-align:top;
             filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#ECAA2F', EndColorStr='#665538'); /* IE6,IE7 */
         -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#ECAA2F', EndColorStr='#665538')";
 }
-.card.teal
+.teal
 {
     /*background-color:#CFE7E2;
     background-color:#FFF;
