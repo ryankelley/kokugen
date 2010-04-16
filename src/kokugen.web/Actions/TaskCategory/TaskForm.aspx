@@ -7,7 +7,7 @@
 <div id="task-form-container" class="hide">
 <%= this.FormFor(new AddTaskModel()) %>
     <%= this.Edit(x => x.Task.Name).Id("task-form-name") %>
-    <%=this.InputFor(x => x.Task.Id).Id("task-edit-form-id") %>
+    <%=this.InputFor(x => x.Task.Id).Id("task-edit-form-ProjectId") %>
     
 <%= this.EndForm() %>
    

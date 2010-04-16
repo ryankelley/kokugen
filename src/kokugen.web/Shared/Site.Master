@@ -19,7 +19,6 @@
 		    <li class="lbar"><%= this.LinkTo(new TimeRecordListModel()).Text("Time") %></li>
 		    <li class="lbar"><%=this.LinkTo(new UserListRequest()).Text("Users") %></li>
 		    <li class="lbar"><%= this.LinkTo(new TaskListModel()).Text("Tasks") %></li>
-            <li class="lbar"><%= this.LinkTo(new CardListModel()).Text("Cards") %></li>
             <li class="last"><%= this.LinkTo(new DailyTimeRecordListModel()).Text("Daily Time") %></li>
 	    </ul>
 	    <ul class="subnav right">

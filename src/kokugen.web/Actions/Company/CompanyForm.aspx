@@ -11,7 +11,7 @@
     <%= this.Edit(x => x.Company.Address.City)%>
     <%= this.Edit(x => x.Company.Address.State)%>
     <%= this.Edit(x => x.Company.Address.ZipCode)%>
-    <%= this.InputFor(x => x.Company.Id).Id("company-edit-form-id") %>
+    <%= this.InputFor(x => x.Company.Id).Id("company-edit-form-ProjectId") %>
 <%= this.EndForm() %>
 
 

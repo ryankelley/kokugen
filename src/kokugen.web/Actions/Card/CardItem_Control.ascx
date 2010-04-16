@@ -6,9 +6,7 @@
         <td>
             <%= this.DisplayFor(x => x.CardNumber) %>
         </td>
-        <td>
-            <%= this.DisplayFor(x => x.AssignedTo.UserName) %>
-        </td> 
+        
         <td class="<%=Model.Color %>">
 <%--            <%= this.DisplayFor(x => x.Color) %>--%>
         </td>
@@ -18,9 +16,7 @@
          <td>
             <%= this.DisplayFor(x => x.Deadline) %>
         </td>
-         <td>
-            <%= this.DisplayFor(x => x.DateCompleted) %>
-        </td>                   
+         
 
 
 

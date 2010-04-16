@@ -41,8 +41,8 @@ namespace Kokugen.Web.Actions.Project
                                //           {
                                //               Name = project.Name,
                                //               Description = project.Description,
-                               //               Id = project.Id,
-                               //               CompanyId = project.Company.Id,
+                               //               ProjectId = project.ProjectId,
+                               //               CompanyId = project.Company.ProjectId,
                                //               CompanyName = project.Company.Name
                                //           }
                            }

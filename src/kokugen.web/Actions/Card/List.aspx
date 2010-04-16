@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" Inherits="Kokugen.Web.Actions.Card.List" MasterPageFile="~/Shared/Site.Master"%>
+﻿<%@ Page Language="C#" AutoEventWireup="true" Inherits="Kokugen.Web.Actions.Card.List" MasterPageFile="~/Shared/Project.Master"%>
 <%@ Import Namespace="Kokugen.Web.Actions.Card"%>
 <%@ Import Namespace="FubuMVC.Core.Urls"%>
 
@@ -43,9 +43,6 @@ th
             #
         </th>
         <th>
-            Assigned 
-        </th>
-        <th>
             Color
         </th>
         <th>
@@ -54,11 +51,8 @@ th
         <th>
             Deadline
         </th>
-        <th>
-            Completed
-        </th>
-    </tr>
-        <%=this.PartialForEach(x => x.Cards).Using<CardItem_Control>() %>
+     </tr>
+        <%=this.PartialForEach(x => x.Cards).Using<CardItem_Control>()  %>
     </table>    
  </div>
 </asp:Content>
