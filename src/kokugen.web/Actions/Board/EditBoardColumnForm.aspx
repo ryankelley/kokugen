@@ -2,6 +2,7 @@
 <%@ Import Namespace="HtmlTags"%>
 <%@ Import Namespace="Kokugen.Web.Actions.Board"%>
 <%@ Import Namespace="Kokugen.Web.Conventions"%>
+<%@ Import Namespace="Kokugen.Web.Actions.Board.SaveColumn" %>
 
 <div id="new-column-container" class="hidden">
 <%= this.FormFor(new BoardColumnInputModel()).Id("column-form")%>

@@ -5,6 +5,7 @@ using FubuMVC.UI.Configuration;
 using Kokugen.Core;
 using Kokugen.Core.Domain;
 using Kokugen.Web.Actions.Board;
+using Kokugen.Web.Actions.Board.Configure;
 using Kokugen.Web.Actions.Project;
 
 namespace Kokugen.Web.Conventions.Builders

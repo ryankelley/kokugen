@@ -1,0 +1,21 @@
+body{
+	width: 290px;
+	height: 100px;
+	text-align: right;
+	background: url("images/background.png") no-repeat;
+}
+
+.error{
+	border: thin red solid;
+}
+
+label.error{
+	border: none;
+	visible: false;
+	position: absolute;
+	top: -99999px;
+}
+
+input{
+	width: 150px;
+}
