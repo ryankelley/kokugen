@@ -5,7 +5,9 @@ KokugenUrl = "";
 UserName = "";
 Password = "";
 
-isConnected = false;
+var CurrentUserId = "";
+
+isLoggedIn = false;
 
 $(document).ready(function(){
 	$("#slider_button").click(function(){
@@ -15,32 +17,24 @@ $(document).ready(function(){
 	KokugenUrl = System.Gadget.Settings.readString("KokugenUrl");
 	UserName = System.Gadget.Settings.readString("UserName");
 	Password = System.Gadget.Settings.readString("Password");
-	updateStatus(isConnected);	
+	updateStatus(isLoggedIn);	
 });
 
 function updateStatus(connected){
-    if (connected == true) {
-        $("#project_select").removeAttr("disabled");		
+    if (isLoggedIn) {
+        //$("#project_select").removeAttr("disabled");		
     }
     else {
-        $("#project_select").attr("disabled", true);
+        //$("#project_select").attr("disabled", true);
     }
 }
 
-//Try to connect using the url and credentials provided.
-function connect(){
-	//login(setIsConnected);
-	if(isConnected)
-	{	    		
-	    afterConnected();
-	}
-	updateStatus(isConnected);
-}
 
 function setIsConnected(response){
-	if(response && response.Success)
-	{
-		isConnected = true;
+	if(response && response.Success) {
+	    CurrentUserId=Response.Item;
+	    isLoggedIn = true;
+	    afterConnected();
 	}
 }
 
@@ -52,12 +46,11 @@ function SettingsClosed(event)
 		KokugenUrl = System.Gadget.Settings.read("KokugenUrl");
 		UserName = System.Gadget.Settings.read("UserName");
 		Password = System.Gadget.Settings.read("Password");
-		connect();		
+		login(setIsConnected);	
 	}	
 }
 
 function afterConnected() {    
-    login(setIsConnected);
 	loadProjects(afterProjectsLoad);
     loadTaskList(afterTasksLoad);	
 }
@@ -77,13 +70,15 @@ function afterProjectsLoad(response) {
     }
 
     $("#project_select").change(function () {
-    var value = $("#project_select option:selected").val();
+        var value = $("#project_select option:selected").val();
+
         loadCardList(value,afterCardsLoad);
     });
 }
 
 function afterCardsLoad(response) {
     if (response.Success) {
+        $("#card_select").children().each(function () { $(this).remove(); });
         for (var i in response.Item) {
             var item = '<option value="' + response.Item[i].Id + '">' + response.Item[i].Name + '</option>';
 
@@ -103,18 +98,4 @@ function afterTasksLoad(response) {
     }
 }
 
-(function ($) {
-    $.fn.selected = function (fn) {
-        return this.each(function () {
-            var clicknum = 0;
-            $(this).click(function () {
-                clicknum++;
-                if (clicknum == 2) {
-                    clicknum = 0;
-                    fn();
-                }
-            });
-        });
-    }
-})(jQuery);
 
