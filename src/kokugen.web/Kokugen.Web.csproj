@@ -134,7 +134,7 @@
     <Content Include="Actions\DailyTimeRecord\List.aspx" />
     <Content Include="Actions\DailyTimeRecord\DailyTimeRecord_Control.ascx" />
     <Content Include="Actions\Errors\FourZeroThree.aspx" />
-    <Content Include="Actions\Project\Manage\Users\Delete\DeleteProjectUser.aspx" />
+    <Content Include="Actions\Project\Manage\Users\ProjectUsers.aspx" />
     <Content Include="Actions\Project\MenuList\ProjectMenu.aspx" />
     <Content Include="Actions\Project\Manage\Users\Add\AddUserToProject.aspx" />
     <Content Include="Content\css\jquery.jgrowl.css" />
@@ -145,6 +145,7 @@
     <Content Include="Content\images\magnify16.png" />
     <Content Include="Content\images\spite.png" />
     <Content Include="Content\Scripts\company.js" />
+    <Content Include="Content\Scripts\projectusers.js" />
     <Content Include="Content\Scripts\task.js" />
     <Content Include="Content\Scripts\dovetail.editing.js" />
     <Content Include="Content\Scripts\jquery.jeditable.js" />
@@ -247,6 +248,9 @@
     <Compile Include="Actions\Project\ListAction.cs" />
     <Compile Include="Actions\Project\Manage\Menu\ManageProjectMenuAction.cs" />
     <Compile Include="Actions\Project\Manage\Users\Delete\DeleteProjectUserAction.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Actions\Project\Manage\Users\ProjectUsersAction.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Actions\Project\ProjectFormAction.cs" />
@@ -488,7 +492,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Actions\Project\Manage\Users\Roles\" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
