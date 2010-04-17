@@ -24,7 +24,7 @@ namespace Kokugen.Core.Events
         // Explicit registration
         //void AddListener(object listener);
 
-        void AddListener(Type listenerType);
+        void AddListener(object listenerType);
 
         void RemoveListener(object listener);
 

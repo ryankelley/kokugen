@@ -8,7 +8,7 @@ using Kokugen.Core.Persistence.Repositories;
 
 namespace Kokugen.Core.Services
 {
-    public interface ICompanyService
+    public interface ICompanyService : IListener<ValueEntitySaved<Company>>, IListener<ValueEntityRemoved<Company>>
     {
         IEnumerable<Company> ListAllCompanies();
         void DeleteCompany(Guid guid);
@@ -17,7 +17,7 @@ namespace Kokugen.Core.Services
         void Save(Company company);
     }
 
-    public class CompanyService : ICompanyService, IListener<ValueEntitySaved<Company>>, IListener<ValueEntityRemoved<Company>>
+    public class CompanyService : ICompanyService
     {
         private readonly ICompanyRepository _companyRepository;
 
@@ -75,6 +75,7 @@ namespace Kokugen.Core.Services
         {
             ValueObjectRegistry.RemoveValueObject<Company>(new ValueObject(message.Entity.Id.ToString(), message.Entity.Name));
         }
+
     }
 
     

@@ -65,6 +65,12 @@ namespace Kokugen.Core
             list.Add(typeof(T));
         }
 
+        public static bool IsGenericEnumerable(this Type type)
+        {
+            var genericArgs = type.GetGenericArguments();
+            return genericArgs.Length == 1 && typeof(IEnumerable<>).MakeGenericType(genericArgs).IsAssignableFrom(type);
+        }
+
         public static void CallOn<T>(this object target, Action<T> action) where T : class
         {
             var subject = target as T;

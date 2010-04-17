@@ -21,4 +21,11 @@ namespace Kokugen.Core.Events.Messages
 
         public T Entity { get; set; }
     }
+
+    public class CompanyRemoved : ValueEntityRemoved<Company>
+    {
+        public CompanyRemoved(Company entity) : base(entity)
+        {
+        }
+    }
 }

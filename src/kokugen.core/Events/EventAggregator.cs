@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using StructureMap;
 
 namespace Kokugen.Core.Events
 {
@@ -20,7 +21,6 @@ namespace Kokugen.Core.Events
     {
         //private readonly SynchronizationContext _context;
         private readonly List<object> _listeners = new List<object>();
-        private readonly List<Type> _typeListeners = new List<Type>();
 
         private readonly object _locker = new object();
 
@@ -45,12 +45,6 @@ namespace Kokugen.Core.Events
         public void SendMessage<T>() where T : new()
         {
             SendMessage(new T());
-        }
-
-        public void AddListener(Type type)
-        {
-            if(!_typeListeners.Contains(type))
-                _typeListeners.Add(type);
         }
 
         public void AddListener(object listener)
@@ -78,7 +72,7 @@ namespace Kokugen.Core.Events
         {
             lock (_locker)
             {
-                return _typeListeners.ToArray();
+                return _listeners.ToArray();
             }
         }
 

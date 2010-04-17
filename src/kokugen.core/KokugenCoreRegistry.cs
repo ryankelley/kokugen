@@ -77,7 +77,7 @@ namespace Kokugen.Core
 
         private void registerEventAggregator()
         {
-            For<IEventAggregator>().Singleton().Use<EventAggregator>();
+            For<IEventAggregator>().Use<EventAggregator>();
             RegisterInterceptor(new EventAggregatorInterceptor());
         }
     }

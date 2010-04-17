@@ -12,7 +12,7 @@ namespace Kokugen.Core
 
         public object Process(object target, IContext context)
         {
-            context.GetInstance<IEventAggregator>().AddListener(target.GetType());
+            context.GetInstance<IEventAggregator>().AddListener(target);
             return target;
         }
 
