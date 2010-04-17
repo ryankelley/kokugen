@@ -6,8 +6,8 @@ namespace Kokugen.Core.Events
 {
     public class SimpleEventAggregator : EventAggregator
     {
-        public SimpleEventAggregator()
-            : base(new IHandler[0])
+        public SimpleEventAggregator(IContainer container)
+            : base(new IHandler[0], container)
         {
         }
 
@@ -19,13 +19,16 @@ namespace Kokugen.Core.Events
 
     public class EventAggregator : IEventAggregator
     {
+        private readonly IContainer _container;
         //private readonly SynchronizationContext _context;
         private readonly List<object> _listeners = new List<object>();
+        private readonly List<Type> _typeListeners = new List<Type>();
 
         private readonly object _locker = new object();
 
-        public EventAggregator(IHandler[] handlers)
+        public EventAggregator(IHandler[] handlers, IContainer container)
         {
+            _container = container;
             //_context = context;
             _listeners.AddRange(handlers);
         }
@@ -39,12 +42,18 @@ namespace Kokugen.Core.Events
 
         public void SendMessage<T>(T message)
         {
-            sendAction(() => all().CallOnEach<IListener<T>>(x => { x.Handle(message); }));
+            sendAction(() => all().CallOnEach<IListener<T>>(_container, x => { x.Handle(message); }));
         }
 
         public void SendMessage<T>() where T : new()
         {
             SendMessage(new T());
+        }
+
+        public void AddListener(Type type)
+        {
+            if(!_typeListeners.Contains(type))
+                _typeListeners.Add(type);
         }
 
         public void AddListener(object listener)
@@ -72,7 +81,7 @@ namespace Kokugen.Core.Events
         {
             lock (_locker)
             {
-                return _listeners.ToArray();
+                return _typeListeners.ToArray();
             }
         }
 
