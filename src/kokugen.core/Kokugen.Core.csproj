@@ -150,6 +150,12 @@
     <Compile Include="Domain\SiteConfiguration.cs" />
     <Compile Include="Domain\TimeRecord.cs" />
     <Compile Include="Domain\User.cs" />
+    <Compile Include="EventAggregatorInterceptor.cs" />
+    <Compile Include="Events\EventAggregator.cs" />
+    <Compile Include="Events\FilteredListener.cs" />
+    <Compile Include="Events\IEventAggregator.cs" />
+    <Compile Include="Events\IHandler.cs" />
+    <Compile Include="Events\Messages\ValueEntitySaved.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Inflector.cs" />
     <Compile Include="IStartable.cs" />
@@ -161,6 +167,7 @@
     <Compile Include="Persistence\Overrides\UserMappingOverride.cs" />
     <Compile Include="Persistence\Repositories\IDailyTimeRecordRepository.cs" />
     <Compile Include="Persistence\Repositories\IPermissionRepository.cs" />
+    <Compile Include="Persistence\Repositories\PublishingRepository.cs" />
     <Compile Include="Persistence\Repositories\RoleRepository.cs" />
     <Compile Include="Persistence\Repositories\UserRepository.cs" />
     <Compile Include="Services\IDailyTimeRecordService.cs" />
@@ -280,6 +287,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

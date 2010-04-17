@@ -1,4 +1,5 @@
 using Kokugen.Core.Domain;
+using Kokugen.Core.Events;
 using NHibernate;
 
 namespace Kokugen.Core.Persistence.Repositories
@@ -8,9 +9,9 @@ namespace Kokugen.Core.Persistence.Repositories
 
     }
 
-    public class CompanyRepository : NHibernateRepository<Company>, ICompanyRepository
+    public class CompanyRepository : PublishingRepository<Company>, ICompanyRepository
     {
-        public CompanyRepository(ISession session) : base(session)
+        public CompanyRepository(ISession session, IEventAggregator eventAggregator) : base(session, eventAggregator)
         {
         }
     }
