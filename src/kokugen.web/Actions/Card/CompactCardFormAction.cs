@@ -36,19 +36,9 @@ namespace Kokugen.Web.Actions.Card
 
             var user = model.UserId.IsEmpty() ? _userService.GetUserByLogin(_securityContext.CurrentIdentity.Name) : _userService.GetUserById(model.UserId);
 
-            var card = new Core.Domain.Card
-                           {
-                               Title = model.Card.Title, 
-                               Size = model.Card.Size, 
-                               Priority = model.Card.Priority, 
-                               Deadline = model.Card.Deadline, 
-                               Details = model.Card.Details,
-                               Project = project,
-                               Color = "grey",
-                               Status = CardStatus.New,
-                               AssignedTo = user 
-                               
-                           };
+            var card = _cardService.CreateCard(model.Card, project, user);
+
+            
 
             
             var notification = _cardService.SaveCard(card);
