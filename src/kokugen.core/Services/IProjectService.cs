@@ -80,6 +80,7 @@ namespace Kokugen.Core.Services
 
             project.Owner = owner;
 
+            project.Status = ProjectStatus.Active;
 
             return project;
         }

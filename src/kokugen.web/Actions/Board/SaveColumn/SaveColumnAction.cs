@@ -2,7 +2,7 @@ using System;
 using Kokugen.Core;
 using Kokugen.Core.Services;
 
-namespace Kokugen.Web.Actions.Board
+namespace Kokugen.Web.Actions.Board.SaveColumn
 {
     public class SaveColumnAction
     {
@@ -15,7 +15,7 @@ namespace Kokugen.Web.Actions.Board
             _boardService = boardService;
         }
 
-        public AjaxResponse SaveColumn(BoardColumnInputModel model)
+        public AjaxResponse Command(BoardColumnInputModel model)
         {
             if (model.ProjectId.IsEmpty()) return new AjaxResponse { Success = false };
 
