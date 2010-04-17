@@ -1,7 +1,4 @@
 System.Gadget.settingsUI = "settings.html";
-System.Gadget.Flyout.file = "flyout.html";
-System.Gadget.Flyout.onShow = showFlyout;
-System.Gadget.Flyout.onHide = hideFlyout;
 System.Gadget.onSettingsClosed = SettingsClosed;
 var clicknum = 0;
 KokugenUrl = "";
@@ -18,15 +15,12 @@ $(document).ready(function(){
 	KokugenUrl = System.Gadget.Settings.readString("KokugenUrl");
 	UserName = System.Gadget.Settings.readString("UserName");
 	Password = System.Gadget.Settings.readString("Password");
-	connect();
-	updateStatus(isConnected);
-
-
+	updateStatus(isConnected);	
 });
 
 function updateStatus(connected){
     if (connected == true) {
-        $("#project_select").removeAttr("disabled");
+        $("#project_select").removeAttr("disabled");		
     }
     else {
         $("#project_select").attr("disabled", true);
@@ -35,29 +29,19 @@ function updateStatus(connected){
 
 //Try to connect using the url and credentials provided.
 function connect(){
-	if(KokugenUrl != "")
-	{
-	    isConnected = true;
+	//login(setIsConnected);
+	if(isConnected)
+	{	    		
 	    afterConnected();
 	}
-	else
+	updateStatus(isConnected);
+}
+
+function setIsConnected(response){
+	if(response && response.Success)
 	{
-		isConnected = false;
+		isConnected = true;
 	}
-}
-
-//Show the flyout by changing the css class.
-function showFlyout()
-{
-	$("#slider_button").removeClass("slider_button_closed");
-	$("#slider_button").addClass("slider_button_open");
-}
-
-//Hide the flyout by changing the css class.
-function hideFlyout()
-{
-	$("#slider_button").addClass("slider_button_closed");
-	$("#slider_button").removeClass("slider_button_open");
 }
 
 function SettingsClosed(event)
@@ -65,30 +49,17 @@ function SettingsClosed(event)
     // User hits OK on the settings page.
     if (event.closeAction == event.Action.commit)
     {
-		$("#start_stop_button").addClass("stop_button");
-		$("#start_stop_button").removeClass("start_button");
-		
 		KokugenUrl = System.Gadget.Settings.read("KokugenUrl");
 		UserName = System.Gadget.Settings.read("UserName");
 		Password = System.Gadget.Settings.read("Password");
-		connect();
-		
-	}
-    // User hits Cancel on the settings page.
-    else if (event.closeAction == event.Action.cancel)
-    {
-		$("#start_stop_button").addClass("start_button");
-		$("#start_stop_button").removeClass("stop_button");		
-    }
-	updateStatus(isConnected);
+		connect();		
+	}	
 }
 
-
-
-function afterConnected() {
-    
-    loadProjects(afterProjectsLoad);
-    loadTaskList(afterTasksLoad);
+function afterConnected() {    
+    login(setIsConnected);
+	loadProjects(afterProjectsLoad);
+    loadTaskList(afterTasksLoad);	
 }
 
 function afterProjectsLoad(response) {
