@@ -1,0 +1,18 @@
+body{
+	width: 200px;
+	height: 350px;
+	
+	background: url("images/background.png") no-repeat;
+}
+
+#task_list{
+	list-style: none;
+}
+
+li{
+	padding: 5px 0px 0px 0px;
+}
+
+.odd{
+	background-color: #aeaeae;
+}

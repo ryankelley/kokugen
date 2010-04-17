@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using FubuCore;
 using Kokugen.Core.Membership;
 using Kokugen.Core.Membership.Security;
 using Kokugen.Core.Services;
@@ -12,6 +13,7 @@ namespace Kokugen.Core.Domain
     {
         private readonly string _password;
         private IList<Role> _roles = new List<Role>();
+        private IList<Project> _projects = new List<Project>();
 
         protected User()
         {}
@@ -37,7 +39,10 @@ namespace Kokugen.Core.Domain
             get { return Id; }
         }
 
-
+        public virtual string DisplayName()
+        {
+            return FirstName.IsEmpty() ? UserName : FirstName + " " + LastName;
+        }
         
         public virtual string FirstName { get; set; }
 
@@ -48,6 +53,8 @@ namespace Kokugen.Core.Domain
 
         public virtual string Question { get; set; }
         public virtual string Answer { get; set; }
+
+        public virtual string GravatarHash { get; set; }
 
         public virtual IEnumerable<Role> GetRoles()
         {
@@ -113,5 +120,11 @@ namespace Kokugen.Core.Domain
         {
             IsLocked = false;
         }
+
+        public virtual IEnumerable<Project> GetProjects()
+        {
+            return _projects;
+        }
+        
     }
 }

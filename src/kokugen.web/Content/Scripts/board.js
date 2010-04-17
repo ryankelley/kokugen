@@ -19,6 +19,8 @@ var Card = function (card) {
     this.ReasonBlocked = card.BlockReason;
     this.CardOrder = card.CardOrder;
     this.ProjectId = card.ProjectId;
+    this.GravatarHash = card.GravatarHash;
+    this.UserDisplay = card.UserDisplay;
 
 };
 
@@ -54,7 +56,15 @@ var buildCardDisplay = function (scard) {
     var size = document.createElement('div');
     $(size).addClass("card-size").attr("title", "Estimated Size of this card");
     size.appendChild(document.createTextNode(scard.Size));
+
+    var userName = document.createElement('div');
+    $(userName).html(scard.UserDisplay).addClass("username");
+
     var worker = document.createElement('div');
+    worker.setAttribute('class', 'gravatar');
+    var gravatar = document.createElement('img');
+    gravatar.setAttribute('src', 'http://gravatar.com/avatar/' + scard.GravatarHash + '?s=27');
+    worker.appendChild(gravatar);
 
     // Blockage reason
     var blocked = document.createElement('div');
@@ -99,6 +109,8 @@ var buildCardDisplay = function (scard) {
     head.appendChild(number);
     head.appendChild(size);
     head.appendChild(worker);
+    head.appendChild(userName);
+
 
     body.appendChild(document.createTextNode(scard.Title));
 
@@ -157,6 +169,22 @@ var buildCardDisplay = function (scard) {
             type: "POST"
         });
     };
+
+    element.claim = function () {
+        $.ajax({
+            url: "/card/claim",
+            data: { CardId: scard.Id },
+            dataType: "json",
+            type: "POST",
+            success: updateUser
+        });
+    };
+
+    function updateUser(response) {
+
+        $(userName).html(response.Item.UserDisplay);
+        gravatar.setAttribute('src', 'http://gravatar.com/avatar/' + response.Item.GravatarHash + '?s=27');
+    }
 
     element.notStarted = function () {
         $.ajax({
@@ -373,8 +401,15 @@ function buildToolbar(card) {
     claim.setAttribute("class", "icon");
 
     var claimLink = document.createElement('a');
+    claimLink.setAttribute("class", "claim");
+    claimLink.setAttribute("title", "Click to Claim");
     claimLink.appendChild(document.createTextNode("Claim"));
     claim.appendChild(claimLink);
+
+    $(claimLink).click(function () {
+        
+        $(this).parent().parent().parent().get(0).claim();
+    });
     
     var ready = document.createElement('li');
     ready.setAttribute("class", "checkbox");

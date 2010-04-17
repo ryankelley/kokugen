@@ -233,6 +233,12 @@ background-color: #FFF;
     text-decoration:none;
 }
 
+.card .card-header .card-number a:hover
+{
+    background: transparent url('/content/images/magnify16.png') no-repeat -2px 6px;
+    text-indent: 16px;
+}
+
 
 div.error 
 {
@@ -333,6 +339,11 @@ ul #card-toolbar
     background: transparent url('/content/images/color_wheel.png') no-repeat center center;
 }
 
+.claim 
+{
+    background: transparent url('/content/images/claim16.png') no-repeat center center;
+}
+
 .card-up  
 {
     background: transparent url('/content/images/up.png') no-repeat center center;
@@ -401,7 +412,14 @@ vertical-align:top;
     cursor: move;
     overflow: hidden;
     border-bottom:1px solid;
+    height: 27px;
     
+}
+
+.card .card-header div.gravatar 
+{
+    margin-right: 0px;
+    margin-top: 0px;
 }
 
 .card 
@@ -599,6 +617,12 @@ vertical-align:top;
     font-weight: bold;
 }
 
+.card .card-header .username 
+{
+    float:right;
+    margin-right:4px;
+    margin-top:2px;
+}
 .card.grey .card-header .card-size 
 {
     background-color:#BBB;
@@ -633,5 +657,40 @@ vertical-align:top;
 .card.ready .card-header .card-size
 {
     background-color:#2e8015;
+}
+
+.grey 
+{
+    background-color:#DDDDDD;
+    border-color:#CCCCCC;
+}
+
+.blue 
+{
+    background-color:#70a5d8;
+    border-color:#233644;
+}
+
+
+
+
+.yellow 
+{
+    background-color:#ECD800;
+    border-color:#9C8C02;
+}
+
+
+.orange 
+{
+    background-color:#E49703;
+    border-color:#B67902;
+}
+
+
+.teal 
+{
+    background-color:#029DB6;
+    border-color:#027E92;
 }
 

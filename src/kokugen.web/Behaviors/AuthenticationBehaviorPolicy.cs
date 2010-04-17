@@ -10,7 +10,7 @@ namespace Kokugen.Web.Behaviors
     {
         public void Configure(BehaviorGraph graph)
         {
-            var myBehavs = graph.Behaviors.Where(c => c.FirstCall().Category == BehaviorCategory.Call).ToList();
+            //var myBehavs = graph.Behaviors.Where(c => c.FirstCall().Category == BehaviorCategory.Call).ToList();
             var myActions = graph.Actions().Where(c => c.Category == BehaviorCategory.Call).ToList();
             myActions.Each(act =>
                                {

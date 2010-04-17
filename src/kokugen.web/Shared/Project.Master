@@ -2,6 +2,10 @@
 <%@ Import Namespace="Kokugen.Web.Actions.TimeRecord"%>
 <%@ Import Namespace="Kokugen.Web.Actions.Project"%>
 <%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Project.Master.cs" Inherits="Kokugen.Web.Shared.ProjectMaster" MasterPageFile="~/Shared/Super.Master" %>
+<%@ Import Namespace="Kokugen.Web.Actions.Card" %>
+<%@ Import Namespace="Kokugen.Web.Actions.Card.Lists" %>
+<%@ Import Namespace="Kokugen.Web.Actions.Board.Configure" %>
+<%@ Import Namespace="Kokugen.Web.Actions.Project.MenuList" %>
 
 <asp:Content ContentPlaceHolderID="Masterhead" ID="projecthead" runat="server">
 <script type="text/javascript">
@@ -39,6 +43,7 @@
 				<li class="active"><%= this.LinkTo(new GetProjectModel { Id = Model.ProjectId}).Text("Project Home") %></li>
 				<li class="bar"><%= this.LinkTo(new ViewBoardInputModel{ Id = Model.ProjectId}).Text("Board")%></li>
 				<li class="bar"><%= this.LinkTo(new BoardConfigurationModel{ Id = Model.ProjectId}).Text("Process") %></li>
+                <li class="lbar"><%= this.LinkTo(new CardListModel() {Id = Model.ProjectId}).Text("Cards") %></li>
 				<li class="bar"><%= this.LinkTo(new TimeRecordListModel()).Text("Time") %></li>
 				
 			</ul>

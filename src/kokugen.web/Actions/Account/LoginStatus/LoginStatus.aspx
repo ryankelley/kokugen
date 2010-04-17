@@ -5,7 +5,7 @@
 <%if (Model.IsAuthenticated)
   { %>
 <div class="gravatar">
-    <img src="http://www.gravatar.com/avatar/<%= Model.EmailAddress.ToGravatarHash() %>?d=monsterid"
+    <img src="http://www.gravatar.com/avatar/<%= Model.EmailAddress.ToGravatarHash() %>?d=monsterid&s=60"
         alt="gravatar" /></div>
 <div class="user-actions">
     Welcome <b>

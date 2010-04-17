@@ -71,6 +71,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\FubuMVC\HtmlTags.dll</HintPath>
     </Reference>
+    <Reference Include="MarkdownSharp">
+      <HintPath>..\..\lib\markdownsharp\MarkdownSharp.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\Common Service Locator\Microsoft.Practices.ServiceLocation.dll</HintPath>
@@ -127,16 +130,22 @@
     <Content Include="Actions\Account\Password\PasswordResetForm.aspx" />
     <Content Include="Actions\Card\CardProgress.aspx" />
     <Content Include="Actions\Card\Get.aspx" />
-    <Content Include="Actions\Company\CompanyItem_Control.ascx" />
+    <Content Include="Actions\Card\Lists\CardItem_Control.ascx" />
     <Content Include="Actions\DailyTimeRecord\List.aspx" />
     <Content Include="Actions\DailyTimeRecord\DailyTimeRecord_Control.ascx" />
     <Content Include="Actions\Errors\FourZeroThree.aspx" />
-    <Content Include="Actions\Project\ProjectMenu.aspx" />
+    <Content Include="Actions\Project\Manage\Users\Delete\DeleteProjectUser.aspx" />
+    <Content Include="Actions\Project\MenuList\ProjectMenu.aspx" />
+    <Content Include="Actions\Project\Manage\Users\Add\AddUserToProject.aspx" />
     <Content Include="Content\css\jquery.jgrowl.css" />
-    <Content Include="Actions\Project\ProjectMenu_Item.ascx" />
+    <Content Include="Actions\Project\MenuList\ProjectMenu_Item.ascx" />
+    <Content Include="Content\images\claim16.png" />
     <Content Include="Content\images\delete.png" />
     <Content Include="Content\images\edit2.png" />
-    <Content Include="Content\images\spite.jpg" />
+    <Content Include="Content\images\magnify16.png" />
+    <Content Include="Content\images\spite.png" />
+    <Content Include="Content\Scripts\company.js" />
+    <Content Include="Content\Scripts\task.js" />
     <Content Include="Content\Scripts\dovetail.editing.js" />
     <Content Include="Content\Scripts\jquery.jeditable.js" />
     <Content Include="Content\Scripts\jquery.jgrowl.js" />
@@ -144,7 +153,7 @@
     <Content Include="Content\Scripts\jquery.jgrowl_minimized.js" />
     <Content Include="Content\Scripts\jquery.ui.ajax.dialog.js" />
     <Content Include="Content\Scripts\jquery.metadata.js" />
-    <Content Include="Content\Scripts\kokugenEditable.js" />
+    <Content Include="Content\Scripts\showdown.js" />
     <Content Include="Global.asax" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -160,7 +169,23 @@
     <Compile Include="Actions\Account\Password\ResetPasswordAction.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Actions\Board\ReOrder\BoardColumnReorderModel.cs" />
+    <Compile Include="Actions\Board\Configure\ConfigureAction.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Actions\Board\ReOrder\ReOrderAction.cs" />
+    <Compile Include="Actions\Card\AllActive\AllActiveCardsAction.cs" />
+    <Compile Include="Actions\Card\Blocked\BlockedAction.cs" />
     <Compile Include="Actions\Card\CardProgressAction.cs" />
+    <Compile Include="Actions\Card\Claim\CardClaimAction.cs" />
+    <Compile Include="Actions\Card\Color\ColorAction.cs" />
+    <Compile Include="Actions\Card\Dates\CardDatesAction.cs" />
+    <Compile Include="Actions\Card\Lists\View_Page_Type_Declarations.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Actions\Card\Move\CardMovedAction.cs" />
+    <Compile Include="Actions\Card\Ready\CardReadyAction.cs" />
+    <Compile Include="Actions\Card\ReOrder\ReOrderAction.cs" />
     <Compile Include="Actions\Card\UpdateAction.cs" />
     <Compile Include="Actions\DailyTimeRecord\View_Page_Type_Declarations.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -179,20 +204,20 @@
     <Compile Include="Actions\BoardColumn\RemoveAction.cs" />
     <Compile Include="Actions\Board\BoardColumnDTO.cs" />
     <Compile Include="Actions\Board\EditBoardColumnFormAction.cs" />
-    <Compile Include="Actions\Board\BoardAction.cs" />
-    <Compile Include="Actions\Board\SaveColumnAction.cs" />
+    <Compile Include="Actions\Board\Configure\BoardConfigurationModel.cs" />
+    <Compile Include="Actions\Board\SaveColumn\SaveColumnAction.cs" />
     <Compile Include="Actions\Board\ViewBoardAction.cs" />
     <Compile Include="Actions\Board\View_Page_Type_Declarations.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Actions\Card\AddAction.cs" />
-    <Compile Include="Actions\Card\CardMovedAction.cs" />
+    <Compile Include="Actions\Card\CardModels.cs" />
     <Compile Include="Actions\Card\CompactCardFormAction.cs" />
     <Compile Include="Actions\Card\GetAction.cs" />
     <Compile Include="Actions\Card\View_Page_Type_Declarations.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Actions\Card\ListAction.cs" />
+    <Compile Include="Actions\Card\Lists\ListAction.cs" />
     <Compile Include="Actions\Company\AddAction.cs" />
     <Compile Include="Actions\Company\CompanyFormAction.cs" />
     <Compile Include="Actions\Company\ListAction.cs" />
@@ -219,8 +244,18 @@
     <Compile Include="Actions\Project\AddProjectModel.cs" />
     <Compile Include="Actions\Project\GetProjectAction.cs" />
     <Compile Include="Actions\Project\ListAction.cs" />
+    <Compile Include="Actions\Project\Manage\Menu\ManageProjectMenuAction.cs" />
+    <Compile Include="Actions\Project\Manage\Users\Delete\DeleteProjectUserAction.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Actions\Project\ProjectFormAction.cs" />
-    <Compile Include="Actions\Project\ProjectMenuAction.cs" />
+    <Compile Include="Actions\Project\MenuList\ProjectMenuAction.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Actions\Project\Manage\Users\Add\AddUserToProjectAction.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Actions\TaskCategory\MenuList\MenuList.cs" />
     <Compile Include="Actions\TaskCategory\RemoveAction.cs" />
     <Compile Include="Actions\TimeRecord\AddAction.cs" />
     <Compile Include="Actions\TimeRecord\AddTimeRecordModel.cs" />
@@ -261,10 +296,12 @@
     <Compile Include="Conventions\Builders\BeforePartialBuilder.cs" />
     <Compile Include="Conventions\Builders\AfterPartialBuilder.cs" />
     <Compile Include="Conventions\Builders\OddEvenLiModifier.cs" />
+    <Compile Include="Conventions\EditInPlaceBuilder.cs" />
     <Compile Include="Conventions\HtmlExtensions.cs" />
     <Compile Include="Conventions\IRequestById.cs" />
     <Compile Include="Conventions\KokugenHtmlConventions.cs" />
     <Compile Include="Conventions\Builders\LabelBuilder.cs" />
+    <Compile Include="Conventions\MarkdownAttribute.cs" />
     <Compile Include="Conventions\SplitCamelCaseExtension.cs" />
     <Compile Include="Conventions\ValueObjectDropdownBuilder.cs" />
     <Compile Include="Conventions\ValueObjectDropdownExtensions.cs" />
@@ -298,8 +335,9 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Startables\CheckPermissionsInDb.cs" />
-    <Compile Include="Startables\PasswordQuestionInitializer.cs" />
+    <Compile Include="Startables\ValueObjectInitializers\PasswordQuestionInitializer.cs" />
     <Compile Include="Startables\SetupSuperUser.cs" />
+    <Compile Include="Startables\ValueObjectInitializers\RoleInitializer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\kokugen.core\Kokugen.Core.csproj">
@@ -312,10 +350,10 @@
     <Content Include="Actions\Board\BoardPhase_Control.ascx" />
     <Content Include="Actions\Board\ViewBoard.aspx" />
     <Content Include="Actions\Board\EditBoardColumnForm.aspx" />
-    <Content Include="Actions\Board\Configure.aspx" />
+    <Content Include="Actions\Board\Configure\Configure.aspx" />
     <Content Include="Actions\Card\Add.aspx" />
     <Content Include="Actions\Card\CompactCardForm.aspx" />
-    <Content Include="Actions\Card\List.aspx" />
+    <Content Include="Actions\Card\Lists\List.aspx" />
     <Content Include="Actions\Company\CompanyForm.aspx" />
     <Content Include="Actions\Company\List.aspx" />
     <Content Include="Actions\Home\Home.aspx" />
@@ -330,7 +368,6 @@
     <Content Include="Actions\TimeRecord\TimeRecordForm.aspx" />
     <Content Include="Actions\TimeRecord\TimeRecord_Control.ascx" />
     <Content Include="Actions\TaskCategory\TaskForm.aspx" />
-    <Content Include="Actions\TaskCategory\TaskItem_Control.ascx" />
     <Content Include="Actions\TaskCategory\List.aspx" />
     <Content Include="Actions\Users\List.aspx" />
     <Content Include="Content\css\custom-theme\images\ui-bg_fine-grain_10_ffffff_60x60.png" />
@@ -439,6 +476,18 @@
   <ItemGroup>
     <Content Include="Shared\Super.Master" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

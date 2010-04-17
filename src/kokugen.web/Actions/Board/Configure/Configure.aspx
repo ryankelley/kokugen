@@ -1,4 +1,4 @@
-<%@ Page Language="C#" Inherits="Kokugen.Web.Actions.Board.Configure" AutoEventWireup="true" MasterPageFile="~/Shared/Project.Master" %>
+<%@ Page Language="C#" Inherits="Kokugen.Web.Actions.Board.Configure.Configure" AutoEventWireup="true" MasterPageFile="~/Shared/Project.Master" %>
 <%@ Import Namespace="Kokugen.Web.Actions.BoardColumn"%>
 <%@ Import Namespace="FubuMVC.Core.Urls"%>
 <%@ Import Namespace="Kokugen.Web.Actions.Company"%>

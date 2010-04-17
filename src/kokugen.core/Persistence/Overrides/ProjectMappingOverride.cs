@@ -21,6 +21,13 @@ namespace Kokugen.Core.Persistence.Overrides
                 .ForeignKeyConstraintName("FK_Project_To_Board_Columns");
 
             mapping.HasMany(x => x.GetCards()).Access.CamelCaseField(Prefix.Underscore).Cascade.SaveUpdate().ForeignKeyConstraintName("fk_column_to_card").Inverse();
+
+            mapping.HasManyToMany(x => x.GetUsers())
+                .Access.CamelCaseField(Prefix.Underscore)
+                .Cascade.SaveUpdate()
+                .AsSet()
+                .ForeignKeyConstraintNames("FK_Project_To_User_Columns", "FK_User_To_Project_Columns")
+                .Table("ProjectToUser");
         }
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Web.Security;
+using Kokugen.Core.Attributes;
 using Kokugen.Core.Domain;
 using Kokugen.Core.Membership.Security;
 using Kokugen.Core.Validation;
@@ -20,7 +21,9 @@ namespace Kokugen.Core.Domain
         public virtual string Priority { get; set; }
         public virtual DateTime? Deadline { get; set; }
         public virtual string Color { get; set; }
-        public virtual Guid AssignedTo { get; set; }
+      
+        
+        public virtual User AssignedTo { get; set; }
 
 
         //Dates
@@ -46,6 +49,8 @@ namespace Kokugen.Core.Domain
         public virtual BoardColumn Column { get; set; }
         public virtual int CardOrder { get; set; }
         public virtual string BlockReason { get; set; }
+
+        
 
     }
 

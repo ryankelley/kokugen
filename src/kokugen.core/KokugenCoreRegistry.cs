@@ -6,6 +6,7 @@ using FluentNHibernate;
 using FubuMVC.Core.Behaviors;
 using FubuMVC.Core.Configuration;
 using FubuMVC.Core.Security;
+using Kokugen.Core.Events;
 using Kokugen.Core.Membership.Security;
 using Kokugen.Core.Membership.Services;
 using Kokugen.Core.Membership.Settings;
@@ -31,6 +32,7 @@ namespace Kokugen.Core
                      });
 
             setupEmail();
+            registerEventAggregator();
         }
 
         private void setupEmail()
@@ -69,9 +71,15 @@ namespace Kokugen.Core
                 var settingsProvider = c.GetInstance<ISettingsProvider>();
                 return settingsProvider.SettingsFor<DatabaseSettings>();
             });
+
+            
         }
 
-
+        private void registerEventAggregator()
+        {
+            For<IEventAggregator>().Use<EventAggregator>();
+            RegisterInterceptor(new EventAggregatorInterceptor());
+        }
     }
 
     public class SettingsConvention : IRegistrationConvention

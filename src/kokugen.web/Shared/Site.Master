@@ -5,6 +5,7 @@
 <%@ Import Namespace="Kokugen.Web.Actions.Company"%>
 <%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="FubuMVC.Core.View.FubuMasterPage" MasterPageFile="~/Shared/Super.Master" %>
 <%@ Import Namespace="Kokugen.Web.Actions.DailyTimeRecord" %>
+<%@ Import Namespace="Kokugen.Web.Actions.Card" %>
 <asp:Content ContentPlaceHolderID="Masterhead" ID="sitehead" runat="server">
 <asp:ContentPlaceHolder ID="head" runat="server" />
 </asp:Content>

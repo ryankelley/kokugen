@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using FubuCore;
@@ -26,8 +27,12 @@ namespace Kokugen.Web.Conventions
 
             if (value == null) return new TextboxTag(request.ElementId, request.Value<string>());
 
-            var defaultValue = request.Value<string>();
-            if(defaultValue.IsEmpty())
+            var defaultValue = "";
+            if (request.RawValue != null)
+            {
+                defaultValue = request.RawValue.ToString();
+            }
+            if (defaultValue.IsEmpty())
             {
                 ValueObject @default = value.Values.FirstOrDefault(x => x.IsDefault);
                 if (@default != null) defaultValue = @default.Key;
@@ -39,40 +44,16 @@ namespace Kokugen.Web.Conventions
                                          value.Values.Each(vo => tag.Option(vo.Value, vo.Key));
                                          tag.SelectByValue(defaultValue);
                                      });
-
-            //var defaultValue = request.Value<string>();
-
-            //if (defaultValue.IsEmpty())
-            //{
-            //    request.ForListName(name =>
-            //    {
-            //        ValueObject @default = ValueObjectRegistry.FindDefault(name);
-            //        if (@default != null) defaultValue = @default.Key;
-            //    });
-            //}
-
-            //return new SelectTag(tag =>
-            //{
-            //    request.EachValueObject(
-            //        vo => tag.Option(vo.LocalizedText(), vo.Key)
-            //        );
-            //    tag.SelectByValue(defaultValue);
-            //});
         }
 
-        public static HtmlTag Build(string listName)
+        public static HtmlTag Build(string listName, string @for, Func<IEnumerable<ValueObject>> giveMeTheList)
         {
-            //return new SelectTag(tag =>
-            //{
-            //    ValueObjectRegistry.GetAllActive(listName).Each(x => tag.Option(x.LocalizedText(), x.Key));
-
-            //    var defaultVO = ValueObjectRegistry.FindDefault(listName);
-            //    if (defaultVO != null)
-            //    {
-            //        tag.SelectByValue(defaultVO.Key);
-            //    }
-            //});
-            return new HtmlTag("DIV");
+            return new SelectTag(tag =>
+                                     {
+                                         tag.Attr("name", @for);
+                                         tag.TopOption(string.Format("-- Select {0} --", listName), null);
+                                         giveMeTheList().Each(vo => tag.Option(vo.Value, vo.Key));
+                                     });
         }
     }
 }

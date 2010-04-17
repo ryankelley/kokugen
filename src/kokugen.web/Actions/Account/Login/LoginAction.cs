@@ -1,3 +1,4 @@
+using System.Linq;
 using FubuMVC.Core.Continuations;
 using FubuMVC.Core.Urls;
 using Kokugen.Core.Services;
@@ -21,13 +22,13 @@ namespace Kokugen.Web.Actions.Account.Login
             var user = _loginService.LoginUser(inModel.Login, inModel.Password, inModel.RememberMe);
 
             //redirect here instead
-            return user != null
+            return user.IsValid()
                        ? inModel.ReturnUrl != ""
                              ? FubuContinuation.RedirectTo(inModel.ReturnUrl)
                              : FubuContinuation.RedirectTo(_urlRegistry.UrlFor<IndexAction>(x => x.Query()))
                        : FubuContinuation.RedirectTo(new LoginFormModel()
                                                          {
-                                                             Message = "User name or password was incorrect.",
+                                                             Message = user.AllMessages.First().Message,
                                                              ReturnUrl = inModel.ReturnUrl
                                                          });
         }

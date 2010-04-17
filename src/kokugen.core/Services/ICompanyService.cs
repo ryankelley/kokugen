@@ -2,11 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Kokugen.Core.Domain;
+using Kokugen.Core.Events;
+using Kokugen.Core.Events.Messages;
 using Kokugen.Core.Persistence.Repositories;
 
 namespace Kokugen.Core.Services
 {
-    public interface ICompanyService
+    public interface ICompanyService : IListener<ValueEntitySaved<Company>>, IListener<ValueEntityRemoved<Company>>
     {
         IEnumerable<Company> ListAllCompanies();
         void DeleteCompany(Guid guid);
@@ -38,7 +40,7 @@ namespace Kokugen.Core.Services
                                   };
 
             _companyRepository.Save(company);
-            ValueObjectRegistry.AddValueObject<Company>(new ValueObject(company.Id.ToString(), company.Name));
+           
             return company;
         }
 
@@ -55,7 +57,7 @@ namespace Kokugen.Core.Services
         public void DeleteCompany(Guid guid)
         {
             var company = _companyRepository.Get(guid);
-            ValueObjectRegistry.RemoveValueObject<Company>(new ValueObject(company.Id.ToString(), company.Name));
+            
             _companyRepository.Delete(company);
         }
 
@@ -63,9 +65,18 @@ namespace Kokugen.Core.Services
         {
             return _companyRepository.Get(id);
         }
+
+        public void Handle(ValueEntitySaved<Company> message)
+        {
+            ValueObjectRegistry.AddValueObject<Company>(new ValueObject(message.Entity.Id.ToString(), message.Entity.Name));
+        }
+
+        public void Handle(ValueEntityRemoved<Company> message)
+        {
+            ValueObjectRegistry.RemoveValueObject<Company>(new ValueObject(message.Entity.Id.ToString(), message.Entity.Name));
+        }
+
     }
 
-    public class CompanyAddedEventArgs
-    {
-    }
+    
 }

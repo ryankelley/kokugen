@@ -3,9 +3,16 @@
 <%@ Import Namespace="Kokugen.Web.Actions.Board"%>
 <%@ Import Namespace="FubuMVC.Core.Urls"%>
 <%@ Import Namespace="HtmlTags" %>
+<%@ Import Namespace="Kokugen.Web.Actions.Project.Manage.Menu" %>
+<%@ Import Namespace="Kokugen.Web.Actions.Board.Configure" %>
 <asp:Content ID="ProjectListHead" ContentPlaceHolderID="head" runat="server">
 
 </asp:Content>
+
+<asp:Content ContentPlaceHolderID=extraNavigation runat=server>
+    <%this.Partial(new ManageProjectMenuRequest(){Id = Model.ProjectId}); %>
+</asp:Content>
+
 <asp:Content ID="ProjectListContent" ContentPlaceHolderID="mainContent" runat="server">
 <style type="text/css">
 table

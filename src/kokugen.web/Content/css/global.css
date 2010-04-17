@@ -62,14 +62,20 @@ div.user-actions
 {
     float: right;
     display: inline;
-    margin-right:10px;
-margin-top:25px;
+    margin-right:-62px;
+margin-top:75px;
+font-size:11px;
 }
 
+
 div.gravatar 
-{
+{	
+
     float: right;
     display: inline;
+    margin-top:5px;
+    margin-right:40px;
+;
 }
 /*subnav*/
 
@@ -167,6 +173,7 @@ ul.subnav li ul.dropdown {
 	float: left;
 	width: 170px;
 	border: 1px solid #111;
+	z-index: 1000;
 }
 ul.subnav li ul.dropdown li{
 	margin: 0; padding: 0;
@@ -248,9 +255,9 @@ li.project a {
 -moz-background-inline-policy:continuous;
 -moz-background-origin:padding;
 background:#EEE url(../images/clipboard.png) no-repeat scroll 6px 6px;
-border:1px solid #333;
-font-family:"Georgia","Times New Roman",serif;
-color:#000000;
+border:thin solid #999;
+font-family:Sans-Serif;
+color:#222;
 display:block;
 padding:6px;
 text-decoration:none;
@@ -260,12 +267,12 @@ z-index:10;
 
 li.project.odd a 
 {
-    background:#CCC url(../images/clipboard.png) no-repeat scroll 6px 6px;
+    background:#aaa url(../images/clipboard.png) no-repeat scroll 6px 6px;
 }
 
 li.project.even a 
 {
-    background:#FFF url(../images/clipboard.png) no-repeat scroll 6px 6px;
+    background:#ccc url(../images/clipboard.png) no-repeat scroll 6px 6px;
 }
 
 li.project a:hover {
@@ -273,8 +280,8 @@ li.project a:hover {
 -moz-background-inline-policy:continuous;
 -moz-background-origin:padding;
 background:#D3F3D3 url(../images/clipboard.png) no-repeat scroll 6px 6px;
-border:1px solid #A3D3A3;
-font-family:"Georgia","Times New Roman",serif;
+border:thin solid #00AA0A;
+font-family: Sans-Serif;
 color:#000000;
 display:block;
 padding:6px;
@@ -285,7 +292,9 @@ z-index: 10;
 
 li.project span.project-name 
 {
+	color:#333;
     font-weight: bold;
+    text-shadow: 0 1px #eee;
 }
 
 li.project span.project-stats {
@@ -297,6 +306,7 @@ font-style:italic;
 font-variant:normal;
 font-weight:normal;
 line-height:normal;
+text-shadow:0 1px #eee;
 }
 
 li.project div.project-owner {
@@ -323,10 +333,12 @@ line-height:normal;
 .add-caption img { vertical-align: middle; margin: 2px; }
 .add-caption a, .add-caption a:visited
 {
+	
     color: #666;
-    font-family:"Georgia","Times New Roman",serif;
-    font-style: normal;
+    font-family:Sans-Serif;
+    font-weight:bold;
     text-decoration: none;
+    text-shadow:0 1px #fff;
     
 }
 .clear { clear:both;}
@@ -466,7 +478,6 @@ body {
 
 /*nav*/
 
-
 .btns {
 	height: 37px;
 	margin: auto;
@@ -490,34 +501,35 @@ body {
 }
 
 .btns li a {
-	background: url(../images/spite.jpg) no-repeat;
+	background: url(../images/spite.png) no-repeat;
 	xbackground-color: fuchsia;
 	display: inline-block;
-	height: 40px;
+	height: 33px;
 	margin-left:5px;
 	text-indent: -7777px;
-	width: 94px;
+	width: 97px;
 }
 
 
 .btns #ready a {background-position: -0px 0px;}
-.btns #block a {background-position: -94px 0px;}
-.btns #color a {background-position: -188px 0px;}
-.btns #claim a {background-position: -282px 0px;}
-.btns #delete a {background-position: -376px 0px;}
+.btns #block a {background-position: -96px 0px;}
+.btns #color a {background-position: -192px 0px;}
+.btns #claim a {background-position: -288px 0px;}
+.btns #delete a {background-position: -384px 0px;}
 
-.btns #ready a:hover {background-position: -0px -39px;}
-.btns #block a:hover {background-position: -94px -39px;}
-.btns #color a:hover {background-position: -188px -39px;}
-.btns #claim a:hover {background-position: -282px -39px;}
-.btns #delete a:hover {background-position: -376px -39px;}
+.btns #ready a:hover {background-position: -0px -32px;}
+.btns #block a:hover {background-position: -96px -32px;}
+.btns #color a:hover {background-position: -192px -32px;}
+.btns #claim a:hover {background-position: -288px -32px;}
+.btns #delete a:hover {background-position: -384px -32px;}
 
 
-.btns #ready.active a {background-position: -95px -120px;}
-.btns #block.active a {background-position: -293px -120px;}
-.btns #color.active a {background-position: -491px -120px;}
-.btns #claim.active a {background-position: -695px -120px;}
-.btns #delete.active a {background-position: -695px -120px;}
+.btns #ready.active a {background-position: -0px -64px;}
+.btns #block.active a {background-position: -96px -64px;}
+.btns #color.active a {background-position: -192px -64px;}
+.btns #claim.active a {background-position: -288px -64px;}
+.btns #delete.active a {background-position: -384px -64px;}
+
 
 .contentWrapper {float: left; background-color: #FFF;
 width: 100%;
@@ -539,7 +551,7 @@ background-color: #DDD;
 
 .main-panel div { padding: 4px; }
 
-.main-panel .action-bar { background-color: #DDD }
+.main-panel .action-bar { background-color: #DDD; border-bottom:1px solid #666666;}
 
 .main-panel .card-title 
 {
@@ -587,6 +599,24 @@ padding-right:2px;
     margin-left: 10px;
 }
 
+.right-panel li .button span 
+{
+    margin-left:0;
+}
+
+.right-panel li.indicator
+{
+    color:#FFFFFF;
+font-size:1.2em;
+line-height:3em;
+text-align:center;
+}
+.right-panel li.indicator.ready { background-color:#80C84B;
+    border-color:#2e8015; }
+
+.right-panel li.indicator.block { background-color:#e65540;
+    border-color:#d34f52; }
+
 .right-panel li.card-number 
 {
     font-size:2em;
@@ -632,6 +662,19 @@ padding-right:2px;
     margin-left: 2px;
 }
 
+.right-panel li.owner img 
+{
+    float:right;
+    margin-top: -26px;
+}
+
+.right-panel li.owner 
+{
+    height: 57px;
+}
+
+
+
  .editable-empty 
 {
     font-size: 1em;
@@ -656,10 +699,25 @@ ul.card-progress li
     
 }
 
+div.card-blocked 
+{
+    background-color:#D05750;
+    color:#FFFFFF;
+    margin-left:10px;
+    margin-right:10px;
+    padding:5px;
+    text-indent:1em;
+}
+div.card-color-bar, div.card-color-bar #card-color-editor, div.card-color-bar #card-color-editor li
+{
+    background-color:#DDDDDD;
+}
+
+
 div.card-process 
 {
     background-color:#DDDDDD;
-    border-top:1px solid #333333;
+    border-top:1px solid #999;
     min-height:40px;
     padding-top:20px;
 }
@@ -684,8 +742,18 @@ ul.card-progress li.green
 }
 
 .ui-widget-header  {
-background-color:#CCCCCC;
+background: none;
+background-color:#DDDDDD;
 border:none;
+border-top: 1px solid #999;
+
+}
+
+.markdown-instruct 
+{
+    float: right;
+    color: #666;
+    font-size: .8em;
 }
 
 .save-button 

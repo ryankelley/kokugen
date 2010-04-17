@@ -1,0 +1,107 @@
+body.normal{
+	width:273px;
+	text-align: right;
+	background: url("/images/background.png") no-repeat;
+	height: 130px;
+	overflow: visible;
+}
+body.expanded{
+	width:273px;
+	text-align: right;
+	background: url("/images/background.png") no-repeat;
+	height: 130px;
+	overflow: visible;
+}
+
+#logo{
+	position: absolute;
+	top: 10px;
+	left: 15px;
+}
+
+#time_record_form{
+	
+}
+#start_stop_button{
+	position: absolute;
+	top: 33px;
+	left: 15px;
+	width: 68px;
+	height: 36px;
+}
+.start_button{
+	background: url("/images/start.png") no-repeat;
+	border: none;
+}
+
+.stop_button{
+	background: url("/images/stop.png") no-repeat;
+	border: none;
+}
+
+#project_select{
+	position: absolute;
+	left: 100px;
+	top: 2px;
+	margin: 1px 1px;
+	width: 160px;
+}
+
+#task_select{
+	position: absolute;
+	left: 100px;
+	top: 26px;
+	margin: 1px 1px;
+	width: 160px;
+}
+#card_select{
+	position: absolute;
+	left: 100px;
+	top: 50px;
+	margin: 1px 1px;
+	width: 160px;
+}
+#worked_time_text{
+	position: absolute;
+	left: 210px;
+	top: 77px;
+	width: 50px;
+}
+
+#billable_time_text{
+	position: absolute;
+	left: 210px;
+	top: 103px;
+	width: 50px;
+}
+#description{
+	position: absolute;
+	top: 75px;
+	left: 35px;
+	width: 170px;
+	height: 50px;
+	overflow: auto;
+}
+#slider_button{
+	position: absolute;
+	top: 109px;
+	left: 5px;	
+	width: 18px;
+	height: 18px;	
+	border: none;
+}
+.slider_button_open{
+	background: url("/images/arrow-up-ben.png") no-repeat;
+}
+.slider_button_closed{
+	background: url("/images/arrow-down-ben.png") no-repeat;
+}
+
+#slider{
+	width: 255px;
+	height: 120px;
+	position: absolute;
+	top:130px;
+	z-index: -20;
+	left: 0px;
+}

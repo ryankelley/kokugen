@@ -70,6 +70,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\FubuMVC\HtmlTags.dll</HintPath>
     </Reference>
+    <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\NHibernate\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="MarkdownSharp">
+      <HintPath>..\..\lib\markdownsharp\MarkdownSharp.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\Common Service Locator\Microsoft.Practices.ServiceLocation.dll</HintPath>
@@ -143,6 +150,12 @@
     <Compile Include="Domain\SiteConfiguration.cs" />
     <Compile Include="Domain\TimeRecord.cs" />
     <Compile Include="Domain\User.cs" />
+    <Compile Include="EventAggregatorInterceptor.cs" />
+    <Compile Include="Events\EventAggregator.cs" />
+    <Compile Include="Events\FilteredListener.cs" />
+    <Compile Include="Events\IEventAggregator.cs" />
+    <Compile Include="Events\IHandler.cs" />
+    <Compile Include="Events\Messages\ValueEntitySaved.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Inflector.cs" />
     <Compile Include="IStartable.cs" />
@@ -154,6 +167,7 @@
     <Compile Include="Persistence\Overrides\UserMappingOverride.cs" />
     <Compile Include="Persistence\Repositories\IDailyTimeRecordRepository.cs" />
     <Compile Include="Persistence\Repositories\IPermissionRepository.cs" />
+    <Compile Include="Persistence\Repositories\PublishingRepository.cs" />
     <Compile Include="Persistence\Repositories\RoleRepository.cs" />
     <Compile Include="Persistence\Repositories\UserRepository.cs" />
     <Compile Include="Services\IDailyTimeRecordService.cs" />
@@ -250,6 +264,7 @@
     <Compile Include="Validation\ValidEmailAttribute.cs" />
     <Compile Include="Validation\ValidYear.cs" />
     <Compile Include="ValueObject.cs" />
+    <Compile Include="ValueObjectInitializer.cs" />
     <Compile Include="ValueObjectRegistry.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -272,6 +287,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

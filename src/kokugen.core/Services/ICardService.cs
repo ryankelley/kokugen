@@ -14,6 +14,7 @@ namespace Kokugen.Core.Services
         INotification SaveCard(Card card);
         Card GetCard(Guid id);
         bool ReOrderCards(List<CardViewDTO> cards);
+        Card CreateCard(Card card, Project project, User user);
     }
 
     public class CardService : ICardService
@@ -65,6 +66,29 @@ namespace Kokugen.Core.Services
 
 
             return true;
+        }
+
+        public Card CreateCard(Card card, Project project, User user)
+        {
+            var newcard = new Card
+            {
+                Title = card.Title,
+                Size = card.Size,
+                Priority = card.Priority,
+                Deadline = card.Deadline,
+                Details = card.Details,
+                Project = project,
+                Color = "grey",
+                Status = CardStatus.New,
+                AssignedTo = user
+
+            };
+
+            var lastCard = project.GetCards().OrderByDescending(x => x.CardNumber).Take(1).FirstOrDefault();
+
+            newcard.CardNumber = lastCard == null ? 1 : lastCard.CardNumber + 1;
+
+            return newcard;
         }
     }
 }

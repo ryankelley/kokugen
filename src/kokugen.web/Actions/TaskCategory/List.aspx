@@ -4,8 +4,16 @@
 
     
 <asp:Content ID="THISCONTENTAREAID" ContentPlaceHolderID="mainContent" runat="server">
+<%= this.Script("task.js") %>
     <div class="content"align=center  margin-left=auto margin-right=auto width=6em>
     <style type="text/css">
+    
+    h2
+    {
+    color:#333;	
+    
+    }
+    
     table
         {
             border-collapse:collapse;
@@ -19,69 +27,22 @@ table, td, th
         border:3px solid black;
         border-style:inset;
         text-align:center;
-        background-color:#CEBEB4;
-        color:#49657D;
+        background-color:#ddd;
+        color:#555;
     }
 th
     {
-        background-color:#9e9993;
-        color:black;
+        background-color:#888;
+        color:#222;
+        text-shadow: 0 1px #bbb;
     }
 </style>
 
-        <script type="text/javascript">
 
-            $(document).ready(function () {
-                $(".delete-button").click(function () {
-
-                    makeDeleteCall($(this).attr("data"));
-
-                });
-            });
-
-            var onSuccess = function (data) {
-                if (data.Success !== true) {
-                    alert("failed to remove");
-                    return;
-                }
-                var link = $(this);
-
-                var listItem = link.parent("tr");
-                listItem.remove();
-            }
-
-            function makeDeleteCall(id) {
-
-                $.ajax({
-                    url: "<%= Get<IUrlRegistry>().UrlFor(new RemoveTaskInput()) %>",
-                    data: { Id: id },
-                    dataType: "json",
-                    type: "DELETE",
-                    success: onSuccess
-                });
-                
-                return false;
-            }
-            $(document).ready(function () {
-                $(".edit-button").click(function () {
-
-                    makeEditCall($(this).attr("name"), $(this).attr("id"));
-
-                });
-            });
-
-           
-            function makeEditCall(name, id) {
-            
-            showTaskForm(name, id);
-
-                return false;
-            }
-        </script>
-        <div class="add-caption" ><a href="#" onclick="showTaskForm(null, null);"><img src="/content/images/add_button.png" alt="add project" />Add New Task</a></div>
+        <div class="add-caption" ><a href="#" onclick="showTaskForm(null);"><img src="/content/images/add_button.png" alt="add project" />Add New Task</a></div>
             
         <h2>Tasks</h2>
-        <table>
+        <table class="taskList" id="taskList">
        <tr>       
             <th> 
             Task
@@ -90,7 +51,7 @@ th
             Edit
             </th>
         </tr>
-        <%= this.PartialForEach(m => m.TaskCategories).Using<TaskItem_Control>() %>
+        
         </table>
         
     </div>
@@ -101,22 +62,44 @@ th
 <script type="text/javascript">
 
 
-    function showTaskForm(name, id) {
+    function showTaskForm(task) {
 
-        $("#task-name").val(name);
-        $("#task-edit-form-id").val(id);
+        if (task == null) {
+            $("#task-form-container").dialog('open');
+            return false;
+        }
+
+        $("#task-name").val(task.Name);
+        $("#task-edit-form-id").val(task.Id);
+        $("#" + task.Id).remove();
         $("#task-form-container").dialog('open');  
             
             
             return false;
         }
-
-        function appendTaskToList(task) {
-            var output = "<span class=\"task-name\">" + task.Name + "</span>";
-            
-            $(".task-list").append(output);
-        }    
+                
+          
         
     </script>
+    <script type="text/javascript">
+    var addtaskUrl = "<%= Get<IUrlRegistry>().UrlFor(new AddTaskModel()) %>";
+    var removetaskUrl = "<%= Get<IUrlRegistry>().UrlFor(new RemoveTaskInput()) %>";
+    var tasks = <%= Model.TaskCategories.ToJson() %>;
+    var taskList = $("#taskList");
+    function addtaskToList(task){
+            var t = new Task(task);
+            var element = buildtaskDisplay(t);
+            taskList.append( element );
+        }
 
+    $(document).ready(function(){
+        taskList = $("#taskList");
+
+        $.each(tasks, function(i, elem){
+            addtaskToList(elem);
+        });
+    });
+
+
+</script>
 </asp:Content>

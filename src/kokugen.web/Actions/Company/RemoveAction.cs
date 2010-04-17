@@ -1,5 +1,6 @@
 using System;
 using Kokugen.Core.Services;
+using StructureMap;
 
 namespace Kokugen.Web.Actions.Company
 {
@@ -14,11 +15,19 @@ namespace Kokugen.Web.Actions.Company
 
         public AjaxResponse Remove(RemoveCompanyInput model)
         {
-            _companyService.DeleteCompany(model.Id);
-            return new AjaxResponse
-                       {
-                           Success = true
-                       };
+            try
+            {
+                _companyService.DeleteCompany(model.Id);
+                return new AjaxResponse
+                           {
+                               Success = true,
+                               Item = model.Id
+                           };
+            }
+            catch(Exception ex)
+            {
+                return new AjaxResponse {Success = false, Item = ex.Message};
+            }
         }
     }
 

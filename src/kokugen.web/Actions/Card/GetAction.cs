@@ -29,6 +29,7 @@ namespace Kokugen.Web.Actions.Card
     public class CardDetailModel : ProjectBaseViewModel
     {
         public string Title { get; set; }
+        [Markdown]
         public string Details { get; set; }
         public int TimeEstimate { get; set; }
         public int Size { get; set; }
@@ -44,6 +45,9 @@ namespace Kokugen.Web.Actions.Card
         public virtual DateTime Created { get; set; }
         public virtual DateTime? Started { get; set; }
         public virtual DateTime? DateCompleted { get; set; }
+
+        public string GravatarHash { get; set; }
+        public string UserDisplay { get; set; }
         
     }
 
