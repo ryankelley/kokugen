@@ -3,6 +3,7 @@
 <%@ Import Namespace="Kokugen.Web.Actions.Project"%>
 <%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Project.Master.cs" Inherits="Kokugen.Web.Shared.ProjectMaster" MasterPageFile="~/Shared/Super.Master" %>
 <%@ Import Namespace="Kokugen.Web.Actions.Card" %>
+<%@ Import Namespace="Kokugen.Web.Actions.Card.Lists" %>
 
 <asp:Content ContentPlaceHolderID="Masterhead" ID="projecthead" runat="server">
 <script type="text/javascript">
