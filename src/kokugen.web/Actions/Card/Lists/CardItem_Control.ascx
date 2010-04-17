@@ -24,8 +24,12 @@
             <%= this.DisplayFor(x => x.Deadline.Value.Month) + "/" + this.DisplayFor(x => x.Deadline.Value.Day) + "/" + this.DisplayFor(x => x.Deadline.Value.Year)%>
         </td>
         <td>
+        <%= this.DisplayFor(x => x.ColumnName) %>
+        </td>
+        <td>
         <%=this.LinkTo(new CardDetailInputModel() { Id = Model.Id }).NoClosingTag() + "<img src=\"/content/images/magnify16.png\" alt=\"edit\" /></a>"%>
         </td>
+
          
 
 

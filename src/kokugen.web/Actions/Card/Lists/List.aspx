@@ -59,6 +59,9 @@ th
             Deadline
         </th>
         <th>
+            Status
+        </th>
+        <th>
            
         </th>
      </tr>
