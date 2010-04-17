@@ -130,7 +130,7 @@
     <Content Include="Actions\Account\Password\PasswordResetForm.aspx" />
     <Content Include="Actions\Card\CardProgress.aspx" />
     <Content Include="Actions\Card\Get.aspx" />
-    <Content Include="Actions\Card\CardItem_Control.ascx" />
+    <Content Include="Actions\Card\Lists\CardItem_Control.ascx" />
     <Content Include="Actions\DailyTimeRecord\List.aspx" />
     <Content Include="Actions\DailyTimeRecord\DailyTimeRecord_Control.ascx" />
     <Content Include="Actions\Errors\FourZeroThree.aspx" />
@@ -174,6 +174,9 @@
     <Compile Include="Actions\Card\Claim\CardClaimAction.cs" />
     <Compile Include="Actions\Card\Color\ColorAction.cs" />
     <Compile Include="Actions\Card\Dates\CardDatesAction.cs" />
+    <Compile Include="Actions\Card\Lists\View_Page_Type_Declarations.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Actions\Card\Move\CardMovedAction.cs" />
     <Compile Include="Actions\Card\Ready\CardReadyAction.cs" />
     <Compile Include="Actions\Card\ReOrder\ReOrderAction.cs" />
@@ -208,7 +211,7 @@
     <Compile Include="Actions\Card\View_Page_Type_Declarations.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Actions\Card\ListAction.cs" />
+    <Compile Include="Actions\Card\Lists\ListAction.cs" />
     <Compile Include="Actions\Company\AddAction.cs" />
     <Compile Include="Actions\Company\CompanyFormAction.cs" />
     <Compile Include="Actions\Company\ListAction.cs" />
@@ -341,7 +344,7 @@
     <Content Include="Actions\Board\Configure.aspx" />
     <Content Include="Actions\Card\Add.aspx" />
     <Content Include="Actions\Card\CompactCardForm.aspx" />
-    <Content Include="Actions\Card\List.aspx" />
+    <Content Include="Actions\Card\Lists\List.aspx" />
     <Content Include="Actions\Company\CompanyForm.aspx" />
     <Content Include="Actions\Company\List.aspx" />
     <Content Include="Actions\Home\Home.aspx" />
