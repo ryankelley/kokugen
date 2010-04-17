@@ -1,3 +1,4 @@
+using FubuCore;
 using FubuMVC.Core.Urls;
 using Kokugen.Core.Membership.Services;
 using Kokugen.Core.Services;
@@ -17,13 +18,17 @@ namespace Kokugen.Web.Actions.Account.LoginAjax
 
         public AjaxResponse Command(AjaxLoginModel inModel)
         {
-            var userValid = _loginService.LoginUser(inModel.Login, inModel.Password, true);
-            var user = _userService.GetUserByLogin(inModel.Login);
-            if(userValid.IsValid())
+            if (inModel.Login.IsNotEmpty() && inModel.Password.IsNotEmpty())
             {
-                return new AjaxResponse {Success = true, Item = user.Id};
+                var userValid = _loginService.LoginUser(inModel.Login, inModel.Password, true);
+                var user = _userService.GetUserByLogin(inModel.Login);
+
+                if (userValid.IsValid())
+                {
+                    return new AjaxResponse {Success = true, Item = user.Id};
+                }
             }
-            return new AjaxResponse {Success = false};
+            return new AjaxResponse {Success = false, Item = "Login failed"};
 
         }
     }
