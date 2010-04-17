@@ -25,7 +25,7 @@ var buildUserWidget = function (user) {
     var $element = $(element);
 
     $element
-        .addClass("user")
+        .addClass("user ui-draggable")
         .append("<span class='display'>" + user.DisplayName);
 
     if (user.IsOwner) {
@@ -100,7 +100,7 @@ var buildRoleWidget = function (role) {
 
 
     var userContainer = document.createElement('ul');
-    $(userContainer).addClass('sortable');
+    $(userContainer).addClass('ui-sortable');
 
     body.appendChild(userContainer);
 
