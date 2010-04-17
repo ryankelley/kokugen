@@ -29,6 +29,18 @@
                 }
             };
 
+            var roles = <%=Model.Roles.ToJson() %>;
+
+            for(var i in roles){
+                var role = new Role(roles[i]);
+
+                _roles.push(role);
+
+                var widget = buildRoleWidget(role);
+
+                $('#role-widget-list').append(widget);
+            }
+
       });
   
   </script>
@@ -39,8 +51,10 @@
  <asp:Content ContentPlaceHolderID="mainContent" runat=server>
     
     <div id="project-users-toolbar"><%=this.LinkTo(new AddUserToProjectRequest(){Id = Model.ProjectId}).Text("Add User").Id("add-user")%></div>
-
-    <ul id="project-users-list"></ul>
-
-
+    <div class="user-left-side">
+        <ul id="project-users-list"></ul>
+    </div>
+    <div class="user-role-area">
+        <ul id="role-widget-list"></ul>
+    </div>
  </asp:Content>

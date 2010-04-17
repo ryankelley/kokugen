@@ -76,3 +76,41 @@ var Role = function (role) {
     this.Name = role.Name;
 };
 
+var buildRoleWidget = function (role) {
+
+    if (!(role instanceof Role)) {
+        throw ("role in not an instance of Role");
+    }
+
+    this.myRole = role;
+
+    var myTools = buildToolbar(role);
+
+    var element = document.createElement('li');
+    $(element).addClass('role-wrapper');
+
+    var head = document.createElement('div');
+    $(head).addClass('role-header').html(role.Name);
+
+    var body = document.createElement('div');
+    $(body).addClass('role-body');
+
+    var foot = document.createElement('div');
+    $(foot).addClass('role-footer');
+
+
+    var userContainer = document.createElement('ul');
+    $(userContainer).addClass('sortable');
+
+    body.appendChild(userContainer);
+
+    element.appendChild(head);
+    element.appendChild(body);
+    element.appendChild(foot);
+
+    return element;
+};
+
+function buildToolbar(role) {
+
+}
