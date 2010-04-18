@@ -6,7 +6,7 @@ UserName = "";
 Password = "";
 
 var CurrentUserId = "";
-
+var CurrentTimeId = {};
 isLoggedIn = false;
 
 $(document).ready(function(){
@@ -55,7 +55,8 @@ function SettingsClosed(event)
 
 function afterConnected() {    
 	loadProjects(afterProjectsLoad);
-    loadTaskList(afterTasksLoad);	
+	loadTaskList(afterTasksLoad);
+		
 }
 
 function afterProjectsLoad(response) {
@@ -99,6 +100,43 @@ function afterTasksLoad(response) {
             $("#task_select").append(item);
         }
     }
+}
+
+function submitStartTask() {
+    var data = new TimeRecordData();
+
+    data.UserId = CurrentUserId;
+    data.TaskId = $("#task_select option:selected").val();
+    data.ProjectId = $("#project_select option:selected").val();
+    data.CardId = $("#card_select option:selected").val();
+    
+    startTimeRecord(data, function (response) {
+        if (response && response.Success) {
+            CurrentTimeId = response.Item.Id;
+        }
+        updateScreenAfterStartTask();
+        $("#description").html(CurrentTimeId);
+    });
+
+
+}
+
+function submitSaveTask() {
+    var data = new TimeRecordData();
+
+    data.Id = CurrentTimeId;
+    data.Duration = $("#worked_time_text").val();
+    data.Billable = $("#billable_time_text").val();
+    data.Description = $("#description").val();
+
+    stopTimeRecord(data, function (response) {
+        if (response && response.Success) {
+            CurrentTimeId = ""
+        }
+        updateScreenAfterSaveTask();
+    });
+
+
 }
 
 

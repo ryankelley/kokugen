@@ -139,6 +139,10 @@
     <Content Include="Actions\Project\Manage\Users\Add\AddUserToProject.aspx" />
     <Content Include="Content\css\jquery.jgrowl.css" />
     <Content Include="Actions\Project\MenuList\ProjectMenu_Item.ascx" />
+    <Content Include="Content\images\btn-check16.png" />
+    <Content Include="Content\images\btn-check24.png" />
+    <Content Include="Content\images\btn-delete16.png" />
+    <Content Include="Content\images\btn-delete24.png" />
     <Content Include="Content\images\claim16.png" />
     <Content Include="Content\images\delete.png" />
     <Content Include="Content\images\edit2.png" />

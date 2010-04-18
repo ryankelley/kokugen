@@ -178,6 +178,14 @@ width:32px;
     padding:4px;
     width:100%;
 }
+.card .card-blocked
+{
+    text-indent: 0px !important;
+}
+div.reason-form 
+{
+    text-indent: 0px;
+}
 .reason-form textarea 
 {
     margin-left: 8px;
@@ -420,6 +428,7 @@ vertical-align:top;
 {
     margin-right: 0px;
     margin-top: 0px;
+    min-width: 27px;
 }
 
 .card 
