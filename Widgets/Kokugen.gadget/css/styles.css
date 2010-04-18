@@ -1,8 +1,18 @@
 body.normal{
-	width:273px;
+	width:275px;
 	text-align: right;
-	background: url("/images/background.png") no-repeat;
-	height: 130px;
+	background-color: #333;
+	/*background: url("/images/background.png") no-repeat;*/
+	height: 225px;
+	overflow: visible;
+}
+body.compact
+{
+    width:275px;
+	text-align: right;
+	background-color: #333;
+	/*background: url("/images/background.png") no-repeat;*/
+	height: 75px;
 	overflow: visible;
 }
 body.expanded{
@@ -12,96 +22,162 @@ body.expanded{
 	height: 130px;
 	overflow: visible;
 }
+.hidden { display: none; }
+
+.frame  
+{
+    margin-top: 5px;
+    margin-right: 125px;
+       background-color: #DEDEDE;
+        height: 75px;
+        width: 255px;
+        margin-left:-3px;
+        
+ }
+
+#textField {
+    color: black;
+    font-family: HelveticaNeue;
+    width: 125px;
+    font-size: 20pt;
+    background-color: rgb(158, 158, 139);
+    text-align: right;
+    margin-top: 8px;
+    margin-left: 15px;
+}
+
+#stop-btn, #start-btn, #save-btn
+{
+    margin-top: -55px;
+    margin-right: 25px;
+}
 
 #logo{
 	position: absolute;
 	top: 10px;
-	left: 15px;
+	left: 85px;
 }
 
-#time_record_form{
-	
+.frame select 
+{
+  margin-right: 115px;
+  margin-bottom: 8px;  
+  width: 135px;
+  
 }
-#start_stop_button{
-	position: absolute;
-	top: 33px;
-	left: 15px;
-	width: 68px;
-	height: 36px;
+
+#timerecord-info 
+{
+    float:left;
+    background-color: #DDD;
+    margin-top: 0px;
+    width: 262px;
+    margin-left:-3px;
+    height: 150px;
+    overflow: hidden;
+    font-family: Sans-Serif;
+    margin-right: 125px;
+}
+
+
+#timerecord-info label 
+{
+    display:inline;
+    margin-left: 5px;
+    font-size: 11px;
+    font-weight:bold;
+}
+#timerecord-info textarea
+{
+    font-size: 11px;
+    font-weight:bold;
+    margin-left: 5px;
+}
+
+#timerecord-info input
+{
+    margin-left: 5px;
+    margin-right: 5px;
+    display:inline;
+    
+}
+.desc-label
+{
+    margin-right: 90px;
+    font-family: Sans-Serif;
+    
+    width: 125px;
+    display: block;
 }
 .start_button{
 	background: url("/images/start.png") no-repeat;
 	border: none;
+	width: 68px;
+	height: 36px;
 }
 
 .stop_button{
 	background: url("/images/stop.png") no-repeat;
 	border: none;
+	width: 68px;
+	height: 36px;
 }
-
-#project_select{
-	position: absolute;
-	left: 100px;
-	top: 2px;
-	margin: 1px 1px;
-	width: 160px;
-}
-
-#task_select{
-	position: absolute;
-	left: 100px;
-	top: 26px;
-	margin: 1px 1px;
-	width: 160px;
-}
-#card_select{
-	position: absolute;
-	left: 100px;
-	top: 50px;
-	margin: 1px 1px;
-	width: 160px;
-}
-#worked_time_text{
-	position: absolute;
-	left: 210px;
-	top: 77px;
-	width: 50px;
-}
-
-#billable_time_text{
-	position: absolute;
-	left: 210px;
-	top: 103px;
-	width: 50px;
-}
-#description{
-	position: absolute;
-	top: 75px;
-	left: 35px;
-	width: 170px;
-	height: 50px;
-	overflow: auto;
-}
-#slider_button{
-	position: absolute;
-	top: 109px;
-	left: 5px;	
-	width: 18px;
-	height: 18px;	
+.save_button{
+	background: url("/images/save.png") no-repeat;
 	border: none;
-}
-.slider_button_open{
-	background: url("/images/arrow-up-ben.png") no-repeat;
-}
-.slider_button_closed{
-	background: url("/images/arrow-down-ben.png") no-repeat;
+	width: 68px;
+	height: 36px;
 }
 
-#slider{
-	width: 255px;
-	height: 120px;
-	position: absolute;
-	top:130px;
-	z-index: -20;
-	left: 0px;
+.clock-in, .clock-out
+{
+    margin-right: 255px;
+    margin-top: -25px;
+    width: 65px;
+    height: 25px;
+    color: #FFF;
+    border: 1px solid #000;
+    background-color: #666;
+     -moz-border-radius: 5px; /* FF1+ */
+  -webkit-border-radius: 5px; /* Saf3+, Chrome */
+          border-radius: 5px; /* Opera 10.5, IE 9 */
+
 }
+
+.slide-button
+{
+    font-size:10px;
+    font-weight:bold;
+    margin-right: 15px;
+    margin-top: 5px;
+    padding-bottom:1px;
+    width: 45px;
+    height: 18px;
+    color: #FFF;
+    border: 1px solid #000;
+    background-color: #666;
+     -moz-border-radius: 5px; /* FF1+ */
+  -webkit-border-radius: 5px; /* Saf3+, Chrome */
+          border-radius: 5px; /* Opera 10.5, IE 9 */
+}
+
+#status 
+{
+    
+    color:#FFF;
+    font-size:10px;
+    font-family: Sans-Serif;
+    font-weight: bold;
+    width: 65px;
+    height: 20px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 2px;
+}
+div.out 
+{
+    background-color: Red;
+}
+div.in { background-color: Green;}
+    

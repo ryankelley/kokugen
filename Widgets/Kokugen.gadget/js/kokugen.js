@@ -10,7 +10,7 @@ var CurrentUserId = "";
 isLoggedIn = false;
 
 $(document).ready(function(){
-	$("#slider_button").click(function(){
+    $(".slide-button").click(function () {
 		System.Gadget.Flyout.show = !System.Gadget.Flyout.show;
 	});
 	
@@ -32,9 +32,12 @@ function updateStatus(connected){
 
 function setIsConnected(response){
 	if(response && response.Success) {
-	    CurrentUserId=Response.Item;
+	    CurrentUserId= response.Item;
 	    isLoggedIn = true;
 	    afterConnected();
+	    $("#status").html("Logged In");
+	    $("#status").removeClass("out").addClass("in");
+
 	}
 }
 
