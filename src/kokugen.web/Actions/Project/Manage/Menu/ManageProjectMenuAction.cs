@@ -6,7 +6,6 @@ using FubuMVC.Core.View;
 using HtmlTags;
 using Kokugen.Web.Actions.Project.Manage.Users;
 using Kokugen.Web.Actions.Project.Manage.Users.Add;
-using Kokugen.Web.Actions.Project.Manage.Users.Delete;
 using Kokugen.Web.Conventions;
 
 namespace Kokugen.Web.Actions.Project.Manage.Menu

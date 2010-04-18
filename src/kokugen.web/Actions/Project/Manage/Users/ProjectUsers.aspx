@@ -52,9 +52,19 @@
                 $('#role-widget-list').append(widget);
             }
 
-            $(".ui-sortable").sortable({ revert:true, placeholder: 'user-placeholder', forcePlaceholderSize: true, connectWith: '.ui-sortable'});
-            //$(".ui-draggable").draggable({connectToSortable:".ui-sortable", helper: 'clone', revert:'invalid'});
-           // $(".ui-sortable").disableSelection();
+            $(".ui-sortable").sortable({ 
+                revert:true, 
+                placeholder: 'user-placeholder', 
+                forcePlaceholderSize: true, 
+                connectWith: '.ui-sortable', 
+                receive: function(event, ui) {
+                    $(ui.item).find('.ui-icon').remove();
+                },
+                helper: 'clone'
+            });
+
+            $(".ui-draggable").draggable({connectToSortable:".ui-sortable", helper: 'clone', revert:'invalid'});
+            $(".ui-sortable").disableSelection();
 
            
       });
@@ -104,7 +114,7 @@
         {
             padding: 5px;
         }
-        
+        .ui-draggable{padding:5px;}
        
     </style>
 </asp:Content>
@@ -114,7 +124,7 @@
         <%=this.LinkTo(new AddUserToProjectRequest(){Id = Model.ProjectId}).Text("Add User").Id("add-user")%></div>
     
         <div class="user-left-side">
-            <ul id="project-users-list" class="ui-sortable">
+            <ul id="project-users-list">
             </ul>
         </div>
         <div class="user-role-area">
