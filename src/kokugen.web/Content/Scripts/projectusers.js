@@ -26,6 +26,8 @@ var buildUserWidget = function (user) {
 
     $element
         .addClass("user ui-draggable")
+        .addClass(user.Id)
+        .data('User',user)
         .append("<span class='display'>" + user.DisplayName);
 
     if (user.IsOwner) {
@@ -37,7 +39,18 @@ var buildUserWidget = function (user) {
 
         var deleteLink = document.createElement('a');
         deleteLink.setAttribute("href", user.DeleteUrl);
-        $(deleteLink).html('<span class="ui-icon ui-icon-trash" style="float:right;display:none;"');
+        $(deleteLink)
+            .addClass('delete')
+            .css('display',"inline")
+            .html('<img style="float:right;" src="/content/images/btn-delete24.png" alt="delete"/>')
+            .hide();
+
+        $element.hover(function () {
+            $(this).find('.delete').show();
+        },
+        function () {
+            $(this).find('.delete').hide();
+        });
 
         $element.hover(function () {
             $(this).find('.ui-icon').fadeIn();
@@ -62,7 +75,7 @@ var buildUserWidget = function (user) {
 
     function removeUserFromDisplay(response) {
         if (response.Success) {
-            $(element).remove();
+            $('.'+self.myUser.Id).remove();
         }
         else {
             $.jGrowl('You cannot remove this user', { theme: 'jgrowl-error' });
@@ -91,6 +104,8 @@ var buildRoleWidget = function (role) {
         throw ("role in not an instance of Role");
     }
 
+    var myUsers = new Array();
+
     this.myRole = role;
 
     var myTools = buildToolbar(role);
@@ -110,6 +125,13 @@ var buildRoleWidget = function (role) {
 
     var userContainer = document.createElement('ul');
     $(userContainer).addClass('ui-sortable');
+
+    $(userContainer).sortable({
+        revert: true,
+        placeholder: 'user-placeholder',
+        forcePlaceholderSize: true,
+        connectWith: '.ui-sortable'
+    });
 
     body.appendChild(userContainer);
 

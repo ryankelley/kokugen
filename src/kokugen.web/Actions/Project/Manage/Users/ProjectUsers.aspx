@@ -2,7 +2,7 @@
     MasterPageFile="~/Shared/Project.Master" %>
 
 <%@ Import Namespace="Kokugen.Web.Actions.Project.Manage.Users.Add" %>
-<asp:Content ContentPlaceHolderID="head" runat="server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <%=this.Script("projectusers.js") %>
     <script type="text/javascript">
       $(function () {
@@ -34,7 +34,9 @@
                 if($data.Success){
                     var user = new User($data.Item);
                     _users.push(user);
-                    $('#project-users-list').append(buildUserWidget(user));
+                    var widget = buildUserWidget(user);
+                    makeDraggable(widget);
+                    $('#project-users-list').append(widget);
                 }else{
                     $.jGrowl('Error occured adding the user to the project!', {sticky:true,theme:'jgrowl-error'});
                 }
@@ -48,25 +50,25 @@
                 _roles.push(role);
 
                 var widget = buildRoleWidget(role);
-
                 $('#role-widget-list').append(widget);
             }
 
-            $(".ui-sortable").sortable({ 
-                revert:true, 
-                placeholder: 'user-placeholder', 
-                forcePlaceholderSize: true, 
-                connectWith: '.ui-sortable', 
-                receive: function(event, ui) {
-                    $(ui.item).find('.ui-icon').remove();
-                },
-                helper: 'clone'
-            });
 
-            $(".ui-draggable").draggable({connectToSortable:".ui-sortable", helper: 'clone', revert:'invalid'});
+            $(".ui-draggable").each(function(){makeDraggable(this);});
             $(".ui-sortable").disableSelection();
 
-           
+            function makeDraggable(element){
+                $(element).draggable({
+                connectToSortable:".ui-sortable", 
+                helper: function(element, ui){
+                    return buildUserWidget($(element.currentTarget).data('User'));
+                }, 
+                revert:'invalid',
+                start:function(event, ui){
+                    $(ui.helper).find('.delete').remove();
+                }
+            });
+            };
       });
 
     </script>
@@ -114,17 +116,21 @@
         {
             padding: 5px;
         }
-        .ui-draggable{padding:5px;}
+
+        .ui-draggable { padding:5px;}
+        .ui-sortable > .user > .delete {display:none;}
+
        
     </style>
 </asp:Content>
-<asp:Content ContentPlaceHolderID="mainContent" runat="server">
+<asp:Content ID="Content2" ContentPlaceHolderID="mainContent" runat="server">
 <div id="manage-users-wrapper">
     <div id="project-users-toolbar">
         <%=this.LinkTo(new AddUserToProjectRequest(){Id = Model.ProjectId}).Text("Add User").Id("add-user")%></div>
     
         <div class="user-left-side">
-            <ul id="project-users-list">
+           <ul id="project-users-list">
+
             </ul>
         </div>
         <div class="user-role-area">
