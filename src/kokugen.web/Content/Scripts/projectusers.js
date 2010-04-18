@@ -34,9 +34,11 @@ var buildUserWidget = function (user) {
             .append("<em class='isOwner'>(Owner)");
     } else {
         //append delete from project button 
+       
         var deleteLink = document.createElement('a');
         deleteLink.setAttribute("href", user.DeleteUrl);
-        $(deleteLink).addClass('ui-icon-trash').html('delete');
+        $(deleteLink).html('<span class="ui-icon ui-icon-trash" style="float:right;"');
+        
 
 
         $(deleteLink).click(function (e) {
@@ -63,7 +65,7 @@ var buildUserWidget = function (user) {
     };
 
     $element
-        .append('<img class="gravatar" src="' + 'http://gravatar.com/avatar/' + user.GravatarHash + '?s=27" alt="Gravatar Icon" />');
+        .append('<img class="gravatar" style="float:left; padding:0 5px;" src="' + 'http://gravatar.com/avatar/' + user.GravatarHash + '?s=27" alt="Gravatar Icon" />');
 
     return element;
 };
