@@ -23,7 +23,7 @@ namespace Kokugen.Web.Actions.Card.Lists
 
             var project = _projectService.GetProjectFromId(inModel.Id);
 
-            var cards =_cardService.GetCards(project).OrderBy(x => x.CardNumber).Select(Mapper.DynamicMap<CardViewDTO> ) ;
+            var cards =_cardService.GetCards(project).OrderBy(x => x.CardNumber).Select(x => Mapper.DynamicMap<CardViewDTO>(x)) ;
 
             return new CardListModel()
                        {
