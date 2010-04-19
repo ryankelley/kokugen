@@ -1,5 +1,14 @@
-function loadProjects(callback) {
+function login(callback) {
+    $.ajax({
+        url: 'http://' + KokugenUrl + '/account/loginajax',
+        dataType: 'json',
+        type: 'POST',
+        data: { Login: UserName, Password: Password },
+        success: callback
+    });
+}
 
+function loadProjects(callback) {
     $.ajax({
         url: 'http://' + KokugenUrl + '/project/menulist',
         dataType: 'json',

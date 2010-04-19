@@ -1,12 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using FubuMVC.Core.Urls;
 using FubuMVC.Core.View;
 using Kokugen.Core.Attributes;
 using Kokugen.Core.Domain;
 using Kokugen.Core.Membership.Services;
 using Kokugen.Core.Services;
 using Kokugen.Core.Validation;
+using Kokugen.Web.Actions.Project.Manage.Users.Delete;
 using Kokugen.Web.Conventions;
 
 namespace Kokugen.Web.Actions.Project.Manage.Users.Add
@@ -14,15 +16,17 @@ namespace Kokugen.Web.Actions.Project.Manage.Users.Add
     public class AddUserToProjectAction
     {
         private readonly IUserService _userService;
+        private readonly IUrlRegistry _urlRegistry;
         private readonly IRolesService _rolesService;
         private readonly IProjectService _projectService;
 
         public AddUserToProjectAction(IUserService userService, 
-            IRolesService rolesService,
+            IUrlRegistry urlRegistry,
             IProjectService projectService)
         {
             _userService = userService;
-            _rolesService = rolesService;
+            _urlRegistry = urlRegistry;
+
             _projectService = projectService;
         }
 
@@ -38,9 +42,6 @@ namespace Kokugen.Web.Actions.Project.Manage.Users.Add
         public AjaxResponse Command(AddUserToProjectModel model)
         {
             var user = _userService.Retrieve(model.User);
-            var role = _rolesService.Retrieve(model.Role);
-
-            user.AddRole(role);
 
             var project = _projectService.GetProjectFromId(model.ProjectId);
 
@@ -49,7 +50,19 @@ namespace Kokugen.Web.Actions.Project.Manage.Users.Add
             var validation = _projectService.SaveProject(project);
 
             if (validation.IsValid())
-                return new AjaxResponse() {Success = true, Item = "User has been add to the project"};
+                return new AjaxResponse()
+                           {
+                               Success = true,
+                               Item =
+                                   new ProjectUserDTO
+                                       {
+                                           Id = user.Id,
+                                           ProjectId = project.Id,
+                                           DisplayName = user.DisplayName(),
+                                           GravatarHash = user.GravatarHash,
+                                           DeleteUrl = _urlRegistry.UrlFor(new DeleteProjectUserModel())
+                                       }
+                           };
 
             return new AjaxResponse() {Item = validation.AllMessages.Select(x => x.Message)};
         }
@@ -66,8 +79,6 @@ namespace Kokugen.Web.Actions.Project.Manage.Users.Add
 
         [Required]
         public Guid User { get; set; }
-        [ValueOf("Role"), Required]
-        public Guid Role { get; set; }
 
         public IEnumerable<User> Users { get; set; }
     }

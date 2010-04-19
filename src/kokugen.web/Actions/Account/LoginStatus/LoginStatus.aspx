@@ -22,6 +22,8 @@
 <%}
   else
   {%>
+  <div class="gravatar">
+    </div>
 <div class="user-actions">
     [ <a href="<%=Model.RawUrl %>">Log In</a> ] <span>
         <%=this.LinkTo(new RegisterAccountRequest()).Text("Register") %></span>

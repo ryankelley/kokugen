@@ -4,8 +4,8 @@ using FubuMVC.Core;
 using FubuMVC.Core.Urls;
 using FubuMVC.Core.View;
 using HtmlTags;
+using Kokugen.Web.Actions.Project.Manage.Users;
 using Kokugen.Web.Actions.Project.Manage.Users.Add;
-using Kokugen.Web.Actions.Project.Manage.Users.Delete;
 using Kokugen.Web.Conventions;
 
 namespace Kokugen.Web.Actions.Project.Manage.Menu
@@ -25,14 +25,15 @@ namespace Kokugen.Web.Actions.Project.Manage.Menu
             var menus = new HtmlTag("ul");
 
             menus.Child(new HtmlTag("li").Child(
-             new LinkTag("Remove User",
-                         _urlRegistry.UrlFor(new DeleteProjectUserRequest() { Id = request.Id }),
-                         "manage-proj-menu").Title("Remove User")).AddClass("bar"));
-
-            menus.Child(new HtmlTag("li").Child(
                 new LinkTag("Add User",
                             _urlRegistry.UrlFor(new AddUserToProjectRequest() {Id = request.Id}),
                             "manage-proj-menu").Title("Add User")).AddClass("bar"));
+
+            menus.Child(new HtmlTag("li").Child(
+                new LinkTag("Manage Users",
+                            _urlRegistry.UrlFor(new ProjectUsersRequest() { Id = request.Id }),
+                            "").Title("Manage Users")).AddClass("bar"));
+
 
             var script = new HtmlTag("script").Attr("type", "text/javascript")
                 .Text(

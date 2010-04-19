@@ -6,6 +6,5 @@
     <%=this.FormFor<AddUserToProjectModel>() %>
         <%=this.InputFor(x => x.ProjectId).Hide() %>
         <%=this.DropDownFor(x=> x.User,()=>Model.Users.Select(x => new ValueObject(x.Id.ToString(),x.DisplayName()))) %>
-        <%=this.Edit(x=> x.Role) %>
     <%=this.EndForm() %>
 </div>

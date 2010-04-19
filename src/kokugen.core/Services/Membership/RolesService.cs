@@ -82,18 +82,18 @@ namespace Kokugen.Core.Services
             _roleRepository.Delete(entity);
         }
 
-        public IEnumerable<string> FindAll()
+        public IEnumerable<Role> FindAll()
         {
-            return _roleRepository.FindAll().Select(x => x.Name);
+            return _roleRepository.FindAll();
         }
 
-        public IEnumerable<string> FindByUserName(User userName)
+        public IEnumerable<Role> FindByUserName(User userName)
         {
             return _userRepository.FindBy(x => x.UserName, userName.UserName)
-                .GetRoles().Select(x => x.Name);
+                .GetRoles();
         }
 
-        public IEnumerable<string> FindUserNamesByRole(Role roleName)
+        public IEnumerable<string > FindUserNamesByRole(Role roleName)
         {
             return _roleRepository.FindBy(x => x.Name, roleName.Name)
                 .GetUsers()

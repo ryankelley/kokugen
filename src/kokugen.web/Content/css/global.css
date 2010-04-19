@@ -67,6 +67,11 @@ margin-top:75px;
 font-size:11px;
 }
 
+.user-actions a, .user-actions a:visited 
+{
+    color: #fff;
+}
+
 
 div.gravatar 
 {	
@@ -75,7 +80,8 @@ div.gravatar
     display: inline;
     margin-top:5px;
     margin-right:40px;
-;
+    min-width: 64px;
+    min-height: 60px;
 }
 /*subnav*/
 
@@ -294,7 +300,6 @@ li.project span.project-name
 {
 	color:#333;
     font-weight: bold;
-    text-shadow: 0 1px #eee;
 }
 
 li.project span.project-stats {
@@ -306,7 +311,6 @@ font-style:italic;
 font-variant:normal;
 font-weight:normal;
 line-height:normal;
-text-shadow:0 1px #eee;
 }
 
 li.project div.project-owner {
@@ -333,7 +337,6 @@ line-height:normal;
 .add-caption img { vertical-align: middle; margin: 2px; }
 .add-caption a, .add-caption a:visited
 {
-	
     color: #666;
     font-family:Sans-Serif;
     font-weight:bold;
