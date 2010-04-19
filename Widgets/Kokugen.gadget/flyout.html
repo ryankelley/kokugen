@@ -2,25 +2,137 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=Unicode" />
 		<link href="css/flyout.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
+		<script type="text/javascript" src="js/kokugen-common.js"></script>
+		
+		
+		<script type="text/javascript">
+		var LogUserId ="";
+		
+var TimeRecord = function(record) {
+	this.Description = record.Description;
+	this.ProjectName = record.ProjectName;
+	this.CardDesc = record.CardTitle;
+	this.Duration = record.Duration;
+	this.Billable = record.Billable;
+};
+
+function buildLogItem(data) {
+	if (!(data instanceof TimeRecord)) {
+        throw ("card is not an instance of Card");
+    }
+	
+	var element = document.createElement('li');
+	
+	var top = document.createElement('div');
+	$(top).addClass("desc").attr("title", "Description of Work").html(data.Description);
+	
+	element.appendChild(top);
+	
+	var mid = document.createElement('div');
+	$(mid).addClass("middle");
+	
+	var proj = document.createElement('span');
+	$(proj).addClass("proj").attr("title", "Project").html(data.ProjectName);
+	
+	var card = document.createElement('span');
+	$(card).addClass("card").attr("title", "Card/Work Item").html(data.CardDesc);
+	
+	mid.appendChild(proj);
+	mid.appendChild(card);
+	element.appendChild(mid);
+	
+	var bottom = document.createElement('div');
+	$(bottom).addClass("bottom");
+	
+	var duration = document.createElement('span');
+	$(duration).addClass("duration").attr("title", "Duration").html(data.Duration);
+	
+	var bill = document.createElement('span');
+	$(bill).addClass("billable").attr("title", "Billable Time").html(data.Billable);
+	
+	bottom.appendChild(duration);
+	bottom.appendChild(bill);
+	element.appendChild(bottom);
+	
+	return element;
+
+}
+
+function getLogForUser(url, userId, callback) {
+	$.ajax({
+        url: 'http://' + url + '/timerecord/widgetlog',
+        type: 'POST',
+        data: { UserId: userId },
+        dataType: 'json',
+        success: callback
+    });
+}
+
+function loadLog() {
+
+try {
+			if(LogUserId != "" && LogUserId !== null) {
+			//$("#task_list").append('<li class="even" style="color:Red;">Trying to Get Info</li>');
+			//$("#task_list").append('<li class="even" style="color:Red;">'+LogUserId+'</li>');
+				
+				var url = System.Gadget.Settings.readString("KokugenUrl");
+				//$("#task_list").append('<li class="even" style="color:Red;">'+url+'</li>');
+				getLogForUser(url, LogUserId, function(response) {
+				if(response && response.Success) {
+						
+					
+					var count = 0;
+					for(var i in response.Item) {
+					
+						var item = new TimeRecord(response.Item[i]);
+						
+						var html = buildLogItem(item);
+						if(count % 2==0) { $(html).addClass("even"); }
+						else { $(html).addClass("odd"); }
+						$("#task_list").append(html);
+						count++;
+					}
+				
+				} else {
+				$("#task_list").append('<li class="even" style="color:Red;">No Records Retreived</li>');
+				}
+				
+			});
+			} 
+			else {
+				$("#task_list").append('<li class="even" style="color:Red;">You are Not logged in</li>');
+			}
+			} catch(err) {
+			$("#task_list").append('<li class="even" style="color:Red;">'+err+'</li>');
+			}
+}
+
+function setUser(data) {
+LogUserId = data;
+}
+
+function onLoad() {
+
+LogUserId =System.Gadget.Settings.read("KokugenUserId");
+
+}
+
+$(document).ready(function(){
+	$(window).resize(function(){
+	LogUserId = System.Gadget.Settings.read("KokugenUserId");
+		
+			loadLog();
+	});
+});
+	</script>
     </head>
 	
-    <body>
-		Hello, Ben
-		
-		What you've been working on.
+    <body onLoad="onLoad()" style="background-color:#333; width:275px; overflow: scroll;">
+	
+		<div class="title">Recent Activity</div>
 		<ul id="task_list">
-			<li class="odd">test</li>
-			<li class="even">test</li>
-			<li class="odd">test</li>
-			<li class="even">test</li>
-			<li class="odd">test</li>
-			<li class="even">test</li>
-			<li class="odd">test</li>
-			<li class="even">test</li>
-			<li class="odd">test</li>
-			<li class="even">test</li>
-			<li class="odd">test</li>
-			<li class="even">test</li>
+
 		</ul>
 	</body>
 </html>

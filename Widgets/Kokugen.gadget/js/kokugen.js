@@ -11,7 +11,10 @@ isLoggedIn = false;
 
 $(document).ready(function(){
     $(".slide-button").click(function () {
+		if(isLoggedIn) {
+				
 		System.Gadget.Flyout.show = !System.Gadget.Flyout.show;
+		}
 	});
 	
 	KokugenUrl = System.Gadget.Settings.readString("KokugenUrl");
@@ -33,6 +36,7 @@ function updateStatus(connected){
 function setIsConnected(response){
 	if(response && response.Success) {
 	    CurrentUserId= response.Item;
+		System.Gadget.Settings.write("KokugenUserId", response.Item);
 	    isLoggedIn = true;
 	    afterConnected();
 	    $("#status").html("Logged In");
@@ -94,6 +98,7 @@ function afterCardsLoad(response) {
 function afterTasksLoad(response) {
 
     if (response.Success) {
+	$("#task_select").children().each(function () { $(this).remove(); });
         for (var i in response.Item) {
             var item = '<option value="' + response.Item[i].Id + '">' + response.Item[i].Name + '</option>';
 
@@ -109,6 +114,10 @@ function submitStartTask() {
     data.TaskId = $("#task_select option:selected").val();
     data.ProjectId = $("#project_select option:selected").val();
     data.CardId = $("#card_select option:selected").val();
+	
+		if(data.TaskId == "" || data.TaskId == null ||
+ 	data.ProjectId =="" || data.ProjectId =="")
+	{ return; }
     
     startTimeRecord(data, function (response) {
         if (response && response.Success) {

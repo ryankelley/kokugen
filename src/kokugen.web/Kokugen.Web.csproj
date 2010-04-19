@@ -290,6 +290,7 @@
     <Compile Include="Actions\TimeRecord\View_Page_Type_Declarations.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Actions\TimeRecord\WidgetLog\WidgetLogAction.cs" />
     <Compile Include="Actions\Users\Details\DetailsAction.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>

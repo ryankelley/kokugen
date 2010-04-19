@@ -10,6 +10,7 @@ using Kokugen.Core.Services;
 using Kokugen.Web.Actions.Board;
 using Kokugen.Web.Actions.Card;
 using Kokugen.Web.Actions.DTO;
+using Kokugen.Web.Actions.TimeRecord.WidgetLog;
 using Kokugen.Web.Behaviors;
 using StructureMap;
 
@@ -69,6 +70,9 @@ namespace Kokugen.Web
                 .ForMember(a => a.CardLimit, b=> b.UseValue(0));
             Mapper.CreateMap<CustomBoardColumn, BoardColumnDTO>()
                 .ForMember(a => a.CardLimit, b=> b.NullSubstitute(0));
+
+            Mapper.CreateMap<TimeRecord, TimeLogItem>();
+                
 //            Mapper.CreateMap<TimeRecord, TimeRecordDTO>()
 //                .ForMember(a => a.User, b => b.NullSubstitute(null));
 
