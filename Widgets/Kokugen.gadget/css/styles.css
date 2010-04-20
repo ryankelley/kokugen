@@ -182,4 +182,16 @@ div.out
     background-color: Red;
 }
 div.in { background-color: Green;}
+
+.refresh 
+{
+    border:none;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 100px;
+ width: 16px;
+ height: 16px;
+ background: url('/images/refresh.png') no-repeat;
+}
     

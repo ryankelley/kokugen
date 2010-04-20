@@ -23,7 +23,7 @@ namespace Kokugen.Web.Actions.TimeRecord.WidgetLog
             if(model.UserId.IsNotEmpty())
             {
                 var user = _userService.GetUserById(model.UserId);
-                var records = _timeRecordService.FindAll(user, 10).Select(x => Mapper.DynamicMap<TimeLogItem>(x));
+                var records = _timeRecordService.FindAll(user, 10).Select(x => Mapper.DynamicMap<TimeLogItem>(x)).ToList();
 
                 return new AjaxResponse { Success = true, Item = records};
             }

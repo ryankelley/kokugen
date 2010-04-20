@@ -15,7 +15,7 @@ namespace Kokugen.Web.Actions.TaskCategory.MenuList
             _taskCategoryService = taskCategoryService;
         }
 
-        public AjaxResponse Query(TaskMenuListRequest request)
+        public AjaxResponse Execute(TaskMenuListRequest request)
         {
             var list = _taskCategoryService.GetAllCategories().OrderBy(x => x.Name).Select(x => new {Id = x.Id, Name = x.Name});
             return new AjaxResponse {Success = true, Item = list};

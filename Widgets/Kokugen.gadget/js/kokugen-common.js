@@ -20,7 +20,8 @@ function loadTaskList(callback) {
     $.ajax({
         url: 'http://' + KokugenUrl + '/taskcategory/menulist',
         dataType: 'json',
-        success: callback
+        success: callback,
+        type: 'POST'
     });
 }
 

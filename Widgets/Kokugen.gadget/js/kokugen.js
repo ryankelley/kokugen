@@ -20,7 +20,15 @@ $(document).ready(function(){
 	KokugenUrl = System.Gadget.Settings.readString("KokugenUrl");
 	UserName = System.Gadget.Settings.readString("UserName");
 	Password = System.Gadget.Settings.readString("Password");
-	updateStatus(isLoggedIn);	
+	updateStatus(isLoggedIn);
+
+	$('#stop-btn').click(function () { stopTask(); });
+	$('#start-btn').click(function () { if (isLoggedIn) { startNewTask(); } });
+	$('#save-btn').click(function () { completeTask(); });
+
+	$('#clock-in').click(function () { clockIn(); });
+	$('#clock-out').click(function () { clockOut(); });
+	
 });
 
 function updateStatus(connected){
@@ -36,7 +44,10 @@ function updateStatus(connected){
 function setIsConnected(response){
 	if(response && response.Success) {
 	    CurrentUserId= response.Item;
-		System.Gadget.Settings.write("KokugenUserId", response.Item);
+	    System.Gadget.Settings.write("KokugenUserId", response.Item);
+
+	    $(".server").html(KokugenUrl);
+
 	    isLoggedIn = true;
 	    afterConnected();
 	    $("#status").html("Logged In");
@@ -60,7 +71,9 @@ function SettingsClosed(event)
 function afterConnected() {    
 	loadProjects(afterProjectsLoad);
 	loadTaskList(afterTasksLoad);
-		
+	$("#refreshmain").click(function () {
+	    refreshBoxes();
+	});
 }
 
 function afterProjectsLoad(response) {
@@ -140,12 +153,109 @@ function submitSaveTask() {
 
     stopTimeRecord(data, function (response) {
         if (response && response.Success) {
-            CurrentTimeId = ""
+            CurrentTimeId = "";
         }
         updateScreenAfterSaveTask();
     });
 
 
+}
+
+function refreshBoxes() {
+    if (isLoggedIn) {
+        loadProjects(afterProjectsLoad);
+        loadTaskList(afterTasksLoad);
+    }
+
+}
+
+function zeroPad(num, count) {
+    var numZeropad = num + '';
+    while (numZeropad.length < count) {
+        numZeropad = "0" + numZeropad;
+    }
+    return numZeropad;
+}
+
+function formatTimeSpan(milliseconds) {
+    var seconds = milliseconds / 1000;
+    var minutes = parseInt(seconds / 60);
+    var hours = parseInt(minutes / 60);
+    var printMinutes = parseInt(minutes % 60);
+    var printSeconds = parseInt(seconds % 60);
+
+    return hours + ':' + zeroPad(printMinutes, 2) + ':' + zeroPad(printSeconds, 2);
+}
+
+var timer;
+var startTime = new Date();
+function startNewTask(event) {
+    submitStartTask();
+}
+
+function updateScreenAfterStartTask() {
+
+    startTime = new Date();
+
+
+    $('#textField').val(formatTimeSpan(new Date() - startTime));
+
+    timer = setInterval(function () {
+        $('#textField').val(formatTimeSpan(new Date() - startTime));
+    }, 1000);
+    $('#start-btn').hide();
+    $('#stop-btn').show();
+
+    $("select").each(function () { $(this).hide(); });
+    $("body").height(141);
+}
+
+function updateDuration() {
+    var milliseconds = new Date() - startTime;
+    var seconds = milliseconds / 1000;
+    var output = (seconds / 3600);
+    $('#worked_time_text').val(output);
+
+}
+function stopTask(event) {
+    clearInterval(timer);
+
+    updateDuration();
+
+
+    $('#stop-btn').hide();
+    $('#save-btn').show();
+
+    $("body").height(295);
+    $('#timerecord-info').show();
+}
+
+function completeTask() {
+    // make server call
+    submitSaveTask();
+}
+
+function updateScreenAfterSaveTask() {
+    $("select").each(function () { $(this).show(); });
+    $('#save-btn').hide();
+    $('#start-btn').show();
+    $('#timerecord-info').hide();
+    $("body").height(225);
+}
+
+function clockOut() {
+    // make server call
+
+    $('#clock-in').show();
+    $('#clock-out').hide();
+}
+
+function clockIn() {
+    // make server cal
+
+
+    $('#clock-in').hide();
+    $('#clock-out').show();
 }
 
 
