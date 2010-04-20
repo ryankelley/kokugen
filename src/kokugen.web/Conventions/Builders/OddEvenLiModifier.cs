@@ -86,9 +86,6 @@ namespace Kokugen.Web.Conventions.Builders
 
     public abstract class PartialElementModifier : IPartialElementModifier
     {
-         private readonly Func<AccessorDef, bool> _matches;
-        private readonly Func<AccessorDef, EachPartialTagModifier> _modifierBuilder;
-
         protected EachPartialTagModifier modifier;
 
         protected abstract bool matches(AccessorDef accessorDef);

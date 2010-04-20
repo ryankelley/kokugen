@@ -1,5 +1,14 @@
 var _cards = new Array();
 
+var Task = function (task) {
+    this.Id = task.Id;
+    this.Description = task.Description;
+    this.TaskOrder = task.TaskOrder;
+    this.CompletedDate = task.CompletedDate;
+    this.UserName = task.UserName;
+    this.IsComplete = task.IsComplete;
+}
+
 var Card = function (card) {
 
     this.Id = card.Id;
@@ -21,6 +30,7 @@ var Card = function (card) {
     this.ProjectId = card.ProjectId;
     this.GravatarHash = card.GravatarHash;
     this.UserDisplay = card.UserDisplay;
+    this.GetTasks = card.GetTasks;
 
 };
 
@@ -33,6 +43,7 @@ var buildCardDisplay = function (scard) {
 
     var myTools = buildToolbar(scard);
     var colors = buildColorEditor();
+    var taskControl = buildTaskControl(scard.GetTasks);
 
     // makes outer container
     var element = document.createElement('li');
@@ -104,6 +115,7 @@ var buildCardDisplay = function (scard) {
     element.appendChild(body);
     element.appendChild(colors);
     element.appendChild(myTools);
+    element.appendChild(taskControl);
     element.appendChild(blocked);
 
     head.appendChild(number);
@@ -410,7 +422,18 @@ function buildToolbar(card) {
         
         $(this).parent().parent().parent().get(0).claim();
     });
-    
+
+    var tasks = document.createElement('li');
+    $(tasks).addClass("icon");
+
+    var taskLink = buildAnchor("Tasks", "#", "task");
+    $(taskLink).attr("title", "Click to see tasks");
+    tasks.appendChild(taskLink);
+
+    $(taskLink).click(function () {
+        $(this).parent().parent().siblings("#card-task-editor").slideToggle();
+    });
+
     var ready = document.createElement('li');
     ready.setAttribute("class", "checkbox");
 
@@ -427,6 +450,7 @@ function buildToolbar(card) {
     element.appendChild(down);
     element.appendChild(color);
     element.appendChild(claim);
+    element.appendChild(tasks);
     element.appendChild(ready);
     element.appendChild(blocked);
 
@@ -597,4 +621,18 @@ function archiveRemove(event, ui) {
 
 function archiveReceive(event, ui) {
     ui.item[0].done();
+}
+
+function buildTaskControl(tasks) {
+
+    var element = document.createElement('div');
+    $(element).attr("id","card-task-editor");
+
+    if (tasks.length > 0) {
+        $(element).removeClass("hidden");
+    }
+
+
+
+    return element;
 }

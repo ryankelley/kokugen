@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Web.Security;
 using Kokugen.Core.Attributes;
 using Kokugen.Core.Domain;
@@ -12,6 +13,8 @@ namespace Kokugen.Core.Domain
     {
         [Required, MaximumStringLength(2047)]
         public virtual string Title { get; set; }
+
+        private IList<Task> _tasks = new List<Task>();
 
         public virtual int CardNumber { get; set; }
 
@@ -50,7 +53,24 @@ namespace Kokugen.Core.Domain
         public virtual int CardOrder { get; set; }
         public virtual string BlockReason { get; set; }
 
-        
+        public virtual IEnumerable<Task> GetTasks()
+        {
+            return _tasks;
+        }
+
+        public virtual void AddTask(Task task)
+        {
+            if(_tasks.Contains(task)) return;
+
+            task.Card = this;
+            _tasks.Add(task);
+        }
+
+        public virtual void RemoveTask(Task task)
+        {
+            if (_tasks.Contains(task))
+                _tasks.Remove(task);
+        }
 
     }
 

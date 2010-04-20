@@ -41,11 +41,11 @@ th
 
     <div class="content" align=center>
     <div class="add-caption"><a href="#" onclick="showCompanyForm(null);"><img src="/content/images/add_button.png" alt="add company" />Add New Company </a></div>
-        <h2>Companies</h2>
+        <h2>Clients</h2>
         <table class="companyList" id="companyList">
         <tr>
         <th>
-            Company
+            Client Name
         </th>
         <th>
             Edit
