@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Kokugen.Core.Domain;
 using Kokugen.Core.Persistence.Repositories;
 using Kokugen.Core.Validation;
@@ -11,6 +12,7 @@ namespace Kokugen.Core.Services
         INotification Update(Task task);
         void Destroy(Task task);
         Task Complete(Guid id, bool isComplete, User user);
+        bool ReOrderTasks(List<TaskOrderDTO> data);
     }
     public class TaskService : ITaskService
     {
@@ -63,5 +65,24 @@ namespace Kokugen.Core.Services
             Update(task);
             return task;
         }
+
+        public bool ReOrderTasks(List<TaskOrderDTO> data)
+        {
+            data.Each(x =>
+            {
+                var task = _taskRepository.Get(x.Id);
+                task.TaskOrder = x.TaskOrder;
+                _taskRepository.Save(task);
+
+            });
+
+            return true;
+        }
+    }
+
+    public class TaskOrderDTO
+    {
+        public Guid Id { get; set; }
+        public int TaskOrder { get; set; }
     }
 }

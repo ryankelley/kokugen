@@ -1,5 +1,14 @@
 var _cards = new Array();
 
+var TaskOrderDTO = function (task) {
+    if (!(task instanceof Task)) {
+        throw ("task is not an instance of Task");
+    }
+
+    this.Id = task.Id;
+    this.TaskOrder = task.TaskOrder;
+}
+
 var Task = function (task) {
     this.Id = task.Id;
     this.Description = task.Description;
@@ -360,13 +369,18 @@ function cardMovedOut(event, ui) {
     checkLimit(this);
 }
 
+var CardOrderDTO = function (card) {
+    this.Id = card.Id;
+    this.CardOrder = card.CardOrder;
+}
+
 function reOrderCards(event, ui) {
     var cardsInColumn = new Array();
     var column = this;
     var count = 1;
     $(column).children().each(function() {
         this.UpdateOrder(count++);
-        cardsInColumn.push(this.myCard);
+        cardsInColumn.push(new CardOrderDTO(this.myCard));
     });
 
     cardsInColumn.sort(function(a, b) {
@@ -651,9 +665,10 @@ function buildTaskControl(card, tasks) {
     $(taskStatus).addClass("task-status");
 
     var taskList = document.createElement('ul');
-    $(taskList).sortable();
 
-    
+    $(taskList).sortable({ update: updateTaskOrder });
+
+    taskList.taskList = new Array();
 
     if (tasks.length > 0) {
         for (var i in tasks) {
@@ -662,6 +677,8 @@ function buildTaskControl(card, tasks) {
             }
             var task = new Task(tasks[i]);
             task.CardId = card.Id;
+            element.cardId = card.Id;
+            taskList.taskList.push(task);
             var item = buildTaskLine(task);
             taskList.appendChild(item);
         }
@@ -728,7 +745,28 @@ function buildTaskControl(card, tasks) {
     return element;
 }
 
+function updateTaskOrder() {
+    var count = 1;
+    var order = $(this).children().each(function () {
+        this.UpdateOrder(count++);
+    });
 
+    this.taskList.sort(function (a, b) {
+        return a.Order - b.Order;
+    });
+
+    var cols = new Array();
+    $(this.taskList).each(function () {
+        cols.push(new TaskOrderDTO(this));
+    });
+
+    var data = new Object();
+    data.CardId = this.parentNode.cardId;
+    data.Tasks = $.toJSON(cols);
+
+    $.ajax({ type: 'POST', url: '/task/reorder', data: data, dataType: 'JSON' });
+    //$("#info").load("process-sortable.php?" + order);
+}
 
 function buildTaskLine(task) {
 
@@ -786,7 +824,7 @@ function buildTaskLine(task) {
 
     desc.appendChild(document.createTextNode(task.Description));
 
-    element.appendChild(desc);
+    
 
     var completedInfo = document.createElement('span');
     completedInfo.appendChild(document.createTextNode(task.UserName + ' @ ' + formatDate(task.CompletedDate)));
@@ -796,7 +834,7 @@ function buildTaskLine(task) {
         $(completedInfo).removeClass("hidden");
     }
 
-    element.appendChild(completedInfo);
+    
 
     var deleteLink = buildAnchor("X", "#", "delete-link");
     $(deleteLink).click(function () {
@@ -828,6 +866,8 @@ function buildTaskLine(task) {
     };
 
     element.appendChild(deleteLink);
+    element.appendChild(desc);
+    element.appendChild(completedInfo);
 
     element.taskNotComplete = function () {
         $(completedInfo).hide();
@@ -886,6 +926,10 @@ function buildTaskLine(task) {
 
 
     };
+
+    element.UpdateOrder = function (order) {
+        task.TaskOrder = order;
+    }
 
     return element;
 }

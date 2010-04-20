@@ -34,8 +34,6 @@ namespace Kokugen.Web.Actions.TimeRecord
                 if (model.Billable != 0)
                 {
                     timeRecord.Billable = model.Billable;
-                    
-
                 }
                 else
                 {
