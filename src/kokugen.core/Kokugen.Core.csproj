@@ -242,6 +242,7 @@
     <Compile Include="Services\LoginService.cs" />
     <Compile Include="Membership\Services\IPasswordService.cs" />
     <Compile Include="Membership\Services\SecurityHttpModule.cs" />
+    <Compile Include="Services\TaskService.cs" />
     <Compile Include="TypeExtensions.cs" />
     <Compile Include="Validation\MinimumStringLengthAttribute.cs" />
     <Compile Include="Validation\GreaterOrEqualToZeroAttribute.cs" />

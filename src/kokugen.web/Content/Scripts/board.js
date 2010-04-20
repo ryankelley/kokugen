@@ -4,9 +4,15 @@ var Task = function (task) {
     this.Id = task.Id;
     this.Description = task.Description;
     this.TaskOrder = task.TaskOrder;
-    this.CompletedDate = task.CompletedDate;
+
+    this.CompletedDate = task.CompletedDate === null ? null : task.CompletedDate.toString();
+
+    if (this.CompletedDate !== null) {
+        this.CompletedDate = fixDate(this.CompletedDate);
+    }
     this.UserName = task.UserName;
     this.IsComplete = task.IsComplete;
+    this.CardId;
 }
 
 var Card = function (card) {
@@ -19,7 +25,7 @@ var Card = function (card) {
 
     this.Deadline = card.Deadline === null ? null : card.Deadline.toString();
     if (this.Deadline !== null) {
-        this.Deadline = new Date(parseInt(this.Deadline.replace("/Date(", "").replace(")/", ""), 10));
+        this.Deadline = fixDate(this.Deadline);
     }
     this.CardNumber = card.CardNumber;
     this.Size = card.Size;
@@ -43,7 +49,7 @@ var buildCardDisplay = function (scard) {
 
     var myTools = buildToolbar(scard);
     var colors = buildColorEditor();
-    var taskControl = buildTaskControl(scard.GetTasks);
+    var taskControl = buildTaskControl(scard, scard.GetTasks);
 
     // makes outer container
     var element = document.createElement('li');
@@ -114,8 +120,9 @@ var buildCardDisplay = function (scard) {
     element.appendChild(head);
     element.appendChild(body);
     element.appendChild(colors);
-    element.appendChild(myTools);
     element.appendChild(taskControl);
+    element.appendChild(myTools);
+
     element.appendChild(blocked);
 
     head.appendChild(number);
@@ -309,8 +316,12 @@ var buildCardDisplay = function (scard) {
         }
     });
 
-    $(head).click(function () {
-        $(this).siblings("#card-toolbar").slideToggle();
+    element.wasDragged = false;
+
+    $(head).dblclick(function () {
+        if (!element.wasDragged) {
+            $(this).siblings("#card-toolbar").slideToggle();
+        }
     });
 
     $(element).hover(function () { $(this).addClass("hover"); }, function () { $(this).removeClass("hover"); });
@@ -623,16 +634,300 @@ function archiveReceive(event, ui) {
     ui.item[0].done();
 }
 
-function buildTaskControl(tasks) {
-
+function buildTaskControl(card, tasks) {
+    var numberComplete = 0;
     var element = document.createElement('div');
-    $(element).attr("id","card-task-editor");
+
+    element.card = card;
+
+    $(element).attr("id", "card-task-editor");
+    $(element).addClass("hidden");
 
     if (tasks.length > 0) {
         $(element).removeClass("hidden");
     }
 
+    var taskStatus = document.createElement('div');
+    $(taskStatus).addClass("task-status");
 
+    var taskList = document.createElement('ul');
+    $(taskList).sortable();
+
+    
+
+    if (tasks.length > 0) {
+        for (var i in tasks) {
+            if (tasks[i].IsComplete) {
+                numberComplete++;
+            }
+            var task = new Task(tasks[i]);
+            task.CardId = card.Id;
+            var item = buildTaskLine(task);
+            taskList.appendChild(item);
+        }
+
+        element.cardTotal = tasks.length;
+        element.cardComplete = numberComplete;
+        
+    }
+    $(taskList).addClass("hidden");
+
+    element.appendChild(taskStatus);
+
+    $(taskStatus).click(function () {
+        $(taskList).slideToggle();
+        $(taskTools).toggle();
+    });
+
+    element.appendChild(taskList);
+
+    var taskTools = document.createElement('div');
+    taskTools.setAttribute('class', 'task-buttons');
+    $(taskTools).addClass("hidden");
+    element.appendChild(taskTools);
+
+    var addButton = document.createElement('button');
+    $(addButton).addClass("task-add-button").html('Add');
+
+    $(addButton).click(function () {
+        var newTask = new Task({ Id: null, IsComplete: false, Description: "", CompletedDate: null, UserName: null });
+        newTask.CardId = this.parentNode.parentNode.card.Id;
+        var newTaskDisplay = buildTaskLine(newTask);
+        newTaskDisplay.showInPlace();
+        $(taskList).append(newTaskDisplay);
+    });
+    
+    var hideButton = document.createElement('button');
+    $(hideButton).addClass("task-hide-button").html('Hide');
+    $(hideButton).click(function () {
+        $(taskList).slideToggle();
+        $(taskTools).toggle();
+    });
+    taskTools.appendChild(addButton);
+    taskTools.appendChild(hideButton);
+
+
+
+    element.updateTaskStatus = function () {
+
+        var total = this.cardTotal;
+        var numChecked = this.cardComplete;
+
+        if (total && total != 0) {
+            var percent = (numChecked / total) * 100;
+
+            $(taskStatus).html(numChecked + ' of ' + total + ' tasks completed ( ' + Math.round(percent) + '% )');
+        }
+        else {
+            $(taskStatus).html("There have not been any tasks created yet");
+        }
+    };
+    
+    element.updateTaskStatus();
 
     return element;
+}
+
+
+
+function buildTaskLine(task) {
+
+    var element = document.createElement('li');
+
+    element.task = task;
+
+    $(element).addClass('task-line');
+
+    var move = document.createElement('span');
+    $(move).addClass('task-move').html("&nbsp;");
+    
+
+    element.appendChild(move);
+
+    var check = document.createElement('input');
+    check.setAttribute('type', 'checkbox');
+    $(check).addClass("check").attr('title', 'Click to toggle Task Completion');
+
+    if (task.IsComplete) {
+        $(check).attr('checked', 'checked');
+    } else { $(check).attr('checked', ''); }
+
+    $(check).click(function () {
+        if (this.checked) {
+        $.ajax({
+            url: '/task/complete',
+            type: 'POST',
+            data: { Id: element.task.Id, IsComplete: true },
+            success: element.taskComplete
+
+        });
+
+        this.parentNode.parentNode.parentNode.cardComplete++;
+        this.parentNode.parentNode.parentNode.updateTaskStatus();
+            
+        } else {
+        $.ajax({
+            url: '/task/complete',
+            type: 'POST',
+            data: { Id: element.task.Id, IsComplete: false },
+            success: element.taskNotComplete
+
+        });
+
+        this.parentNode.parentNode.parentNode.cardComplete--;
+        this.parentNode.parentNode.parentNode.updateTaskStatus();
+        }
+    });
+
+    element.appendChild(check);
+
+    var desc = document.createElement('span');
+    $(desc).addClass('task-description');
+
+    desc.appendChild(document.createTextNode(task.Description));
+
+    element.appendChild(desc);
+
+    var completedInfo = document.createElement('span');
+    completedInfo.appendChild(document.createTextNode(task.UserName + ' @ ' + formatDate(task.CompletedDate)));
+    $(completedInfo).addClass("hidden").addClass("task-complete-info");
+
+    if (task.IsComplete) {
+        $(completedInfo).removeClass("hidden");
+    }
+
+    element.appendChild(completedInfo);
+
+    var deleteLink = buildAnchor("X", "#", "delete-link");
+    $(deleteLink).click(function () {
+        
+
+        var checkbox = $(this).siblings("input")[0];
+        var isChecked = checkbox.checked;
+
+        if (isChecked) {
+            this.parentNode.parentNode.parentNode.cardComplete--;
+            this.parentNode.parentNode.parentNode.cardTotal--;
+            this.parentNode.parentNode.parentNode.updateTaskStatus();
+        }
+        else {
+            this.parentNode.parentNode.parentNode.cardTotal--;
+            this.parentNode.parentNode.parentNode.updateTaskStatus();
+        }
+
+        $.ajax({
+            url: '/task',
+            data: { Id: element.task.Id },
+            type: 'DELETE',
+            success: element.afterRemoved
+        });
+    });
+
+    element.afterRemoved = function () {
+        $(element).remove();
+    };
+
+    element.appendChild(deleteLink);
+
+    element.taskNotComplete = function () {
+        $(completedInfo).hide();
+        
+    };
+
+    element.taskComplete = function (response) {
+        if (response && response.Success) {
+            var date = fixDate(response.Item.CompletedDate);
+            $(completedInfo).html(response.Item.UserName + ' @ ' + formatDate(date));
+            $(completedInfo).show();
+
+            
+        }
+    };
+
+    $(desc).dblclick(function () {
+        element.showInPlace();
+    });
+
+    var inPlace = buildInPlaceTaskEdit(element);
+    element.appendChild(inPlace);
+
+
+    element.showInPlace = function () {
+        var width = $(element).parents("li.card").width();
+        $(inPlace).children("input").width(width - 46);
+        $(inPlace).show();
+        $(move).hide();
+        $(check).hide();
+        $(desc).hide();
+
+        if (element.task.IsComplete) {
+            $(completedInfo).hide();
+        }
+
+        $(deleteLink).hide();
+    };
+
+    element.hideInPlace = function () {
+        $(inPlace).hide();
+        $(move).show();
+        $(check).show();
+        $(desc).show();
+
+        if (element.task.IsComplete) {
+            $(completedInfo).show();
+        }
+
+        $(deleteLink).show();
+    };
+
+    element.afterSaveTask = function () {
+        $(desc).html($(inPlace).children("input").val());
+        element.hideInPlace();
+
+
+    };
+
+    return element;
+}
+
+function buildInPlaceTaskEdit(element) {
+
+    var inPlace = document.createElement('div');
+    $(inPlace).addClass("task-inplace");
+
+    var descEdit = document.createElement('input');
+    descEdit.setAttribute('type', 'text');
+    descEdit.setAttribute('class', 'task-description-edit');
+    $(descEdit).val(element.task.Description);
+    inPlace.appendChild(descEdit);
+
+    var save = document.createElement('button');
+    $(save).html('Save').addClass('task-save');
+
+    $(save).click(function () {
+        var text = $(descEdit).val();
+
+        this.parentNode.parentNode.parentNode.parentNode.cardTotal++;
+        this.parentNode.parentNode.parentNode.parentNode.updateTaskStatus();
+        $.ajax({
+            url: '/task',
+            type: 'POST',
+            data: { Id: this.parentNode.parentNode.task.Id, Description: text, CardId: this.parentNode.parentNode.task.CardId },
+            success: element.afterSaveTask
+        });
+    });
+
+    var cancel = document.createElement('button');
+    $(cancel).html('Cancel').addClass('task-cancel');
+
+    $(cancel).click(function () {
+        element.hideInPlace();
+    });
+
+    inPlace.appendChild(save);
+    inPlace.appendChild(cancel);
+
+    $(inPlace).addClass("hidden");
+
+    return inPlace;
 }
