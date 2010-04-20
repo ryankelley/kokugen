@@ -1,6 +1,5 @@
 using System;
 using FubuMVC.Core;
-using FubuMVC.Core.Security;
 using FubuMVC.Core.View;
 using HtmlTags;
 using Kokugen.Core.Membership.Services;
@@ -13,7 +12,6 @@ namespace Kokugen.Web.Actions.Account.Password
     {
         private readonly IUserService _userService;
         private readonly IPasswordService _passwordService;
-        private readonly ISecurityContext _securityContext;
         private readonly PasswordResetRetrievalSettings _passwordResetRetrievalSettings;
 
         public ResetPasswordAction(IUserService userService, IPasswordService passwordService,

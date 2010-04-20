@@ -14,7 +14,7 @@
 <asp:Content ID="sitenav" ContentPlaceHolderID="MasterNavigation" runat="server">
     <div class="nav">
 	    <ul class="subnav">
-		    <li class="active"><%= this.LinkTo(new CompanyListModel()).Text("Companies") %></li>
+		    <li class="active"><%= this.LinkTo(new CompanyListModel()).Text("Clients") %></li>
 		    <li class="bar"><%= this.LinkTo(new ProjectListModel()).Text("Projects") %></li>
 		    <li class="lbar"><%= this.LinkTo(new TimeRecordListModel()).Text("Time") %></li>
 		    <li class="lbar"><%=this.LinkTo(new UserListRequest()).Text("Users") %></li>

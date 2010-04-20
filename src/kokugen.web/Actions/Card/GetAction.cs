@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using AutoMapper;
 using Kokugen.Core;
 using Kokugen.Core.Services;
@@ -48,7 +49,7 @@ namespace Kokugen.Web.Actions.Card
 
         public string GravatarHash { get; set; }
         public string UserDisplay { get; set; }
-        
+        public IEnumerable<TaskDTO> GetTasks { get; set; }
     }
 
     public class CardDetailInputModel : IRequestById

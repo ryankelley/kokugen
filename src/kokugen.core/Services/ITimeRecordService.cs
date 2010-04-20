@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Kokugen.Core.Domain;
 using Kokugen.Core.Persistence.Repositories.Kokugen.Core.Persistence.Repositories;
 
@@ -12,6 +13,7 @@ namespace Kokugen.Core.Services
         void DeleteTimeRecord(Guid id);
         TimeRecord GetTimeRecord(Guid id);
         void Save(TimeRecord timeRecord);
+        IEnumerable<TimeRecord> FindAll(User user, int limit);
     }
 
     public class TimeRecordService : ITimeRecordService
@@ -43,6 +45,15 @@ namespace Kokugen.Core.Services
         public void Save(TimeRecord timeRecord)
         {
             _timeRecordRepository.Save(timeRecord);
+        }
+
+        public IEnumerable<TimeRecord> FindAll(User user, int limit)
+        {
+            return _timeRecordRepository.Query()
+                .Where(x => x.User == user)
+                .OrderByDescending(x => x.StartTime)
+                .Take(limit)
+                .ToList();
         }
     }
 }

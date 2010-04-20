@@ -142,6 +142,7 @@
     <Compile Include="Domain\DailyTimeRecord.cs" />
     <Compile Include="Domain\Permission.cs" />
     <Compile Include="Domain\Role.cs" />
+    <Compile Include="Domain\Task.cs" />
     <Compile Include="Domain\TaskCategory.cs" />
     <Compile Include="Domain\Entity.cs" />
     <Compile Include="Domain\Enumeration.cs" />

@@ -219,8 +219,10 @@
         <div id="tabs">
             <ul>
                 <li><a href="#details"><span>Details</span></a></li>
+                <li><a href="#tasks"><span>Tasks</span></a></li>
             </ul>
             <div id="details" class="card-detail"><%= this.EditInPlace(m => m.Details)%></div>
+            <div id="tasks" class="card-tasks"><%= this.PartialForEach(m => m.GetTasks).Using<CardTask_Item>().WithoutItemWrapper().WithoutListWrapper() %></div>
         </div>
         
 </div>

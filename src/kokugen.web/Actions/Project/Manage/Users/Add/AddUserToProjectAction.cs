@@ -17,7 +17,6 @@ namespace Kokugen.Web.Actions.Project.Manage.Users.Add
     {
         private readonly IUserService _userService;
         private readonly IUrlRegistry _urlRegistry;
-        private readonly IRolesService _rolesService;
         private readonly IProjectService _projectService;
 
         public AddUserToProjectAction(IUserService userService, 

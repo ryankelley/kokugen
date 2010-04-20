@@ -9,5 +9,8 @@ namespace Kokugen.Web.Actions.TimeRecord
         //public Core.Domain.TaskCategory TimeRecordTask { get; set; }
         public Guid ProjectId { get; set; }
         public Guid TaskId { get; set; }
+        public Guid UserId { get; set; }
+        public Guid CardId { get; set; }
+        public Guid Id { get; set; }
     }
 }

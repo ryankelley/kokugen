@@ -137,16 +137,9 @@ color:black;
     
     </div>
     
-   <div id ="Board Link"><%= this.LinkTo(new BoardConfigurationModel{ Id = Model.Project.Id}).Text("Configure Board Columns") %></div> 
    
 </div>
-    
-    <%= this.LinkTo(new ViewBoardInputModel { Id = Model.Project.Id }).AddClass("icon")
-        .Child(new HtmlTag("img", tag =>
-                                        {
-                                            tag.Attr("src","/content/images/board_big.png");
-                                            tag.Attr("alt","veiw board");
-                                        }))%>
+
     <% this.Partial(new StopTimeRecordFormInputModel()); %>
 
     

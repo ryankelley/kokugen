@@ -10,5 +10,8 @@ namespace Kokugen.Web.Actions.TimeRecord
 
         public double Billable { get; set; }
 
+        public string Description { get; set; }
+        
+
     }
 }
