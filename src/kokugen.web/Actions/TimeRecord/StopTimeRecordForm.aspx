@@ -10,7 +10,7 @@
     <label >Duration</label></div>
     <%= this.DisplayFor(x => x.TimeRecord.Duration).Id("time-record-duration") %>
     <%= this.Edit(x =>x.TimeRecord.Billable) %>
-    <%= this.InputFor(x => x.TimeRecord.Id).Id("time-record-ProjectId") %>
+    <%= this.InputFor(x => x.TimeRecord.Id).Id("time-record-id") %>
     
     
 <%= this.EndForm() %>
