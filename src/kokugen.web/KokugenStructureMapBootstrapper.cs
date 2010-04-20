@@ -72,7 +72,7 @@ namespace Kokugen.Web
                 .ForMember(a => a.CardLimit, b=> b.NullSubstitute(0));
 
             Mapper.CreateMap<TimeRecord, TimeLogItem>();
-                
+            Mapper.CreateMap<Task, TaskDTO>();
 //            Mapper.CreateMap<TimeRecord, TimeRecordDTO>()
 //                .ForMember(a => a.User, b => b.NullSubstitute(null));
 

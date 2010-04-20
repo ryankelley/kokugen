@@ -352,6 +352,11 @@ ul #card-toolbar
     background: transparent url('/content/images/claim16.png') no-repeat center center;
 }
 
+.task 
+{
+    background: transparent url('/content/images/task16.png') no-repeat center center;
+}
+
 .card-up  
 {
     background: transparent url('/content/images/up.png') no-repeat center center;

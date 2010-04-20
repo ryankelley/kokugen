@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Kokugen.Core.Services
 {
@@ -22,5 +23,17 @@ namespace Kokugen.Core.Services
 
         public string GravatarHash { get; set; }
         public string UserDisplay { get; set; }
+
+        public IEnumerable<TaskDTO> GetTasks { get; set; }
+    }
+
+    public class TaskDTO
+    {
+        public virtual Guid Id { get; set; }
+        public virtual string Description { get; set; }
+        public virtual int TaskOrder { get; set; }
+        public virtual DateTime? CompletedDate { get; set; }
+        public virtual string UserName { get; set; }
+        public virtual bool IsComplete { get; set; }
     }
 }

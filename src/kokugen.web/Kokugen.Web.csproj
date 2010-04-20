@@ -129,6 +129,7 @@
     <Content Include="Actions\Account\Password\PasswordPartial.aspx" />
     <Content Include="Actions\Account\Password\PasswordResetForm.aspx" />
     <Content Include="Actions\Card\CardProgress.aspx" />
+    <Content Include="Actions\Card\CardTask_Item.ascx" />
     <Content Include="Actions\Card\Get.aspx" />
     <Content Include="Actions\Card\Lists\CardItem_Control.ascx" />
     <Content Include="Actions\DailyTimeRecord\List.aspx" />
@@ -148,6 +149,7 @@
     <Content Include="Content\images\edit2.png" />
     <Content Include="Content\images\magnify16.png" />
     <Content Include="Content\images\spite.png" />
+    <Content Include="Content\images\task16.png" />
     <Content Include="Content\Scripts\company.js" />
     <Content Include="Content\Scripts\projectusers.js" />
     <Content Include="Content\Scripts\task.js" />
