@@ -19,6 +19,7 @@ namespace Kokugen.Core.Domain
 
         public virtual int CardNumber { get; set; }
 
+        [MaximumStringLength(10000)]
         public virtual string Details { get; set; }
         public virtual int TimeEstimate { get; set; }
         public virtual int Size { get; set; }
