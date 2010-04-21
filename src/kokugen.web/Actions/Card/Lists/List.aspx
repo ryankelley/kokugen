@@ -71,6 +71,7 @@ border-color:#027E92;
 <span class="deadline">Deadline</span>
 <span class="status">Status</span>
 <span class="tasks">Tasks</span>
+<span class= "card-link"></span>
 </li>
 
     <%=this.PartialForEach(x => x.Cards).Using<CardItem_Control>()  %>

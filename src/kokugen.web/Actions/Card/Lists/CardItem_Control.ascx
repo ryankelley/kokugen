@@ -11,6 +11,8 @@
 <span class="deadline"><%= Model.Deadline == null ? "" : Model.Deadline.Value.ToShortDateString()%></span>
 <%= this.DisplayFor(x => x.Status).AddClass("status") %>
 <span class="tasks"><%= Model.GetTasks.Count() %></span>
+<span class="card-link"><%=this.LinkTo(new CardDetailInputModel() { Id = Model.Id }).NoClosingTag()
+                           + "<img src=\"/content/images/magnify16.png\" alt=\"edit\" /></a>"%> </span>
    
 		
 	
