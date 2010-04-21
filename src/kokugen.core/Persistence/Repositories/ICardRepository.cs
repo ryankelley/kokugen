@@ -15,4 +15,18 @@ namespace Kokugen.Core.Persistence.Repositories
             
         }
     }
+
+    public interface ITaskRepository : IRepository<Task>
+    {
+
+    }
+
+    public class TaskRepository : NHibernateRepository<Task>, ITaskRepository
+    {
+        public TaskRepository(ISession session)
+            : base(session)
+        {
+
+        }
+    }
 }

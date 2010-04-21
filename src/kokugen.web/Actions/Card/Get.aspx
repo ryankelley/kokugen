@@ -2,8 +2,9 @@
 <%@ Import Namespace="Kokugen.Web.Actions.Card" %>
 <asp:Content ID="CardGetHead" ContentPlaceHolderID="head" runat="server">
 <%= this.CSS("board.css") %>
-<%= this.Script("board.js") %>
+<%= this.Script("application.js")%>
 <%= this.Script("showdown.js")%>
+<%= this.Script("cardEdit.js")%>
 <%= this.Script("jquery.metadata.js")%>
 <%= this.Script("jquery.jeditable.js")%>
 <%= this.Script("dovetail.editing.js")%>
@@ -12,112 +13,25 @@
     var status = "<%= Model.Status %>";
     var cardId = "<%= Model.Id %>";
     var reasonBlockedMessage = "<%= Model.BlockReason %>";
-
-    function notReady() {
-        $("ul.btns #ready").removeClass("active");
-        $(".indicator.ready").addClass("hidden");
-    }
-
-    function makeReady() {
-        $("ul.btns #ready").addClass("active");
-        $(".indicator.ready").removeClass("hidden");
-    }
-
-    function makeBlocked() {
-        $("ul.btns #block").addClass("active");
-        $(".indicator.block").removeClass("hidden"); 
-        $('div.card-blocked').removeClass("hidden");
-
-    }
-
-    function notBlocked() {
-        $("ul.btns #block").removeClass("active");
-        $(".indicator.block").addClass("hidden"); 
-        $('div.card-blocked').addClass("hidden");
-    }
-
-
-    function buildBlockageForm() {
-        var reasonBlocked = document.createElement('span');
-        $(reasonBlocked).addClass('reason-blocked');
-        reasonBlocked.appendChild(document.createTextNode(reasonBlockedMessage));
-
-        $('div.card-blocked').append(reasonBlocked);
-
-        var reasonForm = document.createElement('div');
-        $(reasonForm).addClass("reason-form hidden");
-        var container = document.createElement('div');
-        var input = document.createElement('textarea');
-        $(input).attr("cols", "105").attr("rows", "3").attr("name", "value").addClass("required");
-
-        input.appendChild(document.createTextNode(reasonBlockedMessage));
-
-        $('div.card-blocked').append(reasonForm);
-
-        container.appendChild(input);
-        reasonForm.appendChild(container);
-
-        var submitReason = document.createElement('button');
-        submitReason.appendChild(document.createTextNode('OK'));
-        var cancelReason = document.createElement('button');
-        cancelReason.appendChild(document.createTextNode('Cancel'));
-
-        reasonForm.appendChild(submitReason);
-        reasonForm.appendChild(cancelReason);
-
-            $(submitReason).click(function () {
-             status = "Blocked";
-             reasonBlockedMessage = $(input).val();
-             $.ajax({
-                            url: "/card/blocked",
-                            data: { Id: cardId, Reason: reasonBlockedMessage, Status: status },
-                            dataType: "json",
-                            type: "POST"
-                        });
-        
-                //$('div.card-blocked').toggleClass("hidden");
-                        $('div.card-blocked span').html(reasonBlockedMessage);
-                        $('div.card-blocked span').removeClass("hidden");
-                        $('div.reason-form').addClass("hidden");
-                        makeBlocked();
-                        notReady();
-            });
-
-            $(cancelReason).click(function () {
-                status = "New";
-                notBlocked();
-            });
-    }
-
-     function colorChange(color) {
-        $.ajax({
-            url: "/card/color",
-            data: { Id: cardId, Color: color },
-            dataType: "json",
-            type: "POST"
-        });
-
-        $('.card-number').removeClass().addClass('card-number').addClass(color);
-        $(".card-color-bar").slideToggle();
-        return false;
-    };
-
-    function updateUserGravatar(response) {
-        if(response.Item != null) {
-        var newImg = document.createElement('img');
-        newImg.setAttribute("src", "http://gravatar.com/avatar/" + response.Item.GravatarHash + "?s=56");
-         $("li.owner img").replaceWith(newImg);
-
-         $("li.owner .user-display").html(response.Item.UserDisplay);
-
-        }
-    }
+    var tasks = <%= Model.GetTasks.ToJson() %>;
+    var taskList = new Array();
 
     $(document).ready(function () {
         $('#tabs').tabs();
         dovetailEditableValues = <%= Model.ToJson() %>
         $('.editable').makeEditable('<%= Model.Id %>', "/Card/update");
         buildBlockageForm();
+
+        if (tasks.length > 0) {
+        for (var i in tasks) {
+            
+            var task = new Task(tasks[i]);
+            task.CardId = '<%= Model.Id %>';
+            taskList.push(task);
+            var item = buildTaskLine(task);
+            $("#task-container").append(item);
+            }
+        }
 
 
         if(status == "Ready") {
@@ -186,6 +100,16 @@
                     success: updateUserGravatar
                 });
         });
+
+        $("#task-container").sortable({update: updateTaskOrder});
+
+        $("#add-task").click(function () {
+        var newTask = new Task({ Id: null, IsComplete: false, Description: "", CompletedDate: null, UserName: null });
+        newTask.CardId = '<%= Model.Id %>';
+        var newTaskDisplay = buildTaskLine(newTask);
+        newTaskDisplay.showInPlace();
+        $("#task-container").append(newTaskDisplay);
+    });
         
     });
 
@@ -222,7 +146,7 @@
                 <li><a href="#tasks"><span>Tasks</span></a></li>
             </ul>
             <div id="details" class="card-detail"><%= this.EditInPlace(m => m.Details)%></div>
-            <div id="tasks" class="card-tasks"><%= this.PartialForEach(m => m.GetTasks).Using<CardTask_Item>().WithoutItemWrapper().WithoutListWrapper() %></div>
+            <div id="tasks" class="card-tasks"><div class="task-toolbar"><button id="add-task" class="add-task">Add Task</button></div><ul id="task-container"></ul></div>
         </div>
         
 </div>

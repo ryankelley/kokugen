@@ -9,25 +9,40 @@ function login(callback) {
 }
 
 function loadProjects(callback) {
+
+var rand = Math.random();
+
+var url = 'http://' + KokugenUrl + '/project/menulist/?trash='+rand;
+if(debug) {
+	debugWrite('Loading projects from: '+ url);
+}
     $.ajax({
-        url: 'http://' + KokugenUrl + '/project/menulist',
+        url: url,
         dataType: 'json',
         success: callback
     });
 }
 
 function loadTaskList(callback) {
+var url = 'http://' + KokugenUrl + '/taskcategory/menulist?temp=' + Math.random();
+if(debug) {
+	debugWrite('Loading tasks from: '+ url);
+}
     $.ajax({
-        url: 'http://' + KokugenUrl + '/taskcategory/menulist',
+        url:url,
         dataType: 'json',
         success: callback,
-        type: 'POST'
+        type: 'GET'
     });
 }
 
 function loadCardList(projectId, callback) {
+var url = 'http://' + KokugenUrl + '/card/allactive?trash='+Math.random();
+if(debug) {
+	debugWrite('Loading tasks from: '+ url);
+}
     $.ajax({
-        url: 'http://' + KokugenUrl + '/card/allactive',
+        url:url,
         type: 'POST',
         data: { Id: projectId },
         dataType: 'json',

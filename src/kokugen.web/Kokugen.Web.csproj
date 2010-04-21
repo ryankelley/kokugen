@@ -148,8 +148,10 @@
     <Content Include="Content\images\delete.png" />
     <Content Include="Content\images\edit2.png" />
     <Content Include="Content\images\magnify16.png" />
+    <Content Include="Content\images\move16.png" />
     <Content Include="Content\images\spite.png" />
     <Content Include="Content\images\task16.png" />
+    <Content Include="Content\Scripts\cardEdit.js" />
     <Content Include="Content\Scripts\company.js" />
     <Content Include="Content\Scripts\projectusers.js" />
     <Content Include="Content\Scripts\task.js" />
@@ -268,6 +270,9 @@
     </Compile>
     <Compile Include="Actions\TaskCategory\MenuList\MenuList.cs" />
     <Compile Include="Actions\TaskCategory\RemoveAction.cs" />
+    <Compile Include="Actions\Task\Complete\CompleteAction.cs" />
+    <Compile Include="Actions\Task\PostAction.cs" />
+    <Compile Include="Actions\Task\ReOrder\TaskReorderAction.cs" />
     <Compile Include="Actions\TimeRecord\AddAction.cs" />
     <Compile Include="Actions\TimeRecord\AddTimeRecordModel.cs" />
     <Compile Include="Actions\TimeRecord\ListAction.cs" />

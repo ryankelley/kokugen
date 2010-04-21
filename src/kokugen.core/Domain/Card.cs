@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Security;
 using Kokugen.Core.Attributes;
 using Kokugen.Core.Domain;
@@ -55,7 +56,7 @@ namespace Kokugen.Core.Domain
 
         public virtual IEnumerable<Task> GetTasks()
         {
-            return _tasks;
+            return _tasks.OrderBy(x => x.TaskOrder);
         }
 
         public virtual void AddTask(Task task)

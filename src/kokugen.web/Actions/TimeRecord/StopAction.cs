@@ -26,22 +26,15 @@ namespace Kokugen.Web.Actions.TimeRecord
 
                 if (model.Description.IsNotEmpty()) timeRecord.Description = model.Description;
 
-                if(model.Duration != 0)
-                {
-                    timeRecord.Stop();
-                }
 
                 if (model.Billable != 0)
                 {
                     timeRecord.Billable = model.Billable;
-                    
-
                 }
-                else
-                {
-                    timeRecord.Stop();
-                    timeRecord.ComputeDuration();
-                }
+                
+                timeRecord.Stop();
+                timeRecord.ComputeDuration();
+                
                 _timeRecordService.Save(timeRecord);
                 return new AjaxResponse {Success = true, Item = Mapper.DynamicMap<TimeRecordDTO>(timeRecord)};
             }

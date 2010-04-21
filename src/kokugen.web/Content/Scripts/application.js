@@ -9,6 +9,37 @@ function setContentHeightToFull() {
     $(".content").attr("style", "height: " + cheight + "px;");
 }
 
+        function fixDate(data) {
+            var regex = new RegExp("^/Date\\((\\d+)\\)/$");
+                
+                    if (typeof data == 'string' && regex.test(data)) {
+                        data = new Date(parseInt(data.replace(regex, "$1")));
+                        return data;
+            }
+        }
+
+        function zeroPad(num,count)
+        {
+            var numZeropad = num + '';
+            while(numZeropad.length < count) {
+                numZeropad = "0" + numZeropad;
+            }
+            return numZeropad;
+        }
+        function formatDate(date) {
+            if (date instanceof Date) {
+                var returnDate = date.getMonth() + '/' + date.getDate();
+                var now = new Date();
+                var lastYear = new Date().setFullYear(now.getFullYear() - 1);
+                if (date <= lastYear) {
+                    returnDate += '/' + date.getFullYear();
+                }
+                returnDate += ' ' + date.getHours() + ':' + zeroPad(date.getMinutes(), 2);
+                return returnDate;
+            }
+            if (date == null) return '';
+            return date;
+        }
 
 
 function ValidateAndSave(successCallback, formObject, clearForm) {

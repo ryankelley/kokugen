@@ -194,4 +194,5 @@ div.in { background-color: Green;}
  height: 16px;
  background: url('/images/refresh.png') no-repeat;
 }
-    
+
+.server { font-size: .75em; color: #FFF; margin-right: 5px; text-align: left;}
