@@ -42,7 +42,10 @@ namespace Kokugen.Core
                          {
                              var settingsProvider = c.GetInstance<ISettingsProvider>();
                              var emailSettings = settingsProvider.SettingsFor<EmailSettings>();
-                             return new EmailService(new SmtpClient(emailSettings.Host, emailSettings.Port),
+                             return new EmailService(new SmtpClient(emailSettings.Host, emailSettings.Port)
+                                                         {
+                                                             EnableSsl = emailSettings.EnableSsl
+                                                         },
                                                      emailSettings.User, emailSettings.Password,
                                                      emailSettings.AuthorizationRequired);
                          });
