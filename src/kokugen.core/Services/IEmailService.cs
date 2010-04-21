@@ -23,7 +23,8 @@ namespace Kokugen.Core.Services
             
             _smtpClient = smtpClient;
             if (authRequired)
-                _smtpClient.Credentials = new NetworkCredential(mailUser, mailPassword);
+                _smtpClient.Credentials = new NetworkCredential(mailUser, mailPassword, "");
+
         }
 
         #region IEmailService Members
@@ -50,5 +51,6 @@ namespace Kokugen.Core.Services
         public bool EnableSsl { get; set; }
         public string User { get; set; }
         public string Password { get; set; }
+        public string DefaultFromEmailAddress { get; set; }
     }
 }

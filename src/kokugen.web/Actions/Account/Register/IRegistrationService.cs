@@ -20,12 +20,17 @@ namespace Kokugen.Web.Actions.Account.Register
     {
         private readonly IUserService _userService;
         private readonly IEmailService _emailService;
+        private readonly EmailSettings _emailSettings;
         private readonly IUrlRegistry _urlRegistry;
 
-        public RegistrationService(IUserService userService, IEmailService emailService, IUrlRegistry urlRegistry)
+        public RegistrationService(IUserService userService, 
+            IEmailService emailService, 
+            EmailSettings emailSettings,
+            IUrlRegistry urlRegistry)
         {
             _userService = userService;
             _emailService = emailService;
+            _emailSettings = emailSettings;
             _urlRegistry = urlRegistry;
         }
 
@@ -57,7 +62,7 @@ namespace Kokugen.Web.Actions.Account.Register
                 .Child(new HtmlTag("div").Id("wrapper")
                            .Child(new LinkTag("Click here to activate your account",
                                               UrlContext.ToFull(_urlRegistry.UrlFor(new ActivateAccountModel() {Id = user.Id})))));
-            _emailService.SendEmail(user.Email, "no-reply@kokugen.com", "Activate your account", email.ToString());
+            _emailService.SendEmail(user.Email, _emailSettings.DefaultFromEmailAddress, "Activate your account", email.ToString());
         }
 
         #endregion

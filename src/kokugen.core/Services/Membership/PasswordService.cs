@@ -15,18 +15,21 @@ namespace Kokugen.Core.Services
         private readonly IUserRepository _userRepository;
         private readonly IValidator _validator;
         private readonly IEmailService _emailService;
+        private readonly EmailSettings _emailSettings;
         private readonly MembershipSettingsBag _settings;
 
         public PasswordService(IPasswordHelperService passwordHelper,
             IUserRepository userRepository, 
             IValidator validator,
             IEmailService emailService,
+            EmailSettings emailSettings,
             MembershipSettingsBag settings)
         {
             _passwordHelper = passwordHelper;
             _userRepository = userRepository;
             _validator = validator;
             _emailService = emailService;
+            _emailSettings = emailSettings;
             _settings = settings;
         }
 
@@ -130,7 +133,7 @@ namespace Kokugen.Core.Services
                 .Child(new HtmlTag("span", tag => tag.Text("Your new password is: ")))
                 .Child(new HtmlTag("span", tag => tag.Text(newPassword)));
 
-            _emailService.SendEmail(user.Email, "no-reply@kokugen.com","Your Password Has Been Reset", email.ToString());
+            _emailService.SendEmail(user.Email, _emailSettings.DefaultFromEmailAddress,"Your Password Has Been Reset", email.ToString());
         }
 
         public void ResetPassword(User user)
