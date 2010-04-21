@@ -285,7 +285,7 @@ li.project a:hover {
 -moz-background-clip:border;
 -moz-background-inline-policy:continuous;
 -moz-background-origin:padding;
-background:#D3F3D3 url(../images/clipboard.png) no-repeat scroll 6px 6px;
+background:#91B5D8 url(../images/clipboard.png) no-repeat scroll 6px 6px;
 border:thin solid #00AA0A;
 font-family: Sans-Serif;
 color:#000000;
@@ -389,8 +389,8 @@ li.phase h4
 }
 .board-column-configure .phase-placeholder {
 -moz-border-radius:8px 8px 8px 8px;
-background-color:#CCFFCC;
-border:1px solid #BBEEBB !important;
+background-color:#91B5D8;
+border:1px solid #233644 !important;
 display:inline-block;
 margin:0 0 12px 12px;
 vertical-align:top;
@@ -799,6 +799,21 @@ div#tabs div#details ul
 {
     list-style: disc none outside;
 }
+div#tabs div#details *
+{
+    line-height: 1.4em;
+    margin-left: 4px;
+    margin-right:4px;
 
+}
+div#tabs div#details li
+{
+    padding-left: 4px;
+}
+div#tabs div#details p
+{
+    margin-top:12px;
+    margin-bottom:12px;
+}
 .jgrowl-dark{color: #FFF; border: 1px solid #3281b7; background: #000 !important;}
 .jgrowl-error{background:#f1cece !important; color:#bb2222; border: 1px solid #f19696;}

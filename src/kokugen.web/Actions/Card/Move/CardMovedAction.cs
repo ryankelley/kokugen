@@ -19,7 +19,11 @@ namespace Kokugen.Web.Actions.Card.Move
             var card = _cardService.GetCard(model.Id);
             var column = _boardService.GetColumn(model.ColumnId);
 
-            card.Status = CardStatus.New;
+            if (column.Name == "Archive")
+                card.Status = CardStatus.Complete;
+            else
+                card.Status = CardStatus.New;
+            
             card.BlockReason = "";
 
             card.Column = column;

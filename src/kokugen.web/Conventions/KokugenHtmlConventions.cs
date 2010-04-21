@@ -31,6 +31,7 @@ namespace Kokugen.Web.Conventions
             BeforeEachOfPartial.Modifier<OddEvenLiModifier>();
             BeforeEachOfPartial.Modifier<FixedItemBoardModifier>();
             BeforeEachOfPartial.Modifier<BoardColumnIDAdder>();
+            BeforeEachOfPartial.Modifier<CardListItemModifier>();
             BeforeEachOfPartial.If(x => x.ModelType == typeof(ProjectListModel)).Modify(x => x.AddClass("project"));
             BeforeEachOfPartial.If(x => x.ModelType == typeof(BoardConfigurationModel)).Modify(x => x.AddClass("phase"));
             

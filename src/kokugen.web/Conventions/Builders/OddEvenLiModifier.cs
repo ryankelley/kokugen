@@ -4,8 +4,10 @@ using System.Linq;
 using FubuMVC.UI.Configuration;
 using Kokugen.Core;
 using Kokugen.Core.Domain;
+using Kokugen.Core.Services;
 using Kokugen.Web.Actions.Board;
 using Kokugen.Web.Actions.Board.Configure;
+using Kokugen.Web.Actions.Card.Lists;
 using Kokugen.Web.Actions.Project;
 
 namespace Kokugen.Web.Conventions.Builders
@@ -14,7 +16,7 @@ namespace Kokugen.Web.Conventions.Builders
     {
         protected override bool matches(AccessorDef accessorDef)
         {
-            return accessorDef.ModelType.IsType<ProjectListModel>();
+            return accessorDef.ModelType.IsType<ProjectListModel>() || accessorDef.ModelType.IsType<CardListModel>();
         }
 
         public OddEvenLiModifier()
@@ -79,6 +81,33 @@ namespace Kokugen.Web.Conventions.Builders
                                }
                                    //tag.ProjectId(request.RawValue.ToString());
 
+                           };
+        }
+    }
+
+    public class CardListItemModifier : PartialElementModifier
+    {
+        protected override bool matches(AccessorDef accessorDef)
+        {
+            return accessorDef.ModelType.IsType<CardListModel>() && accessorDef.Accessor.PropertyType.IsType<IEnumerable<CardViewDTO>>();
+        }
+
+        public CardListItemModifier()
+        {
+            modifier = (request, tag, index, count) =>
+                           {
+                               if(request.RawValue is IEnumerable<CardViewDTO>)
+                               {
+                                   var cards = (request.RawValue as IEnumerable<CardViewDTO>).ToList();
+                                   var card = cards[index] as CardViewDTO;
+
+                                   if (card.Status == CardStatus.Complete.DisplayName)
+                                       tag.AddClass("completed");
+                                   if (card.Status == CardStatus.Blocked.DisplayName)
+                                       tag.AddClass("blocked");
+                                   if (card.Status == CardStatus.Ready.DisplayName)
+                                       tag.AddClass("ready");
+                               }
                            };
         }
     }

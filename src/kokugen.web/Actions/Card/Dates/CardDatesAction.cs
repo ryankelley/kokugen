@@ -1,5 +1,6 @@
 using System;
 using Kokugen.Core;
+using Kokugen.Core.Domain;
 using Kokugen.Core.Services;
 
 namespace Kokugen.Web.Actions.Card.Dates
@@ -37,6 +38,7 @@ namespace Kokugen.Web.Actions.Card.Dates
 
                 case "Done":
                     card.DateCompleted = DateTime.Now;
+                    card.Status = CardStatus.Complete;
                     break;
 
                 case "NotDone":

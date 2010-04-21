@@ -19,6 +19,7 @@ namespace Kokugen.Core.Domain
 
         public virtual int CardNumber { get; set; }
 
+        [MaximumStringLength(10000)]
         public virtual string Details { get; set; }
         public virtual int TimeEstimate { get; set; }
         public virtual int Size { get; set; }
@@ -80,6 +81,7 @@ namespace Kokugen.Core.Domain
         public static CardStatus New = new CardStatus(1, "New");
         public static CardStatus Ready = new CardStatus(2, "Ready");
         public static CardStatus Blocked = new CardStatus(3, "Blocked");
+        public static CardStatus Complete = new CardStatus(4, "Complete");
         private CardStatus(int value, string displayName) : base(value, displayName)
         {
             
