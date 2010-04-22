@@ -16,6 +16,7 @@ namespace Kokugen.Core.Persistence.Overrides
             mapping.References(x => x.Project).Cascade.SaveUpdate().ForeignKey("fk_card_to_project");
             mapping.References(x => x.AssignedTo).Cascade.SaveUpdate().Fetch.Join().ForeignKey("fk_Card_to_AssignedTo");
             mapping.HasMany(x => x.GetTasks()).Access.CamelCaseField(Prefix.Underscore).Inverse().Cascade.SaveUpdate().ForeignKeyConstraintName("fk_card_to_task");
+            mapping.HasMany(x => x.GetActivities()).Access.CamelCaseField(Prefix.Underscore).Inverse().Cascade.SaveUpdate().ForeignKeyConstraintName("fk_card_to_activity");
         }
     }
 
@@ -24,6 +25,14 @@ namespace Kokugen.Core.Persistence.Overrides
         public void Override(AutoMapping<Task> mapping)
         {
             mapping.References(x => x.Card).Cascade.SaveUpdate().ForeignKey("fk_task_to_card");
+        }
+    }
+
+    public class CardActivityMappingOverride : IAutoMappingOverride<CardActivity>
+    {
+        public void Override(AutoMapping<CardActivity> mapping)
+        {
+            mapping.References(x => x.Card).Cascade.SaveUpdate().ForeignKey("fk_activity_to_card");
         }
     }
 }

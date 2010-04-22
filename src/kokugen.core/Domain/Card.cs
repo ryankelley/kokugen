@@ -16,6 +16,7 @@ namespace Kokugen.Core.Domain
         public virtual string Title { get; set; }
 
         private IList<Task> _tasks = new List<Task>();
+        private IList<CardActivity> _activities = new List<CardActivity>();
 
         public virtual int CardNumber { get; set; }
 
@@ -74,6 +75,64 @@ namespace Kokugen.Core.Domain
                 _tasks.Remove(task);
         }
 
+        public virtual IEnumerable<CardActivity> GetActivities()
+        {
+            return _activities.AsEnumerable();
+        }
+
+        public virtual void AddActivity(CardActivity activity)
+        {
+            if(_activities.Contains(activity)) return;
+
+            activity.Card = this;
+            _activities.Add(activity);
+        }
+
+        public virtual void RemoveActivity(CardActivity activity)
+        {
+            if (_activities.Contains(activity))
+                _activities.Remove(activity);
+        }
+
+    }
+
+    public class CardActivity : Entity
+    {
+        public virtual DateTime StartTime { get; set; }
+        public virtual DateTime? EndTime { get; set; }
+        public virtual decimal Duration { get; set; }
+        public virtual Card Card { get; set; }
+
+        private int _activityId;
+        public virtual int ActivityId
+        {
+            get { return _activityId; }
+            set { _activityId = value; }
+        }
+
+        public virtual ActivityType Status
+        {
+            get { return Enumeration.FromValue<ActivityType>(_activityId); }
+            set { _activityId = value.Value; }
+        }
+        
+
+    }
+
+    public class ActivityType : Enumeration
+    {
+        public static ActivityType Working = new ActivityType(1, "Working");
+        public static ActivityType Idle = new ActivityType(2, "Idle");
+
+        private ActivityType(int id, string name) : base(id,name)
+        {
+            
+        }
+
+        public ActivityType()
+        {
+            
+        }
     }
 
     public class CardStatus : Enumeration
