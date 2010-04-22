@@ -68,12 +68,12 @@ return output;
          link.remove();
          var date = getDateTimeFormat(new Date(parseInt(response.Item.EndTime.replace("/Date(", "").replace(")/", ""), 10)));
          var span = document.createElement('span');
-         span.appendChild(document.createTextNode(date));
          
-         parent.append(span);
          
-         parent.siblings('.billable').children('span').html(response.Item.Billable);
-         parent.siblings('.duration').children('span').html(response.Item.Duration);
+         parent.append(document.createTextNode(date));
+         
+         parent.siblings('.billable').html(response.Item.Billable);
+         parent.siblings('.duration').html(response.Item.Duration);
          
          
 
