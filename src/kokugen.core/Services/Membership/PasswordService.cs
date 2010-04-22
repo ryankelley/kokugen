@@ -12,6 +12,7 @@ namespace Kokugen.Core.Services
     public class PasswordService : IPasswordService
     {
         private readonly IPasswordHelperService _passwordHelper;
+        private readonly IPasswordValidator _passwordValidator;
         private readonly IUserRepository _userRepository;
         private readonly IValidator _validator;
         private readonly IEmailService _emailService;
@@ -19,6 +20,7 @@ namespace Kokugen.Core.Services
         private readonly MembershipSettingsBag _settings;
 
         public PasswordService(IPasswordHelperService passwordHelper,
+            IPasswordValidator passwordValidator,
             IUserRepository userRepository, 
             IValidator validator,
             IEmailService emailService,
@@ -26,6 +28,7 @@ namespace Kokugen.Core.Services
             MembershipSettingsBag settings)
         {
             _passwordHelper = passwordHelper;
+            _passwordValidator = passwordValidator;
             _userRepository = userRepository;
             _validator = validator;
             _emailService = emailService;
@@ -55,6 +58,8 @@ namespace Kokugen.Core.Services
 
             if(!_passwordHelper.ComparePasswordToHash(oldPassword, entity.Password))
                 throw new InvalidOperationException("The old password provided does not match the current password.");
+
+
 
             switch (_settings.Password.PasswordFormat)
             {

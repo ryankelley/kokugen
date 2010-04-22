@@ -1,3 +1,4 @@
+using System.Linq;
 using FubuMVC.Core.View;
 using Kokugen.Core.Attributes;
 using Kokugen.Core.Domain;
@@ -43,7 +44,7 @@ namespace Kokugen.Web.Actions.Account.Register
                                  Item =
                                      "Thank you for registering! You will be recieving an email to confirm your account shortly"
                              }
-                       : new AjaxResponse() {Item = new {messages = notification.AllMessages}};
+                       : new AjaxResponse() { Item = notification.AllMessages.Select(x => x.FieldName + ": " + x.Message).Aggregate((x, y) => x + " /n" + y) };
         }
 
     }

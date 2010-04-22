@@ -11,7 +11,6 @@ namespace Kokugen.Core.Domain
 {
     public class User : Entity, IUser
     {
-        private readonly string _password;
         private IList<Role> _roles = new List<Role>();
         private IList<Project> _projects = new List<Project>();
 
@@ -20,7 +19,7 @@ namespace Kokugen.Core.Domain
 
         public User(string userName, string email, string password)
         {
-            _password = password;
+            Password = password;
             UserName = userName;
             Email = email;
         }
@@ -108,7 +107,7 @@ namespace Kokugen.Core.Domain
 
         public virtual void SetPassword(IPasswordHelperService service)
         {
-            this.Password = service.CreatePasswordHash(_password);
+            this.Password = service.CreatePasswordHash(this.Password);
         }
 
         public virtual void ChangePassword(IPasswordHelperService service, string newPassword)
@@ -125,6 +124,10 @@ namespace Kokugen.Core.Domain
         {
             return _projects;
         }
-        
+
+        public void RemoveRole(Role role)
+        {
+            _roles.Remove(role);
+        }
     }
 }

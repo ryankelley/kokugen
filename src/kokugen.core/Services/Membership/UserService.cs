@@ -115,9 +115,6 @@ namespace Kokugen.Core.Services
 
         public INotification Create(User user)
         {
-
-           
-
             user.GravatarHash = user.Email.ToGravatarHash();
 
             return ValidateAndCreate(user);
