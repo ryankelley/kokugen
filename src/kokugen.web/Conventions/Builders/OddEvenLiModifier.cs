@@ -9,6 +9,7 @@ using Kokugen.Web.Actions.Board;
 using Kokugen.Web.Actions.Board.Configure;
 using Kokugen.Web.Actions.Card.Lists;
 using Kokugen.Web.Actions.Project;
+using Kokugen.Web.Actions.TimeRecord;
 
 namespace Kokugen.Web.Conventions.Builders
 {
@@ -16,7 +17,8 @@ namespace Kokugen.Web.Conventions.Builders
     {
         protected override bool matches(AccessorDef accessorDef)
         {
-            return accessorDef.ModelType.IsType<ProjectListModel>() || accessorDef.ModelType.IsType<CardListModel>();
+            return accessorDef.ModelType.IsType<ProjectListModel>() || accessorDef.ModelType.IsType<CardListModel>()
+                || accessorDef.ModelType.IsType<TimeRecordListModel>() || accessorDef.ModelType.IsType<ProjectModel>();
         }
 
         public OddEvenLiModifier()
@@ -84,6 +86,8 @@ namespace Kokugen.Web.Conventions.Builders
                            };
         }
     }
+
+
 
     public class CardListItemModifier : PartialElementModifier
     {
