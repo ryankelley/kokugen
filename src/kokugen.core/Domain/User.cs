@@ -125,7 +125,7 @@ namespace Kokugen.Core.Domain
             return _projects;
         }
 
-        public void RemoveRole(Role role)
+        public virtual void RemoveRole(Role role)
         {
             _roles.Remove(role);
         }
