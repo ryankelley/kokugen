@@ -15,8 +15,8 @@ namespace Kokugen.Core.Persistence.Overrides
             mapping.References(x => x.Column, "Column_id").Cascade.SaveUpdate().ForeignKey("fk_card_to_column");
             mapping.References(x => x.Project).Cascade.SaveUpdate().ForeignKey("fk_card_to_project");
             mapping.References(x => x.AssignedTo).Cascade.SaveUpdate().Fetch.Join().ForeignKey("fk_Card_to_AssignedTo");
-            mapping.HasMany(x => x.GetTasks()).Access.CamelCaseField(Prefix.Underscore).Inverse().Cascade.SaveUpdate().ForeignKeyConstraintName("fk_card_to_task");
-            mapping.HasMany(x => x.GetActivities()).Access.CamelCaseField(Prefix.Underscore).Inverse().Cascade.SaveUpdate().ForeignKeyConstraintName("fk_card_to_activity");
+            mapping.HasMany(x => x.GetTasks()).Access.CamelCaseField(Prefix.Underscore).Inverse().Cascade.SaveUpdate().ForeignKeyConstraintName("fk_card_to_task").BatchSize(20);
+            mapping.HasMany(x => x.GetActivities()).Access.CamelCaseField(Prefix.Underscore).Inverse().Cascade.SaveUpdate().ForeignKeyConstraintName("fk_card_to_activity").BatchSize(20);
         }
     }
 

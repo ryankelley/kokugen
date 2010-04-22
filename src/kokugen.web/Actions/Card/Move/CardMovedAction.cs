@@ -20,19 +20,18 @@ namespace Kokugen.Web.Actions.Card.Move
         {
             var card = _cardService.GetCard(model.Id);
             var column = _boardService.GetColumn(model.ColumnId);
+            card.Column = column;
+            card.ColumnChanged();
 
-            var project = card.Project;
-
-            var customColumnCount = card.Project.GetBoardColumns().Count();
             var customColumn = card.Project.GetBoardColumns().Where(x => x.Id == model.ColumnId).FirstOrDefault();
             
-            if (column.Name == "Archive")
+            if (column.Name == Core.Domain.BoardColumn.ArchiveName)
             {
                 card.Status = CardStatus.Complete;
                 card.DateCompleted = DateTime.Now;
                 card.StopActivity();
             }
-            else if (column.Name == "Backlog")
+            else if (column.Name == Core.Domain.BoardColumn.BacklogName)
             {
                 card.Status = CardStatus.New;
                 card.Started = null;
@@ -51,12 +50,17 @@ namespace Kokugen.Web.Actions.Card.Move
                     card.StartWorking();
                 }
                 card.DateCompleted = null;
+                card.StartWorking();
+            }
+            else
+            {
+                card.StopActivity();
             }
             
 
             card.BlockReason = "";
 
-            card.Column = column;
+            
 
             _cardService.SaveCard(card);
 

@@ -142,24 +142,31 @@ var buildCardDisplay = function (scard) {
 
     body.appendChild(document.createTextNode(scard.Title));
 
-    function unblock() {
+    function unblock(callServer) {
         scard.Status = "New";
         scard.ReasonBlocked = "";
         $(element).removeClass("blocked");
         $(blocked).addClass("hidden");
         myTools.isBlocked(false);
-        element.updateBlocked(false);
+
+        if (callServer) {
+            element.updateBlocked(false);
+        }
     }
 
-    function notReady() {
+    function notReady(callServer) {
         scard.Status = "New";
-        element.isReady(false);
+        element.isReady(false, true);
         myTools.isReady(false);
+
+        if (callServer) {
+            element.updateReadyStatus(false);
+        }
     }
 
     element.receive = function (newColumnId) {
-        unblock();
-        notReady();
+        unblock(false);
+        notReady(false);
         $.ajax({
             url: "/card/move",
             data: { Id: scard.Id, ColumnId: newColumnId },
@@ -205,7 +212,7 @@ var buildCardDisplay = function (scard) {
         gravatar.setAttribute('src', 'http://gravatar.com/avatar/' + response.Item.GravatarHash + '?s=27');
     }
 
-    element.isReady = function (status) {
+    element.isReady = function (status, skipServerCall) {
         if (status) {
             this.Status = "Ready";
             $(element).addClass("ready");
@@ -215,6 +222,12 @@ var buildCardDisplay = function (scard) {
             $(element).removeClass("ready");
         }
 
+        if (!skipServerCall) {
+            element.updateReadyStatus(status);
+        }
+    };
+
+    element.updateReadyStatus = function (status) {
         $.ajax({
             url: "/card/ready",
             data: { Id: scard.Id, Status: status },
@@ -326,10 +339,6 @@ function checkLimit(list) {
 });
 }
 function cardOverColumn(event, ui) {
-    checkLimit(this);
-}
-
-function cardMovedOut(event, ui) {
     checkLimit(this);
 }
 

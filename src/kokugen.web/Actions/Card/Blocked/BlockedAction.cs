@@ -19,11 +19,14 @@ namespace Kokugen.Web.Actions.Card.Blocked
             card.BlockReason = model.Reason;
 
 
-            if (card.Status == CardStatus.Blocked)
-                card.StartIdle();
-            else
-                card.StartWorking();
+            if (card.Column.Name != Core.Domain.BoardColumn.BacklogName && card.Column.Name != Core.Domain.BoardColumn.ArchiveName)
+            {
+                if (card.Status == CardStatus.Blocked)
+                    card.StartIdle();
+                else
+                    card.StartWorking();
 
+            }
 
             _cardService.SaveCard(card);
             return new AjaxResponse() { Success = true };

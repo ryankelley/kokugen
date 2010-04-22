@@ -9,3 +9,15 @@
 2010-04-14 18:58:12,902 [1] INFO  Rhino.Licensing.LicenseValidator [(null)] - License C:\Users\JF05563\AppData\Local\NHibernate Profiler\license.xml expiration date is 12/31/9999 23:59:59
 2010-04-14 18:58:13,029 [1] DEBUG Rhino.Licensing.LicenseValidator [(null)] - License accepted for NHibernate Profiler
 2010-04-20 23:37:52,502 [1] WARN  Rhino.Licensing.LicenseValidator [(null)] - Could not find license file: C:\Users\Ryan\AppData\Local\NHibernate Profiler\license.xml
+2010-04-22 00:14:00,850 [1] INFO  Rhino.Licensing.LicenseValidator [(null)] - License C:\Users\Ryan\AppData\Local\NHibernate Profiler\license.xml expiration date is 12/31/9999 23:59:59
+2010-04-22 00:14:01,049 [1] DEBUG Rhino.Licensing.LicenseValidator [(null)] - License accepted for NHibernate Profiler
+2010-04-22 00:15:45,448 [6] DEBUG HibernatingRhinos.Profiler.Client.Services.StackTraceExplorer [(null)] - Need to display in VS: D:\code\ryans-kokugen\src\kokugen.web\Actions\Board\ViewBoardAction.cs
+2010-04-22 00:15:45,449 [6] DEBUG HibernatingRhinos.Profiler.Client.Services.StackTraceExplorer [(null)] - Trying to get runing instance of VS 2008
+2010-04-22 00:15:45,526 [6] DEBUG HibernatingRhinos.Profiler.Client.Services.StackTraceExplorer [(null)] - Trying to get runing instance of VS 2005
+2010-04-22 00:15:45,527 [6] DEBUG HibernatingRhinos.Profiler.Client.Services.StackTraceExplorer [(null)] - Could not create running instance of either VS 2005 or 2008
+2010-04-22 00:15:45,527 [6] DEBUG HibernatingRhinos.Profiler.Client.Services.StackTraceExplorer [(null)] - Could not find a running version of VS, starting a new one
+2010-04-22 00:15:45,528 [6] DEBUG HibernatingRhinos.Profiler.Client.Services.StackTraceExplorer [(null)] - Trying to start a new instance of devenv
+2010-04-22 00:15:45,837 [6] DEBUG HibernatingRhinos.Profiler.Client.Services.StackTraceExplorer [(null)] - Trying to get runing instance of VS 2008
+2010-04-22 00:15:45,837 [6] DEBUG HibernatingRhinos.Profiler.Client.Services.StackTraceExplorer [(null)] - Trying to get runing instance of VS 2005
+2010-04-22 00:15:45,838 [6] DEBUG HibernatingRhinos.Profiler.Client.Services.StackTraceExplorer [(null)] - Could not create running instance of either VS 2005 or 2008
+2010-04-22 00:15:45,838 [6] WARN  HibernatingRhinos.Profiler.Client.Services.StackTraceExplorer [(null)] - Could not start a new version of VS

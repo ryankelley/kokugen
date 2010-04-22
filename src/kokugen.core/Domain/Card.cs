@@ -53,6 +53,7 @@ namespace Kokugen.Core.Domain
         }
 
         public virtual BoardColumn Column { get; set; }
+
         public virtual int CardOrder { get; set; }
         public virtual string BlockReason { get; set; }
 
@@ -96,13 +97,20 @@ namespace Kokugen.Core.Domain
 
         public virtual void StartWorking()
         {
-            StopActivity();
-            AddActivity(new CardActivity{ StartTime = DateTime.Now, Status = ActivityType.Working});
+            var lastActivity = _activities.Where(x => x.EndTime == null && x.ActivityId != ActivityType.Column.Value).FirstOrDefault();
+
+            if (lastActivity != null && lastActivity.Status == ActivityType.Idle)
+            {
+                lastActivity.EndTime = DateTime.Now;
+                AddActivity(new CardActivity {StartTime = DateTime.Now, Status = ActivityType.Working});
+            }
+            else if(lastActivity == null)
+                AddActivity(new CardActivity { StartTime = DateTime.Now, Status = ActivityType.Working });
         }
 
         public virtual void StopActivity()
         {
-            var lastActivity = _activities.Where(x => x.EndTime == null).FirstOrDefault();
+            var lastActivity = _activities.Where(x => x.EndTime == null && x.ActivityId != ActivityType.Column.Value).FirstOrDefault();
             if (lastActivity != null) lastActivity.EndTime = DateTime.Now;
         }
 
@@ -110,6 +118,14 @@ namespace Kokugen.Core.Domain
         {
            StopActivity();
             AddActivity(new CardActivity{ StartTime = DateTime.Now, Status = ActivityType.Idle});
+        }
+
+        public virtual void ColumnChanged()
+        {
+            var lastActivity = _activities.Where(x => x.EndTime == null && x.ActivityId == ActivityType.Column.Value).FirstOrDefault();
+            if (lastActivity != null) lastActivity.EndTime = DateTime.Now;
+
+            AddActivity(new CardActivity {StartTime = DateTime.Now, Status = ActivityType.Column, ColumnName = Column.Name});
         }
     }
 
@@ -132,14 +148,15 @@ namespace Kokugen.Core.Domain
             get { return Enumeration.FromValue<ActivityType>(_activityId); }
             set { _activityId = value.Value; }
         }
-        
 
+        public virtual string ColumnName { get; set; }
     }
 
     public class ActivityType : Enumeration
     {
         public static ActivityType Working = new ActivityType(1, "Working");
         public static ActivityType Idle = new ActivityType(2, "Idle");
+        public static ActivityType Column = new ActivityType(3, "Column");
 
         private ActivityType(int id, string name) : base(id,name)
         {
