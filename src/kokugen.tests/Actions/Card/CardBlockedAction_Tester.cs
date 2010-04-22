@@ -28,7 +28,7 @@ namespace Kokugen.Tests.Actions.Card
         }
 
        
-        public class When_the_card_is_blocked : CardBlockedAction_Tester
+        public class When_the_card_is_blocked_in_work_column : CardBlockedAction_Tester
         {
             private CardBlockedInput _input;
             private Guid cardId;
@@ -41,6 +41,7 @@ namespace Kokugen.Tests.Actions.Card
 
 
                 _card.Stub(c => c.Status).PropertyBehavior();
+                _card.Stub(c => c.Column).Return(ActionStubs.WorkColumn);
 
                 _cardService.Stub(x => x.GetCard(cardId)).Return(_card);
                 _action.Command(_input);
@@ -72,7 +73,7 @@ namespace Kokugen.Tests.Actions.Card
 
         }
 
-        public class When_the_card_is_not_blocked : CardBlockedAction_Tester
+        public class When_the_card_is_not_blocked_in_a_working_column : CardBlockedAction_Tester
         {
             private CardBlockedInput _input;
             private Guid cardId;
@@ -82,7 +83,7 @@ namespace Kokugen.Tests.Actions.Card
                 cardId = Guid.NewGuid();
                 _input = new CardBlockedInput { Id = cardId, Status = "new" };
                 _card.Stub(c => c.Status).PropertyBehavior();
-
+                _card.Stub(c => c.Column).Return(ActionStubs.WorkColumn);
                 _cardService.Stub(x => x.GetCard(cardId)).Return(_card);
                 _action.Command(_input);
             }
@@ -111,5 +112,13 @@ namespace Kokugen.Tests.Actions.Card
                 _cardService.AssertWasCalled(c => c.SaveCard(_card));
             }
         }
+    }
+
+    public static class ActionStubs
+    {
+        public static CustomBoardColumn WorkColumn = new CustomBoardColumn{ ColumnOrder = 1, CardLimit = 3, Name = "Working"};
+        public static BoardColumn BacklogColumn = new CustomBoardColumn{ ColumnOrder = 0, CardLimit = 0, Name = BoardColumn.BacklogName};
+        public static BoardColumn ArchiveColumn = new CustomBoardColumn{ ColumnOrder = 0, CardLimit = 0, Name = BoardColumn.ArchiveName};
+
     }
 }

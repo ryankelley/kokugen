@@ -27,7 +27,7 @@ namespace Kokugen.Tests.Actions.Card
         }
 
        
-        public class When_the_card_is_ready : CardReadyAction_Tester
+        public class When_the_card_is_ready_in_work_column : CardReadyAction_Tester
         {
             private CardReadyInput _input;
             private Guid cardId;
@@ -37,11 +37,11 @@ namespace Kokugen.Tests.Actions.Card
                 cardId = Guid.NewGuid();
                 _input = new CardReadyInput {Id = cardId, Status = true};
 
-
-
                 _card.Stub(c => c.Status).PropertyBehavior();
-
+                _card.Stub(c => c.Column).Return(ActionStubs.WorkColumn);
+                
                 _cardService.Stub(x => x.GetCard(cardId)).Return(_card);
+                
                 _action.Command(_input);
             }
 
@@ -71,7 +71,7 @@ namespace Kokugen.Tests.Actions.Card
 
         }
 
-        public class When_the_card_is_not_ready : CardReadyAction_Tester
+        public class When_the_card_is_not_ready_in_work_column : CardReadyAction_Tester
         {
             private CardReadyInput _input;
             private Guid cardId;
@@ -81,7 +81,7 @@ namespace Kokugen.Tests.Actions.Card
                 cardId = Guid.NewGuid();
                 _input = new CardReadyInput { Id = cardId, Status = false };
                 _card.Stub(c => c.Status).PropertyBehavior();
-
+                _card.Stub(c => c.Column).Return(ActionStubs.WorkColumn);
                 _cardService.Stub(x => x.GetCard(cardId)).Return(_card);
                 _action.Command(_input);
             }
