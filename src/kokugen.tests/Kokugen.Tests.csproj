@@ -122,6 +122,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Actions\Card\CardReadyAction_Tester.cs" />
+    <Compile Include="Actions\Card\CardBlockedAction_Tester.cs" />
     <Compile Include="ContextSpecification.cs" />
     <Compile Include="Persistence\InMemoryRepository.cs" />
     <Compile Include="Persistence\IntegrationAssemblySetup.cs" />
