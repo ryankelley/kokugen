@@ -797,7 +797,13 @@ form.editing .button:hover
 
 div#tabs div#details ul
 {
-    list-style: disc none outside;
+    list-style: disc none inside;
+    margin-left:1em;
+}
+div#tabs div#details ol
+{
+    list-style: decimal none inside;
+    margin-left:1em;
 }
 div#tabs div#details *
 {
@@ -817,3 +823,8 @@ div#tabs div#details p
 }
 .jgrowl-dark{color: #FFF; border: 1px solid #3281b7; background: #000 !important;}
 .jgrowl-error{background:#f1cece !important; color:#bb2222; border: 1px solid #f19696;}
+
+#tabs.ui-tabs #details.ui-tabs-panel 
+{
+    padding:0.5em;
+}
