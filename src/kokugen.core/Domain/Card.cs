@@ -116,8 +116,15 @@ namespace Kokugen.Core.Domain
 
         public virtual void StartIdle()
         {
-           StopActivity();
-            AddActivity(new CardActivity{ StartTime = DateTime.Now, Status = ActivityType.Idle});
+            var lastActivity = _activities.Where(x => x.EndTime == null && x.ActivityId != ActivityType.Column.Value).FirstOrDefault();
+
+            if (lastActivity != null && lastActivity.Status == ActivityType.Working)
+            {
+                lastActivity.EndTime = DateTime.Now;
+                AddActivity(new CardActivity { StartTime = DateTime.Now, Status = ActivityType.Idle });
+            }
+            else if (lastActivity == null)
+                AddActivity(new CardActivity { StartTime = DateTime.Now, Status = ActivityType.Idle });
         }
 
         public virtual void ColumnChanged()

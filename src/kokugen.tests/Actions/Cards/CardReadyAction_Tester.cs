@@ -38,7 +38,7 @@ namespace Kokugen.Tests.Actions.Card
                 _input = new CardReadyInput {Id = cardId, Status = true};
 
                 _card.Stub(c => c.Status).PropertyBehavior();
-                _card.Stub(c => c.Column).Return(ActionStubs.WorkColumn);
+                _card.Stub(c => c.Column).Return(Stubs.WorkColumn);
                 
                 _cardService.Stub(x => x.GetCard(cardId)).Return(_card);
                 
@@ -81,7 +81,7 @@ namespace Kokugen.Tests.Actions.Card
                 cardId = Guid.NewGuid();
                 _input = new CardReadyInput { Id = cardId, Status = false };
                 _card.Stub(c => c.Status).PropertyBehavior();
-                _card.Stub(c => c.Column).Return(ActionStubs.WorkColumn);
+                _card.Stub(c => c.Column).Return(Stubs.WorkColumn);
                 _cardService.Stub(x => x.GetCard(cardId)).Return(_card);
                 _action.Command(_input);
             }

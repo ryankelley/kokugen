@@ -42,6 +42,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -121,9 +122,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Actions\Card\CardReadyAction_Tester.cs" />
-    <Compile Include="Actions\Card\CardBlockedAction_Tester.cs" />
+    <Compile Include="Domain\When_StartIdle\When_StartIdle_is_called.cs" />
+    <Compile Include="Domain\When_StartWorking\When_StartWorking_is_called.cs" />
+    <Compile Include="Domain\When_the_column_changes\When_ColumnChanged_is_Called.cs" />
+    <Compile Include="Stubs.cs" />
+    <Compile Include="Actions\Cards\CardReadyAction_Tester.cs" />
+    <Compile Include="Actions\Cards\CardBlockedAction_Tester.cs" />
     <Compile Include="ContextSpecification.cs" />
+    <Compile Include="Domain\CardTester.cs" />
     <Compile Include="Persistence\InMemoryRepository.cs" />
     <Compile Include="Persistence\IntegrationAssemblySetup.cs" />
     <Compile Include="Persistence\PersistenceTesterContext.cs" />
