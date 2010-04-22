@@ -164,6 +164,8 @@
     <Compile Include="Membership\SecurityRegistry.cs" />
     <Compile Include="Membership\Security\IRole.cs" />
     <Compile Include="Membership\Security\IUser.cs" />
+    <Compile Include="Membership\Services\IPasswordValidator.cs" />
+    <Compile Include="Membership\Services\PasswordValidator.cs" />
     <Compile Include="Persistence\Overrides\RoleMappingOverride.cs" />
     <Compile Include="Persistence\Overrides\UserMappingOverride.cs" />
     <Compile Include="Persistence\Repositories\IDailyTimeRecordRepository.cs" />
