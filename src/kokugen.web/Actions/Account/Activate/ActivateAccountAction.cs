@@ -1,4 +1,5 @@
 using System;
+using FubuMVC.Core.View;
 using Kokugen.Web.Conventions;
 using Kokugen.Web.Actions.Account.Register;
 
@@ -26,5 +27,5 @@ namespace Kokugen.Web.Actions.Account.Activate
         public Guid Id { get; set; }
     }
 
-
+    public class ActivateAccount : FubuPage<ActivateAccountModel>{}
 }
