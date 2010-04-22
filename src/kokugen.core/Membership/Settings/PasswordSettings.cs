@@ -29,6 +29,13 @@ namespace Kokugen.Core.Membership.Settings
         public string PasswordStrengthRegularExpression { get; set; }
         public PasswordFormat PasswordFormat { get; set; }
 
+        public string GetValidationMessage()
+        {
+            return
+                string.Format(
+                    "Your password must be at least {0} characters long with at least {1} non alpha-numberic characters",
+                    MinRequiredPasswordLength, MinRequiredNonAlphanumericCharacters);
+        }
     }
 
     public enum PasswordFormat

@@ -123,7 +123,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContextSpecification.cs" />
-    <Compile Include="Core\Membership\Services\PasswordValidator.cs" />
     <Compile Include="Core\Membership\Services\PasswordValidatorTester.cs" />
     <Compile Include="InteractionContext.cs" />
     <Compile Include="Persistence\InMemoryRepository.cs" />

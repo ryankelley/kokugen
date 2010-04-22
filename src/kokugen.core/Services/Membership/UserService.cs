@@ -16,16 +16,19 @@ namespace Kokugen.Core.Services
     {
         private readonly IUserRepository _userRepository;
         private readonly IPasswordHelperService _passwordHelperService;
+        private readonly IPasswordValidator _passwordValidator;
         private readonly IValidator _validator;
         private readonly MembershipSettingsBag _settings;
 
         public UserService(IUserRepository userRepository, 
             IPasswordHelperService passwordHelperService,
+            IPasswordValidator passwordValidator,
             IValidator validator,
             MembershipSettingsBag settings)
         {
             _userRepository = userRepository;
             _passwordHelperService = passwordHelperService;
+            _passwordValidator = passwordValidator;
             _validator = validator;
             _settings = settings;
         }
@@ -112,33 +115,27 @@ namespace Kokugen.Core.Services
 
         public INotification Create(User user)
         {
-            var notification = new Notification();
-            
-            switch (_settings.Password.PasswordFormat)
-            {
-                case PasswordFormat.Hashed:
-                    user.SetPassword(_passwordHelperService);
-                    break;
-                case PasswordFormat.Clear:
-                    user.SetPassword(new ClearPasswordHelper());
-                    break;
-                case PasswordFormat.Encrypted:
-                    throw new NotImplementedException();
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+
+           
 
             user.GravatarHash = user.Email.ToGravatarHash();
 
-            return ValidateAndSave(user);
+            return ValidateAndCreate(user);
         }
 
-        private INotification ValidateAndSave(Domain.User user)
+        private INotification ValidateAndCreate(Domain.User user)
         {
             var notification = _validator.Validate(user);
+
             if (notification.IsValid())
             {
+                //verify valid password
+                if (!_passwordValidator.ValidatePassword(user.Password))
+                {
+                    notification.RegisterMessage("Password", _settings.Password.GetValidationMessage(), Severity.Error);
+                    return notification;
+                }
+
                 //make sure user is unique
                 if(_userRepository.FindBy(x => x.UserName, user.UserName) != null)
                 {
@@ -152,6 +149,22 @@ namespace Kokugen.Core.Services
                     notification.RegisterMessage("Email", "Email already exists!", Severity.Error);
                     return notification;
                 }
+
+                switch (_settings.Password.PasswordFormat)
+                {
+                    case PasswordFormat.Hashed:
+                        user.SetPassword(_passwordHelperService);
+                        break;
+                    case PasswordFormat.Clear:
+                        user.SetPassword(new ClearPasswordHelper());
+                        break;
+                    case PasswordFormat.Encrypted:
+                        throw new NotImplementedException();
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+
                 _userRepository.Save(user);
             }
             return notification;
