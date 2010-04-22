@@ -16,6 +16,13 @@ namespace Kokugen.Web.Actions.Card.Ready
         {
             var card = _cardService.GetCard(model.Id);
             card.Status = model.Status ? CardStatus.Ready : CardStatus.New;
+
+            if (card.Status == CardStatus.Ready)
+                card.StartIdle();
+            else
+                card.StartWorking();
+
+
             _cardService.SaveCard(card);
 
             return new AjaxResponse() { Success = true };

@@ -189,15 +189,6 @@ var buildCardDisplay = function (scard) {
         this.myCard = scard;
     };
 
-    element.started = function () {
-        $.ajax({
-            url: "/card/dates",
-            data: { Id: scard.Id, Status: "Started" },
-            dataType: "json",
-            type: "POST"
-        });
-    };
-
     element.claim = function () {
         $.ajax({
             url: "/card/claim",
@@ -213,33 +204,6 @@ var buildCardDisplay = function (scard) {
         $(userName).html(response.Item.UserDisplay);
         gravatar.setAttribute('src', 'http://gravatar.com/avatar/' + response.Item.GravatarHash + '?s=27');
     }
-
-    element.notStarted = function () {
-        $.ajax({
-            url: "/card/dates",
-            data: { Id: scard.Id, Status: "NotStarted" },
-            dataType: "json",
-            type: "POST"
-        });
-    };
-
-    element.done = function () {
-        $.ajax({
-            url: "/card/dates",
-            data: { Id: scard.Id, Status: "Done" },
-            dataType: "json",
-            type: "POST"
-        });
-    };
-
-    element.notDone = function () {
-        $.ajax({
-            url: "/card/dates",
-            data: { Id: scard.Id, Status: "NotDone" },
-            dataType: "json",
-            type: "POST"
-        });
-    };
 
     element.isReady = function (status) {
         if (status) {
@@ -630,22 +594,6 @@ function determineColor(element) {
         return "orange"; }
     if(element.hasClass("teal")) {
         return "teal"; }
-}
-
-function backlogRemove(event, ui) {
-    ui.item[0].started();
-}
-
-function backlogReceive(event, ui) {
-    ui.item[0].notStarted();
-}
-
-function archiveRemove(event, ui) {
-    ui.item[0].notDone();
-}
-
-function archiveReceive(event, ui) {
-    ui.item[0].done();
 }
 
 function buildTaskControl(card, tasks) {

@@ -94,6 +94,23 @@ namespace Kokugen.Core.Domain
                 _activities.Remove(activity);
         }
 
+        public virtual void StartWorking()
+        {
+            StopActivity();
+            AddActivity(new CardActivity{ StartTime = DateTime.Now, Status = ActivityType.Working});
+        }
+
+        public virtual void StopActivity()
+        {
+            var lastActivity = _activities.Where(x => x.EndTime == null).FirstOrDefault();
+            if (lastActivity != null) lastActivity.EndTime = DateTime.Now;
+        }
+
+        public virtual void StartIdle()
+        {
+           StopActivity();
+            AddActivity(new CardActivity{ StartTime = DateTime.Now, Status = ActivityType.Idle});
+        }
     }
 
     public class CardActivity : Entity
