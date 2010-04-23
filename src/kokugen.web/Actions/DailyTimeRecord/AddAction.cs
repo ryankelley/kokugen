@@ -59,10 +59,12 @@ namespace Kokugen.Web.Actions.DailyTimeRecord
 
     public class DailyTimeRecordDTO
     {
-        public virtual double Duration { get; set; }
-        public virtual DateTime StartTime { get; set; }
-        public virtual DateTime? EndTime { get; set; }
-        public virtual User User { get; set; }
+        public double Duration { get; set; }
+        public DateTime StartTime { get; set; }
+        public DateTime? EndTime { get; set; }
+        public User User { get; set; }
+        public Guid Id { get; set; }
+
     }
 
     public class DailyTimeRecordFormModel

@@ -18,8 +18,8 @@
                                            Response.Write(new LinkTag("", "#").AddClass("stop-button").Attr("data", Model.Id).NoClosingTag().AddClass("icon") + "<img src=\" /content/images/stopsign.png\" alt=\"stop\" /></a>");
                                        else
                                            Response.Write(Model.EndTime);%></span></td>
-        <td class="duration">
-            <%= this.DisplayFor(x => x.Duration) + " " %>hrs
+        <td >
+            <span class="duration"> <%= this.DisplayFor(x => x.Duration) + " " %>hrs </span>
         </td>
                 
 	</tr>	
