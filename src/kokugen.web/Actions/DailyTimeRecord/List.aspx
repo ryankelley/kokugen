@@ -164,7 +164,7 @@ return output;
 
         function startTimeRecord(data) {
             $.ajax ({
-                succes: refreshpage,
+                success: refreshpage,
                 type: 'post',        // 'get' or 'post', override for form's 'method' attribute 
                 dataType: 'json'        // 'xml', 'script', or 'json' (expected server response type) 
             })
@@ -172,7 +172,7 @@ return output;
         }
 
        function refreshpage(){
-       window.location ="/dailytimerecord"
+           window.location.reload(true);
        }
 
       
