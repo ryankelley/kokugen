@@ -41,7 +41,8 @@ namespace Kokugen.Core.Services
         public IEnumerable<Card> GetCards(Project project)
         {
             return _session.CreateCriteria<Card>()
-                .SetFetchMode("GetTasks", FetchMode.Eager)
+               .SetFetchMode("GetTasks", FetchMode.Eager)
+               .Add(NHibernate.Criterion.Expression.Eq("Project", project))
                 .List<Card>();
             //return _cardRepository.Query().Where(c => c.Project == project);
         }

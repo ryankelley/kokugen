@@ -43,12 +43,14 @@ namespace Kokugen.Web.Actions.Card.Move
             // set the dates
             if(customColumn != null)
             {
-                if(customColumn.ColumnOrder == 1)
+                if(customColumn.ColumnOrder == 1 || card.Started == null)
                 {
                     // the card was started
                     card.Started = DateTime.Now;
                     card.StartWorking();
                 }
+                
+                    
                 card.DateCompleted = null;
                 card.StartWorking();
             }
