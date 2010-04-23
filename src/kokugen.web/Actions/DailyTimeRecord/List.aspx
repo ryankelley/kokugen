@@ -100,7 +100,7 @@ return output;
          
          parent.append(document.createTextNode(date));
          
-         parent.siblings('.duration').html(response.Item.Duration);
+         parent.siblings('.duration').html(response.Item.Duration + " hrs");
         
     }
 

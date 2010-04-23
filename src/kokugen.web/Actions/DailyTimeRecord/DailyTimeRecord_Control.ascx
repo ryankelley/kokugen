@@ -14,12 +14,12 @@
             <%= this.DisplayFor(x => x.StartTime) %>
         </td>
         <td class="end-time">
-            <span class="end-time" > <%if (Model.EndTime == null)
+             <%if (Model.EndTime == null)
                                            Response.Write(new LinkTag("", "#").AddClass("stop-button").Attr("data", Model.Id).NoClosingTag().AddClass("icon") + "<img src=\" /content/images/stopsign.png\" alt=\"stop\" /></a>");
                                        else
-                                           Response.Write(Model.EndTime);%></span></td>
-        <td >
-            <span class="duration"> <%= this.DisplayFor(x => x.Duration) + " " %>hrs </span>
+                                           Response.Write(Model.EndTime);%></td>
+        <td class="duration" >
+             <%= this.DisplayFor(x => x.Duration) + " " %>hrs 
         </td>
                 
 	</tr>	
