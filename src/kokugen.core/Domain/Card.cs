@@ -127,12 +127,26 @@ namespace Kokugen.Core.Domain
                 AddActivity(new CardActivity { StartTime = DateTime.Now, Status = ActivityType.Idle });
         }
 
-        public virtual void ColumnChanged()
+        public virtual void ColumnChanged(BoardColumn oldColumn, BoardColumn newColumn)
         {
             var lastActivity = _activities.Where(x => x.EndTime == null && x.ActivityId == ActivityType.Column.Value).FirstOrDefault();
             if (lastActivity != null) lastActivity.EndTime = DateTime.Now;
 
-            AddActivity(new CardActivity {StartTime = DateTime.Now, Status = ActivityType.Column, ColumnName = Column.Name});
+            AddActivity(new CardActivity {StartTime = DateTime.Now, Status = ActivityType.Column, Leaving = oldColumn, Entering = newColumn});
+        }
+
+        public virtual TimeSpan TotalWorkTime()
+        {
+            var activities = _activities.Where(x => x.Status == ActivityType.Working && x.EndTime != null).ToList();
+            var totalTime = new TimeSpan();
+            return activities.Aggregate(totalTime, (current, cardActivity) => current + (cardActivity.EndTime.Value - cardActivity.StartTime));
+        }
+
+        public virtual TimeSpan TotalIdleTime()
+        {
+            var activities = _activities.Where(x => x.Status == ActivityType.Idle && x.EndTime != null).ToList();
+            var totalTime = new TimeSpan();
+            return activities.Aggregate(totalTime, (current, cardActivity) => current + (cardActivity.EndTime.Value - cardActivity.StartTime));
         }
     }
 
@@ -156,7 +170,9 @@ namespace Kokugen.Core.Domain
             set { _activityId = value.Value; }
         }
 
-        public virtual string ColumnName { get; set; }
+        public virtual BoardColumn Leaving { get; set; }
+
+        public virtual BoardColumn Entering { get; set; }
     }
 
     public class ActivityType : Enumeration

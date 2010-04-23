@@ -14,6 +14,24 @@ namespace Kokugen.Core
 {
     public static class Extensions
     {
+        public static string ToSimpleDisplay(this TimeSpan timeSpan)
+        {
+            if(timeSpan.Days > 0)
+            {
+                return Math.Round(timeSpan.TotalDays).ToString() + " Days";
+            }
+            if(timeSpan.Hours > 0)
+            {
+                return Math.Round(timeSpan.TotalHours).ToString() + " Hours";
+            }
+            if(timeSpan.Minutes > 0)
+            {
+                return Math.Round(timeSpan.TotalMinutes).ToString() + " Minutes";
+            }
+
+            return Math.Round(timeSpan.TotalSeconds).ToString() + " Seconds";
+        }
+
         public static bool IsDateTime(this Type type)
         {
             return typeof (DateTime) == type || typeof(DateTime?) == type;

@@ -33,6 +33,8 @@ namespace Kokugen.Core.Persistence.Overrides
         public void Override(AutoMapping<CardActivity> mapping)
         {
             mapping.References(x => x.Card).Cascade.SaveUpdate().ForeignKey("fk_activity_to_card");
+            mapping.References(x => x.Leaving).Cascade.SaveUpdate().ForeignKey("fk_activity_to_columnin");
+            mapping.References(x => x.Entering).Cascade.SaveUpdate().ForeignKey("fk_activity_to_columnout");
         }
     }
 }

@@ -135,6 +135,7 @@
     <Content Include="Actions\DailyTimeRecord\List.aspx" />
     <Content Include="Actions\DailyTimeRecord\DailyTimeRecord_Control.ascx" />
     <Content Include="Actions\Errors\FourZeroThree.aspx" />
+    <Content Include="Actions\Metrics\Get.aspx" />
     <Content Include="Actions\Project\Manage\Users\ProjectUsers.aspx" />
     <Content Include="Actions\Project\MenuList\ProjectMenu.aspx" />
     <Content Include="Actions\Project\Manage\Users\Add\AddUserToProject.aspx" />
@@ -247,6 +248,9 @@
     <Compile Include="Actions\Home\IndexAction.cs" />
     <Compile Include="Actions\Account\Login\LoginAction.cs" />
     <Compile Include="Actions\Account\Login\LoginFormAction.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Actions\Metrics\GetAction.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Actions\ProjectBaseViewModel.cs" />

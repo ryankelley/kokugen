@@ -32,10 +32,10 @@ namespace Kokugen.Tests.Domain.When_the_column_changes
         {
             _card = new Card();
 
-            _card.AddActivity(new CardActivity { StartTime = DateTime.Now, Status = ActivityType.Column, ColumnName = Stubs.BacklogColumn.Name});
+            _card.AddActivity(new CardActivity { StartTime = DateTime.Now, Status = ActivityType.Column, Leaving = Stubs.BacklogColumn});
 
             _card.Column = Stubs.WorkColumn;
-            _card.ColumnChanged();
+            _card.ColumnChanged(Stubs.BacklogColumn, Stubs.WorkColumn);
         }
 
         [Test]
@@ -59,7 +59,7 @@ namespace Kokugen.Tests.Domain.When_the_column_changes
         [Test]
         public void the_first_activity_should_be_from_the_backlog_column()
         {
-            _card.GetActivities().First().ColumnName.ShouldEqual(Stubs.BacklogColumn.Name);
+            _card.GetActivities().First().Leaving.ShouldEqual(Stubs.BacklogColumn);
         }
 
         [Test]
@@ -77,7 +77,7 @@ namespace Kokugen.Tests.Domain.When_the_column_changes
         [Test]
         public void the_last_activity_should_be_from_the_working_column()
         {
-            _card.GetActivities().Last().ColumnName.ShouldEqual(Stubs.WorkColumn.Name);
+            _card.GetActivities().Last().Entering.ShouldEqual(Stubs.WorkColumn);
         }
     }
 
@@ -89,7 +89,7 @@ namespace Kokugen.Tests.Domain.When_the_column_changes
 
             _card.Column = Stubs.BacklogColumn;
 
-            _card.ColumnChanged();
+            _card.ColumnChanged(null, Stubs.BacklogColumn);
         }
 
         [Test]
@@ -113,7 +113,7 @@ namespace Kokugen.Tests.Domain.When_the_column_changes
         [Test]
         public void The_activity_should_be_for_the_backlog_column()
         {
-            _card.GetActivities().First().ColumnName.ShouldEqual(BoardColumn.BacklogName);
+            _card.GetActivities().First().Entering.ShouldEqual(Stubs.BacklogColumn);
         }
 
     }

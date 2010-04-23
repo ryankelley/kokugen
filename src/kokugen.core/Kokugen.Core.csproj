@@ -227,6 +227,7 @@
     <Compile Include="Services\ICardService.cs" />
     <Compile Include="Services\ICompanyService.cs" />
     <Compile Include="Services\IEmailService.cs" />
+    <Compile Include="Services\IProjectMetricsService.cs" />
     <Compile Include="Services\IProjectService.cs" />
     <Compile Include="Services\ITimeRecordService.cs" />
     <Compile Include="Services\Membership\ClearPasswordHelper.cs" />

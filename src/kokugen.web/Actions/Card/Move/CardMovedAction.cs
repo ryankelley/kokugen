@@ -20,8 +20,10 @@ namespace Kokugen.Web.Actions.Card.Move
         {
             var card = _cardService.GetCard(model.Id);
             var column = _boardService.GetColumn(model.ColumnId);
+            
+            card.ColumnChanged(card.Column, column);
+
             card.Column = column;
-            card.ColumnChanged();
 
             var customColumn = card.Project.GetBoardColumns().Where(x => x.Id == model.ColumnId).FirstOrDefault();
             

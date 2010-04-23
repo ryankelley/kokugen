@@ -828,3 +828,31 @@ div#tabs div#details p
 {
     padding:0.5em;
 }
+.metrics-header 
+{
+    width:100%;
+}
+.metrics-header ul.metrics
+{
+    display:table;
+    width:100%;
+}
+.metrics-header ul li
+{
+background-color:#DDDDDD;
+border:1px solid #333333;
+display:table-cell;
+padding:12px;
+}
+ul.metrics li span
+{
+    padding:6px;
+    text-align:center;
+    display:block;
+}
+span.mdata {font-size:1.2em;}
+span.mhead 
+{
+font-size:1.5em;
+font-weight:bold;
+}
