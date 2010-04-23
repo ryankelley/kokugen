@@ -14,9 +14,10 @@
             <%= this.DisplayFor(x => x.StartTime) %>
         </td>
         <td class="end-time">
-        
-            <%Response.Write(this.DisplayFor(x => x.EndTime));%>
-        </td>
+            <span class="end-time" > <%if (Model.EndTime == null)
+                                           Response.Write(new LinkTag("", "#").AddClass("stop-button").Attr("data", Model.Id).NoClosingTag().AddClass("icon") + "<img src=\" /content/images/stopsign.png\" alt=\"stop\" /></a>");
+                                       else
+                                           Response.Write(Model.EndTime);%></span></td>
         <td class="duration">
             <%= this.DisplayFor(x => x.Duration) + " " %>hrs
         </td>

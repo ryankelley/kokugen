@@ -150,6 +150,7 @@
     <Content Include="Content\images\magnify16.png" />
     <Content Include="Content\images\move16.png" />
     <Content Include="Content\images\spite.png" />
+    <Content Include="Content\images\start.png" />
     <Content Include="Content\images\task16.png" />
     <Content Include="Content\Scripts\cardEdit.js" />
     <Content Include="Content\Scripts\company.js" />
@@ -197,6 +198,8 @@
     <Compile Include="Actions\Card\Ready\CardReadyAction.cs" />
     <Compile Include="Actions\Card\ReOrder\ReOrderAction.cs" />
     <Compile Include="Actions\Card\UpdateAction.cs" />
+    <Compile Include="Actions\DailyTimeRecord\AddAction.cs" />
+    <Compile Include="Actions\DailyTimeRecord\StopAction.cs" />
     <Compile Include="Actions\DailyTimeRecord\View_Page_Type_Declarations.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
