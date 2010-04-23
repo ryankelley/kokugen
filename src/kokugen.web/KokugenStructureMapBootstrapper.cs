@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Web.Routing;
 using AutoMapper;
 using FubuCore;
@@ -61,11 +62,13 @@ namespace Kokugen.Web
             Mapper.CreateMap<Card, CardViewDTO>()
                 .ForMember(a => a.Status, b=> b.MapFrom(c => c.Status.DisplayName))
                 .ForMember(a => a.GravatarHash, b=> b.MapFrom(c => c.AssignedTo.GravatarHash))
-                .ForMember(a => a.UserDisplay, b=> b.MapFrom(c => c.AssignedTo.DisplayName()));
+                .ForMember(a => a.UserDisplay, b=> b.MapFrom(c => c.AssignedTo.DisplayName()))
+                .ForMember(a => a.GetTasks, b => b.MapFrom(c => c.GetTasks().ToList()));
             Mapper.CreateMap<Card, CardDetailModel>()
                 .ForMember(a => a.Status, b => b.MapFrom(c => c.Status.DisplayName))
                 .ForMember(a => a.GravatarHash, b=> b.MapFrom(c => c.AssignedTo.GravatarHash))
-                .ForMember(a => a.UserDisplay, b=> b.MapFrom(c => c.AssignedTo.DisplayName()));
+                .ForMember(a => a.UserDisplay, b=> b.MapFrom(c => c.AssignedTo.DisplayName()))
+                .ForMember(a => a.GetTasks, b=>b.MapFrom(c=>c.GetTasks().ToList()));
             Mapper.CreateMap<BoardColumn, BoardColumnDTO>()
                 .ForMember(a => a.CardLimit, b=> b.UseValue(0));
             Mapper.CreateMap<CustomBoardColumn, BoardColumnDTO>()

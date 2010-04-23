@@ -4,6 +4,7 @@ using System.Linq;
 using Kokugen.Core.Domain;
 using Kokugen.Core.Persistence.Repositories;
 using Kokugen.Core.Validation;
+using NHibernate;
 
 namespace Kokugen.Core.Services
 {
@@ -22,12 +23,14 @@ namespace Kokugen.Core.Services
         private readonly ICardRepository _cardRepository;
         private readonly IValidator _validator;
         private readonly IProjectService _projectService;
+        private readonly ISession _session;
 
-        public CardService(ICardRepository cardRepository, IValidator validator, IProjectService projectService)
+        public CardService(ICardRepository cardRepository, IValidator validator, IProjectService projectService, ISession session)
         {
             _cardRepository = cardRepository;
             _validator = validator;
             _projectService = projectService;
+            _session = session;
         }
 
         public IEnumerable<Card> GetCards()
@@ -37,7 +40,11 @@ namespace Kokugen.Core.Services
 
         public IEnumerable<Card> GetCards(Project project)
         {
-            return _cardRepository.Query().Where(c => c.Project == project);
+            return _session.CreateCriteria<Card>()
+               .SetFetchMode("GetTasks", FetchMode.Eager)
+               .Add(NHibernate.Criterion.Expression.Eq("Project", project))
+                .List<Card>();
+            //return _cardRepository.Query().Where(c => c.Project == project);
         }
 
         public INotification SaveCard(Card card)
