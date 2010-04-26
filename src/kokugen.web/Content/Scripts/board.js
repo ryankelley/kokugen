@@ -683,6 +683,8 @@ function buildTaskControl(card, tasks) {
         var newTaskDisplay = buildTaskLine(newTask);
         newTaskDisplay.showInPlace();
         $(taskList).append(newTaskDisplay);
+
+        $(newTaskDisplay).find('.task-description-edit').focus();
     });
     
     var hideButton = document.createElement('button');
@@ -913,6 +915,8 @@ function buildInPlaceTaskEdit(element) {
     var descEdit = document.createElement('input');
     descEdit.setAttribute('type', 'text');
     descEdit.setAttribute('class', 'task-description-edit');
+
+   
     $(descEdit).val(element.task.Description);
     inPlace.appendChild(descEdit);
 
@@ -943,6 +947,12 @@ function buildInPlaceTaskEdit(element) {
     inPlace.appendChild(cancel);
 
     $(inPlace).addClass("hidden");
+
+    $(descEdit).keyup(function (event) {
+        if (event.keyCode == 13) {
+            $(save).click();
+        }
+    });
 
     return inPlace;
 }
