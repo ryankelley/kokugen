@@ -386,6 +386,15 @@ function buildToolbar(card) {
 
     up.appendChild(upLink);
 
+    $(upLink).click(function () {
+
+        $(this).parent().parent().parent().parent().prepend($(this).parent().parent().parent());
+        this.parentNode.parentNode.parentNode.receive(this.parentNode.parentNode.parentNode.parentNode.id);
+
+        this.receive
+    });
+
+
     var down = document.createElement('li');
     var downLink = document.createElement('a');
     downLink.setAttribute("class", "card-down");
@@ -393,6 +402,11 @@ function buildToolbar(card) {
     down.setAttribute("class", "icon");
 
     down.appendChild(downLink);
+
+    $(downLink).click(function () {
+        $(this).parent().parent().parent().parent().append($(this).parent().parent().parent());
+        this.parentNode.parentNode.parentNode.receive(this.parentNode.parentNode.parentNode.parentNode.id);
+    });
     
     var color = document.createElement('li');
     color.setAttribute("class", "icon");
