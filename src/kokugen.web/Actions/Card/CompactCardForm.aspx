@@ -25,13 +25,20 @@
         </div>
         <%= this.InputFor(x => x.Card.Id).Hide() %>
         <%= this.InputFor(x => x.ProjectId).Hide() %>
+        <%= this.InputFor(x => x.Card.Details).Id("card-details").Hide() %>
         <div class="actions">
+             <button id="details-button" class="btn">Details</button>
              <input type="submit" name="Submit" value="Add to Backlog" id="save-button" class="button grn"/>
+             
          </div>
      </div>
      <div class="bottom-border"></div>
      <div class="clear"></div>
 <%= this.EndForm() %>
+
+<div class="hidden" id="details-editor">
+<textarea rows="15" cols="69" id="details-text"></textarea>
+</div>
 
 </div>
 
@@ -48,6 +55,18 @@
 
     $(document).ready(function () {
 
+        $("#details-editor").dialog({ modal: true, resizable: false, title: "Card Details", autoOpen: false, width: 700, height: 500, closeOnEscape: true, buttons: { "OK": function () {
+
+            var data = $("#details-text").val();
+            $("#card-details").val(data);
+            $(this).dialog("close");
+        }, "Cancel": function () { $(this).dialog("close"); }
+        }
+        });
+
+
+
+        $("#details-button").click(function () { $("#details-editor").dialog('open'); return false; });
         $("#card-form-compact").validate({ errorClass: "error", ignoreTitle: true,
 
             invalidHandler: function (e, validator) {
@@ -62,12 +81,12 @@
             }
         });
         $('#save-button').submit(function () {
-//            if ($('#card-size-box').val() == "Card Size (Optional)")
-//            { $('#card-size-box').val(''); }
+            //            if ($('#card-size-box').val() == "Card Size (Optional)")
+            //            { $('#card-size-box').val(''); }
 
-            
-                $("[_hint]").each(function () { $(this).removeHint() });
-            
+
+            $("[_hint]").each(function () { $(this).removeHint() });
+
             ValidateAndSave(updateBoard, $("#card-form-compact"));
             return false;
 
