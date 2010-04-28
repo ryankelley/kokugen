@@ -1,21 +1,27 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Xml;
 using Kokugen.Core.Domain;
+using Kokugen.Core.Persistence.Repositories;
 
 namespace Kokugen.Core.Services
 {
     public interface IProjectMetricsService
     {
         ProjectMetricsDTO GetAverageMetrics(Project project);
+        XmlDocument BuildCumulativeFlowData(Project project);
     }
 
     public class ProjectMetricsService : IProjectMetricsService
     {
         private readonly ICardService _cardService;
+        private readonly ICardRepository _cardRepository;
 
-        public ProjectMetricsService(ICardService cardService)
+        public ProjectMetricsService(ICardService cardService, ICardRepository cardRepository)
         {
             _cardService = cardService;
+            _cardRepository = cardRepository;
         }
 
         public ProjectMetricsDTO GetAverageMetrics(Project project)
@@ -60,6 +66,50 @@ namespace Kokugen.Core.Services
                            Efficiency = efficiency
 
                        };
+        }
+
+        public XmlDocument BuildCumulativeFlowData(Project project)
+        {
+            var flowData = _cardRepository.GetCumalitiveFlowForProject(project.Id);
+
+            var cols = (from f in flowData
+                        select f.ColumnId).Distinct().ToList();
+
+            var dates = flowData.Select(x => x.Day).OrderBy(x => x.Date).Distinct().ToList();
+
+            var output = new XmlDocument();
+
+            var chartTag = output.CreateNode(XmlNodeType.Element, "chart", "");
+            output.AppendChild(chartTag);
+
+            var series = output.CreateNode(XmlNodeType.Element, "series", "");
+
+            var totalDates = 0;
+            foreach (var date in dates)
+            {
+                var data = output.CreateNode(XmlNodeType.Element, "value", "");
+                var attr = output.CreateAttribute("xid");
+                attr.Value = totalDates.ToString();
+                data.Attributes.Append(attr);
+                data.Value = date.ToShortDateString();
+
+                series.AppendChild(data);
+                totalDates++;
+            }
+            
+            output.AppendChild(series);
+
+
+
+            foreach (var colId in cols)
+            {
+                foreach (var data in flowData.Where(x => x.ColumnId == colId))
+                {
+
+                }
+            }
+
+            return output;
         }
     }
 

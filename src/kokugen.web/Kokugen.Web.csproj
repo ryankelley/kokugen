@@ -253,6 +253,7 @@
     <Compile Include="Actions\Account\Login\LoginFormAction.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Actions\Metrics\CumulativeFlow\GetData.cs" />
     <Compile Include="Actions\Metrics\GetAction.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -323,9 +324,11 @@
     <Compile Include="Conventions\EditInPlaceBuilder.cs" />
     <Compile Include="Conventions\HtmlExtensions.cs" />
     <Compile Include="Conventions\IRequestById.cs" />
+    <Compile Include="Conventions\IXMLWriter.cs" />
     <Compile Include="Conventions\KokugenHtmlConventions.cs" />
     <Compile Include="Conventions\Builders\LabelBuilder.cs" />
     <Compile Include="Conventions\MarkdownAttribute.cs" />
+    <Compile Include="Conventions\RenderXMLNode.cs" />
     <Compile Include="Conventions\SplitCamelCaseExtension.cs" />
     <Compile Include="Conventions\ValueObjectDropdownBuilder.cs" />
     <Compile Include="Conventions\ValueObjectDropdownExtensions.cs" />
