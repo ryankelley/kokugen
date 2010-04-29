@@ -5,12 +5,12 @@ using Kokugen.Web.Actions.TimeRecord;
 
 namespace Kokugen.Web.Actions.DailyTimeRecord
 {
-    public class ListAction
+    public class DailyTimeListAction
     {
         private readonly IDailyTimeRecordService _dailyTimeRecordService;
 
 
-        public ListAction(IDailyTimeRecordService dailyTimeRecordService)
+        public DailyTimeListAction(IDailyTimeRecordService dailyTimeRecordService)
         {
             _dailyTimeRecordService = dailyTimeRecordService;
         }

@@ -3,11 +3,11 @@ using Kokugen.Core.Services;
 
 namespace Kokugen.Web.Actions.TaskCategory
 {
-    public class ListAction
+    public class TaskListAction
     {
         private readonly ITaskCategoryService _taskCategoryService;
 
-        public ListAction(ITaskCategoryService taskCategoryService)
+        public TaskListAction(ITaskCategoryService taskCategoryService)
         {
             _taskCategoryService = taskCategoryService;
         }

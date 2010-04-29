@@ -9,12 +9,12 @@ using PagedList;
 
 namespace Kokugen.Web.Actions.Users
 {
-    public class ListAction
+    public class UserListAction
     {
         private readonly IUserService _userService;
         private readonly IUrlRegistry _urlRegistry;
 
-        public ListAction(IUserService userService, IUrlRegistry urlRegistry)
+        public UserListAction(IUserService userService, IUrlRegistry urlRegistry)
         {
             _userService = userService;
             _urlRegistry = urlRegistry;

@@ -247,7 +247,7 @@
     <Compile Include="Actions\Card\Lists\ListAction.cs" />
     <Compile Include="Actions\Company\AddAction.cs" />
     <Compile Include="Actions\Company\CompanyFormAction.cs" />
-    <Compile Include="Actions\Company\ListAction.cs" />
+    <Compile Include="Actions\Company\CompanyListAction.cs" />
     <Compile Include="Actions\Company\RemoveAction.cs" />
     <Compile Include="Actions\Company\View_Page_Type_Declarations.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -296,11 +296,11 @@
     <Compile Include="Actions\Task\ReOrder\TaskReorderAction.cs" />
     <Compile Include="Actions\TimeRecord\AddAction.cs" />
     <Compile Include="Actions\TimeRecord\AddTimeRecordModel.cs" />
-    <Compile Include="Actions\TimeRecord\ListAction.cs" />
+    <Compile Include="Actions\TimeRecord\TimeRecordListAction.cs" />
     <Compile Include="Actions\TimeRecord\StopTimeRecordFormAction.cs" />
     <Compile Include="Actions\TimeRecord\StopAction.cs" />
     <Compile Include="Actions\TimeRecord\ProjectTimeRecordFormAction.cs" />
-    <Compile Include="Actions\DailyTimeRecord\ListAction.cs" />
+    <Compile Include="Actions\DailyTimeRecord\DailyTimeListAction.cs" />
     <Compile Include="Actions\TimeRecord\RemoveAction.cs" />
     <Compile Include="Actions\TimeRecord\TimeRecordFormAction.cs" />
     <Compile Include="Actions\Project\View_Page_Type_Declarations.cs">
@@ -312,7 +312,7 @@
     <Compile Include="Actions\TaskCategory\View_Page_Type_Declarations.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Actions\TaskCategory\ListAction.cs" />
+    <Compile Include="Actions\TaskCategory\TaskListAction.cs" />
     <Compile Include="Actions\TaskCategory\TaskListModel.cs" />
     <Compile Include="Actions\TimeRecord\StopTimeRecordModel.cs" />
     <Compile Include="Actions\TimeRecord\View_Page_Type_Declarations.cs">
@@ -322,7 +322,7 @@
     <Compile Include="Actions\Users\Details\DetailsAction.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Actions\Users\ListAction.cs">
+    <Compile Include="Actions\Users\UserListAction.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Behaviors\AuthenticationBehaviorPolicy.cs" />
