@@ -331,6 +331,7 @@
     <Compile Include="Behaviors\TransactionalContainerBehavior.cs" />
     <Compile Include="Content\amline\export.aspx.cs">
       <DependentUpon>export.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Conventions\Builders\AfterEachOfPartialBuilder.cs" />
     <Compile Include="Conventions\Builders\BeforeEachOfPartialBuilder.cs" />

@@ -34,7 +34,7 @@
 	    so.addVariable("path", "/amline/");
 	    so.addVariable("settings_file", encodeURIComponent("/content/amline/cumflow_settings.xml"));                // you can set two or more different settings files here (separated by commas)
 	    so.addVariable("data_file", escape("/metrics/cumalativeflow?ProjectId=<%= Model.ProjectId %>"));
-        
+	    so.addParam("wmode", "opaque");
 
 	    //	so.addVariable("chart_data", encodeURIComponent("data in CSV or XML format"));                    // you can pass chart data as a string directly from this file
 	    //	so.addVariable("chart_settings", encodeURIComponent("<settings>...</settings>"));                 // you can pass chart settings as a string directly from this file

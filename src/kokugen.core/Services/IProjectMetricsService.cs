@@ -79,7 +79,7 @@ namespace Kokugen.Core.Services
             var projectCols = project.GetAllBoardColumns().ToList();
             projectCols.Reverse();
 
-            var cols = projectCols.Select(x => x.Id).ToList();
+            var cols = projectCols.Select(x => new KeyValuePair<Guid, string>(x.Id, x.Name)).ToList();
 
             //TODO: What I really need to do is to make sure I print out values for all dates since the beginning of the project.
             // If I have dates with no cards, I should substitute 0
@@ -97,7 +97,7 @@ namespace Kokugen.Core.Services
                 new XElement("chart",
                              new XElement("series", BuildDateSeries(dates)),
                              new XElement("graphs", 
-                                 BuildGraphSeries(cols, flowData))
+                                 BuildGraphSeries(dates, cols, flowData))
                     )
                 );
                     
@@ -109,18 +109,19 @@ namespace Kokugen.Core.Services
             return doc.ToXmlDocument();
         }
 
-        private XElement[] BuildGraphSeries(IEnumerable<Guid> cols, IEnumerable<CumalitiveFlowData> flowData)
+        private XElement[] BuildGraphSeries(IEnumerable<DateTime> dates, IEnumerable<KeyValuePair<Guid, string>> cols, IEnumerable<CumalitiveFlowData> flowData)
         {
             var outputList = new List<XElement>();
 
             var graphid = 0;
             foreach (var colId in cols)
             {
+                
                 var graph = new XElement("graph",
                                          new XAttribute("gid", graphid),
-                                         new XAttribute("title", flowData.Where(x => x.ColumnId == colId).First().ColumnName),
+                                         new XAttribute("title", colId.Value),
                                          new XAttribute("fill_alpha", 30),
-                                         buildGraphData(flowData.Where(x => x.ColumnId == colId).ToList()));
+                                         buildGraphData(dates, flowData.Where(x => x.ColumnId == colId.Key)));
                 outputList.Add(graph);
                 graphid++;
             }
@@ -128,14 +129,15 @@ namespace Kokugen.Core.Services
             return outputList.ToArray();
         }
 
-        private XElement[] buildGraphData(IEnumerable<CumalitiveFlowData> flowData)
+        private XElement[] buildGraphData(IEnumerable<DateTime> dates, IEnumerable<CumalitiveFlowData> flowData = null)
         {
             var colData = new List<XElement>();
             var number = 0;
-            foreach (var data in flowData)
+            foreach (var date in dates)
             {
+                var data = flowData == null ? null : flowData.Where(x => x.Day == date).FirstOrDefault();
                 colData.Add(new XElement("value",
-                    new XAttribute("xid", number), data.NumberOfCards));
+                    new XAttribute("xid", number), data == null ? 0 : data.NumberOfCards));
                 number++;
             }
             return colData.ToArray();
