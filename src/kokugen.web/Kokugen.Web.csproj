@@ -139,6 +139,19 @@
     <Content Include="Actions\Project\Manage\Users\ProjectUsers.aspx" />
     <Content Include="Actions\Project\MenuList\ProjectMenu.aspx" />
     <Content Include="Actions\Project\Manage\Users\Add\AddUserToProject.aspx" />
+    <Content Include="Content\amline\amline.swf" />
+    <Content Include="Content\amline\amline_data.txt" />
+    <Content Include="Content\amline\amline_data.xml" />
+    <Content Include="Content\amline\amline_settings.xml" />
+    <Content Include="Content\amline\cumflow_settings.xml" />
+    <Content Include="Content\amline\export.aspx" />
+    <Content Include="Content\amline\fonts\arial.swf" />
+    <Content Include="Content\amline\fonts\garamond.swf" />
+    <Content Include="Content\amline\fonts\georgia.swf" />
+    <Content Include="Content\amline\fonts\tahoma.swf" />
+    <Content Include="Content\amline\fonts\times new roman.swf" />
+    <Content Include="Content\amline\plugins\value_indicator.swf" />
+    <Content Include="Content\amline\swfobject.js" />
     <Content Include="Content\css\jquery.jgrowl.css" />
     <Content Include="Actions\Project\MenuList\ProjectMenu_Item.ascx" />
     <Content Include="Content\images\btn-check16.png" />
@@ -253,7 +266,7 @@
     <Compile Include="Actions\Account\Login\LoginFormAction.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Actions\Metrics\CumulativeFlow\GetData.cs" />
+    <Compile Include="Actions\Metrics\CumulativeFlow\GetAction.cs" />
     <Compile Include="Actions\Metrics\GetAction.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -316,6 +329,9 @@
     <Compile Include="Behaviors\BehaviorCall.cs" />
     <Compile Include="Behaviors\MustBeAuthorizedBehavior.cs" />
     <Compile Include="Behaviors\TransactionalContainerBehavior.cs" />
+    <Compile Include="Content\amline\export.aspx.cs">
+      <DependentUpon>export.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Conventions\Builders\AfterEachOfPartialBuilder.cs" />
     <Compile Include="Conventions\Builders\BeforeEachOfPartialBuilder.cs" />
     <Compile Include="Conventions\Builders\BeforePartialBuilder.cs" />
@@ -516,6 +532,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Actions\Project\Manage\Users\Roles\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Content\amline\export.php" />
+    <None Include="Content\amline\fonts\tahoma.fla" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

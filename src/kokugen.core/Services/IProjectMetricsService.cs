@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Xml;
+using System.Xml.Linq;
 using Kokugen.Core.Domain;
 using Kokugen.Core.Persistence.Repositories;
 
@@ -49,12 +51,14 @@ namespace Kokugen.Core.Services
                 totalNumber++;
             }
 
-            var leadTime = new TimeSpan(totalLeadTime.Ticks / totalNumber);
-            var cycleTime = new TimeSpan(totalCycleTime.Ticks/totalNumber);
-            var worktime = new TimeSpan(totalWorkTime.Ticks/totalNumber);
-            var idleTime = new TimeSpan(totalIdleTime.Ticks/totalNumber);
+            var noData = cards.Count() == 0;
 
-            var efficiency = worktime.Seconds/cycleTime.Seconds;
+            var leadTime = noData ? new TimeSpan(0) : new TimeSpan(totalLeadTime.Ticks / totalNumber);
+            var cycleTime = noData ? new TimeSpan(0) : new TimeSpan(totalCycleTime.Ticks / totalNumber);
+            var worktime = noData ? new TimeSpan(0) : new TimeSpan(totalWorkTime.Ticks / totalNumber);
+            var idleTime = noData ? new TimeSpan(0) : new TimeSpan(totalIdleTime.Ticks / totalNumber);
+
+            var efficiency = noData ? 0 : worktime.Seconds/cycleTime.Seconds;
 
 
             return new ProjectMetricsDTO
@@ -72,44 +76,84 @@ namespace Kokugen.Core.Services
         {
             var flowData = _cardRepository.GetCumalitiveFlowForProject(project.Id);
 
-            var cols = (from f in flowData
-                        select f.ColumnId).Distinct().ToList();
+            var projectCols = project.GetAllBoardColumns().ToList();
+            projectCols.Reverse();
+
+            var cols = projectCols.Select(x => x.Id).ToList();
+
+            //TODO: What I really need to do is to make sure I print out values for all dates since the beginning of the project.
+            // If I have dates with no cards, I should substitute 0
+
+            //var cols = (from f in flowData
+            //            join c in projectCols on f.ColumnId equals c.Id
+            //            select f.ColumnId).Distinct().ToList();
 
             var dates = flowData.Select(x => x.Day).OrderBy(x => x.Date).Distinct().ToList();
 
-            var output = new XmlDocument();
-
-            var chartTag = output.CreateNode(XmlNodeType.Element, "chart", "");
-            output.AppendChild(chartTag);
-
-            var series = output.CreateNode(XmlNodeType.Element, "series", "");
-
             var totalDates = 0;
-            foreach (var date in dates)
-            {
-                var data = output.CreateNode(XmlNodeType.Element, "value", "");
-                var attr = output.CreateAttribute("xid");
-                attr.Value = totalDates.ToString();
-                data.Attributes.Append(attr);
-                data.Value = date.ToShortDateString();
 
-                series.AppendChild(data);
-                totalDates++;
-            }
+            var doc = new XDocument(
+                new XDeclaration("1.0", Encoding.UTF8.HeaderName, String.Empty),
+                new XElement("chart",
+                             new XElement("series", BuildDateSeries(dates)),
+                             new XElement("graphs", 
+                                 BuildGraphSeries(cols, flowData))
+                    )
+                );
+                    
+                        
+                        
+
             
-            output.AppendChild(series);
 
+            return doc.ToXmlDocument();
+        }
 
+        private XElement[] BuildGraphSeries(IEnumerable<Guid> cols, IEnumerable<CumalitiveFlowData> flowData)
+        {
+            var outputList = new List<XElement>();
 
+            var graphid = 0;
             foreach (var colId in cols)
             {
-                foreach (var data in flowData.Where(x => x.ColumnId == colId))
-                {
-
-                }
+                var graph = new XElement("graph",
+                                         new XAttribute("gid", graphid),
+                                         new XAttribute("title", flowData.Where(x => x.ColumnId == colId).First().ColumnName),
+                                         new XAttribute("fill_alpha", 30),
+                                         buildGraphData(flowData.Where(x => x.ColumnId == colId).ToList()));
+                outputList.Add(graph);
+                graphid++;
             }
 
-            return output;
+            return outputList.ToArray();
+        }
+
+        private XElement[] buildGraphData(IEnumerable<CumalitiveFlowData> flowData)
+        {
+            var colData = new List<XElement>();
+            var number = 0;
+            foreach (var data in flowData)
+            {
+                colData.Add(new XElement("value",
+                    new XAttribute("xid", number), data.NumberOfCards));
+                number++;
+            }
+            return colData.ToArray();
+        }
+
+        private XElement[] BuildDateSeries(IEnumerable<DateTime> dates)
+        {
+            var list = new List<XElement>();
+            var totalCount = 0;
+            foreach (var date in dates)
+            {
+                list.Add(new XElement("value", 
+                    new XAttribute("xid", totalCount), 
+                    date.Month + "/" + date.Day));
+                totalCount++;
+            }
+
+            return list.ToArray();
         }
     }
 

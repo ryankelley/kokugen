@@ -65,6 +65,11 @@ namespace Kokugen.Web
             Policies.WrapBehaviorChainsWith<load_the_current_principal>();
             Policies.Add<AuthenticationBehaviorPolicy>();
 
+            Services(x =>
+                         {
+                             x.SetServiceIfNone(typeof(IXMLWriter), typeof(XMLWriter));
+                         });
+
             //Policies.WrapBehaviorChainsWith<MustBeAuthorizedBehavior>();
             //Policies.ConditionallyWrapBehaviorChainsWith<MustBeAuthorizedBehavior>(c => c.OutputType() == typeof (BoardConfigurationModel));
             
@@ -72,7 +77,8 @@ namespace Kokugen.Web
             
             Output.ToJson.WhenCallMatches(action => action.Returns<AjaxResponse>());
             Output.ToJson.WhenCallMatches(action => action.Returns<InPlaceAjaxResponse>());
-            Output.To(call => new RenderXMLNode(call.OutputType())).WhenCallMatches(action => action.Returns<XmlDocument>());
+            //Output.ToXml().WhenCallMatches(action => action.Returns<XmlResponse>());
+            Output.To(call => new RenderXMLNode(call.OutputType())).WhenCallMatches(action => action.Returns<XmlResponse>());
 
             Views.TryToAttach(x =>
                                   {
@@ -87,6 +93,15 @@ namespace Kokugen.Web
         }
     }
 
+    public static class FubuRegistryExtensions
+    {
+        public static ActionCallFilterExpression ToXml(this OutputDeterminationExpression expr)
+        {
+
+            return expr.To(call => new RenderXMLNode(call.OutputType()));
+            
+        }
+    }
 
     //public class KokugenViewAttachmentStrategy : IViewsForActionFilter
     //{

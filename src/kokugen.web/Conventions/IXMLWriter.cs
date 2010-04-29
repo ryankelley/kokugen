@@ -25,20 +25,20 @@ namespace Kokugen.Web.Conventions
 
         public void Write(XmlDocument output)
         {
-            var rawXMLOutput = output.ToString();
+            var rawXMLOutput = output.InnerXml;
 
-            if (_requestData.IsAjaxRequest())
-            {
+            //if (_requestData.IsAjaxRequest())
+            //{
                  _outputWriter.Write(MimeType.XML.ToString(), rawXMLOutput);
-            }
-            else
-            {
-                // For proper jquery.form plugin support of file uploads
-                // See the discussion on the File Uploads sample at http://malsup.com/jquery/form/#code-samples
-                string html = "<html><body><textarea rows=\"10\" cols=\"80\">" + rawXMLOutput +
-                    "</textarea></body></html>";
-                _outputWriter.Write(MimeType.Html.ToString(), html);
-            }
+            //}
+            //else
+            //{
+            //    // For proper jquery.form plugin support of file uploads
+            //    // See the discussion on the File Uploads sample at http://malsup.com/jquery/form/#code-samples
+            //    string html = "<html><body><textarea rows=\"10\" cols=\"80\">" + rawXMLOutput +
+            //        "</textarea></body></html>";
+            //    _outputWriter.Write(MimeType.Html.ToString(), html);
+            //}
         }
     }
 }
