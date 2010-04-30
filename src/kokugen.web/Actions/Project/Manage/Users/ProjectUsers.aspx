@@ -3,7 +3,7 @@
 
 <%@ Import Namespace="Kokugen.Web.Actions.Project.Manage.Users.Add" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-	<%=this.Script("jquery.metadata.js")%>
+	<%=this.Script("project/manage/custom.jquery.metadata.js")%>
     <%=this.Script("util.js") %>
     <%=this.Script("project/manage/view.js") %>
     <%=this.Script("project/manage/model.js")%>
@@ -123,7 +123,6 @@
         }
         .user-left-side ul
         {
-        	background-color:Red;
             height:100%;
         }
         div.role-body
@@ -150,7 +149,7 @@
 		.ui-sortable li { list-style: none;width:100%;}
 		.user-placeholder {background-color:blue; height:30px;}
 		ul.ui-sortable-hover {background-color:gray;}
-		ul.ui-sortable-error{background-color:red !important;}
+		ul.ui-sortable-error{background:#f1cece !important; color:#bb2222; border: 1px solid #f19696;}
 	    .ui-sortable-active{background-color:#B0B1B5;}
        
     </style>
