@@ -11,17 +11,6 @@ jQuery.extend({
 			helper : 'clone',
 			revert: 'invalid'
 		});
-
-		
-		
-		// $list.sortable({
-			// revert: true,
-			// placeholder: 'user-placeholder',
-			// forcePlaceHolderSize: true,
-			// receive : function (event, ui) {
-				// ui.item.remove();
-			// },
-		// });
 	},
 
 	View: function($list){
@@ -50,6 +39,16 @@ jQuery.extend({
 			$list.addClass('ui-sortable-error');
 		}
 		
+		this.showActive = function () {
+			$list.addClass('ui-sortable-active');
+		}
+
+		this.hideActive = function () {
+			$list.removeClass('ui-sortable-hover');
+			$list.removeClass('ui-sortable-error');
+			$list.removeClass('ui-sortable-active');
+		}
+
 		this.addItem = function (metadata){
 			var stringified = JSON.stringify(metadata);
 			var element = $("<li><span>");
@@ -68,7 +67,7 @@ jQuery.extend({
 			forcePlaceHolderSize: true,
 			connectWith: '.ui-sortable',
 			receive : function (event, ui) {
-				console.log('Receive ' + this.id);
+				log('Receive ' + this.id);
 				me.notifyReceived(ui.item, ui.sender);
 			},
 			over : function (event, ui) {
@@ -80,25 +79,29 @@ jQuery.extend({
 				$list.removeClass('ui-sortable-error');
 			},
 			remove : function (event, ui) {
-				console.log('Remove ' + this.id);
+				log('Remove ' + this.id);
 				me.notifyRemoved(ui.item, this);
 			},
 			stop: function(event, ui){
-				console.log('Stop ' + this.id);
+				log('Stop ' + this.id);
+				me.notifyStopped(ui.item, this);
 			},
 			beforeStop: function(event, ui){
-				console.log('BeforeStop ' + this.id);
+				log('BeforeStop ' + this.id);
 				me.notifyBeforeStopped(ui.item, this);
 			},
 			update: function(event, ui){
-				console.log('Update ' + this.id);
+				log('Update ' + this.id);
 			},
 			activate: function(event, ui){
-				console.log('Activate ' + this.id);
+				log('Activate ' + this.id);
+				me.notifyActivated(ui.item, this);
+				
 			},
 			deactivate : function(event, ui){
-				console.log('Deactivate ' + this.id);
-			}
+				log('Deactivate ' + this.id);
+				me.hideActive();
+		    }
 		});
 		
 		$list.droppable({
@@ -112,10 +115,21 @@ jQuery.extend({
 				$list.removeClass('ui-sortable-error');
 			},
 			drop: function (event, ui){
+				log('Drop ' + this.id);
 				$list.removeClass('ui-sortable-hover');
 				$list.removeClass('ui-sortable-error');
 				me.notifyDropped(ui.helper, this);
-			}
+			},
+			activeClass: 'ui-sortable-active',
+			activate: function(event, ui){
+				log('Activate ' + this.id);
+				me.notifyActivated(ui.helper, this);
+				
+			},
+			deactivate : function(event, ui){
+				log('Deactivate ' + this.id);
+				me.hideActive();
+		    }
 		});
 		
 		this.notifyReceived = function (item, sender){
@@ -154,6 +168,18 @@ jQuery.extend({
 			});
 		}
 		
+		this.notifyActivated = function (item, sender) {
+			$.each(listeners, function (i) {
+					listeners[i].onActivated(item, sender);
+			});
+		}
+		
+		function log(message) {
+			if(console != undefined){
+				console.log(message);
+			}
+		}
+		
 	},
 	
 	/**
@@ -167,6 +193,8 @@ jQuery.extend({
 			onRemoved : function (){},
 			onDropped : function () {},
 			onBeforeStopped : function(){},
+			onActivated: function(){},
+			onStopped: function () {},
 			removeUserClicked : function (ui) { },
 			addUserClicked : function () { }
 		}, list);

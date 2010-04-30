@@ -4,3 +4,4 @@
 .user-placeholder {background-color:blue; height:30px;}
 ul.ui-sortable-hover {background-color:gray;}
 ul.ui-sortable-error{background-color:red !important;}
+.ui-sortable-active{background-color:#B0B1B5;}

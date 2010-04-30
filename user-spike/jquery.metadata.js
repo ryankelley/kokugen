@@ -79,9 +79,9 @@ $.extend({
       // check for empty string in single property
       if ( !settings.single.length ) settings.single = 'metadata';
       
-      //var data = $.data(elem, settings.single);
+      var data = $.data(elem, settings.single);
       // returned cached data if it already exists
-      //if ( data ) return data;
+      if ( data ) return data;
       
       data = "{}";
       
@@ -126,7 +126,7 @@ $.extend({
         object = getObject(data.indexOf("{") < 0 ? "{" + data + "}" : data);
       }
       
-      //$.data( elem, settings.single, object );
+      $.data( elem, settings.single, object );
       return object;
     }
   }

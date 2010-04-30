@@ -54,28 +54,26 @@ jQuery.extend({
 					view.indicateError();
 				}
 			},
-			onRemoved : function (item, sender) {
-				
-				log('OH you removed me! item: ' + $(item).html() + ' sender: ' + sender.id );
-				
+			onActivated : function (item, sender){
 				var itemmetadata = getMetadata(item);
-				if(itemmetadata && itemmetadata.Id){
-					//model.removeUser(itemmetadata);
+				
+				if(!model.canAdd(itemmetadata)){
+					view.indicateError();
 				}else{
-					log("error occured on remove - no metadata!");
+					view.showActive();
 				}
 			},
-			onBeforeStopped : function (item, sender){
-			
-				log('Should I stop? item: ' + $(item).html() + ' sender: ' + sender.id );
-				
+			onStopped : function (item, sender) {
 				var itemmetadata = getMetadata(item);
-				if(itemmetadata && itemmetadata.Id){
-					log("Stopped: " + itemmetadata.Id);
-					
-					if(!model.canAdd(itemmetadata)){
-						//$(sender).sortable("cancel");
-					}
+				
+				// get the child element count
+				//if child element count is less that model.count
+				//remove the user
+				
+				var elementCount = sender.childElementCount;
+				
+				if(model.getCount() > elementCount){
+					model.removeUser(itemmetadata);
 				}
 			}
 		});
@@ -103,14 +101,18 @@ jQuery.extend({
 			
 		});
 		model.addListener(mlist);
+		
+		function log(message) {
+			if(console){
+				console.log(message);
+			}
+		}
 	}
+	
+	
 	
 	
 });
 
-function log(message) {
-		if(console){
-			//console.log(message);
-		}
-	}
+
 

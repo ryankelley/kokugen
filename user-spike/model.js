@@ -13,15 +13,8 @@ jQuery.extend({
 		 */
 		var listeners = new Array();
 		
-		/**
-		 * get contents of cache into an array
-		 */
-		function toArray(){
-			var a = new Array();
-			for (var i in cache){
-				a.push(cache[i]);
-			}
-			return a;
+		this.getCount = function () {
+			return cache.toArray().length;
 		}
 		
 		/**
@@ -36,7 +29,7 @@ jQuery.extend({
 		}
 		
 		this.getAll = function () {
-			var outCache = toArray();
+			var outCache = cache.toArray();
 			if(outCache.length) return outCache;
 			
 			me.notifyLoadBegin();
