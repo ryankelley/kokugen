@@ -5,12 +5,11 @@ jQuery.extend({
 		var me = this;
 		
 		var listeners = new Array();
-	
-
-		
+			
 		$('.ui-draggable', $list).draggable({
-			connectToSortable : '.ui-sortable',
-			helper : 'clone'
+			//connectToSortable: '.ui-sortable',
+			helper : 'clone',
+			revert: 'invalid'
 		});
 
 		
@@ -43,23 +42,37 @@ jQuery.extend({
 		this.addListener = function(list){
 			listeners.push(list);
 		}
+		
+		/**
+		* public methods
+		*/
+		this.indicateError = function () {
+			$list.addClass('ui-sortable-error');
+		}
+		
+		this.addItem = function (metadata){
+			var stringified = JSON.stringify(metadata);
+			var element = $("<li><span>");
+			element.find('span').text(metadata.Name);
+			element.attr('data',stringified);
+			$list.append(element);
+		}
 
+		
+		/**
+		*  set up listeners
+		*/
 		$list.sortable({
 			revert: true,
 			placeholder: 'user-placeholder',
 			forcePlaceHolderSize: true,
 			connectWith: '.ui-sortable',
 			receive : function (event, ui) {
-				me.notifyReceived(ui, this)
-			},
-			stop : function (event, ui) {
-				me.notifyStopped(ui, this);
-			},
-			beforeStop: function (event, ui) {
-				me.notifyBeforeStopped(ui, this);
+				console.log('Receive ' + this.id);
+				me.notifyReceived(ui.item, ui.sender);
 			},
 			over : function (event, ui) {
-				me.notifyOver(ui, this);
+				me.notifyOver(ui.item, this);
 				$list.addClass('ui-sortable-hover');
 			},
 			out : function (event, ui) {
@@ -67,44 +80,79 @@ jQuery.extend({
 				$list.removeClass('ui-sortable-error');
 			},
 			remove : function (event, ui) {
-				me.notifyRemoved(ui, this);
+				console.log('Remove ' + this.id);
+				me.notifyRemoved(ui.item, this);
+			},
+			stop: function(event, ui){
+				console.log('Stop ' + this.id);
+			},
+			beforeStop: function(event, ui){
+				console.log('BeforeStop ' + this.id);
+				me.notifyBeforeStopped(ui.item, this);
+			},
+			update: function(event, ui){
+				console.log('Update ' + this.id);
+			},
+			activate: function(event, ui){
+				console.log('Activate ' + this.id);
+			},
+			deactivate : function(event, ui){
+				console.log('Deactivate ' + this.id);
 			}
 		});
 		
-		this.indicateError = function () {
-			$list.addClass('ui-sortable-error');
-		}
+		$list.droppable({
+			accept: '.ui-draggable',
+			over : function (event, ui) {
+				me.notifyOver(ui.draggable, this);
+				$list.addClass('ui-sortable-hover');
+			},
+			out : function (event, ui) {
+				$list.removeClass('ui-sortable-hover');
+				$list.removeClass('ui-sortable-error');
+			},
+			drop: function (event, ui){
+				$list.removeClass('ui-sortable-hover');
+				$list.removeClass('ui-sortable-error');
+				me.notifyDropped(ui.helper, this);
+			}
+		});
 		
-		this.notifyReceived = function (ui, origin){
+		this.notifyReceived = function (item, sender){
 			$.each(listeners, function (i) {
-					listeners[i].onReceived(ui, origin);
+					listeners[i].onReceived(item, sender);
 			});
 		}
 		
-		this.notifyStopped = function (ui, origin) {
+		this.notifyStopped = function (item, sender) {
 			$.each(listeners, function (i) {
-					listeners[i].onStopped(ui, origin);
+					listeners[i].onStopped(item, sender);
 			});
 		}
 		
-		this.notifyBeforeStopped = function (ui, origin) {
+		this.notifyBeforeStopped = function (item, sender) {
 			$.each(listeners, function (i) {
-					listeners[i].onBeforeStopped(ui, origin);
+					listeners[i].onBeforeStopped(item, sender);
 			});
 		}
 		
-		this.notifyOver = function (ui, origin) {
+		this.notifyOver = function (item, sender) {
 			$.each(listeners, function (i) {
-					listeners[i].onOver(ui, origin);
+					listeners[i].onOver(item, sender);
 			});
 		}
 		
-		this.notifyRemoved = function (ui, origin) {
+		this.notifyRemoved = function (item, sender) {
 			$.each(listeners, function (i) {
-					listeners[i].onRemoved(ui, origin);
+					listeners[i].onRemoved(item, sender);
 			});
 		}
 		
+		this.notifyDropped = function (item, sender) {
+			$.each(listeners, function (i) {
+					listeners[i].onDropped(item, sender);
+			});
+		}
 		
 	},
 	
@@ -115,10 +163,10 @@ jQuery.extend({
 		if(!list) list = {};
 		return $.extend({
 			onReceived : function(ui, origin) { },
-			onStopped: function (ui, origin) {},
-			onBeforeStopped: function(ui, origin){},
 			onOver : function () {},
 			onRemoved : function (){},
+			onDropped : function () {},
+			onBeforeStopped : function(){},
 			removeUserClicked : function (ui) { },
 			addUserClicked : function () { }
 		}, list);

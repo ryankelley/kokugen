@@ -1,49 +1,83 @@
 jQuery.extend({
 
 	Controller: function(model, view){
+		
+		function getMetadata(item) {
+			return item.metadata({ type : 'attr', name : 'data'  });
+		}
+		
 		/**
 		 * listen to the view
 		 */
 		var vlist = $.ViewListener({
 
-			onReceived : function (data, origin) {
-				log('I received it!  sender: ' + $(data.sender).attr('id') + ' me: ' + origin.id);
+			onReceived : function (item, sender) {
+			
+				log('I received it!  item: ' + $(item).html() + ' sender: ' + $(sender).attr('id'));
 				
-				
-				
-				var itemMetadata = data.item.metadata({ type : 'attr', name : 'data'  });
-				if(itemMetadata && itemMetadata.Id){
-					log("Received: " + itemMetadata.Id);
+				var itemmetadata = getMetadata(item);
+				if(itemmetadata && itemmetadata.Id){
+					log("Received: " + itemmetadata.Id);
 					
-					if(model.canAdd(itemMetadata)){
-						model.addUser(itemMetadata);
+					if(model.canAdd(itemmetadata)){
+						model.addUser(itemmetadata);
 					}else{
-						data.sender.sortable("cancel");
+						sender.sortable("cancel");
+						log("model can not be added");
 					}
 				}else{
 					log("error occured on receive - no metadata!");
 				}
 			},
-			onStopped : function (data, origin) {
-				log('I stopped helper: ' + $(data.helper).html() + ' me: ' + origin.id);
+			onDropped : function (item, sender) {
+			
+				log('Hey! you dropped me... item: ' + $(item).html() + ' sender: ' + sender.id);
+				
+				var itemmetadata = getMetadata(item);
+				if(itemmetadata && itemmetadata.Id){
+					log("Dropped: " + itemmetadata.Id);
+					
+					if(model.canAdd(itemmetadata)){
+						model.addUser(itemmetadata);
+						view.addItem(itemmetadata);
+					}else{
+						item.remove();
+					}
+				}
 			},
-			onOver : function (data, origin) {
-				log('OH you hovered me! helper: ' + $(data.helper).html() + ' sender: ' + $(data.sender).attr('id') + ' me: ' + origin.id );
-				var itemMetadata = data.item.metadata({ type : 'attr', name : 'data'  });
-				if(!model.canAdd(itemMetadata)){
+			onOver : function (item, sender) {
+				
+				log('OH you hovered me! item: ' + $(item).html() + ' sender: ' + sender.id );
+				
+				var itemmetadata = getMetadata(item);
+				if(!model.canAdd(itemmetadata)){
 					view.indicateError();
 				}
 			},
-			onRemoved : function (data, origin) {
-				log('OH you removed me! item: ' + $(data.item).html() + ' me: ' + origin.id );
-				var itemMetadata = data.item.metadata({ type : 'attr', name : 'data'  });
-				if(itemMetadata && itemMetadata.Id){
-					model.removeUser(itemMetadata);
+			onRemoved : function (item, sender) {
+				
+				log('OH you removed me! item: ' + $(item).html() + ' sender: ' + sender.id );
+				
+				var itemmetadata = getMetadata(item);
+				if(itemmetadata && itemmetadata.Id){
+					//model.removeUser(itemmetadata);
 				}else{
 					log("error occured on remove - no metadata!");
 				}
+			},
+			onBeforeStopped : function (item, sender){
+			
+				log('Should I stop? item: ' + $(item).html() + ' sender: ' + sender.id );
+				
+				var itemmetadata = getMetadata(item);
+				if(itemmetadata && itemmetadata.Id){
+					log("Stopped: " + itemmetadata.Id);
+					
+					if(!model.canAdd(itemmetadata)){
+						//$(sender).sortable("cancel");
+					}
+				}
 			}
-		
 		});
 		view.addListener(vlist);
 
@@ -52,7 +86,7 @@ jQuery.extend({
 		 */
 		var mlist = $.ModelListener({
 			loadBegin : function() {
-				log("Fetching Data...");
+				log("Fetching item...");
 			},
 			loadFail : function() {
 				log("ajax error");
@@ -63,8 +97,8 @@ jQuery.extend({
 			loadItem : function(item){
 				log("from ajax: " + item.name);
 			},
-			onAddSuccessful : function (data) {
-				log("added it! id: " + $(data).html());
+			onAddSuccessful : function (item) {
+				log("added it! id: " + item.Id);
 			}
 			
 		});
@@ -76,7 +110,7 @@ jQuery.extend({
 
 function log(message) {
 		if(console){
-			console.log(message);
+			//console.log(message);
 		}
 	}
 
