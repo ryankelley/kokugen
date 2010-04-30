@@ -155,6 +155,10 @@
     <Content Include="Content\Scripts\cardEdit.js" />
     <Content Include="Content\Scripts\company.js" />
     <Content Include="Content\Scripts\projectusers.js" />
+    <Content Include="Content\Scripts\Project\Manage\controller.js" />
+    <Content Include="Content\Scripts\Project\Manage\model.js" />
+    <Content Include="Content\Scripts\util.js" />
+    <Content Include="Content\Scripts\Project\Manage\view.js" />
     <Content Include="Content\Scripts\task.js" />
     <Content Include="Content\Scripts\dovetail.editing.js" />
     <Content Include="Content\Scripts\jquery.jeditable.js" />

@@ -3,73 +3,100 @@
 
 <%@ Import Namespace="Kokugen.Web.Actions.Project.Manage.Users.Add" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <%=this.Script("projectusers.js") %>
+	<%=this.Script("jquery.metadata.js")%>
+    <%=this.Script("util.js") %>
+    <%=this.Script("project/manage/view.js") %>
+    <%=this.Script("project/manage/model.js")%>
+    <%=this.Script("project/manage/controller.js")%>
+	
     <script type="text/javascript">
-      $(function () {
-
-             // bind resizing
-        $(window).resize(setUserColumnHeight);
-
-        // Set the initial height of the sortables based on window size
-        setUserColumnHeight();
-
-        function setUserColumnHeight(){
-            $('#project-users-list').attr("style","height:"+ $(window).height() + "px;");
-        };
-
-            var users = <%=Model.Users.ToJson() %>;
+        var manageUsersUi = function (users, roles) {
             
-            for(var i in users){
-                var user = new User(users[i]);
+            var userView = new $.UserView($('#users-list'));
 
-                _users.push(user);
-
-                $('#project-users-list').append(buildUserWidget(user));
-            }
-
-            $('#add-user').ajaxDialog({onComplete:addUserToList,dataType:'json'});
-
-            function addUserToList(data){
-                var $data = JSON.parse(data);
-                if($data.Success){
-                    var user = new User($data.Item);
-                    _users.push(user);
-                    var widget = buildUserWidget(user);
-                    makeDraggable(widget);
-                    $('#project-users-list').append(widget);
-                }else{
-                    $.jGrowl('Error occured adding the user to the project!', {sticky:true,theme:'jgrowl-error'});
-                }
+            var callBackFunction = function (response) {
+                userView.addUser(response.Item);
             };
 
-            var roles = <%=Model.Roles.ToJson() %>;
-
-            for(var i in roles){
-                var role = new Role(roles[i]);
-
-                _roles.push(role);
-
-                var widget = buildRoleWidget(role);
-                $('#role-widget-list').append(widget);
-            }
-
-
-            $(".ui-draggable").each(function(){makeDraggable(this);});
-            $(".ui-sortable").disableSelection();
-
-            function makeDraggable(element){
-                $(element).draggable({
-                connectToSortable:".ui-sortable", 
-                helper: function(element, ui){
-                    return buildUserWidget($(element.currentTarget).data('User'));
-                }, 
-                revert:'invalid',
-                start:function(event, ui){
-                    $(ui.helper).find('.delete').remove();
-                }
-            });
+            var setupEvents = function (){
+                $('#add-user').ajaxDialog({
+                    onComplete: callBackFunction,
+                    dataType: 'json'
+                });
             };
-      });
+
+            var setupUserView = function (){
+                $.each(users, function(i){
+                    userView.addUser(users[i]); 
+                });
+            };
+			
+			var setupRoleWidgets = function () {
+				 $.each(roles, function(i){
+					$('#role-widget-list').append(buildRoleWidget(roles[i]));
+                });
+			}
+
+            var pageLoadOperations = function () {
+                setupUserView();
+                setupEvents();
+				setupRoleWidgets();
+            };
+			
+			var buildRoleWidget = function (role) {
+
+				this.myRole = role;
+
+				var element = document.createElement('li');
+				$(element).addClass('role-wrapper');
+
+				var head = document.createElement('div');
+				$(head).addClass('role-header').html(role.Name);
+
+				var body = document.createElement('div');
+				$(body).addClass('role-body');
+
+				var foot = document.createElement('div');
+				$(foot).addClass('role-footer');
+
+
+				var userContainer = document.createElement('ul');
+				$(userContainer).addClass('ui-sortable');
+
+				$(userContainer).sortable({
+					revert: true,
+					placeholder: 'user-placeholder',
+					forcePlaceholderSize: true,
+					connectWith: '.ui-sortable'
+				});
+
+				body.appendChild(userContainer);
+				
+				var view = new $.View($(userContainer));
+				var model = new $.Model();
+				var controller = new $.Controller(model, view);
+				
+				element.appendChild(head);
+				element.appendChild(body);
+				element.appendChild(foot);
+
+				return element;
+			};
+
+            return {
+                init:pageLoadOperations
+            };
+
+        }
+        
+
+        $(function () {
+            var users = <%=Model.Users.ToJson() %>;
+			var roles = <%=Model.Roles.ToJson() %>;
+			
+            var ui = new manageUsersUi(users, roles);
+            ui.init();
+        });
 
     </script>
     <style type="text/css">
@@ -119,17 +146,22 @@
 
         .ui-draggable { padding:5px;}
         .ui-sortable > .user > .delete {display:none;}
-
+		.ui-sortable li span { width:100%;}
+		.ui-sortable li { list-style: none;width:100%;}
+		.user-placeholder {background-color:blue; height:30px;}
+		ul.ui-sortable-hover {background-color:gray;}
+		ul.ui-sortable-error{background-color:red !important;}
+	    .ui-sortable-active{background-color:#B0B1B5;}
        
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="mainContent" runat="server">
-<div id="manage-users-wrapper">
+<div id="ui">
     <div id="project-users-toolbar">
         <%=this.LinkTo(new AddUserToProjectRequest(){Id = Model.ProjectId}).Text("Add User").Id("add-user")%></div>
     
         <div class="user-left-side">
-           <ul id="project-users-list">
+           <ul id="users-list">
 
             </ul>
         </div>
