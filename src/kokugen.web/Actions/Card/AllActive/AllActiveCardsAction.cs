@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using AutoMapper;
+using FubuMVC.Core;
 using Kokugen.Core.Services;
 using Kokugen.Web.Actions.Card.Lists;
 
@@ -15,7 +16,7 @@ namespace Kokugen.Web.Actions.Card.AllActive
             _projectService = projectService;
         }
 
-        public AjaxResponse Command(ActiveCardsRequest model)
+        public AjaxResponse Execute(ActiveCardsRequest model)
         {
             var project = _projectService.GetProjectFromId(model.Id);
 
@@ -31,6 +32,7 @@ namespace Kokugen.Web.Actions.Card.AllActive
 
     public class ActiveCardsRequest
     {
+        [QueryString]
         public Guid Id { get; set; }
     }
 }

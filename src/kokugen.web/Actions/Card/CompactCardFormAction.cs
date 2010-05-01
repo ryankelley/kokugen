@@ -45,6 +45,7 @@ namespace Kokugen.Web.Actions.Card
             if (notification.IsValid())
             {
                 card.Column = project.Backlog;
+                card.ColumnChanged(null, card.Column);
                 project.AddCard(card);
                 _projectService.SaveProject(project);
                 var output = new CardViewDTO();

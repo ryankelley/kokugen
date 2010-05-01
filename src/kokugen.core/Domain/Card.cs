@@ -16,6 +16,7 @@ namespace Kokugen.Core.Domain
         public virtual string Title { get; set; }
 
         private IList<Task> _tasks = new List<Task>();
+        private IList<CardActivity> _activities = new List<CardActivity>();
 
         public virtual int CardNumber { get; set; }
 
@@ -52,6 +53,7 @@ namespace Kokugen.Core.Domain
         }
 
         public virtual BoardColumn Column { get; set; }
+
         public virtual int CardOrder { get; set; }
         public virtual string BlockReason { get; set; }
 
@@ -74,6 +76,120 @@ namespace Kokugen.Core.Domain
                 _tasks.Remove(task);
         }
 
+        public virtual IEnumerable<CardActivity> GetActivities()
+        {
+            return _activities.AsEnumerable();
+        }
+
+        public virtual void AddActivity(CardActivity activity)
+        {
+            if(_activities.Contains(activity)) return;
+
+            activity.Card = this;
+            _activities.Add(activity);
+        }
+
+        public virtual void RemoveActivity(CardActivity activity)
+        {
+            if (_activities.Contains(activity))
+                _activities.Remove(activity);
+        }
+
+        public virtual void StartWorking()
+        {
+            var lastActivity = _activities.Where(x => x.EndTime == null && x.ActivityId != ActivityType.Column.Value).FirstOrDefault();
+
+            if (lastActivity != null && lastActivity.Status == ActivityType.Idle)
+            {
+                lastActivity.EndTime = DateTime.Now;
+                AddActivity(new CardActivity {StartTime = DateTime.Now, Status = ActivityType.Working});
+            }
+            else if(lastActivity == null)
+                AddActivity(new CardActivity { StartTime = DateTime.Now, Status = ActivityType.Working });
+        }
+
+        public virtual void StopActivity()
+        {
+            var lastActivity = _activities.Where(x => x.EndTime == null && x.ActivityId != ActivityType.Column.Value).FirstOrDefault();
+            if (lastActivity != null) lastActivity.EndTime = DateTime.Now;
+        }
+
+        public virtual void StartIdle()
+        {
+            var lastActivity = _activities.Where(x => x.EndTime == null && x.ActivityId != ActivityType.Column.Value).FirstOrDefault();
+
+            if (lastActivity != null && lastActivity.Status == ActivityType.Working)
+            {
+                lastActivity.EndTime = DateTime.Now;
+                AddActivity(new CardActivity { StartTime = DateTime.Now, Status = ActivityType.Idle });
+            }
+            else if (lastActivity == null)
+                AddActivity(new CardActivity { StartTime = DateTime.Now, Status = ActivityType.Idle });
+        }
+
+        public virtual void ColumnChanged(BoardColumn oldColumn, BoardColumn newColumn)
+        {
+            var lastActivity = _activities.Where(x => x.EndTime == null && x.ActivityId == ActivityType.Column.Value).FirstOrDefault();
+            if (lastActivity != null) lastActivity.EndTime = DateTime.Now;
+
+            AddActivity(new CardActivity {StartTime = DateTime.Now, Status = ActivityType.Column, Leaving = oldColumn, Entering = newColumn});
+        }
+
+        public virtual TimeSpan TotalWorkTime()
+        {
+            var activities = _activities.Where(x => x.Status == ActivityType.Working && x.EndTime != null).ToList();
+            var totalTime = new TimeSpan();
+            return activities.Aggregate(totalTime, (current, cardActivity) => current + (cardActivity.EndTime.Value - cardActivity.StartTime));
+        }
+
+        public virtual TimeSpan TotalIdleTime()
+        {
+            var activities = _activities.Where(x => x.Status == ActivityType.Idle && x.EndTime != null).ToList();
+            var totalTime = new TimeSpan();
+            return activities.Aggregate(totalTime, (current, cardActivity) => current + (cardActivity.EndTime.Value - cardActivity.StartTime));
+        }
+    }
+
+    public class CardActivity : Entity
+    {
+        public virtual DateTime StartTime { get; set; }
+        public virtual DateTime? EndTime { get; set; }
+        public virtual decimal Duration { get; set; }
+        public virtual Card Card { get; set; }
+
+        private int _activityId;
+        public virtual int ActivityId
+        {
+            get { return _activityId; }
+            set { _activityId = value; }
+        }
+
+        public virtual ActivityType Status
+        {
+            get { return Enumeration.FromValue<ActivityType>(_activityId); }
+            set { _activityId = value.Value; }
+        }
+
+        public virtual BoardColumn Leaving { get; set; }
+
+        public virtual BoardColumn Entering { get; set; }
+    }
+
+    public class ActivityType : Enumeration
+    {
+        public static ActivityType Working = new ActivityType(1, "Working");
+        public static ActivityType Idle = new ActivityType(2, "Idle");
+        public static ActivityType Column = new ActivityType(3, "Column");
+
+        private ActivityType(int id, string name) : base(id,name)
+        {
+            
+        }
+
+        public ActivityType()
+        {
+            
+        }
     }
 
     public class CardStatus : Enumeration

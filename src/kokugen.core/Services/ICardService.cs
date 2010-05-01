@@ -4,6 +4,8 @@ using System.Linq;
 using Kokugen.Core.Domain;
 using Kokugen.Core.Persistence.Repositories;
 using Kokugen.Core.Validation;
+using NHibernate;
+using NHibernate.Criterion;
 
 namespace Kokugen.Core.Services
 {
@@ -15,6 +17,7 @@ namespace Kokugen.Core.Services
         Card GetCard(Guid id);
         bool ReOrderCards(List<CardViewDTO> cards);
         Card CreateCard(Card card, Project project, User user);
+        IEnumerable<Card> GetCompleteCards(Project project);
     }
 
     public class CardService : ICardService
@@ -22,12 +25,14 @@ namespace Kokugen.Core.Services
         private readonly ICardRepository _cardRepository;
         private readonly IValidator _validator;
         private readonly IProjectService _projectService;
+        private readonly ISession _session;
 
-        public CardService(ICardRepository cardRepository, IValidator validator, IProjectService projectService)
+        public CardService(ICardRepository cardRepository, IValidator validator, IProjectService projectService, ISession session)
         {
             _cardRepository = cardRepository;
             _validator = validator;
             _projectService = projectService;
+            _session = session;
         }
 
         public IEnumerable<Card> GetCards()
@@ -37,7 +42,11 @@ namespace Kokugen.Core.Services
 
         public IEnumerable<Card> GetCards(Project project)
         {
-            return _cardRepository.Query().Where(c => c.Project == project);
+            return _session.CreateCriteria<Card>()
+               .SetFetchMode("GetTasks", FetchMode.Eager)
+               .Add(NHibernate.Criterion.Expression.Eq("Project", project))
+                .List<Card>();
+            //return _cardRepository.Query().Where(c => c.Project == project);
         }
 
         public INotification SaveCard(Card card)
@@ -89,6 +98,15 @@ namespace Kokugen.Core.Services
             newcard.CardNumber = lastCard == null ? 1 : lastCard.CardNumber + 1;
 
             return newcard;
+        }
+
+        public IEnumerable<Card> GetCompleteCards(Project project)
+        {
+            return _session.CreateCriteria<Card>()
+               .SetFetchMode("GetActivities", FetchMode.Eager)
+               .Add(Restrictions.Eq("Project", project))
+               .Add(Restrictions.IsNotNull("DateCompleted"))
+                .List<Card>();
         }
     }
 }

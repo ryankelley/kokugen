@@ -136,6 +136,7 @@
     <Content Include="Actions\DailyTimeRecord\List.aspx" />
     <Content Include="Actions\DailyTimeRecord\DailyTimeRecord_Control.ascx" />
     <Content Include="Actions\Errors\FourZeroThree.aspx" />
+    <Content Include="Actions\Metrics\Get.aspx" />
     <Content Include="Actions\Project\Manage\Users\ProjectUsers.aspx" />
     <Content Include="Actions\Project\MenuList\ProjectMenu.aspx" />
     <Content Include="Actions\Project\Manage\Users\Add\AddUserToProject.aspx" />
@@ -151,6 +152,7 @@
     <Content Include="Content\images\magnify16.png" />
     <Content Include="Content\images\move16.png" />
     <Content Include="Content\images\spite.png" />
+    <Content Include="Content\images\start.png" />
     <Content Include="Content\images\task16.png" />
     <Content Include="Content\Scripts\cardEdit.js" />
     <Content Include="Content\Scripts\company.js" />
@@ -203,6 +205,8 @@
     <Compile Include="Actions\Card\Ready\CardReadyAction.cs" />
     <Compile Include="Actions\Card\ReOrder\ReOrderAction.cs" />
     <Compile Include="Actions\Card\UpdateAction.cs" />
+    <Compile Include="Actions\DailyTimeRecord\AddAction.cs" />
+    <Compile Include="Actions\DailyTimeRecord\StopAction.cs" />
     <Compile Include="Actions\DailyTimeRecord\View_Page_Type_Declarations.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -255,6 +259,9 @@
     <Compile Include="Actions\Home\IndexAction.cs" />
     <Compile Include="Actions\Account\Login\LoginAction.cs" />
     <Compile Include="Actions\Account\Login\LoginFormAction.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Actions\Metrics\GetAction.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Actions\ProjectBaseViewModel.cs" />
