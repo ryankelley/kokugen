@@ -20,7 +20,8 @@ namespace Kokugen.Core.Persistence.Repositories
 
         public IEnumerable<CumalitiveFlowData> GetCumalitiveFlowForProject(Guid projectId)
         {
-            return ExecuteStoredProcedure(flowDataConverter, "GetCumalitiveFlowForProject", new[] {new Parameter("projectId", projectId)}).ToList();
+            var parameters = new Parameter[] { new Parameter("projectId", projectId) };
+            return ExecuteStoredProcedure(flowDataConverter, "GetCumalitiveFlowForProject", parameters).ToList();
         }
 
         private CumalitiveFlowData flowDataConverter(SafeDataReader input)
