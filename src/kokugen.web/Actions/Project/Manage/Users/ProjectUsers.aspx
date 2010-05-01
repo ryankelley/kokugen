@@ -100,19 +100,19 @@
 
     </script>
     <style type="text/css">
-        .user {width:230px; font-size:1.1em;}
+        .user {width:300px; font-size:1.1em;cursor:-moz-grab;}
         .user > * {display:inline;}
-        
+        .grip{cursor:-moz-grabbing;}
         .user-left-side
         {
         	float: left;
             height: 100%;
-            width: 250px;
+            width: 300px;
             
         }
         .user-role-area
         {
-           margin-left:-250px;
+           margin-left:-300px;
             height: 100%;
             overflow:hidden;
         }
@@ -146,7 +146,7 @@
         .ui-draggable { padding:5px;}
         .ui-sortable > .user > .delete {display:none;}
 		.ui-sortable li span { width:100%;}
-		.ui-sortable li { list-style: none;width:100%;}
+		.ui-sortable li { list-style: none;}
 		.user-placeholder {background-color:blue; height:30px;}
 		ul.ui-sortable-hover {background-color:gray;}
 		ul.ui-sortable-error{background:#f1cece !important; color:#bb2222; border: 1px solid #f19696;}

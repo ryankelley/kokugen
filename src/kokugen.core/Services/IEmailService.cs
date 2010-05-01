@@ -32,7 +32,13 @@ namespace Kokugen.Core.Services
         public void SendEmail(string to, string from, string subject, string body)
         {
             var msg = new MailMessage(from, to, subject, body){IsBodyHtml = true};
-            _smtpClient.Send(msg);
+            // todo fix this because I dont want to swallow exceptions
+            try
+            {
+                _smtpClient.Send(msg);
+            }catch
+            {
+            }
         }
 
         #endregion

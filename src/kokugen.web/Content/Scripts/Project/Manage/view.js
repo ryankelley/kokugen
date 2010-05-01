@@ -1,4 +1,76 @@
 jQuery.extend({
+    
+	UserWidget : function (user, canDelete) {
+		var me = this;
+		
+		var listeners = new Array();
+		
+		/**
+		 * add a listener to this view
+		 */
+		this.addListener = function(list){
+			listeners.push(list);
+		}
+		
+		this.myUser = user;
+
+		var element = document.createElement('li');
+		var $element = $(element);
+
+		$element
+			.addClass("user")
+			.addClass(user.Id)
+			.attr('data',JSON.stringify(user))
+			.append("<span class='display'>" + user.DisplayName);
+
+		if (user.IsOwner) {
+			$element
+				.find(".display")
+				.append("<em class='isOwner'>(Owner)");
+		} 
+		
+		if(canDelete) {
+			//append delete from project button 
+
+			var deleteLink = document.createElement('a');
+			deleteLink.setAttribute("href", "#");
+			$(deleteLink)
+				.addClass('delete')
+				.css('display',"inline")
+				.html('<img style="float:right;" src="/content/images/btn-delete24.png" alt="delete"/>')
+				.hide();
+
+			$element.hover(function () {
+				$(this).find('.delete').show();
+			},
+			function () {
+				$(this).find('.delete').hide();
+			});
+
+
+			$(deleteLink).click(function () {
+				me.notifyDeleteClicked(me.myUser.Id);
+				return false;
+			});
+
+			element.appendChild(deleteLink);
+		}
+		
+		this.notifyDeleteClicked = function (id) {
+			$.each(listeners, function (i) {
+					listeners[i].removeUserClicked(id);
+			});
+		}
+
+
+		$element
+			.append('<img class="gravatar" style="float:left; padding:0 5px;" src="' + 'http://gravatar.com/avatar/' + 					user.GravatarHash + '?s=27" alt="Gravatar Icon" />');
+
+
+
+		return element;
+    },
+
 
 	UserView : function ($list) {
 		
@@ -7,93 +79,39 @@ jQuery.extend({
 		var listeners = new Array();
 		
 		this.addUser = function (user) {
-			 var widget = buildUserWidget(user);
-			 $(widget).draggable({
+			 var widget = new $.UserWidget(user, (!user.IsOwner));
+			 
+			 $(widget).addClass('ui-draggable').draggable({
 				//connectToSortable: '.ui-sortable',
 				helper : 'clone',
-				revert: 'invalid'
+				revert: 'invalid',
+				start : function (event, ui) {
+					ui.helper.find('.delete').hide();
+					ui.helper.addClass('grip');
+				}
 
 			});
 			
 			$list.append(widget);
 			
+			// lets listen to the user widgets from the left side
+			// is this the right place for this???
+			var widgetListener = $.ViewListener({
+				removeUserClicked : function (id) {
+					me.notifyDeleteClicked(id);
+				}
+			});
+			
 		}
 		
-		var buildUserWidget = function (user) {
-
-			var me = this;
-			this.myUser = user;
-
-			var element = document.createElement('li');
-			var $element = $(element);
-
-			$element
-				.addClass("user ui-draggable")
-				.addClass(user.Id)
-				.attr('data',JSON.stringify(user))
-				.append("<span class='display'>" + user.DisplayName);
-
-			if (user.IsOwner) {
-				$element
-					.find(".display")
-					.append("<em class='isOwner'>(Owner)");
-			} else {
-				//append delete from project button 
-
-				var deleteLink = document.createElement('a');
-				deleteLink.setAttribute("href", user.DeleteUrl);
-				$(deleteLink)
-					.addClass('delete')
-					.css('display',"inline")
-					.html('<img style="float:right;" src="/content/images/btn-delete24.png" alt="delete"/>')
-					.hide();
-
-				$element.hover(function () {
-					$(this).find('.delete').show();
-				},
-				function () {
-					$(this).find('.delete').hide();
-				});
-
-				$element.hover(function () {
-						$(this).find('.ui-icon').fadeIn();
-					},
-					function () {
-						$(this).find('.ui-icon').fadeOut();
-				});
-				
-				// this is dirty move to a controller
-				$(deleteLink).click(function (e) {
-					e.preventDefault();
-					$.ajax({
-						url: this.href,
-						data: { ProjectId: self.myUser.ProjectId, UserId: self.myUser.Id },
-						success: removeUserFromDisplay,
-						dataType: "json",
-						type: "DELETE"
-					});
-				});
-
-				element.appendChild(deleteLink);
-			}
-
-			function removeUserFromDisplay(response) {
-				if (response.Success) {
-					$('.'+self.myUser.Id).remove();
-				}
-				else {
-					$.jGrowl('You cannot remove this user', { theme: 'jgrowl-error' });
-				}
-			};
-
-			$element
-				.append('<img class="gravatar" style="float:left; padding:0 5px;" src="' + 'http://gravatar.com/avatar/' + 					user.GravatarHash + '?s=27" alt="Gravatar Icon" />');
-
-
-
-			return element;
-		};
-
+		// here we want to tell the controller that the user wants to completely remove the user 
+		// from the project
+		this.notifyDeleteClicked = function (id) {
+			$.each(listeners, function (i) {
+					listeners[i].removeUserClicked(id);
+			});
+		}
+		
 	},
 
 	View: function($list){
@@ -133,10 +151,16 @@ jQuery.extend({
 		}
 
 		this.addItem = function (metadata){
-			var stringified = JSON.stringify(metadata);
-			var element = $("<li><span>");
-			element.find('span').text(metadata.DisplayName);
-			element.attr('data',stringified);
+			var element = new $.UserWidget(metadata, true);
+			
+			// lets listen to the widget added to my list
+			// is this the right place for this???
+			var widgetListener = $.ViewListener({
+				removeUserClicked : function (id) {
+					me.notifyDeleteClicked(id);
+				}
+			});
+			
 			$list.append(element);
 		}
 
@@ -149,6 +173,9 @@ jQuery.extend({
 			placeholder: 'user-placeholder',
 			forcePlaceHolderSize: true,
 			connectWith: '.ui-sortable',
+			start : function (event, ui) {
+				ui.item.addClass('grip').find('.delete').hide();
+			},
 			receive : function (event, ui) {
 				log('Receive ' + this.id);
 				me.notifyReceived(ui.item, ui.sender);
@@ -159,7 +186,6 @@ jQuery.extend({
 			},
 			out : function (event, ui) {
 				$list.removeClass('ui-sortable-hover');
-				$list.removeClass('ui-sortable-error');
 			},
 			remove : function (event, ui) {
 				log('Remove ' + this.id);
@@ -171,6 +197,7 @@ jQuery.extend({
 			},
 			beforeStop: function(event, ui){
 				log('BeforeStop ' + this.id);
+				ui.item.removeClass('grip');
 				me.notifyBeforeStopped(ui.item, this);
 			},
 			update: function(event, ui){
@@ -195,7 +222,6 @@ jQuery.extend({
 			},
 			out : function (event, ui) {
 				$list.removeClass('ui-sortable-hover');
-				$list.removeClass('ui-sortable-error');
 			},
 			drop: function (event, ui){
 				log('Drop ' + this.id);
@@ -257,6 +283,12 @@ jQuery.extend({
 			});
 		}
 		
+		this.notifyDeleteClicked = function (id) {
+			$.each(listeners, function (i) {
+					listeners[i].removeUserClicked(id);
+			});
+		}
+		
 		function log(message) {
 			if(console != undefined){
 				console.log(message);
@@ -278,7 +310,7 @@ jQuery.extend({
 			onBeforeStopped : function(){},
 			onActivated: function(){},
 			onStopped: function () {},
-			removeUserClicked : function (ui) { },
+			removeUserClicked : function (id) { },
 			addUserClicked : function () { }
 		}, list);
 	}
