@@ -1,6 +1,6 @@
 jQuery.extend({
 
-	Controller: function(model, view){
+	Controller: function(model, view, userView){
 		
 		function getMetadata(item) {
 			return item.metadata({ type : 'attr', name : 'data'  });
@@ -73,11 +73,17 @@ jQuery.extend({
 				var elementCount = sender.childElementCount;
 				
 				if(model.getCount() > elementCount){
-					model.removeUser(itemmetadata);
+					model.removeUser(itemmetadata.Id);
 				}
+			},
+			removeUserClicked : function (id){
+				log('Dude you want me gone? Why? Id: ' + id);
+				model.removeUser(id);
+				view.removeUser(id);
 			}
 		});
 		view.addListener(vlist);
+		userView.addListener(vlist);
 
 		/**
 		 * listen to the model

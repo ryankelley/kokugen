@@ -66,9 +66,12 @@ jQuery.extend({
 		$element
 			.append('<img class="gravatar" style="float:left; padding:0 5px;" src="' + 'http://gravatar.com/avatar/' + 					user.GravatarHash + '?s=27" alt="Gravatar Icon" />');
 
+		me.dom = element;
+		
+		this.getDom = function () {
+			return me.dom;
+		}
 
-
-		return element;
     },
 
 
@@ -78,10 +81,34 @@ jQuery.extend({
 		
 		var listeners = new Array();
 		
+		/**
+		 * add a listener to this view
+		 */
+		this.addListener = function(list){
+			listeners.push(list);
+		}
+		
+		this.removeUser = function (id) {
+			$('.'+id,$list).remove();
+		}
+		
 		this.addUser = function (user) {
-			 var widget = new $.UserWidget(user, (!user.IsOwner));
+			var widget = new $.UserWidget(user, (!user.IsOwner));
 			 
-			 $(widget).addClass('ui-draggable').draggable({
+			 // lets listen to the user widgets from the left side
+			// is this the right place for this???
+			var widgetListener = $.ViewListener({
+				removeUserClicked : function (id) {
+					me.notifyDeleteClicked(id);
+					me.removeUser(id);
+				}
+			});
+			
+			widget.addListener(widgetListener);
+			 
+			var $widget = widget.getDom();
+			 
+			$($widget).addClass('ui-draggable').draggable({
 				//connectToSortable: '.ui-sortable',
 				helper : 'clone',
 				revert: 'invalid',
@@ -92,15 +119,8 @@ jQuery.extend({
 
 			});
 			
-			$list.append(widget);
+			$list.append($widget);
 			
-			// lets listen to the user widgets from the left side
-			// is this the right place for this???
-			var widgetListener = $.ViewListener({
-				removeUserClicked : function (id) {
-					me.notifyDeleteClicked(id);
-				}
-			});
 			
 		}
 		
@@ -151,7 +171,7 @@ jQuery.extend({
 		}
 
 		this.addItem = function (metadata){
-			var element = new $.UserWidget(metadata, true);
+			var widget = new $.UserWidget(metadata, true);
 			
 			// lets listen to the widget added to my list
 			// is this the right place for this???
@@ -161,7 +181,14 @@ jQuery.extend({
 				}
 			});
 			
-			$list.append(element);
+			widget.addListener(widgetListener);
+			
+			
+			$list.append(widget.getDom());
+		}
+		
+		this.removeUser = function (id) {
+			$('.'+id,$list).remove();
 		}
 
 		
@@ -310,8 +337,7 @@ jQuery.extend({
 			onBeforeStopped : function(){},
 			onActivated: function(){},
 			onStopped: function () {},
-			removeUserClicked : function (id) { },
-			addUserClicked : function () { }
+			removeUserClicked : function (id) { }
 		}, list);
 	}
 });

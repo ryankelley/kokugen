@@ -56,8 +56,8 @@ jQuery.extend({
 			me.notifyUserAdded(user);
 		}
 		
-		this.removeUser = function (user) {
-			cache.clear(user.Id);
+		this.removeUser = function (id) {
+			cache.clear(id);
 		}
 		
 		this.canAdd = function (data) {

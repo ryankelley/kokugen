@@ -74,7 +74,7 @@
 				
 				var view = new $.View($(userContainer));
 				var model = new $.Model();
-				var controller = new $.Controller(model, view);
+				var controller = new $.Controller(model, view, userView);
 				
 				element.appendChild(head);
 				element.appendChild(body);
@@ -100,49 +100,17 @@
 
     </script>
     <style type="text/css">
-        .user {width:300px; font-size:1.1em;cursor:-moz-grab;}
+        .user {width:280px; font-size:1.1em;cursor:-moz-grab;}
         .user > * {display:inline;}
         .grip{cursor:-moz-grabbing;}
-        .user-left-side
-        {
-        	float: left;
-            height: 100%;
-            width: 300px;
-            
-        }
-        .user-role-area
-        {
-           margin-left:-300px;
-            height: 100%;
-            overflow:hidden;
-        }
-        .user-role-area ul
-        {
-            height: 100%;
-            overflow:hidden;
-        }
-        .user-left-side ul
-        {
-            height:100%;
-        }
-        div.role-body
-        {
-            height: 200px;
-        }
-        .role-body .ui-sortable
-        {
-            height: 100%;
-        }
-        .ui-sortable .user-placeholder
-        {
-            background-color: #CC4B3A;
-            border-color: #903529 !important;
-        }
-        .ui-sortable li
-        {
-            padding: 5px;
-        }
-
+        .user-left-side{float: left; height: 100%; width: 300px;}
+        .user-role-area{margin-left:-300px;height: 100%;overflow:hidden;}
+        .user-role-area ul{height: 100%;overflow:hidden;}
+        .user-left-side ul{height:100%;}
+        div.role-body{height: 200px;}
+        .role-body .ui-sortable{height: 100%;}
+        .ui-sortable .user-placeholder{background-color: #CC4B3A;border-color: #903529 !important;}
+        .ui-sortable li{padding: 5px;}
         .ui-draggable { padding:5px;}
         .ui-sortable > .user > .delete {display:none;}
 		.ui-sortable li span { width:100%;}
@@ -151,7 +119,7 @@
 		ul.ui-sortable-hover {background-color:gray;}
 		ul.ui-sortable-error{background:#f1cece !important; color:#bb2222; border: 1px solid #f19696;}
 	    .ui-sortable-active{background-color:#B0B1B5;}
-       
+		em.isOwner{font-size:0.8em;}
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="mainContent" runat="server">
