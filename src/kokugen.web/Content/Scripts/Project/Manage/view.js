@@ -121,6 +121,11 @@ jQuery.extend({
 			
 			$list.append($widget);
 			
+			$list.addClass('ui-sortable').sortable({
+				receive : function (event, ui) {
+					ui.item.remove();
+				}
+			});
 			
 		}
 		
@@ -171,17 +176,17 @@ jQuery.extend({
 		}
 
 		this.addItem = function (metadata){
-			var widget = new $.UserWidget(metadata, true);
+			var widget = new $.UserWidget(metadata, false);
 			
 			// lets listen to the widget added to my list
 			// is this the right place for this???
-			var widgetListener = $.ViewListener({
-				removeUserClicked : function (id) {
-					me.notifyDeleteClicked(id);
-				}
-			});
+			// var widgetListener = $.ViewListener({
+				// removeUserClicked : function (id) {
+					// me.notifyDeleteClicked(id);
+				// }
+			// });
 			
-			widget.addListener(widgetListener);
+			// widget.addListener(widgetListener);
 			
 			
 			$list.append(widget.getDom());

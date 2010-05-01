@@ -3,7 +3,7 @@
 
 <%@ Import Namespace="Kokugen.Web.Actions.Project.Manage.Users.Add" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-	<%=this.Script("project/manage/custom.jquery.metadata.js")%>
+	<%=this.Script("jquery.metadata.js")%>
     <%=this.Script("util.js") %>
     <%=this.Script("project/manage/view.js") %>
     <%=this.Script("project/manage/model.js")%>
@@ -123,18 +123,25 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="mainContent" runat="server">
-<div id="ui">
-    <div id="project-users-toolbar">
-        <%=this.LinkTo(new AddUserToProjectRequest(){Id = Model.ProjectId}).Text("Add User").Id("add-user")%></div>
-    
-        <div class="user-left-side">
-           <ul id="users-list">
 
-            </ul>
-        </div>
-        <div class="user-role-area">
-            <ul id="role-widget-list">
-            </ul>
-        </div>
-</div>
+	<div id="project-users-toolbar">
+		
+	</div>
+
+	<div class="user-left-side">
+	   <ul id="users-list">
+
+		</ul>
+	</div>
+	
+	<div class="user-role-area">
+		<ul id="role-widget-list">
+		</ul>
+	</div>
+
+</asp:Content>
+<asp:Content ContentPlaceHolderID=extraNavigation runat=server>
+<li class="bar">
+    <%=this.LinkTo(new AddUserToProjectRequest(){Id = Model.ProjectId}).Text("Add User").Title("Add User").Id("add-user")%>
+</li>
 </asp:Content>
