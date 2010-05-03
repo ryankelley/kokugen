@@ -171,12 +171,12 @@ width:32px;
 .reason-blocked div { width: 100%; }
 .reason-blocked  
 {
-    color:White;
-    font-size:14px;
-    font-weight:bold;
-    line-height:24px;
-    padding:4px;
-    width:100%;
+color:White;
+font-size:11px;
+font-weight:bold;
+line-height:12px;
+padding:4px;
+width:100%;
 }
 .card .card-blocked
 {

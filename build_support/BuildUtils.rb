@@ -36,7 +36,7 @@ end
 
 class MSBuildRunner
 	def self.compile(attributes)
-		version = attributes.fetch(:clrversion, 'v3.5')
+		version = attributes.fetch(:clrversion, 'v4.0')
 		compileTarget = attributes.fetch(:compilemode, 'debug')
 	    solutionFile = attributes[:solutionfile]
 		

@@ -10,7 +10,7 @@ BUILD_NUMBER_BASE = "0.1.0"
 PRODUCT = "Kokugen"
 COPYRIGHT = 'Copyright 2010 Nine Collective. All rights reserved.';
 COMMON_ASSEMBLY_INFO = 'src/CommonAssemblyInfo.cs';
-CLR_VERSION = "v3.5"
+CLR_VERSION = "v4.0.30319"
 
 TARANTINO = "lib\\tarantino\\Tarantino.DatabaseManager.Console.exe"
 DBNAME = "KokugenData"
