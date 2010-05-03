@@ -6,11 +6,11 @@ using Kokugen.Web.Actions.DTO;
 
 namespace Kokugen.Web.Actions.TimeRecord
 {
-    public class ListAction
+    public class TimeRecordListAction
     {
         private readonly ITimeRecordService _timeRecordService;
 
-        public ListAction(ITimeRecordService timeRecordService)
+        public TimeRecordListAction(ITimeRecordService timeRecordService)
         {
             _timeRecordService = timeRecordService;
         }

@@ -574,8 +574,9 @@ function buildColorButton(color) {
     container.appendChild(link);
 
     // Setup click functions on color links
-    $(link).click(function() {
+    $(link).click(function () {
         changeColor(link, color);
+        return false;
     });
     
     return container;
@@ -788,6 +789,7 @@ function buildTaskLine(task) {
         this.parentNode.parentNode.parentNode.cardComplete--;
         this.parentNode.parentNode.parentNode.updateTaskStatus();
         }
+
     });
 
     element.appendChild(check);
@@ -811,7 +813,7 @@ function buildTaskLine(task) {
 
     var deleteLink = buildAnchor("X", "#", "delete-link");
     $(deleteLink).click(function () {
-        
+
 
         var checkbox = $(this).siblings("input")[0];
         var isChecked = checkbox.checked;
@@ -832,6 +834,7 @@ function buildTaskLine(task) {
             type: 'DELETE',
             success: element.afterRemoved
         });
+        return false;
     });
 
     element.afterRemoved = function () {
@@ -934,6 +937,7 @@ function buildInPlaceTaskEdit(element) {
             data: { Id: this.parentNode.parentNode.task.Id, Description: text, CardId: this.parentNode.parentNode.task.CardId },
             success: element.afterSaveTask
         });
+        return false;
     });
 
     var cancel = document.createElement('button');
@@ -941,6 +945,7 @@ function buildInPlaceTaskEdit(element) {
 
     $(cancel).click(function () {
         element.hideInPlace();
+        return false;
     });
 
     inPlace.appendChild(save);

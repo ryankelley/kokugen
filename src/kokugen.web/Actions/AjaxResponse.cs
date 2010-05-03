@@ -1,3 +1,6 @@
+    using System;
+    using System.Xml;
+
 namespace Kokugen.Web.Actions
 {
     public class AjaxResponse
@@ -10,5 +13,18 @@ namespace Kokugen.Web.Actions
     {
         public bool success { get; set; }
         public object NewValueToDisplay { get; set; }
+    }
+
+        public class XmlResponse : IXmlOutput
+        {
+            public XmlDocument XmlData
+            {
+                get; set;
+            }
+        }
+
+    public interface IXmlOutput
+    {
+        XmlDocument XmlData { get; set; }
     }
 }

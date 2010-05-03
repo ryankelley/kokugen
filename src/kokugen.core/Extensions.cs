@@ -7,11 +7,32 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Xml;
+using System.Xml.Linq;
 using FubuMVC.Core;
 using Kokugen.Core.Domain;
 
 namespace Kokugen.Core
 {
+    public static class DocumentExtensions
+    {
+        public static XmlDocument ToXmlDocument(this XDocument xDocument)
+        {
+            var xmlDocument = new XmlDocument();
+            xmlDocument.Load(xDocument.CreateReader());
+            return xmlDocument;
+        }
+
+        public static XDocument ToXDocument(this XmlDocument xmlDocument)
+        {
+            using (var nodeReader = new XmlNodeReader(xmlDocument))
+            {
+                nodeReader.MoveToContent();
+                return XDocument.Load(nodeReader);
+            }
+        }
+    }
+
     public static class Extensions
     {
         public static string ToSimpleDisplay(this TimeSpan timeSpan)

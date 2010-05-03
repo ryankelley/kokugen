@@ -140,6 +140,19 @@
     <Content Include="Actions\Project\Manage\Users\ProjectUsers.aspx" />
     <Content Include="Actions\Project\MenuList\ProjectMenu.aspx" />
     <Content Include="Actions\Project\Manage\Users\Add\AddUserToProject.aspx" />
+    <Content Include="Content\amline\amline.swf" />
+    <Content Include="Content\amline\amline_data.txt" />
+    <Content Include="Content\amline\amline_data.xml" />
+    <Content Include="Content\amline\amline_settings.xml" />
+    <Content Include="Content\amline\cumflow_settings.xml" />
+    <Content Include="Content\amline\export.aspx" />
+    <Content Include="Content\amline\fonts\arial.swf" />
+    <Content Include="Content\amline\fonts\garamond.swf" />
+    <Content Include="Content\amline\fonts\georgia.swf" />
+    <Content Include="Content\amline\fonts\tahoma.swf" />
+    <Content Include="Content\amline\fonts\times new roman.swf" />
+    <Content Include="Content\amline\plugins\value_indicator.swf" />
+    <Content Include="Content\amline\swfobject.js" />
     <Content Include="Content\css\jquery.jgrowl.css" />
     <Content Include="Actions\Project\MenuList\ProjectMenu_Item.ascx" />
     <Content Include="Content\images\btn-check16.png" />
@@ -241,7 +254,7 @@
     <Compile Include="Actions\Card\Lists\ListAction.cs" />
     <Compile Include="Actions\Company\AddAction.cs" />
     <Compile Include="Actions\Company\CompanyFormAction.cs" />
-    <Compile Include="Actions\Company\ListAction.cs" />
+    <Compile Include="Actions\Company\CompanyListAction.cs" />
     <Compile Include="Actions\Company\RemoveAction.cs" />
     <Compile Include="Actions\Company\View_Page_Type_Declarations.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -260,6 +273,7 @@
     <Compile Include="Actions\Account\Login\LoginFormAction.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Actions\Metrics\CumulativeFlow\GetAction.cs" />
     <Compile Include="Actions\Metrics\GetAction.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -292,11 +306,11 @@
     <Compile Include="Actions\Task\ReOrder\TaskReorderAction.cs" />
     <Compile Include="Actions\TimeRecord\AddAction.cs" />
     <Compile Include="Actions\TimeRecord\AddTimeRecordModel.cs" />
-    <Compile Include="Actions\TimeRecord\ListAction.cs" />
+    <Compile Include="Actions\TimeRecord\TimeRecordListAction.cs" />
     <Compile Include="Actions\TimeRecord\StopTimeRecordFormAction.cs" />
     <Compile Include="Actions\TimeRecord\StopAction.cs" />
     <Compile Include="Actions\TimeRecord\ProjectTimeRecordFormAction.cs" />
-    <Compile Include="Actions\DailyTimeRecord\ListAction.cs" />
+    <Compile Include="Actions\DailyTimeRecord\DailyTimeListAction.cs" />
     <Compile Include="Actions\TimeRecord\RemoveAction.cs" />
     <Compile Include="Actions\TimeRecord\TimeRecordFormAction.cs" />
     <Compile Include="Actions\Project\View_Page_Type_Declarations.cs">
@@ -308,7 +322,7 @@
     <Compile Include="Actions\TaskCategory\View_Page_Type_Declarations.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Actions\TaskCategory\ListAction.cs" />
+    <Compile Include="Actions\TaskCategory\TaskListAction.cs" />
     <Compile Include="Actions\TaskCategory\TaskListModel.cs" />
     <Compile Include="Actions\TimeRecord\StopTimeRecordModel.cs" />
     <Compile Include="Actions\TimeRecord\View_Page_Type_Declarations.cs">
@@ -318,13 +332,17 @@
     <Compile Include="Actions\Users\Details\DetailsAction.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Actions\Users\ListAction.cs">
+    <Compile Include="Actions\Users\UserListAction.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Behaviors\AuthenticationBehaviorPolicy.cs" />
     <Compile Include="Behaviors\BehaviorCall.cs" />
     <Compile Include="Behaviors\MustBeAuthorizedBehavior.cs" />
     <Compile Include="Behaviors\TransactionalContainerBehavior.cs" />
+    <Compile Include="Content\amline\export.aspx.cs">
+      <DependentUpon>export.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Conventions\Builders\AfterEachOfPartialBuilder.cs" />
     <Compile Include="Conventions\Builders\BeforeEachOfPartialBuilder.cs" />
     <Compile Include="Conventions\Builders\BeforePartialBuilder.cs" />
@@ -333,9 +351,11 @@
     <Compile Include="Conventions\EditInPlaceBuilder.cs" />
     <Compile Include="Conventions\HtmlExtensions.cs" />
     <Compile Include="Conventions\IRequestById.cs" />
+    <Compile Include="Conventions\IXMLWriter.cs" />
     <Compile Include="Conventions\KokugenHtmlConventions.cs" />
     <Compile Include="Conventions\Builders\LabelBuilder.cs" />
     <Compile Include="Conventions\MarkdownAttribute.cs" />
+    <Compile Include="Conventions\RenderXMLNode.cs" />
     <Compile Include="Conventions\SplitCamelCaseExtension.cs" />
     <Compile Include="Conventions\ValueObjectDropdownBuilder.cs" />
     <Compile Include="Conventions\ValueObjectDropdownExtensions.cs" />
@@ -522,6 +542,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <None Include="Content\amline\export.php" />
+    <None Include="Content\amline\fonts\tahoma.fla" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
