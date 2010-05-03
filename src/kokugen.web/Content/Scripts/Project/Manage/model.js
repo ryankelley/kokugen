@@ -1,5 +1,5 @@
 jQuery.extend({
-	Model: function(){
+	Model: function(role, projectId){
 		/**
 		 * our local cache of data
 		 */
@@ -13,6 +13,10 @@ jQuery.extend({
 		 */
 		var listeners = new Array();
 		
+		this.myRole = role;
+		
+		this.url = '/Project/Manage/Users/Roles/'+ projectId;
+		
 		this.getCount = function () {
 			return cache.toArray().length;
 		}
@@ -23,7 +27,7 @@ jQuery.extend({
 		 */
 		function loadResponse(data){
 			$.each(data, function(item){
-				cache[data[item].id] = data[item];
+				cache.put(data[item].Id, data[item]);
 				me.notifyItemLoaded(data[item]);
 			});
 		}
@@ -35,16 +39,17 @@ jQuery.extend({
 			me.notifyLoadBegin();
 			
 			$.ajax({
-				url: '/someurl',
-				data : { load : true },
+				url: me.url,
+				data : { RoleId : me.myRole.Id },
 				type: 'GET',
 				dataType: 'json',
-				timeout: 1000,
 				error: function () {
 					me.notifyLoadFail();
 				},
 				success: function (data){
-					loadResponse(data);
+					if(data.Item){
+						loadResponse(data.Item);
+					}
 					me.notifyLoadFinish();
 				}
 			});
@@ -53,11 +58,38 @@ jQuery.extend({
 		
 		this.addUser = function (user) {
 		    cache.put(user.Id, user);
-			me.notifyUserAdded(user);
+			
+			$.ajax({
+				url: me.url,
+				type: 'POST',
+				data: { RoleId : me.myRole.Id, UserId : user.Id },
+				dataType: 'json',
+				error:	function () {
+					me.notifyLoadFail();
+				},
+				success : function (data) {
+					me.notifyUserAdded(user);
+				}
+			});
+			
 		}
 		
 		this.removeUser = function (id) {
 			cache.clear(id);
+			$.ajax({
+				url: me.url,
+				type: 'DELETE',
+				data: { RoleId : me.myRole.Id, UserId : id },
+				dataType: 'json',
+				error:	function () {
+					// pop some kind of error
+					
+				},
+				success : function (data) {
+					// pop success message?
+					
+				}
+			});
 		}
 		
 		this.canAdd = function (data) {

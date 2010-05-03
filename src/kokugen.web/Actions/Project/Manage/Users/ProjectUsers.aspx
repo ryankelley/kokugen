@@ -13,6 +13,27 @@
         var manageUsersUi = function (users, roles) {
             
             var userView = new $.UserView($('#users-list'));
+			
+			var vlist = $.ViewListener({
+				removeUserClicked : function (id){
+					$.ajax({
+						url: '/Project/Manage/Users/Delete',
+						type: 'DELETE',
+						data: { ProjectId : '<%=Model.ProjectId%>', UserId : id },
+						dataType: 'json',
+						error:	function () {
+							// pop some kind of error
+							
+						},
+						success : function (data) {
+							// pop success message?
+							
+						}
+					});
+				}
+			});
+			
+			userView.addListener(vlist);
 
             var callBackFunction = function (response) {
                 userView.addUser(response.Item);
@@ -73,7 +94,7 @@
 				body.appendChild(userContainer);
 				
 				var view = new $.View($(userContainer));
-				var model = new $.Model();
+				var model = new $.Model(role, '<%=Model.ProjectId%>');
 				var controller = new $.Controller(model, view, userView);
 				
 				element.appendChild(head);
@@ -105,7 +126,7 @@
         .grip{cursor:-moz-grabbing;}
         .user-left-side{float: left; height: 100%; width: 300px;}
         .user-role-area{margin-left:-300px;height: 100%;overflow:hidden;}
-        .user-role-area ul{height: 100%;overflow:hidden;}
+        .user-role-area ul{height: 100%;overflow:hidden;margin:5px;}
         .user-left-side ul{height:100%;}
         div.role-body{height: 200px;}
         .role-body .ui-sortable{height: 100%;}

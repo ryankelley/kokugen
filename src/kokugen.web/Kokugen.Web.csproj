@@ -158,7 +158,6 @@
     <Content Include="Content\Scripts\company.js" />
     <Content Include="Content\Scripts\projectusers.js" />
     <Content Include="Content\Scripts\Project\Manage\controller.js" />
-    <Content Include="Content\Scripts\Project\Manage\custom.jquery.metadata.js" />
     <Content Include="Content\Scripts\Project\Manage\model.js" />
     <Content Include="Content\Scripts\util.js" />
     <Content Include="Content\Scripts\Project\Manage\view.js" />
@@ -276,6 +275,9 @@
     <Compile Include="Actions\Project\Manage\Users\ProjectUsersAction.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Actions\Project\Manage\Users\Roles\AddToRoleAction.cs" />
+    <Compile Include="Actions\Project\Manage\Users\Roles\GetUsersAction.cs" />
+    <Compile Include="Actions\Project\Manage\Users\Roles\RemoveFromRoleAction.cs" />
     <Compile Include="Actions\Project\ProjectFormAction.cs" />
     <Compile Include="Actions\Project\MenuList\ProjectMenuAction.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -519,9 +521,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Actions\Project\Manage\Users\Roles\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

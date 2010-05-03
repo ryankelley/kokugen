@@ -1,5 +1,9 @@
 jQuery.extend({
 
+	UserController: function(view){
+
+	},
+
 	Controller: function(model, view, userView){
 		
 		function getMetadata(item) {
@@ -13,29 +17,29 @@ jQuery.extend({
 
 			onReceived : function (item, sender) {
 			
-				log('I received it!  item: ' + $(item).html() + ' sender: ' + $(sender).attr('id'));
+				Fb.log('I received it!  item: ' + $(item).html() + ' sender: ' + $(sender).attr('id'));
 				
 				var itemmetadata = getMetadata(item);
 				if(itemmetadata && itemmetadata.Id){
-					log("Received: " + itemmetadata.Id);
+					Fb.log("Received: " + itemmetadata.Id);
 					
 					if(model.canAdd(itemmetadata)){
 						model.addUser(itemmetadata);
 					}else{
 						sender.sortable("cancel");
-						log("model can not be added");
+						Fb.log("model can not be added");
 					}
 				}else{
-					log("error occured on receive - no metadata!");
+					Fb.log("error occured on receive - no metadata!");
 				}
 			},
 			onDropped : function (item, sender) {
 			
-				log('Hey! you dropped me... item: ' + $(item).html() + ' sender: ' + sender.id);
+				Fb.log('Hey! you dropped me... item: ' + $(item).html() + ' sender: ' + sender.id);
 				
 				var itemmetadata = getMetadata(item);
 				if(itemmetadata && itemmetadata.Id){
-					log("Dropped: " + itemmetadata.Id);
+					Fb.log("Dropped: " + itemmetadata.Id);
 					
 					if(model.canAdd(itemmetadata)){
 						model.addUser(itemmetadata);
@@ -47,7 +51,7 @@ jQuery.extend({
 			},
 			onOver : function (item, sender) {
 				
-				log('OH you hovered me! item: ' + $(item).html() + ' sender: ' + sender.id );
+				Fb.log('OH you hovered me! item: ' + $(item).html() + ' sender: ' + sender.id );
 				
 				var itemmetadata = getMetadata(item);
 				if(!model.canAdd(itemmetadata)){
@@ -77,7 +81,7 @@ jQuery.extend({
 				}
 			},
 			removeUserClicked : function (id){
-				log('Dude you want me gone? Why? Id: ' + id);
+				Fb.log('Dude you want me gone? Why? Id: ' + id);
 				model.removeUser(id);
 				view.removeUser(id);
 			}
@@ -90,33 +94,28 @@ jQuery.extend({
 		 */
 		var mlist = $.ModelListener({
 			loadBegin : function() {
-				log("Fetching item...");
+				Fb.log("Fetching item...");
 			},
 			loadFail : function() {
-				log("ajax error");
+				Fb.log("ajax error");
 			},
 			loadFinish : function() {
-				log("Done.");
+				Fb.log("Done.");
 			},
 			loadItem : function(item){
-				log("from ajax: " + item.name);
+				Fb.log("from ajax: " + item.Id);
+				view.addItem(item);
 			},
 			onAddSuccessful : function (item) {
-				log("added it! id: " + item.Id);
+				Fb.log("added it! id: " + item.Id);
 			}
 			
 		});
 		model.addListener(mlist);
 		
-		function log(message) {
-			if(console){
-				console.log(message);
-			}
-		}
+		model.getAll();
+
 	}
-	
-	
-	
 	
 });
 

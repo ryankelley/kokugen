@@ -92,6 +92,16 @@ jQuery.extend({
 			$('.'+id,$list).remove();
 		}
 		
+		this.showActive = function () {
+			$list.addClass('ui-sortable-active');
+		}
+
+		this.hideActive = function () {
+			$list.removeClass('ui-sortable-hover');
+			$list.removeClass('ui-sortable-error');
+			$list.removeClass('ui-sortable-active');
+		}
+		
 		this.addUser = function (user) {
 			var widget = new $.UserWidget(user, (!user.IsOwner));
 			 
@@ -124,7 +134,21 @@ jQuery.extend({
 			$list.addClass('ui-sortable').sortable({
 				receive : function (event, ui) {
 					ui.item.remove();
+				},
+				over : function (event, ui) {
+					$list.addClass('ui-sortable-hover');
+				},
+				out : function (event, ui) {
+					$list.removeClass('ui-sortable-hover');
+				},
+				activate: function(event, ui){
+					me.showActive();
+					
+				},
+				deactivate : function(event, ui){
+					me.hideActive();
 				}
+				
 			});
 			
 		}
@@ -209,7 +233,7 @@ jQuery.extend({
 				ui.item.addClass('grip').find('.delete').hide();
 			},
 			receive : function (event, ui) {
-				log('Receive ' + this.id);
+				Fb.log('Receive ' + this.id);
 				me.notifyReceived(ui.item, ui.sender);
 			},
 			over : function (event, ui) {
@@ -220,28 +244,28 @@ jQuery.extend({
 				$list.removeClass('ui-sortable-hover');
 			},
 			remove : function (event, ui) {
-				log('Remove ' + this.id);
+				Fb.log('Remove ' + this.id);
 				me.notifyRemoved(ui.item, this);
 			},
 			stop: function(event, ui){
-				log('Stop ' + this.id);
+				Fb.log('Stop ' + this.id);
 				me.notifyStopped(ui.item, this);
 			},
 			beforeStop: function(event, ui){
-				log('BeforeStop ' + this.id);
+				Fb.log('BeforeStop ' + this.id);
 				ui.item.removeClass('grip');
 				me.notifyBeforeStopped(ui.item, this);
 			},
 			update: function(event, ui){
-				log('Update ' + this.id);
+				Fb.log('Update ' + this.id);
 			},
 			activate: function(event, ui){
-				log('Activate ' + this.id);
+				Fb.log('Activate ' + this.id);
 				me.notifyActivated(ui.item, this);
 				
 			},
 			deactivate : function(event, ui){
-				log('Deactivate ' + this.id);
+				Fb.log('Deactivate ' + this.id);
 				me.hideActive();
 		    }
 		});
@@ -256,19 +280,19 @@ jQuery.extend({
 				$list.removeClass('ui-sortable-hover');
 			},
 			drop: function (event, ui){
-				log('Drop ' + this.id);
+				Fb.log('Drop ' + this.id);
 				$list.removeClass('ui-sortable-hover');
 				$list.removeClass('ui-sortable-error');
 				me.notifyDropped(ui.helper, this);
 			},
 			activeClass: 'ui-sortable-active',
 			activate: function(event, ui){
-				log('Activate ' + this.id);
+				Fb.log('Activate ' + this.id);
 				me.notifyActivated(ui.helper, this);
 				
 			},
 			deactivate : function(event, ui){
-				log('Deactivate ' + this.id);
+				Fb.log('Deactivate ' + this.id);
 				me.hideActive();
 		    }
 		});
@@ -321,11 +345,6 @@ jQuery.extend({
 			});
 		}
 		
-		function log(message) {
-			if(console != undefined){
-				console.log(message);
-			}
-		}
 		
 	},
 	

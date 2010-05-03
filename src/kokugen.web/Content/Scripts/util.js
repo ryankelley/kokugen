@@ -45,3 +45,14 @@ jQuery.extend({
 		}	
 	}
 });
+
+var Fb = {}; //An empty object literal for holding the function
+Fb.log = function(obj, consoleMethod) {
+       if (window.console && window.console.firebug && window.console.firebug.replace(/^\s\s*/, '').replace(/\s\s*$/, '') !== '') {
+               if (typeof consoleMethod === "string" && typeof console[consoleMethod] === "function") {
+                       console[consoleMethod](obj);
+               } else {
+                       console.log(obj);
+               }
+       }
+}
