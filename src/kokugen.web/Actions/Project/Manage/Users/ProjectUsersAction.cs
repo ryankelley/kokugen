@@ -52,8 +52,6 @@ namespace Kokugen.Web.Actions.Project.Manage.Users
 
             var roles = _rolesService.FindAll().ToList();
 
-            roles.Add(new Role("Test"){Id = Guid.NewGuid()});
-
             return new ProjectUsersModel(){ProjectId = request.Id, Users = users, Roles = roles};
         }
 

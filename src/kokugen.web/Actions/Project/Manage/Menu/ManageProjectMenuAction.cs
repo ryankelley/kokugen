@@ -24,10 +24,10 @@ namespace Kokugen.Web.Actions.Project.Manage.Menu
         {
             var menus = new HtmlTag("ul");
 
-            menus.Child(new HtmlTag("li").Child(
-                new LinkTag("Add User",
-                            _urlRegistry.UrlFor(new AddUserToProjectRequest() {Id = request.Id}),
-                            "manage-proj-menu").Title("Add User")).AddClass("bar"));
+            //menus.Child(new HtmlTag("li").Child(
+            //    new LinkTag("Add User",
+            //                _urlRegistry.UrlFor(new AddUserToProjectRequest() {Id = request.Id}),
+            //                "manage-proj-menu").Title("Add User")).AddClass("bar"));
 
             menus.Child(new HtmlTag("li").Child(
                 new LinkTag("Manage Users",

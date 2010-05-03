@@ -123,6 +123,7 @@
     <Reference Include="System.Web.Mobile" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Actions\Account\Activate\ActivateAccount.aspx" />
     <Content Include="Actions\Account\LoginStatus\LoginStatus.aspx" />
     <Content Include="Actions\Account\Manage\ChangePassword\ChangePassword.aspx" />
     <Content Include="Actions\Account\Manage\ManageAccount.aspx" />
@@ -169,6 +170,10 @@
     <Content Include="Content\Scripts\cardEdit.js" />
     <Content Include="Content\Scripts\company.js" />
     <Content Include="Content\Scripts\projectusers.js" />
+    <Content Include="Content\Scripts\Project\Manage\controller.js" />
+    <Content Include="Content\Scripts\Project\Manage\model.js" />
+    <Content Include="Content\Scripts\util.js" />
+    <Content Include="Content\Scripts\Project\Manage\view.js" />
     <Content Include="Content\Scripts\task.js" />
     <Content Include="Content\Scripts\dovetail.editing.js" />
     <Content Include="Content\Scripts\jquery.jeditable.js" />
@@ -218,7 +223,9 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Actions\Errors\ForbiddenAction.cs" />
-    <Compile Include="Actions\Account\Activate\ActivateAccountAction.cs" />
+    <Compile Include="Actions\Account\Activate\ActivateAccountAction.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Actions\Account\LoginStatus\LoginStatusAction.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -282,6 +289,9 @@
     <Compile Include="Actions\Project\Manage\Users\ProjectUsersAction.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Actions\Project\Manage\Users\Roles\AddToRoleAction.cs" />
+    <Compile Include="Actions\Project\Manage\Users\Roles\GetUsersAction.cs" />
+    <Compile Include="Actions\Project\Manage\Users\Roles\RemoveFromRoleAction.cs" />
     <Compile Include="Actions\Project\ProjectFormAction.cs" />
     <Compile Include="Actions\Project\MenuList\ProjectMenuAction.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -531,8 +541,10 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Actions\Project\Manage\Users\Roles\" />
+    <None Include="Content\amline\export.php" />
+    <None Include="Content\amline\fonts\tahoma.fla" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Content\amline\export.php" />

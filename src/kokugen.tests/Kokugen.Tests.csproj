@@ -130,6 +130,8 @@
     <Compile Include="Actions\Cards\CardBlockedAction_Tester.cs" />
     <Compile Include="ContextSpecification.cs" />
     <Compile Include="Domain\CardTester.cs" />
+    <Compile Include="Core\Membership\Services\PasswordValidatorTester.cs" />
+    <Compile Include="InteractionContext.cs" />
     <Compile Include="Persistence\InMemoryRepository.cs" />
     <Compile Include="Persistence\IntegrationAssemblySetup.cs" />
     <Compile Include="Persistence\PersistenceTesterContext.cs" />

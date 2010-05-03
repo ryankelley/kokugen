@@ -16,7 +16,7 @@ namespace Kokugen.Tests.Actions.Card
         protected RhinoAutoMocker<BlockedAction> _mocks;
         protected BlockedAction _action;
         protected ICardService _cardService;
-        protected Core.Domain.Card _card;
+        protected Kokugen.Core.Domain.Card _card;
 
         protected override void SetContext()
         {
@@ -24,7 +24,7 @@ namespace Kokugen.Tests.Actions.Card
             _action = _mocks.ClassUnderTest;
 
             _cardService = _mocks.Get<ICardService>();
-            _card = _mocks.Get<Core.Domain.Card>();
+            _card = _mocks.Get<Kokugen.Core.Domain.Card>();
         }
 
        

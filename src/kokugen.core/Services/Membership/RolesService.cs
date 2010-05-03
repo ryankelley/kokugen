@@ -67,14 +67,9 @@ namespace Kokugen.Core.Services
 
         public void RemoveUserFromRole(User userName, Role roleName)
         {
-            var entity = userName as Domain.User;
-
-            if (entity == null)
-                return;
-
-            //TODO: figure out how to remove a many to many
-
-         }
+            userName.RemoveRole(roleName);
+            ValidateAndSave(userName);
+        }
 
         public void Delete(Role roleName)
         {
