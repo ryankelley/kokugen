@@ -12,6 +12,7 @@ namespace Kokugen.Core.Domain
         private IList<TimeRecord> _timeRecords = new List<TimeRecord>();
         private IList<CustomBoardColumn> _boardColumns = new List<CustomBoardColumn>();
         private ISet<User> _users = new HashedSet<User>();
+        private ISet<Role> _roles = new HashedSet<Role>();
         
 
         [Required]
@@ -31,6 +32,23 @@ namespace Kokugen.Core.Domain
 
         public virtual BoardColumn Backlog { get; set; }
         public virtual BoardColumn Archive { get; set; }
+
+        public virtual IEnumerable<Role> GetRoles()
+        {
+            return _roles;
+        }
+
+        public virtual void AddRole(Role role)
+        {
+            role.Project = this;
+            _roles.Add(role);
+        }
+
+        public virtual void RemoveRole(Role role)
+        {
+            if (_roles.Contains(role))
+                _roles.Remove(role);
+        }
 
         public virtual IEnumerable<User> GetUsers()
         {

@@ -23,6 +23,8 @@ namespace Kokugen.Core.Domain
 
         #endregion
 
+        public virtual Project Project { get; set; }
+
         public virtual IEnumerable<User> GetUsers()
         {
             return _users;

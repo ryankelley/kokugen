@@ -9,6 +9,17 @@ using Kokugen.Core.Validation;
 
 namespace Kokugen.Core.Domain
 {
+    public class SuperUser : User
+    {
+        protected SuperUser()
+        {
+        }
+
+        public SuperUser(string userName, string email, string password) : base(userName, email, password)
+        {
+        }
+    }
+
     public class User : Entity, IUser
     {
         private IList<Role> _roles = new List<Role>();

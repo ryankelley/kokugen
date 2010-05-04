@@ -24,14 +24,15 @@ namespace Kokugen.Core.Services
     {
         private readonly IProjectRepository _projectRepository;
         private readonly IValidator _validator;
-       
+        private readonly IPermissionRepository _permissionRepository;
 
         public ProjectService(IProjectRepository projectRepository, 
-            IValidator validator)
+            IValidator validator,
+            IPermissionRepository permissionRepository)
         {
             _projectRepository = projectRepository;
             _validator = validator;
-          
+            _permissionRepository = permissionRepository;
         }
 
         public IEnumerable<Project> ListProjects()
@@ -81,6 +82,10 @@ namespace Kokugen.Core.Services
             project.Owner = owner;
 
             project.Status = ProjectStatus.Active;
+
+            var permissions = _permissionRepository.Query().ToArray();
+
+            var adminRole = new Role("Adminstrator");
 
             return project;
         }
