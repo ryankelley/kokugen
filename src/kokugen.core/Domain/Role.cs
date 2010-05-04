@@ -39,6 +39,9 @@ namespace Kokugen.Core.Domain
 
         public virtual void AddPermission(Permission permission)
         {
+            if(permission == null)
+                return;
+
             if (!_permissions.Contains(permission))
             {
                 _permissions.Add(permission);

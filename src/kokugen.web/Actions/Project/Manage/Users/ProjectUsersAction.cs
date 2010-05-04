@@ -17,10 +17,9 @@ namespace Kokugen.Web.Actions.Project.Manage.Users
         private readonly IRolesService _rolesService;
         private readonly IUrlRegistry _urlRegistry;
 
-        public ProjectUsersAction(IProjectService projectService, IRolesService rolesService, IUrlRegistry urlRegistry)
+        public ProjectUsersAction(IProjectService projectService, IUrlRegistry urlRegistry)
         {
             _projectService = projectService;
-            _rolesService = rolesService;
             _urlRegistry = urlRegistry;
         }
 
@@ -50,7 +49,12 @@ namespace Kokugen.Web.Actions.Project.Manage.Users
 
             users.Insert(0, owner);
 
-            var roles = _rolesService.FindAll().ToList();
+            var roles = project.GetRoles()
+                .Select(x => new RoleDTO()
+                                 {
+                                     Id = x.Id,
+                                     Name = x.Name
+                                 });
 
             return new ProjectUsersModel(){ProjectId = request.Id, Users = users, Roles = roles};
         }
@@ -70,7 +74,7 @@ namespace Kokugen.Web.Actions.Project.Manage.Users
     {
         public Guid Id { get; set; }
         public IEnumerable<ProjectUserDTO> Users { get; set; }
-        public IEnumerable<Role> Roles { get; set; }
+        public IEnumerable<RoleDTO> Roles { get; set; }
     }
 
     public class ProjectUserDTO
@@ -82,6 +86,12 @@ namespace Kokugen.Web.Actions.Project.Manage.Users
         public string DeleteUrl { get; set;}
 
         public Guid ProjectId { get; set; }
+    }
+
+    public class RoleDTO
+    {
+        public Guid Id { get; set; }
+        public string Name { get; set; }
     }
 
     public class ProjectUsers : FubuPage<ProjectUsersModel>
