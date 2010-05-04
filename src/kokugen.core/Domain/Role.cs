@@ -23,6 +23,8 @@ namespace Kokugen.Core.Domain
 
         #endregion
 
+        public virtual Project Project { get; set; }
+
         public virtual IEnumerable<User> GetUsers()
         {
             return _users;
@@ -37,6 +39,9 @@ namespace Kokugen.Core.Domain
 
         public virtual void AddPermission(Permission permission)
         {
+            if(permission == null)
+                return;
+
             if (!_permissions.Contains(permission))
             {
                 _permissions.Add(permission);

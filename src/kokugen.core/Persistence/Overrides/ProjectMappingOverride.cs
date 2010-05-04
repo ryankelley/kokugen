@@ -28,6 +28,11 @@ namespace Kokugen.Core.Persistence.Overrides
                 .AsSet()
                 .ForeignKeyConstraintNames("FK_Project_To_User_Columns", "FK_User_To_Project_Columns")
                 .Table("ProjectToUser");
+
+            mapping.HasMany(x => x.GetRoles())
+                .Access.CamelCaseField(Prefix.Underscore)
+                .Cascade.All()
+                .AsSet();
         }
     }
 }

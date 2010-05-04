@@ -49,6 +49,7 @@ namespace Kokugen.Core.Services
         public EmailSettings()
         {
             Port = 25;
+            DefaultFromEmailAddress = "no-reply@kokugen.com";
         }
 
         public string Host { get; set; }

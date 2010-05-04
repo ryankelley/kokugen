@@ -21,20 +21,12 @@ namespace Kokugen.Web.Startables
         public void Start()
         {
             addDefaultAdmin();
-
-            // add the User role
-            var role = new Role("User");
-            _rolesService.Create(role);
         }
 
 
         private void addDefaultAdmin()
         {
-            var role = new Role("Administrator");
-            _rolesService.Create(role);
-
-            _user = new User("KokugenAdmin", "KokugenAdmin@Kokugen.com", "K0kugen@dmin");
-            _user.AddRole(role);
+            _user = new SuperUser("KokugenAdmin", "KokugenAdmin@Kokugen.com", "K0kugen@dmin");
             _userService.Create(_user);
         }
     }

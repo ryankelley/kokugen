@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Kokugen.Core.Domain;
+using Kokugen.Core.Membership;
 using Kokugen.Core.Persistence.Repositories;
 using Kokugen.Core.Persistence.Repositories.Kokugen.Core.Persistence.Repositories;
 using Kokugen.Core.Validation;
@@ -24,14 +25,15 @@ namespace Kokugen.Core.Services
     {
         private readonly IProjectRepository _projectRepository;
         private readonly IValidator _validator;
-       
+        private readonly IPermissionRepository _permissionRepository;
 
         public ProjectService(IProjectRepository projectRepository, 
-            IValidator validator)
+            IValidator validator,
+            IPermissionRepository permissionRepository)
         {
             _projectRepository = projectRepository;
             _validator = validator;
-          
+            _permissionRepository = permissionRepository;
         }
 
         public IEnumerable<Project> ListProjects()
@@ -82,8 +84,45 @@ namespace Kokugen.Core.Services
 
             project.Status = ProjectStatus.Active;
 
+            var permissions = _permissionRepository.Query().ToArray();
+
+            project.AddRole(GetAdminRole(permissions));
+            project.AddRole(GetUserRole(permissions));
+
             return project;
         }
+
+        private Role GetAdminRole(Permission[] permissions)
+        {
+            var adminRole = new Role("Adminstrator");
+
+            permissions.Each(x => adminRole.AddPermission(x));
+            return adminRole;
+        }
+
+         private Role GetUserRole(Permission[] permissions)
+         {
+             var userRole = new Role("User");
+
+             userRole.AddPermission(permissions
+                                        .Where(x => x.Name == PermissionName.CanViewProject)
+                                        .FirstOrDefault());
+             userRole.AddPermission(permissions
+                                        .Where(x => x.Name == PermissionName.CanListDailyTime)
+                                        .FirstOrDefault());
+             userRole.AddPermission(permissions
+                                        .Where(x => x.Name == PermissionName.CanListProjects)
+                                        .FirstOrDefault());
+             userRole.AddPermission(permissions
+                                        .Where(x => x.Name == PermissionName.CanListTimeRecords)
+                                        .FirstOrDefault());
+             userRole.AddPermission(permissions
+                                        .Where(x => x.Name == PermissionName.CanListTasks)
+                                        .FirstOrDefault());
+
+             return userRole;
+            
+         }
 
         public Project GetProjectFromId(Guid id)
         {
