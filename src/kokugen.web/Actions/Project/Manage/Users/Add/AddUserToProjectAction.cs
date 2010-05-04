@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
 using FubuMVC.Core.Urls;
 using FubuMVC.Core.View;
 using Kokugen.Core.Attributes;
@@ -52,15 +53,7 @@ namespace Kokugen.Web.Actions.Project.Manage.Users.Add
                 return new AjaxResponse()
                            {
                                Success = true,
-                               Item =
-                                   new ProjectUserDTO
-                                       {
-                                           Id = user.Id,
-                                           ProjectId = project.Id,
-                                           DisplayName = user.DisplayName(),
-                                           GravatarHash = user.GravatarHash,
-                                           DeleteUrl = _urlRegistry.UrlFor(new DeleteProjectUserModel())
-                                       }
+                               Item = Mapper.Map<User, ProjectUserDTO>(user)
                            };
 
             return new AjaxResponse() {Item = validation.AllMessages.Select(x => x.Message)};

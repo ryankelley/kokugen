@@ -11,6 +11,7 @@ using Kokugen.Core.Services;
 using Kokugen.Web.Actions.Board;
 using Kokugen.Web.Actions.Card;
 using Kokugen.Web.Actions.DTO;
+using Kokugen.Web.Actions.Project.Manage.Users;
 using Kokugen.Web.Actions.TimeRecord.WidgetLog;
 using Kokugen.Web.Behaviors;
 using StructureMap;
@@ -53,34 +54,7 @@ namespace Kokugen.Web
             HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
             
             
-
-            ConfigureAutoMapper();
         }
 
-        private void ConfigureAutoMapper()
-        {
-            Mapper.CreateMap<Card, CardViewDTO>()
-                .ForMember(a => a.Status, b=> b.MapFrom(c => c.Status.DisplayName))
-                .ForMember(a => a.GravatarHash, b=> b.MapFrom(c => c.AssignedTo.GravatarHash))
-                .ForMember(a => a.UserDisplay, b=> b.MapFrom(c => c.AssignedTo.DisplayName()))
-                .ForMember(a => a.GetTasks, b => b.MapFrom(c => c.GetTasks().ToList()));
-            Mapper.CreateMap<Card, CardDetailModel>()
-                .ForMember(a => a.Status, b => b.MapFrom(c => c.Status.DisplayName))
-                .ForMember(a => a.GravatarHash, b=> b.MapFrom(c => c.AssignedTo.GravatarHash))
-                .ForMember(a => a.UserDisplay, b=> b.MapFrom(c => c.AssignedTo.DisplayName()))
-                .ForMember(a => a.GetTasks, b=>b.MapFrom(c=>c.GetTasks().ToList()));
-            Mapper.CreateMap<BoardColumn, BoardColumnDTO>()
-                .ForMember(a => a.CardLimit, b=> b.UseValue(0));
-            Mapper.CreateMap<CustomBoardColumn, BoardColumnDTO>()
-                .ForMember(a => a.CardLimit, b=> b.NullSubstitute(0));
-
-            Mapper.CreateMap<TimeRecord, TimeLogItem>();
-            Mapper.CreateMap<Task, TaskDTO>();
-//            Mapper.CreateMap<TimeRecord, TimeRecordDTO>()
-//                .ForMember(a => a.User, b => b.NullSubstitute(null));
-
-
-            Mapper.AssertConfigurationIsValid();
-        }
     }
 }
