@@ -31,9 +31,10 @@ namespace Kokugen.Web.Actions.Project.Manage.Users
             var owner = Mapper.Map<User, ProjectUserDTO>(project.Owner);
             owner.IsOwner = true;
 
-            IList<ProjectUserDTO> users = Mapper.Map<List<User>, List<ProjectUserDTO>>(project.GetUsers()
-                                                                                   .Except(new[] {project.Owner}).
-                                                                                   ToList());
+            IList<ProjectUserDTO> users = Mapper
+                .Map<List<User>, List<ProjectUserDTO>>(project.GetUsers()
+                                                           .Except(new[] {project.Owner}).
+                                                           ToList());
 
             users.Insert(0, owner);
 
@@ -44,7 +45,7 @@ namespace Kokugen.Web.Actions.Project.Manage.Users
                                      Name = x.Name
                                  });
 
-            return new ProjectUsersModel(){ProjectId = request.Id, Users = users, Roles = roles};
+            return new ProjectUsersModel() {ProjectId = request.Id, Users = users, Roles = roles};
         }
 
         public AjaxResponse Command(ProjectUsersModel model)
