@@ -42,6 +42,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -97,6 +98,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\StructureMap\StructureMap.dll</HintPath>
     </Reference>
+    <Reference Include="StructureMap.AutoMocking">
+      <HintPath>..\..\lib\StructureMap\StructureMap.AutoMocking.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core">
@@ -118,7 +122,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\When_StartIdle\When_StartIdle_is_called.cs" />
+    <Compile Include="Domain\When_StartWorking\When_StartWorking_is_called.cs" />
+    <Compile Include="Domain\When_the_column_changes\When_ColumnChanged_is_Called.cs" />
+    <Compile Include="Stubs.cs" />
+    <Compile Include="Actions\Cards\CardReadyAction_Tester.cs" />
+    <Compile Include="Actions\Cards\CardBlockedAction_Tester.cs" />
     <Compile Include="ContextSpecification.cs" />
+    <Compile Include="Domain\CardTester.cs" />
+    <Compile Include="Core\Membership\Services\PasswordValidatorTester.cs" />
+    <Compile Include="InteractionContext.cs" />
     <Compile Include="Persistence\InMemoryRepository.cs" />
     <Compile Include="Persistence\IntegrationAssemblySetup.cs" />
     <Compile Include="Persistence\PersistenceTesterContext.cs" />
@@ -144,9 +157,15 @@
       <Project>{2226C91A-5067-4434-9782-65543250ECBB}</Project>
       <Name>Kokugen.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\kokugen.web\Kokugen.Web.csproj">
+      <Project>{4A7E0834-EF09-446A-95BB-06BBE6F8077C}</Project>
+      <Name>Kokugen.Web</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Core\Membership\Security\" />

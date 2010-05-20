@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Iesi.Collections.Generic;
 using Kokugen.Core.Validation;
 
 namespace Kokugen.Core.Domain
@@ -10,6 +11,9 @@ namespace Kokugen.Core.Domain
     {
         private IList<TimeRecord> _timeRecords = new List<TimeRecord>();
         private IList<CustomBoardColumn> _boardColumns = new List<CustomBoardColumn>();
+        private ISet<User> _users = new HashedSet<User>();
+        private ISet<Role> _roles = new HashedSet<Role>();
+        
 
         [Required]
         public virtual string Name { get; set; }
@@ -22,9 +26,63 @@ namespace Kokugen.Core.Domain
         public virtual string Description { get; set; }
         
         public virtual Company Company { get; set; }
+        [Required]
+        public virtual User Owner { get; set; }
+       
 
         public virtual BoardColumn Backlog { get; set; }
         public virtual BoardColumn Archive { get; set; }
+
+        public virtual IEnumerable<Role> GetRoles()
+        {
+            return _roles;
+        }
+
+        public virtual void AddRole(Role role)
+        {
+            role.Project = this;
+            _roles.Add(role);
+        }
+
+        public virtual void RemoveRole(Role role)
+        {
+            if (_roles.Contains(role))
+                _roles.Remove(role);
+        }
+
+        public virtual IEnumerable<User> GetUsers()
+        {
+            var list = new List<User>();
+            list.Add(Owner);
+
+            list.AddRange(_users);
+
+            return list;
+        }
+
+        public virtual void AddUser(User user)
+        {
+            _users.Add(user);
+        }
+
+        public virtual void RemoveUser(User user)
+        {
+            if (_users.Contains(user))
+                _users.Remove(user);
+        }
+
+        private int _statusId;
+        public virtual int StatusId
+        {
+            get { return _statusId; }
+            set { _statusId = value; }
+        }
+
+        public virtual ProjectStatus Status
+        {
+            get { return Enumeration.FromValue<ProjectStatus>(_statusId); }
+            set { _statusId = value.Value; }
+        }
 
         #region Time Records
 
@@ -122,5 +180,21 @@ namespace Kokugen.Core.Domain
             
         }
 
+    }
+
+    public class ProjectStatus : Enumeration
+    {
+        public static ProjectStatus Active = new ProjectStatus(1, "Active");
+        public static ProjectStatus Complete = new ProjectStatus(2, "Complete");
+        public static ProjectStatus Archived = new ProjectStatus(3, "Archived");
+        private ProjectStatus(int value, string displayName) : base(value, displayName)
+        {
+            
+        }
+
+        public ProjectStatus()
+        {
+            
+        }
     }
 }

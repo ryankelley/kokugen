@@ -10,7 +10,7 @@ BUILD_NUMBER_BASE = "0.1.0"
 PRODUCT = "Kokugen"
 COPYRIGHT = 'Copyright 2010 Nine Collective. All rights reserved.';
 COMMON_ASSEMBLY_INFO = 'src/CommonAssemblyInfo.cs';
-CLR_VERSION = "v3.5"
+CLR_VERSION = "v4.0.30319"
 
 TARANTINO = "lib\\tarantino\\Tarantino.DatabaseManager.Console.exe"
 DBNAME = "KokugenData"
@@ -33,7 +33,7 @@ assemblyinfo :version do |asm|
   asm_version = BUILD_NUMBER_BASE + ".0"
   
   begin
-	gittag = `git describe --long`.chomp 	# looks something like v0.1.0-63-g92228f4
+	gittag = `git describe --all --long`.chomp 	# looks something like v0.1.0-63-g92228f4
     gitnumberpart = /-(\d+)-/.match(gittag)
     gitnumber = gitnumberpart.nil? ? '0' : gitnumberpart[1]
     commit = (ENV["BUILD_VCS_NUMBER"].nil? ? `git log -1 --pretty=format:%H` : ENV["BUILD_VCS_NUMBER"])
@@ -183,14 +183,9 @@ task :dbDeploy do
 end
 
 desc 'Creates the next migration script'
-task :dbMigrate => [:dbReset, :dbCreateMembership, :dbCreateVersioned] do
+task :dbMigrate => [:dbReset, :dbCreateVersioned] do
 	
 Tarantino.CompareDatabases :dbname => DBNAME, :dbserver => DBSERVER, :scriptdir => DBSCRIPTS
 	
 end
 
-desc 'Creates the ASP.Net Membership stuff in the database'
-task :dbCreateMembership do
-    
-    system("C:\\Windows\\Microsoft.NET\\Framework\\v2.0.50727\\aspnet_regsql -S #{DBSERVER} -E -d #{DBNAME} -A all")
-end

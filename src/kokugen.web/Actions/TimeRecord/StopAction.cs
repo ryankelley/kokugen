@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
+using FubuCore;
 using Kokugen.Core;
 using Kokugen.Core.Services;
 using Kokugen.Web.Actions.DTO;
@@ -23,16 +24,17 @@ namespace Kokugen.Web.Actions.TimeRecord
             {
                 var timeRecord = _timeRecordService.GetTimeRecord(model.Id);
 
+                if (model.Description.IsNotEmpty()) timeRecord.Description = model.Description;
+
+
                 if (model.Billable != 0)
                 {
                     timeRecord.Billable = model.Billable;
-
                 }
-                else
-                {
-                    timeRecord.Stop();
-                    timeRecord.ComputeDuration();
-                }
+                
+                timeRecord.Stop();
+                timeRecord.ComputeDuration();
+                
                 _timeRecordService.Save(timeRecord);
                 return new AjaxResponse {Success = true, Item = Mapper.DynamicMap<TimeRecordDTO>(timeRecord)};
             }

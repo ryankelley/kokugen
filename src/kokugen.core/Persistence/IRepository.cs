@@ -25,6 +25,8 @@ namespace Kokugen.Core.Persistence
     {
         void Save(ENTITY entity);
 
+        void SaveAndFlush(ENTITY entity);
+
         ENTITY Load(Guid id);
 
         ENTITY Get(Guid id);
@@ -103,9 +105,19 @@ namespace Kokugen.Core.Persistence
 
         #region IRepository Members
 
-        public void Save(ENTITY entity)
+        public virtual void Save(ENTITY entity)
         {
+            //if (entity.Id.IsEmpty())
+            //    entity.Created = DateTime.Now;
+            //entity.LastUpdated = DateTime.Now;
+
            _session.SaveOrUpdate(entity);
+        }
+
+        public virtual void SaveAndFlush(ENTITY entity)
+        {
+           Save(entity);
+            _session.Flush();
         }
 
         public ENTITY Load(Guid id)
@@ -128,7 +140,7 @@ namespace Kokugen.Core.Persistence
             return _session.Linq<ENTITY>().Where(whereQuery.Expression);
         }
 
-        public void Delete(ENTITY entity)
+        public virtual void Delete(ENTITY entity)
         {
            _session.Delete(entity);
         }

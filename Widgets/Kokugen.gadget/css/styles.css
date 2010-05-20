@@ -1,0 +1,198 @@
+body.normal{
+	width:275px;
+	text-align: right;
+	background-color: #333;
+	/*background: url("/images/background.png") no-repeat;*/
+	height: 225px;
+	overflow: visible;
+}
+body.compact
+{
+    width:275px;
+	text-align: right;
+	background-color: #333;
+	/*background: url("/images/background.png") no-repeat;*/
+	height: 75px;
+	overflow: visible;
+}
+body.expanded{
+	width:273px;
+	text-align: right;
+	background: url("/images/background.png") no-repeat;
+	height: 130px;
+	overflow: visible;
+}
+.hidden { display: none; }
+
+.frame  
+{
+    margin-top: 5px;
+    margin-right: 125px;
+       background-color: #DEDEDE;
+        height: 75px;
+        width: 255px;
+        margin-left:-3px;
+        
+ }
+
+#textField {
+    color: black;
+    font-family: HelveticaNeue;
+    width: 125px;
+    font-size: 20pt;
+    background-color: rgb(158, 158, 139);
+    text-align: right;
+    margin-top: 8px;
+    margin-left: 15px;
+}
+
+#stop-btn, #start-btn, #save-btn
+{
+    margin-top: -55px;
+    margin-right: 25px;
+}
+
+#logo{
+	position: absolute;
+	top: 10px;
+	left: 85px;
+}
+
+.frame select 
+{
+  margin-right: 115px;
+  margin-bottom: 8px;  
+  width: 135px;
+  
+}
+
+#timerecord-info 
+{
+    float:left;
+    background-color: #DDD;
+    margin-top: 0px;
+    width: 262px;
+    margin-left:-3px;
+    height: 150px;
+    overflow: hidden;
+    font-family: Sans-Serif;
+    margin-right: 125px;
+}
+
+
+#timerecord-info label 
+{
+    display:inline;
+    margin-left: 5px;
+    font-size: 11px;
+    font-weight:bold;
+}
+#timerecord-info textarea
+{
+    font-size: 11px;
+    font-weight:bold;
+    margin-left: 5px;
+}
+
+#timerecord-info input
+{
+    margin-left: 5px;
+    margin-right: 5px;
+    display:inline;
+    
+}
+.desc-label
+{
+    margin-right: 90px;
+    font-family: Sans-Serif;
+    
+    width: 125px;
+    display: block;
+}
+.start_button{
+	background: url("/images/start.png") no-repeat;
+	border: none;
+	width: 68px;
+	height: 36px;
+}
+
+.stop_button{
+	background: url("/images/stop.png") no-repeat;
+	border: none;
+	width: 68px;
+	height: 36px;
+}
+.save_button{
+	background: url("/images/save.png") no-repeat;
+	border: none;
+	width: 68px;
+	height: 36px;
+}
+
+.clock-in, .clock-out
+{
+    margin-right: 255px;
+    margin-top: -25px;
+    width: 65px;
+    height: 25px;
+    color: #FFF;
+    border: 1px solid #000;
+    background-color: #666;
+     -moz-border-radius: 5px; /* FF1+ */
+  -webkit-border-radius: 5px; /* Saf3+, Chrome */
+          border-radius: 5px; /* Opera 10.5, IE 9 */
+
+}
+
+.slide-button
+{
+    font-size:10px;
+    font-weight:bold;
+    margin-right: 15px;
+    margin-top: 5px;
+    padding-bottom:1px;
+    width: 45px;
+    height: 18px;
+    color: #FFF;
+    border: 1px solid #000;
+    background-color: #666;
+     -moz-border-radius: 5px; /* FF1+ */
+  -webkit-border-radius: 5px; /* Saf3+, Chrome */
+          border-radius: 5px; /* Opera 10.5, IE 9 */
+}
+
+#status 
+{
+    
+    color:#FFF;
+    font-size:10px;
+    font-family: Sans-Serif;
+    font-weight: bold;
+    width: 65px;
+    height: 20px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 2px;
+	padding-right:4px;
+	padding-top: 3px;
+}
+div.out 
+{
+    background-color: Red;
+}
+div.in { background-color: Green;}
+
+.refresh 
+{
+    border:none;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 100px;
+ width: 16px;
+ height: 16px;
+ background: url('/images/refresh.png') no-repeat;
+}
+
+.server { font-size: .75em; color: #FFF; margin-right: 5px; text-align: left;}

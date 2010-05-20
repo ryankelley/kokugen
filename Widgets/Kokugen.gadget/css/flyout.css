@@ -1,0 +1,61 @@
+body{
+	width: 275px;
+	height: 350px;
+	background-color: #333333;
+}
+
+#task_list{
+	list-style: none;
+	margin-left:-5px;
+}
+
+li{
+	margin-left: 0px;
+	border-bottom: 1px solid #999;
+	padding: 3px;
+	font-size: .9em;
+	font-weight:bold;
+}
+.even { background-color: #FFF; }
+.odd{
+	background-color: #aeaeae;
+	color:#FFF;
+}
+
+li div {
+margin:0px;
+height:20px;
+
+}
+.title { color: #FFF; font-size: 1.25em; text-align:center; margin-left: 0px; width: 100%;font-weight:bold; margin-bottom:2px;}
+.desc { 
+padding: 4px;
+overflow: hidden;
+border-bottom: 1px solid #333;
+padding-bottom: 2px;
+height: 21px;
+}
+.middle {
+
+margin-bottom:3px;
+border-bottom: 1px solid #333;
+}
+
+span { padding-top:2px; padding-bottom:2px; height:18px; }
+
+.proj { width: 100px; border-right: 1px solid #333; overflow:hidden; padding-right:2px;}
+
+.card { margin-left: 2px; width: 120px; overflow:hidden; padding-left:4px; }
+
+.duration { width: 100px; border-right: 1px solid #333; overflow:hidden;}
+.billable { width: 120px; margin-left:2px; padding-left:4px;  overflow:hidden;}
+.refresh 
+{
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+ width: 16px;
+ height: 16px;
+ background: transparent url('/images/refresh.png') no-repeat center center;
+}

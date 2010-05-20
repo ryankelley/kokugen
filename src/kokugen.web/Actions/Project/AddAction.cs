@@ -1,5 +1,7 @@
+using FubuMVC.Core.Security;
 using Kokugen.Core;
 using Kokugen.Core.Attributes;
+using Kokugen.Core.Membership.Services;
 using Kokugen.Core.Services;
 using Kokugen.Core.Validation;
 
@@ -9,18 +11,25 @@ namespace Kokugen.Web.Actions.Project
     {
         private readonly IProjectService _projectService;
         private readonly ICompanyService _companyService;
+        private readonly IUserService _userService;
+        private readonly ISecurityContext _securityContext;
 
-        public AddAction(IProjectService projectService, ICompanyService companyService)
+        public AddAction(IProjectService projectService, 
+            ICompanyService companyService,
+            IUserService userService,
+            ISecurityContext securityContext)
         {
             _projectService = projectService;
             _companyService = companyService;
+            _userService = userService;
+            _securityContext = securityContext;
         }
 
         public AjaxResponse Command(AddProjectModel inModel)
         {
             var company = _companyService.Get(inModel.CompanyId);
 
-            var project = _projectService.CreateProject(inModel.ProjectName, inModel.ProjectDescription, company);
+            var project = _projectService.CreateProject(inModel.ProjectName, inModel.ProjectDescription, company, _userService.GetUserByLogin(_securityContext.CurrentIdentity.Name));
             var notification = _projectService.SaveProject(project);
 
             if (notification.IsValid())
@@ -32,8 +41,8 @@ namespace Kokugen.Web.Actions.Project
                                //           {
                                //               Name = project.Name,
                                //               Description = project.Description,
-                               //               Id = project.Id,
-                               //               CompanyId = project.Company.Id,
+                               //               ProjectId = project.ProjectId,
+                               //               CompanyId = project.Company.ProjectId,
                                //               CompanyName = project.Company.Name
                                //           }
                            }

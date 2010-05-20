@@ -1,6 +1,30 @@
 var _cards = new Array();
 
-var Card = function(card) {
+var TaskOrderDTO = function (task) {
+    if (!(task instanceof Task)) {
+        throw ("task is not an instance of Task");
+    }
+
+    this.Id = task.Id;
+    this.TaskOrder = task.TaskOrder;
+}
+
+var Task = function (task) {
+    this.Id = task.Id;
+    this.Description = task.Description;
+    this.TaskOrder = task.TaskOrder;
+
+    this.CompletedDate = task.CompletedDate === null ? null : task.CompletedDate.toString();
+
+    if (this.CompletedDate !== null) {
+        this.CompletedDate = fixDate(this.CompletedDate);
+    }
+    this.UserName = task.UserName;
+    this.IsComplete = task.IsComplete;
+    this.CardId;
+}
+
+var Card = function (card) {
 
     this.Id = card.Id;
     this.ColumnId = card.ColumnId;
@@ -10,7 +34,7 @@ var Card = function(card) {
 
     this.Deadline = card.Deadline === null ? null : card.Deadline.toString();
     if (this.Deadline !== null) {
-        this.Deadline = new Date(parseInt(this.Deadline.replace("/Date(", "").replace(")/", ""), 10));
+        this.Deadline = fixDate(this.Deadline);
     }
     this.CardNumber = card.CardNumber;
     this.Size = card.Size;
@@ -18,11 +42,15 @@ var Card = function(card) {
     this.Status = card.Status;
     this.ReasonBlocked = card.BlockReason;
     this.CardOrder = card.CardOrder;
-    
+    this.ProjectId = card.ProjectId;
+    this.GravatarHash = card.GravatarHash;
+    this.UserDisplay = card.UserDisplay;
+    this.GetTasks = card.GetTasks;
+
 };
 
 
-var buildCardDisplay = function(scard) {
+var buildCardDisplay = function (scard) {
     if (!(scard instanceof Card)) {
         throw ("card is not an instance of Card");
     }
@@ -30,6 +58,7 @@ var buildCardDisplay = function(scard) {
 
     var myTools = buildToolbar(scard);
     var colors = buildColorEditor();
+    var taskControl = buildTaskControl(scard, scard.GetTasks);
 
     // makes outer container
     var element = document.createElement('li');
@@ -46,13 +75,22 @@ var buildCardDisplay = function(scard) {
 
     var editLink = document.createElement('a');
     editLink.appendChild(document.createTextNode(scard.CardNumber));
+    editLink.setAttribute("href", "/card/" + scard.Id);
 
     number.appendChild(editLink);
 
     var size = document.createElement('div');
     $(size).addClass("card-size").attr("title", "Estimated Size of this card");
     size.appendChild(document.createTextNode(scard.Size));
+
+    var userName = document.createElement('div');
+    $(userName).html(scard.UserDisplay).addClass("username");
+
     var worker = document.createElement('div');
+    worker.setAttribute('class', 'gravatar');
+    var gravatar = document.createElement('img');
+    gravatar.setAttribute('src', 'http://gravatar.com/avatar/' + scard.GravatarHash + '?s=27');
+    worker.appendChild(gravatar);
 
     // Blockage reason
     var blocked = document.createElement('div');
@@ -91,33 +129,44 @@ var buildCardDisplay = function(scard) {
     element.appendChild(head);
     element.appendChild(body);
     element.appendChild(colors);
+    element.appendChild(taskControl);
     element.appendChild(myTools);
+
     element.appendChild(blocked);
 
     head.appendChild(number);
     head.appendChild(size);
     head.appendChild(worker);
+    head.appendChild(userName);
+
 
     body.appendChild(document.createTextNode(scard.Title));
 
-    function unblock() {
+    function unblock(callServer) {
         scard.Status = "New";
         scard.ReasonBlocked = "";
         $(element).removeClass("blocked");
         $(blocked).addClass("hidden");
         myTools.isBlocked(false);
-        element.updateBlocked(false);
+
+        if (callServer) {
+            element.updateBlocked(false);
+        }
     }
 
-    function notReady() {
+    function notReady(callServer) {
         scard.Status = "New";
-        element.isReady(false);
+        element.isReady(false, true);
         myTools.isReady(false);
+
+        if (callServer) {
+            element.updateReadyStatus(false);
+        }
     }
 
-    element.receive = function(newColumnId) {
-        unblock();
-        notReady();
+    element.receive = function (newColumnId) {
+        unblock(false);
+        notReady(false);
         $.ajax({
             url: "/card/move",
             data: { Id: scard.Id, ColumnId: newColumnId },
@@ -126,7 +175,7 @@ var buildCardDisplay = function(scard) {
         });
     };
 
-    element.colorChange = function(color) {
+    element.colorChange = function (color) {
         this.Color = color;
 
         originalColor = determineColor($(element));
@@ -142,48 +191,28 @@ var buildCardDisplay = function(scard) {
         });
     };
 
-    element.UpdateOrder = function(number) {
+    element.UpdateOrder = function (number) {
         scard.CardOrder = number;
         this.myCard = scard;
     };
 
-    element.started = function() {
+    element.claim = function () {
         $.ajax({
-            url: "/card/dates",
-            data: { Id: scard.Id, Status: "Started" },
+            url: "/card/claim",
+            data: { CardId: scard.Id },
             dataType: "json",
-            type: "POST"
+            type: "POST",
+            success: updateUser
         });
     };
 
-    element.notStarted = function() {
-        $.ajax({
-            url: "/card/dates",
-            data: { Id: scard.Id, Status: "NotStarted" },
-            dataType: "json",
-            type: "POST"
-        });
-    };
+    function updateUser(response) {
 
-    element.done = function() {
-        $.ajax({
-            url: "/card/dates",
-            data: { Id: scard.Id, Status: "Done" },
-            dataType: "json",
-            type: "POST"
-        });
-    };
+        $(userName).html(response.Item.UserDisplay);
+        gravatar.setAttribute('src', 'http://gravatar.com/avatar/' + response.Item.GravatarHash + '?s=27');
+    }
 
-    element.notDone = function() {
-        $.ajax({
-            url: "/card/dates",
-            data: { Id: scard.Id, Status: "NotDone" },
-            dataType: "json",
-            type: "POST"
-        });
-    };
-
-    element.isReady = function(status) {
+    element.isReady = function (status, skipServerCall) {
         if (status) {
             this.Status = "Ready";
             $(element).addClass("ready");
@@ -193,6 +222,12 @@ var buildCardDisplay = function(scard) {
             $(element).removeClass("ready");
         }
 
+        if (!skipServerCall) {
+            element.updateReadyStatus(status);
+        }
+    };
+
+    element.updateReadyStatus = function (status) {
         $.ajax({
             url: "/card/ready",
             data: { Id: scard.Id, Status: status },
@@ -201,7 +236,7 @@ var buildCardDisplay = function(scard) {
         });
     };
 
-    element.isBlocked = function(value) {
+    element.isBlocked = function (value) {
         scard.Status = value ? "Blocked" : "New";
         if (value) {
             $(element).addClass("blocked");
@@ -216,11 +251,11 @@ var buildCardDisplay = function(scard) {
 
     };
 
-    element.handleReasonBlocked = function(value) {
+    element.handleReasonBlocked = function (value) {
         element.updateBlocked(true, value);
     };
 
-    element.updateBlocked = function(status, reason) {
+    element.updateBlocked = function (status, reason) {
         if (status) {
             var isValid = ($(input).val() != "" && $(input).val() !== undefined);
             if (isValid) {
@@ -245,19 +280,19 @@ var buildCardDisplay = function(scard) {
         }
     };
 
-    $(reasonBlocked).dblclick(function() {
+    $(reasonBlocked).dblclick(function () {
         $(reasonBlocked).addClass("hidden");
         $(reasonForm).removeClass("hidden");
     });
 
-    $(submitReason).click(function() {
+    $(submitReason).click(function () {
         element.updateBlocked(true, $(input).val());
         $(reasonForm).addClass("hidden");
         $(reasonBlocked).removeClass("hidden");
         $(reasonBlocked).html(scard.ReasonBlocked);
     });
 
-    $(cancelReason).click(function() {
+    $(cancelReason).click(function () {
         if (scard.Status == "Blocked") {
             $(reasonForm).addClass("hidden");
             $(reasonBlocked).removeClass("hidden");
@@ -267,11 +302,15 @@ var buildCardDisplay = function(scard) {
         }
     });
 
-    $(head).click(function() {
-        $(this).siblings("#card-toolbar").slideToggle();
+    element.wasDragged = false;
+
+    $(head).dblclick(function () {
+        if (!element.wasDragged) {
+            $(this).siblings("#card-toolbar").slideToggle();
+        }
     });
 
-    $(element).hover(function() { $(this).addClass("hover"); }, function() { $(this).removeClass("hover"); });
+    $(element).hover(function () { $(this).addClass("hover"); }, function () { $(this).removeClass("hover"); });
     return element;
 };
 
@@ -303,8 +342,9 @@ function cardOverColumn(event, ui) {
     checkLimit(this);
 }
 
-function cardMovedOut(event, ui) {
-    checkLimit(this);
+var CardOrderDTO = function (card) {
+    this.Id = card.Id;
+    this.CardOrder = card.CardOrder;
 }
 
 function reOrderCards(event, ui) {
@@ -313,7 +353,7 @@ function reOrderCards(event, ui) {
     var count = 1;
     $(column).children().each(function() {
         this.UpdateOrder(count++);
-        cardsInColumn.push(this.myCard);
+        cardsInColumn.push(new CardOrderDTO(this.myCard));
     });
 
     cardsInColumn.sort(function(a, b) {
@@ -346,6 +386,15 @@ function buildToolbar(card) {
 
     up.appendChild(upLink);
 
+    $(upLink).click(function () {
+
+        $(this).parent().parent().parent().parent().prepend($(this).parent().parent().parent());
+        this.parentNode.parentNode.parentNode.receive(this.parentNode.parentNode.parentNode.parentNode.id);
+
+        this.receive
+    });
+
+
     var down = document.createElement('li');
     var downLink = document.createElement('a');
     downLink.setAttribute("class", "card-down");
@@ -353,6 +402,11 @@ function buildToolbar(card) {
     down.setAttribute("class", "icon");
 
     down.appendChild(downLink);
+
+    $(downLink).click(function () {
+        $(this).parent().parent().parent().parent().append($(this).parent().parent().parent());
+        this.parentNode.parentNode.parentNode.receive(this.parentNode.parentNode.parentNode.parentNode.id);
+    });
     
     var color = document.createElement('li');
     color.setAttribute("class", "icon");
@@ -371,9 +425,27 @@ function buildToolbar(card) {
     claim.setAttribute("class", "icon");
 
     var claimLink = document.createElement('a');
+    claimLink.setAttribute("class", "claim");
+    claimLink.setAttribute("title", "Click to Claim");
     claimLink.appendChild(document.createTextNode("Claim"));
     claim.appendChild(claimLink);
-    
+
+    $(claimLink).click(function () {
+        
+        $(this).parent().parent().parent().get(0).claim();
+    });
+
+    var tasks = document.createElement('li');
+    $(tasks).addClass("icon");
+
+    var taskLink = buildAnchor("Tasks", "#", "task");
+    $(taskLink).attr("title", "Click to see tasks");
+    tasks.appendChild(taskLink);
+
+    $(taskLink).click(function () {
+        $(this).parent().parent().siblings("#card-task-editor").slideToggle();
+    });
+
     var ready = document.createElement('li');
     ready.setAttribute("class", "checkbox");
 
@@ -390,6 +462,7 @@ function buildToolbar(card) {
     element.appendChild(down);
     element.appendChild(color);
     element.appendChild(claim);
+    element.appendChild(tasks);
     element.appendChild(ready);
     element.appendChild(blocked);
 
@@ -501,8 +574,9 @@ function buildColorButton(color) {
     container.appendChild(link);
 
     // Setup click functions on color links
-    $(link).click(function() {
+    $(link).click(function () {
         changeColor(link, color);
+        return false;
     });
     
     return container;
@@ -546,18 +620,344 @@ function determineColor(element) {
         return "teal"; }
 }
 
-function backlogRemove(event, ui) {
-    ui.item[0].started();
+function buildTaskControl(card, tasks) {
+    var numberComplete = 0;
+    var element = document.createElement('div');
+
+    element.card = card;
+
+    $(element).attr("id", "card-task-editor");
+    $(element).addClass("hidden");
+
+    if (tasks.length > 0) {
+        $(element).removeClass("hidden");
+    }
+
+    var taskStatus = document.createElement('div');
+    $(taskStatus).addClass("task-status");
+
+    var taskList = document.createElement('ul');
+
+    $(taskList).sortable({ update: updateTaskOrder });
+
+    taskList.taskList = new Array();
+
+    if (tasks.length > 0) {
+        for (var i in tasks) {
+            if (tasks[i].IsComplete) {
+                numberComplete++;
+            }
+            var task = new Task(tasks[i]);
+            task.CardId = card.Id;
+            element.cardId = card.Id;
+            taskList.taskList.push(task);
+            var item = buildTaskLine(task);
+            taskList.appendChild(item);
+        }
+
+        element.cardTotal = tasks.length;
+        element.cardComplete = numberComplete;
+        
+    }
+    $(taskList).addClass("hidden");
+
+    element.appendChild(taskStatus);
+
+    $(taskStatus).click(function () {
+        $(taskList).slideToggle();
+        $(taskTools).toggle();
+    });
+
+    element.appendChild(taskList);
+
+    var taskTools = document.createElement('div');
+    taskTools.setAttribute('class', 'task-buttons');
+    $(taskTools).addClass("hidden");
+    element.appendChild(taskTools);
+
+    var addButton = document.createElement('button');
+    $(addButton).addClass("task-add-button").html('Add');
+
+    $(addButton).click(function () {
+        var newTask = new Task({ Id: null, IsComplete: false, Description: "", CompletedDate: null, UserName: null });
+        newTask.CardId = this.parentNode.parentNode.card.Id;
+        var newTaskDisplay = buildTaskLine(newTask);
+        newTaskDisplay.showInPlace();
+        $(taskList).append(newTaskDisplay);
+
+        $(newTaskDisplay).find('.task-description-edit').focus();
+    });
+    
+    var hideButton = document.createElement('button');
+    $(hideButton).addClass("task-hide-button").html('Hide');
+    $(hideButton).click(function () {
+        $(taskList).slideToggle();
+        $(taskTools).toggle();
+    });
+    taskTools.appendChild(addButton);
+    taskTools.appendChild(hideButton);
+
+
+
+    element.updateTaskStatus = function () {
+
+        var total = this.cardTotal;
+        var numChecked = this.cardComplete;
+
+        if (total && total != 0) {
+            var percent = (numChecked / total) * 100;
+
+            $(taskStatus).html(numChecked + ' of ' + total + ' tasks completed ( ' + Math.round(percent) + '% )');
+        }
+        else {
+            $(taskStatus).html("There have not been any tasks created yet");
+        }
+    };
+    
+    element.updateTaskStatus();
+
+    return element;
 }
 
-function backlogReceive(event, ui) {
-    ui.item[0].notStarted();
+function updateTaskOrder() {
+    var count = 1;
+    var order = $(this).children().each(function () {
+        this.UpdateOrder(count++);
+    });
+
+    this.taskList.sort(function (a, b) {
+        return a.Order - b.Order;
+    });
+
+    var cols = new Array();
+    $(this.taskList).each(function () {
+        cols.push(new TaskOrderDTO(this));
+    });
+
+    var data = new Object();
+    data.CardId = this.parentNode.cardId;
+    data.Tasks = $.toJSON(cols);
+
+    $.ajax({ type: 'POST', url: '/task/reorder', data: data, dataType: 'JSON' });
+    //$("#info").load("process-sortable.php?" + order);
 }
 
-function archiveRemove(event, ui) {
-    ui.item[0].notDone();
+function buildTaskLine(task) {
+
+    var element = document.createElement('li');
+
+    element.task = task;
+
+    $(element).addClass('task-line');
+
+    var move = document.createElement('span');
+    $(move).addClass('task-move').html("&nbsp;");
+    
+
+    element.appendChild(move);
+
+    var check = document.createElement('input');
+    check.setAttribute('type', 'checkbox');
+    $(check).addClass("check").attr('title', 'Click to toggle Task Completion');
+
+    if (task.IsComplete) {
+        $(check).attr('checked', 'checked');
+    } else { $(check).attr('checked', ''); }
+
+    $(check).click(function () {
+        if (this.checked) {
+        $.ajax({
+            url: '/task/complete',
+            type: 'POST',
+            data: { Id: element.task.Id, IsComplete: true },
+            success: element.taskComplete
+
+        });
+
+        this.parentNode.parentNode.parentNode.cardComplete++;
+        this.parentNode.parentNode.parentNode.updateTaskStatus();
+            
+        } else {
+        $.ajax({
+            url: '/task/complete',
+            type: 'POST',
+            data: { Id: element.task.Id, IsComplete: false },
+            success: element.taskNotComplete
+
+        });
+
+        this.parentNode.parentNode.parentNode.cardComplete--;
+        this.parentNode.parentNode.parentNode.updateTaskStatus();
+        }
+
+    });
+
+    element.appendChild(check);
+
+    var desc = document.createElement('span');
+    $(desc).addClass('task-description');
+
+    desc.appendChild(document.createTextNode(task.Description));
+
+    
+
+    var completedInfo = document.createElement('span');
+    completedInfo.appendChild(document.createTextNode(task.UserName + ' @ ' + formatDate(task.CompletedDate)));
+    $(completedInfo).addClass("hidden").addClass("task-complete-info");
+
+    if (task.IsComplete) {
+        $(completedInfo).removeClass("hidden");
+    }
+
+    
+
+    var deleteLink = buildAnchor("X", "#", "delete-link");
+    $(deleteLink).click(function () {
+
+
+        var checkbox = $(this).siblings("input")[0];
+        var isChecked = checkbox.checked;
+
+        if (isChecked) {
+            this.parentNode.parentNode.parentNode.cardComplete--;
+            this.parentNode.parentNode.parentNode.cardTotal--;
+            this.parentNode.parentNode.parentNode.updateTaskStatus();
+        }
+        else {
+            this.parentNode.parentNode.parentNode.cardTotal--;
+            this.parentNode.parentNode.parentNode.updateTaskStatus();
+        }
+
+        $.ajax({
+            url: '/task',
+            data: { Id: element.task.Id },
+            type: 'DELETE',
+            success: element.afterRemoved
+        });
+        return false;
+    });
+
+    element.afterRemoved = function () {
+        $(element).remove();
+    };
+
+    element.appendChild(deleteLink);
+    element.appendChild(desc);
+    element.appendChild(completedInfo);
+
+    element.taskNotComplete = function () {
+        $(completedInfo).hide();
+        
+    };
+
+    element.taskComplete = function (response) {
+        if (response && response.Success) {
+            var date = fixDate(response.Item.CompletedDate);
+            $(completedInfo).html(response.Item.UserName + ' @ ' + formatDate(date));
+            $(completedInfo).show();
+
+            
+        }
+    };
+
+    $(desc).dblclick(function () {
+        element.showInPlace();
+    });
+
+    var inPlace = buildInPlaceTaskEdit(element);
+    element.appendChild(inPlace);
+
+
+    element.showInPlace = function () {
+        var width = $(element).parents("li.card").width();
+        $(inPlace).children("input").width(width - 46);
+        $(inPlace).show();
+        $(move).hide();
+        $(check).hide();
+        $(desc).hide();
+
+        if (element.task.IsComplete) {
+            $(completedInfo).hide();
+        }
+
+        $(deleteLink).hide();
+    };
+
+    element.hideInPlace = function () {
+        $(inPlace).hide();
+        $(move).show();
+        $(check).show();
+        $(desc).show();
+
+        if (element.task.IsComplete) {
+            $(completedInfo).show();
+        }
+
+        $(deleteLink).show();
+    };
+
+    element.afterSaveTask = function () {
+        $(desc).html($(inPlace).children("input").val());
+        element.hideInPlace();
+
+
+    };
+
+    element.UpdateOrder = function (order) {
+        task.TaskOrder = order;
+    }
+
+    return element;
 }
 
-function archiveReceive(event, ui) {
-    ui.item[0].done();
+function buildInPlaceTaskEdit(element) {
+
+    var inPlace = document.createElement('div');
+    $(inPlace).addClass("task-inplace");
+
+    var descEdit = document.createElement('input');
+    descEdit.setAttribute('type', 'text');
+    descEdit.setAttribute('class', 'task-description-edit');
+
+   
+    $(descEdit).val(element.task.Description);
+    inPlace.appendChild(descEdit);
+
+    var save = document.createElement('button');
+    $(save).html('Save').addClass('task-save');
+
+    $(save).click(function () {
+        var text = $(descEdit).val();
+
+        this.parentNode.parentNode.parentNode.parentNode.cardTotal++;
+        this.parentNode.parentNode.parentNode.parentNode.updateTaskStatus();
+        $.ajax({
+            url: '/task',
+            type: 'POST',
+            data: { Id: this.parentNode.parentNode.task.Id, Description: text, CardId: this.parentNode.parentNode.task.CardId },
+            success: element.afterSaveTask
+        });
+        return false;
+    });
+
+    var cancel = document.createElement('button');
+    $(cancel).html('Cancel').addClass('task-cancel');
+
+    $(cancel).click(function () {
+        element.hideInPlace();
+        return false;
+    });
+
+    inPlace.appendChild(save);
+    inPlace.appendChild(cancel);
+
+    $(inPlace).addClass("hidden");
+
+    $(descEdit).keyup(function (event) {
+        if (event.keyCode == 13) {
+            $(save).click();
+        }
+    });
+
+    return inPlace;
 }

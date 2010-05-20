@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Kokugen.Core.Domain;
+using Kokugen.Core.Membership;
 using Kokugen.Core.Persistence.Repositories;
 using Kokugen.Core.Persistence.Repositories.Kokugen.Core.Persistence.Repositories;
 using Kokugen.Core.Validation;
@@ -14,7 +15,7 @@ namespace Kokugen.Core.Services
         INotification SaveProject(Project project);
         Project Load(Guid Id);
         Project GetProjectFromName(string name);
-        Project CreateProject(string projectName, string projectDescription, Company company);
+        Project CreateProject(string projectName, string projectDescription, Company company, User owner);
         Project GetProjectFromId(Guid id);
 
         
@@ -24,13 +25,15 @@ namespace Kokugen.Core.Services
     {
         private readonly IProjectRepository _projectRepository;
         private readonly IValidator _validator;
-       
+        private readonly IPermissionRepository _permissionRepository;
 
-        public ProjectService(IProjectRepository projectRepository, IValidator validator)
+        public ProjectService(IProjectRepository projectRepository, 
+            IValidator validator,
+            IPermissionRepository permissionRepository)
         {
             _projectRepository = projectRepository;
             _validator = validator;
-          
+            _permissionRepository = permissionRepository;
         }
 
         public IEnumerable<Project> ListProjects()
@@ -63,13 +66,13 @@ namespace Kokugen.Core.Services
             return _projectRepository.Query().Where(c => c.Name == name).FirstOrDefault();
         }
 
-        public Project CreateProject(string projectName, string projectDescription, Company company)
+        public Project CreateProject(string projectName, string projectDescription, Company company, User owner)
         {
             var project = new Project();
             project.Name = projectName;
             project.Description = projectDescription;
-            project.Backlog = new BoardColumn {Name = "Backlog", Description = "This is the project Backlog"};
-            project.Archive = new BoardColumn {Name = "Archive", Description = "This queue contains all finished tasks"};
+            project.Backlog = new BoardColumn {Name = BoardColumn.BacklogName, Description = "This is the project Backlog"};
+            project.Archive = new BoardColumn {Name = BoardColumn.ArchiveName, Description = "This queue contains all finished tasks"};
 
             project.AddBoardColumn(new CustomBoardColumn { ColumnOrder = 1, Name = "Ready", Description = "Items in this column are ready"});
             project.AddBoardColumn(new CustomBoardColumn { ColumnOrder = 2, Name = "Working", Description = "Items in this column are being worked on"});
@@ -77,8 +80,49 @@ namespace Kokugen.Core.Services
 
             project.Company = company;
 
+            project.Owner = owner;
+
+            project.Status = ProjectStatus.Active;
+
+            var permissions = _permissionRepository.Query().ToArray();
+
+            project.AddRole(GetAdminRole(permissions));
+            project.AddRole(GetUserRole(permissions));
+
             return project;
         }
+
+        private Role GetAdminRole(Permission[] permissions)
+        {
+            var adminRole = new Role("Adminstrator");
+
+            permissions.Each(x => adminRole.AddPermission(x));
+            return adminRole;
+        }
+
+         private Role GetUserRole(Permission[] permissions)
+         {
+             var userRole = new Role("User");
+
+             userRole.AddPermission(permissions
+                                        .Where(x => x.Name == PermissionName.CanViewProject)
+                                        .FirstOrDefault());
+             userRole.AddPermission(permissions
+                                        .Where(x => x.Name == PermissionName.CanListDailyTime)
+                                        .FirstOrDefault());
+             userRole.AddPermission(permissions
+                                        .Where(x => x.Name == PermissionName.CanListProjects)
+                                        .FirstOrDefault());
+             userRole.AddPermission(permissions
+                                        .Where(x => x.Name == PermissionName.CanListTimeRecords)
+                                        .FirstOrDefault());
+             userRole.AddPermission(permissions
+                                        .Where(x => x.Name == PermissionName.CanListTasks)
+                                        .FirstOrDefault());
+
+             return userRole;
+            
+         }
 
         public Project GetProjectFromId(Guid id)
         {

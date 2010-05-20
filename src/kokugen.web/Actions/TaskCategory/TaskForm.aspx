@@ -6,7 +6,8 @@
 
 <div id="task-form-container" class="hide">
 <%= this.FormFor(new AddTaskModel()) %>
-    <%= this.Edit(x => x.Task.Name) %>
+    <%= this.Edit(x => x.Task.Name).Id("task-form-name") %>
+    <%=this.InputFor(x => x.Task.Id).Id("task-edit-form-ProjectId") %>
     
 <%= this.EndForm() %>
    
@@ -14,9 +15,15 @@
 <script type="text/javascript">
 
     function closeDialog(response) {
-        appendTaskToList(response.Item);
 
         $("#task-form-container").dialog('close');
+        var elements = document.getElementById("mainForm").elements;
+        for (var i in elements) {
+            elements[i].value = '';
+        }
+        
+        
+        addtaskToList(response.Item);
         // would want to update list here too
     }
     function validateAndSave() {
@@ -30,7 +37,11 @@
 
         if (isValid) {
             $("#mainForm").ajaxSubmit(options);
+            
         }
+
+        
+
         return false;
     }
 
@@ -38,5 +49,6 @@
         $("#mainForm").validate({ errorClass: "error" });
         $("#task-form-container").dialog({ title: "Add Task", autoOpen: false, buttons: { "Save": validateAndSave} });
         $("#task-form-container").submit(validateAndSave);
+        
     });
 </script>

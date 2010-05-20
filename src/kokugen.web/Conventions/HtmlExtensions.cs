@@ -1,9 +1,14 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
+using FubuCore;
 using FubuCore.Reflection;
 using FubuMVC.Core.View;
 using FubuMVC.UI;
+using FubuMVC.UI.Configuration;
 using HtmlTags;
+using Kokugen.Core;
 
 namespace Kokugen.Web.Conventions
 {
@@ -20,10 +25,35 @@ namespace Kokugen.Web.Conventions
             divWrapper.Child(textbox);
 
             return divWrapper;
+        }
+
+        public static HtmlTag DropDownFor<T>(this IFubuPage<T> page, Expression<Func<T, object>> expression, Func<IEnumerable<ValueObject>> giveMeTheList) where T : class
+        {
+            var divWrapper = new HtmlTag("div").AddClass("form-item");
+           
+            var label = page.LabelFor(expression);
+
+            //lame hack to get the conventions for the expression
+            var input = page.InputFor(expression);
+
+            var select = ValueObjectDropdownBuilder.Build(expression.ToAccessor().FieldName,
+                                                          page.ElementNameFor(expression),
+                                                          giveMeTheList).Id(label.Attr("for"));
+
+            select.AddClasses(input.GetClasses().ToList());
 
 
+            divWrapper.Child(label);
+            divWrapper.Child(select);
 
+            return divWrapper;
+        }
 
+        public static HtmlTag EditInPlace<T>(this IFubuPage<T> page, Expression<Func<T, object>> expression) where T: class
+        {
+            page.Tags().SetProfile("inplace");
+            var output = page.InputFor(expression);
+            return output;
         }
 
         public static HtmlTag Show<T>(this IFubuPage<T> page, Expression<Func<T, object>> expression) where T : class

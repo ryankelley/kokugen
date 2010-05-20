@@ -2,16 +2,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Kokugen.Core.Domain;
+using Kokugen.Core.Events;
+using Kokugen.Core.Events.Messages;
 using Kokugen.Core.Persistence.Repositories;
 
 namespace Kokugen.Core.Services
 {
-    public interface ICompanyService
+    public interface ICompanyService : IListener<ValueEntitySaved<Company>>, IListener<ValueEntityRemoved<Company>>
     {
         IEnumerable<Company> ListAllCompanies();
         void DeleteCompany(Guid guid);
         Company Get(Guid id);
         Company AddCompany(string companyName, string addressStreetLine1, string addressStreetLine2, string addressCity, string addressState, string addressZipCode);
+        void Save(Company company);
     }
 
     public class CompanyService : ICompanyService
@@ -37,8 +40,13 @@ namespace Kokugen.Core.Services
                                   };
 
             _companyRepository.Save(company);
-            ValueObjectRegistry.AddValueObject<Company>(new ValueObject(company.Id.ToString(), company.Name));
+           
             return company;
+        }
+
+        public void Save(Company company)
+        {
+            _companyRepository.Save(company);
         }
 
         public IEnumerable<Company> ListAllCompanies()
@@ -49,6 +57,7 @@ namespace Kokugen.Core.Services
         public void DeleteCompany(Guid guid)
         {
             var company = _companyRepository.Get(guid);
+            
             _companyRepository.Delete(company);
         }
 
@@ -56,9 +65,18 @@ namespace Kokugen.Core.Services
         {
             return _companyRepository.Get(id);
         }
+
+        public void Handle(ValueEntitySaved<Company> message)
+        {
+            ValueObjectRegistry.AddValueObject<Company>(new ValueObject(message.Entity.Id.ToString(), message.Entity.Name));
+        }
+
+        public void Handle(ValueEntityRemoved<Company> message)
+        {
+            ValueObjectRegistry.RemoveValueObject<Company>(new ValueObject(message.Entity.Id.ToString(), message.Entity.Name));
+        }
+
     }
 
-    public class CompanyAddedEventArgs
-    {
-    }
+    
 }

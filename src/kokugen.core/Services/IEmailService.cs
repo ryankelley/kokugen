@@ -11,7 +11,7 @@ namespace Kokugen.Core.Services
 {
     public interface IEmailService
     {
-        void SendPasswordResetEmail(MembershipUser user);
+        void SendEmail(string to, string from, string subject, string body);
     }
 
     public class EmailService : IEmailService
@@ -20,25 +20,44 @@ namespace Kokugen.Core.Services
 
         public EmailService(SmtpClient smtpClient, string mailUser, string mailPassword, bool authRequired)
         {
+            
             _smtpClient = smtpClient;
             if (authRequired)
-                _smtpClient.Credentials = new NetworkCredential(mailUser, mailPassword);
+                _smtpClient.Credentials = new NetworkCredential(mailUser, mailPassword, "");
+
         }
 
         #region IEmailService Members
 
-        public void SendPasswordResetEmail(MembershipUser user)
+        public void SendEmail(string to, string from, string subject, string body)
         {
-            const string message = "";
-            SendEmail(user.Email,"test@test.com","Password Reset", message);
-        }
-
-        private void SendEmail(string to, string from, string subject, string body)
-        {
-            var msg = new MailMessage(from, to, subject, body);
-            _smtpClient.Send(msg);
+            var msg = new MailMessage(from, to, subject, body){IsBodyHtml = true};
+            // todo fix this because I dont want to swallow exceptions
+            try
+            {
+                _smtpClient.Send(msg);
+            }catch
+            {
+            }
         }
 
         #endregion
+    }
+
+    public class EmailSettings
+    {
+        public EmailSettings()
+        {
+            Port = 25;
+            DefaultFromEmailAddress = "no-reply@kokugen.com";
+        }
+
+        public string Host { get; set; }
+        public int Port { get; set; }
+        public bool AuthorizationRequired { get; set; }
+        public bool EnableSsl { get; set; }
+        public string User { get; set; }
+        public string Password { get; set; }
+        public string DefaultFromEmailAddress { get; set; }
     }
 }

@@ -1,12 +1,13 @@
 using System;
+using FubuCore;
 using FubuMVC.UI;
-using FubuMVC.UI.Configuration;
 using FubuMVC.UI.Tags;
 using HtmlTags;
 using Kokugen.Core;
 using Kokugen.Core.Domain;
 using Kokugen.Core.Validation;
 using Kokugen.Web.Actions.Board;
+using Kokugen.Web.Actions.Board.Configure;
 using Kokugen.Web.Actions.Project;
 using Kokugen.Web.Conventions.Builders;
 
@@ -30,13 +31,23 @@ namespace Kokugen.Web.Conventions
             BeforeEachOfPartial.Modifier<OddEvenLiModifier>();
             BeforeEachOfPartial.Modifier<FixedItemBoardModifier>();
             BeforeEachOfPartial.Modifier<BoardColumnIDAdder>();
+            BeforeEachOfPartial.Modifier<CardListItemModifier>();
+            
             BeforeEachOfPartial.If(x => x.ModelType == typeof(ProjectListModel)).Modify(x => x.AddClass("project"));
             BeforeEachOfPartial.If(x => x.ModelType == typeof(BoardConfigurationModel)).Modify(x => x.AddClass("phase"));
             
+            Profile("inplace", x=> x.Editors.Builder<EditInPlaceBuilder>());
+
             //BeforeEachOfPartial.If(x => x.Accessor.)
 
             //BeforeEachOfPartial.If(x => x.Is<ProjectListModel>()).Modify();
             AfterEachOfPartial.Builder<AfterEachOfPartialBuilder>();
+
+            Displays.If(x => x.Accessor.PropertyType.IsType<DateTime?>()).Modify(tag =>
+                                                                                     {
+                                                                                         if(tag.Text().IsEmpty())
+                                                                                             tag.Text("-");
+                                                                                     });
 
         }
 
@@ -49,6 +60,9 @@ namespace Kokugen.Web.Conventions
 
             Editors.If(x => x.Accessor.OwnerType.IsType<Card>() && x.Accessor.Name == "CardTitle").BuildBy(request => new HtmlTag("textarea").Attr("name", request.ElementId).Text(request.StringValue()));
             //Editors.Builder(new FormItemBuilder());
+
+            Editors.If(x => x.Accessor.FieldName.ToLower().Contains("password"))
+                .BuildBy(build => new HtmlTag("input").Attr("type", "password"));
         }
 
         // Setting up rules for tagging elements with jQuery validation
@@ -92,5 +106,5 @@ namespace Kokugen.Web.Conventions
         }
     }
 
-    
+
 }

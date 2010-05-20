@@ -5,13 +5,14 @@
 <div id="company-form-container" class="hide">
 <%= this.FormFor(new AddCompanyInput()).Id("company-form") %>
        
-    <%= this.Edit(x => x.Company.Name) %>
+    <%= this.Edit(x => x.Company.Name).Id("company-edit-form-name") %>
     <%= this.Edit(x => x.Company.Address.StreetLine1)%>
     <%= this.Edit(x => x.Company.Address.StreetLine2)%>
     <%= this.Edit(x => x.Company.Address.City)%>
     <%= this.Edit(x => x.Company.Address.State)%>
     <%= this.Edit(x => x.Company.Address.ZipCode)%>
-</form>
+    <%= this.InputFor(x => x.Company.Id).Id("company-edit-form-ProjectId") %>
+<%= this.EndForm() %>
 
 
    
@@ -20,9 +21,15 @@
 <script type="text/javascript">
 
     function closeDialog(response) {
-        
+
         $("#company-form-container").dialog('close');
-        // would want to update list here too
+
+        var elements = document.getElementById("company-form").elements;
+        for (var i in elements) {
+            elements[i].value = '';
+        }
+
+        addCompanyToList(response.Item);
     }
     
     function validateAndSave() {

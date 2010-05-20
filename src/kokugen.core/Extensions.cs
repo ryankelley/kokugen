@@ -5,22 +5,75 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Text.RegularExpressions;
+using System.Xml;
+using System.Xml.Linq;
 using FubuMVC.Core;
 using Kokugen.Core.Domain;
 
 namespace Kokugen.Core
 {
+    public static class DocumentExtensions
+    {
+        public static XmlDocument ToXmlDocument(this XDocument xDocument)
+        {
+            var xmlDocument = new XmlDocument();
+            xmlDocument.Load(xDocument.CreateReader());
+            return xmlDocument;
+        }
+
+        public static XDocument ToXDocument(this XmlDocument xmlDocument)
+        {
+            using (var nodeReader = new XmlNodeReader(xmlDocument))
+            {
+                nodeReader.MoveToContent();
+                return XDocument.Load(nodeReader);
+            }
+        }
+    }
+
     public static class Extensions
     {
+        public static string ToSimpleDisplay(this TimeSpan timeSpan)
+        {
+            if(timeSpan.Days > 0)
+            {
+                return Math.Round(timeSpan.TotalDays).ToString() + " Days";
+            }
+            if(timeSpan.Hours > 0)
+            {
+                return Math.Round(timeSpan.TotalHours).ToString() + " Hours";
+            }
+            if(timeSpan.Minutes > 0)
+            {
+                return Math.Round(timeSpan.TotalMinutes).ToString() + " Minutes";
+            }
+
+            return Math.Round(timeSpan.TotalSeconds).ToString() + " Seconds";
+        }
+
         public static bool IsDateTime(this Type type)
         {
-            return typeof (DateTime) == type.GetType();
+            return typeof (DateTime) == type || typeof(DateTime?) == type;
         }
 
         public static bool IsIntegerBased(this Type type)
         {
             return type == typeof (Int32) || type == typeof(Int16) || type == typeof(Int64) || type == typeof(int);
+        }
+
+        public static string ToGravatarHash(this string email)
+        {
+            var hasher = new System.Security.Cryptography.MD5CryptoServiceProvider();
+            var hash = new StringBuilder();
+
+            foreach (byte b in hasher.ComputeHash(Encoding.UTF8.GetBytes(email.ToLower())))
+            {
+                hash.Append(b.ToString("x2").ToLower());
+            }
+
+            return hash.ToString();
         }
 
         public static bool IsFloatingPoint(this Type type)

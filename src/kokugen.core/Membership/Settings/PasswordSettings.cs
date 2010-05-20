@@ -1,4 +1,5 @@
-﻿using System.Web.Security;
+﻿using System;
+using System.Web.Security;
 
 namespace Kokugen.Core.Membership.Settings
 {
@@ -12,11 +13,29 @@ namespace Kokugen.Core.Membership.Settings
             PasswordStrengthRegularExpression = "";
         }
 
-        public int MinRequiredPasswordLength { get; private set; }
-        public int MinRequiredNonAlphanumericCharacters { get; private set; }
-        public string PasswordStrengthRegularExpression { get; private set; }
-        public PasswordFormat PasswordFormat { get; private set; }
+        private int _minRequiredPasswordLength;
+        public int MinRequiredPasswordLength
+        {
+            get { return _minRequiredPasswordLength; }
+            set
+            {
+                if(value < 6)
+                    throw new InvalidOperationException("Password length must be at least 6, come on man, seriously!");
+                _minRequiredPasswordLength = value;
+            }
+        }
 
+        public int MinRequiredNonAlphanumericCharacters { get; set; }
+        public string PasswordStrengthRegularExpression { get; set; }
+        public PasswordFormat PasswordFormat { get; set; }
+
+        public string GetValidationMessage()
+        {
+            return
+                string.Format(
+                    "Your password must be at least {0} characters long with at least {1} non alpha-numberic characters",
+                    MinRequiredPasswordLength, MinRequiredNonAlphanumericCharacters);
+        }
     }
 
     public enum PasswordFormat

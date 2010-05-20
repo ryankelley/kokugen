@@ -3,7 +3,7 @@ using FubuMVC.Core.View;
 namespace Kokugen.Web.Actions.Board
 {
     public class ViewBoard : FubuPage<ViewBoardModel> { }
-    public class Configure : FubuPage<BoardConfigurationModel> { }
+    
 
     public class EditBoardColumnForm : FubuPage<BoardColumnEditModel> {}
 

@@ -1,0 +1,44 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Super.Master.cs" Inherits="FubuMVC.Core.View.FubuMasterPage" %>
+<%@ Import Namespace="Kokugen.Web.Actions.Account.LoginStatus" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head runat="server">
+    <title>Kokugen - Time Tracking</title>
+    <%= this.Script("jquery-1.4.2.min.js")%>
+    <script src="/Content/Scripts/jquery-1.4.1-vsdoc.js"></script>
+    <%= this.Script("jquery-ui-1.8.smoothness.min.js")%>
+    <%= this.Script("jquery.validate.min.js")%>
+    <%= this.Script("jquery.form.js")%>
+    <%= this.Script("application.js")%>
+    <%= this.Script("jquery.json-2.2.min.js")%>
+    <%= this.Script("hinting.js")%>
+    <%= this.Script("jquery.jgrowl.js") %>
+    <%= this.Script("jquery.ui.ajax.dialog.js") %>
+    <%= this.CSS("jquery.jgrowl.css") %>
+    <%= this.CSS("smoothness/jquery-ui-1.8.custom.css")%>
+    <%= this.CSS("global.css")%>
+    <link rel="shortcut icon" href="/content/images/icon.png" />
+    <asp:ContentPlaceHolder ID="Masterhead" runat="server">
+    </asp:ContentPlaceHolder>
+
+</head>
+<body>
+<div id="head">
+		<div id="wrapper">
+			<h1 id="logo"><a href="/">Kokugen - Time Managment</a></h1>
+            <div class="user-stuff"> <%this.Partial<LoginStatusModel>(); %></div>
+            <div class="clear"></div>
+		</div>
+        	<asp:ContentPlaceHolder ID="MasterNavigation" runat="server" />	
+		
+	</div>
+	
+    <div class="content clear">
+        <asp:ContentPlaceHolder ID="SupermainContent" runat="server">
+        
+        </asp:ContentPlaceHolder>
+    </div>
+</body>
+</html>

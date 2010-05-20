@@ -3,6 +3,7 @@ using System.Security.Principal;
 using System.Threading;
 using System.Web;
 using System.Web.Security;
+using Kokugen.Core.Domain;
 using Kokugen.Core.Membership.Services;
 
 namespace Kokugen.Core.Membership.Security
@@ -40,14 +41,25 @@ namespace Kokugen.Core.Membership.Security
 
         public bool IsInRole(string role)
         {
+            if (_user is SuperUser)
+                return true;
+
             if (_user != null)
-                return _user.IsInRole(role);
+                return _user.HasPermission(role);//.IsInRole(role));
             return false;
         }
 
         public IIdentity Identity
         {
             get { return _identity; }
+        }
+
+        public User User
+        {
+            get {
+                return _user;
+            }
+
         }
 
         #endregion

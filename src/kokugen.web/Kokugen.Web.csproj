@@ -71,6 +71,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\FubuMVC\HtmlTags.dll</HintPath>
     </Reference>
+    <Reference Include="MarkdownSharp">
+      <HintPath>..\..\lib\markdownsharp\MarkdownSharp.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\Common Service Locator\Microsoft.Practices.ServiceLocation.dll</HintPath>
@@ -120,61 +123,194 @@
     <Reference Include="System.Web.Mobile" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Actions\Account\Activate\ActivateAccount.aspx" />
+    <Content Include="Actions\Account\LoginStatus\LoginStatus.aspx" />
+    <Content Include="Actions\Account\Manage\ChangePassword\ChangePassword.aspx" />
+    <Content Include="Actions\Account\Manage\ManageAccount.aspx" />
+    <Content Include="Actions\Account\Password\PasswordPartial.aspx" />
+    <Content Include="Actions\Account\Password\PasswordResetForm.aspx" />
+    <Content Include="Actions\Card\CardProgress.aspx" />
+    <Content Include="Actions\Card\CardTask_Item.ascx" />
+    <Content Include="Actions\Card\Get.aspx" />
+    <Content Include="Actions\Card\Lists\CardItem_Control.ascx" />
+    <Content Include="Actions\DailyTimeRecord\List.aspx" />
+    <Content Include="Actions\DailyTimeRecord\DailyTimeRecord_Control.ascx" />
+    <Content Include="Actions\Errors\FourZeroThree.aspx" />
+    <Content Include="Actions\Metrics\Get.aspx" />
+    <Content Include="Actions\Project\Manage\Users\ProjectUsers.aspx" />
+    <Content Include="Actions\Project\MenuList\ProjectMenu.aspx" />
+    <Content Include="Actions\Project\Manage\Users\Add\AddUserToProject.aspx" />
+    <Content Include="Content\amline\amline.swf" />
+    <Content Include="Content\amline\amline_data.txt" />
+    <Content Include="Content\amline\amline_data.xml" />
+    <Content Include="Content\amline\amline_settings.xml" />
+    <Content Include="Content\amline\cumflow_settings.xml" />
+    <Content Include="Content\amline\export.aspx" />
+    <Content Include="Content\amline\fonts\arial.swf" />
+    <Content Include="Content\amline\fonts\garamond.swf" />
+    <Content Include="Content\amline\fonts\georgia.swf" />
+    <Content Include="Content\amline\fonts\tahoma.swf" />
+    <Content Include="Content\amline\fonts\times new roman.swf" />
+    <Content Include="Content\amline\plugins\value_indicator.swf" />
+    <Content Include="Content\amline\swfobject.js" />
+    <Content Include="Content\css\jquery.jgrowl.css" />
+    <Content Include="Actions\Project\MenuList\ProjectMenu_Item.ascx" />
+    <Content Include="Content\images\btn-check16.png" />
+    <Content Include="Content\images\btn-check24.png" />
+    <Content Include="Content\images\btn-delete16.png" />
+    <Content Include="Content\images\btn-delete24.png" />
+    <Content Include="Content\images\claim16.png" />
+    <Content Include="Content\images\delete.png" />
+    <Content Include="Content\images\edit2.png" />
+    <Content Include="Content\images\magnify16.png" />
+    <Content Include="Content\images\move16.png" />
+    <Content Include="Content\images\spite.png" />
+    <Content Include="Content\images\start.png" />
+    <Content Include="Content\images\task16.png" />
+    <Content Include="Content\Scripts\cardEdit.js" />
+    <Content Include="Content\Scripts\company.js" />
+    <Content Include="Content\Scripts\projectusers.js" />
+    <Content Include="Content\Scripts\Project\Manage\controller.js" />
+    <Content Include="Content\Scripts\Project\Manage\model.js" />
+    <Content Include="Content\Scripts\util.js" />
+    <Content Include="Content\Scripts\Project\Manage\view.js" />
+    <Content Include="Content\Scripts\task.js" />
+    <Content Include="Content\Scripts\dovetail.editing.js" />
+    <Content Include="Content\Scripts\jquery.jeditable.js" />
+    <Content Include="Content\Scripts\jquery.jgrowl.js" />
+    <Content Include="Content\Scripts\jquery.jgrowl_compressed.js" />
+    <Content Include="Content\Scripts\jquery.jgrowl_minimized.js" />
+    <Content Include="Content\Scripts\jquery.ui.ajax.dialog.js" />
+    <Content Include="Content\Scripts\jquery.metadata.js" />
+    <Content Include="Content\Scripts\showdown.js" />
     <Content Include="Global.asax" />
     <Content Include="Web.config">
+      <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actions\Account\LoginAjax\LoginAjaxAction.cs" />
+    <Compile Include="Actions\Account\Manage\ChangePassword\ChangePasswordAction.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Actions\Account\Manage\ManageAccountAction.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Actions\Account\Password\ResetPasswordAction.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Actions\Board\ReOrder\BoardColumnReorderModel.cs" />
+    <Compile Include="Actions\Board\Configure\ConfigureAction.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Actions\Board\ReOrder\ReOrderAction.cs" />
+    <Compile Include="Actions\Card\AllActive\AllActiveCardsAction.cs" />
+    <Compile Include="Actions\Card\Blocked\BlockedAction.cs" />
+    <Compile Include="Actions\Card\CardProgressAction.cs" />
+    <Compile Include="Actions\Card\Claim\CardClaimAction.cs" />
+    <Compile Include="Actions\Card\Color\ColorAction.cs" />
+    <Compile Include="Actions\Card\Dates\CardDatesAction.cs" />
+    <Compile Include="Actions\Card\Lists\View_Page_Type_Declarations.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Actions\Card\Move\CardMovedAction.cs" />
+    <Compile Include="Actions\Card\Ready\CardReadyAction.cs" />
+    <Compile Include="Actions\Card\ReOrder\ReOrderAction.cs" />
+    <Compile Include="Actions\Card\UpdateAction.cs" />
+    <Compile Include="Actions\DailyTimeRecord\AddAction.cs" />
+    <Compile Include="Actions\DailyTimeRecord\StopAction.cs" />
+    <Compile Include="Actions\DailyTimeRecord\View_Page_Type_Declarations.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Actions\Errors\ForbiddenAction.cs" />
+    <Compile Include="Actions\Account\Activate\ActivateAccountAction.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Actions\Account\LoginStatus\LoginStatusAction.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Actions\Account\LogOff\LogOffAction.cs" />
+    <Compile Include="Actions\Account\Register\IRegistrationService.cs" />
+    <Compile Include="Actions\Account\Register\RegisterAccountAction.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Actions\AjaxResponse.cs" />
     <Compile Include="Actions\BoardColumn\RemoveAction.cs" />
     <Compile Include="Actions\Board\BoardColumnDTO.cs" />
     <Compile Include="Actions\Board\EditBoardColumnFormAction.cs" />
-    <Compile Include="Actions\Board\BoardAction.cs" />
-    <Compile Include="Actions\Board\SaveColumnAction.cs" />
+    <Compile Include="Actions\Board\Configure\BoardConfigurationModel.cs" />
+    <Compile Include="Actions\Board\SaveColumn\SaveColumnAction.cs" />
     <Compile Include="Actions\Board\ViewBoardAction.cs" />
     <Compile Include="Actions\Board\View_Page_Type_Declarations.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Actions\Card\AddAction.cs" />
-    <Compile Include="Actions\Card\CardMovedAction.cs" />
+    <Compile Include="Actions\Card\CardModels.cs" />
     <Compile Include="Actions\Card\CompactCardFormAction.cs" />
+    <Compile Include="Actions\Card\GetAction.cs" />
     <Compile Include="Actions\Card\View_Page_Type_Declarations.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Actions\Card\ListAction.cs" />
+    <Compile Include="Actions\Card\Lists\ListAction.cs" />
     <Compile Include="Actions\Company\AddAction.cs" />
     <Compile Include="Actions\Company\CompanyFormAction.cs" />
-    <Compile Include="Actions\Company\ListAction.cs" />
+    <Compile Include="Actions\Company\CompanyListAction.cs" />
     <Compile Include="Actions\Company\RemoveAction.cs" />
     <Compile Include="Actions\Company\View_Page_Type_Declarations.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Actions\DTO\TimeRecordDTO.cs" />
+    <Compile Include="Actions\Errors\view_page_type_declarations.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Actions\Home\Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Actions\Home\HomeViewModel.cs" />
     <Compile Include="Actions\Home\IndexAction.cs" />
-    <Compile Include="Actions\Login\LoginAction.cs" />
-    <Compile Include="Actions\Login\LoginForm.aspx.cs">
-      <DependentUpon>LoginForm.aspx</DependentUpon>
+    <Compile Include="Actions\Account\Login\LoginAction.cs" />
+    <Compile Include="Actions\Account\Login\LoginFormAction.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Actions\Login\LoginFormAction.cs" />
+    <Compile Include="Actions\Metrics\CumulativeFlow\GetAction.cs" />
+    <Compile Include="Actions\Metrics\GetAction.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Actions\ProjectBaseViewModel.cs" />
     <Compile Include="Actions\Project\AddAction.cs" />
     <Compile Include="Actions\Project\AddProjectModel.cs" />
     <Compile Include="Actions\Project\GetProjectAction.cs" />
     <Compile Include="Actions\Project\ListAction.cs" />
+    <Compile Include="Actions\Project\Manage\Menu\ManageProjectMenuAction.cs" />
+    <Compile Include="Actions\Project\Manage\Users\Delete\DeleteProjectUserAction.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Actions\Project\Manage\Users\ProjectUsersAction.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Actions\Project\Manage\Users\Roles\AddToRoleAction.cs" />
+    <Compile Include="Actions\Project\Manage\Users\Roles\GetUsersAction.cs" />
+    <Compile Include="Actions\Project\Manage\Users\Roles\RemoveFromRoleAction.cs" />
     <Compile Include="Actions\Project\ProjectFormAction.cs" />
+    <Compile Include="Actions\Project\MenuList\ProjectMenuAction.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Actions\Project\Manage\Users\Add\AddUserToProjectAction.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Actions\TaskCategory\MenuList\MenuList.cs" />
     <Compile Include="Actions\TaskCategory\RemoveAction.cs" />
+    <Compile Include="Actions\Task\Complete\CompleteAction.cs" />
+    <Compile Include="Actions\Task\PostAction.cs" />
+    <Compile Include="Actions\Task\ReOrder\TaskReorderAction.cs" />
     <Compile Include="Actions\TimeRecord\AddAction.cs" />
     <Compile Include="Actions\TimeRecord\AddTimeRecordModel.cs" />
+    <Compile Include="Actions\TimeRecord\TimeRecordListAction.cs" />
     <Compile Include="Actions\TimeRecord\StopTimeRecordFormAction.cs" />
     <Compile Include="Actions\TimeRecord\StopAction.cs" />
     <Compile Include="Actions\TimeRecord\ProjectTimeRecordFormAction.cs" />
-    <Compile Include="Actions\TimeRecord\ListAction.cs" />
+    <Compile Include="Actions\DailyTimeRecord\DailyTimeListAction.cs" />
     <Compile Include="Actions\TimeRecord\RemoveAction.cs" />
     <Compile Include="Actions\TimeRecord\TimeRecordFormAction.cs" />
     <Compile Include="Actions\Project\View_Page_Type_Declarations.cs">
@@ -186,32 +322,40 @@
     <Compile Include="Actions\TaskCategory\View_Page_Type_Declarations.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Actions\TaskCategory\ListAction.cs" />
+    <Compile Include="Actions\TaskCategory\TaskListAction.cs" />
     <Compile Include="Actions\TaskCategory\TaskListModel.cs" />
     <Compile Include="Actions\TimeRecord\StopTimeRecordModel.cs" />
     <Compile Include="Actions\TimeRecord\View_Page_Type_Declarations.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Actions\TimeRecord\WidgetLog\WidgetLogAction.cs" />
     <Compile Include="Actions\Users\Details\DetailsAction.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Actions\Users\ListAction.cs">
+    <Compile Include="Actions\Users\UserListAction.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Actions\Users\Roles\ListAction.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
+    <Compile Include="Behaviors\AuthenticationBehaviorPolicy.cs" />
+    <Compile Include="Behaviors\BehaviorCall.cs" />
     <Compile Include="Behaviors\MustBeAuthorizedBehavior.cs" />
     <Compile Include="Behaviors\TransactionalContainerBehavior.cs" />
+    <Compile Include="Content\amline\export.aspx.cs">
+      <DependentUpon>export.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Conventions\Builders\AfterEachOfPartialBuilder.cs" />
     <Compile Include="Conventions\Builders\BeforeEachOfPartialBuilder.cs" />
     <Compile Include="Conventions\Builders\BeforePartialBuilder.cs" />
     <Compile Include="Conventions\Builders\AfterPartialBuilder.cs" />
     <Compile Include="Conventions\Builders\OddEvenLiModifier.cs" />
+    <Compile Include="Conventions\EditInPlaceBuilder.cs" />
     <Compile Include="Conventions\HtmlExtensions.cs" />
     <Compile Include="Conventions\IRequestById.cs" />
+    <Compile Include="Conventions\IXMLWriter.cs" />
     <Compile Include="Conventions\KokugenHtmlConventions.cs" />
     <Compile Include="Conventions\Builders\LabelBuilder.cs" />
+    <Compile Include="Conventions\MarkdownAttribute.cs" />
+    <Compile Include="Conventions\RenderXMLNode.cs" />
     <Compile Include="Conventions\SplitCamelCaseExtension.cs" />
     <Compile Include="Conventions\ValueObjectDropdownBuilder.cs" />
     <Compile Include="Conventions\ValueObjectDropdownExtensions.cs" />
@@ -232,6 +376,10 @@
     <Compile Include="KokugenWebRegistry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SecurityConfiguration.cs" />
+    <Compile Include="Shared\Super.Master.cs">
+      <DependentUpon>Super.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Shared\Project.Master.cs">
       <DependentUpon>Project.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -240,7 +388,11 @@
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Startables\SetupDefaultRoles.cs" />
+    <Compile Include="Startables\AutomapperConfigurationStartable.cs" />
+    <Compile Include="Startables\CheckPermissionsInDb.cs" />
+    <Compile Include="Startables\ValueObjectInitializers\PasswordQuestionInitializer.cs" />
+    <Compile Include="Startables\SetupSuperUser.cs" />
+    <Compile Include="Startables\ValueObjectInitializers\RoleInitializer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\kokugen.core\Kokugen.Core.csproj">
@@ -253,14 +405,14 @@
     <Content Include="Actions\Board\BoardPhase_Control.ascx" />
     <Content Include="Actions\Board\ViewBoard.aspx" />
     <Content Include="Actions\Board\EditBoardColumnForm.aspx" />
-    <Content Include="Actions\Board\Configure.aspx" />
+    <Content Include="Actions\Board\Configure\Configure.aspx" />
     <Content Include="Actions\Card\Add.aspx" />
     <Content Include="Actions\Card\CompactCardForm.aspx" />
-    <Content Include="Actions\Card\List.aspx" />
+    <Content Include="Actions\Card\Lists\List.aspx" />
     <Content Include="Actions\Company\CompanyForm.aspx" />
     <Content Include="Actions\Company\List.aspx" />
     <Content Include="Actions\Home\Home.aspx" />
-    <Content Include="Actions\Login\LoginForm.aspx" />
+    <Content Include="Actions\Account\Login\LoginForm.aspx" />
     <Content Include="Actions\Project\GetProject.aspx" />
     <Content Include="Actions\Project\List.aspx" />
     <Content Include="Actions\Project\ProjectForm.aspx" />
@@ -271,7 +423,6 @@
     <Content Include="Actions\TimeRecord\TimeRecordForm.aspx" />
     <Content Include="Actions\TimeRecord\TimeRecord_Control.ascx" />
     <Content Include="Actions\TaskCategory\TaskForm.aspx" />
-    <Content Include="Actions\TaskCategory\TaskItem_Control.ascx" />
     <Content Include="Actions\TaskCategory\List.aspx" />
     <Content Include="Actions\Users\List.aspx" />
     <Content Include="Content\css\custom-theme\images\ui-bg_fine-grain_10_ffffff_60x60.png" />
@@ -365,18 +516,40 @@
     <Content Include="Shared\Site.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Actions\Account\Register\Register.aspx" />
     <Content Include="Content\images\k-logo.png" />
     <Content Include="Actions\Users\Details\Details.aspx" />
-    <Content Include="Actions\Users\Roles\List.aspx" />
     <Content Include="Content\css\ellipsis-xbl.xml" />
     <Content Include="Content\images\archive-title.png" />
     <Content Include="Content\images\backlog-title.png" />
     <Content Include="Content\images\collapse-left.png" />
     <Content Include="Content\images\collapse-right.png" />
-    <Content Include="Content\Scripts\jquery.jeditable.mini.js" />
     <Content Include="Default.aspx" />
     <Content Include="Content\images\stopsign.png" />
     <Content Include="Shared\Project.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Shared\Super.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="Content\amline\export.php" />
+    <None Include="Content\amline\fonts\tahoma.fla" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Content\amline\export.php" />
+    <None Include="Content\amline\fonts\tahoma.fla" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

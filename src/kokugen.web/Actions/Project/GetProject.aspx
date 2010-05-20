@@ -2,32 +2,54 @@
 <%@ Import Namespace="Kokugen.Web.Actions.TimeRecord"%>
 <%@ Import Namespace="Kokugen.Web.Actions.Board"%>
 <%@ Import Namespace="FubuMVC.Core.Urls"%>
+<%@ Import Namespace="HtmlTags" %>
+<%@ Import Namespace="Kokugen.Web.Actions.Project.Manage.Menu" %>
+<%@ Import Namespace="Kokugen.Web.Actions.Board.Configure" %>
 <asp:Content ID="ProjectListHead" ContentPlaceHolderID="head" runat="server">
 
 </asp:Content>
+
+<asp:Content ContentPlaceHolderID=extraNavigation runat=server>
+    <%this.Partial(new ManageProjectMenuRequest(){Id = Model.ProjectId}); %>
+</asp:Content>
+
 <asp:Content ID="ProjectListContent" ContentPlaceHolderID="mainContent" runat="server">
 <style type="text/css">
-table
-{
-border-collapse:collapse;
-width:1024px;
-padding:10px;
-border:5px solid gray;
-margin:10px;
+ .content { 
+      display: table;
+    width: 100%;
+  background-image: -moz-linear-gradient(top, #F0F0F0, #FFFFFF 20%); /* FF3.6 */
+  background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #d0d0d0),color-stop(1, #FFFFFF)); /* Saf4+, Chrome */
+            filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#d0d0d0', EndColorStr='#FFFFFF'); /* IE6,IE7 */
+        -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#d0d0d0', EndColorStr='#FFFFFF')"; /* IE8 */ 
 }
-table, td, th
+ul.timerecords 
 {
-border:3px solid black;
-border-style:inset;
-text-align:center;
-background-color:#CEBEB4;
-color:#49657D;
+    display: table;
+    width:100%;
 }
-th
+
+li.header { text-align: center; font-weight: bold; background-color: #666; color:#FFF; }
+ul li { display: table-row; }
+ul li span { border-bottom:1px solid #999999;              
+border-right:1px solid #999999;
+display:table-cell;
+padding:7px;
+text-align:center; }
+
+ul.timerecords li.even { background-color: #DEDEDE; }
+ul.timerecords li:hover { background-color:#91B5D8;
+border-color:#233644; }
+
+span.user { min-width: 30px; width: 40px; }
+
+li.completed span { text-decoration: line-through; }
+li.header span.user { text-indent: 0px; }
+.user a { color: #333; text-decoration: none; }
+.user a:hover  
 {
-background-color:#9e9993;
-color:black;
-}
+    text-indent: 16px;}    
+
 </style>
 <script type="text/javascript">
 
@@ -69,71 +91,39 @@ color:black;
 
 <div class="upper-meta">
     <div class="add-caption" ><a href="#" onclick="showTimeRecordForm();"><img src="/content/images/add_button.png" alt="add time record" />Add New TimeRecord</a></div>
-</div>
-<div class="timerecords">
-    
-         <table>
-                <thead>                   
-                    <h2><%=Model.Project.Name+" "%>Time Records</h2>               
-                </thead>                      
-           <tr>
-                <th>
-                    <h3>
-                        User
-                    </h3>
-                </th>
-                <th>
-                    <h3>
-                        Description
-                    </h3>
-                </th>
-                <th>
-                    <h3>
-                        Start
-                    </h3>
-                </th>
-                <th>
-                    <h3>
-                        End
-                    </h3>
-                </th>
-                <th>
-                    <h3>
-                        Duration
-                    </h3>
-                </th>
-                <th>
-                    <h3>
-                        Billable
-                    </h3>
-                </th>
-                
-                <th>
-                    <h3>
-                        Task
-                    </h3>
-                </th> 
-                 <th>
-                    <h3>
-                        Project
-                    </h3>
-                </th>                       
-            </tr>
+</div>    
+        
+                                  
+          <h2><%=Model.Project.Name+" "%>Time Records</h2>               
+                                     
+           <ul class="timerecords" >  
+         
+            
+            <li class="header">
+            <span class="user">User</span>                
+            <span class="description">Description</span>                   
+            <span class="start">Start</span>            
+            <span class="end">End</span>            
+            <span class="duration">Duration</span>            
+            <span class="billable">Billable</span>            
+            <span class="task">Task</span>            
+            <span class="project">Project</span>  
+                    
+                        
+             </li>      
+            
             <%= this.PartialForEach(p => p.TimeRecords).Using<TimeRecord_Control>() %>
-       </table>
+  </ul>
         
             
             
             <ul id="companyList"></ul>
        
     
-    </div>
-    
-   <div id ="Board Link"><%= this.LinkTo(new BoardConfigurationModel{ Id = Model.Project.Id}).Text("Configure Board Columns") %></div> 
+    </div>  
    
-</div>
-    
-    <%= this.LinkTo(new ViewBoardInputModel{ Id = Model.Project.Id}).NoClosingTag().AddClass("icon") %><img src="/content/images/board_big.png" alt="view board" /></a>
+
+
     <% this.Partial(new StopTimeRecordFormInputModel()); %>
 
     
@@ -147,7 +137,7 @@ color:black;
     }
 
     function appendTimeRecordToList(timerecord) {
-        var output = "<tr><td class=\"description\">" + timerecord.Description + "</td></tr>";
+        var output = "<li><span class=\"description\">" + timerecord.Description + "</span></li>";
 
         $(".timerecord-list").append(output);
     }    

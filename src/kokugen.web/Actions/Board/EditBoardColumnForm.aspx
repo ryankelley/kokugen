@@ -2,18 +2,19 @@
 <%@ Import Namespace="HtmlTags"%>
 <%@ Import Namespace="Kokugen.Web.Actions.Board"%>
 <%@ Import Namespace="Kokugen.Web.Conventions"%>
+<%@ Import Namespace="Kokugen.Web.Actions.Board.SaveColumn" %>
 
 <div id="new-column-container" class="hidden">
 <%= this.FormFor(new BoardColumnInputModel()).Id("column-form")%>
        
     <%= this.Edit(x => x.Column.Name) %>
     <%= this.Edit(x => x.Column.Description)%>
-    <%= this.Edit(x => x.Column.Limit)%>
+    <%= this.Edit(x => x.Column.CardLimit)%>
     <%= this.InputFor(x => x.Id).Hide() %>
     <%= this.InputFor(x => x.ProjectId) %>
     
      <input type="submit" name="Submit" value="Save" id="col-save-button"/>
-</form>
+<%= this.EndForm() %>
 
 </div>
 

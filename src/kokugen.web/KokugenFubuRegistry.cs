@@ -1,14 +1,15 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Xml;
 using FubuCore;
 using FubuMVC.Core;
-using FubuMVC.Core.Registration;
+using FubuMVC.Core.Behaviors;
 using FubuMVC.Core.Registration.DSL;
-using FubuMVC.Core.Registration.Nodes;
 using FubuMVC.Core.Registration.ObjectGraph;
+using FubuMVC.Core.Urls;
+using Kokugen.Core.Membership;
 using Kokugen.Web.Actions;
 using Kokugen.Web.Actions.Board;
+using Kokugen.Web.Actions.Errors;
 using Kokugen.Web.Actions.Home;
 using FubuMVC.UI;
 using Kokugen.Web.Behaviors;
@@ -41,6 +42,7 @@ namespace Kokugen.Web
                 .ConstrainToHttpMethod(action => action.Method.Name.StartsWith("Remove"), "DELETE")
                 .ForInputTypesOf<IRequestById>(x => x.RouteInputFor(request => request.Id).DefaultValue = "");
 
+
             this.UseDefaultHtmlConventions();
             this.HtmlConvention(new KokugenHtmlConventions());
 
@@ -50,19 +52,33 @@ namespace Kokugen.Web
 
             this.StringConversions(x =>
             {
-                x.IfIsType<DateTime>(d => d.ToString("g"));
-                x.IfIsType<decimal>(d => d.ToString("N2"));
-                x.IfIsType<float>(f => f.ToString("N2"));
-                x.IfIsType<double>(d => d.ToString("N2"));
+                x.IfIsType<DateTime>().ConvertBy(d => d.ToString("g"));
+                x.IfIsType<decimal>().ConvertBy(d => d.ToString("N2"));
+                x.IfIsType<float>().ConvertBy(f => f.ToString("N2"));
+                x.IfIsType<double>().ConvertBy(d => d.ToString("N2"));
             });
 
-            Policies.Add<TestBehaviorPolicy>();
+            // Configure Permissions
+            SecurityProvider.Configure(new KokugenSecurityRegistry());
+
+
+            Policies.WrapBehaviorChainsWith<load_the_current_principal>();
+            Policies.Add<AuthenticationBehaviorPolicy>();
+
+            Services(x =>
+                         {
+                             x.SetServiceIfNone(typeof(IXMLWriter), typeof(XMLWriter));
+                         });
+
             //Policies.WrapBehaviorChainsWith<MustBeAuthorizedBehavior>();
             //Policies.ConditionallyWrapBehaviorChainsWith<MustBeAuthorizedBehavior>(c => c.OutputType() == typeof (BoardConfigurationModel));
             
             //Policies.WrapBehaviorChainsWith<MustBeAuthorizedBehavior>();
             
             Output.ToJson.WhenCallMatches(action => action.Returns<AjaxResponse>());
+            Output.ToJson.WhenCallMatches(action => action.Returns<InPlaceAjaxResponse>());
+            //Output.ToXml().WhenCallMatches(action => action.Returns<XmlResponse>());
+            Output.To(call => new RenderXMLNode(call.OutputType())).WhenCallMatches(action => action.Returns<XmlResponse>());
 
             Views.TryToAttach(x =>
                                   {
@@ -77,32 +93,13 @@ namespace Kokugen.Web
         }
     }
 
-    public class TestBehaviorPolicy : IConfigurationAction
+    public static class FubuRegistryExtensions
     {
-        public void Configure(BehaviorGraph graph)
+        public static ActionCallFilterExpression ToXml(this OutputDeterminationExpression expr)
         {
-            var myBehavs = graph.Behaviors.Where(c => c.FirstCall().Category == BehaviorCategory.Call).ToList();
-            var myActions = graph.Actions().Where(c => c.Category == BehaviorCategory.Call).ToList();
-            myActions.Each(act => act.AddBefore(new AuthorizationWrapper(act)));// Wrapper.For<MustBeAuthorizedBehavior>()));
-            //graph.Behaviors.Where(c => c.FirstCall().Category == BehaviorCategory.Call).Each(c => c.Prepend(new Wrapper(typeof(MustBeAuthorizedBehavior)))); 
-        }
-    }
 
-    public class AuthorizationWrapper : BehaviorNode
-    {
-        public AuthorizationWrapper(object act)
-        {
+            return expr.To(call => new RenderXMLNode(call.OutputType()));
             
-        }
-
-        protected override ObjectDef buildObjectDef()
-        {
-            return new ObjectDef(typeof(MustBeAuthorizedBehavior));
-        }
-
-        public override BehaviorCategory Category
-        {
-            get { return BehaviorCategory.Wrapper; }
         }
     }
 

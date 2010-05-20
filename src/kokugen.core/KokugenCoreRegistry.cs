@@ -1,10 +1,12 @@
 using System;
+using System.Net.Mail;
 using System.Security.Principal;
 using System.Web.Security;
 using FluentNHibernate;
 using FubuMVC.Core.Behaviors;
 using FubuMVC.Core.Configuration;
 using FubuMVC.Core.Security;
+using Kokugen.Core.Events;
 using Kokugen.Core.Membership.Security;
 using Kokugen.Core.Membership.Services;
 using Kokugen.Core.Membership.Settings;
@@ -28,6 +30,25 @@ namespace Kokugen.Core
                          x.WithDefaultConventions();
                          x.Convention<SettingsConvention>();
                      });
+
+            setupEmail();
+            registerEventAggregator();
+        }
+
+        private void setupEmail()
+        {
+            For<IEmailService>()
+                .Use(c =>
+                         {
+                             var settingsProvider = c.GetInstance<ISettingsProvider>();
+                             var emailSettings = settingsProvider.SettingsFor<EmailSettings>();
+                             return new EmailService(new SmtpClient(emailSettings.Host, emailSettings.Port)
+                                                         {
+                                                             EnableSsl = emailSettings.EnableSsl
+                                                         },
+                                                     emailSettings.User, emailSettings.Password,
+                                                     emailSettings.AuthorizationRequired);
+                         });
         }
 
         private void setupNHibernate()
@@ -53,9 +74,15 @@ namespace Kokugen.Core
                 var settingsProvider = c.GetInstance<ISettingsProvider>();
                 return settingsProvider.SettingsFor<DatabaseSettings>();
             });
+
+            
         }
 
-
+        private void registerEventAggregator()
+        {
+            For<IEventAggregator>().Use<EventAggregator>();
+            RegisterInterceptor(new EventAggregatorInterceptor());
+        }
     }
 
     public class SettingsConvention : IRegistrationConvention

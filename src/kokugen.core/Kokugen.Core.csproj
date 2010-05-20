@@ -70,6 +70,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\FubuMVC\HtmlTags.dll</HintPath>
     </Reference>
+    <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\NHibernate\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="MarkdownSharp">
+      <HintPath>..\..\lib\markdownsharp\MarkdownSharp.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\Common Service Locator\Microsoft.Practices.ServiceLocation.dll</HintPath>
@@ -132,7 +139,10 @@
     <Compile Include="Domain\BoardColumn.cs" />
     <Compile Include="Domain\Card.cs" />
     <Compile Include="Domain\Company.cs" />
+    <Compile Include="Domain\DailyTimeRecord.cs" />
+    <Compile Include="Domain\Permission.cs" />
     <Compile Include="Domain\Role.cs" />
+    <Compile Include="Domain\Task.cs" />
     <Compile Include="Domain\TaskCategory.cs" />
     <Compile Include="Domain\Entity.cs" />
     <Compile Include="Domain\Enumeration.cs" />
@@ -141,17 +151,29 @@
     <Compile Include="Domain\SiteConfiguration.cs" />
     <Compile Include="Domain\TimeRecord.cs" />
     <Compile Include="Domain\User.cs" />
+    <Compile Include="EventAggregatorInterceptor.cs" />
+    <Compile Include="Events\EventAggregator.cs" />
+    <Compile Include="Events\FilteredListener.cs" />
+    <Compile Include="Events\IEventAggregator.cs" />
+    <Compile Include="Events\IHandler.cs" />
+    <Compile Include="Events\Messages\ValueEntitySaved.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Inflector.cs" />
     <Compile Include="IStartable.cs" />
-    <Compile Include="Membership\Permission.cs" />
+    <Compile Include="Membership\PermissionName.cs" />
     <Compile Include="Membership\SecurityRegistry.cs" />
     <Compile Include="Membership\Security\IRole.cs" />
     <Compile Include="Membership\Security\IUser.cs" />
+    <Compile Include="Membership\Services\IPasswordValidator.cs" />
+    <Compile Include="Membership\Services\PasswordValidator.cs" />
     <Compile Include="Persistence\Overrides\RoleMappingOverride.cs" />
     <Compile Include="Persistence\Overrides\UserMappingOverride.cs" />
+    <Compile Include="Persistence\Repositories\IDailyTimeRecordRepository.cs" />
+    <Compile Include="Persistence\Repositories\IPermissionRepository.cs" />
+    <Compile Include="Persistence\Repositories\PublishingRepository.cs" />
     <Compile Include="Persistence\Repositories\RoleRepository.cs" />
     <Compile Include="Persistence\Repositories\UserRepository.cs" />
+    <Compile Include="Services\IDailyTimeRecordService.cs" />
     <Compile Include="Services\ILoginService.cs" />
     <Compile Include="Membership\Services\IMembershipValidator.cs" />
     <Compile Include="Membership\Settings\LoginSettings.cs" />
@@ -207,8 +229,10 @@
     <Compile Include="Services\ICardService.cs" />
     <Compile Include="Services\ICompanyService.cs" />
     <Compile Include="Services\IEmailService.cs" />
+    <Compile Include="Services\IProjectMetricsService.cs" />
     <Compile Include="Services\IProjectService.cs" />
     <Compile Include="Services\ITimeRecordService.cs" />
+    <Compile Include="Services\Membership\ClearPasswordHelper.cs" />
     <Compile Include="Services\Membership\IPasswordHelperService.cs" />
     <Compile Include="Services\Membership\PasswordHelperService.cs" />
     <Compile Include="Services\Membership\PasswordService.cs" />
@@ -221,6 +245,7 @@
     <Compile Include="Services\LoginService.cs" />
     <Compile Include="Membership\Services\IPasswordService.cs" />
     <Compile Include="Membership\Services\SecurityHttpModule.cs" />
+    <Compile Include="Services\TaskService.cs" />
     <Compile Include="TypeExtensions.cs" />
     <Compile Include="Validation\MinimumStringLengthAttribute.cs" />
     <Compile Include="Validation\GreaterOrEqualToZeroAttribute.cs" />
@@ -244,6 +269,7 @@
     <Compile Include="Validation\ValidEmailAttribute.cs" />
     <Compile Include="Validation\ValidYear.cs" />
     <Compile Include="ValueObject.cs" />
+    <Compile Include="ValueObjectInitializer.cs" />
     <Compile Include="ValueObjectRegistry.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -266,6 +292,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

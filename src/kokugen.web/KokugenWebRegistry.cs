@@ -17,8 +17,8 @@ namespace Kokugen.Web
                      }
                 );
 
-            ForRequestedType<HttpContextBase>().TheDefault.Is.ConstructedBy(ctx => new HttpContextWrapper(HttpContext.Current));
-            ForRequestedType<HttpRequestBase>().TheDefault.Is.ConstructedBy(ctx => new HttpRequestWrapper(HttpContext.Current.Request));
+            For<HttpContextBase>().Use(ctx => new HttpContextWrapper(HttpContext.Current));
+            For<HttpRequestBase>().Use(ctx => new HttpRequestWrapper(HttpContext.Current.Request));
         }
     }
 }

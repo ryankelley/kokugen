@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<gadget>
+  <name>Kokugen</name>
+  <version>1.0.0.0</version>
+  <author name="Kokugen">
+		<info url="http://gihub.com/ryankelley/kokugen" />
+		<icon height="71" width="71" src="images\briggs-logo.png"/>
+	</author>
+	<copyright>© 2010 by Kokugen Group</copyright>
+	<description>The Kokugen gadget is a simple interface for the Kokugen Project and Time managment software. This gadget allows user to track time on projects and cards, they can also review their last 10 records.</description>
+  <icons>
+      <icon height="71" width="71" src="images\briggs-logo.png"/>
+  </icons> 
+  <hosts>
+    <host name="sidebar">
+      <base type="HTML" apiVersion="1.0.0" src="kokugen.html" />
+      <permissions>Full</permissions>
+      <platform minPlatformVersion="1.0" />
+    </host>
+  </hosts>
+</gadget>
+

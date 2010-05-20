@@ -4,6 +4,8 @@ using System.Linq;
 using Kokugen.Core.Domain;
 using Kokugen.Core.Persistence.Repositories;
 using Kokugen.Core.Validation;
+using NHibernate;
+using NHibernate.Criterion;
 
 namespace Kokugen.Core.Services
 {
@@ -14,6 +16,8 @@ namespace Kokugen.Core.Services
         INotification SaveCard(Card card);
         Card GetCard(Guid id);
         bool ReOrderCards(List<CardViewDTO> cards);
+        Card CreateCard(Card card, Project project, User user);
+        IEnumerable<Card> GetCompleteCards(Project project);
     }
 
     public class CardService : ICardService
@@ -21,12 +25,14 @@ namespace Kokugen.Core.Services
         private readonly ICardRepository _cardRepository;
         private readonly IValidator _validator;
         private readonly IProjectService _projectService;
+        private readonly ISession _session;
 
-        public CardService(ICardRepository cardRepository, IValidator validator, IProjectService projectService)
+        public CardService(ICardRepository cardRepository, IValidator validator, IProjectService projectService, ISession session)
         {
             _cardRepository = cardRepository;
             _validator = validator;
             _projectService = projectService;
+            _session = session;
         }
 
         public IEnumerable<Card> GetCards()
@@ -36,20 +42,25 @@ namespace Kokugen.Core.Services
 
         public IEnumerable<Card> GetCards(Project project)
         {
-            return _cardRepository.Query().Where(c => c.Project == project);
+            return _session.CreateCriteria<Card>()
+               .SetFetchMode("GetTasks", FetchMode.Eager)
+               .Add(NHibernate.Criterion.Expression.Eq("Project", project))
+                .List<Card>();
+            //return _cardRepository.Query().Where(c => c.Project == project);
         }
 
         public INotification SaveCard(Card card)
         {
             var validationResults = _validator.Validate(card);
             if (validationResults.IsValid())
-                _cardRepository.Save(card);
+                _cardRepository.SaveAndFlush(card);
             return validationResults;
         }
 
         public Card GetCard(Guid id)
         {
-            return _cardRepository.Get(id);
+            return _cardRepository.Query().Where(x => x.Id == id).FirstOrDefault();
+            //return _cardRepository.Get(id);
         }
 
         public bool ReOrderCards(List<CardViewDTO> cards)
@@ -64,6 +75,38 @@ namespace Kokugen.Core.Services
 
 
             return true;
+        }
+
+        public Card CreateCard(Card card, Project project, User user)
+        {
+            var newcard = new Card
+            {
+                Title = card.Title,
+                Size = card.Size,
+                Priority = card.Priority,
+                Deadline = card.Deadline,
+                Details = card.Details,
+                Project = project,
+                Color = "grey",
+                Status = CardStatus.New,
+                AssignedTo = user
+
+            };
+
+            var lastCard = project.GetCards().OrderByDescending(x => x.CardNumber).Take(1).FirstOrDefault();
+
+            newcard.CardNumber = lastCard == null ? 1 : lastCard.CardNumber + 1;
+
+            return newcard;
+        }
+
+        public IEnumerable<Card> GetCompleteCards(Project project)
+        {
+            return _session.CreateCriteria<Card>()
+               .SetFetchMode("GetActivities", FetchMode.Eager)
+               .Add(Restrictions.Eq("Project", project))
+               .Add(Restrictions.IsNotNull("DateCompleted"))
+                .List<Card>();
         }
     }
 }
